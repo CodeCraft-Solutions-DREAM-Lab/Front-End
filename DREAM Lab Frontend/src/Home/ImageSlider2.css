@@ -1,0 +1,20 @@
+.carousel-container {
+	overflow-x: hidden;
+	background-color: antiquewhite;
+
+}
+
+.image-track {
+	display: flex;
+	gap: 4vmin;
+	transform: translate(0%, 0%);
+	user-select: none;
+}
+
+.image-track > .image {
+	width: 20vmin;
+	height: 28vmin;
+	object-fit: cover;
+	object-position: 100% center;
+	/* padding: 1vmin; */
+}

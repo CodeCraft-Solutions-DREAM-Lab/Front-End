@@ -1,33 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ImageSlider2 from './Home/ImageSlider2'
+import ImageSlider1 from './Home/ImageSlider'
+
+const OPTIONS = { dragFree: true, loop: false }
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
+const unsplash_prefix = 'https://images.unsplash.com/photo-'
+const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+const IMAGES = [`${unsplash_prefix}1524781289445-ddf8f5695861${unsplash_suffix}`,
+`${unsplash_prefix}1610194352361-4c81a6a8967e${unsplash_suffix}`,
+`${unsplash_prefix}1618202133208-2907bebba9e1${unsplash_suffix}`,
+`${unsplash_prefix}1548021682-1720ed403a5b${unsplash_suffix}`,
+`${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
+`${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
+`${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,]
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <ImageSlider2 images={images} /> */}
+      <ImageSlider1 images={IMAGES} options={OPTIONS} />
     </>
   )
 }
