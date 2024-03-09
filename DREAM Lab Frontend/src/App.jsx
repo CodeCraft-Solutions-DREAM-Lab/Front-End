@@ -2,7 +2,7 @@ import './App.css'
 import ImageSlider2 from './Home/ImageSlider2'
 import ImageSlider1 from './Home/ImageSlider'
 
-const OPTIONS = { dragFree: true, loop: false }
+const OPTIONS = { dragFree: true, loop: true }
 const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
@@ -19,7 +19,7 @@ const IMAGES = [`${unsplash_prefix}1524781289445-ddf8f5695861${unsplash_suffix}`
 function App() {
   return (
     <>
-      {/* <ImageSlider2 images={images} /> */}
+      <ImageSlider1 images={IMAGES} options={OPTIONS} />
       <ImageSlider1 images={IMAGES} options={OPTIONS} />
     </>
   )
