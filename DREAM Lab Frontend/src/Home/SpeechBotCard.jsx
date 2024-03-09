@@ -8,7 +8,6 @@ function SpeechBotCard() {
 			<Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
 			<Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
 			<Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
-			<h1 style={{ color: 'white' }}>Hola</h1>
 			<EvervaultCard />
 		</div>
 	);

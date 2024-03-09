@@ -2,8 +2,7 @@ import { useMotionValue } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../../utils/cn";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
+import MicrophoneButton from "../../Home/MicrophoneButton.jsx";
 
 export const EvervaultCard = ({
 	text,
@@ -15,7 +14,7 @@ export const EvervaultCard = ({
 	const [randomString, setRandomString] = useState("");
 
 	useEffect(() => {
-		let str = generateRandomString(4000);
+		let str = generateRandomString(8000);
 		setRandomString(str);
 	}, []);
 
@@ -24,12 +23,8 @@ export const EvervaultCard = ({
 		mouseX.set(clientX - left);
 		mouseY.set(clientY - top);
 
-		const str = generateRandomString(4000);
+		const str = generateRandomString(8000);
 		setRandomString(str);
-	}
-
-	function onClick() {
-		alert("You clicked the microphone button!");
 	}
 
 	return (
@@ -49,10 +44,7 @@ export const EvervaultCard = ({
 					randomString={randomString}
 				/>
 				<div className="relative z-10 flex items-center justify-center">
-					<button onClick={onClick} className="relative h-44 w-44  rounded-full flex items-center justify-center text-white font-bold text-4xl">
-						<div className="absolute w-full h-full bg-white/[0.8] dark:bg-black/[0.8] blur-sm rounded-full" />
-						<span className="dark:text-white text-black z-20">{<FontAwesomeIcon icon={faMicrophone} />}</span>
-					</button>
+					<MicrophoneButton />
 				</div>
 			</div>
 		</div>

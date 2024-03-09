@@ -1,6 +1,7 @@
 // import ImageSlider from './Home/ImageSlider'
 import SpeechBotCard from './Home/SpeechBotCard'
 import './output.css'
+import './App.css'
 
 // const OPTIONS = { dragFree: true, loop: true }
 // const SLIDE_COUNT = 5
