@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import './ImageSlider.css'
 
-const TWEEN_FACTOR_BASE = 0.2
+const TWEEN_FACTOR_BASE = 0.1 // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
 	const { images, options } = props
