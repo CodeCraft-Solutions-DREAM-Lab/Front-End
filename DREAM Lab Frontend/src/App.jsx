@@ -20,26 +20,14 @@ const IMAGES = [`${unsplash_prefix}1524781289445-ddf8f5695861${unsplash_suffix}`
 function App() {
   return (
     <>
-      <div style={{
-        width: '100%',
-        height: '18rem',
-      }}>
-        <SpeechBotCard />
-      </div>
-
+      <SpeechBotCard width='100%' height='18rem' />
 
       <br />
-      <div style={{ width: '100%' }}>
-        <ImageSlider images={IMAGES} options={OPTIONS} />
-      </div>
+      <ImageSlider images={IMAGES} options={OPTIONS} />
       <br />
-      <div style={{ width: '100%' }}>
-        <ImageSlider images={IMAGES} options={OPTIONS} />
-      </div>
+      <ImageSlider images={IMAGES} options={OPTIONS} />
       <br />
-      <div style={{ width: '100%' }}>
-        <ImageSlider images={IMAGES} options={OPTIONS} />
-      </div>
+      <ImageSlider images={IMAGES} options={OPTIONS} />
 
     </>
   )
