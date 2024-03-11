@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './output.css'
 import './App.css'
 import HomePage from './Home/HomePage.jsx'
-import ReservacionCuarto from "./Reservaciones/ReservacionCuarto.jsx";
+import ReservacionCuarto from "./Reservaciones/ReservacionSala.jsx";
 
 
 function App() {
