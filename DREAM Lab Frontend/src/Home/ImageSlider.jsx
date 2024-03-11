@@ -1,10 +1,17 @@
 import React, { useCallback, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import useEmblaCarousel from 'embla-carousel-react'
 import './ImageSlider.css'
 
 const TWEEN_FACTOR_BASE = 0.1 // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
+	let navigate = useNavigate();
+	function handleClick(imageId) {
+		navigate(`/reservacion/${imageId}`);
+	}
+
 	const { images, options } = props
 	const [emblaRef, emblaApi] = useEmblaCarousel(options)
 	const tweenFactor = useRef(0)
@@ -81,8 +88,9 @@ const ImageSlider = (props) => {
 								<div className="embla__parallax__layer">
 									<img
 										className="embla__slide__img embla__parallax__img"
-										src={image}
+										src={image.url}
 										alt="Your alt text"
+										onClick={() => handleClick(image.id)}
 									/>
 								</div>
 							</div>
