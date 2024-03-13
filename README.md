@@ -17,7 +17,7 @@ Este proyecto utiliza Vite para el desarrollo y el proceso de construcción.
     Usando la misma terminar con la que se clonó el repositorio, ejecuta el siguiente comando:
    
     ```
-     cd dream-lab-frontend
+     cd "dream-lab-frontend\Dream Lab Frontend"
      ```
 
 3. Instala las dependencias del proyecto:
