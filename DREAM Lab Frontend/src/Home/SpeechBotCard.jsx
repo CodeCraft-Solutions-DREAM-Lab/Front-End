@@ -1,5 +1,5 @@
 import React from "react";
-import { EvervaultCard, Icon } from "../components/ui/evervault-card.jsx";
+import { EvervaultCard, Icon } from "../components/aceternity/evervault-card.jsx";
 
 function SpeechBotCard(props) {
 	return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../components/ui/moving-border.jsx";
+import { Button } from "../components/aceternity/moving-border.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
 
