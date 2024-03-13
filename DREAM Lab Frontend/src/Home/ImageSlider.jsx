@@ -91,6 +91,8 @@ const ImageSlider = (props) => {
 										src={image.url}
 										alt="Your alt text"
 										onClick={() => handleClick(image.id)}
+										draggable="false"
+										onContextMenu={(e) => e.preventDefault()}
 									/>
 								</div>
 							</div>
