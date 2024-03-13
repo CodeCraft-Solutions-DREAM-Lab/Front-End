@@ -22,6 +22,13 @@ const IMAGES = [{ 'id': 'sala-1', 'url': `${unsplash_prefix}1610194352361-4c81a6
 function HomePage() {
 	return (
 		<>
+			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
+                <div className="logo-container">
+                    <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
+                    <h1 className="dreamlab">Dream Lab</h1>
+                </div>
+            </GlassCard >
+
 			<SpeechBotCard width='100%' height='18rem' />
 
 			<br />
@@ -33,10 +40,6 @@ function HomePage() {
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
-			<GlassCard padding='2rem'>
-				<h1>TITLE</h1>
-				<p>Hello</p>
-			</GlassCard >
 		</>
 	)
 }
