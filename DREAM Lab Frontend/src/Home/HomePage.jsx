@@ -4,6 +4,7 @@ import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import UserAvatar from '../components/general/UserAvatar'
+import TypeText from './TypeText'
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -33,11 +34,11 @@ function HomePage() {
 		<>
 			<UserAvatar />
 			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
-                <div className="logo-container">
-                    <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
-                    <h1 className="dreamlab">DREAM Lab</h1>
-                </div>
-            </GlassCard >
+				<div className="logo-container">
+					<img src="././LogoDreamLab.png" alt="Logo" className="logo" />
+					<h1 className="dreamlab">DREAM Lab</h1>
+				</div>
+			</GlassCard >
 
 			<SpeechBotCard width='100%' height='25rem' />
 
@@ -52,6 +53,27 @@ function HomePage() {
 
 
 			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
+
+			<TypeText
+				title='Title'
+				words={[
+					{
+						text: "Build",
+					},
+					{
+						text: "awesome",
+					},
+					{
+						text: "apps",
+					},
+					{
+						text: "with",
+					},
+					{
+						text: "Aceternity.",
+						className: "text-blue-500 dark:text-blue-500",
+					},
+				]} />
 		</>
 	)
 }
