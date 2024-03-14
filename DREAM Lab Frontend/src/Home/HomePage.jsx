@@ -7,6 +7,7 @@ import RecommendationsCarousel from './RecommendationsCarousel'
 import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
 import TypeText from './TypeText'
+import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -31,6 +32,30 @@ const IMAGES = [{ 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
 { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
 { 'id': 'Curso de Swift', 'url': '/ImagenCursoSwift.png' },
 { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },]
+
+const DATA = [
+	{
+		bgColor: "#F54748",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+	{
+		bgColor: "#7952B3",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+	{
+		bgColor: "#1597BB",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+];
 
 function HomePage() {
 	const [processedTranscript, setProcessedTranscript] = useState('');
@@ -64,20 +89,19 @@ function HomePage() {
                 </div>
             )}
 
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
 
-			<div className="carousel-container">
-				<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
-			</div>
+			<br />
+			<ImageSlider images={IMAGES} options={OPTIONS} />
+			<br />
+			<ImageSlider images={IMAGES} options={OPTIONS} />
+			<br />
+			<ImageSlider images={IMAGES} options={OPTIONS} />
+			<br />
+			<ImageSlider images={IMAGES} options={OPTIONS} />
 
-			<TypeText
+			<NCarruselRecomendaciones data={DATA} activeSlide={parseInt(Math.floor(DATA.length / 2))} />
+
+			< TypeText
 				title='Title'
 				words={[
 					{
