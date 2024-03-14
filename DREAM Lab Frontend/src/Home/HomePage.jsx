@@ -3,10 +3,9 @@ import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
+import UserAvatar from '../components/general/UserAvatar'
 
 const OPTIONS = { dragFree: true, loop: true }
-const SLIDE_COUNT = 5
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const unsplash_prefix = 'https://images.unsplash.com/photo-'
 const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
@@ -20,18 +19,19 @@ const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fG
 { 'id': 'sala-8', 'url': `${unsplash_prefix}1709525091854-7152bddb6d9d${unsplash_suffix}` },
 { 'id': 'sala-9', 'url': `${unsplash_prefix}1707343845208-a20c56d2c8ba${unsplash_suffix}` },]*/
 const IMAGES = [{ 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
-{ 'id': 'sala-2', 'url': '/ImagenUsoRouters.png' },
-{ 'id': 'sala-3', 'url': '/ImagenExpGoogle.png' },
-{ 'id': 'sala-4', 'url': `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}` },
-{ 'id': 'sala-5', 'url': `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}` },
-{ 'id': 'sala-6', 'url': `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}` },
-{ 'id': 'sala-7', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
-{ 'id': 'sala-8', 'url': '/ImagenCursoSwift.png' },
-{ 'id': 'sala-9', 'url': '/ImagenConnections.png' },]
+{ 'id': 'Deep Net', 'url': '/ImagenUsoRouters.png' },
+{ 'id': 'Testing Land', 'url': '/ImagenExpGoogle.png' },
+{ 'id': 'Electric Garage', 'url': `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}` },
+{ 'id': 'Electric Garage', 'url': `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}` },
+{ 'id': 'Electric Garage', 'url': `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}` },
+{ 'id': 'Electric Garage', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
+{ 'id': 'Curso de Swift', 'url': '/ImagenCursoSwift.png' },
+{ 'id': 'Deep Net', 'url': '/ImagenConnections.png' },]
 
 function HomePage() {
 	return (
 		<>
+			<UserAvatar />
 			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
                 <div className="logo-container">
                     <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
@@ -40,7 +40,6 @@ function HomePage() {
             </GlassCard >
 
 			<SpeechBotCard width='100%' height='25rem' />
-
 
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
