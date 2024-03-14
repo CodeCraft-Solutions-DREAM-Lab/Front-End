@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import RecommendationsCarousel from './RecommendationsCarousel'
+import "./RecommendationsCarousel.css"
+import TranscriptProcessor from "../components/general/TranscriptProcessor";
 
 const OPTIONS = { dragFree: true, loop: true }
 const SLIDE_COUNT = 5
@@ -20,9 +23,14 @@ const IMAGES = [{ 'id': 'sala-1', 'url': `${unsplash_prefix}1610194352361-4c81a6
 { 'id': 'sala-9', 'url': `${unsplash_prefix}1707343845208-a20c56d2c8ba${unsplash_suffix}` },]
 
 function HomePage() {
+
 	return (
 		<>
-			<SpeechBotCard width='100%' height='18rem' />
+			<SpeechBotCard width='100%' height='18rem'/>
+			
+			<div className="carousel-container">
+                <RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
+            </div>
 
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
@@ -33,7 +41,6 @@ function HomePage() {
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
-			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
 		</>
 	)
 }

@@ -5,3 +5,8 @@
 	object-fit: cover;
 	border-radius: 2rem;
 }
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+}
