@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EvervaultCard, Icon } from "../components/aceternity/evervault-card.jsx";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import TranscriptProcessor from "../components/general/TranscriptProcessor.jsx";
 
 function SpeechBotCard(props) {
+	const {
+        transcript,
+        resetTranscript,
+        browserSupportsSpeechRecognition,
+		listening,
+    } = useSpeechRecognition();
+
+    if (!browserSupportsSpeechRecognition) {
+		return <span>Browser doesn't support speech recognition.</span>;
+    }
+	
+    const onClick = () => {
+		resetTranscript();
+        SpeechRecognition.startListening({ language: 'es-MX' });
+    }
+
+	const handleProcessedText = (processedText) => {
+		props.onProcessedText(processedText);
+        console.log("Processed text from SpeechBotCard: ", processedText);
+    };
+
+	useEffect(() => {
+		if (!listening) {
+			console.log(transcript);
+			resetTranscript();
+		}
+	}, [listening, transcript]);
 	return (
 		<div
 			className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start mx-auto p-4 relative"
 			style={{
 				width: props.width,
 				height: props.height
-			}}>
+			}} onClick={onClick}>
 			<Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
 			<Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
 			<Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
 			<Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
 			<EvervaultCard />
+			<TranscriptProcessor transcript={transcript} onProcessedText={handleProcessedText} />
 		</div>
 	);
 }

@@ -4,7 +4,6 @@ import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import "./RecommendationsCarousel.css"
-import TranscriptProcessor from "../components/general/TranscriptProcessor";
 
 const OPTIONS = { dragFree: true, loop: true }
 const SLIDE_COUNT = 5
@@ -35,22 +34,27 @@ function HomePage() {
 
     return (
         <>
-            <SpeechBotCard width='100%' height='18rem'/>
+            <SpeechBotCard width='100%' height='18rem' onProcessedText={handleProcessedText} />
             
-            <div className="carousel-container">
-                <RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' processedTranscript={processedTranscript} />
+            {processedTranscript && (
+                <div className="processed-transcript-container">
+                    <h2>Recomendaciones: </h2>
+                    <p>{processedTranscript}</p>
+                </div>
+            )}
+
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+
+			<div className="carousel-container">
+                <RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
             </div>
-
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-
-            {/* Removed TranscriptProcessor component from here */}
         </>
     )
 }
