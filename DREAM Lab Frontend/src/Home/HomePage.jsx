@@ -1,7 +1,7 @@
 import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
-import GlassCard from '../components/general/glass-card'
+import RecommendationsCarousel from './RecommendationsCarousel'
 
 const OPTIONS = { dragFree: true, loop: true }
 const SLIDE_COUNT = 5
@@ -33,10 +33,7 @@ function HomePage() {
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
-			<GlassCard padding='2rem'>
-				<h1>TITLE</h1>
-				<p>Hello</p>
-			</GlassCard >
+			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
 		</>
 	)
 }
