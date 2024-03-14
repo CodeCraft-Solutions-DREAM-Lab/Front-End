@@ -5,6 +5,7 @@ import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import UserAvatar from '../components/general/UserAvatar'
 import TypeText from './TypeText'
+import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -29,6 +30,30 @@ const IMAGES = [{ 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
 { 'id': 'Curso de Swift', 'url': '/ImagenCursoSwift.png' },
 { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },]
 
+const DATA = [
+	{
+		bgColor: "#F54748",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+	{
+		bgColor: "#7952B3",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+	{
+		bgColor: "#1597BB",
+		img: '/ImagenSalaVR.png',
+		title: "Lorem Ipsum",
+		desc:
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+	},
+];
+
 function HomePage() {
 	return (
 		<>
@@ -52,9 +77,9 @@ function HomePage() {
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
 
-			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
+			<NCarruselRecomendaciones data={DATA} activeSlide={parseInt(Math.floor(DATA.length / 2))} />
 
-			<TypeText
+			< TypeText
 				title='Title'
 				words={[
 					{
