@@ -1,4 +1,5 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import BotonCancelarReservacion from "./BotonCancelarReservacion";
 
 function ListaReservaciones(props) {
 	return (
@@ -9,6 +10,7 @@ function ListaReservaciones(props) {
 				<TableColumn>Duracion</TableColumn>
 				<TableColumn>Fecha</TableColumn>
 				<TableColumn>Mesa</TableColumn>
+				<TableColumn>Cancelar reservación</TableColumn>
 			</TableHeader>
 			<TableBody>
 				{props.reservations.map((reservation, index) => (
@@ -18,6 +20,7 @@ function ListaReservaciones(props) {
 						<TableCell>{reservation.duracion}</TableCell>
 						<TableCell>{reservation.fecha}</TableCell>
 						<TableCell>{reservation.numMesa}</TableCell>
+						<TableCell><BotonCancelarReservacion id={reservation.idReservacion} /></TableCell>
 					</TableRow>
 				))}
 			</TableBody>
