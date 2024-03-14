@@ -11,8 +11,8 @@ import { cn } from "../../utils/cn";
 
 export function Button({
 	borderRadius = "1.75rem",
-	height = "8rem",
-	width = "8rem",
+	height = "4rem",
+	width = "4rem",
 	children,
 	as: Component = "button",
 	containerClassName,
@@ -40,10 +40,10 @@ export function Button({
 					className="absolute inset-0"
 					style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
 				>
-					<MovingBorder duration={duration} rx="30%" ry="30%">
+					<MovingBorder duration={duration} rx="10%" ry="10%">
 						<div
 							className={cn(
-								"h-44 w-44 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]",
+								"h-full w-full opacity-[0.8]",
 								borderClassName
 							)}
 						/>
@@ -57,6 +57,7 @@ export function Button({
 					)}
 					style={{
 						borderRadius: `calc(${borderRadius} * 0.96)`,
+						border: "none"
 					}}
 				>
 					{children}
