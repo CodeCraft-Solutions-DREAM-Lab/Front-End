@@ -21,7 +21,6 @@ function Profile() {
 		<div>
 			<BotonRegresar />
 			<h1 style={{ color: 'white' }}>Perfil de usuario</h1>
-			<h1>Profile</h1>
 			<ListaReservaciones reservations={reservaciones} setReservations={setReservaciones} />
 		</div>
 	);
