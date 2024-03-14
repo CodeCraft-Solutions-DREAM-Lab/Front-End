@@ -7,6 +7,7 @@ import RecommendationsCarousel from './RecommendationsCarousel'
 import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
 import TypeText from './TypeText'
+//import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 
 const OPTIONS = { dragFree: true, loop: true }
 

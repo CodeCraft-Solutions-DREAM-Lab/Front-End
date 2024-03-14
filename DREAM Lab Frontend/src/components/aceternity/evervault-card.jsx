@@ -5,6 +5,7 @@ import { cn } from "../../utils/cn";
 import GlassCard from '../../components/general/glass-card'
 import MicrophoneButton from "../../Home/MicrophoneButton.jsx";
 import SendButton from "../../Home/SendButton.jsx";
+import TypeText from "../../Home/TypeText.jsx";
 import '../../App.css'
 
 export const EvervaultCard = ({
@@ -49,8 +50,21 @@ export const EvervaultCard = ({
 				<div className="relative z-10 flex items-center justify-center">
 					<div className="centered-container">
 						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='1rem'>
-							<MicrophoneButton />
-							<SendButton />
+						<div className="flex justify-between items-center w-full">
+								<MicrophoneButton />
+								<TypeText
+									title='Title'
+									words={[
+										{
+											text: "Realidad",
+										},
+										{
+											text: "virtual",
+										},
+									]}
+								/>
+								<SendButton />
+							</div>
 						</GlassCard >
 					</div>
 				</div>
