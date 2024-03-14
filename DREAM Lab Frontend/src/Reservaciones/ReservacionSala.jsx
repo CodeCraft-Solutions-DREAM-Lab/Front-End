@@ -19,7 +19,6 @@ function ReservacionCuarto(props) {
 
 	let navigate = useNavigate();
 	async function handleClick(imageId) {
-		// navigate(`/confirmacion/`);
 		const date = new Date(fecha);
 		setFechaIsoString(date.toISOString());
 		setHoraInicioIsoString(new Date(date.setHours(horaInicio)).toISOString());
@@ -47,6 +46,7 @@ function ReservacionCuarto(props) {
 		.then(response => response.json())
 		.then(data => {
 			console.log('Success:', data);
+			navigate(`/confirmacion/`);
 		})
 		.catch((error) => {
 			console.error('Error:', error);
@@ -61,7 +61,10 @@ function ReservacionCuarto(props) {
 			<br />
 			<br />
 			<DatePicker
-				onChange={(newValue) => setFecha(newValue)}
+				onChange={(newValue) => {
+					setFecha(newValue);
+					setFechaIsoString(newValue.toISOString());
+				}}
 			/>
 			<br />
 			<br />
@@ -72,6 +75,13 @@ function ReservacionCuarto(props) {
 				{[9, 10, 11].map((hora) => (
 					<AutocompleteItem key={hora} value={hora} textValue={`${hora} am`} onClick={() => {
 						setHoraInicio(hora);
+						const date = new Date();
+						date.setHours(hora-6);
+						date.setMinutes(0);
+						date.setSeconds(0);
+						date.setMilliseconds(0);
+
+						setHoraInicioIsoString(date.toISOString());
 					}}>
 						{hora} am
 					</AutocompleteItem>

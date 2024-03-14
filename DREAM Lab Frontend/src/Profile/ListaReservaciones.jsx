@@ -1,6 +1,10 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import BotonCancelarReservacion from "./BotonCancelarReservacion";
 
 function ListaReservaciones(props) {
+
+	const { reservations, setReservations } = props;
+
 	return (
 		<Table aria-label="Example static collection table">
 			<TableHeader>
@@ -9,15 +13,21 @@ function ListaReservaciones(props) {
 				<TableColumn>Duracion</TableColumn>
 				<TableColumn>Fecha</TableColumn>
 				<TableColumn>Mesa</TableColumn>
+				<TableColumn>Cancelar reservación</TableColumn>
 			</TableHeader>
 			<TableBody>
-				{props.reservations.map((reservation, index) => (
+				{reservations.map((reservation, index) => (
 					<TableRow key={index}>
 						<TableCell>{reservation.idSala}</TableCell>
 						<TableCell>{reservation.horaInicio}</TableCell>
 						<TableCell>{reservation.duracion}</TableCell>
 						<TableCell>{reservation.fecha}</TableCell>
 						<TableCell>{reservation.numMesa}</TableCell>
+						<TableCell><BotonCancelarReservacion 
+							id={reservation.idReservacion}  
+							reservaciones={reservations}
+							setReservaciones={setReservations}
+						/></TableCell>
 					</TableRow>
 				))}
 			</TableBody>
