@@ -2,8 +2,6 @@ import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import GlassCard from '../components/general/glass-card'
-import MicrophoneButton from "../Home/MicrophoneButton.jsx";
-import SendButton from "../Home/SendButton.jsx";
 import RecommendationsCarousel from './RecommendationsCarousel'
 
 const OPTIONS = { dragFree: true, loop: true }
@@ -37,7 +35,7 @@ function HomePage() {
 			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
                 <div className="logo-container">
                     <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
-                    <h1 className="dreamlab">Dream Lab</h1>
+                    <h1 className="dreamlab">DREAM Lab</h1>
                 </div>
             </GlassCard >
 
