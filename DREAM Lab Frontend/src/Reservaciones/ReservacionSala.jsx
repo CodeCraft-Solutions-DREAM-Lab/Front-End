@@ -3,14 +3,54 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import GlassCard from '../components/general/glass-card';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function ReservacionCuarto(props) {
 	let { sala } = useParams();
 	let salaString = String(sala);
 
+	const [duration, setDuration] = useState(0);
+
+	const [horaInicio, setHoraInicio] = useState(0);
+	const [horaInicioIsoString, setHoraInicioIsoString] = useState("");
+
+	const [fecha, setFecha] = useState(0);
+	const [fechaIsoString, setFechaIsoString] = useState("");
+
 	let navigate = useNavigate();
-	function handleClick(imageId) {
-		navigate(`/confirmacion/`);
+	async function handleClick(imageId) {
+		// navigate(`/confirmacion/`);
+		const date = new Date(fecha);
+		setFechaIsoString(date.toISOString());
+		setHoraInicioIsoString(new Date(date.setHours(horaInicio)).toISOString());
+
+		const data = { 
+			idReservacion: 3,
+			idUsuario: "A0XXXXXX1",
+			idSala: 1,
+			idExperiencia: 1,
+			horaInicio: horaInicioIsoString,
+			duracion: duration,
+			fecha: fechaIsoString,
+			numMesa: 1
+		};
+
+		fetch('https://dreamlab-api.azurewebsites.net/reservaciones', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+				'Connection': 'keep-alive',
+				'Accept': '*/*'
+			},
+			body: JSON.stringify(data),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 	}
 
 	return (
@@ -20,16 +60,20 @@ function ReservacionCuarto(props) {
 			</h1>
 			<br />
 			<br />
-			<DatePicker />
+			<DatePicker
+				onChange={(newValue) => setFecha(newValue)}
+			/>
 			<br />
 			<br />
 			<Autocomplete
 				label="Hora de inicio"
 				className="max-w-xs"
 			>
-				{['9am', '10am', '11am'].map((hora) => (
-					<AutocompleteItem key={hora} value={hora}>
-						{hora}
+				{[9, 10, 11].map((hora) => (
+					<AutocompleteItem key={hora} value={hora} textValue={`${hora} am`} onClick={() => {
+						setHoraInicio(hora);
+					}}>
+						{hora} am
 					</AutocompleteItem>
 				))}
 			</Autocomplete>
@@ -40,7 +84,10 @@ function ReservacionCuarto(props) {
 				className="max-w-xs"
 			>
 				{['2 horas', '4 horas'].map((hora) => (
-					<AutocompleteItem key={hora} value={hora}>
+					<AutocompleteItem key={hora} value={hora} onClick={() => {
+						if (hora === "2 horas") setDuration(2);
+						if (hora === "4 horas") setDuration(4);
+					}}>
 						{hora}
 					</AutocompleteItem>
 				))}
