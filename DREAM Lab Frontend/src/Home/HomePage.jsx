@@ -1,14 +1,17 @@
+import React, { useState } from "react";
 import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
+import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
 
 const OPTIONS = { dragFree: true, loop: true }
 
 const unsplash_prefix = 'https://images.unsplash.com/photo-'
 const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+
 /*const IMAGES = [{ 'id': 'sala-1', 'url': `${unsplash_prefix}1610194352361-4c81a6a8967e${unsplash_suffix}` },
 { 'id': 'sala-2', 'url': `${unsplash_prefix}1618202133208-2907bebba9e1${unsplash_suffix}` },
 { 'id': 'sala-3', 'url': `${unsplash_prefix}1548021682-1720ed403a5b${unsplash_suffix}` },
@@ -29,31 +32,48 @@ const IMAGES = [{ 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
 { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },]
 
 function HomePage() {
-	return (
-		<>
-			<UserAvatar />
-			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
+    const [processedTranscript, setProcessedTranscript] = useState('');
+
+    const handleProcessedText = (processedText) => {
+        setProcessedTranscript(processedText);
+    };
+
+    console.log("Processed Transcript in HomePage:", processedTranscript);
+
+    return (
+        <>
+            <UserAvatar />
+			      <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
                 <div className="logo-container">
                     <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
                     <h1 className="dreamlab">DREAM Lab</h1>
                 </div>
             </GlassCard >
 
-			<SpeechBotCard width='100%' height='25rem' />
+			      <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText}/>
+      
+            
+            {processedTranscript && (
+                <div className="processed-transcript-container">
+                    <h2>Recomendaciones: </h2>
+                    <p>{processedTranscript}</p>
+                </div>
+            )}
 
-			<br />
-			<ImageSlider images={IMAGES} options={OPTIONS} />
-			<br />
-			<ImageSlider images={IMAGES} options={OPTIONS} />
-			<br />
-			<ImageSlider images={IMAGES} options={OPTIONS} />
-			<br />
-			<ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
+            <br />
+            <ImageSlider images={IMAGES} options={OPTIONS} />
 
-
-			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
-		</>
-	)
+			<div className="carousel-container">
+                <RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
+            </div>
+        </>
+    )
 }
 
 export default HomePage;
