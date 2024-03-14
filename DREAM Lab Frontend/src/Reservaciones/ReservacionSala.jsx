@@ -9,8 +9,35 @@ function ReservacionCuarto(props) {
 	let salaString = String(sala);
 
 	let navigate = useNavigate();
-	function handleClick(imageId) {
-		navigate(`/confirmacion/`);
+	async function handleClick(imageId) {
+		// navigate(`/confirmacion/`);
+		const data = { 
+			idReservacion: 3,
+			idUsuario: "A0XXXXXX1",
+			idSala: 1,
+			idExperiencia: 1,
+			horaInicio: new Date().toISOString(),
+			duracion: 2,
+			fecha: new Date().toISOString(),
+			numMesa: 1
+		};
+
+		fetch('https://dreamlab-api.azurewebsites.net/reservaciones', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+				'Connection': 'keep-alive',
+				'Accept': '*/*'
+			},
+			body: JSON.stringify(data),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 	}
 
 	return (
