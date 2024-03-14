@@ -54,15 +54,6 @@
 	margin-bottom: 16px;
 }
 
-/* normal css  */
-
-body {
-	width: 100vw;
-	min-height: 100vh;
-	overflow: hidden;
-	background: #111;
-}
-
 .center {
 	display: flex;
 	justify-content: center;
@@ -73,6 +64,9 @@ body {
 }
 
 .btns {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding-top: 100px;
 }
 

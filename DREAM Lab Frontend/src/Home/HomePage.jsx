@@ -76,7 +76,6 @@ function HomePage() {
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
-
 			<NCarruselRecomendaciones data={DATA} activeSlide={parseInt(Math.floor(DATA.length / 2))} />
 
 			< TypeText

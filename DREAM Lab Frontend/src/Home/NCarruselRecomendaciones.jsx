@@ -5,6 +5,7 @@ import {
 	faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import "./NCarruselRecomendaciones.css";
+import { useNavigate } from 'react-router-dom';
 
 function NCarruselRecomendaciones(props) {
 	const [activeSlide, setActiveSlide] = useState(props.activeSlide);
@@ -77,7 +78,7 @@ function NCarruselRecomendaciones(props) {
 								...getStyles(i),
 							}}
 						>
-							<SliderContent {...item} index={i} onClick={setActiveSlide} />
+							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} />
 						</div>
 						<div
 							className="reflection"
@@ -112,8 +113,14 @@ function NCarruselRecomendaciones(props) {
 };
 
 const SliderContent = (props) => {
+	let navigate = useNavigate();
+
 	function handleClick() {
-		props.onClick(props.index);
+		if (props.index === props.activeSlide) {
+			navigate(`/reservacion/${props.title}`);
+		} else {
+			props.onClick(props.index);
+		}
 	}
 
 	return (
