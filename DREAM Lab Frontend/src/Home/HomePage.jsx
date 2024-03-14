@@ -2,10 +2,9 @@ import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import RecommendationsCarousel from './RecommendationsCarousel'
+import UserAvatar from '../components/general/UserAvatar'
 
 const OPTIONS = { dragFree: true, loop: true }
-const SLIDE_COUNT = 5
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const unsplash_prefix = 'https://images.unsplash.com/photo-'
 const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
@@ -22,6 +21,7 @@ const IMAGES = [{ 'id': 'Electric Garage', 'url': `${unsplash_prefix}16101943523
 function HomePage() {
 	return (
 		<>
+			<UserAvatar />
 			<SpeechBotCard width='100%' height='18rem' />
 
 			<br />
