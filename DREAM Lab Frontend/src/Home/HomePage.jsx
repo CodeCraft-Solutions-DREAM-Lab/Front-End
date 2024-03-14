@@ -77,17 +77,17 @@ function HomePage() {
 						<UserAvatar />
 					</div>
 				</div>
-            </GlassCard >
+			</GlassCard >
 
-			      <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText}/>
-      
-            
-            {processedTranscript && (
-                <div className="processed-transcript-container">
-                    <h2>Recomendaciones: </h2>
-                    <p>{processedTranscript}</p>
-                </div>
-            )}
+			<SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText} />
+
+
+			{processedTranscript && (
+				<div className="processed-transcript-container">
+					<h2>Recomendaciones: </h2>
+					<p>{processedTranscript}</p>
+				</div>
+			)}
 
 
 			<br />
