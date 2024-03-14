@@ -6,6 +6,7 @@ import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
+import TypeText from './TypeText'
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -32,22 +33,25 @@ const IMAGES = [{ 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
 { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },]
 
 function HomePage() {
-    const [processedTranscript, setProcessedTranscript] = useState('');
+	const [processedTranscript, setProcessedTranscript] = useState('');
 
-    const handleProcessedText = (processedText) => {
-        setProcessedTranscript(processedText);
-    };
+	const handleProcessedText = (processedText) => {
+		setProcessedTranscript(processedText);
+	};
 
-    console.log("Processed Transcript in HomePage:", processedTranscript);
-
-    return (
-        <>
-            <UserAvatar />
-			      <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
-                <div className="logo-container">
-                    <img src="././LogoDreamLab.png" alt="Logo" className="logo" />
-                    <h1 className="dreamlab">DREAM Lab</h1>
-                </div>
+	console.log("Processed Transcript in HomePage:", processedTranscript);
+	return (
+		<>
+			<GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
+				<div className="flex items-center justify-between w-full">
+					<div className="logo-container">
+						<img src="././LogoDreamLab.png" alt="Logo" className="logo" />
+						<h1 className="dreamlab">DREAM Lab</h1>
+					</div>
+					<div className="user-avatar-container">
+						<UserAvatar />
+					</div>
+				</div>
             </GlassCard >
 
 			      <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText}/>
@@ -70,10 +74,31 @@ function HomePage() {
             <ImageSlider images={IMAGES} options={OPTIONS} />
 
 			<div className="carousel-container">
-                <RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
-            </div>
-        </>
-    )
+				<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='20rem' />
+			</div>
+
+			<TypeText
+				title='Title'
+				words={[
+					{
+						text: "Build",
+					},
+					{
+						text: "awesome",
+					},
+					{
+						text: "apps",
+					},
+					{
+						text: "with",
+					},
+					{
+						text: "Aceternity.",
+						className: "text-blue-500 dark:text-blue-500",
+					},
+				]} />
+		</>
+	)
 }
 
 export default HomePage;
