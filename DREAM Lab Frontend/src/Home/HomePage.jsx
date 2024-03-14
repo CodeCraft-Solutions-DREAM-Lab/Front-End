@@ -4,6 +4,7 @@ import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import MicrophoneButton from "../Home/MicrophoneButton.jsx";
 import SendButton from "../Home/SendButton.jsx";
+import RecommendationsCarousel from './RecommendationsCarousel'
 
 const OPTIONS = { dragFree: true, loop: true }
 const SLIDE_COUNT = 5
@@ -52,6 +53,8 @@ function HomePage() {
 			<br />
 			<ImageSlider images={IMAGES} options={OPTIONS} />
 
+
+			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
 		</>
 	)
 }
