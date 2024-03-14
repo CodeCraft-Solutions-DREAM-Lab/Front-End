@@ -3,10 +3,13 @@ const colors = require("tailwindcss/colors");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
+const { nextui } = require("@nextui-org/react");
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: [
+    "./src/**/*.{html,js,jsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",],
   theme: {
     extend: {
       animation: {
@@ -53,8 +56,10 @@ export default {
       },
     },
   },
+  darkMode: "class",
   plugins: [
     addVariablesForColors,
+    nextui()
   ],
 }
 
