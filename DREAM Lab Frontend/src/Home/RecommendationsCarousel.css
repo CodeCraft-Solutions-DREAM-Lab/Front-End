@@ -1,7 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
 .imageCarousel {
 	user-select: none;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	border-radius: 2rem;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+}
+
+.processed-transcript-container {
+	display: flex;
+    justify-content: center;
+	font-family: 'Karla', sans-serif;
+	color: white;
+	font-size: large;
 }
