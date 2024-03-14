@@ -5,16 +5,18 @@ import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import 'regenerator-runtime/runtime';
 
 function MicrophoneButton() {
-    return (
-        <div>
-            <Button
-                borderRadius="1.75rem"
-                className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-            >
-                <FontAwesomeIcon icon={faMicrophone} size="3x" />
-            </Button>
-        </div>
-    );
+	return (
+		<div>
+			<Button
+				className="bg-transparent text-white"
+				
+				//borderRadius="1.75rem"
+				//className="bg-none dark:bg-slate-900 text-white dark:text-black border-neutral-200 dark:border-slate-800"
+			>
+				<FontAwesomeIcon icon={faMicrophone} size="3x" />
+			</Button>
+		</div>
+	);
 }
 
 export default MicrophoneButton;

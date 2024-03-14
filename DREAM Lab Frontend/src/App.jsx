@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './output.css'
 import './App.css'
 import HomePage from './Home/HomePage.jsx'
-import ReservacionCuarto from "./Reservaciones/ReservacionSala.jsx";
+import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
+import Confirmacion from "./Confirmacion/Confirmacion.jsx";
+import Profile from "./Profile/Profile.jsx";
 
 
 function App() {
@@ -11,7 +13,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/reservacion/:sala" element={<ReservacionCuarto />} />
+        <Route path="/reservacion/:sala" element={<ReservacionSala />} />
+        <Route path="/confirmacion" element={<Confirmacion />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
