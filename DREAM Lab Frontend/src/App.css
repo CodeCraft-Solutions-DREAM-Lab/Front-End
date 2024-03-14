@@ -5,3 +5,54 @@
  	min-height: 100vh;
  	/* background: linear-gradient(0deg, rgb(68, 59, 238) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);  */
  }
+
+ .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 80px;
+	padding-left: 20px;
+    margin-right: 10px;
+}
+
+.dreamlab{
+	padding-top: 5px;
+	color: white;
+	font-weight: bolder;
+	font-size: 27px;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+.bg-transparent {
+	background-color: transparent !important;
+}
+
+.text-white {
+	color: white !important;
+}
+
+.send-button {
+	width: 2.5rem;
+    position: absolute;
+    top: 50%;
+    right: 2%; /* Coloca el botón en el borde derecho */
+    transform: translateY(-50%);
+}
+
+.inputReconocimientoVoz {
+    position: relative; /* Establece la posición relativa para los elementos hijos */
+}
+

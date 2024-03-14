@@ -2,7 +2,10 @@ import { useMotionValue } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../../utils/cn";
+import GlassCard from '../../components/general/glass-card'
 import MicrophoneButton from "../../Home/MicrophoneButton.jsx";
+import SendButton from "../../Home/SendButton.jsx";
+import '../../App.css'
 
 export const EvervaultCard = ({
 	text,
@@ -44,7 +47,12 @@ export const EvervaultCard = ({
 					randomString={randomString}
 				/>
 				<div className="relative z-10 flex items-center justify-center">
-					<MicrophoneButton />
+					<div className="centered-container">
+						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='1rem'>
+							<MicrophoneButton />
+							<SendButton />
+						</GlassCard >
+					</div>
 				</div>
 			</div>
 		</div>
