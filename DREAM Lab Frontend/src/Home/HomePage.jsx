@@ -4,6 +4,7 @@ import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import UserAvatar from '../components/general/UserAvatar'
+import TypeText from './TypeText'
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -56,6 +57,27 @@ function HomePage() {
 
 
 			<RecommendationsCarousel images={IMAGES} width='60rem' imageWidth='20rem' imageHeight='30rem' />
+
+			<TypeText
+				title='Title'
+				words={[
+					{
+						text: "Build",
+					},
+					{
+						text: "awesome",
+					},
+					{
+						text: "apps",
+					},
+					{
+						text: "with",
+					},
+					{
+						text: "Aceternity.",
+						className: "text-blue-500 dark:text-blue-500",
+					},
+				]} />
 		</>
 	)
 }
