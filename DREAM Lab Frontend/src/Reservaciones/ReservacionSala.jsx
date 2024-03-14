@@ -76,8 +76,11 @@ function ReservacionCuarto(props) {
 					<AutocompleteItem key={hora} value={hora} textValue={`${hora} am`} onClick={() => {
 						setHoraInicio(hora);
 						const date = new Date();
-						date.setHours(hora);
-						console.log(date.toISOString());
+						date.setHours(hora-6);
+						date.setMinutes(0);
+						date.setSeconds(0);
+						date.setMilliseconds(0);
+
 						setHoraInicioIsoString(date.toISOString());
 					}}>
 						{hora} am
