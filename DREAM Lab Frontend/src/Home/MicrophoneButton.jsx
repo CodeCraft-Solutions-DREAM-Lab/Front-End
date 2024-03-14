@@ -11,9 +11,11 @@ function MicrophoneButton() {
 	return (
 		<div>
 			<Button
-				borderRadius="1.75rem"
-				className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+				className="bg-transparent text-white"
 				onClick={onClick}
+				
+				//borderRadius="1.75rem"
+				//className="bg-none dark:bg-slate-900 text-white dark:text-black border-neutral-200 dark:border-slate-800"
 			>
 				<FontAwesomeIcon icon={faMicrophone} size="3x" />
 			</Button>

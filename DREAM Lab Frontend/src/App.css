@@ -31,3 +31,28 @@
 	font-size: 27px;
 }
 
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+.bg-transparent {
+	background-color: transparent !important;
+}
+
+.text-white {
+	color: white !important;
+}
+
+.send-button {
+	width: 2.5rem;
+    position: absolute;
+    top: 50%;
+    right: 2%; /* Coloca el botón en el borde derecho */
+    transform: translateY(-50%);
+}
+
+.inputReconocimientoVoz {
+    position: relative; /* Establece la posición relativa para los elementos hijos */
+}
+
