@@ -77,7 +77,7 @@ function HomePage() {
             <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
                 <div className="flex items-center justify-between w-full">
                     <div className="logo-container">
-                        <img src="LogoDreamLab.png" alt="Logo" className="logo" />
+                        <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
                         <h1 className="dreamlab">DREAM Lab</h1>
                     </div>
                     <div className="user-avatar-container">

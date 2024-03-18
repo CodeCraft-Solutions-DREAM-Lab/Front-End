@@ -20,8 +20,8 @@ function Profile() {
 	return (
 		<div>
 			<BotonRegresar />
-			<h1>Profile</h1>
-			<ListaReservaciones reservations={reservaciones} setReservations={setReservaciones}/>
+			<h1 style={{ color: 'white' }}>Perfil de usuario</h1>
+			<ListaReservaciones reservations={reservaciones} setReservations={setReservaciones} />
 		</div>
 	);
 }
