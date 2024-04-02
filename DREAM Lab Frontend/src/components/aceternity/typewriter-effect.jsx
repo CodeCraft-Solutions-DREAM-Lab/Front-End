@@ -2,10 +2,14 @@ import { cn } from "../../utils/cn";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
 
+import PropTypes from "prop-types";
+
+
 export const TypewriterEffect = ({
 	words,
 	className,
 	cursorClassName,
+	setCompleted,
 }) => {
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
@@ -32,7 +36,7 @@ export const TypewriterEffect = ({
 				}
 			);
 		}
-	}, [isInView]);
+	}, [isInView, animate]);
 
 	const renderWords = () => {
 		return (
@@ -45,7 +49,7 @@ export const TypewriterEffect = ({
 									initial={{}}
 									key={`char-${index}`}
 									className={cn(
-										`dark:text-white text-black opacity-0 hidden`,
+										`text-white opacity-0 hidden`,
 										word.className
 									)}
 								>
@@ -79,6 +83,9 @@ export const TypewriterEffect = ({
 					repeat: Infinity,
 					repeatType: "reverse",
 				}}
+				onAnimationComplete={() => {
+					setCompleted(true);
+				}}
 				className={cn(
 					"inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
 					cursorClassName
@@ -88,10 +95,19 @@ export const TypewriterEffect = ({
 	);
 };
 
+TypewriterEffect.propTypes = {
+	words: PropTypes.array.isRequired,
+	className: PropTypes.string,
+	cursorClassName: PropTypes.string,
+	setCompleted: PropTypes.func,
+};
+
 export const TypewriterEffectSmooth = ({
 	words,
 	className,
 	cursorClassName,
+	setCompleted,
+	duration,
 }) => {
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
@@ -109,7 +125,7 @@ export const TypewriterEffectSmooth = ({
 							{word.text.map((char, index) => (
 								<span
 									key={`char-${index}`}
-									className={cn(`dark:text-white text-black `, word.className)}
+									className={cn(`text-white `, word.className)}
 								>
 									{char}
 								</span>
@@ -134,9 +150,12 @@ export const TypewriterEffectSmooth = ({
 					width: "100%",
 				}}
 				transition={{
-					duration: 2,
+					duration: duration,
 					ease: "linear",
 					delay: 1,
+				}}
+				onAnimationComplete={() => {
+					setCompleted(true);
 				}}
 			>
 				<div
@@ -168,4 +187,16 @@ export const TypewriterEffectSmooth = ({
 			></motion.span>
 		</div>
 	);
+};
+
+TypewriterEffectSmooth.propTypes = {
+	words: PropTypes.array.isRequired,
+	className: PropTypes.string,
+	cursorClassName: PropTypes.string,
+	setCompleted: PropTypes.func.isRequired,
+	duration: PropTypes.number,
+};
+
+TypewriterEffectSmooth.defaultProps = {
+	duration: 2,
 };
