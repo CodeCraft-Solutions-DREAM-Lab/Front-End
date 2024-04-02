@@ -1,9 +1,11 @@
 import { TypewriterEffectSmooth } from "../components/aceternity/typewriter-effect";
 import { useState, useEffect } from "react";
+import { Textarea } from "@nextui-org/react";
 
 function Typewriter(props) {
 	const [currentWordsArrayIndex, setCurrentWordsArrayIndex] = useState(0);
 	const [completed, setCompleted] = useState(false);
+	const [isHovering, setIsHovering] = useState(false);
 
 	// TODO: Pasar como prop este wordArray
 	const wordsArrays = [
@@ -52,13 +54,19 @@ function Typewriter(props) {
 	}, [completed]);
 
 	return (
-		<div className="flex flex-col items-center justify-center h-[40rem]  " >
-			< TypewriterEffectSmooth
-				key={`${currentWordsArrayIndex}`}
-				words={wordsArrays[currentWordsArrayIndex]}
-				setCurrentWordIndex={setCurrentWordsArrayIndex}
-				setCompleted={setCompleted}
-			/>
+		<div
+			className="flex flex-col items-center justify-center h-[40rem]"
+			onMouseEnter={() => setIsHovering(true)}
+			onMouseLeave={() => setIsHovering(false)}
+		>
+			{isHovering ?
+				<Textarea /> :
+				<TypewriterEffectSmooth
+					key={`${currentWordsArrayIndex}`}
+					words={wordsArrays[currentWordsArrayIndex]}
+					setCurrentWordIndex={setCurrentWordsArrayIndex}
+					setCompleted={setCompleted}
+				/>}
 		</div >
 	);
 }
