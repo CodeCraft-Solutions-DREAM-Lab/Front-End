@@ -2,10 +2,10 @@ import { TypewriterEffectSmooth } from "../components/aceternity/typewriter-effe
 import { useState, useEffect } from "react";
 
 function Typewriter(props) {
-	const [currentWordIndex, setCurrentWordIndex] = useState(0);
 	const [currentWordsArrayIndex, setCurrentWordsArrayIndex] = useState(0);
-	const [trigger, setTrigger] = useState(false);
+	const [completed, setCompleted] = useState(false);
 
+	// TODO: Pasar como prop este wordArray
 	const wordsArrays = [
 		[
 			{
@@ -42,27 +42,22 @@ function Typewriter(props) {
 		],
 	];
 
-	// Function to handle completion of typewriter animation
-	const handleTypewriterComplete = () => {
-		setTimeout(() => { // Adding a delay before triggering the next animation
-			setTrigger(false); // Reset trigger after animation completion
-			setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % wordsArrays.length); // Switch to the next array of words
-		}, 2000); // 2-second delay before triggering the next animation
-	};
-
 	useEffect(() => {
-		// Trigger word change only when the animation completes or when the component mounts
-		setTrigger(true);
-	}, [currentWordsArrayIndex]);
+		if (completed) {
+			setTimeout(() => {
+				setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % wordsArrays.length);
+				setCompleted(false);
+			}, 2000);
+		}
+	}, [completed]);
 
 	return (
 		<div className="flex flex-col items-center justify-center h-[40rem]  " >
 			< TypewriterEffectSmooth
-				key={`${currentWordsArrayIndex}-${currentWordIndex}`}
+				key={`${currentWordsArrayIndex}`}
 				words={wordsArrays[currentWordsArrayIndex]}
-				setCurrentWordIndex={setCurrentWordIndex}
-				trigger={trigger}
-				onComplete={handleTypewriterComplete}
+				setCurrentWordIndex={setCurrentWordsArrayIndex}
+				setCompleted={setCompleted}
 			/>
 		</div >
 	);
