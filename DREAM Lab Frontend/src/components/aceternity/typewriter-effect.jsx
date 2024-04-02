@@ -92,6 +92,9 @@ export const TypewriterEffectSmooth = ({
 	words,
 	className,
 	cursorClassName,
+	trigger,
+	onComplete,
+	setCurrentWordIndex,
 }) => {
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
@@ -121,6 +124,22 @@ export const TypewriterEffectSmooth = ({
 			</div>
 		);
 	};
+
+	useEffect(() => {
+		if (trigger) {
+			const timeout = setTimeout(() => {
+				setCurrentWordIndex((prevIndex) => {
+					if (prevIndex < words.length - 1) {
+						return prevIndex + 1;
+					} else {
+						onComplete && onComplete();
+						return prevIndex;
+					}
+				});
+			}, 2000); // 2-second delay after completing the whole phrase
+			return () => clearTimeout(timeout);
+		}
+	}, [words, trigger, onComplete]);
 
 	return (
 		<div className={cn("flex space-x-1 my-6", className)}>

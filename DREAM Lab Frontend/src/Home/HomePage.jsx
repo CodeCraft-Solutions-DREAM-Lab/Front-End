@@ -6,8 +6,8 @@ import GlassCard from '../components/general/glass-card'
 import RecommendationsCarousel from './RecommendationsCarousel'
 import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
-import TypeText from './TypeText'
 import NCarruselRecomendaciones from './NCarruselRecomendaciones'
+import Typewriter from "./Typewriter";
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -86,7 +86,7 @@ function HomePage() {
                 </div>
             </GlassCard >
 
-            <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText}/>
+            <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText} />
 
             {showRecommendations && (
                 <NCarruselRecomendaciones data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
@@ -101,26 +101,7 @@ function HomePage() {
             <br />
             <ImageSlider images={IMAGES} options={OPTIONS} />
 
-            <TypeText
-                title='Title'
-                words={[
-                    {
-                        text: "Build",
-                    },
-                    {
-                        text: "awesome",
-                    },
-                    {
-                        text: "apps",
-                    },
-                    {
-                        text: "with",
-                    },
-                    {
-                        text: "Aceternity.",
-                        className: "text-blue-500 dark:text-blue-500",
-                    },
-                ]} />
+            <Typewriter />
         </>
     )
 }
