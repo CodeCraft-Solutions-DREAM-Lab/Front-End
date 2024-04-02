@@ -4,7 +4,7 @@ import {
 	faChevronRight,
 	faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import "./NCarruselRecomendaciones.css";
+import "./RecommendationsCarousel.css";
 import { useNavigate } from 'react-router-dom';
 
 function RecomendationsCarousel(props) {
@@ -132,4 +132,4 @@ const SliderContent = (props) => {
 	);
 };
 
-export default NCarruselRecomendaciones;
+export default RecomendationsCarousel;

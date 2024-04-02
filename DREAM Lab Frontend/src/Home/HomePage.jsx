@@ -3,7 +3,6 @@ import ImageSlider from './ImageSlider'
 import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import GlassCard from '../components/general/glass-card'
-import "./RecommendationsCarousel.css"
 import UserAvatar from '../components/general/UserAvatar'
 import RecommendationsCarousel from './RecommendationsCarousel'
 
