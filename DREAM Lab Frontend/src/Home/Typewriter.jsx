@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
  *        ];
  */
 
-function Typewriter(props) {
+function Typewriter({afterPhraseDelay, words}) {
 	const [currentWordsArrayIndex, setCurrentWordsArrayIndex] = useState(0);
 	const [completed, setCompleted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
@@ -27,11 +27,11 @@ function Typewriter(props) {
 	useEffect(() => {
 		if (completed) {
 			setTimeout(() => {
-				setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % props.words.length);
+				setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % words.length);
 				setCompleted(false);
-			}, 2000);
+			}, afterPhraseDelay);
 		}
-	}, [completed, props.words.length]);
+	}, [completed, words.length, afterPhraseDelay]);
 
 	return (
 		<div
@@ -43,7 +43,7 @@ function Typewriter(props) {
 				<Textarea /> :
 				<TypewriterEffectSmooth
 					key={`${currentWordsArrayIndex}`}
-					words={props.words[currentWordsArrayIndex]}
+					words={words[currentWordsArrayIndex]}
 					setCurrentWordIndex={setCurrentWordsArrayIndex}
 					setCompleted={setCompleted}
 				/>}
@@ -53,6 +53,11 @@ function Typewriter(props) {
 
 Typewriter.propTypes = {
 	words: PropTypes.array.isRequired,
+	afterPhraseDelay: PropTypes.number,
+};
+
+Typewriter.defaultProps = {
+	afterPhraseDelay: 2000,
 };
 
 export default Typewriter;
