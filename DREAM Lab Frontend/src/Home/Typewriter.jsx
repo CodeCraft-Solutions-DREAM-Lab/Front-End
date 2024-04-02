@@ -2,56 +2,36 @@ import { TypewriterEffectSmooth } from "../components/aceternity/typewriter-effe
 import { useState, useEffect } from "react";
 import { Textarea } from "@nextui-org/react";
 
+import PropTypes from "prop-types";
+
+/** Example Prop:
+ *  words: [
+ *             [
+ *                 { text: "Hello", className: "text-4xl" },
+ *                 { text: "World", className: "text-4xl" },
+ *             ],
+ *             [
+ *                 { text: "This", className: "text-4xl" },
+ *                 { text: "is", className: "text-4xl" },
+ *                 { text: "a", className: "text-4xl" },
+ *                 { text: "test", className: "text-4xl" },
+ *             ],
+ *        ];
+ */
+
 function Typewriter(props) {
 	const [currentWordsArrayIndex, setCurrentWordsArrayIndex] = useState(0);
 	const [completed, setCompleted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
 
-	// TODO: Pasar como prop este wordArray
-	const wordsArrays = [
-		[
-			{
-				text: "Build",
-			},
-			{
-				text: "awesome",
-			},
-			{
-				text: "apps",
-			},
-		],
-		[
-			{
-				text: "Explore",
-			},
-			{
-				text: "innovative",
-			},
-			{
-				text: "technologies",
-			},
-		],
-		[
-			{
-				text: "Transform",
-			},
-			{
-				text: "your",
-			},
-			{
-				text: "business",
-			},
-		],
-	];
-
 	useEffect(() => {
 		if (completed) {
 			setTimeout(() => {
-				setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % wordsArrays.length);
+				setCurrentWordsArrayIndex((prevIndex) => (prevIndex + 1) % props.words.length);
 				setCompleted(false);
 			}, 2000);
 		}
-	}, [completed]);
+	}, [completed, props.words.length]);
 
 	return (
 		<div
@@ -63,12 +43,16 @@ function Typewriter(props) {
 				<Textarea /> :
 				<TypewriterEffectSmooth
 					key={`${currentWordsArrayIndex}`}
-					words={wordsArrays[currentWordsArrayIndex]}
+					words={props.words[currentWordsArrayIndex]}
 					setCurrentWordIndex={setCurrentWordsArrayIndex}
 					setCompleted={setCompleted}
 				/>}
 		</div >
 	);
 }
+
+Typewriter.propTypes = {
+	words: PropTypes.array.isRequired,
+};
 
 export default Typewriter;

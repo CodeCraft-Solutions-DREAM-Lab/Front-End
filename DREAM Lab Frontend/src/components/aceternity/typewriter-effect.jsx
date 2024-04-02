@@ -2,6 +2,9 @@ import { cn } from "../../utils/cn";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
 
+import PropTypes from "prop-types";
+
+
 export const TypewriterEffect = ({
 	words,
 	className,
@@ -33,7 +36,7 @@ export const TypewriterEffect = ({
 				}
 			);
 		}
-	}, [isInView]);
+	}, [isInView, animate]);
 
 	const renderWords = () => {
 		return (
@@ -92,11 +95,19 @@ export const TypewriterEffect = ({
 	);
 };
 
+TypewriterEffect.propTypes = {
+	words: PropTypes.array.isRequired,
+	className: PropTypes.string,
+	cursorClassName: PropTypes.string,
+	setCompleted: PropTypes.func,
+};
+
 export const TypewriterEffectSmooth = ({
 	words,
 	className,
 	cursorClassName,
 	setCompleted,
+	duration,
 }) => {
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
@@ -139,7 +150,7 @@ export const TypewriterEffectSmooth = ({
 					width: "100%",
 				}}
 				transition={{
-					duration: 2,
+					duration: duration,
 					ease: "linear",
 					delay: 1,
 				}}
@@ -176,4 +187,16 @@ export const TypewriterEffectSmooth = ({
 			></motion.span>
 		</div>
 	);
+};
+
+TypewriterEffectSmooth.propTypes = {
+	words: PropTypes.array.isRequired,
+	className: PropTypes.string,
+	cursorClassName: PropTypes.string,
+	setCompleted: PropTypes.func.isRequired,
+	duration: PropTypes.number,
+};
+
+TypewriterEffectSmooth.defaultProps = {
+	duration: 2,
 };
