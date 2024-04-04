@@ -11,12 +11,12 @@ import Root from "./Global/Root.jsx";
 // import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
 // import Confirmacion from "./Confirmacion/Confirmacion.jsx";
 // import Profile from "./Profile/Profile.jsx";
-import Login from "./Login/Login.jsx";
+import LoginPage from "./Login/LoginPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route element={<Root />}>
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<LoginPage />} />
         </Route>
     )
 );
