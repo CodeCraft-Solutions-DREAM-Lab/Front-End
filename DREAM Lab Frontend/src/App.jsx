@@ -1,24 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    Route,
+    RouterProvider,
+    createBrowserRouter,
+    createRoutesFromElements,
+} from "react-router-dom";
 
-import './output.css'
-import './App.css'
-import HomePage from './Home/HomePage.jsx'
-import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
-import Confirmacion from "./Confirmacion/Confirmacion.jsx";
-import Profile from "./Profile/Profile.jsx";
+import "./App.css";
+import Root from "./Global/Root.jsx";
+// import HomePage from './Home/HomePage.jsx'
+// import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
+// import Confirmacion from "./Confirmacion/Confirmacion.jsx";
+// import Profile from "./Profile/Profile.jsx";
+import Login from "./Login/Login.jsx";
 
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route element={<Root />}>
+            <Route path="login" element={<Login />} />
+        </Route>
+    )
+);
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/reservacion/:sala" element={<ReservacionSala />} />
-        <Route path="/confirmacion" element={<Confirmacion />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
