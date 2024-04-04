@@ -23,7 +23,7 @@ function ReservacionCuarto(props) {
 		setFechaIsoString(date.toISOString());
 		setHoraInicioIsoString(new Date(date.setHours(horaInicio)).toISOString());
 
-		const data = { 
+		const data = {
 			idReservacion: 3,
 			idUsuario: "A0XXXXXX1",
 			idSala: 1,
@@ -43,14 +43,14 @@ function ReservacionCuarto(props) {
 			},
 			body: JSON.stringify(data),
 		})
-		.then(response => response.json())
-		.then(data => {
-			console.log('Success:', data);
-			navigate(`/confirmacion/`);
-		})
-		.catch((error) => {
-			console.error('Error:', error);
-		});
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+				navigate(`/confirmacion/`);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 	}
 
 	return (
@@ -60,12 +60,14 @@ function ReservacionCuarto(props) {
 			</h1>
 			<br />
 			<br />
-			<DatePicker
-				onChange={(newValue) => {
-					setFecha(newValue);
-					setFechaIsoString(newValue.toISOString());
-				}}
-			/>
+			<div style={{ backgroundColor: 'white', display: 'inline-block', borderRadius: '0.6rem' }}>
+				<DatePicker
+					onChange={(newValue) => {
+						setFecha(newValue);
+						setFechaIsoString(newValue.toISOString());
+					}}
+				/>
+			</div>
 			<br />
 			<br />
 			<Autocomplete
@@ -76,8 +78,11 @@ function ReservacionCuarto(props) {
 					<AutocompleteItem key={hora} value={hora} textValue={`${hora} am`} onClick={() => {
 						setHoraInicio(hora);
 						const date = new Date();
-						date.setHours(hora);
-						console.log(date.toISOString());
+						date.setHours(hora-6);
+						date.setMinutes(0);
+						date.setSeconds(0);
+						date.setMilliseconds(0);
+
 						setHoraInicioIsoString(date.toISOString());
 					}}>
 						{hora} am
