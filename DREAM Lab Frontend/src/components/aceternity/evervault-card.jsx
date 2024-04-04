@@ -55,7 +55,7 @@ export const EvervaultCard = () => {
 				/>
 				<div className="relative z-10 flex items-center justify-center">
 					<div className="centered-container">
-						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='1rem'>
+						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='0 2rem 0 2rem'>
 							<MicrophoneButton />
 							<SendButton />
 						</GlassCard >
