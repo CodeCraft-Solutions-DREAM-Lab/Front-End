@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { EvervaultCard, Icon } from "../components/aceternity/evervault-card.jsx";
+import { EvervaultCard } from "../components/aceternity/evervault-card.jsx";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import TranscriptProcessor from "../components/general/TranscriptProcessor.jsx";
 

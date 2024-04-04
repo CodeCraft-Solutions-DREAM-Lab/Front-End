@@ -1,6 +1,8 @@
 import { cn } from "../../utils/cn";
 import { useEffect, useRef, useState } from "react";
 
+import PropTypes from "prop-types";
+
 export const BackgroundGradientAnimation = ({
 	gradientBackgroundStart = "rgb(108, 0, 162)",
 	gradientBackgroundEnd = "rgb(0, 17, 82)",
@@ -40,7 +42,7 @@ export const BackgroundGradientAnimation = ({
 		document.body.style.setProperty("--pointer-color", pointerColor);
 		document.body.style.setProperty("--size", size);
 		document.body.style.setProperty("--blending-value", blendingValue);
-	}, []);
+	}, [blendingValue, fifthColor, firstColor, fourthColor, gradientBackgroundEnd, gradientBackgroundStart, pointerColor, secondColor, size, thirdColor]);
 
 	useEffect(() => {
 		function move() {
@@ -55,7 +57,7 @@ export const BackgroundGradientAnimation = ({
 		}
 
 		move();
-	}, [tgX, tgY]);
+	}, [tgX, tgY, curX, curY]);
 
 	const handleMouseMove = (event) => {
 		if (interactiveRef.current) {
@@ -162,4 +164,21 @@ export const BackgroundGradientAnimation = ({
 			</div>
 		</div>
 	);
+};
+
+BackgroundGradientAnimation.propTypes = {
+	gradientBackgroundStart: PropTypes.string,
+	gradientBackgroundEnd: PropTypes.string,
+	firstColor: PropTypes.string,
+	secondColor: PropTypes.string,
+	thirdColor: PropTypes.string,
+	fourthColor: PropTypes.string,
+	fifthColor: PropTypes.string,
+	pointerColor: PropTypes.string,
+	size: PropTypes.string,
+	blendingValue: PropTypes.string,
+	children: PropTypes.node,
+	className: PropTypes.string,
+	interactive: PropTypes.bool,
+	containerClassName: PropTypes.string,
 };

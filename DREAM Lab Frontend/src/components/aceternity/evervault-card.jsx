@@ -1,5 +1,5 @@
 import { useMotionValue } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../../utils/cn";
 import GlassCard from '../../components/general/glass-card'
@@ -7,10 +7,18 @@ import MicrophoneButton from "../../Home/MicrophoneButton.jsx";
 import SendButton from "../../Home/SendButton.jsx";
 import '../../App.css'
 
-export const EvervaultCard = ({
-	text,
-	className,
-}) => {
+import PropTypes from "prop-types"; 
+
+function generateRandomString(length) {
+	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	let result = "";
+	for (let i = 0; i < length; i++) {
+		result += characters.charAt(Math.floor(Math.random() * characters.length));
+	}
+	return result;
+}
+
+export const EvervaultCard = () => {
 	let mouseX = useMotionValue(0);
 	let mouseY = useMotionValue(0);
 
@@ -33,8 +41,7 @@ export const EvervaultCard = ({
 	return (
 		<div
 			className={cn(
-				"p-0.5  bg-transparent aspect-square  flex items-center justify-center w-full h-full relative",
-				className
+				"p-0.5  bg-transparent aspect-square  flex items-center justify-center w-full h-full relative"
 			)}
 		>
 			<div
@@ -48,7 +55,7 @@ export const EvervaultCard = ({
 				/>
 				<div className="relative z-10 flex items-center justify-center">
 					<div className="centered-container">
-						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='1rem'>
+						<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='0 2rem 0 2rem'>
 							<MicrophoneButton />
 							<SendButton />
 						</GlassCard >
@@ -82,28 +89,8 @@ export function CardPattern({ mouseX, mouseY, randomString }) {
 	);
 }
 
-const characters =
-	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-export const generateRandomString = (length) => {
-	let result = "";
-	for (let i = 0; i < length; i++) {
-		result += characters.charAt(Math.floor(Math.random() * characters.length));
-	}
-	return result;
-};
-
-export const Icon = ({ className, ...rest }) => {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			strokeWidth="1.5"
-			stroke="currentColor"
-			className={className}
-			{...rest}
-		>
-			<path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-		</svg>
-	);
+CardPattern.propTypes = {
+	mouseX: PropTypes.number,
+	mouseY: PropTypes.number,
+	randomString: PropTypes.string,
 };

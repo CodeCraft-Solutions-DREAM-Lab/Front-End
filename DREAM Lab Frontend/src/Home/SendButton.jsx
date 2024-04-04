@@ -1,5 +1,3 @@
-import React from "react";
-
 function SendButton() {
     const onClick = () => {
         // Acción al hacer clic en el botón de la imagen
