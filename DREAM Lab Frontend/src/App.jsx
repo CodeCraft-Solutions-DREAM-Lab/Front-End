@@ -1,35 +1,45 @@
 import {
   Route,
-  Router,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 
+import { useState } from "react";
+
 import "./App.css";
 import Root from "./Global/Root.jsx";
-// import HomePage from './Home/HomePage.jsx'
-// import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
-// import Confirmacion from "./Confirmacion/Confirmacion.jsx";
-// import Profile from "./Profile/Profile.jsx";
+import LandingPage from "./LandingPage/LandingPage.jsx";
 import LoginPage from "./Login/LoginPage";
-import { AuthProvider } from "./hooks/useAuth.jsx";
+import NotFound from "./Global/NotFound.jsx";
+import HomePage from "./Home/HomePage.jsx";
+
+import { requireAuth, loginAction } from "./Global/Auth";
+
+import { UserContext } from "./Global/Context/UserContext.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Root />}>
-      <Route path="login" element={<LoginPage />} />
+    <Route path="/" element={<Root />}>
+      <Route index element={<LandingPage />} />
+      <Route path="login" element={<LoginPage />} action={loginAction} />
+      <Route
+        path="home"
+        element={<HomePage />}
+        loader={async () => await requireAuth()}
+      />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
 
 function App() {
+  const [user, setUser] = useState("");
+
   return (
-    <RouterProvider router={router}>
-      <AuthProvider>
-        <Root />
-      </AuthProvider>
-    </RouterProvider>
+    <UserContext.Provider value={{ user, setUser }}>
+      <RouterProvider router={router} />
+    </UserContext.Provider>
   );
 }
 

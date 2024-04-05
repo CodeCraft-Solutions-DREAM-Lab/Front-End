@@ -13,17 +13,15 @@ import { NextUIProvider } from "@nextui-org/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-import { AuthProvider } from "./hooks/useAuth";
-
 // Estilos
 import "./output.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <NextUIProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <App />
-            </LocalizationProvider>
-        </NextUIProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <NextUIProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <App />
+      </LocalizationProvider>
+    </NextUIProvider>
+  </React.StrictMode>
 );

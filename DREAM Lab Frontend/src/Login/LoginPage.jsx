@@ -1,46 +1,29 @@
-import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
+import {
+  useLoaderData,
+  useNavigation,
+  Form,
+  useActionData,
+} from "react-router-dom";
+// import { loginUser } from "../api";
 
-function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { login } = useAuth();
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    // Here you would usually send a request to your backend to authenticate the user
-    // For the sake of this example, we're using a mock authentication
-    if (username === "user" && password === "password") {
-      // Replace with actual authentication logic
-      await login({ username });
-    } else {
-      alert("Invalid username or password");
-    }
-  };
+export default function LoginPage() {
+  const errorMessage = useActionData();
+  const message = useLoaderData();
+  const navigation = useNavigation();
+
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container">
+      <h1>Sign in to your account</h1>
+      {message && <h3 className="red">{message}</h3>}
+      {errorMessage && <h3 className="red">{errorMessage}</h3>}
+
+      <Form method="post" className="login-form" replace>
+        <input name="email" type="email" placeholder="Email address" />
+        <input name="password" type="password" placeholder="Password" />
+        <button disabled={navigation.state === "submitting"}>
+          {navigation.state === "submitting" ? "Logging in..." : "Log in"}
+        </button>
+      </Form>
     </div>
   );
 }
-
-export default LoginPage;
