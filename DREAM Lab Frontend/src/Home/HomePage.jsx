@@ -90,9 +90,6 @@ function HomePage() {
               <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
               <h1 className="dreamlab">DREAM LAB</h1>
             </div>
-            <div> {/* Search bar*/}
-            <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
-            </div>
             <div className="user-avatar-container">
               <UserAvatar />
             </div>
