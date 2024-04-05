@@ -1,8 +1,5 @@
 import { redirect } from "react-router-dom";
 
-import { useContext } from "react";
-import { UserContext } from "./Context/UserContext.js";
-
 export async function requireAuth() {
   // TODO: Cambiar que en vez de un valor booleano, haya una tabla que relacione
   // a los usuarios y contraseña encriptada, con un token. De esta manera,
@@ -24,25 +21,25 @@ export async function requireAuth() {
 
 export async function loginAction({ request }) {
   // TODO: Cambiar lógica a una validación correcta de usuario y contraseña con la base de datos
-  const loginUser = ({ email, password }) => {
+  const loginUser = ({ user, password }) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (email === "a@a" && password === "test") {
-          resolve({ email });
+        if (user === "aaa" && password === "aaa") {
+          resolve({ user });
         } else {
-          reject(new Error("Invalid email or password"));
+          reject(new Error("Invalid user or password"));
         }
       }, 1000);
     });
   };
 
   const formData = await request.formData();
-  const email = formData.get("email");
+  const user = formData.get("user");
   const password = formData.get("password");
   try {
-    const data = await loginUser({ email, password });
-    console.log(data);
+    const data = await loginUser({ user, password });
     localStorage.setItem("loggedin", true);
+    localStorage.setItem("user", user);
     return redirect("/home");
   } catch (err) {
     return err.message;

@@ -18,8 +18,8 @@ export default function LoginPage() {
       {errorMessage && <h3 className="red">{errorMessage}</h3>}
 
       <Form method="post" className="login-form" replace>
-        <input name="email" type="email" placeholder="Email address" />
-        <input name="password" type="password" placeholder="Password" />
+        <input name="user" placeholder="Usuario" />
+        <input name="password" type="password" placeholder="Contraseña" />
         <button disabled={navigation.state === "submitting"}>
           {navigation.state === "submitting" ? "Logging in..." : "Log in"}
         </button>
