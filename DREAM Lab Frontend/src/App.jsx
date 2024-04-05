@@ -8,6 +8,7 @@ import Confirmacion from "./Confirmacion/Confirmacion.jsx";
 import Profile from "./Profile/Profile.jsx";
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,4 +22,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

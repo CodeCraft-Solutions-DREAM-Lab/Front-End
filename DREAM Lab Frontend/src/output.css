@@ -3164,11 +3164,6 @@ video {
   border-color: hsl(var(--nextui-foreground) / var(--nextui-foreground-opacity, var(--tw-border-opacity)));
 }
 
-.border-neutral-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 229 229 / var(--tw-border-opacity));
-}
-
 .border-primary {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nextui-primary) / var(--nextui-primary-opacity, var(--tw-border-opacity)));
@@ -3177,11 +3172,6 @@ video {
 .border-secondary {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nextui-secondary) / var(--nextui-secondary-opacity, var(--tw-border-opacity)));
-}
-
-.border-slate-800 {
-  --tw-border-opacity: 1;
-  border-color: rgb(30 41 59 / var(--tw-border-opacity));
 }
 
 .border-success {
@@ -3432,10 +3422,6 @@ video {
   background-color: hsl(var(--nextui-secondary) / 0.2);
 }
 
-.bg-slate-900\/\[0\.8\] {
-  background-color: rgb(15 23 42 / 0.8);
-}
-
 .bg-success {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--nextui-success) / var(--nextui-success-opacity, var(--tw-bg-opacity)));
@@ -3487,10 +3473,6 @@ video {
 
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.bg-none {
-  background-image: none;
 }
 
 .bg-stripe-gradient {
@@ -3575,10 +3557,6 @@ video {
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-\[1px\] {
-  padding: 1px;
 }
 
 .\!px-1 {
@@ -3818,11 +3796,6 @@ video {
 .text-medium {
   font-size: var(--nextui-font-size-medium);
   line-height: var(--nextui-line-height-medium);
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .text-small {
@@ -4066,10 +4039,6 @@ video {
 
 .opacity-75 {
   opacity: 0.75;
-}
-
-.opacity-\[0\.8\] {
-  opacity: 0.8;
 }
 
 .opacity-\[value\] {
@@ -8113,11 +8082,6 @@ video {
   }
 }
 
-:is(.dark .dark\:border-slate-800) {
-  --tw-border-opacity: 1;
-  border-color: rgb(30 41 59 / var(--tw-border-opacity));
-}
-
 :is(.dark .dark\:bg-background\/20) {
   background-color: hsl(var(--nextui-background) / 0.2);
 }
@@ -8132,18 +8096,8 @@ video {
   background-color: hsl(var(--nextui-default) / var(--nextui-default-opacity, var(--tw-bg-opacity)));
 }
 
-:is(.dark .dark\:bg-slate-900) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-}
-
 :is(.dark .dark\:bg-transparent) {
   background-color: transparent;
-}
-
-:is(.dark .dark\:text-black) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 :is(.dark .dark\:text-danger-500) {

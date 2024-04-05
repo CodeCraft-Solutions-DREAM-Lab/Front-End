@@ -1,0 +1,101 @@
+.home-background-image-container {
+    
+    display: flex;
+    justify-content: space-between; 
+    padding: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: blur(10px); /* Adjust the blur amount as needed */
+    z-index: 1; 
+    object-fit: cover;
+    height: 300px;
+}
+
+.left-blobs-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-image {
+    align-self: flex-start;
+    justify-content: left;
+    height: 90%;
+}
+.right-image {
+    height: 120%;
+}
+.mini-blob {
+    justify-content: center;
+    height: auto; /* Let the height adjust automatically */
+    max-width: 40%; /* Limit the maximum width */
+    margin-left: 20%;
+
+}
+
+
+/* Media query para móvil */
+@media only screen and (max-width: 480px) {
+    .home-background-image-container {
+        flex-direction: column; /* Se alinean las imagenes de manera vertical */
+        filter: blur(8px);
+        
+    }
+
+    .home-background-image-container .left-image {
+        height: 40%;
+    }
+
+    .home-background-image-container .right-image {
+        display: none; /* Quitar imagen de la derecha */
+    }
+    .home-background-image-container .mini-blob {
+        display: none; /* Quitar mini blob */
+    }
+}
+
+
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
+    .home-background-image-container .left-image {
+        height: 80%;
+    }
+
+    .home-background-image-container .right-image {
+        height: 80%;
+    }
+}
+
+
+.background-container {
+    background: linear-gradient(180deg, rgb(4, 45, 83) 0%, rgb(101, 84, 177) 100%);
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.page-content {
+    position: relative; /* Establishes stacking context */
+    z-index: 2; /* Above background and images */
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-container {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.carousel-container h1 {
+    color: whitesmoke;
+    font-weight: 700;
+    padding-bottom: 2%;
+    font-size: medium;
+}
