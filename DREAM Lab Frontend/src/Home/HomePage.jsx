@@ -83,6 +83,22 @@ function HomePage() {
   console.log("Processed Transcript in HomePage:", processedTranscript);
   return (
     <>
+    <div className="navbar-positioning">
+        <div className="navbar glass-card" height="4.5rem">
+          <div className="flex items-center justify-between w-full">
+            <div className="logo-container">
+              <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
+              <h1 className="dreamlab">DREAM LAB</h1>
+            </div>
+            <div> {/* Search bar*/}
+            <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
+            </div>
+            <div className="user-avatar-container">
+              <UserAvatar />
+            </div>
+          </div>
+        </div>
+        </div>
       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
@@ -105,17 +121,7 @@ function HomePage() {
         </div>
       </div>
       <div className="page-content">
-        <div className="navbar glass-card" height="4.5rem">
-          <div className="flex items-center justify-between w-full">
-            <div className="logo-container">
-              <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
-              <h1 className="dreamlab">DREAM Lab</h1>
-            </div>
-            <div className="user-avatar-container">
-              <UserAvatar />
-            </div>
-          </div>
-        </div>
+        
 
         <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
 
