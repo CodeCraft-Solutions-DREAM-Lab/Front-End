@@ -13,10 +13,10 @@ export async function requireAuth() {
   const isLoggedIn = localStorage.getItem("loggedin");
 
   if (!isLoggedIn) {
-    throw redirect("/login");
+    redirect("/login");
+  } else {
+    redirect("/home");
   }
-
-  return null;
 }
 
 export async function loginAction({ request }) {
