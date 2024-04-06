@@ -5,9 +5,14 @@ import GlassCard from "../components/general/glass-card";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setExperiencia,
+  selectExperiencia,
+} from "../redux/Slices/experienciaSlice";
+
 function ReservacionCuarto(props) {
-  const [searchParams] = useSearchParams();
-  let sala = searchParams.get("sala");
+  const experiencia = useSelector(selectExperiencia);
 
   const [duration, setDuration] = useState(0);
 
@@ -56,8 +61,8 @@ function ReservacionCuarto(props) {
   return (
     <GlassCard padding="2rem">
       <h1 style={{ color: "white" }}>
-        {sala
-          ? `Reservación de ${sala} - Mesa 1`
+        {experiencia
+          ? `Reservación de ${experiencia} - Mesa 1`
           : "No se proporcionó un ID de sala"}
       </h1>
       <br />

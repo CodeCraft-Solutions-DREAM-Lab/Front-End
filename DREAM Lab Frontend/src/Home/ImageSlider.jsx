@@ -4,12 +4,21 @@ import { useNavigate } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import "./ImageSlider.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setExperiencia,
+  selectExperiencia,
+} from "../redux/Slices/experienciaSlice";
+
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+
   function handleClick(imageId) {
-    navigate(`/reservacion?sala=${imageId}`);
+    dispatch(setExperiencia(imageId));
+    navigate(`/reservacion`);
   }
 
   const { images, options } = props;
