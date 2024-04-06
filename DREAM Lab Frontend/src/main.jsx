@@ -22,12 +22,12 @@ import "./output.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <NextUIProvider>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <NextUIProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Provider store={store}>
           <App />
-        </LocalizationProvider>
-      </NextUIProvider>
-    </Provider>
+        </Provider>
+      </LocalizationProvider>
+    </NextUIProvider>
   </React.StrictMode>
 );

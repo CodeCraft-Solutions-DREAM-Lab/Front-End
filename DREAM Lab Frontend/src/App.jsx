@@ -11,8 +11,10 @@ import LandingPage from "./LandingPage/LandingPage.jsx";
 import LoginPage from "./Login/LoginPage";
 import NotFound from "./Global/NotFound.jsx";
 import HomePage from "./Home/HomePage.jsx";
+import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
 
-import { requireAuth, loginAction } from "./Global/Auth";
+import { loginAction } from "./Global/Auth";
+import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,8 +23,19 @@ const router = createBrowserRouter(
       <Route path="login" element={<LoginPage />} action={loginAction} />
       <Route
         path="home"
-        element={<HomePage />}
-        loader={async () => await requireAuth()}
+        element={
+          <ProtectedRoutes>
+            <HomePage />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="reservacion"
+        element={
+          <ProtectedRoutes>
+            <ReservacionSala />
+          </ProtectedRoutes>
+        }
       />
       <Route path="*" element={<NotFound />} />
     </Route>

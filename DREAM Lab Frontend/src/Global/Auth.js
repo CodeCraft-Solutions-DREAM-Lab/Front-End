@@ -14,9 +14,9 @@ export async function requireAuth() {
 
   if (!isLoggedIn) {
     redirect("/login");
-  } else {
-    redirect("/home");
   }
+
+  return null;
 }
 
 export async function loginAction({ request }) {
@@ -38,7 +38,10 @@ export async function loginAction({ request }) {
   const password = formData.get("password");
   try {
     const data = await loginUser({ user, password });
-    localStorage.setItem("loggedin", true);
+    localStorage.setItem(
+      "token",
+      "5dc98289890b193dd625ba2479de47abcb07936a2d3b3f06b71b73ed6df1a982fb49932954d5607e09f996a6c51c52952468b4ab31cb256d701536ffa5bd3855"
+    );
     localStorage.setItem("user", user);
     return redirect("/home");
   } catch (err) {

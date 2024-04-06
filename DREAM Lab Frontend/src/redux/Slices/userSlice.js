@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   token: "",
+  isAuth: false,
 };
 
 export const userSlice = createSlice({
@@ -14,10 +15,15 @@ export const userSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
+    setAuth: (state, action) => {
+      state.isAuth = action.payload;
+    },
   },
 });
 
 // Los creadores de acciones se generan para cada función reductora
-export const { setToken } = userSlice.actions;
+export const { setToken, setAuth } = userSlice.actions;
+
+export const selectAuth = (state) => state.user.isAuth;
 
 export default userSlice.reducer;
