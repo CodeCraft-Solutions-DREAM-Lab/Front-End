@@ -68,7 +68,7 @@
 
 
 .background-container {
-    background: linear-gradient(180deg, rgb(4, 45, 83) 0%, rgb(101, 84, 177) 100%);
+    background: linear-gradient(180deg, #042E55 0%, #7B7AFD 100%);
     position: relative;
     top: -4.5rem;
     left: 0;
@@ -91,6 +91,8 @@
 .carousel-container {
     width: 100%;
     margin-bottom: 5%;
+    overflow-x: auto; /* Enable horizontal scrolling by default */
+    white-space: nowrap; /* Prevent wrapping of carousel items */
 }
 
 .carousel-container h1 {

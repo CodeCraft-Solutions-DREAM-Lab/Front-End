@@ -13,29 +13,33 @@ const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
   "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
-const IMAGES = [
-  { id: "sala-1", url: "/ImagenSalaVR.png" },
-  { id: "Deep Net", url: "/ImagenUsoRouters.png" },
-  { id: "Testing Land", url: "/ImagenExpGoogle.png" },
-  {
-    id: "Electric Garage",
-    url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
-  },
-  {
-    id: "Electric Garage",
-    url: `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
-  },
-  {
-    id: "Electric Garage",
-    url: `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,
-  },
-  {
-    id: "Electric Garage",
-    url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
-  },
-  { id: "Curso de Swift", url: "/ImagenCursoSwift.png" },
-  { id: "Deep Net", url: "/ImagenConnections.png" },
-];
+  const IMAGES = [
+    { id: "sala-1", url: "/ImagenSalaVR.png", title: "Sala VR" },
+    { id: "Deep Net", url: "/ImagenUsoRouters.png", title: "Deep Net" },
+    { id: "Testing Land", url: "/ImagenExpGoogle.png", title: "Testing Land" },
+    {
+      id: "Electric Garage",
+      url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
+      title: "Electric Garage",
+    },
+    {
+      id: "Electric Garage",
+      url: `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
+      title: "Electric Garage",
+    },
+    {
+      id: "Electric Garage",
+      url: `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,
+      title: "Electric Garage",
+    },
+    {
+      id: "Electric Garage",
+      url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
+      title: "Electric Garage",
+    },
+    { id: "Curso de Swift", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
+    { id: "Deep Net", url: "/ImagenConnections.png", title: "Deep Net" },
+  ];
 
 const initialData = [
   {
@@ -135,15 +139,18 @@ function HomePage() {
 
         <div className="carousel-container">
           <h1>RECOMENDACIONES</h1>
+          <ImageSlider images={IMAGES} titles={IMAGES.map((item) => item.title)} options={OPTIONS} />
+        </div>
+        <div className="carousel-container">
+        <h1>SALAS</h1>
           <ImageSlider images={IMAGES} options={OPTIONS} />
         </div>
         <div className="carousel-container">
+        <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
           <ImageSlider images={IMAGES} options={OPTIONS} />
         </div>
         <div className="carousel-container">
-          <ImageSlider images={IMAGES} options={OPTIONS} />
-        </div>
-        <div className="carousel-container">
+        <h1>UNIDADES DE FORMACIÓN</h1>
           <ImageSlider images={IMAGES} options={OPTIONS} />
         </div>
       </div>
