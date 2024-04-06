@@ -4,6 +4,7 @@ import SpeechBotCard from "./SpeechBotCard";
 import "../App.css";
 import UserAvatar from "../components/general/UserAvatar";
 import RecommendationsCarousel from "./RecommendationsCarousel";
+import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 
 const OPTIONS = { dragFree: true, loop: true };
@@ -61,6 +62,8 @@ function HomePage() {
   const [processedTranscript, setProcessedTranscript] = useState("");
   const [data, setData] = useState(initialData);
   const [showRecommendations, setShowRecommendations] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     if (processedTranscript) {
@@ -76,6 +79,19 @@ function HomePage() {
     }
   }, [processedTranscript]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos === 0);
+      setPrevScrollPos(currentScrollPos);
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+  
+
   const handleProcessedText = (processedText) => {
     setProcessedTranscript(processedText);
   };
@@ -83,20 +99,8 @@ function HomePage() {
   console.log("Processed Transcript in HomePage:", processedTranscript);
   return (
     <>
-    <div className="navbar-positioning">
-        <div className="navbar glass-card" height="4.5rem">
-          <div className="flex items-center justify-between w-full">
-            <div className="logo-container">
-              <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
-              <h1 className="dreamlab">DREAM LAB</h1>
-            </div>
-            <div className="user-avatar-container">
-              <UserAvatar />
-            </div>
-          </div>
-        </div>
-        </div>
-      <div className="background-container">
+      <Navbar visible={visible} /> {/* Use the Navbar component */}
+       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
             <img

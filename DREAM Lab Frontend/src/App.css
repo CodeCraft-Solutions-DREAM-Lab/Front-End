@@ -27,7 +27,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: top 0.3s ease-in-out;
 }
+
+.visible {
+    top: 0; /* Display navbar at the top */
+  }
+  
+.hidden {
+    top: -9rem; /* Hide navbar above the viewport */
+  }
+  
 
 .logo-container {
     display: flex;
@@ -90,6 +100,37 @@ body {
 }
 
 .searchBar {
-   border: 1rem;
-   border-color: white;
+    border: 1.5px solid white; /* Changed border width and added border style */
+    border-radius: 25px;
+    width: 60%;
+    height: 2.3rem; /* Adjusted height */
+    padding: 0 20px 0 40px; /* Adjust for icon width and padding */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    text-align: left; /* Center text horizontally */
+    outline: none;
+    background-color: transparent;
+    color: white;
+    background-image: url('./images/magnifying-glass-icon.svg'); /* Path to your magnifying glass icon */
+    background-size: 20px; /* Adjust size as needed */
+    background-position: 10% center; /* Adjust position as needed */
+    background-repeat: no-repeat;
+    align-self: flex-end;
+ }
+ 
+ .searchBar:focus {
+    border-color: white; /* Change border color on focus */
 }
+
+.searchBar::placeholder {
+    color: whitesmoke; /* Change placeholder color */
+}
+
+.searchContainer {
+    margin-left: auto;
+    padding-right: 2rem;
+    position: relative;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: flex-end; /* Align items to the right */
+}
+

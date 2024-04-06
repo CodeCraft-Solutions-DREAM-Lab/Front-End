@@ -1,7 +1,8 @@
 //import React from "react";
 import PropTypes from "prop-types";
-import UserAvatar from "../components/general/UserAvatar";
-import "../App.css";
+import UserAvatar from "./UserAvatar";
+import "../../App.css";
+import SearchBar from "../general/SearchBar";
 
 const Navbar = ({ visible }) => {
   return (
@@ -12,10 +13,8 @@ const Navbar = ({ visible }) => {
             <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
             <h1 className="dreamlab">DREAM LAB</h1>
           </div>
-          <div>
-            {/* Search bar*/}
-            <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
-          </div>
+            <SearchBar/>
+
           <div className="user-avatar-container">
             <UserAvatar />
           </div>
