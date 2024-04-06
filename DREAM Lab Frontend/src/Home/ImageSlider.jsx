@@ -9,7 +9,7 @@ const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax e
 const ImageSlider = (props) => {
   let navigate = useNavigate();
   function handleClick(imageId) {
-    navigate(`/reservacion?id=${imageId}`);
+    navigate(`/reservacion?sala=${imageId}`);
   }
 
   const { images, options } = props;
