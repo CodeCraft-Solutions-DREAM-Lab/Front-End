@@ -11,6 +11,8 @@ import { Navigate } from "react-router-dom";
 
 import { Spinner } from "@nextui-org/react";
 
+import { getFromLocalStorage } from "./Storage";
+
 function ProtectedRoutes({ children }) {
   // Obtener el estado de autenticación del store de redux
   const isAuth = useSelector(selectAuth);
@@ -28,7 +30,7 @@ function ProtectedRoutes({ children }) {
     // Llamada a la API para validar el token
     async function validateToken() {
       const data = await postData("http://localhost:3000/authToken", {
-        token: localStorage.getItem("token") || "",
+        token: getFromLocalStorage("token") || "",
       });
 
       // la api regresa un booleano que indica si el token es válido o no

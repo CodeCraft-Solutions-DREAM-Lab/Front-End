@@ -1,18 +1,26 @@
-import { useSearchParams } from "react-router-dom";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import GlassCard from "../components/general/glass-card";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
 import {
-  setExperiencia,
-  selectExperiencia,
-} from "../redux/Slices/experienciaSlice";
+  getFromSessionStorage,
+  existsInSessionStorage,
+} from "../Global/Storage";
 
 function ReservacionCuarto(props) {
-  const experiencia = useSelector(selectExperiencia);
+  const navigate = useNavigate();
+
+  // Si no existe la experiencia en el sessionStorage, redirigir a la página de inicio
+  useEffect(() => {
+    if (!existsInSessionStorage("experiencia")) {
+      navigate("/home");
+    }
+  }, [navigate]);
+
+  // Obtiene el nombre de la experiencia del sessionStorage
+  const experiencia = getFromSessionStorage("experiencia");
 
   const [duration, setDuration] = useState(0);
 
@@ -22,7 +30,6 @@ function ReservacionCuarto(props) {
   const [fecha, setFecha] = useState(0);
   const [fechaIsoString, setFechaIsoString] = useState("");
 
-  let navigate = useNavigate();
   async function handleClick(imageId) {
     const date = new Date(fecha);
     setFechaIsoString(date.toISOString());
@@ -51,7 +58,7 @@ function ReservacionCuarto(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        navigate(`/confirmacion/`);
+        navigate(`confirmacion`);
       })
       .catch((error) => {
         console.error("Error:", error);

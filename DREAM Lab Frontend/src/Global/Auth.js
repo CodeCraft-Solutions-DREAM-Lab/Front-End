@@ -1,5 +1,7 @@
 import { postData } from "./Database";
 
+import { saveToLocalStorage } from "./Storage";
+
 // Función para validar las credenciales del usuario y redirigir a la página
 export async function loginAction({ formData }) {
   const user = formData.get("user");
@@ -13,8 +15,8 @@ export async function loginAction({ formData }) {
       // De la API se recibe un jwt (JSON Web Token)
       const jwt = response.jwt;
       // Guardar el token y el usuario en el local storage
-      localStorage.setItem("token", jwt);
-      localStorage.setItem("user", user);
+      saveToLocalStorage("token", jwt);
+      saveToLocalStorage("user", user);
       // Regresar la dirección a la que se debe redirigir
       return "/home";
     })

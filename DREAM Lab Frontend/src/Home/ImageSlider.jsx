@@ -10,14 +10,17 @@ import {
   selectExperiencia,
 } from "../redux/Slices/experienciaSlice";
 
+import { saveToSessionStorage } from "../Global/Storage";
+
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function handleClick(imageId) {
-    dispatch(setExperiencia(imageId));
+  function handleClick(idExperiencia) {
+    dispatch(setExperiencia(idExperiencia));
+    saveToSessionStorage("experiencia", idExperiencia);
     navigate(`/reservacion`);
   }
 
