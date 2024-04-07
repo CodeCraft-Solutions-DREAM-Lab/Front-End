@@ -6,14 +6,31 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import Root from "./Global/Root.jsx";
-import LandingPage from "./LandingPage/LandingPage.jsx";
-import LoginPage from "./Login/LoginPage";
-import NotFound from "./Global/NotFound.jsx";
-import HomePage from "./Home/HomePage.jsx";
-import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
 
+// Estructura base
+import Root from "./Global/Root.jsx";
+
+// Rutas protegidas
 import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
+
+// Pagina no encontrada
+import NotFound from "./Global/NotFound.jsx";
+
+// Login
+import LoginPage from "./Login/LoginPage";
+
+// Landing page
+import LandingPage from "./LandingPage/LandingPage.jsx";
+
+// Home
+import HomePage from "./Home/HomePage.jsx";
+
+// Reservaciones
+import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
+import Confirmacion from "./Reservaciones/Confirmacion.jsx";
+import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
+import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
+import SelectorSala from "./Reservaciones/SelectorSala.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +50,38 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoutes>
             <ReservacionSala />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="reservacion/confirmacion"
+        element={
+          <ProtectedRoutes>
+            <Confirmacion />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="reservacion/resumen"
+        element={
+          <ProtectedRoutes>
+            <ResumenReservacion />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="reservacion/equipo"
+        element={
+          <ProtectedRoutes>
+            <SelectorEquipo />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="reservacion/sala"
+        element={
+          <ProtectedRoutes>
+            <SelectorSala />
           </ProtectedRoutes>
         }
       />
