@@ -1,6 +1,5 @@
 import { redirect } from "react-router-dom";
 import { postData } from "./Database";
-import { useState, useEffect } from "react";
 
 export async function requireAuth() {
   // TODO: Cambiar que en vez de un valor booleano, haya una tabla que relacione
@@ -34,7 +33,7 @@ export async function loginAction({ formData }) {
       localStorage.setItem("user", user);
       return "/home";
     })
-    .catch((err) => {
-      return err.message;
+    .catch(() => {
+      return "/login";
     });
 }

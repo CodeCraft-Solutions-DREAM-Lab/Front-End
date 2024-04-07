@@ -41,6 +41,8 @@ function ProtectedRoutes({ children }) {
     }
   }, [authVal, dispatch]);
 
+  console.log(authVal, isAuth);
+
   // Mientras se valida el token, authVal es null, una vez que se valida, si
   // fue exitoso, se muestra la página, si no, se redirige a login
   if (authVal === null) {

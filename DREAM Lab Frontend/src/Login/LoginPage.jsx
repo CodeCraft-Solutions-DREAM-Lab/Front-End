@@ -4,6 +4,7 @@ import {
   Form,
   useActionData,
   redirect,
+  useNavigate,
 } from "react-router-dom";
 import { loginAction } from "../Global/Auth"; // import the loginAction function
 
@@ -11,12 +12,18 @@ export default function LoginPage() {
   const errorMessage = useActionData();
   const message = useLoaderData();
   const navigation = useNavigation();
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const path = await loginAction({ formData });
-    redirect(path);
+    try {
+      const path = await loginAction({ formData });
+      console.log("Path:", path);
+      navigate(path);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (

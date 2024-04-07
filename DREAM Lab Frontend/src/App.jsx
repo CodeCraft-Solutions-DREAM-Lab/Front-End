@@ -13,7 +13,6 @@ import NotFound from "./Global/NotFound.jsx";
 import HomePage from "./Home/HomePage.jsx";
 import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
 
-import { loginAction } from "./Global/Auth";
 import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
 
 const router = createBrowserRouter(
