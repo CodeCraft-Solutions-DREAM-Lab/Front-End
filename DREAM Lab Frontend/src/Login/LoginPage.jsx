@@ -1,25 +1,22 @@
-import {
-  useLoaderData,
-  useNavigation,
-  Form,
-  useActionData,
-  redirect,
-  useNavigate,
-} from "react-router-dom";
-import { loginAction } from "../Global/Auth"; // import the loginAction function
+import { useNavigation, Form, useNavigate } from "react-router-dom";
+
+// Accion que maneja la logica de validar si el usuario y contraseña son válidos
+// y regresar la ruta a la que se debe redirigir y un token que se guardará en
+// el local storage
+import { loginAction } from "../Global/Auth";
 
 export default function LoginPage() {
-  const errorMessage = useActionData();
-  const message = useLoaderData();
   const navigation = useNavigation();
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
+    // Evitar que se haga el submit del formulario
     event.preventDefault();
+    // Obtener los datos del formulario
     const formData = new FormData(event.target);
     try {
+      // Llamar a la acción de login y obtener el path al que se debe redirigir
       const path = await loginAction({ formData });
-      console.log("Path:", path);
       navigate(path);
     } catch (error) {
       console.error("Login failed:", error);
@@ -29,8 +26,6 @@ export default function LoginPage() {
   return (
     <div className="login-container">
       <h1>Sign in to your account</h1>
-      {message && <h3 className="red">{message}</h3>}
-      {errorMessage && <h3 className="red">{errorMessage}</h3>}
 
       <Form method="post" className="login-form" replace onSubmit={handleLogin}>
         <input name="user" placeholder="Usuario" />
