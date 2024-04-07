@@ -2,43 +2,45 @@ import { useState, useEffect } from "react";
 import ImageSlider from "./ImageSlider";
 import SpeechBotCard from "./SpeechBotCard";
 import "../App.css";
-import UserAvatar from "../components/general/UserAvatar";
 import RecommendationsCarousel from "./RecommendationsCarousel";
 import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 
-const OPTIONS = { dragFree: true, loop: true };
+
+const OPTIONS = { dragFree: true, loop: true, startIndex: 0};
 
 const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
   "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
   const IMAGES = [
-    { id: "sala-1", url: "/ImagenSalaVR.png", title: "Sala VR" },
-    { id: "Deep Net", url: "/ImagenUsoRouters.png", title: "Deep Net" },
-    { id: "Testing Land", url: "/ImagenExpGoogle.png", title: "Testing Land" },
+    { id: "1", url: "/ImagenSalaVR.png", title: "Sala VR" },
+    { id: "2", url: "/ImagenUsoRouters.png", title: "Deep Net" },
+    { id: "3", url: "/ImagenExpGoogle.png", title: "Testing Land" },
     {
-      id: "Electric Garage",
+      id: "4",
       url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
       title: "Electric Garage",
     },
     {
-      id: "Electric Garage",
+      id: "5",
       url: `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
       title: "Electric Garage",
     },
     {
-      id: "Electric Garage",
+      id: "6",
       url: `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,
       title: "Electric Garage",
     },
     {
-      id: "Electric Garage",
+      id: "7",
       url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
       title: "Electric Garage",
     },
-    { id: "Curso de Swift", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
-    { id: "Deep Net", url: "/ImagenConnections.png", title: "Deep Net" },
+    { id: "8", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
+    { id: "9", url: "/ImagenConnections.png", title: "Deep Net" },
+    { id: "10", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
+    { id: "11", url: "/ImagenConnections.png", title: "Deep Net" },
   ];
 
 const initialData = [
@@ -136,6 +138,7 @@ function HomePage() {
             activeSlide={parseInt(Math.floor(data.length / 2))}
           />
         )}
+
 
         <div className="carousel-container">
           <h1>RECOMENDACIONES</h1>

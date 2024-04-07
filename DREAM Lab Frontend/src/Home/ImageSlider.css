@@ -14,13 +14,20 @@
 	backface-visibility: hidden;
 	display: flex;
 	touch-action: pan-y;
+
 	margin-left: calc(var(--slide-spacing) * -1);
+	
 }
 
 .embla__slide {
 	flex: 0 0 var(--slide-size);
 	min-width: 0;
 	padding-left: var(--slide-spacing);
+
+}
+
+.embla__container:hover {
+	border: 10px;
 }
 
 .embla__slide__img {
@@ -31,11 +38,12 @@
 	object-fit: cover;
 	transform: scale(1.1);
 	user-select: none;
+
 }
 
 .embla__parallax {
 	border-radius: 1rem;
-	height: 100%;
+	
 	overflow: hidden;
 }
 
@@ -46,6 +54,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
+
 }
 
 .embla__parallax__img {
@@ -53,6 +62,7 @@
 	max-width: none;
 	flex: 0 0 calc(115% + (var(--slide-spacing) * 2));
 	object-fit: cover;
+
 }
 
 
@@ -150,13 +160,11 @@
 }
 
 .slide-title {
-    position: absolute;
-    bottom: -20px; /* Adjust as needed */
-    left: 0;
-    width: 100%;
-    text-align: center;
+
+    left: 50%;
+	padding-top: 4%;
     color: white;
-    font-size: 1.5rem; /* Adjust as needed */
-    z-index: 2; /* Ensure it appears above the image */
-    padding: 0 10px; /* Add padding to make text more readable */
+    font-size: 1.1rem; /* Adjust as needed */
+    text-align: center;
+    z-index: 1; /* Ensure it appears above the image */
 }
