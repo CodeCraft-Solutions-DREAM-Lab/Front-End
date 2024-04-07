@@ -1,4 +1,6 @@
 import { redirect } from "react-router-dom";
+import { postData } from "./Database";
+import { useState, useEffect } from "react";
 
 export async function requireAuth() {
   // TODO: Cambiar que en vez de un valor booleano, haya una tabla que relacione
@@ -19,32 +21,20 @@ export async function requireAuth() {
   return null;
 }
 
-export async function loginAction({ request }) {
-  // TODO: Cambiar lógica a una validación correcta de usuario y contraseña con la base de datos
-  const loginUser = ({ user, password }) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (user === "aaa" && password === "aaa") {
-          resolve({ user });
-        } else {
-          reject(new Error("Invalid user or password"));
-        }
-      }, 1000);
-    });
-  };
-
-  const formData = await request.formData();
+export async function loginAction({ formData }) {
   const user = formData.get("user");
   const password = formData.get("password");
-  try {
-    const data = await loginUser({ user, password });
-    localStorage.setItem(
-      "token",
-      "5dc98289890b193dd625ba2479de47abcb07936a2d3b3f06b71b73ed6df1a982fb49932954d5607e09f996a6c51c52952468b4ab31cb256d701536ffa5bd3855"
-    );
-    localStorage.setItem("user", user);
-    return redirect("/home");
-  } catch (err) {
-    return err.message;
-  }
+  return postData("http://localhost:3000/authUsuario", {
+    usuario: user,
+    contrasena: password,
+  })
+    .then((response) => {
+      const jwt = response.jwt;
+      localStorage.setItem("token", jwt);
+      localStorage.setItem("user", user);
+      return "/home";
+    })
+    .catch((err) => {
+      return err.message;
+    });
 }
