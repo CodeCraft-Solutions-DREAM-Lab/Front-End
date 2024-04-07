@@ -12,8 +12,15 @@ import { Navigate } from "react-router-dom";
 import { Spinner } from "@nextui-org/react";
 
 function ProtectedRoutes({ children }) {
+  // Obtener el estado de autenticación del store de redux
   const isAuth = useSelector(selectAuth);
+  // Obtener la función para actualizar el estado de autenticación
   const dispatch = useDispatch();
+  // Se usarán dos useStates para poder actualizar el componentes cuando reciban
+  // cambios. Esto porque cuando se hace una llamada a la api, se recibe una
+  // promesa de que recibirá un valor, pero no se sabe cuándo. Por lo tanto, se
+  // estará esperando usando un usesState para actualizar el componente cuando
+  // se reciba el valor.
   const [authVal, setAuthVal] = useState(null);
 
   // Validar el token
@@ -25,23 +32,24 @@ function ProtectedRoutes({ children }) {
       });
 
       // la api regresa un booleano que indica si el token es válido o no
+      // Si todavía no se recibe nada de la api, authVal se queda en false
       setAuthVal(data || false);
     }
 
-    // Si no está autenticado o no se ha validado el token, validar
+    // Si no está autenticado o no se ha validado el token, validarlo
     if (!isAuth || authVal === null) {
       validateToken();
     }
   }, [isAuth, authVal]);
 
-  // Actualizar el estado de autenticación
+  // Actualizar el estado de autenticación una vez que se haya validado el token
   useEffect(() => {
+    // Si se recibe un valor de la api, actualizar el estado de autenticación
+    // usando la función de dispatch de redux
     if (authVal) {
       dispatch(setAuth(authVal));
     }
   }, [authVal, dispatch]);
-
-  console.log(authVal, isAuth);
 
   // Mientras se valida el token, authVal es null, una vez que se valida, si
   // fue exitoso, se muestra la página, si no, se redirige a login

@@ -14,7 +14,6 @@ export const experienciaSlice = createSlice({
   },
 });
 
-// Los creadores de acciones se generan para cada función reductora
 export const { setExperiencia } = experienciaSlice.actions;
 
 export const selectExperiencia = (state) => state.experiencia.experiencia;
