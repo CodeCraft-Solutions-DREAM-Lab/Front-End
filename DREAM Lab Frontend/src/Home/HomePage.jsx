@@ -5,6 +5,7 @@ import "../App.css";
 import RecommendationsCarousel from "./RecommendationsCarousel";
 import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
+import axios from "axios";
 
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0};
@@ -70,6 +71,17 @@ function HomePage() {
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [experiences, setExperiences] = useState([]);
+
+  useEffect(() => {
+    axios.get("/experiencias")
+      .then(response => {
+        setExperiences(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching experiences:", error);
+      });
+  }, []);
 
   useEffect(() => {
     if (processedTranscript) {
@@ -150,7 +162,11 @@ function HomePage() {
         </div>
         <div className="carousel-container">
         <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
-          <ImageSlider images={IMAGES} options={OPTIONS} />
+          <ImageSlider images={experiences.map(experience => ({
+                id: experience.idExperiencia,
+                url: experience.portadaURL,
+                title: experience.nombre
+              }))} options={OPTIONS} />
         </div>
         <div className="carousel-container">
         <h1>UNIDADES DE FORMACIÓN</h1>

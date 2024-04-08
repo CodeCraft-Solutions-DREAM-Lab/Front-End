@@ -23,6 +23,7 @@
     "@mui/material": "^5.15.13",
     "@mui/x-date-pickers": "^6.19.6",
     "@nextui-org/react": "^2.2.10",
+    "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "clsx": "^2.1.0",
     "concurrently": "^8.2.2",
