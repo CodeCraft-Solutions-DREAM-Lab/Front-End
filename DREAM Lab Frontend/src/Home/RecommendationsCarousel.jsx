@@ -127,7 +127,9 @@ const SliderContent = (props) => {
 		<div className="sliderContent" onClick={handleClick}>
 			{props.icon}
 			<h2>{props.title}</h2>
-			<p>{props.desc}</p>
+			<div className="textContainer">
+				<p>{props.desc}</p>
+			</div>
 		</div>
 	);
 };

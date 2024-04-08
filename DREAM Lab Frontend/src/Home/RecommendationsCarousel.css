@@ -2,14 +2,14 @@
 	position: relative;
 	perspective: 1000px;
 	transform-style: preserve-3d;
-	width: 362px;
-	height: 272px;
+	width: 650px;
+	height: 450px;
 	margin: 0 auto;
 }
 
 .slide {
-	width: 362px;
-	height: 272px;
+	width: 650px;
+	height: 450px;
 	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
 		visibility 500ms ease 0s;
 	position: absolute;
@@ -47,9 +47,16 @@
 
 .sliderContent h2 {
 	margin: 16px 0;
+	font-weight: bold;
+	font-size: larger;
+	text-transform: uppercase;
 }
 
-.sliderContent p {
+.textContainer {
+	width: 35%;
+}
+
+.textContainer p {
 	margin: 0;
 	margin-bottom: 16px;
 }
