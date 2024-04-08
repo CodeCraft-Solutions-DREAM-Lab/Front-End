@@ -72,8 +72,8 @@ function RecomendationsCarousel(props) {
 						<div
 							className="slide"
 							style={{
-								background: item.bgColor,
-								// backgroundImage: `url(${item.img})`,
+								//background: item.bgColor,
+								backgroundImage: `url(${item.img})`,
 								boxShadow: `0 5px 20px ${item.bgColor}30`,
 								...getStyles(i),
 							}}
