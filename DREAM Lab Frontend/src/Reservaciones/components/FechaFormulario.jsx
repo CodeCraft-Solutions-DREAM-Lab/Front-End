@@ -2,6 +2,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 import {
     getFromSessionStorage,
@@ -11,6 +12,7 @@ import {
 
 function FechaFormulario(props) {
     
+    const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
     const [fecha, setFecha] = useState(getFromSessionStorage("fecha") || "");
     const [fechaIsoString, setFechaIsoString] = useState(getFromSessionStorage("fechaIsoString") || "");
     const [horaInicio, setHoraInicio] = useState(getFromSessionStorage("horaInicio") || "");
@@ -24,22 +26,22 @@ function FechaFormulario(props) {
     useEffect(() => {saveToLocalStorage("duration", duration)}, [duration]);
 
     return (
-        <div className="">
-            <div
-                style={{
-                    backgroundColor: "white",
-                    display: "inline-block",
-                    borderRadius: "0.6rem",
-                }}
-            >
+        <div className="flex flex-col mx-3">
+                <p className="text-white">Fecha</p>
                 <DatePicker
+                    className="bg-white rounded"
+                    minDate={minEligibleDate}
                     onChange={(newValue) => {
                         setFecha(newValue);
                         setFechaIsoString(newValue.toISOString());
                     }}
                 />
 
-                <Autocomplete label="Hora de inicio" className="max-w-xs">
+                <p className="text-white mt-6">Hora de inicio</p>
+                <Autocomplete 
+                    className="max-w mb-3"
+                    aria-label="Hora de inicio"
+                >
                     {[9, 10, 11].map((hora) => (
                         <AutocompleteItem
                             key={hora}
@@ -61,9 +63,10 @@ function FechaFormulario(props) {
                     ))}
                 </Autocomplete>
 
+                <p className="text-white mt-3">Duración</p>
                 <Autocomplete
-                    label="Duración de la reservación (horas)"
-                    className="max-w-xs"
+                    className="max-w"
+                    aria-label="Duración"
                 >
                     {["2 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem
@@ -92,9 +95,6 @@ function FechaFormulario(props) {
                     console.log(horaInicioIsoString);
                     console.log(duration);
                 }}>Debug</Button>
-            </div>
-
-
         </div>
     );
 }

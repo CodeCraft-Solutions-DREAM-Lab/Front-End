@@ -13,9 +13,7 @@ function SelectorSala(props) {
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    <Card>
-                        <FechaFormulario />
-                    </Card>
+                    <FechaFormulario />
                 </Grid>
             </Grid>
 
