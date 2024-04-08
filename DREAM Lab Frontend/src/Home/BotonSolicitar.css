@@ -1,0 +1,45 @@
+.boton-solicitar{
+    background-color: #042E55;
+    border-radius: 18px; 
+    font-family: "Karla", sans-serif;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: white;
+    border: 3px solid white; 
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.boton-solicitar:hover{
+    background-color: white;
+    border-radius: 18px; 
+    font-family: "Karla", sans-serif;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #042E55;
+    border: 2px solid white; 
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+
+    .boton-solicitar{
+        border-radius: 0px; 
+        border: 0px solid white; ;
+        width: 100%;
+        border-bottom: 2px solid white; 
+    }
+
+    .boton-solicitar:hover{
+        border-radius: 0px; 
+        border: 0px solid white; ;
+        width: 100%;
+        border-bottom: 2px solid white; 
+    }
+    
+}

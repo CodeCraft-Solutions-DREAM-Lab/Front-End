@@ -1,0 +1,20 @@
+.close-button {
+    background-color: #042E55;
+    color: white;
+    border-radius: 100%;
+    position: fixed;
+    z-index: 25; 
+    width: 30px;
+    height: 30px;
+    left: 10px;
+    top: 10px;
+    padding-bottom: 2px;
+    font-family: "Karla", sans-serif;
+    font-weight: bolder;
+    border: 2px solid white; /* Agrega un borde blanco */
+}
+
+.close-button:hover{
+    background-color: white;
+    color: #042E55;
+}

@@ -1,21 +1,29 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import useEmblaCarousel from 'embla-carousel-react'
 import './ImageSlider.css'
+import Detalles from "./Detalles.jsx";
 
 const TWEEN_FACTOR_BASE = 0.1 // The higher the number, the more the parallax effect. Default is 0.2
 
+
 const ImageSlider = (props) => {
+
 	let navigate = useNavigate();
-	function handleClick(imageId) {
-		navigate(`/reservacion/${imageId}`);
-	}
+	const { mostrarDetalles } = props; // Función para mostrar Detalles
+
+	const handleClick = (imageId) => {
+		mostrarDetalles(); // Llama a la función para mostrar Detalles
+		/*navigate(`/reservacion/${imageId}`);*/
+		props.onImageClick(imageId); // pasa el ID de la imagen al componente padre
+		console.log("IMAGE SLIDER: " + imageId);
+	};
 
 	const { images, options } = props
 	const [emblaRef, emblaApi] = useEmblaCarousel(options)
 	const tweenFactor = useRef(0)
 	const tweenNodes = useRef([])
+
 
 	const setTweenNodes = useCallback((emblaApi) => {
 		tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {

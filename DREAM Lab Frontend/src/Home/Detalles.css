@@ -1,0 +1,213 @@
+
+
+.main-details-div{
+    transform: translateY(-30%);
+    background-color: #123360;
+    margin: 0 auto;
+    position: fixed;
+    z-index: 25; 
+    margin-left: -2.5%;
+    padding: 3%;
+    padding-bottom: 0%;
+    border-bottom: 3px solid white;
+    border: 2px solid rgba(0, 0, 0, 0.2); /* Opacidad del 50% */
+    border-bottom-left-radius: 38px;
+    border-bottom-right-radius: 38px;    
+}
+
+.details{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 2%;
+}
+
+.experience-details{
+    width: 50%;
+    max-height: 70%;
+    font-family: "Karla", sans-serif;
+    color: white;
+    font-weight: lighter; 
+    padding-right: 2%;
+}
+
+.experience-name{
+    font-weight: bold;
+    font-size:x-large;
+    margin-top: 7%;
+    text-transform: uppercase;
+}
+
+.experience-description{
+    margin-top: 1%;
+    text-align: justify;
+    
+}
+
+.image {
+    width: 50%;
+    text-align: center;
+    max-height: 40vh; 
+    margin: 0 auto; 
+    overflow: hidden;
+    background-image: url('./Images/details_blur.png');
+    background-size: cover;
+    background-position: center center; 
+}
+
+.experience-image {
+    margin-top: 5%;
+    max-height: 80%; 
+    vertical-align: middle; 
+    display: inline-block; 
+}
+
+.tags-details {
+    display: flex; 
+    flex-wrap: nowrap; 
+}
+
+.tag{
+    margin-top: 5%;
+    flex: 0 0 auto; 
+    margin-right: 3%; 
+}
+
+.boton-solicitud {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    z-index: 25; 
+    transform: translateY(-155%);
+}
+
+.boton-cerrar-detalles{
+    transform: translateX(95%) translateY(100px);
+}
+
+
+@media (max-width: 1000px){
+
+    .boton-solicitud {
+        margin-left: 50%;
+    }
+}
+
+@media (max-width: 900px) {
+    .experience-details {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .experience-details {
+        font-size: smaller;
+        padding-right: 3%;
+        width: 100%;
+    }
+
+    .image{
+        display: none;
+    }
+
+    .experience-image {
+        display: none;
+    }
+
+    .boton-cerrar-detalles{
+        display: none;
+    }
+
+    .main-details-div{
+        transform: translateY(-43%);
+        background-color: #123360;
+        margin: 0 auto;
+        position: fixed;
+        z-index: 25; 
+        margin-left: -6.5%;
+        padding: 3%;
+        padding-bottom: 5%;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .experience-name{
+        font-weight: bold;
+        font-size:large;
+        margin-top: 7%;
+        text-transform: uppercase;
+    }
+
+    .boton-solicitud {
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin-left: 50%;
+        margin-right: auto;
+        font-size: small;
+        z-index: 25; 
+        transform: translateY(-85%);
+    }
+}
+
+@media (max-width: 480px) {
+    .boton-solicitud {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: small;
+        z-index: 25; 
+        transform: translateY(30%);
+    }
+}
+
+/*Animación hacia abajo*/
+@keyframes slide-in {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(10);
+        opacity: 1;
+    }
+}
+
+
+/*Animación hacia arriba*/
+@keyframes slide-out {
+    from {
+        transform: translateY(10);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+}
+
+.fade-in {
+    opacity: 0; /* Inicialmente, establece la opacidad en 0 para que el elemento esté oculto */
+    animation: fadeInAnimation 1s ease forwards;
+}
+  
+@keyframes fadeInAnimation {
+    from {
+      opacity: 0; /* Comienza con una opacidad de 0 */
+    }
+    to {
+      opacity: 1; /* Aumenta la opacidad a 1 para hacer que el elemento aparezca gradualmente */
+    }
+}
+
+

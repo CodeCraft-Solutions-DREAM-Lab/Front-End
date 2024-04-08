@@ -1,0 +1,26 @@
+.etiqueta-div {
+    background-color: white;
+    color: green;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 13px; 
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px; 
+    width: 100%;
+    margin-top: 6%;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+
+    .etiqueta-div {
+        font-size: smaller;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
