@@ -151,7 +151,6 @@ function HomePage() {
         setProcessedTranscript(processedText);
     };
 
-
     console.log("Processed Transcript in HomePage:", processedTranscript);
 
     if(isLoading){

@@ -1,0 +1,43 @@
+.div-exterior-logro {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    width: 26%;
+    border-radius: 20px;
+    font-family: 'Karla', sans-serif;
+    color: black;
+    padding-left: 1.5%;
+    padding-right: 2%;
+    padding-top: 1.2%;
+    padding-bottom: 1%;
+    margin-bottom: 1%;
+    align-items: center;
+}
+
+.icono-logro{
+    width: 25%;
+}
+
+.div-info-logro{
+    width: 65%;
+    margin-left: 6%;
+}
+
+.nombre-logro-bloqueado{
+    text-transform: uppercase;
+    font-size: large;
+    font-weight:900;
+    color: #B7B7B7;
+}
+
+.nombre-logro-desbloqueado{
+    text-transform: uppercase;
+    font-size: large;
+    font-weight:900;
+}
+
+.descripcion-logro{
+    font-size: small;
+    font-weight:light;
+    line-height: 1.2;
+}
