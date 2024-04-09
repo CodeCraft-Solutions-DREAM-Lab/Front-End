@@ -12,7 +12,9 @@
     border-bottom: 3px solid white;
     border: 2px solid rgba(0, 0, 0, 0.2); /* Opacidad del 50% */
     border-bottom-left-radius: 38px;
-    border-bottom-right-radius: 38px;    
+    border-bottom-right-radius: 38px;  
+    min-width: 101%;
+    min-height: 55%;
 }
 
 .details{
@@ -35,18 +37,21 @@
     font-size:x-large;
     margin-top: 7%;
     text-transform: uppercase;
+    
 }
 
 .experience-description{
     margin-top: 1%;
     text-align: justify;
-    
+
 }
 
 .image {
+
     width: 50%;
     text-align: center;
-    max-height: 40vh; 
+    min-height: 45vh; 
+    max-height: 45vh; 
     margin: 0 auto; 
     overflow: hidden;
     background-image: url('./Images/details_blur.png');
@@ -80,7 +85,7 @@
     margin-right: auto;
     text-align: center;
     z-index: 25; 
-    transform: translateY(-155%);
+    transform: translateY(-185%);
 }
 
 .boton-cerrar-detalles{
@@ -89,13 +94,18 @@
 
 
 @media (max-width: 1000px){
-
     .boton-solicitud {
         margin-left: 50%;
+    }
+    .main-details-div{
+        transform: translateX(-12px) translateY(-30%);
     }
 }
 
 @media (max-width: 900px) {
+    .main-details-div{
+        transform: translateX(-12px) translateY(-30%);
+    }
     .experience-details {
         font-size: 15px;
     }
@@ -131,6 +141,8 @@
         padding-bottom: 5%;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
+        height: fit-content;
+        min-height: 40%;
     }
 
     .experience-name{
@@ -148,7 +160,7 @@
         margin-right: auto;
         font-size: small;
         z-index: 25; 
-        transform: translateY(-85%);
+        transform: translateY(-70%);
     }
 }
 
@@ -159,7 +171,11 @@
         text-align: center;
         font-size: small;
         z-index: 25; 
-        transform: translateY(30%);
+        transform: translateY(40%);
+    }
+
+    .main-details-div{
+        transform: translateX(-10px) translateY(-40%);
     }
 }
 

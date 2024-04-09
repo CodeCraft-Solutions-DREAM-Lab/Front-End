@@ -4,6 +4,7 @@ import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import GlassCard from '../components/general/glass-card';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Slider from './Slider';
 
 function ReservacionCuarto(props) {
 	let { sala } = useParams();
@@ -106,6 +107,8 @@ function ReservacionCuarto(props) {
 			</Autocomplete>
 			<br />
 			<br />
+
+			<Slider minimo={1} maximo={8}/>
 			<Button color="primary" variant="solid" onClick={handleClick}>
 				Aceptar
 			</Button>

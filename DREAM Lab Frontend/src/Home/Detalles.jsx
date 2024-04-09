@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import GlassCard from '../components/general/glass-card';
 import UserAvatar from '../components/general/UserAvatar';
-import imageBlur from "./Images/details_blur.png";
-import experienceImage from "./Images/vr.png";
-import experienceImage2 from "./Images/router.png";
-import experienceImage3 from "./Images/iphone.jpg";
 import Etiqueta from "./Etiqueta.jsx";
 import './Detalles.css'
 import BotonSolicitar from "./BotonSolicitar.jsx";
@@ -55,14 +51,14 @@ function ExperienceDetails(props){
 						<p className="experience-description">{props.descripcion}</p>
 						<div className="tags-details">
 						<div className="tags-details">
-							<div className="tag"><Etiqueta nombre="Exclusivo UF" tipo="exclusivo-uf" /></div>
-							<div className="tag"><Etiqueta nombre="Autodirigido" tipo="autodirigido" /></div>
+							{props.exclusivoUF && <div className="tag"><Etiqueta nombre="Exclusivo UF" tipo="exclusivo-uf" /></div>}
+							{props.autodirigido && <div className="tag"><Etiqueta nombre="Autodirigido" tipo="autodirigido" /></div>}
 						</div>
 						</div>
 					</div>
 
 					<div className="image">
-						<img className="experience-image" src={experienceImage} alt="Fotografía de experiencia"/>
+						<img className="experience-image" src={props.imagenExp} alt="Fotografía de experiencia"/>
 					</div>
 
 				</div>

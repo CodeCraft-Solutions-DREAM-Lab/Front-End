@@ -10,21 +10,32 @@ import TypeText from './TypeText'
 import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 import Detalles from './Detalles.jsx';
 
+import experienceImage from "./Images/vr.png";
+import experienceImage2 from "./Images/router.png";
+import experienceImage3 from "./Images/iphone.jpg";
+import experienceImage4 from "./Images/arduino.jpg";
+import experienceImage5 from "./Images/hacker.png";
+import experienceImage6 from "./Images/videogame.jpg";
+import experienceImage7 from "./Images/visionpro.png";
+
+import axios from "axios";
+import { get } from './Database.js';
+
 const OPTIONS = { dragFree: true, loop: true }
 
 const unsplash_prefix = 'https://images.unsplash.com/photo-'
 const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
 
 const IMAGES = [
-    { 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
-    { 'id': 'Deep Net', 'url': '/ImagenUsoRouters.png' },
-    { 'id': 'Testing Land', 'url': '/ImagenExpGoogle.png' },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
-    { 'id': 'Curso de Swift', 'url': '/ImagenCursoSwift.png' },
-    { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },
+    { 'id': '6', 'url': '/ImagenSalaVR.png' },
+    { 'id': '1', 'url': '/ImagenUsoRouters.png' },
+    { 'id': '2', 'url': '/ImagenExpGoogle.png' },
+    { 'id': '3', 'url': `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}` },
+    { 'id': '0', 'url': `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}` },
+    { 'id': '5', 'url': `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}` },
+    { 'id': '6', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
+    { 'id': '5', 'url': '/ImagenCursoSwift.png' },
+    { 'id': '4', 'url': '/ImagenConnections.png' },
 ];
 
 const initialData = [
@@ -58,6 +69,32 @@ function HomePage() {
     const [detallesVisible, setDetallesVisible] = useState(false);
     const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
     const detallesRef = useRef(null);
+
+    const [detallesBD, setDetallesBD] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    function renderizarImagen() {
+        const imagenURL = detallesBD[imageID].imagenDetallesURL;
+    
+        switch (imagenURL) {
+            case "experienceImage":
+                return experienceImage;
+            case "experienceImage2":
+                return experienceImage2;
+            case "experienceImage3":
+                return experienceImage3;
+            case "experienceImage4":
+                return experienceImage4;
+            case "experienceImage5":
+                return experienceImage5;
+            case "experienceImage6":
+                return experienceImage6;
+            case "experienceImage7":
+                return experienceImage7;
+            default:
+                return null; // O alguna imagen de respaldo si el texto no coincide con ninguna de las opciones
+        }
+    }
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -97,12 +134,30 @@ function HomePage() {
         };
     }, [processedTranscript]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const result = await get('experiencias', () => setIsLoading(false), () => setIsLoading(false));
+            setDetallesBD(result);
+          } catch (error) {
+            console.error('An error occurred:', error);
+          }
+    };
+    
+        fetchData();
+    }, []);
+
     const handleProcessedText = (processedText) => {
         setProcessedTranscript(processedText);
     };
 
 
     console.log("Processed Transcript in HomePage:", processedTranscript);
+
+    if(isLoading){
+        return <div>Cargando...</div>
+    }
+    
     return (
         <>
             <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
@@ -116,11 +171,14 @@ function HomePage() {
                     </div>
                 </div>
             </GlassCard >
-            
+                      
             <div ref={detallesRef}>
                 {detallesVisible && <Detalles 
-                    nombre = "VR EXPERIENCE"
-                    descripcion = "¡Explora el Mundo Virtual: Un Viaje Educativo en Realidad Virtual! Únete a nosotros en nuestra escuela para una experiencia única donde los estudiantes se sumergirán en la magia de la realidad virtual. Desde viajar a lugares exóticos hasta aventurarse en mundos históricos, cada experiencia ofrecerá una nueva perspectiva y un aprendizaje interactivo."
+                    nombre = {detallesBD[imageID].nombre}
+                    descripcion = {detallesBD[imageID].descripcion}
+                    autodirigido = {detallesBD[imageID].esAutoDirigida}
+                    exclusivoUF = {detallesBD[imageID].esExclusivaUF}
+                    imagenExp = {renderizarImagen()}
                     imageID={imageID} // Pasa el imageID como prop al componente Detalles
                 />}
             </div>
@@ -130,6 +188,7 @@ function HomePage() {
             {showRecommendations && (
                 <NCarruselRecomendaciones data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
             )}
+            
 
             <br />
             <ImageSlider images={IMAGES} options={OPTIONS} mostrarDetalles={mostrarDetalles} onImageClick={handleImageClick}/>
