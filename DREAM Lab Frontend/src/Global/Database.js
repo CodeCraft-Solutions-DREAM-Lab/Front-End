@@ -15,7 +15,7 @@ function MyComponent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await get('https://api.example.com/data', () => setIsLoading(false), () => setIsLoading(false));
+        const result = await get('data', () => setIsLoading(false), () => setIsLoading(false));
         setData(result);
       } catch (error) {
         console.error('An error occurred:', error);
@@ -48,7 +48,7 @@ function MyComponent() {
   useEffect(() => {
     const postData = async () => {
       try {
-        const result = await post('https://api.example.com/data', { name: 'John' }, () => setIsLoading(false), () => setIsLoading(false));
+        const result = await post('data', { name: 'John' }, () => setIsLoading(false), () => setIsLoading(false));
         setData(result);
       } catch (error) {
         console.error('An error occurred:', error);
@@ -70,6 +70,8 @@ function MyComponent() {
 export default MyComponent;
 */
 
+const defaultURL = "http://localhost:3000/";
+
 async function apiRequest(
   method,
   url,
@@ -80,7 +82,7 @@ async function apiRequest(
   try {
     const response = await axios({
       method,
-      url,
+      url: defaultURL + url,
       data,
       headers: {
         "Content-Type": "application/json",
