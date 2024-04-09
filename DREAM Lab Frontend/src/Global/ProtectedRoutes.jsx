@@ -29,13 +29,18 @@ function ProtectedRoutes({ children }) {
   useEffect(() => {
     // Llamada a la API para validar el token
     async function validateToken() {
-      const data = await post("authToken", {
-        token: getFromLocalStorage("token") || "",
-      });
+      try {
+        const data = await post("authToken", {
+          token: getFromLocalStorage("token") || "",
+        });
 
-      // la api regresa un booleano que indica si el token es válido o no
-      // Si todavía no se recibe nada de la api, authVal se queda en false
-      setAuthVal(data || false);
+        // la api regresa un booleano que indica si el token es válido o no
+        // Si todavía no se recibe nada de la api, authVal se queda en false
+        setAuthVal(data || false);
+      } catch (error) {
+        // Si hay un error, se asume que el token no es válido
+        setAuthVal(false);
+      }
     }
 
     // Si no está autenticado o no se ha validado el token, validarlo
