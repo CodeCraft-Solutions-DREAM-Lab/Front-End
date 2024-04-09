@@ -8,12 +8,12 @@ function SendButton({ transcript, onProcessedText }) {
             setProcessing(true); // Start processing, set processing state to true
             // Simulate asynchronous processing by sending the data to the server
             console.log("processTranscript transcript var: ", transcript)
-            const response = await fetch('http://localhost:5000/process_text', {
+            const response = await fetch('http://localhost:3000/chatbot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ text_input: transcript })
+                body: JSON.stringify({ prompt: transcript })
             });
 
             if (!response.ok) {

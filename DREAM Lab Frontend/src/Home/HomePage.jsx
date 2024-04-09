@@ -26,21 +26,21 @@ const IMAGES = [
 const initialData = [
     {
         bgColor: "#F54748",
-        img: '/ImagenSalaVR.png',
+        img: 'https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg',
         title: "Lorem Ipsum",
         desc:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
     },
     {
         bgColor: "#7952B3",
-        img: '/ImagenSalaVR.png',
+        img: 'https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg',
         title: "Lorem Ipsum",
         desc:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
     },
     {
         bgColor: "#1597BB",
-        img: '/ImagenSalaVR.png',
+        img: 'https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg',
         title: "Lorem Ipsum",
         desc:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
