@@ -20,8 +20,6 @@ function FechaFormulario(props) {
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(getFromSessionStorage("horaInicioIsoString") || "");
     const [duration, setDuration] = useState(getFromSessionStorage("duration") || 0);
 
-    const [selectedKeyInDuration, setSelectedKeyInDuration] = useState("");
-
     useEffect(() => {
         if (!!fecha) {
             saveToSessionStorage("fecha", fecha)
@@ -52,19 +50,11 @@ function FechaFormulario(props) {
         }
     }, [duration]);
 
-    useEffect(() => {
-        if (duration === 2) {
-            setSelectedKeyInDuration("2 horas");
-        } else if (duration === 4) {
-            setSelectedKeyInDuration("4 horas");
-        }
-    }, [duration]);
 
     return (
         <div className="flex flex-col mx-3">
                 <p className="text-white">Fecha</p>
                 <DatePicker
-                    value={fecha}
                     className="bg-white rounded"
                     minDate={minEligibleDate}
                     onChange={(newValue) => {
@@ -106,7 +96,7 @@ function FechaFormulario(props) {
                 <Autocomplete
                     className="max-w"
                     aria-label="Duración"
-                    selectedKey={selectedKeyInDuration}
+                    selectedKey={duration + " horas"}
                 >
                     {["2 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem
@@ -124,24 +114,21 @@ function FechaFormulario(props) {
                 </Autocomplete>
 
                 {/* <Button onClick={ () => {
-                    console.log("-----Session Storage:--------------");
-                    console.log(getFromSessionStorage("fecha"));
-                    console.log(getFromSessionStorage("fechaIsoString"));
-                    console.log(getFromSessionStorage("horaInicio"));
-                    console.log(getFromSessionStorage("horaInicioIsoString"));
-                    console.log(getFromSessionStorage("duration"));
-                    console.log("------Estados: -------------------");
-                    console.log(fecha);
-                    console.log(fechaIsoString);
-                    console.log(horaInicio);
-                    console.log(horaInicioIsoString);
+                    // console.log("-----Session Storage:--------------");
+                    // console.log(getFromSessionStorage("fecha"));
+                    // console.log(getFromSessionStorage("fechaIsoString"));
+                    // console.log(getFromSessionStorage("horaInicio"));
+                    // console.log(getFromSessionStorage("horaInicioIsoString"));
+                    // console.log(getFromSessionStorage("duration"));
+                    // console.log("------Estados: -------------------");
+                    // console.log(fecha);
+                    // console.log(fechaIsoString);
+                    // console.log(horaInicio);
+                    // console.log(horaInicioIsoString);
+                    // console.log(duration);
+                    // console.log("----------------------------------")
                     console.log(duration);
-                    console.log("----------------------------------")
-                    // removeFromSessionStorage("fecha");
-                    // removeFromSessionStorage("fechaIsoString");
-                    // removeFromSessionStorage("horaInicio");
-                    // removeFromSessionStorage("horaInicioIsoString");
-                    // removeFromSessionStorage("duration");
+                    console.log(selectedKeyInDuration);
                 }}>
                     Session Storage
                 </Button> */}

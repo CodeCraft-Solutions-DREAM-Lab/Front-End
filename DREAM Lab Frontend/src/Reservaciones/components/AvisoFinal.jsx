@@ -1,29 +1,26 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
 import React from "react";
 
-function PrimerRecordatorio(props) {
+function AvisoFinal(props) {
     return (
         <Modal 
             size={props.size} 
-            isOpen={props.isOpen} 
+            isOpen={props.isOpen}
             onClose={props.onClose} 
             backdrop="blur"
         >
             <ModalContent>
-            {(onClose) => (
+            {() => (
                 <>
-                <ModalHeader className="flex flex-row">¡Recordatorio!</ModalHeader>
+                <ModalHeader className="flex flex-row">Palomita</ModalHeader>
                 <ModalBody>
-                    <p> 
-                    Recuerda que tu solicitud no garantiza tu reserva de inmediato.
-                    Confirmaremos la disponibilidad y te notificaremos en breve.
-                    <br/>
-                    ¡Gracias por tu paciencia!
+                    <p className="text-l"> 
+                    Tu solicitud ha sido procesada exitosamente
                     </p>
                 </ModalBody>
                 <ModalFooter className="justify-center">
                     <Button className="py-4 px-8" color="primary" onPress={props.onOk}>
-                        OK
+                        Cerrar
                     </Button>
                 </ModalFooter>
                 </>
@@ -33,4 +30,4 @@ function PrimerRecordatorio(props) {
     );
 }
 
-export default PrimerRecordatorio;
+export default AvisoFinal;
