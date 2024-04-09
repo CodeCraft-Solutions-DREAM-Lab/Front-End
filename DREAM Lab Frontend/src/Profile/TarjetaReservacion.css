@@ -2,16 +2,17 @@
     display: flex;
     flex-wrap: wrap;
     background-color: white;
-    width: 26%;
+    width: 100%;
     border-radius: 20px;
     font-family: 'Karla', sans-serif;
     color: black;
-    padding-left: 1.5%;
-    padding-right: 2%;
-    padding-top: 1.2%;
-    padding-bottom: 1%;
-    margin-bottom: 1%;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    margin-bottom: 4%;
     align-items: center;
+    cursor: pointer;
 }
 
 .sala-reservacion{
@@ -31,12 +32,12 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    font-size: small;
 }
 
 .hora-reservaion{
     width: 40%;
     margin-right: auto; /* Alinea a la derecha */
-
 }
 
 .dia-reservacion{

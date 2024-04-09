@@ -50,6 +50,7 @@
 .logo-div{
     width: 10%;
     opacity: 50%;
+    cursor: pointer;
 }
 
 .div-usuario{
