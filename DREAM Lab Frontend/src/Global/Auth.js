@@ -1,4 +1,4 @@
-import { postData } from "./Database";
+import { post } from "./Database";
 
 import { saveToLocalStorage } from "./Storage";
 
@@ -7,7 +7,7 @@ export async function loginAction({ formData }) {
   const user = formData.get("user");
   const password = formData.get("password");
   // Llamar a la API para validar las credenciales
-  return postData("http://localhost:3000/authUsuario", {
+  return post("http://localhost:3000/authUsuario", {
     usuario: user,
     contrasena: password,
   })

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, selectAuth } from "../redux/Slices/userSlice";
 
-import { postData } from "./Database";
+import { post } from "./Database";
 
 import { Navigate } from "react-router-dom";
 
@@ -29,7 +29,7 @@ function ProtectedRoutes({ children }) {
   useEffect(() => {
     // Llamada a la API para validar el token
     async function validateToken() {
-      const data = await postData("http://localhost:3000/authToken", {
+      const data = await post("http://localhost:3000/authToken", {
         token: getFromLocalStorage("token") || "",
       });
 
