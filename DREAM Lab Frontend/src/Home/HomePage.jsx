@@ -68,7 +68,6 @@ function HomePage() {
         setProcessedTranscript(processedText);
     };
 
-    console.log("Processed Transcript in HomePage:", processedTranscript);
     return (
         <>
             <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
