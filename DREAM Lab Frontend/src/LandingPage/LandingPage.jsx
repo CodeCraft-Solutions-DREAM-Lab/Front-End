@@ -6,6 +6,9 @@ import { setAuth } from "../redux/Slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  // Remover posteriormente
+  // El handleClick guarda en el local storage un token valido y sin caducidad y
+  // marca como que se ha iniciado sesión en redux. Posteriormente se redirige a home
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
