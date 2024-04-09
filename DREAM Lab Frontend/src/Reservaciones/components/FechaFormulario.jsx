@@ -20,38 +20,43 @@ function FechaFormulario(props) {
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(getFromSessionStorage("horaInicioIsoString") || "");
     const [duration, setDuration] = useState(getFromSessionStorage("duration") || 0);
 
+    const [selectedKeyInDuration, setSelectedKeyInDuration] = useState("");
+
     useEffect(() => {
-        console.log("fecha: ", fecha);
         if (!!fecha) {
             saveToSessionStorage("fecha", fecha)
         }
     }, [fecha]);
 
     useEffect(() => {
-        console.log("fechaIsoString: ", fechaIsoString)
         if (!!fechaIsoString) {
             saveToSessionStorage("fechaIsoString", fechaIsoString)
         }
     }, [fechaIsoString]);
 
     useEffect(() => {
-        console.log("horaInicio: ", horaInicio)
         if (!!horaInicio) {
             saveToSessionStorage("horaInicio", horaInicio)
         }
     }, [horaInicio]);
 
     useEffect(() => {
-        console.log("horaInicioIsoString: ", horaInicioIsoString)
         if (!!horaInicioIsoString) {
             saveToSessionStorage("horaInicioIsoString", horaInicioIsoString)
         }
     }, [horaInicioIsoString]);
 
     useEffect(() => {
-        console.log("duration: ", duration)
         if (!!duration) {
             saveToSessionStorage("duration", duration)
+        }
+    }, [duration]);
+
+    useEffect(() => {
+        if (duration === 2) {
+            setSelectedKeyInDuration("2 horas");
+        } else if (duration === 4) {
+            setSelectedKeyInDuration("4 horas");
         }
     }, [duration]);
 
@@ -101,7 +106,7 @@ function FechaFormulario(props) {
                 <Autocomplete
                     className="max-w"
                     aria-label="Duración"
-                    selectedKey={duration === 2 ? "2 horas" : "4 horas"}
+                    selectedKey={selectedKeyInDuration}
                 >
                     {["2 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem

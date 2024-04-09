@@ -18,11 +18,11 @@ function SelectorSala(props) {
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        // console.log(".....")
-        // console.log(getFromSessionStorage("fecha"))
-        // console.log(getFromSessionStorage("horaInicio"))
-        // console.log(getFromSessionStorage("duration"))
-        // console.log(".....")
+        console.log(".....")
+        console.log(getFromSessionStorage("fecha"))
+        console.log(getFromSessionStorage("horaInicio"))
+        console.log(getFromSessionStorage("duration"))
+        console.log(".....")
 
         if (!getFromSessionStorage("fecha") ||
             !getFromSessionStorage("horaInicio") || 
