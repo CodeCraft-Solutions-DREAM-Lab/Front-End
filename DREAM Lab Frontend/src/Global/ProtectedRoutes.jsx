@@ -29,7 +29,7 @@ function ProtectedRoutes({ children }) {
   useEffect(() => {
     // Llamada a la API para validar el token
     async function validateToken() {
-      const data = await post("http://localhost:3000/authToken", {
+      const data = await post("authToken", {
         token: getFromLocalStorage("token") || "",
       });
 
