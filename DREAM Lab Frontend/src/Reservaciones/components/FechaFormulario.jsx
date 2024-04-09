@@ -6,34 +6,66 @@ import dayjs from "dayjs";
 
 import {
     getFromSessionStorage,
-    existsInSessionStorage,
-    saveToLocalStorage,
+    saveToSessionStorage,
 } from "../../Global/Storage";
 
 function FechaFormulario(props) {
+
+    const {update, setUpdate} = props;
     
     const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
-    const [fecha, setFecha] = useState(getFromSessionStorage("fecha") || "");
+    const [fecha, setFecha] = useState(/*getFromSessionStorage("fecha") ||*/ dayjs());
     const [fechaIsoString, setFechaIsoString] = useState(getFromSessionStorage("fechaIsoString") || "");
-    const [horaInicio, setHoraInicio] = useState(getFromSessionStorage("horaInicio") || "");
+    const [horaInicio, setHoraInicio] = useState(getFromSessionStorage("horaInicio") || 0);
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(getFromSessionStorage("horaInicioIsoString") || "");
     const [duration, setDuration] = useState(getFromSessionStorage("duration") || 0);
 
-    useEffect(() => {saveToLocalStorage("fecha", fecha)}, [fecha]);
-    useEffect(() => {saveToLocalStorage("fechaIsoString", fechaIsoString)}, [fechaIsoString]);
-    useEffect(() => {saveToLocalStorage("horaInicio", horaInicio)}, [horaInicio]);
-    useEffect(() => {saveToLocalStorage("horaInicioIsoString", horaInicioIsoString)}, [horaInicioIsoString]);
-    useEffect(() => {saveToLocalStorage("duration", duration)}, [duration]);
+    useEffect(() => {
+        console.log("fecha: ", fecha);
+        if (!!fecha) {
+            saveToSessionStorage("fecha", fecha)
+        }
+    }, [fecha]);
+
+    useEffect(() => {
+        console.log("fechaIsoString: ", fechaIsoString)
+        if (!!fechaIsoString) {
+            saveToSessionStorage("fechaIsoString", fechaIsoString)
+        }
+    }, [fechaIsoString]);
+
+    useEffect(() => {
+        console.log("horaInicio: ", horaInicio)
+        if (!!horaInicio) {
+            saveToSessionStorage("horaInicio", horaInicio)
+        }
+    }, [horaInicio]);
+
+    useEffect(() => {
+        console.log("horaInicioIsoString: ", horaInicioIsoString)
+        if (!!horaInicioIsoString) {
+            saveToSessionStorage("horaInicioIsoString", horaInicioIsoString)
+        }
+    }, [horaInicioIsoString]);
+
+    useEffect(() => {
+        console.log("duration: ", duration)
+        if (!!duration) {
+            saveToSessionStorage("duration", duration)
+        }
+    }, [duration]);
 
     return (
         <div className="flex flex-col mx-3">
                 <p className="text-white">Fecha</p>
                 <DatePicker
+                    value={fecha}
                     className="bg-white rounded"
                     minDate={minEligibleDate}
                     onChange={(newValue) => {
                         setFecha(newValue);
                         setFechaIsoString(newValue.toISOString());
+                        setUpdate(!update);
                     }}
                 />
 
@@ -41,10 +73,11 @@ function FechaFormulario(props) {
                 <Autocomplete 
                     className="max-w mb-3"
                     aria-label="Hora de inicio"
+                    selectedKey={horaInicio+"am"}
                 >
                     {[9, 10, 11].map((hora) => (
                         <AutocompleteItem
-                            key={hora}
+                            key={hora + "am"}
                             value={hora}
                             textValue={`${hora} am`}
                             onClick={() => {
@@ -56,6 +89,7 @@ function FechaFormulario(props) {
                                 date.setMilliseconds(0);
 
                                 setHoraInicioIsoString(date.toISOString());
+                                setUpdate(!update);
                             }}
                         >
                             {hora} am
@@ -67,6 +101,7 @@ function FechaFormulario(props) {
                 <Autocomplete
                     className="max-w"
                     aria-label="Duración"
+                    selectedKey={duration === 2 ? "2 horas" : "4 horas"}
                 >
                     {["2 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem
@@ -75,6 +110,7 @@ function FechaFormulario(props) {
                             onClick={() => {
                                 if (hora === "2 horas") setDuration(2);
                                 if (hora === "4 horas") setDuration(4);
+                                setUpdate(!update);
                             }}
                         >
                             {hora}
@@ -82,19 +118,29 @@ function FechaFormulario(props) {
                     ))}
                 </Autocomplete>
 
-                <Button onClick={() => {
+                {/* <Button onClick={ () => {
+                    console.log("-----Session Storage:--------------");
                     console.log(getFromSessionStorage("fecha"));
                     console.log(getFromSessionStorage("fechaIsoString"));
                     console.log(getFromSessionStorage("horaInicio"));
                     console.log(getFromSessionStorage("horaInicioIsoString"));
                     console.log(getFromSessionStorage("duration"));
-
+                    console.log("------Estados: -------------------");
                     console.log(fecha);
                     console.log(fechaIsoString);
                     console.log(horaInicio);
                     console.log(horaInicioIsoString);
                     console.log(duration);
-                }}>Debug</Button>
+                    console.log("----------------------------------")
+                    // removeFromSessionStorage("fecha");
+                    // removeFromSessionStorage("fechaIsoString");
+                    // removeFromSessionStorage("horaInicio");
+                    // removeFromSessionStorage("horaInicioIsoString");
+                    // removeFromSessionStorage("duration");
+                }}>
+                    Session Storage
+                </Button> */}
+
         </div>
     );
 }
