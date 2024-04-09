@@ -1,9 +1,13 @@
 import { useNavigation, Form, useNavigate } from "react-router-dom";
 
+import "./LoginPage.css";
+
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
 import { loginAction } from "../Global/Auth";
+
+import GlassCard from "../components/general/GlassCard";
 
 export default function LoginPage() {
   const navigation = useNavigation();
@@ -24,16 +28,23 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="login-container">
-      <h1>Sign in to your account</h1>
+    <div className="glassCardContainer flex items-center justify-center">
+      <GlassCard classes={"glassCard"}>
+        <h1>Sign in to your account</h1>
 
-      <Form method="post" className="login-form" replace onSubmit={handleLogin}>
-        <input name="user" placeholder="Usuario" />
-        <input name="password" type="password" placeholder="Contraseña" />
-        <button disabled={navigation.state === "submitting"}>
-          {navigation.state === "submitting" ? "Logging in..." : "Log in"}
-        </button>
-      </Form>
+        <Form
+          method="post"
+          className="login-form"
+          replace
+          onSubmit={handleLogin}
+        >
+          <input name="user" placeholder="Usuario" />
+          <input name="password" type="password" placeholder="Contraseña" />
+          <button disabled={navigation.state === "submitting"}>
+            {navigation.state === "submitting" ? "Logging in..." : "Log in"}
+          </button>
+        </Form>
+      </GlassCard>
     </div>
   );
 }
