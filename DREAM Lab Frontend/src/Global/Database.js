@@ -1,123 +1,154 @@
-// Función para hacer una petición POST a una API
-// Recibe el url de la API, los datos a enviar, una función de éxito y una de
-// error para especificarle qué hacer en cada caso
-export async function postData(
+import axios from "axios";
+
+/*
+EJEMPLOS DE USO:
+
+=================================================================GET=======================================================================
+
+import React, { useState, useEffect } from 'react';
+import { get } from './Database';
+
+function MyComponent() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await get('https://api.example.com/data', () => setIsLoading(false), () => setIsLoading(false));
+        setData(result);
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+
+  return (
+    <div>CARGADO!!</div>
+    );
+  }
+
+export default MyComponent;
+
+=================================================================POST=======================================================================
+
+import React, { useState, useEffect } from 'react';
+import { post } from './Database';
+
+function MyComponent() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        const result = await post('https://api.example.com/data', { name: 'John' }, () => setIsLoading(false), () => setIsLoading(false));
+        setData(result);
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+
+    postData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+
+  return (
+    <div>CARGADO!!</div>
+  );
+}
+
+export default MyComponent;
+*/
+
+async function apiRequest(
+  method,
+  url,
+  data = null,
+  successActions = () => {},
+  errorActions = () => {}
+) {
+  try {
+    const response = await axios({
+      method,
+      url,
+      data,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+    });
+
+    successActions();
+    return response.data;
+  } catch (error) {
+    errorActions();
+    throw error;
+  }
+}
+
+/**
+ * GET
+ * @param {*} url dirección a la que se hará la petición
+ * @param {string} url dirección a la que se hará la petición
+ * @param {function} successActions función que se ejecutará si la petición es exitosa
+ * @param {function} errorActions función que se ejecutará si la petición falla
+ * @returns la respuesta de la petición
+ */
+export function get(url, successActions = () => {}, errorActions = () => {}) {
+  return apiRequest("GET", url, null, successActions, errorActions);
+}
+
+/**
+ * POST
+ * @param {string} url dirección a la que se hará la petición
+ * @param {Object} data información que se enviará en la petición
+ * @param {function} successActions función que se ejecutará si la petición es exitosa
+ * @param {function} errorActions función que se ejecutará si la petición falla
+ * @returns la respuesta de la petición
+ */
+export function post(
   url,
   data,
   successActions = () => {},
   errorActions = () => {}
 ) {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Connection: "keep-alive",
-        Accept: "*/*",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    successActions();
-    return json;
-  } catch (error) {
-    errorActions();
-  }
+  return apiRequest("POST", url, data, successActions, errorActions);
 }
 
-// Función para hacer una petición GET a una API
-// Recibe el url de la API, una función de éxito y una de error para
-// especificarle qué hacer en cada caso
-export async function getData(
-  url,
-  successActions = () => {},
-  errorActions = () => {}
-) {
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Connection: "keep-alive",
-        Accept: "*/*",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    successActions();
-    return json;
-  } catch (error) {
-    errorActions();
-  }
-}
-
-// Función para hacer una petición DELETE a una API
-// Recibe el url de la API, una función de éxito y una de error para
-// especificarle qué hacer en cada caso
-export async function deleteData(
-  url,
-  successActions = () => {},
-  errorActions = () => {}
-) {
-  try {
-    const response = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Connection: "keep-alive",
-        Accept: "*/*",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    successActions();
-    return json;
-  } catch (error) {
-    errorActions();
-  }
-}
-
-// Función para hacer una petición PUT a una API
-// Recibe el url de la API, los datos a enviar, una función de éxito y una de
-// error para especificarle qué hacer en cada caso
-export async function putData(
+/**
+ * PUT
+ * @param {string} url dirección a la que se hará la petición
+ * @param {Object} data información que se enviará en la petición
+ * @param {function} successActions función que se ejecutará si la petición es exitosa
+ * @param {function} errorActions función que se ejecutará si la petición falla
+ * @returns la respuesta de la petición
+ */
+export function put(
   url,
   data,
   successActions = () => {},
   errorActions = () => {}
 ) {
-  try {
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Connection: "keep-alive",
-        Accept: "*/*",
-      },
-      body: JSON.stringify(data),
-    });
+  return apiRequest("PUT", url, data, successActions, errorActions);
+}
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    successActions();
-    return json;
-  } catch (error) {
-    errorActions();
-  }
+/**
+ * DELETE
+ * @param {string} url dirección a la que se hará la petición
+ * @param {function} successActions función que se ejecutará si la petición es exitosa
+ * @param {function} errorActions función que se ejecutará si la petición falla
+ * @returns la respuesta de la petición
+ */
+export function del(url, successActions = () => {}, errorActions = () => {}) {
+  return apiRequest("DELETE", url, null, successActions, errorActions);
 }
