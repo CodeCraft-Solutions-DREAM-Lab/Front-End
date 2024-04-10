@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function SendButton({ transcript, onProcessedText }) {
+function SendButton({ transcript, onProcessedText, micWasClicked, resetClicked }) {
     const [processing, setProcessing] = useState(false);
 
     const processTranscript = async (transcript) => {
         try {
-            setProcessing(true); // Start processing, set processing state to true
+            setProcessing(true);
             // Simulate asynchronous processing by sending the data to the server
             console.log("processTranscript transcript var: ", transcript)
             const response = await fetch('http://localhost:3000/chatbot', {
@@ -26,7 +26,9 @@ function SendButton({ transcript, onProcessedText }) {
             console.error('Error:', error);
             return null; // Return null in case of an error
         } finally {
-            setProcessing(false); // Stop processing, set processing state to false
+            resetClicked(0);
+            console.log("Clicked reset to 0");
+            setProcessing(false);
         }
     };
 
@@ -40,8 +42,15 @@ function SendButton({ transcript, onProcessedText }) {
         }
     };
 
+    useEffect(() => {
+        if (micWasClicked == 2) {
+            console.log("Automatically sending transcript for processing...")
+            handleClick();
+        }
+    }, [micWasClicked]);
+
     return (
-        <button className="send-button" onClick={handleClick}>
+        <button className="send-button" onClick={handleClick} disabled={processing}>
             {processing ? (
                 // Render loading image when processing is ongoing
                 <img src="/loading.gif" alt="Processing..." />
