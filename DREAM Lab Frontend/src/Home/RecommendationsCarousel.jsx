@@ -72,8 +72,8 @@ function RecomendationsCarousel(props) {
 						<div
 							className="slide"
 							style={{
-								background: item.bgColor,
-								// backgroundImage: `url(${item.img})`,
+								//background: item.bgColor,
+								backgroundImage: `url(${item.img})`,
 								boxShadow: `0 5px 20px ${item.bgColor}30`,
 								...getStyles(i),
 							}}
@@ -127,7 +127,9 @@ const SliderContent = (props) => {
 		<div className="sliderContent" onClick={handleClick}>
 			{props.icon}
 			<h2>{props.title}</h2>
-			<p>{props.desc}</p>
+			<div className="textContainer">
+				<p>{props.desc}</p>
+			</div>
 		</div>
 	);
 };
