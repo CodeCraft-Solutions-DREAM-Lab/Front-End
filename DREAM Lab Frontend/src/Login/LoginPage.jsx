@@ -2,6 +2,7 @@ import { useNavigation, Form, useNavigate } from "react-router-dom";
 
 import LoginTextField from "./LoginTextField/LoginTextField";
 import LoginButton from "./LoginButton/LoginButton";
+import LoginRow from "./LoginRow/LoginRow";
 
 import "./LoginPage.css";
 
@@ -33,22 +34,24 @@ export default function LoginPage() {
   return (
     <div className="glassCardContainer">
       <GlassCard classes={"glassCard grid grid-rows-4 grid-cols-1 gap-4"}>
-        <div className="login-logo-container">
+        <LoginRow>
           <img
             src="/LogoDreamLabedited.png"
             alt="Logo"
             className="login-logo"
           />
           <h1 className="login-dreamlab-title">DREAM LAB</h1>
-        </div>
-        <div>
+        </LoginRow>
+        <LoginRow>
           <h1 className="login-titulo">Inicia sesión</h1>
-        </div>
-        <div className="login-form">
+        </LoginRow>
+        <LoginRow flexDirection="col">
           <LoginTextField label={"Matrícula"} marginBot={20} />
           <LoginTextField label={"Contraseña"} />
-        </div>
-        <LoginButton />
+        </LoginRow>
+        <LoginRow>
+          <LoginButton />
+        </LoginRow>
       </GlassCard>
     </div>
   );

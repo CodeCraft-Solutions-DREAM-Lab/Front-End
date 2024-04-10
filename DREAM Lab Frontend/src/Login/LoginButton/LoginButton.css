@@ -1,2 +1,9 @@
 .login-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-button {
+  width: 40%;
+  border-radius: 30px;
 }
