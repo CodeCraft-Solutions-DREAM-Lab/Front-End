@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faChevronRight,
@@ -17,6 +17,14 @@ function RecomendationsCarousel(props) {
 	const prev = () => {
 		setActiveSlide(activeSlide === 0 ? props.data.length - 1 : activeSlide - 1);
 	};
+
+	const handleDotClick = (index) => {
+        setActiveSlide(index);
+    };
+
+	setTimeout(
+        () => next(), 5000
+    )
 
 	const getStyles = (index) => {
 		if (activeSlide === index)
@@ -63,6 +71,13 @@ function RecomendationsCarousel(props) {
 			};
 	};
 
+	const getStylesDots = (index) => {
+		if (activeSlide === index)
+			return{
+				backgroundColor: '#ffffff',
+		};
+	};
+
 	return (
 		<>
 			{/* carousel */}
@@ -80,13 +95,6 @@ function RecomendationsCarousel(props) {
 						>
 							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} />
 						</div>
-						<div
-							className="reflection"
-							style={{
-								background: `linear-gradient(to bottom, ${item.bgColor}40, transparent)`,
-								...getStyles(i),
-							}}
-						/>
 					</React.Fragment>
 				))}
 			</div>
@@ -100,6 +108,18 @@ function RecomendationsCarousel(props) {
 					color="#fff"
 					size="2x"
 				/>
+
+				<div className="dots">
+                    {props.data.map((item, i) => (
+                        <div
+                            key={i}
+                            className="dot"
+                            style={getStylesDots(i)}
+                            onClick={() => handleDotClick(i)}
+                        />
+                    ))}
+                </div>
+
 				<FontAwesomeIcon
 					className="btn"
 					onClick={next}
