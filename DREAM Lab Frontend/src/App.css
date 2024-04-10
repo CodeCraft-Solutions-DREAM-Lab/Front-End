@@ -103,8 +103,8 @@ body {
 
 .inputReconocimientoVoz {
     position: relative;
-    /* Establece la posición relativa para los elementos hijos */
-}
+    /* Establece la posición relativa para los elementos hijos */}
+
 
 .speechBotCard {
    margin-top: auto;
@@ -156,3 +156,35 @@ body {
     }
 }
 
+
+
+ .text-field {
+    display: flex;
+    align-items: center;
+    margin-left: 6em;
+    transform: translateY(-155%);
+    width: 75%;
+    border-radius: 8px;
+    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.2); /* 20% opacity white */
+    color: white; /* White text */
+    padding: 10px;
+ }
+
+
+ /* Microphone active animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.relative.active svg {
+    animation: pulse 0.5s infinite alternate;
+}

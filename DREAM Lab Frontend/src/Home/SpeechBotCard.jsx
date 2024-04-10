@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { EvervaultCard } from "../components/aceternity/evervault-card.jsx";
+import GlassCard from '../components/general/glass-card.jsx';
+import MicrophoneButton from "./MicrophoneButton.jsx";
+import SendButton from "./SendButton.jsx";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import TranscriptProcessor from "../components/general/TranscriptProcessor.jsx";
+import TextField from "./TextField.jsx";
+import "../App.css";
 
 function SpeechBotCard(props) {
+
+	// --- Para el reconocimiento de voz ---
 	const {
         transcript,
         resetTranscript,
@@ -11,55 +17,60 @@ function SpeechBotCard(props) {
 		listening,
     } = useSpeechRecognition();
 
+	// Validar que el navegador maneje reconocimiento de voz
     if (!browserSupportsSpeechRecognition) {
 		return <span>Browser doesn't support speech recognition.</span>;
     }
 	
+	// Función para activar el micrófono
     const onClick = () => {
+		console.log("Listening...")
 		resetTranscript();
         SpeechRecognition.startListening({ language: 'es-MX' });
     }
 
+	// Función para el manejo del transcript procesado
 	const handleProcessedText = (processedText) => {
 		props.onProcessedText(processedText);
-        console.log("Processed text from SpeechBotCard: ", processedText);
+        console.log("Results:\n", processedText);
     };
 
+
+	// --- Para el input del teclado ---
+	const [text, setText] = useState('');
+
+	function handleChange(e) {
+		setText(e.target.value);
+	}
+
+	// Función de apoyo para verificar funcionalidad del micrófono
 	useEffect(() => {
-		if (!listening) {
-			console.log(transcript);
-			resetTranscript();
+		if (transcript != '' && listening) {
+			console.log("Transcript variable: ", transcript);
+			setText(transcript);
 		}
-	}, [listening, transcript]);
+	}, [text, listening, transcript]);
+
 	return (
 		<div
 			className="flex flex-col items-start mx-auto p-4 relative"
 			style={{
 				width: props.width,
 				height: props.height
-			}} onClick={onClick}>
+			}}>
 
-			<EvervaultCard />
-			<TranscriptProcessor transcript={transcript} onProcessedText={handleProcessedText} />
+			{/* <EvervaultCard /> */}
+			<div className="relative z-10 flex items-center center">
+				<div className="centered-container">
+					<GlassCard className="inputReconocimientoVoz" height='6rem' width='50rem' padding='0 2rem 0 2rem'>
+						<MicrophoneButton onClick={onClick} isActive={listening}/>
+						<TextField value={text} onChange={handleChange}/>
+						<SendButton transcript={text} onProcessedText={handleProcessedText}/>
+					</GlassCard >
+				</div>
+			</div>
 		</div>
 	);
 }
 
 export default SpeechBotCard;
-
-// import React from "react";
-// import { BackgroundGradientAnimation } from "../components/ui/background-gradient-animation.jsx";
-
-// export function SpeechBotCard() {
-// 	return (
-// 		<BackgroundGradientAnimation>
-// 			<div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl">
-// 				<p className="bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-// 					Gradients X Animations
-// 				</p>
-// 			</div>
-// 		</BackgroundGradientAnimation>
-// 	);
-// }
-
-// export default SpeechBotCard;

@@ -1,84 +1,94 @@
-import React, { useCallback, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
-import useEmblaCarousel from 'embla-carousel-react'
-import './ImageSlider.css'
+import useEmblaCarousel from "embla-carousel-react";
+import "./ImageSlider.css";
 
-const TWEEN_FACTOR_BASE = 0.05 // The higher the number, the more the parallax effect. Default is 0.2
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setExperiencia,
+  selectExperiencia,
+} from "../redux/Slices/experienciaSlice";
+
+import { saveToSessionStorage } from "../Global/Storage";
+
+const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
-	let navigate = useNavigate();
-	function handleClick(imageId) {
-		navigate(`/reservacion/${imageId}`);
-	}
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
 
-	const { images, options } = props
-	const [emblaRef, emblaApi] = useEmblaCarousel(options)
-	const tweenFactor = useRef(0)
-	const tweenNodes = useRef([])
+  function handleClick(idExperiencia) {
+    dispatch(setExperiencia(idExperiencia));
+    saveToSessionStorage("experiencia", idExperiencia);
+    navigate(`/reservacion`);
+  }
 
-	const setTweenNodes = useCallback((emblaApi) => {
-		tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
-			return slideNode.querySelector('.embla__parallax__layer')
-		})
-	}, [])
+  const { images, options } = props;
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const tweenFactor = useRef(0);
+  const tweenNodes = useRef([]);
 
-	const setTweenFactor = useCallback((emblaApi) => {
-		tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
-	}, [])
+  const setTweenNodes = useCallback((emblaApi) => {
+    tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
+      return slideNode.querySelector(".embla__parallax__layer");
+    });
+  }, []);
 
-	const tweenParallax = useCallback((emblaApi, eventName) => {
-		const engine = emblaApi.internalEngine()
-		const scrollProgress = emblaApi.scrollProgress()
-		const slidesInView = emblaApi.slidesInView()
-		const isScrollEvent = eventName === 'scroll'
+  const setTweenFactor = useCallback((emblaApi) => {
+    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
+  }, []);
 
-		emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-			let diffToTarget = scrollSnap - scrollProgress
-			const slidesInSnap = engine.slideRegistry[snapIndex]
+  const tweenParallax = useCallback((emblaApi, eventName) => {
+    const engine = emblaApi.internalEngine();
+    const scrollProgress = emblaApi.scrollProgress();
+    const slidesInView = emblaApi.slidesInView();
+    const isScrollEvent = eventName === "scroll";
 
-			slidesInSnap.forEach((slideIndex) => {
-				if (isScrollEvent && !slidesInView.includes(slideIndex)) return
+    emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+      let diffToTarget = scrollSnap - scrollProgress;
+      const slidesInSnap = engine.slideRegistry[snapIndex];
 
-				if (engine.options.loop) {
-					engine.slideLooper.loopPoints.forEach((loopItem) => {
-						const target = loopItem.target()
+      slidesInSnap.forEach((slideIndex) => {
+        if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
 
-						if (slideIndex === loopItem.index && target !== 0) {
-							const sign = Math.sign(target)
+        if (engine.options.loop) {
+          engine.slideLooper.loopPoints.forEach((loopItem) => {
+            const target = loopItem.target();
 
-							if (sign === -1) {
-								diffToTarget = scrollSnap - (1 + scrollProgress)
-							}
-							if (sign === 1) {
-								diffToTarget = scrollSnap + (1 - scrollProgress)
-							}
-						}
-					})
-				}
+            if (slideIndex === loopItem.index && target !== 0) {
+              const sign = Math.sign(target);
 
-				const translate = diffToTarget * (-1 * tweenFactor.current) * 100
-				const tweenNode = tweenNodes.current[slideIndex]
-				tweenNode.style.transform = `translateX(${translate}%)`
-			})
-		})
-	}, [])
+              if (sign === -1) {
+                diffToTarget = scrollSnap - (1 + scrollProgress);
+              }
+              if (sign === 1) {
+                diffToTarget = scrollSnap + (1 - scrollProgress);
+              }
+            }
+          });
+        }
 
-	useEffect(() => {
-		if (!emblaApi) return
+        const translate = diffToTarget * (-1 * tweenFactor.current) * 100;
+        const tweenNode = tweenNodes.current[slideIndex];
+        tweenNode.style.transform = `translateX(${translate}%)`;
+      });
+    });
+  }, []);
 
-		setTweenNodes(emblaApi)
-		setTweenFactor(emblaApi)
-		tweenParallax(emblaApi)
+  useEffect(() => {
+    if (!emblaApi) return;
 
-		emblaApi
-			.on('reInit', setTweenNodes)
-			.on('reInit', setTweenFactor)
-			.on('reInit', tweenParallax)
-			.on('scroll', tweenParallax)
-	}, [emblaApi, tweenParallax])
+    setTweenNodes(emblaApi);
+    setTweenFactor(emblaApi);
+    tweenParallax(emblaApi);
 
-
+    emblaApi
+      .on("reInit", setTweenNodes)
+      .on("reInit", setTweenFactor)
+      .on("reInit", tweenParallax)
+      .on("scroll", tweenParallax);
+  }, [emblaApi, tweenParallax]);
 
 	return (
 		<div className="embla">
@@ -109,4 +119,4 @@ const ImageSlider = (props) => {
 	)
 }
 
-export default ImageSlider
+export default ImageSlider;
