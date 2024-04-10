@@ -1876,11 +1876,6 @@ video {
   margin-right: calc((1.75rem - 1.25rem) / 2);
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -2236,10 +2231,6 @@ video {
   width: 0.625rem;
 }
 
-.w-2\/4 {
-  width: 50%;
-}
-
 .w-3 {
   width: 0.75rem;
 }
@@ -2322,30 +2313,6 @@ video {
 
 .w-unit-8 {
   width: var(--nextui-spacing-unit-8);
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-.w-3\/5 {
-  width: 60%;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
-.w-1\/3 {
-  width: 33.333333%;
-}
-
-.w-4\/5 {
-  width: 80%;
-}
-
-.w-0 {
-  width: 0px;
 }
 
 .min-w-10 {
