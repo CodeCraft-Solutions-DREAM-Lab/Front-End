@@ -1,17 +1,17 @@
 import { useNavigation, Form, useNavigate } from "react-router-dom";
 
-import LoginTextField from "./LoginTextField/LoginTextField";
-import LoginButton from "./LoginButton/LoginButton";
-import LoginRow from "./LoginRow/LoginRow";
+import LoginTextField from "../LoginTextField/LoginTextField";
+import LoginButton from "../LoginButton/LoginButton";
+import LoginRow from "../LoginRow/LoginRow";
 
 import "./LoginPage.css";
 
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
-import { loginAction } from "../Global/Auth";
+import { loginAction } from "../../Global/Auth";
 
-import GlassCard from "../components/general/GlassCard";
+import GlassCard from "../../components/general/GlassCard";
 
 export default function LoginPage() {
   const navigation = useNavigation();
@@ -33,23 +33,25 @@ export default function LoginPage() {
 
   return (
     <div className="glassCardContainer">
-      <GlassCard classes={"glassCard grid grid-rows-4 grid-cols-1 gap-4"}>
-        <LoginRow>
-          <img
-            src="/LogoDreamLabedited.png"
-            alt="Logo"
-            className="login-logo"
-          />
-          <h1 className="login-dreamlab-title">DREAM LAB</h1>
-        </LoginRow>
-        <LoginRow>
-          <h1 className="login-titulo">Inicia sesión</h1>
+      <GlassCard classes={"glassCard grid grid-rows-3 grid-cols-1 gap-4"}>
+        <LoginRow flexDirection="col" justify="between">
+          <LoginRow margin="70px 0 0 0">
+            <img
+              src="/LogoDreamLabedited.png"
+              alt="Logo"
+              className="login-logo"
+            />
+            <h1 className="login-dreamlab-title">DREAM LAB</h1>
+          </LoginRow>
+          <LoginRow margin="0 0 0 0">
+            <h1 className="login-titulo">Inicia sesión</h1>
+          </LoginRow>
         </LoginRow>
         <LoginRow flexDirection="col">
           <LoginTextField label={"Matrícula"} marginBot={20} />
           <LoginTextField label={"Contraseña"} />
         </LoginRow>
-        <LoginRow>
+        <LoginRow margin="0 0 80px 0">
           <LoginButton text="ACEPTAR" />
         </LoginRow>
       </GlassCard>
