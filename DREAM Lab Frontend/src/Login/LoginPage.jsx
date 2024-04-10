@@ -1,5 +1,8 @@
 import { useNavigation, Form, useNavigate } from "react-router-dom";
 
+import LoginTextField from "./LoginTextField/LoginTextField";
+import LoginButton from "./LoginButton/LoginButton";
+
 import "./LoginPage.css";
 
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
@@ -28,11 +31,31 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="glassCardContainer flex items-center justify-center">
-      <GlassCard classes={"glassCard"}>
-        <h1>Sign in to your account</h1>
+    <div className="glassCardContainer">
+      <GlassCard classes={"glassCard grid grid-rows-4 grid-cols-1 gap-4"}>
+        <div className="login-logo-container">
+          <img
+            src="/LogoDreamLabedited.png"
+            alt="Logo"
+            className="login-logo"
+          />
+          <h1 className="login-dreamlab-title">DREAM LAB</h1>
+        </div>
+        <div>
+          <h1 className="login-titulo">Inicia sesión</h1>
+        </div>
+        <div className="login-form">
+          <LoginTextField label={"Matrícula"} marginBot={20} />
+          <LoginTextField label={"Contraseña"} />
+        </div>
+        <LoginButton />
+      </GlassCard>
+    </div>
+  );
+}
 
-        <Form
+/*
+<Form
           method="post"
           className="login-form"
           replace
@@ -44,7 +67,4 @@ export default function LoginPage() {
             {navigation.state === "submitting" ? "Logging in..." : "Log in"}
           </button>
         </Form>
-      </GlassCard>
-    </div>
-  );
-}
+*/

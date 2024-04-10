@@ -1,0 +1,18 @@
+.login-tf-container {
+  width: 60%;
+}
+
+.login-tf-label-container {
+  margin-left: 20px;
+  margin-bottom: 4px;
+}
+
+.login-tf-label {
+  color: white;
+  font-size: 14px;
+}
+
+.login-tf {
+  border: 2px solid white;
+  border-radius: 30px;
+}
