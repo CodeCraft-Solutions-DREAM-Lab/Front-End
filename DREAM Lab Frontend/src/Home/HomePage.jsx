@@ -81,12 +81,19 @@ function HomePage() {
     axios
       .get("/salas")
       .then((response) => {
-        setSalas(response.data);
+        // Check if the response data is an array
+        if (Array.isArray(response.data)) {
+          // Set the fetched data to the state
+          setSalas(response.data);
+        } else {
+          console.error("Data received from /salas is not an array:", response.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching salas:", error);
       });
   }, []);
+  
 
   useEffect(() => {
     // Hacer la solicitud HTTP para obtener la información de las UFs
