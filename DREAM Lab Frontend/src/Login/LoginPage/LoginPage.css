@@ -1,9 +1,11 @@
 .glassCardContainer {
+  position: relative;
   width: 96vw;
   height: 96vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 @media screen and (max-width: 400px) {
@@ -39,9 +41,10 @@
 
 .glassCard {
   position: relative;
-  box-sizing: border-box;
-  justify-content: center;
-  z-index: 1;
+  background-color: aqua;
+
+  /* box-sizing: border-box;
+  justify-content: center; */
 }
 
 .login-logo {
@@ -75,7 +78,7 @@
   position: absolute;
   top: -5%;
   left: -5%;
-  z-index: 2;
+  z-index: 1;
 }
 
 .bottom-right-image {

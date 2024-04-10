@@ -11,6 +11,7 @@ import "./LoginPage.css";
 // el local storage
 import { loginAction } from "../../Global/Auth";
 
+import "../../components/general/GlassCard.css";
 import GlassCard from "../../components/general/GlassCard";
 
 export default function LoginPage() {
@@ -39,7 +40,11 @@ export default function LoginPage() {
           alt="Logo"
           className="top-left-image"
         />
-
+        <img
+          src="/LogoDreamLabedited.png"
+          alt="Logo"
+          className="bottom-right-image"
+        />
         <div className="grid-container">
           <LoginRow flexDirection="col" justify="between">
             <LoginRow margin="70px 0 0 0">
