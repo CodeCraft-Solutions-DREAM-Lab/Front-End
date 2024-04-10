@@ -34,6 +34,11 @@ export default function LoginPage() {
   return (
     <div className="glassCardContainer">
       <GlassCard classes={"glassCard grid grid-rows-3 grid-cols-1 gap-4"}>
+        <img
+          src="/LogoDreamLabedited.png"
+          alt="Logo"
+          className="top-left-image"
+        />
         <LoginRow flexDirection="col" justify="between">
           <LoginRow margin="70px 0 0 0">
             <img
