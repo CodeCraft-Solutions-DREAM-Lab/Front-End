@@ -41,6 +41,7 @@
   position: relative;
   box-sizing: border-box;
   justify-content: center;
+  z-index: 1;
 }
 
 .login-logo {
@@ -60,9 +61,26 @@
   text-align: center;
 }
 
+.grid-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .top-left-image {
   position: absolute;
   top: -5%;
   left: -5%;
-  z-index: 1;
+  z-index: 2;
+}
+
+.bottom-right-image {
+  position: absolute;
+  bottom: -5%;
+  right: -5%;
+  z-index: -1;
 }

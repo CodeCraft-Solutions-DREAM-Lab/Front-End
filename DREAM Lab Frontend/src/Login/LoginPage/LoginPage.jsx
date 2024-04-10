@@ -33,32 +33,35 @@ export default function LoginPage() {
 
   return (
     <div className="glassCardContainer">
-      <GlassCard classes={"glassCard grid grid-rows-3 grid-cols-1 gap-4"}>
+      <GlassCard classes={"glassCard"}>
         <img
           src="/LogoDreamLabedited.png"
           alt="Logo"
           className="top-left-image"
         />
-        <LoginRow flexDirection="col" justify="between">
-          <LoginRow margin="70px 0 0 0">
-            <img
-              src="/LogoDreamLabedited.png"
-              alt="Logo"
-              className="login-logo"
-            />
-            <h1 className="login-dreamlab-title">DREAM LAB</h1>
+
+        <div className="grid-container">
+          <LoginRow flexDirection="col" justify="between">
+            <LoginRow margin="70px 0 0 0">
+              <img
+                src="/LogoDreamLabedited.png"
+                alt="Logo"
+                className="login-logo"
+              />
+              <h1 className="login-dreamlab-title">DREAM LAB</h1>
+            </LoginRow>
+            <LoginRow margin="0 0 0 0">
+              <h1 className="login-titulo">Inicia sesión</h1>
+            </LoginRow>
           </LoginRow>
-          <LoginRow margin="0 0 0 0">
-            <h1 className="login-titulo">Inicia sesión</h1>
+          <LoginRow flexDirection="col">
+            <LoginTextField label={"Matrícula"} marginBot={20} />
+            <LoginTextField label={"Contraseña"} />
           </LoginRow>
-        </LoginRow>
-        <LoginRow flexDirection="col">
-          <LoginTextField label={"Matrícula"} marginBot={20} />
-          <LoginTextField label={"Contraseña"} />
-        </LoginRow>
-        <LoginRow margin="0 0 80px 0">
-          <LoginButton text="ACEPTAR" />
-        </LoginRow>
+          <LoginRow margin="0 0 80px 0">
+            <LoginButton text="ACEPTAR" />
+          </LoginRow>
+        </div>
       </GlassCard>
     </div>
   );
