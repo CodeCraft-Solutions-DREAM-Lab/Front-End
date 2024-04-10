@@ -50,7 +50,7 @@ export default function LoginPage() {
           <LoginTextField label={"Contraseña"} />
         </LoginRow>
         <LoginRow>
-          <LoginButton />
+          <LoginButton text="ACEPTAR" />
         </LoginRow>
       </GlassCard>
     </div>

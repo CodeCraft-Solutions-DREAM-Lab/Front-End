@@ -4,6 +4,13 @@
 }
 
 .login-button {
-  width: 40%;
+  width: 9rem;
   border-radius: 30px;
+  background-color: white;
+}
+
+.login-button-label {
+  color: #042e55;
+  font-size: 1rem;
+  font-weight: 700;
 }
