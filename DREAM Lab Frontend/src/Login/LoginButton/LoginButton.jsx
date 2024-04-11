@@ -6,7 +6,7 @@ import "./LoginButton.css";
 function LoginButton({ text }) {
   return (
     <div className="login-button-container">
-      <Button className="login-button">
+      <Button className="login-button" color="white">
         <label className="login-button-label">{text}</label>
       </Button>
     </div>

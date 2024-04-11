@@ -33,33 +33,46 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="glassCardContainer">
-      <GlassCard classes={"glassCard"}>
-        <img src="/top-blob.png" alt="Logo" className="top-left-image" />
-        <img src="/bottom-blob.png" alt="Logo" className="bottom-right-image" />
-        <div className="grid-container">
-          <LoginRow flexDirection="col" justify="between">
-            <LoginRow margin="70px 0 0 0">
-              <img
-                src="/LogoDreamLabedited.png"
-                alt="Logo"
-                className="login-logo"
-              />
-              <h1 className="login-dreamlab-title">DREAM LAB</h1>
+    <div className="login-container">
+      <div className="blobs-container">
+        <img
+          src="/top-blob.png"
+          alt="Logo"
+          className="blob-image top-left-image"
+        />
+        <img
+          src="/bottom-blob.png"
+          alt="Logo"
+          className="blob-image bottom-right-image"
+        />
+      </div>
+
+      <div className="glassCardContainer">
+        <GlassCard classes={"glassCard"}>
+          <div className="grid-container">
+            <LoginRow flexDirection="col" justify="between">
+              <LoginRow margin="70px 0 0 0">
+                <img
+                  src="/LogoDreamLabedited.png"
+                  alt="Logo"
+                  className="login-logo"
+                />
+                <h1 className="login-dreamlab-title">DREAM LAB</h1>
+              </LoginRow>
+              <LoginRow margin="0 0 0 0">
+                <h1 className="login-titulo">Inicia sesión</h1>
+              </LoginRow>
             </LoginRow>
-            <LoginRow margin="0 0 0 0">
-              <h1 className="login-titulo">Inicia sesión</h1>
+            <LoginRow flexDirection="col">
+              <LoginTextField label={"Matrícula"} marginBot={20} />
+              <LoginTextField label={"Contraseña"} />
             </LoginRow>
-          </LoginRow>
-          <LoginRow flexDirection="col">
-            <LoginTextField label={"Matrícula"} marginBot={20} />
-            <LoginTextField label={"Contraseña"} />
-          </LoginRow>
-          <LoginRow margin="0 0 80px 0">
-            <LoginButton text="ACEPTAR" />
-          </LoginRow>
-        </div>
-      </GlassCard>
+            <LoginRow margin="0 0 80px 0">
+              <LoginButton text="ACEPTAR" />
+            </LoginRow>
+          </div>
+        </GlassCard>
+      </div>
     </div>
   );
 }
