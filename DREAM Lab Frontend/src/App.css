@@ -90,27 +90,66 @@ body {
 }
 
 .text-white {
-    color: white !important;
+  color: white !important;
+}
+
+.inputRecomendaciones {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between; /* Change to space-between */
+  align-items: center; /* Center items vertically */
+  width: 60%;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  margin-inline: auto;
+  padding: 1.3rem ;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.text-field {
+  flex: 1; /* Change flex to 1 */
+  margin-left: 0.5rem;
+  margin-right: 0.5rem; /* Adjust margin */
+  border: none;
+  background-color: transparent;
+  color: white;
+  padding: 0.3rem;
+  outline: none;
+  font-size: 20px;
+}
+
+.microphone-button {
+  font-size: 3em;
+  padding-right: 60%;
+  padding-left: 30%;
 }
 
 .send-button {
     width: 2.5rem;
-    position: absolute;
-    top: 50%;
-    right: 2%;
-    /* Coloca el botón en el borde derecho */
-    transform: translateY(-50%);
+    margin-left: 0.5rem; /* Adjust margin */
 }
 
-.inputReconocimientoVoz {
-    position: relative;
-    /* Establece la posición relativa para los elementos hijos */}
+    @media only screen and (max-width: 700px) {
+        .inputRecomendaciones {
+          width: 100%;
+          flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
+          justify-content: flex-start; /* Align items to start on smaller screens */
+        }
+      
+        .microphone-button {
+          font-size: 2.2rem;
+          justify-content: center;
+        }
+
+  .text-field {
+    flex: 1;
+    width: auto; /* Remove fixed width */
+  }
 
 
-.speechBotCard {
-   margin-top: auto;
-   margin-bottom: auto;
 }
+
 
 .searchBar {
     border: 1.5px solid white; /* Changed border width and added border style */
@@ -159,33 +198,19 @@ body {
 
 
 
- .text-field {
-    display: flex;
-    align-items: center;
-    margin-left: 6em;
-    transform: translateY(-155%);
-    width: 75%;
-    border-radius: 8px;
-    border: 1px solid white;
-    background-color: rgba(255, 255, 255, 0.2); /* 20% opacity white */
-    color: white; /* White text */
-    padding: 10px;
- }
-
-
- /* Microphone active animation */
+/* Animación micrófono activo */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .relative.active svg {
-    animation: pulse 0.5s infinite alternate;
+  animation: pulse 0.5s infinite alternate;
 }
