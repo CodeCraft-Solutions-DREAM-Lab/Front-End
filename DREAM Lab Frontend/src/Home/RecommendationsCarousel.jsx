@@ -10,6 +10,12 @@ import { useNavigate } from 'react-router-dom';
 function RecomendationsCarousel(props) {
 	const [activeSlide, setActiveSlide] = useState(props.activeSlide);
 
+	const [autoRotate, setAutoRotate] = useState(true);
+
+	const stopRotating = () =>{
+		setAutoRotate(false);
+	}
+
 	const next = () => {
 		setActiveSlide((activeSlide + 1) % props.data.length);
 	};
@@ -20,11 +26,19 @@ function RecomendationsCarousel(props) {
 
 	const handleDotClick = (index) => {
         setActiveSlide(index);
+		stopRotating();
     };
 
-	setTimeout(
-        () => next(), 5000
-    )
+	useEffect(() => {
+        let interval;
+        if (autoRotate) {
+            interval = setInterval(() => {
+                next();
+            }, 5000);
+        }
+
+        return () => clearInterval(interval);
+    }, [activeSlide, autoRotate]);
 
 	const getStyles = (index) => {
 		if (activeSlide === index)
@@ -93,7 +107,7 @@ function RecomendationsCarousel(props) {
 								...getStyles(i),
 							}}
 						>
-							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} />
+							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} stopRotating={stopRotating}/>
 						</div>
 					</React.Fragment>
 				))}
@@ -103,7 +117,10 @@ function RecomendationsCarousel(props) {
 			<div className="btns">
 				<FontAwesomeIcon
 					className="btn"
-					onClick={prev}
+					onClick={() => {
+                        prev();
+                        stopRotating();
+                    }}
 					icon={faChevronLeft}
 					color="#fff"
 					size="2x"
@@ -122,7 +139,10 @@ function RecomendationsCarousel(props) {
 
 				<FontAwesomeIcon
 					className="btn"
-					onClick={next}
+					onClick={() => {
+                        next();
+                        stopRotating();
+                    }}
 					icon={faChevronRight}
 					color="#fff"
 					size="2x"
@@ -136,6 +156,7 @@ const SliderContent = (props) => {
 	let navigate = useNavigate();
 
 	function handleClick() {
+		props.stopRotating();
 		if (props.index === props.activeSlide) {
 			navigate(`/reservacion/${props.title}`);
 		} else {
