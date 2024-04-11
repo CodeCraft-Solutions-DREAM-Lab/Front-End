@@ -3,9 +3,7 @@ import { post } from "./Database";
 import { saveToLocalStorage } from "./Storage";
 
 // Función para validar las credenciales del usuario y redirigir a la página
-export async function loginAction({ formData }) {
-  const user = formData.get("user");
-  const password = formData.get("password");
+export async function loginAction({ user, password }) {
   // Llamar a la API para validar las credenciales
   return post("authUsuario", {
     usuario: user,

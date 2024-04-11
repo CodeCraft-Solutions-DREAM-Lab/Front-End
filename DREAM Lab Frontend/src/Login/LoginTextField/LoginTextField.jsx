@@ -8,7 +8,14 @@ import { EyeFilledIcon, EyeSlashFilledIcon } from "./VisibilityIcons";
 
 import "./LoginTextField.css";
 
-function LoginTextField({ label, placeholder, marginBot, isLogin = false }) {
+function LoginTextField({
+  label,
+  placeholder,
+  marginBot,
+  isLogin = false,
+  onValueChange,
+  value,
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -20,6 +27,8 @@ function LoginTextField({ label, placeholder, marginBot, isLogin = false }) {
       <Input
         labelPlacement="outside"
         placeholder={placeholder}
+        value={value}
+        onValueChange={onValueChange}
         fullWidth={false}
         radius="full"
         endContent={
@@ -50,6 +59,8 @@ function LoginTextField({ label, placeholder, marginBot, isLogin = false }) {
       <Input
         labelPlacement="outside"
         placeholder={placeholder}
+        value={value}
+        onValueChange={onValueChange}
         fullWidth={false}
         radius="full"
         type="text"
@@ -68,6 +79,8 @@ LoginTextField.propTypes = {
   width: propTypes.string,
   marginBot: propTypes.number,
   isLogin: propTypes.bool,
+  onValueChange: propTypes.func,
+  value: propTypes.string,
 };
 
 export default LoginTextField;

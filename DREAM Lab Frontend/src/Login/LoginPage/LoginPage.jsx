@@ -6,6 +6,8 @@ import LoginRow from "../LoginRow/LoginRow";
 
 import "./LoginPage.css";
 
+import { useState } from "react";
+
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
@@ -15,17 +17,18 @@ import "../../components/general/GlassCard.css";
 import GlassCard from "../../components/general/GlassCard";
 
 export default function LoginPage() {
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigation = useNavigation();
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    // Evitar que se haga el submit del formulario
-    event.preventDefault();
-    // Obtener los datos del formulario
-    const formData = new FormData(event.target);
+  const handleLogin = async () => {
+    console.log("User:", user, "Password:", password);
     try {
       // Llamar a la acción de login y obtener el path al que se debe redirigir
-      const path = await loginAction({ formData });
+      console.log("User:", user, "Password:", password);
+      const path = await loginAction({ user, password });
       navigate(path);
     } catch (error) {
       console.error("Login failed:", error);
@@ -64,11 +67,21 @@ export default function LoginPage() {
               </LoginRow>
             </LoginRow>
             <LoginRow flexDirection="col">
-              <LoginTextField label={"Matrícula"} marginBot={20} />
-              <LoginTextField label={"Contraseña"} isLogin={true} />
+              <LoginTextField
+                label={"Matrícula"}
+                marginBot={20}
+                value={user}
+                onValueChange={setUser}
+              />
+              <LoginTextField
+                label={"Contraseña"}
+                isLogin={true}
+                value={password}
+                onValueChange={setPassword}
+              />
             </LoginRow>
             <LoginRow margin="0 0 80px 0">
-              <LoginButton text="ACEPTAR" />
+              <LoginButton text="ACEPTAR" onClick={handleLogin} />
             </LoginRow>
           </div>
         </GlassCard>

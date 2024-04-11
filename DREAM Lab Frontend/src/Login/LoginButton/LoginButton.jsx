@@ -3,10 +3,10 @@ import propTypes from "prop-types";
 
 import "./LoginButton.css";
 
-function LoginButton({ text }) {
+function LoginButton({ text, onClick }) {
   return (
     <div className="login-button-container">
-      <Button className="login-button" color="white">
+      <Button className="login-button" color="white" onClick={onClick}>
         <label className="login-button-label">{text}</label>
       </Button>
     </div>
@@ -15,6 +15,7 @@ function LoginButton({ text }) {
 
 LoginButton.propTypes = {
   text: propTypes.string,
+  onClick: propTypes.func,
 };
 
 export default LoginButton;
