@@ -6,7 +6,7 @@
     231,
     0.06
   ); /* Background color with transparency */
-  border-radius: 25px;
+  border-radius: 4vh;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(17.5px);
   -webkit-backdrop-filter: blur(17.5px);
@@ -20,7 +20,7 @@
   left: -1px; /* Adjust positioning to align with border */
   right: -1px; /* Adjust positioning to align with border */
   bottom: -1px; /* Adjust positioning to align with border */
-  border-radius: 25px;
+  border-radius: 4vh;
   padding: 1px;
   pointer-events: none;
   background: linear-gradient(

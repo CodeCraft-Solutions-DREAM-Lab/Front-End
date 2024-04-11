@@ -1,13 +1,14 @@
 .glassCardContainer {
-  width: 96vw;
-  height: 96vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
   .glassCard {
     width: 300px;
   }
@@ -35,6 +36,30 @@
 @media screen and (min-height: 801px) {
   .glassCard {
     height: 700px;
+  }
+} */
+
+@media screen and (max-width: 1005px) {
+  .glassCard {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1006px) {
+  .glassCard {
+    width: 30vw;
+  }
+}
+
+@media screen and (max-height: 615px) {
+  .glassCard {
+    height: 510px;
+  }
+}
+
+@media screen and (min-height: 616px) {
+  .glassCard {
+    height: 80vh;
   }
 }
 
@@ -73,12 +98,12 @@
   position: absolute;
   top: -50%;
   left: -50%;
-  z-index: 1;
+  z-index: -1;
 }
 
 .bottom-right-image {
   position: absolute;
   bottom: -50%;
   right: -50%;
-  z-index: -1;
+  z-index: 1;
 }
