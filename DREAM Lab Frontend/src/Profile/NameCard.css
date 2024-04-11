@@ -68,3 +68,111 @@
     font-size:larger;
 
 }
+
+@media (max-width: 1200px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: larger;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size:large;
+    }
+
+    .div-exterior{
+        padding-left: 5%;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: large;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size:medium;
+    }
+
+    .div-exterior{
+        padding-left: 5%;
+        max-width: 52%;
+        margin-left: -2%;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: medium;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size:medium;
+    }
+
+    .div-exterior{
+        margin-left: 12%;
+        padding-left: 5%;
+        min-width: 95%;
+        height: 60px;
+    }
+
+    .logo-div{
+        width: 8%;;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: medium;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size:medium;
+    }
+
+    .div-exterior{
+        padding-left: 8%;
+        margin-left: 10%;
+        height: 60px;
+    }
+
+    .logo-div{
+        width: 12%;
+    }
+
+}
+
+@media (max-width: 300px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: small;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size:small;
+    }
+
+    .logo-div{
+        width: 10%;
+    }
+}

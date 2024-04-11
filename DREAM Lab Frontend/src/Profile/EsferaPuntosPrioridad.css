@@ -2,8 +2,8 @@
     background-color: rgba(255, 255, 255, 0.1);
     border: 5px solid rgba(255, 255, 255, 0.3); 
     border-radius: 100%;
-    width: 97%;
-    min-height: 318px;
+    width: 22vw;
+    height: 22vw;
     margin-top: 2%;
     margin-bottom: 2%;
   
@@ -18,8 +18,8 @@
 .div-esfera-in{
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 100%;
-    width: 88%;
-    height: 265px;
+    width: 18vw;
+    height: 18vw;
 
     background: rgba(255, 231, 231, 0.06); /* Background color with transparency */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -88,4 +88,120 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1)); /* Gradiente para simular el efecto de agua */
     animation: agua 10s ease-in-out infinite; /* Animación de la propiedad background-size */
   }
-  
+
+  @media (max-width: 1200px) {
+
+    .puntos-prioridad{
+        font-size: 55px;
+    }
+
+    .subtitulo{
+        font-size: 12px;
+    }
+    
+  }
+
+  @media (max-width: 1000px) {
+
+    .puntos-prioridad{
+        font-size: 55px;
+    }
+
+    .subtitulo{
+        font-size: 12px;
+    }
+    
+  }
+
+  @media (max-width: 900px) {
+
+    .puntos-prioridad{
+        font-size: 35px;
+    }
+
+    .subtitulo{
+        font-size: 8px;
+    }
+    
+  }
+
+  @media (max-width: 780px) {
+
+    .puntos-prioridad{
+        font-size: 40px;
+    }
+
+    .subtitulo{
+        font-size: 12px;
+    }
+
+    .div-esfera-out {
+        width: 40vw;
+        height: 40vw;
+      }
+    
+    .div-esfera-in{
+        width: 30vw;
+        height: 30vw;
+    }
+    
+  }
+
+  @media (max-width: 500px) {
+
+    .puntos-prioridad{
+        font-size: 32px;
+    }
+
+    .subtitulo{
+        font-size: 11px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-self: center;
+        align-items: center;
+        width: 99%;
+        line-height: 99%;
+        margin-top: 5%;
+    }
+
+    .div-esfera-out {
+        width: 40vw;
+        height: 40vw;
+      }
+    
+    .div-esfera-in{
+        width: 30vw;
+        height: 30vw;
+    }
+    
+  }
+
+  @media (max-width: 400px) {
+
+    .puntos-prioridad{
+        font-size: 28px;
+    }
+
+    .subtitulo{
+        font-size: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-self: center;
+        align-items: center;
+        width: 99%;
+        line-height: 99%;
+        margin-top: 5%;
+    }
+
+    .div-esfera-out {
+        width: 40vw;
+        height: 40vw;
+      }
+    
+    .div-esfera-in{
+        width: 30vw;
+        height: 30vw;
+    }
+    
+  }
+

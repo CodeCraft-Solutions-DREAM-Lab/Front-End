@@ -42,3 +42,107 @@
     font-weight:light;
     line-height: 1.2;
 }
+
+@media (max-width: 1200px) {
+
+    .nombre-logro-bloqueado .nombre-logro-desbloqueado{
+        font-size: small;
+    }
+    .descripcion-logro{
+        font-size: small;
+    }
+}
+
+@media (max-width: 950px) {
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: x-small;
+    }
+    .descripcion-logro{
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .icono-logro{
+        display: none;
+    }
+
+    .div-info-logro{
+        width: 85%;
+    }
+ 
+}
+
+@media (max-width: 780px) {
+
+    .div-exterior-logro {
+        width: 100%;
+        height: auto;
+        padding-left: 4%;
+        padding-right: 4%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+    }
+    
+    .icono-logro{
+        display: block;
+        width: 10vw;
+    }
+
+    .div-info-logro{
+        width: 65%;
+        margin-left: 4%;
+    }
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: medium;
+    }
+    .descripcion-logro{
+        font-size: small;
+    }
+ 
+}
+
+@media (max-width: 500px) {
+
+    .icono-logro{
+        display: none;
+    }
+
+    .div-info-logro{
+        width: 90%;
+        margin-left: 4%;
+    }
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: small;
+    }
+    .descripcion-logro{
+        font-size: small;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .div-exterior-logro {
+
+        border-radius: 15px;
+        padding-left: 8%;
+        padding-right: 8%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        margin-bottom: 4%;
+    }
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: x-small;
+    }
+    .descripcion-logro{
+        font-size: x-small;
+    }
+}
+
+

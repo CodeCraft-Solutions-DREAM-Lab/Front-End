@@ -3,12 +3,12 @@
     flex-wrap: wrap;
     justify-content: center; 
     align-items: center; 
-    margin-top: 5%;
+    margin-top: 4%;
     margin-bottom: 5%;
     max-height: 120%;
     height: 120%;
     width: 105%;
-    transform: translateX(-3%);
+    transform: translateX(-2.7%);
 }
 
 .logros-div{
@@ -20,14 +20,17 @@
     -webkit-backdrop-filter: blur(17.5px);
     border: 1.5px solid rgba(255, 255, 255, 0.10); /* Border color with transparency */
 
-    
     width: 30%;
     border-radius: 20px;
-    min-height: 350px;
-    max-height: 350px;
+    height: auto;
     padding: 2%;
-    overflow-y: auto;
+}
 
+
+.logros-div-in{
+    overflow-y: auto;
+    max-height: 250px;
+    padding-right: 3%;
 }
 
 .esfera-div{
@@ -36,6 +39,10 @@
     border-radius: 20px;
     padding: 3%;
     padding-left: 4%;
+}
+
+.esfera-div-celular{
+    display: none;
 }
 
 .reservaciones-div{
@@ -48,11 +55,16 @@
     
     width: 30%;
     border-radius: 20px;
-    min-height: 350px;
-    max-height: 350px;
+    height: auto;
     padding: 2%;
-    overflow-y: auto;
 }
+
+.reservaciones-div-in{
+    overflow-y: auto;
+    max-height: 250px;
+    padding-right: 3%;
+}
+
 
 .reservaciones-div::before .logros-div::before {
     content: "";
@@ -87,16 +99,142 @@
     max-height: 100px;
 }
 
-.logros-div::-webkit-scrollbar,
-.reservaciones-div::-webkit-scrollbar {
+.logros-div-in::-webkit-scrollbar,
+.reservaciones-div-in::-webkit-scrollbar {
     width: 7px; /* Ancho de la barra de desplazamiento */
-    margin-right: 500px; /* Desplazamiento del borde derecho */
-
 }
 
-.logros-div::-webkit-scrollbar-thumb,
-.reservaciones-div::-webkit-scrollbar-thumb  {
+.logros-div-in::-webkit-scrollbar-thumb,
+.reservaciones-div-in::-webkit-scrollbar-thumb  {
     background-color: rgba(255, 255, 255, 0.3); /* Color del "pulgar" del scroll */
     border-radius: 6px; /* Radio del borde del "pulgar" del scroll */
 }
 
+@media (max-width: 800px) {
+
+    .sub{
+       font-size: small;
+    }
+}
+
+@media (max-width: 780px) {
+
+    .sub{
+       font-size: small;
+       margin-bottom: 2%;
+       display: flex;
+       justify-content: center;
+    }
+
+    .esfera-div{
+        display: none;
+    }
+
+    .esfera-div-celular{
+        display: block;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logros-div{
+        width: 90%;
+        margin-bottom: 3%;
+        margin-top: 5%;
+        height: 180px;
+    }
+
+    .logros-div-in{
+        overflow-y: auto;
+        padding-right: 3%;
+        height: 8em;
+    }
+    
+    .reservaciones-div{
+        width: 90%;
+        height: 180px;
+
+    }
+
+    .reservaciones-div-in{
+        height: 8em;
+    }
+    
+}
+
+
+@media (max-width: 500px) {
+
+    .esfera-div-celular{
+        margin-top: 4%;
+        margin-bottom: 3%;
+    }
+
+    .logros-div{
+        width: 90%;
+        margin-bottom: 3%;
+        margin-top: 5%;
+        height: 150px;
+    }
+
+    .logros-div-in{
+        overflow-y: auto;
+        padding-right: 3%;
+        height: 6em;
+    }
+    
+    .reservaciones-div{
+        width: 90%;
+        height: 150px;
+    }
+
+    .reservaciones-div-in{
+        height: 6em;
+    }
+    
+}
+
+@media (max-width: 400px) {
+
+    
+    .sub{
+        font-size: x-small;
+     }
+
+    .logros-div{
+        width: 90%;
+        margin-bottom: 3%;
+        margin-top: 5%;
+        height: 102px;
+    }
+
+    .logros-div-in{
+        overflow-y: auto;
+        padding-right: 3%;
+        height: 4.3em;
+    }
+    
+    .reservaciones-div{
+        width: 90%;
+        height: 102px;
+    }
+
+    .reservaciones-div-in{
+        height: 4.3em;
+    }
+
+    .logros-div-in::-webkit-scrollbar,
+    .reservaciones-div-in::-webkit-scrollbar {
+        width: 7px; /* Ancho de la barra de desplazamiento */
+        display: none;
+    }
+
+    .logros-div-in::-webkit-scrollbar-thumb,
+    .reservaciones-div-in::-webkit-scrollbar-thumb  {
+        background-color: rgba(255, 255, 255, 0.3); /* Color del "pulgar" del scroll */
+        border-radius: 6px; /* Radio del borde del "pulgar" del scroll */
+        display: none;
+    }
+    
+}
