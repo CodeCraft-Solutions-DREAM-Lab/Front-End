@@ -25,6 +25,7 @@ const ImageSlider = (props) => {
   }
 
   const { images, options } = props;
+  console.log(images);
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef([]);

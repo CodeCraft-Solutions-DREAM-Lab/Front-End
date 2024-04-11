@@ -6,6 +6,7 @@ import RecommendationsCarousel from "./RecommendationsCarousel";
 import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import axios from "axios";
+import { getFromLocalStorage } from "../Global/Storage.js";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
@@ -138,8 +139,14 @@ function HomePage() {
       setIsLoadingUfs(true);
       setErrorUfs(null);
 
+      const userID = getFromLocalStorage("user");
+      console.log("este es el user: " + userID);
       try {
-        const response = await axios.get(defaultURL + "/experiencias/UFs");
+        const response = await axios.get(defaultURL + "/experiencias/UFs", {
+          params: {
+            user: userID
+          }
+        });
         const data = response.data;
         console.log(data);
 
@@ -269,6 +276,7 @@ function HomePage() {
           <h1>UNIDADES DE FORMACIÓN</h1>
           <ImageSlider
             images={ufs.map((uf) => ({
+              
               id: uf.idExperiencia,
               url: uf.portadaURL,
               title: uf.nombre,
