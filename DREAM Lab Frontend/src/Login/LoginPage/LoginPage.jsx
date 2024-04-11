@@ -19,18 +19,21 @@ import GlassCard from "../../components/general/GlassCard";
 export default function LoginPage() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const navigation = useNavigation();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    console.log("User:", user, "Password:", password);
+    setLoading(true);
     try {
       // Llamar a la acción de login y obtener el path al que se debe redirigir
       console.log("User:", user, "Password:", password);
       const path = await loginAction({ user, password });
+      setLoading(false);
       navigate(path);
     } catch (error) {
+      setLoading(false);
       console.error("Login failed:", error);
     }
   };
@@ -81,7 +84,11 @@ export default function LoginPage() {
               />
             </LoginRow>
             <LoginRow margin="0 0 80px 0">
-              <LoginButton text="ACEPTAR" onClick={handleLogin} />
+              <LoginButton
+                text="ACEPTAR"
+                onClick={handleLogin}
+                isLoading={isLoading}
+              />
             </LoginRow>
           </div>
         </GlassCard>

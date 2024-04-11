@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import "./LoginButton.css";
 
-function LoginButton({ text, onClick }) {
+function LoginButton({ text, onClick, isLoading }) {
   return (
     <div className="login-button-container">
       <Button
@@ -11,6 +11,7 @@ function LoginButton({ text, onClick }) {
         color="white"
         onClick={onClick}
         radius="full"
+        isLoading={isLoading}
       >
         <label className="login-button-label">{text}</label>
       </Button>
@@ -21,6 +22,7 @@ function LoginButton({ text, onClick }) {
 LoginButton.propTypes = {
   text: propTypes.string,
   onClick: propTypes.func,
+  isLoading: propTypes.bool,
 };
 
 export default LoginButton;
