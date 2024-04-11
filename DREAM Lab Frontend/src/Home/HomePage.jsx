@@ -199,7 +199,7 @@ function HomePage() {
 
   return (
     <>
-      <Navbar visible={visible} /> {/* Use the Navbar component */}
+      <Navbar visible={true} /> {/* Use the Navbar component */}
       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
