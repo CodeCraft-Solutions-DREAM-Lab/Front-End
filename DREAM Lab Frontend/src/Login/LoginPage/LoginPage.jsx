@@ -65,7 +65,7 @@ export default function LoginPage() {
             </LoginRow>
             <LoginRow flexDirection="col">
               <LoginTextField label={"Matrícula"} marginBot={20} />
-              <LoginTextField label={"Contraseña"} />
+              <LoginTextField label={"Contraseña"} isLogin={true} />
             </LoginRow>
             <LoginRow margin="0 0 80px 0">
               <LoginButton text="ACEPTAR" />
