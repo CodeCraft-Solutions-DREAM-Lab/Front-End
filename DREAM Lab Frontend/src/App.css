@@ -1,92 +1,85 @@
-body {     
-    background: rgb(2, 0, 36);
-    background: linear-gradient(180deg, #042E55 0%, #7B7AFD 100%);
-    min-height: 100vh;
+body {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(180deg, #042e55 0%, #7b7afd 100%);
+  min-height: 100vh;
 }
 
 .navbar {
-    
-    display: flex;
-    width: 95%;
-    height: 11%;
-    align-items: center;
-    margin: 0 auto;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
-    position: fixed;
-    z-index: 9;
-    padding: 1%;
-
-    
+  display: flex;
+  width: 95%;
+  height: 11%;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  position: fixed;
+  z-index: 9;
+  padding: 1%;
 }
 
 .navbar-positioning {
-    position: relative; /* Establishes stacking context */
-    padding: 2rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: top 0.3s ease-in-out;
+  position: relative; /* Establishes stacking context */
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: top 0.3s ease-in-out;
 }
 
-
 .visible {
-    top: 0; /* Display navbar at the top */
-  }
-  
+  top: 0; /* Display navbar at the top */
+}
+
 .hidden {
-    top: -9rem; /* Hide navbar above the viewport */
-  }
-  
+  top: -9rem; /* Hide navbar above the viewport */
+}
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 200px;
 }
 
 .logo {
-    width: 33%;
-    padding-left: 10%;
-    padding-bottom: 2%;
-    margin-right: 4%;
+  width: 33%;
+  padding-left: 10%;
+  padding-bottom: 2%;
+  margin-right: 4%;
 }
 
 .dreamlab {
-    padding-top: 1%;
-    color: white;
-    font-weight: 800;
-    font-size: 100%;
+  padding-top: 1%;
+  color: white;
+  font-weight: 800;
+  font-size: 100%;
 }
 
 @media only screen and (max-width: 480px) {
-    .logo {
-        width: 45%; /* Adjust the width for smaller screens */
-        padding-left: 10%; /* Adjust padding as needed */
-        padding-bottom: 1%; /* Adjust padding as needed */
-    }
-    .dreamlab {
-        display: none; /* Hide the Dream Lab text on phone screens */
-    }
+  .logo {
+    width: 45%; /* Adjust the width for smaller screens */
+    padding-left: 10%; /* Adjust padding as needed */
+    padding-bottom: 1%; /* Adjust padding as needed */
+  }
+  .dreamlab {
+    display: none; /* Hide the Dream Lab text on phone screens */
+  }
 }
 
 .user-avatar-container {
-   display: flex;
-   align-items: center;
-   margin-right: 20px;
-   
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
-
 .centered-container {
-   display: flex;
-   justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .bg-transparent {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .text-white {
@@ -102,7 +95,7 @@ body {
   margin-top: 5rem;
   margin-bottom: 5rem;
   margin-inline: auto;
-  padding: 1.3rem ;
+  padding: 1.3rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
@@ -120,83 +113,82 @@ body {
 }
 
 .microphone-button {
-  font-size: 3em;
+  font-size: 2.5em;
   padding-right: 60%;
   padding-left: 30%;
 }
 
 .send-button {
-    width: 2.5rem;
-    margin-left: 0.5rem; /* Adjust margin */
+  width: 2rem;
+  margin-left: 0.5rem; /* Adjust margin */
 }
 
-    @media only screen and (max-width: 700px) {
-        .inputRecomendaciones {
-          width: 100%;
-          flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
-          justify-content: flex-start; /* Align items to start on smaller screens */
-        }
-      
-        .microphone-button {
-          font-size: 2.2rem;
-          justify-content: center;
-        }
+@media only screen and (max-width: 700px) {
+  .inputRecomendaciones {
+    width: 100%;
+    flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
+    justify-content: flex-start; /* Align items to start on smaller screens */
+  }
+
+  .microphone-button {
+    font-size: 2.2rem;
+    justify-content: center;
+  }
 
   .text-field {
     flex: 1;
-    width: auto; /* Remove fixed width */
+    width: 40%; /* Remove fixed width */
   }
+  .send-button {
+    width: 2rem;
 
-
+  }
 }
 
-
 .searchBar {
-    border: 1.5px solid white; /* Changed border width and added border style */
-    border-radius: 25px;
-    width: 60%;
-    height: 2.3rem; /* Adjusted height */
-    padding: 0 20px 0 40px; /* Adjust for icon width and padding */
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
-    text-align: left; /* Center text horizontally */
-    outline: none;
-    background-color: transparent;
-    color: white;
-    background-image: url('./images/magnifying-glass-icon.svg'); /* Path to your magnifying glass icon */
-    background-size: 20px; /* Adjust size as needed */
-    background-position: 10% center; /* Adjust position as needed */
-    background-repeat: no-repeat;
-    align-self: flex-end;
- }
- 
- .searchBar:focus {
-    border-color: white; /* Change border color on focus */
+  border: 1.5px solid white; /* Changed border width and added border style */
+  border-radius: 25px;
+  width: 60%;
+  height: 2.3rem; /* Adjusted height */
+  padding: 0 20px 0 40px; /* Adjust for icon width and padding */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  text-align: left; /* Center text horizontally */
+  outline: none;
+  background-color: transparent;
+  color: white;
+  background-image: url("./images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+  background-size: 20px; /* Adjust size as needed */
+  background-position: 10% center; /* Adjust position as needed */
+  background-repeat: no-repeat;
+  align-self: flex-end;
+}
+
+.searchBar:focus {
+  border-color: white; /* Change border color on focus */
 }
 
 .searchBar::placeholder {
-    color: whitesmoke; /* Change placeholder color */
+  color: whitesmoke; /* Change placeholder color */
 }
 
 .searchContainer {
-    margin-left: auto;
-    padding-right: 2rem;
-    position: relative;
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Align items vertically */
-    justify-content: flex-end; /* Align items to the right */
+  margin-left: auto;
+  padding-right: 2rem;
+  position: relative;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Align items vertically */
+  justify-content: flex-end; /* Align items to the right */
 }
 
 @media only screen and (max-width: 480px) {
-    .searchContainer {
-        margin: 0 auto; /* Center the search bar on phone screens */
-        width: 90%; /* Adjust width for phone screens */
-    }
-    .searchBar {
-        width: 100%; /* Set full width on phone screens */
-    }
+  .searchContainer {
+    margin: 0 auto; /* Center the search bar on phone screens */
+    width: 90%; /* Adjust width for phone screens */
+  }
+  .searchBar {
+    width: 100%; /* Set full width on phone screens */
+  }
 }
-
-
 
 /* Animación micrófono activo */
 @keyframes pulse {
