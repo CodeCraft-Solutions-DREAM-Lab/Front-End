@@ -14,7 +14,7 @@ body {
     justify-content: center;
     background: rgba(255, 255, 255, 0.06);
     position: fixed;
-    z-index: 5;
+    z-index: 9;
     padding: 1%;
 
     
@@ -29,6 +29,7 @@ body {
     align-items: center;
     transition: top 0.3s ease-in-out;
 }
+
 
 .visible {
     top: 0; /* Display navbar at the top */

@@ -72,7 +72,7 @@ export default MyComponent;
 
 const defaultURL = "http://localhost:3000/";
 
-async function apiRequest(
+export async function apiRequest(
   method,
   url,
   data = null,

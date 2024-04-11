@@ -44,27 +44,24 @@ const IMAGES = [
 ];
 
 const initialData = [
-    {
-        bgColor: "#F54748",
-        img: 'https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg',
-        title: "Lorem Ipsum",
-        desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-    },
-    {
-        bgColor: "#7952B3",
-        img: 'https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg',
-        title: "Lorem Ipsum",
-        desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-    },
-    {
-        bgColor: "#1597BB",
-        img: 'https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg',
-        title: "Lorem Ipsum",
-        desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-    },
+  {
+    bgColor: "#F54748",
+    img: "https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg",
+    title: "Lorem Ipsum",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+  {
+    bgColor: "#7952B3",
+    img: "https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg",
+    title: "Lorem Ipsum",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
+  {
+    bgColor: "#1597BB",
+    img: "https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg",
+    title: "Lorem Ipsum",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+  },
 ];
 
 function HomePage() {
@@ -76,46 +73,91 @@ function HomePage() {
   const [experiences, setExperiences] = useState([]);
   const [ufs, setUfs] = useState([]);
   const [salas, setSalas] = useState([]);
+  const [isLoadingSalas, setIsLoadingSalas] = useState(false);
+  const [errorSalas, setErrorSalas] = useState(null);
+  const [isLoadingUfs, setIsLoadingUfs] = useState(false);
+  const [errorUfs, setErrorUfs] = useState(null);
+  const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
+  const [errorExperiences, setErrorExperiences] = useState(null);
+  const defaultURL = "http://localhost:3000";
 
   useEffect(() => {
-    axios
-      .get("/salas")
-      .then((response) => {
-        // Check if the response data is an array
-        if (Array.isArray(response.data)) {
-          // Set the fetched data to the state
-          setSalas(response.data);
+    const fetchData = async () => {
+      setIsLoadingSalas(true);
+      setErrorSalas(null);
+
+      try {
+        const response = await axios.get(defaultURL + "/salas");
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setSalas(JSON.parse(data));
         } else {
-          console.error("Data received from /salas is not an array:", response.data);
+          console.log(salas)
+          setSalas(data); // Assuming data is already an object
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching salas:", error);
-      });
-  }, []);
-  
+        setErrorSalas(error);
+      } finally {
+        setIsLoadingSalas(false);
+      }
+    };
 
-  useEffect(() => {
-    // Hacer la solicitud HTTP para obtener la información de las UFs
-    axios
-      .get("/experiencias/UFs")
-      .then((response) => {
-        setUfs(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching UFs:", error);
-      });
+    fetchData();
   }, []);
 
   useEffect(() => {
-    axios
-      .get("/experiencias/autodirigidas")
-      .then((response) => {
-        setExperiences(response.data);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      setIsLoadingExperiences(true);
+      setErrorExperiences(null);
+
+      try {
+        const response = await axios.get(defaultURL + "/experiencias/autodirigidas");
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setExperiences(JSON.parse(data));
+        } else {
+          console.log(experiences)
+          setExperiences(data); // Assuming data is already an object
+        }
+      } catch (error) {
         console.error("Error fetching experiences:", error);
-      });
+        setErrorExperiences(error);
+      } finally {
+        setIsLoadingExperiences(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingUfs(true);
+      setErrorUfs(null);
+
+      try {
+        const response = await axios.get(defaultURL + "/experiencias/UFs");
+        const data = response.data;
+        console.log(data);
+
+        if (typeof data === "string") {
+          setUfs(JSON.parse(data));
+        } else {
+          console.log(ufs)
+          setUfs(data); // Assuming data is already an object
+        }
+      } catch (error) {
+        console.error("Error fetching ufs:", error);
+        setErrorUfs(error);
+      } finally {
+        setIsLoadingUfs(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -148,7 +190,7 @@ function HomePage() {
     setProcessedTranscript(processedText);
   };
 
-  console.log("Processed Transcript in HomePage:", processedTranscript);
+  //console.log("Processed Transcript in HomePage:", processedTranscript);
   return (
     <>
       <Navbar visible={visible} /> {/* Use the Navbar component */}
@@ -192,6 +234,8 @@ function HomePage() {
           />
         </div>
         <div className="carousel-container">
+      {salas.length > 0 && !isLoadingSalas && (
+        <>
           <h1>SALAS</h1>
           <ImageSlider
             images={salas.map((sala) => ({
@@ -201,8 +245,12 @@ function HomePage() {
             }))}
             options={OPTIONS}
           />
-        </div>
-        <div className="carousel-container">
+        </>
+      )}
+    </div>
+    <div className="carousel-container">
+      {experiences.length > 0 && !isLoadingExperiences && (
+        <>
           <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
           <ImageSlider
             images={experiences.map((experience) => ({
@@ -212,8 +260,12 @@ function HomePage() {
             }))}
             options={OPTIONS}
           />
-        </div>
-        <div className="carousel-container">
+        </>
+      )}
+    </div>
+    <div className="carousel-container">
+      {ufs.length > 0 && !isLoadingUfs && (
+        <>
           <h1>UNIDADES DE FORMACIÓN</h1>
           <ImageSlider
             images={ufs.map((uf) => ({
@@ -223,7 +275,9 @@ function HomePage() {
             }))}
             options={OPTIONS}
           />
-        </div>
+        </>
+      )}
+    </div>
       </div>
     </>
   );
