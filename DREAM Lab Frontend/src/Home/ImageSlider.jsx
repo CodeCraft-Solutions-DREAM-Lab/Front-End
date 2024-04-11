@@ -25,6 +25,7 @@ const ImageSlider = (props) => {
   }
 
   const { images, options } = props;
+  console.log(images);
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef([]);
@@ -90,30 +91,33 @@ const ImageSlider = (props) => {
       .on("scroll", tweenParallax);
   }, [emblaApi, tweenParallax]);
 
-  return (
-    <div className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {images.map((image, index) => (
-            <div className="embla__slide" key={index}>
-              <div className="embla__parallax">
-                <div className="embla__parallax__layer">
-                  <img
-                    className="embla__slide__img embla__parallax__img"
-                    src={image.url}
-                    alt="Your alt text"
-                    onClick={() => handleClick(image.id)}
-                    draggable="false"
-                    onContextMenu={(e) => e.preventDefault()}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
+	return (
+		<div className="embla">
+			<div className="embla__viewport" ref={emblaRef}>
+				<div className="embla__container">
+					{images.map((image, index) => (
+						<div className="embla__slide  " key={image.id}>
+							<div className="embla__parallax">
+								<div className="embla__parallax__layer">
+									<img
+										className="embla__slide__img embla__parallax__img"
+										src={image.url}
+										alt="Your alt text"
+										onClick={() => handleClick(image.id)}
+										draggable="false"
+										onContextMenu={(e) => e.preventDefault()}
+									/>
+								</div>
+								
+							</div>
+							<p className='slide-title'>{image.title}</p>
+						</div>
+						
+					))}
+				</div>
+			</div>
+		</div>
+	)
+}
 
 export default ImageSlider;
