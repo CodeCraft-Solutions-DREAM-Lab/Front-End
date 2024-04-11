@@ -77,15 +77,28 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 100px;
+	padding-top: 30px;
 }
 
 .btns .btn {
 	cursor: pointer;
+	padding-inline: 10px;
 }
 
-.btns .btn:last-child {
-	margin-left: 40px;
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
 }
+
+.btns .dots {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
 
 /* normal css  */
