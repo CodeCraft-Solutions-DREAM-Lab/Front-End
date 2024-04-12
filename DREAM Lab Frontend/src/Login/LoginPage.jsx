@@ -17,6 +17,7 @@ export default function LoginPage() {
     try {
       // Llamar a la acción de login y obtener el path al que se debe redirigir
       const path = await loginAction({ formData });
+      //console.log(formData.get("user"));
       navigate(path);
     } catch (error) {
       console.error("Login failed:", error);
