@@ -82,17 +82,31 @@ function HomePage() {
   const [errorExperiences, setErrorExperiences] = useState(null);
   const defaultURL = "http://localhost:3000";
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos === 0);
-      setPrevScrollPos(currentScrollPos);
-    };
+  
+const [currentScrollPos, setCurrentScrollPos] = useState(0);
 
-    window.addEventListener("scroll", handleScroll);
+useEffect(() => {
+  const handleScroll = () => {
+    const newScrollPos = window.pageYOffset;
+    setCurrentScrollPos(newScrollPos);  // Update current scroll position
+    setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
+    setPrevScrollPos(newScrollPos);
+  };
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  window.addEventListener("scroll", handleScroll);
+
+  // Restore scroll position on component mount and data updates
+  const restoreScrollPosition = () => {
+    window.scrollTo(0, currentScrollPos);  // Restore previous scroll position
+  };
+
+  restoreScrollPosition();  // Call on initial mount
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [currentScrollPos]); // Only re-run on currentScrollPos changes
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -199,7 +213,7 @@ function HomePage() {
 
   return (
     <>
-      <Navbar visible={true} /> {/* Use the Navbar component */}
+      <Navbar visible={visible} /> {/* Use the Navbar component */}
       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
