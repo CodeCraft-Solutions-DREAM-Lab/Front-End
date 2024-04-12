@@ -7,7 +7,7 @@ import SearchBar from "../general/SearchBar";
 const Navbar = ({ visible }) => {
   return (
     <div className={`navbar-positioning ${visible ? "visible" : "hidden"}`}>
-      <div className="navbar glass-card" height="4.5rem">
+      <div className="navbar glass-card" height="1rem">
         <div className="flex items-center justify-between w-full">
           <div className="logo-container">
             <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
