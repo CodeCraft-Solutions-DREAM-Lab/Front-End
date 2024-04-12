@@ -11,19 +11,6 @@ import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 import Detalles from './Detalles.jsx';
 import { get } from './Database.js';
 
-import experienceImage1 from "./Images/electric-garage.png";
-import experienceImage2 from "./Images/dimension-forge.png";
-import experienceImage3 from "./Images/new-horizons.png";
-import experienceImage4 from "./Images/deep-net.jpg";
-import experienceImage5 from "./Images/graveyard.png";
-import experienceImage6 from "./Images/pcb-factory.jpg";
-import experienceImage7 from "./Images/hack-battlefield.png";
-import experienceImage8 from "./Images/testing-land.jpg";
-import experienceImage9 from "./Images/war-headquarters.png";
-import experienceImage10 from "./Images/biometrics.jpg";
-import experienceImage11 from "./Images/beyond-digits.jpg";
-import experienceImage404 from "./Images/error.jpg";
-
 const OPTIONS = { dragFree: true, loop: true }
 
 const unsplash_prefix = 'https://images.unsplash.com/photo-'
@@ -76,37 +63,6 @@ function HomePage() {
     const [detallesBD, setDetallesBD] = useState(null);
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
-    function renderizarImagen() {
-        const imagenURL = salasBD[imageID].nombre;
-    
-        switch (imagenURL) {
-            case "Electric Garage":
-                return experienceImage1;
-            case "Dimension Forge":
-                return experienceImage2;
-            case "New Horizons":
-                return experienceImage3;
-            case "Deep Net":
-                return experienceImage4;
-            case "Graveyard":
-                return experienceImage5;
-            case "PCB Factory":
-                return experienceImage6;
-            case "Hack-Battlefield":
-                return experienceImage7;
-            case "Testing Land":
-                return experienceImage8;
-            case "War Headquarters":
-                return experienceImage9;   
-            case "Biometrics Flexible Hall":
-                return experienceImage10;  
-            case "Beyond-Digits":
-                return experienceImage11;  
-            default:
-                return experienceImage404; 
-        }
-    }
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -202,7 +158,7 @@ function HomePage() {
                     descripcion = {detallesBD[imageID]?.descripcion || "Lamentamos la falta de detalles. Estamos trabajando para brindarte una experiencia completa. Agradecemos tu paciencia y esperamos compartir pronto todos los detalles contigo."}
                     autodirigido = {detallesBD[imageID]?.esAutoDirigida || false}
                     exclusivoUF = {detallesBD[imageID]?.esExclusivaUF || false}
-                    imagenExp = {renderizarImagen()}
+                    imagenExp = {salasBD[imageID]?.detallesURL || "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"}
                     imageID={imageID} // Pasa el imageID como prop al componente Detalles
                 />}
             </div>
