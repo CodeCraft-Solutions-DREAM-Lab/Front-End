@@ -30,7 +30,6 @@ function SpeechBotCard(props) {
 
   const handleProcessedText = (processedText) => {
     // Expresión regular para encontrar tipo y ID
-    console.log('flag handled text', processedText);
     const regex = /(\w+),\s*Id:\s*(\d+)/g;
 
     // Array para almacenar las coincidencias
@@ -45,8 +44,6 @@ function SpeechBotCard(props) {
             id: parseInt(match[2]) // ID convertido a número
         });
     }
-
-    console.log("Results:\n", matches);
 
     // Llamar a la función onProcessedText con las coincidencias encontradas
     props.onProcessedText(matches);

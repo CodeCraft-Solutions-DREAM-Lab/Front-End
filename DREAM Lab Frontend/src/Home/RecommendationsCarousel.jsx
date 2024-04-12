@@ -101,10 +101,12 @@ function RecomendationsCarousel(props) {
 						<div
 							className="slide"
 							style={{
-								//background: item.bgColor,
-								backgroundImage: `url(${item.img})`,
+								background: `linear-gradient(to right, rgba(0, 0, 0, 0.5) 40%, transparent), url(${item.img})`,
 								boxShadow: `0 5px 20px ${item.bgColor}30`,
 								...getStyles(i),
+								backgroundRepeat: 'no-repeat',
+								backgroundSize: 'cover',
+        						backgroundPosition: 'center',
 							}}
 						>
 							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} stopRotating={stopRotating}/>

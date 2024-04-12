@@ -69,7 +69,6 @@ function HomePage() {
     
                         if (result.ok) {
                             const data = await result.json();
-                            console.log(data[0].nombre);
                             if(type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia"){
                                 return {
                                     ...item,
@@ -97,7 +96,6 @@ function HomePage() {
                     }
                 }));
     
-                console.log('newData: ', newData);
                 setData(newData);
                 setShowRecommendations(true);
             };
