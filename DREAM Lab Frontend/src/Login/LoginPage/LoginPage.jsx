@@ -57,7 +57,7 @@ export default function LoginPage() {
         <GlassCard classes={"glassCard"}>
           <div className="grid-container">
             <LoginRow flexDirection="col" justify="between">
-              <LoginRow margin="70px 0 0 0">
+              <LoginRow margin="12vh 0 0 0">
                 <img
                   src="/LogoDreamLabedited.png"
                   alt="Logo"
@@ -65,14 +65,14 @@ export default function LoginPage() {
                 />
                 <h1 className="login-dreamlab-title">DREAM LAB</h1>
               </LoginRow>
-              <LoginRow margin="0 0 0 0">
+              <LoginRow margin="4vh 0 0 0">
                 <h1 className="login-titulo">Inicia sesión</h1>
               </LoginRow>
             </LoginRow>
             <LoginRow flexDirection="col">
               <LoginTextField
                 label={"Matrícula"}
-                marginBot={20}
+                marginBot={"5vh"}
                 value={user}
                 onValueChange={setUser}
               />
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 onValueChange={setPassword}
               />
             </LoginRow>
-            <LoginRow margin="0 0 80px 0">
+            <LoginRow margin="0 0 12vh 0">
               <LoginButton
                 text="ACEPTAR"
                 onClick={handleLogin}

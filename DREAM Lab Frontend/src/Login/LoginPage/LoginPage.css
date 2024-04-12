@@ -43,19 +43,21 @@
 }
 
 .login-logo {
-  height: 40px;
-  margin-right: 15px;
+  height: 3.8vh;
+  margin-right: 1vw;
 }
 
 .login-dreamlab-title {
   color: white;
-  font-size: 25px;
+  /* font-size: 25px; */
+  font-size: max(2.5vh, 1.4vw);
   font-weight: bold;
 }
 
 .login-titulo {
   color: white;
-  font-size: 28px;
+  /* font-size: 28px; */
+  font-size: max(3vh, 2vw);
   text-align: center;
 }
 
@@ -85,13 +87,13 @@
   }
 
   .top-left-image {
-    left: 10vw;
-    top: -25vh;
+    left: 7vw;
+    top: -15vh;
   }
 
   .bottom-right-image {
-    bottom: -20%;
-    right: 12%;
+    bottom: -25vh;
+    right: 14vw;
   }
 }
 
@@ -114,7 +116,7 @@
 .top-left-image {
   position: absolute;
   z-index: 1;
-  transform: rotate(-90deg);
+  transform: rotate(-109deg);
 }
 
 .bottom-right-image {

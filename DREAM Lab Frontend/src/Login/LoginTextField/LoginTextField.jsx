@@ -46,8 +46,8 @@ function LoginTextField({
         }
         type={isVisible ? "text" : "password"}
         classNames={{
-          input: ["text-white"],
-          inputWrapper: ["bg-transparent border-2"],
+          input: ["text-white text-xl"],
+          inputWrapper: ["bg-transparent border-2  h-12"],
         }}
       />
     </div>
@@ -64,9 +64,10 @@ function LoginTextField({
         fullWidth={false}
         radius="full"
         type="text"
+        className="login-tf"
         classNames={{
-          input: ["text-white"],
-          inputWrapper: ["bg-transparent border-2"],
+          input: ["text-white text-xl"],
+          inputWrapper: ["bg-transparent border-2 h-12"],
         }}
       />
     </div>
@@ -77,7 +78,7 @@ LoginTextField.propTypes = {
   label: propTypes.string,
   placeholder: propTypes.string,
   width: propTypes.string,
-  marginBot: propTypes.number,
+  marginBot: propTypes.string,
   isLogin: propTypes.bool,
   onValueChange: propTypes.func,
   value: propTypes.string,

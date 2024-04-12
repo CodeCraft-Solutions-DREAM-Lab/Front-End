@@ -3,16 +3,11 @@
 }
 
 .login-tf-label-container {
-  margin-left: 20px;
-  margin-bottom: 4px;
+  margin-left: 6%;
+  margin-bottom: 2%;
 }
 
 .login-tf-label {
   color: white;
-  font-size: 14px;
-}
-
-.login-tf {
-  border: 2px solid white;
-  border-radius: 30px;
+  font-size: max(1.5vh, 1.1vw);
 }

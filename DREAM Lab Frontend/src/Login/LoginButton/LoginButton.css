@@ -1,15 +1,22 @@
-.login-button-container {
-  display: flex;
-  justify-content: center;
+@media screen and (orientation: landscape) {
+  .login-button {
+    width: 40%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .login-button {
+    width: 50%;
+  }
 }
 
 .login-button {
-  width: 9rem;
+  height: 4.5vh !important;
   background-color: white;
 }
 
 .login-button-label {
   color: #042e55;
-  font-size: 1rem;
+  font-size: max(1.5vh, 1vw);
   font-weight: 700;
 }
