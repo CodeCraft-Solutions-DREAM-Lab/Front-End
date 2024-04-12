@@ -27,14 +27,9 @@
 }
 
 @media (max-width: 820px) {
+
     .boton-solicitar{
         font-size: small;
-    }
-}
-
-@media (max-width: 820px) {
-
-    .boton-solicitar{
         border-radius: 0px;
         border: 0px solid white; ;
         width: 100%;
