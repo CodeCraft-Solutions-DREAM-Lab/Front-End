@@ -44,13 +44,13 @@
 
 .login-logo {
   height: 3.8vh;
-  margin-right: 1vw;
+  margin-right: max(1.2vh, 1vw);
 }
 
 .login-dreamlab-title {
   color: white;
   /* font-size: 25px; */
-  font-size: max(2.5vh, 1.4vw);
+  font-size: max(2.5vh, 1.5vw);
   font-weight: bold;
 }
 
@@ -99,16 +99,16 @@
 
 @media screen and (orientation: portrait) {
   .blob-image {
-    height: 50%;
+    height: 35%;
   }
 
   .top-left-image {
-    left: -40%;
-    top: -30%;
+    left: -12%;
+    top: -12%;
   }
 
   .bottom-right-image {
-    bottom: -20%;
+    bottom: -6%;
     right: -10%;
   }
 }
