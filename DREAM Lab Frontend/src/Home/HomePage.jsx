@@ -54,15 +54,58 @@ function HomePage() {
 
     useEffect(() => {
         if (processedTranscript) {
-            const recommendations = processedTranscript.split(/\d+\.\s+/).filter(item => item.trim() !== '');
-            const newData = initialData.slice(0, recommendations.length);
-            newData.forEach((item, index) => {
-                item.title = recommendations[index];
-            });
-            setData(newData);
-            setShowRecommendations(true);
+            const fetchData = async () => {
+                const newData = await Promise.all(processedTranscript.map(async (item, index) => {
+                    const type = item.type;
+                    const id = item.id;
+    
+                    try {
+                        let result;
+                        if (type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia") {
+                            result = await fetch('http://localhost:3000/experiencias/' + id);
+                        } else if (type === "salas" || type === "Salas" || type === "sala" || type === "Sala") {
+                            result = await fetch('http://localhost:3000/salas/' + id);
+                        }
+    
+                        if (result.ok) {
+                            const data = await result.json();
+                            console.log(data[0].nombre);
+                            if(type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia"){
+                                return {
+                                    ...item,
+                                    img: data[0].portadaURL,
+                                    title: data[0].nombre,
+                                    desc: data[0].descripcion
+                                };
+                            }
+                            else{
+                                return {
+                                    ...item,
+                                    img: data[0].fotoURL,
+                                    title: data[0].nombre,
+                                    desc: data[0].descripcion
+                                };
+                            }
+                            
+                        } else {
+                            console.error('Error fetching ${type} with id ${id}');
+                            return item; // Conservar el item original en caso de error
+                        }
+                    } catch (error) {
+                        console.error('Error fetching ${type} with id ${id}:', error);
+                        return item; // Conservar el item original en caso de error
+                    }
+                }));
+    
+                console.log('newData: ', newData);
+                setData(newData);
+                setShowRecommendations(true);
+            };
+    
+            fetchData();
         }
     }, [processedTranscript]);
+    
 
     const handleProcessedText = (processedText) => {
         setProcessedTranscript(processedText);
