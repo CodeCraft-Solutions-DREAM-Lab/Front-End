@@ -18,3 +18,18 @@
     background-color: white;
     color: #042E55;
 }
+
+
+@media (max-width: 820px){
+    .close-button{
+        transform: translateX(-30px) translateY(-30%);
+    }
+}
+
+@media (max-width: 600px){
+    .close-button{
+        width: 37px;
+        height: 37px;
+        transform: translateX(-50px) translateY(-60%);
+    }
+}

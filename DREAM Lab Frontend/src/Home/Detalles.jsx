@@ -61,14 +61,16 @@ function ExperienceDetails(props){
 						<img className="experience-image" src={props.imagenExp} alt="Fotografía de experiencia"/>
 					</div>
 
-				</div>
-
-				<div className="boton-solicitud">
+					<div className="boton-solicitud">
 					<BotonSolicitar 
 						nombreBoton = "Solicitar"
 						onClick={() => handleSolicitarClick(props.imageID)} // Cambio realizado aquí
 						/>
 				</div>
+
+				</div>
+
+	
 
 			</div>
     )

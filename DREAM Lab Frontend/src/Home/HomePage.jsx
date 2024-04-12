@@ -9,17 +9,20 @@ import UserAvatar from '../components/general/UserAvatar'
 import TypeText from './TypeText'
 import NCarruselRecomendaciones from './NCarruselRecomendaciones'
 import Detalles from './Detalles.jsx';
-
-import experienceImage from "./Images/vr.png";
-import experienceImage2 from "./Images/router.png";
-import experienceImage3 from "./Images/iphone.jpg";
-import experienceImage4 from "./Images/arduino.jpg";
-import experienceImage5 from "./Images/hacker.png";
-import experienceImage6 from "./Images/videogame.jpg";
-import experienceImage7 from "./Images/visionpro.png";
-
-import axios from "axios";
 import { get } from './Database.js';
+
+import experienceImage1 from "./Images/electric-garage.png";
+import experienceImage2 from "./Images/dimension-forge.png";
+import experienceImage3 from "./Images/new-horizons.png";
+import experienceImage4 from "./Images/deep-net.jpg";
+import experienceImage5 from "./Images/graveyard.png";
+import experienceImage6 from "./Images/pcb-factory.jpg";
+import experienceImage7 from "./Images/hack-battlefield.png";
+import experienceImage8 from "./Images/testing-land.jpg";
+import experienceImage9 from "./Images/war-headquarters.png";
+import experienceImage10 from "./Images/biometrics.jpg";
+import experienceImage11 from "./Images/beyond-digits.jpg";
+import experienceImage404 from "./Images/error.jpg";
 
 const OPTIONS = { dragFree: true, loop: true }
 
@@ -71,28 +74,37 @@ function HomePage() {
     const detallesRef = useRef(null);
 
     const [detallesBD, setDetallesBD] = useState(null);
+    const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     function renderizarImagen() {
-        const imagenURL = detallesBD[imageID].imagenDetallesURL;
+        const imagenURL = salasBD[imageID].nombre;
     
         switch (imagenURL) {
-            case "experienceImage":
-                return experienceImage;
-            case "experienceImage2":
+            case "Electric Garage":
+                return experienceImage1;
+            case "Dimension Forge":
                 return experienceImage2;
-            case "experienceImage3":
+            case "New Horizons":
                 return experienceImage3;
-            case "experienceImage4":
+            case "Deep Net":
                 return experienceImage4;
-            case "experienceImage5":
+            case "Graveyard":
                 return experienceImage5;
-            case "experienceImage6":
+            case "PCB Factory":
                 return experienceImage6;
-            case "experienceImage7":
+            case "Hack-Battlefield":
                 return experienceImage7;
+            case "Testing Land":
+                return experienceImage8;
+            case "War Headquarters":
+                return experienceImage9;   
+            case "Biometrics Flexible Hall":
+                return experienceImage10;  
+            case "Beyond-Digits":
+                return experienceImage11;  
             default:
-                return null; // O alguna imagen de respaldo si el texto no coincide con ninguna de las opciones
+                return experienceImage404; 
         }
     }
 
@@ -143,7 +155,20 @@ function HomePage() {
             console.error('An error occurred:', error);
           }
     };
-    
+        
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const result = await get('salas', () => setIsLoading(false), () => setIsLoading(false));
+            setSalasBD(result);
+          } catch (error) {
+            console.error('An error occurred:', error);
+          }
+    };
+        
         fetchData();
     }, []);
 
@@ -173,10 +198,10 @@ function HomePage() {
                       
             <div ref={detallesRef}>
                 {detallesVisible && <Detalles 
-                    nombre = {detallesBD[imageID].nombre}
-                    descripcion = {detallesBD[imageID].descripcion}
-                    autodirigido = {detallesBD[imageID].esAutoDirigida}
-                    exclusivoUF = {detallesBD[imageID].esExclusivaUF}
+                    nombre={detallesBD[imageID]?.nombre || "Experiencia D.R.E.A.M. Lab"} 
+                    descripcion = {detallesBD[imageID]?.descripcion || "Lamentamos la falta de detalles. Estamos trabajando para brindarte una experiencia completa. Agradecemos tu paciencia y esperamos compartir pronto todos los detalles contigo."}
+                    autodirigido = {detallesBD[imageID]?.esAutoDirigida || false}
+                    exclusivoUF = {detallesBD[imageID]?.esExclusivaUF || false}
                     imagenExp = {renderizarImagen()}
                     imageID={imageID} // Pasa el imageID como prop al componente Detalles
                 />}
@@ -188,7 +213,6 @@ function HomePage() {
                 <NCarruselRecomendaciones data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
             )}
             
-
             <br />
             <ImageSlider images={IMAGES} options={OPTIONS} mostrarDetalles={mostrarDetalles} onImageClick={handleImageClick}/>
             <br />
