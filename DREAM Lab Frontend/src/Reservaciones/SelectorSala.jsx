@@ -2,12 +2,12 @@ import { Card, Button } from "@nextui-org/react";
 import { Grid } from "@mui/material";
 import FechaFormulario from "./components/FechaFormulario";
 import PrimerRecordatorio from "./components/PrimerRecordatorio";
+import TextoFecha from "./components/TextoFecha";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
     getFromSessionStorage,
-    existsInSessionStorage,
 } from "../Global/Storage";
 
 function SelectorSala(props) {
@@ -52,6 +52,7 @@ function SelectorSala(props) {
                         update={update}
                         setUpdate={setUpdate}
                     />
+                    <TextoFecha update={update}/>
                     <div className="flex w-fit p-3">
                     <Button 
                         className="mt-4 px-2 justify-self-center"

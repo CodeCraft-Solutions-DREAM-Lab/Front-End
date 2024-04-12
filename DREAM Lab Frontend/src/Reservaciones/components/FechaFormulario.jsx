@@ -14,7 +14,7 @@ function FechaFormulario(props) {
     const {update, setUpdate} = props;
     
     const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
-    const [fecha, setFecha] = useState(/*getFromSessionStorage("fecha") ||*/ dayjs());
+    const [fecha, setFecha] = useState(dayjs(getFromSessionStorage("fecha")) || dayjs());
     const [fechaIsoString, setFechaIsoString] = useState(getFromSessionStorage("fechaIsoString") || "");
     const [horaInicio, setHoraInicio] = useState(getFromSessionStorage("horaInicio") || 0);
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(getFromSessionStorage("horaInicioIsoString") || "");
@@ -55,7 +55,8 @@ function FechaFormulario(props) {
         <div className="flex flex-col mx-3">
                 <p className="text-white">Fecha</p>
                 <DatePicker
-                    className="bg-white rounded"
+                    className="bg-white rounded font-bold"
+                    value={fecha}
                     minDate={minEligibleDate}
                     onChange={(newValue) => {
                         setFecha(newValue);
@@ -96,14 +97,16 @@ function FechaFormulario(props) {
                 <Autocomplete
                     className="max-w"
                     aria-label="Duración"
-                    selectedKey={duration + " horas"}
+                    selectedKey={duration+(duration == 1 ? " hora" : " horas")}
                 >
-                    {["2 horas", "4 horas"].map((hora) => (
+                    {["1 hora", "2 horas", "3 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem
                             key={hora}
                             value={hora}
                             onClick={() => {
+                                if (hora === "1 hora") setDuration(1);
                                 if (hora === "2 horas") setDuration(2);
+                                if (hora === "3 horas") setDuration(3);
                                 if (hora === "4 horas") setDuration(4);
                                 setUpdate(!update);
                             }}

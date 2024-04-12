@@ -2258,10 +2258,6 @@ video {
   min-height: var(--nextui-spacing-unit-8);
 }
 
-.w-0 {
-  width: 0px;
-}
-
 .w-1 {
   width: 0.25rem;
 }
@@ -2881,6 +2877,10 @@ video {
 
 .place-content-center {
   place-content: center;
+}
+
+.content-center {
+  align-content: center;
 }
 
 .items-start {
@@ -3608,6 +3608,10 @@ video {
   padding: 1rem;
 }
 
+.p-5 {
+  padding: 1.25rem;
+}
+
 .\!px-1 {
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
@@ -3865,6 +3869,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
