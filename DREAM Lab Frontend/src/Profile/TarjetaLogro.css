@@ -63,19 +63,7 @@
     }
 }
 
-@media (max-width: 800px) {
-
-    .icono-logro{
-        display: none;
-    }
-
-    .div-info-logro{
-        width: 85%;
-    }
- 
-}
-
-@media (max-width: 780px) {
+@media (max-width: 820px), (height: 1366px) {
 
     .div-exterior-logro {
         width: 100%;
@@ -88,7 +76,7 @@
     
     .icono-logro{
         display: block;
-        width: 10vw;
+        width: 8vw;
     }
 
     .div-info-logro{
@@ -104,6 +92,15 @@
     }
  
 }
+
+@media (height: 1366px) {
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: large;
+    }
+    .descripcion-logro{
+        font-size: medium;
+    }
+  }
 
 @media (max-width: 500px) {
 

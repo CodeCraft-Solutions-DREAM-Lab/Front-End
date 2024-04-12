@@ -108,6 +108,44 @@
     }
 }
 
+@media (max-width: 820px), (height: 1366px) {
+
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: x-large;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size: large;
+    }
+
+    .div-exterior{
+        padding-left: 5%;
+        max-width: 52%;
+        margin-left: -2%;
+    }
+}
+
+@media (height: 1366px){
+    .nombre-usuario{
+        font-weight: 650;
+        font-size: xx-large;
+        margin-bottom: -8px;
+    }
+    
+    .apodo{
+        font-weight: lighter;
+        font-size: x-large;
+    }
+
+    .div-exterior{
+        height: 130px;
+    }
+
+}
+
 @media (max-width: 550px) {
 
     .nombre-usuario{
@@ -134,17 +172,17 @@
 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
 
     .nombre-usuario{
         font-weight: 650;
-        font-size: medium;
+        font-size: large;
         margin-bottom: -8px;
     }
     
     .apodo{
         font-weight: lighter;
-        font-size:medium;
+        font-size:large;
     }
 
     .div-exterior{

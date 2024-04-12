@@ -125,14 +125,14 @@
     
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 820px), (height: 1366px) {
 
     .puntos-prioridad{
-        font-size: 40px;
+      font-size: 65px;
     }
 
     .subtitulo{
-        font-size: 12px;
+      font-size: 15px;
     }
 
     .div-esfera-out {
@@ -145,16 +145,28 @@
         height: 30vw;
     }
     
+  }
+
+  @media (height: 1366px) {
+    .puntos-prioridad{
+      font-size: 100px;
+    }
+
+    .subtitulo{
+        font-size: 22px;
+        margin-top: 0%;
+
+    }
   }
 
   @media (max-width: 500px) {
 
     .puntos-prioridad{
-        font-size: 32px;
+        font-size: 6vh;
     }
 
     .subtitulo{
-        font-size: 11px;
+        font-size: 2vh;
         display: flex;
         flex-wrap: wrap;
         justify-self: center;
@@ -165,42 +177,13 @@
     }
 
     .div-esfera-out {
-        width: 40vw;
-        height: 40vw;
+        width: 60vw;
+        height: 60vw;
       }
     
     .div-esfera-in{
-        width: 30vw;
-        height: 30vw;
-    }
-    
-  }
-
-  @media (max-width: 400px) {
-
-    .puntos-prioridad{
-        font-size: 28px;
-    }
-
-    .subtitulo{
-        font-size: 8px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-self: center;
-        align-items: center;
-        width: 99%;
-        line-height: 99%;
-        margin-top: 5%;
-    }
-
-    .div-esfera-out {
-        width: 40vw;
-        height: 40vw;
-      }
-    
-    .div-esfera-in{
-        width: 30vw;
-        height: 30vw;
+        width: 50vw;
+        height: 50vw;
     }
     
   }

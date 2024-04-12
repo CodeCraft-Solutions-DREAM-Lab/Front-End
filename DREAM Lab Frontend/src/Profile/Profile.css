@@ -110,6 +110,12 @@
     border-radius: 6px; /* Radio del borde del "pulgar" del scroll */
 }
 
+.botones-modo-celular {
+    display: none;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
 @media (max-width: 800px) {
 
     .sub{
@@ -117,11 +123,11 @@
     }
 }
 
-@media (max-width: 780px) {
+  @media (max-width: 820px),(height: 1366px){
 
     .sub{
-       font-size: small;
-       margin-bottom: 2%;
+       font-size: medium;
+       margin-bottom: 3%;
        display: flex;
        justify-content: center;
     }
@@ -136,42 +142,76 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 3%;
     }
 
     .logros-div{
-        width: 90%;
-        margin-bottom: 3%;
+        width: 45%;
+        margin-right: 3%;
+        height: 28vh;
         margin-top: 5%;
-        height: 180px;
     }
 
     .logros-div-in{
         overflow-y: auto;
         padding-right: 3%;
-        height: 8em;
+        height: 21vh;
     }
     
     .reservaciones-div{
-        width: 90%;
-        height: 180px;
-
+        width: 45%;
+        height: 28vh;
+        margin-top: 5%;
     }
 
     .reservaciones-div-in{
-        height: 8em;
+        height: 21vh;
     }
     
+}
+
+@media (height: 1366px){
+
+    .sub{
+       font-size: x-large;
+       margin-bottom: 3%;
+       display: flex;
+       justify-content: center;
+    }
+        
+    .reservaciones-div{
+        height: 26vh;
+    }
+
+    .logros-div{
+        height: 26vh;
+    }
 }
 
 
 @media (max-width: 500px) {
 
+    .botones-modo-celular {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5%;
+    }   
+
+    .esfera-div{
+        background-color: rgba(0, 255, 55, 0);
+        width: 30%;
+        border-radius: 20px;
+        padding: 3%;
+        padding-left: 4%;
+    }
+    
     .esfera-div-celular{
         margin-top: 4%;
         margin-bottom: 3%;
     }
 
     .logros-div{
+        display: none;
         width: 90%;
         margin-bottom: 3%;
         margin-top: 5%;
@@ -185,6 +225,7 @@
     }
     
     .reservaciones-div{
+        display: none;
         width: 90%;
         height: 150px;
     }
@@ -197,7 +238,6 @@
 
 @media (max-width: 400px) {
 
-    
     .sub{
         font-size: x-small;
      }

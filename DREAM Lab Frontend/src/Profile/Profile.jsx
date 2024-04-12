@@ -5,7 +5,9 @@ import NameCard from "./NameCard";
 import TarjetaLogro from "./TarjetaLogro";
 import TarjetaReservacion from "./TarjetaReservacion";
 import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
+import BotonCelular from "./BotonCelular";
 import './Profile.css'
+
 
 function Profile() {
 
@@ -105,6 +107,11 @@ function Profile() {
 							dia="26 de enero"
 						/>
 					</div>
+				</div>
+
+				<div className="botones-modo-celular">
+					<BotonCelular texto="Logros" imagen="logros"/>
+					<BotonCelular texto="Reservaciones activas" imagen="calendario"/>
 				</div>
 
 			</div>

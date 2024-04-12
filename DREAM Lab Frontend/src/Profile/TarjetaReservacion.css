@@ -86,23 +86,9 @@
     }
 }
 
-@media (max-width: 800px) {
 
-    .hora-reservaion{
-        width: 100%;
-        margin-right: none; /* Alinea a la derecha */
-        padding-left: -100%;
+@media (max-width: 820px), (height: 1366px) {
 
-    }
-    
-    .dia-reservacion{
-        width: 100%;
-        margin-left: none; /* Alinea a la derecha */
-    }
-
-}
-
-@media (max-width: 780px) {
     .div-externo-reservacion {
         padding-left: 4%;
         padding-right: 4%;
@@ -123,12 +109,12 @@
     }
 
     .hora-reservaion{
-        width: 30%;
+        width: 45%;
         margin-right: auto; /* Alinea a la derecha */
     }
     
     .dia-reservacion{
-        width: 30%;
+        width: 45%;
         margin-left: auto; /* Alinea a la derecha */
     }
 
