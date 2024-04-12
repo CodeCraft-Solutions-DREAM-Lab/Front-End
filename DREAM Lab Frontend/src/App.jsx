@@ -32,59 +32,33 @@ import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
 import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
 
+function secured(Component) {
+  return function WrappedComponent(props) {
+    return (
+      <ProtectedRoutes>
+        <Component {...props} />
+      </ProtectedRoutes>
+    );
+  };
+}
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<LandingPage />} />
       <Route path="login" element={<LoginPage />} />
-      <Route
-        path="home"
-        element={
-          <ProtectedRoutes>
-            <HomePage />
-          </ProtectedRoutes>
-        }
-      />
-      <Route
-        path="reservacion"
-        element={
-          <ProtectedRoutes>
-            <ReservacionSala />
-          </ProtectedRoutes>
-        }
-      />
+      <Route path="home" element={secured(HomePage)()} />
+      <Route path="reservacion" element={secured(ReservacionSala)()} />
       <Route
         path="reservacion/confirmacion"
-        element={
-          <ProtectedRoutes>
-            <Confirmacion />
-          </ProtectedRoutes>
-        }
+        element={secured(Confirmacion)()}
       />
       <Route
         path="reservacion/resumen"
-        element={
-          <ProtectedRoutes>
-            <ResumenReservacion />
-          </ProtectedRoutes>
-        }
+        element={secured(ResumenReservacion)()}
       />
-      <Route
-        path="reservacion/equipo"
-        element={
-          <ProtectedRoutes>
-            <SelectorEquipo />
-          </ProtectedRoutes>
-        }
-      />
-      <Route
-        path="reservacion/sala"
-        element={
-          <ProtectedRoutes>
-            <SelectorSala />
-          </ProtectedRoutes>
-        }
-      />
+      <Route path="reservacion/equipo" element={secured(SelectorEquipo)()} />
+      <Route path="reservacion/sala" element={secured(SelectorSala)()} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )
