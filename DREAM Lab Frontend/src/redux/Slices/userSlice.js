@@ -18,11 +18,16 @@ export const userSlice = createSlice({
     setAuth: (state, action) => {
       state.isAuth = action.payload;
     },
+    // Acción para cerrar sesión
+    logoutUser: (state) => {
+      state.token = "";
+      state.isAuth = false;
+    },
   },
 });
 
 // Los creadores de acciones se generan para cada función reductora
-export const { setToken, setAuth } = userSlice.actions;
+export const { setToken, setAuth, logoutUser } = userSlice.actions;
 
 export const selectAuth = (state) => state.user.isAuth;
 

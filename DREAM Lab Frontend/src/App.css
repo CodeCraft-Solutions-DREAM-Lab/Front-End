@@ -65,7 +65,7 @@ body {
 
 @media only screen and (max-width: 480px) {
   .logo {
-    width: 45%; /* Adjust the width for smaller screens */
+    width: 40%; /* Adjust the width for smaller screens */
     padding-left: 10%; /* Adjust padding as needed */
     padding-bottom: 1%; /* Adjust padding as needed */
   }
