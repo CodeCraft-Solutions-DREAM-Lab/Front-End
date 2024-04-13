@@ -166,8 +166,7 @@ useEffect(() => {
       setErrorUfs(null);
 
       const userID = getFromLocalStorage("user");
-     
-      
+
       try {
         const response = await axios.get(defaultURL + "/experiencias/UFs", {
           params: {
@@ -175,7 +174,6 @@ useEffect(() => {
           },
         });
         const data = response.data;
-        
 
         if (typeof data === "string") {
           setUfs(JSON.parse(data));

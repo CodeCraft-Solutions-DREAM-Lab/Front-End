@@ -2,7 +2,7 @@ import { useMotionValue } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useMotionTemplate, motion } from "framer-motion";
 import { cn } from "../../utils/cn";
-import GlassCard from "../../components/general/glass-card";
+import GlassCard from "../../components/general/GlassCard";
 import MicrophoneButton from "../../Home/MicrophoneButton.jsx";
 import SendButton from "../../Home/SendButton.jsx";
 import "../../App.css";
