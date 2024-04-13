@@ -3,7 +3,11 @@ import { post } from "./Database";
 import { saveToLocalStorage } from "./Storage";
 
 // Función para validar las credenciales del usuario y redirigir a la página
-export async function loginAction({ user, password }) {
+export async function loginAction(
+  { user, password },
+  success = () => {},
+  error = () => {}
+) {
   // Llamar a la API para validar las credenciales
   return post("authUsuario", {
     usuario: user,
@@ -15,10 +19,14 @@ export async function loginAction({ user, password }) {
       // Guardar el token y el usuario en el local storage
       saveToLocalStorage("token", jwt);
       saveToLocalStorage("user", user);
+      // Llamar a la función de éxito
+      success();
       // Regresar la dirección a la que se debe redirigir
       return "/home";
     })
     .catch(() => {
+      // Llamar a la función de error
+      error();
       // Si las credenciales no son válidas, regresar a la página de login
       return "/login";
     });

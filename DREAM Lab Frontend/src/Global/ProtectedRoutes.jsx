@@ -11,6 +11,9 @@ import { Navigate } from "react-router-dom";
 
 import { Spinner } from "@nextui-org/react";
 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import { getFromLocalStorage } from "./Storage";
 
 function ProtectedRoutes({ children }) {
@@ -61,7 +64,14 @@ function ProtectedRoutes({ children }) {
   // Mientras se valida el token, authVal es null, una vez que se valida, si
   // fue exitoso, se muestra la página, si no, se redirige a login
   if (authVal === null) {
-    return <Spinner label="Cargando..." labelColor="primary" />;
+    return (
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
   } else {
     if (authVal || isAuth) {
       return children;
