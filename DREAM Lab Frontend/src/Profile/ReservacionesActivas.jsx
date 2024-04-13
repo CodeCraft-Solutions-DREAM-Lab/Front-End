@@ -59,6 +59,8 @@ function ReservacionesActivas(){
                                 dia="26 de enero"
                             />
 
+                            <div className="degradado-down-celular"></div>                 
+
                         </div>
             </div>
         </div>

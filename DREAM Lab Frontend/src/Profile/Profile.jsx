@@ -7,6 +7,7 @@ import TarjetaReservacion from "./TarjetaReservacion";
 import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
 import BotonCelular from "./BotonCelular";
 import './Profile.css'
+import BotonBack from "../components/general/BotonBack";
 
 
 function Profile() {
@@ -28,7 +29,10 @@ function Profile() {
 	return (
 
 		<div>
-			<BotonRegresar />
+			<div className="boton-atras">
+				<BotonBack className="imagen-boton" ruta="/home/"/>
+			</div>
+			
 			<NameCard/>
 
 			<div className="div-exterior-perfil">
@@ -69,6 +73,9 @@ function Profile() {
 							colorFondo="#7885F8"
 							iconoUtilizado='LogoRobot'
 						/>
+
+						<div className="degradado-down"></div>                 
+
 					</div>
 
 				</div>
@@ -106,6 +113,9 @@ function Profile() {
 							hora="11:00 am - 1:00 pm."
 							dia="26 de enero"
 						/>
+
+						<div className="degradado-down"></div>                 
+
 					</div>
 				</div>
 

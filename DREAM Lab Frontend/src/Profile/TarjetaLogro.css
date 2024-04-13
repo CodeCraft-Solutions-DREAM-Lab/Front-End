@@ -104,42 +104,37 @@
 
 @media (max-width: 500px) {
 
+    .div-exterior-logro {
+        display: flex;
+        flex-wrap: wrap;
+        width: 94%;
+        padding-left: 5.5%;
+        padding-right: 8%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+        margin-bottom: 4%;
+        margin-left: 3%;
+        align-items: center;
+    }
+
     .icono-logro{
-        display: none;
+        width: 15vw;
     }
 
     .div-info-logro{
-        width: 90%;
-        margin-left: 4%;
+        width: 65%;
+        margin-left: 7%;
     }
 
     .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
-        font-size: small;
+        font-size: medium;
+        margin-bottom: 2%;
     }
     .descripcion-logro{
         font-size: small;
+        margin-bottom: 9%;
+
     }
 
 }
-
-@media (max-width: 400px) {
-
-    .div-exterior-logro {
-
-        border-radius: 15px;
-        padding-left: 8%;
-        padding-right: 8%;
-        padding-top: 4%;
-        padding-bottom: 4%;
-        margin-bottom: 4%;
-    }
-
-    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
-        font-size: x-small;
-    }
-    .descripcion-logro{
-        font-size: x-small;
-    }
-}
-
 

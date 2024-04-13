@@ -58,7 +58,8 @@
 
 @media (max-width: 500px) {
   .fraction {
-    font-size: x-small;
+    font-size: small;
+    transform: translateY(-38%);
   }
 
   .div-barra-progreso{
@@ -68,18 +69,3 @@
 }
 
 
-@media (max-width: 400px) {
-  .progress-bar {
-    width: 84%;
-    height: 6px;
-  }
-
-  .fraction {
-    font-size: xx-small;
-  }
-
-  .div-barra-progreso{
-    margin-top: 4%;
-    margin-bottom: 1%;
-  }
-}
