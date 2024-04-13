@@ -159,6 +159,16 @@
     }
   }
 
+
+  @media (max-width: 600px) {
+    .puntos-prioridad{
+      font-size: 5vh;
+    }
+    .subtitulo{
+      font-size: 1.5vh;
+  }
+  }
+
   @media (max-width: 500px) {
 
     .puntos-prioridad{

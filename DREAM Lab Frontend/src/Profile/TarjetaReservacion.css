@@ -126,61 +126,40 @@
 
 @media (max-width: 500px){
 
+    .div-externo-reservacion { 
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+        width: 94%;
+        margin-left: 3%;
+    }
+
+    .linea{
+        width: 100%;
+        border-bottom: 1.5px solid #D2D2D2;
+        margin-top: 4%;
+        margin-bottom: 2%;
+    }
+    
     .sala-reservacion{
-        font-size: small;
+        font-size: large;
     }
 
     .experiencia-reservacion{
-        font-size: small;
+        font-size: medium;
+        margin-top: 2%;
     }
 
     .div-fecha-reservacion{
-        font-size: x-small;
+        font-size: small;
     }
 
     .hora-reservaion{
-        width: 45%;
-        margin-right: auto; /* Alinea a la derecha */
+        width: 50%;
     }
     
     .dia-reservacion{
         width: 45%;
-        margin-left: auto; /* Alinea a la derecha */
-    }
-}
-
-@media (max-width: 400px) {
-    .div-externo-reservacion {
-        padding-left: 8%;
-        padding-right: 8%;
-        padding-top: 4%;
-        padding-bottom: 4%;
-        border-radius: 15px;
-
-    }
-    .sala-reservacion{
-        font-size: x-small;
-    }
-
-    .experiencia-reservacion{
-        font-size: x-small;
-    }
-
-    .div-fecha-reservacion{
-        font-size: x-small;
-    }
-
-    .hora-reservaion{
-        width: 100%;
-        margin-right: none; /* Alinea a la derecha */
-        padding-left: -100%;
-
-    }
-    
-    .dia-reservacion{
-        width: 100%;
-        margin-left: none; /* Alinea a la derecha */
-        margin-top: -3%;
-
     }
 }

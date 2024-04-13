@@ -110,8 +110,8 @@ function Profile() {
 				</div>
 
 				<div className="botones-modo-celular">
-					<BotonCelular texto="Logros" imagen="logros"/>
-					<BotonCelular texto="Reservaciones activas" imagen="calendario"/>
+					<BotonCelular texto="Logros" tipo="logros"/>
+					<BotonCelular texto="Reservaciones activas" tipo="calendario"/>
 				</div>
 
 			</div>

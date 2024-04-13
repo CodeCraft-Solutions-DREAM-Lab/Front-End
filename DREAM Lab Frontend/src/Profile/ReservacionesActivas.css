@@ -1,0 +1,55 @@
+.reservaciones-div-celular{
+    background: rgba(255, 231, 231, 0.06); /* Background color with transparency */
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.5px);
+    -webkit-backdrop-filter: blur(17.5px);
+    border: 1.5px solid rgba(255, 255, 255, 0.10); /* Border color with transparency */
+
+    width: 100%;
+    border-radius: 20px;
+    min-height: 70vh;
+    padding: 2%;
+    padding-top: 8%;
+}
+
+.sub-celular{
+    font-weight: bold;
+    font-size: larger;
+    font-family: 'Karla', sans-serif;
+    color: white;
+    max-height: 100px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 90%;
+}
+
+.reservaciones-div-in-celular{
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 3%;
+}
+
+.reservaciones-div-in-celular::-webkit-scrollbar {
+    width: 7px; /* Ancho de la barra de desplazamiento */
+}
+
+.reservaciones-div-in-celular::-webkit-scrollbar-thumb  {
+    background-color: rgba(255, 255, 255, 0.3); /* Color del "pulgar" del scroll */
+    border-radius: 6px; /* Radio del borde del "pulgar" del scroll */
+}
+
+.back-subtitulo-div{
+    max-width: 100%;
+    margin-top: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12%;
+}
+
+.boton-back{
+    width: 4%;
+    cursor: pointer;
+}
