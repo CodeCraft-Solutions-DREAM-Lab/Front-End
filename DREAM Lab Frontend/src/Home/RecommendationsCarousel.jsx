@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faChevronRight,
@@ -10,6 +10,12 @@ import { useNavigate } from 'react-router-dom';
 function RecomendationsCarousel(props) {
 	const [activeSlide, setActiveSlide] = useState(props.activeSlide);
 
+	const [autoRotate, setAutoRotate] = useState(true);
+
+	const stopRotating = () =>{
+		setAutoRotate(false);
+	}
+
 	const next = () => {
 		setActiveSlide((activeSlide + 1) % props.data.length);
 	};
@@ -17,6 +23,22 @@ function RecomendationsCarousel(props) {
 	const prev = () => {
 		setActiveSlide(activeSlide === 0 ? props.data.length - 1 : activeSlide - 1);
 	};
+
+	const handleDotClick = (index) => {
+        setActiveSlide(index);
+		stopRotating();
+    };
+
+	useEffect(() => {
+        let interval;
+        if (autoRotate) {
+            interval = setInterval(() => {
+                next();
+            }, 5000);
+        }
+
+        return () => clearInterval(interval);
+    }, [activeSlide, autoRotate]);
 
 	const getStyles = (index) => {
 		if (activeSlide === index)
@@ -63,6 +85,13 @@ function RecomendationsCarousel(props) {
 			};
 	};
 
+	const getStylesDots = (index) => {
+		if (activeSlide === index)
+			return{
+				backgroundColor: '#ffffff',
+		};
+	};
+
 	return (
 		<>
 			{/* carousel */}
@@ -72,21 +101,14 @@ function RecomendationsCarousel(props) {
 						<div
 							className="slide"
 							style={{
-								background: item.bgColor,
-								// backgroundImage: `url(${item.img})`,
+								//background: item.bgColor,
+								backgroundImage: `url(${item.img})`,
 								boxShadow: `0 5px 20px ${item.bgColor}30`,
 								...getStyles(i),
 							}}
 						>
-							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} />
+							<SliderContent {...item} index={i} onClick={setActiveSlide} activeSlide={activeSlide} stopRotating={stopRotating}/>
 						</div>
-						<div
-							className="reflection"
-							style={{
-								background: `linear-gradient(to bottom, ${item.bgColor}40, transparent)`,
-								...getStyles(i),
-							}}
-						/>
 					</React.Fragment>
 				))}
 			</div>
@@ -95,14 +117,32 @@ function RecomendationsCarousel(props) {
 			<div className="btns">
 				<FontAwesomeIcon
 					className="btn"
-					onClick={prev}
+					onClick={() => {
+                        prev();
+                        stopRotating();
+                    }}
 					icon={faChevronLeft}
 					color="#fff"
 					size="2x"
 				/>
+
+				<div className="dots">
+                    {props.data.map((item, i) => (
+                        <div
+                            key={i}
+                            className="dot"
+                            style={getStylesDots(i)}
+                            onClick={() => handleDotClick(i)}
+                        />
+                    ))}
+                </div>
+
 				<FontAwesomeIcon
 					className="btn"
-					onClick={next}
+					onClick={() => {
+                        next();
+                        stopRotating();
+                    }}
 					icon={faChevronRight}
 					color="#fff"
 					size="2x"
@@ -116,6 +156,7 @@ const SliderContent = (props) => {
 	let navigate = useNavigate();
 
 	function handleClick() {
+		props.stopRotating();
 		if (props.index === props.activeSlide) {
 			navigate(`/reservacion/${props.title}`);
 		} else {
@@ -127,7 +168,9 @@ const SliderContent = (props) => {
 		<div className="sliderContent" onClick={handleClick}>
 			{props.icon}
 			<h2>{props.title}</h2>
-			<p>{props.desc}</p>
+			<div className="textContainer">
+				<p>{props.desc}</p>
+			</div>
 		</div>
 	);
 };

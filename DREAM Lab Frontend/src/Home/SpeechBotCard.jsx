@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EvervaultCard } from "../components/aceternity/evervault-card.jsx";
-import GlassCard from "../components/general/GlassCard.jsx";
+import GlassCard from "../components/general/glass-card.jsx";
 import MicrophoneButton from "./MicrophoneButton.jsx";
 import SendButton from "./SendButton.jsx";
 import SpeechRecognition, {
@@ -8,6 +7,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import TextField from "./TextField.jsx";
 import "../App.css";
+import "../components/general/glass-card.css";
 
 function SpeechBotCard(props) {
   // --- Para el reconocimiento de voz ---
@@ -18,13 +18,11 @@ function SpeechBotCard(props) {
     listening,
   } = useSpeechRecognition();
 
-  // Validar que el navegador maneje reconocimiento de voz
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
+  const [clicked, setClicked] = useState(0);
 
   // Función para activar el micrófono
   const onClick = () => {
+    setClicked(1);
     console.log("Listening...");
     resetTranscript();
     SpeechRecognition.startListening({ language: "es-MX" });
@@ -43,40 +41,44 @@ function SpeechBotCard(props) {
     setText(e.target.value);
   }
 
-  // Función de apoyo para verificar funcionalidad del micrófono
+  // Mandar transcript a ser procesado al presionar "Enter" en el teclado
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setClicked(2);
+      console.log("Clicked set to 2 from key press");
+    }
+  };
+
   useEffect(() => {
+    // Mostrar en el campo de texto lo que se está dictando
     if (transcript != "" && listening) {
       console.log("Transcript variable: ", transcript);
       setText(transcript);
     }
+
+    // Mandar transcript a ser procesado al ya no detectar la voz
+    if (clicked == 1 && transcript != "" && !listening) {
+      console.log("Clicked set to 2 automatically");
+      setClicked(2);
+    }
   }, [text, listening, transcript]);
 
   return (
-    <div
-      className="flex flex-col items-start mx-auto p-4 relative"
-      style={{
-        width: props.width,
-        height: props.height,
-      }}
-    >
-      {/* <EvervaultCard /> */}
-      <div className="relative z-10 flex items-center center">
-        <div className="centered-container">
-          <GlassCard
-            className="inputReconocimientoVoz"
-            height="6rem"
-            width="50rem"
-            padding="0 2rem 0 2rem"
-          >
-            <MicrophoneButton onClick={onClick} isActive={listening} />
-            <TextField value={text} onChange={handleChange} />
-            <SendButton
-              transcript={text}
-              onProcessedText={handleProcessedText}
-            />
-          </GlassCard>
-        </div>
-      </div>
+    <div className="inputRecomendaciones glass-card">
+      {browserSupportsSpeechRecognition && (
+        <MicrophoneButton onClick={onClick} isActive={listening} />
+      )}
+      <TextField
+        value={text}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
+      <SendButton
+        transcript={text}
+        onProcessedText={handleProcessedText}
+        micWasClicked={clicked}
+        resetClicked={setClicked}
+      />
     </div>
   );
 }

@@ -2,19 +2,21 @@
 	position: relative;
 	perspective: 1000px;
 	transform-style: preserve-3d;
-	width: 362px;
-	height: 272px;
+	width: 650px;
+	height: 450px;
 	margin: 0 auto;
 }
 
 .slide {
-	width: 362px;
-	height: 272px;
+	width: 650px;
+	height: 450px;
 	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
 		visibility 500ms ease 0s;
 	position: absolute;
 	top: 0;
 	border-radius: 12px;
+	background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* 3D reflection effect */
@@ -47,10 +49,18 @@
 
 .sliderContent h2 {
 	margin: 16px 0;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: uppercase;
 }
 
-.sliderContent p {
+.textContainer {
+	width: 40%;
+}
+
+.textContainer p {
 	margin: 0;
+	margin-left: 5%;
 	margin-bottom: 16px;
 }
 
@@ -67,15 +77,28 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 100px;
+	padding-top: 30px;
 }
 
 .btns .btn {
 	cursor: pointer;
+	padding-inline: 10px;
 }
 
-.btns .btn:last-child {
-	margin-left: 40px;
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
 }
+
+.btns .dots {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
 
 /* normal css  */
