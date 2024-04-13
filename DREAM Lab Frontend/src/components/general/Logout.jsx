@@ -3,6 +3,7 @@ import LogoutIcon from '../../images/logout.svg';
 import "./Logout.css";
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/Slices/userSlice';
+import { removeFromLocalStorage } from '../../Global/Storage';
 
 function Logout() {
     let navigate = useNavigate();
@@ -10,6 +11,8 @@ function Logout() {
 
     const handleClick = () => {
         navigate(`/`); // Navega a la landing page
+        removeFromLocalStorage("token");
+        removeFromLocalStorage("user");
         // Llamámos a la función de logoutUser de la userSlice para borrar los datos del usuario
         dispatch(logoutUser());
     };
