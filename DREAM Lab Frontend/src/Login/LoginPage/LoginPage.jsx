@@ -4,6 +4,9 @@ import LoginTextField from "../LoginTextField/LoginTextField";
 import LoginButton from "../LoginButton/LoginButton";
 import LoginRow from "../LoginRow/LoginRow";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 import "./LoginPage.css";
 
 import { useState } from "react";
@@ -20,20 +23,51 @@ export default function LoginPage() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
+  // Funcion que se llama cuando se cierra el snackbar para resetear el estado
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   const handleLogin = async () => {
+    // Si no se ha introducido un usuario, mostrar un snackbar
+    if (user === "") {
+      setOpen(true);
+      setMessage("Introduce un usuario");
+      return;
+    }
+    // Si no se ha introducido una contraseña, mostrar un snackbar
+    if (password === "") {
+      setOpen(true);
+      setMessage("Introduce una contraseña");
+      return;
+    }
+
     setLoading(true);
     try {
       // Llamar a la acción de login y obtener el path al que se debe redirigir
       console.log("User:", user, "Password:", password);
-      const path = await loginAction({ user, password });
+      const path = await loginAction(
+        { user, password },
+        () => {},
+        () => {
+          console.log("Usuario o contraseña incorrectos");
+          setOpen(true);
+          setMessage("Usuario o contraseña incorrectos");
+        }
+      );
       setLoading(false);
       navigate(path);
     } catch (error) {
+      console.log(error);
       setLoading(false);
-      console.error("Login failed:", error);
     }
   };
 
@@ -51,7 +85,6 @@ export default function LoginPage() {
           className="blob-image bottom-right-image"
         />
       </div>
-
       <div className="glassCardContainer">
         <GlassCard classes={"glassCard"}>
           <div className="grid-container">
@@ -92,6 +125,17 @@ export default function LoginPage() {
           </div>
         </GlassCard>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
+      ;
     </div>
   );
 }
