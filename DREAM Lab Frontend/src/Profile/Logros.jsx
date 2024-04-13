@@ -2,8 +2,33 @@ import React, { useState, useEffect, useRef } from "react";
 import BotonBack from "../components/general/BotonBack";
 import TarjetaLogro from "./TarjetaLogro";
 import './ReservacionesActivas.css'
+import {renderTarjetasLogro} from "./Funciones.jsx";
 
 function Logros(){
+
+	const logrosData = [{
+		"nombre": "Big Dreamer",
+		"descripcion": "Asiste a más de 35 eventos en el Dream Lab.",
+		"progreso": 0.75,
+		"color": "#7885F8",
+		"logo":"LogoBigDreamer"
+		},
+		{
+		"nombre": "Robot Expert",
+		"descripcion": "Asiste a 3 talleres en el Dimesion Forge.",
+		"progreso": 1,
+		"color": "#7885F8",
+		"logo":"LogoRobot"
+		},
+		{
+		"nombre": "Apple Developer",
+		"descripcion": "Asiste a 3 talleres de Swift.",
+		"progreso": 0.25,
+		"color": "#7885F8",
+		"logo":"LogoBigDreamer"
+		}
+	];
+
     return(
         <div>
 
@@ -16,40 +41,18 @@ function Logros(){
 
         <div className="reservaciones-div-in-celular">
 
+						{renderTarjetasLogro(logrosData)}
+
                         <TarjetaLogro 
-							progresoLogro="0.73"
-							nombreLogro="Big Dreamer"
-							descripcion="Asiste a más de 35 eventos en el Dream Lab."
+							progresoLogro="0.2"
+							nombreLogro="Apple Developer"
+							descripcion="Asiste a 3 talleres de Swift."
 							colorFondo="#7885F8"
-							iconoUtilizado='LogoBigDreamer'
+							iconoUtilizado='LogoRobot'
 						/>
 
-						<TarjetaLogro 
+                        <TarjetaLogro 
 							progresoLogro="1"
-							nombreLogro="Robot Expert"
-							descripcion="Asiste a 3 talleres en el Dimesion Forge."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoRobot'
-						/>
-
-						<TarjetaLogro 
-							progresoLogro="0.5"
-							nombreLogro="Apple Developer"
-							descripcion="Asiste a 3 talleres de Swift."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoRobot'
-						/>
-
-                        <TarjetaLogro 
-							progresoLogro="0.5"
-							nombreLogro="Apple Developer"
-							descripcion="Asiste a 3 talleres de Swift."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoRobot'
-						/>
-
-                        <TarjetaLogro 
-							progresoLogro="0.5"
 							nombreLogro="Apple Developer"
 							descripcion="Asiste a 3 talleres de Swift."
 							colorFondo="#7885F8"

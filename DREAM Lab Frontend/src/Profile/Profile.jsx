@@ -8,7 +8,53 @@ import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
 import BotonCelular from "./BotonCelular";
 import './Profile.css'
 import BotonBack from "../components/general/BotonBack";
+import {generateReservationCards, renderTarjetasLogro}from "./Funciones.jsx";
 
+const logrosData = [{
+	"nombre": "Big Dreamer",
+	"descripcion": "Asiste a más de 35 eventos en el Dream Lab.",
+	"progreso": 0.75,
+	"color": "#7885F8",
+	"logo":"LogoBigDreamer"
+	},
+	{
+	"nombre": "Robot Expert",
+	"descripcion": "Asiste a 3 talleres en el Dimesion Forge.",
+	"progreso": 1,
+	"color": "#7885F8",
+	"logo":"LogoRobot"
+	},
+	{
+	"nombre": "Apple Developer",
+	"descripcion": "Asiste a 3 talleres de Swift.",
+	"progreso": 0.25,
+	"color": "#7885F8",
+	"logo":"LogoBigDreamer"
+	}
+];
+
+const reservacionesData = [{
+	"sala": "Sala Horizons",
+	"experiencia": "VR Experience",
+	"horaInicio": "15:00:00",
+	"duracion": 2,
+	"fecha": "2024-12-15"
+	},
+	{
+	"sala": "Dimension Forge",
+	"experiencia": "Make a Computer - Course",
+	"horaInicio": "14:30:00",
+	"duracion": 1,
+	"fecha": "2024-01-24"
+	},
+	{
+	"sala": "Lego Room",
+	"experiencia": "Swift Course",
+	"horaInicio": "08:00:00",
+	"duracion": 3,
+	"fecha": "2024-04-26"
+	}
+]
 
 function Profile() {
 
@@ -50,30 +96,7 @@ function Profile() {
 
 					<div className="logros-div-in">
 
-						<TarjetaLogro 
-							progresoLogro="0.73"
-							nombreLogro="Big Dreamer"
-							descripcion="Asiste a más de 35 eventos en el Dream Lab."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoBigDreamer'
-						/>
-
-						<TarjetaLogro 
-							progresoLogro="1"
-							nombreLogro="Robot Expert"
-							descripcion="Asiste a 3 talleres en el Dimesion Forge."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoRobot'
-						/>
-
-						<TarjetaLogro 
-							progresoLogro="0.5"
-							nombreLogro="Apple Developer"
-							descripcion="Asiste a 3 talleres de Swift."
-							colorFondo="#7885F8"
-							iconoUtilizado='LogoRobot'
-						/>
-
+						{renderTarjetasLogro(logrosData)}
 						<div className="degradado-down"></div>                 
 
 					</div>
@@ -93,27 +116,7 @@ function Profile() {
 
 					<div className="reservaciones-div-in">
 
-						<TarjetaReservacion
-							sala="Sala Horizons"
-							experiencia="VR Experience"
-							hora="3:00 - 5:00 pm."
-							dia="15 de diciembre"
-						/>
-
-						<TarjetaReservacion
-							sala="Dimension Forge"
-							experiencia="Make a Computer - Course"
-							hora="10:00 - 11:00 am."
-							dia="24 de enero"
-						/>
-						
-						<TarjetaReservacion
-							sala="Lego Room"
-							experiencia="Swift Course"
-							hora="11:00 am - 1:00 pm."
-							dia="26 de enero"
-						/>
-
+						{generateReservationCards(reservacionesData)}
 						<div className="degradado-down"></div>                 
 
 					</div>

@@ -2,12 +2,36 @@ import React, { useState, useEffect, useRef } from "react";
 import './ReservacionesActivas.css'
 import TarjetaReservacion from "./TarjetaReservacion";
 import BotonBack from "../components/general/BotonBack";
+import {generateReservationCards} from "./Funciones.jsx";
 
 function ReservacionesActivas(){
+   
+    const reservacionesData = [{
+        "sala": "Sala Horizons",
+        "experiencia": "VR Experience",
+        "horaInicio": "15:00:00",
+        "duracion": 2,
+        "fecha": "2024-12-15"
+        },
+        {
+        "sala": "Dimension Forge",
+        "experiencia": "Make a Computer - Course",
+        "horaInicio": "14:30:00",
+        "duracion": 1,
+        "fecha": "2024-01-24"
+        },
+        {
+        "sala": "Lego Room",
+        "experiencia": "Swift Course",
+        "horaInicio": "08:00:00",
+        "duracion": 3,
+        "fecha": "2024-04-26"
+        }
+    ]
+
     return(
 
         <div>
-
             <div className="back-subtitulo-div">
                 <div className="boton-back"><BotonBack ruta="/profile/"/></div>
                 <h2 className="sub-celular">Reservaciones activas</h2>
@@ -17,26 +41,7 @@ function ReservacionesActivas(){
 
                         <div className="reservaciones-div-in-celular">
 
-                            <TarjetaReservacion 
-                                sala="Sala Horizons"
-                                experiencia="VR Experience"
-                                hora="3:00 - 5:00 pm."
-                                dia="15 de diciembre"
-                            />
-
-                            <TarjetaReservacion
-                                sala="Dimension Forge"
-                                experiencia="Make a Computer - Course"
-                                hora="10:00 - 11:00 am."
-                                dia="24 de enero"
-                            />
-                            
-                            <TarjetaReservacion
-                                sala="Lego Room"
-                                experiencia="Swift Course"
-                                hora="11:00 am - 1:00 pm."
-                                dia="26 de enero"
-                            />
+                            {generateReservationCards(reservacionesData)}
 
                             <TarjetaReservacion
                                 sala="Lego Room"

@@ -44,6 +44,7 @@
     font-weight: bold;
     width: 40%;
     margin-left: auto; /* Alinea a la derecha */
+    text-align: right;
 }
 
 @media (max-width: 1200px) {
@@ -161,5 +162,22 @@
     
     .dia-reservacion{
         width: 45%;
+    }
+}
+
+@media (max-width: 376px){
+    .div-fecha-reservacion{
+        font-size: small;
+    }
+
+    .hora-reservaion{
+        width: 95%;
+    }
+    
+    .dia-reservacion{
+        width: 95%;
+        margin-right: none;
+        text-align: left;
+        margin-left: 0px;
     }
 }

@@ -65,3 +65,16 @@
     border-bottom-right-radius: 20px;
 }
 
+
+@media (max-width: 376px){
+
+    .reservaciones-div-celular{
+        min-height: 60vh;
+    }
+
+    .reservaciones-div-in-celular{
+        max-height: 60vh;
+    }
+    
+}
+
