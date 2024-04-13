@@ -139,18 +139,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-/*
-<Form
-          method="post"
-          className="login-form"
-          replace
-          onSubmit={handleLogin}
-        >
-          <input name="user" placeholder="Usuario" />
-          <input name="password" type="password" placeholder="Contraseña" />
-          <button disabled={navigation.state === "submitting"}>
-            {navigation.state === "submitting" ? "Logging in..." : "Log in"}
-          </button>
-        </Form>
-*/
