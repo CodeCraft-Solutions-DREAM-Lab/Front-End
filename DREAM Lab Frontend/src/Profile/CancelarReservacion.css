@@ -158,7 +158,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding-top: 7%;
+    padding-top: 3%;
     font-family: "Karla", sans-serif;
     background-color: white;
     border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
@@ -173,7 +173,7 @@
     color: #14247B;
     font-weight: bolder;
     text-align: center;
-    margin-top: -1.5vw;
+    margin-top: 1.5vw;
     line-height: 95%;
 }
 
@@ -182,7 +182,7 @@
     font-size: 2vw;
     color: #646464;
     font-weight: bold;
-    margin-top: 2vw;
+    margin-top: 1vw;
     text-align: center;
     line-height: 95%;
 }
@@ -203,7 +203,7 @@
     justify-content: center;
     width: 100%;
     text-align: center;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
 }
 
 
