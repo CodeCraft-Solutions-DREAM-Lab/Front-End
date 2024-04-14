@@ -3,7 +3,7 @@ import './TarjetaReservacion.css'
 
 function TarjetaReservacion(props){
     return(
-        <div className="div-externo-reservacion">
+        <div className="div-externo-reservacion" onClick={props.funcion}>
 
             <div className="div-datos-reservacion">
                 <h1 className="sala-reservacion">{props.sala}</h1>

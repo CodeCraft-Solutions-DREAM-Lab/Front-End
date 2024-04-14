@@ -1,0 +1,46 @@
+.boton-nodal-exterior-cancelar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 4px solid #AC3E1B;
+    width: 23%;
+    height: 2.7vw;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-family: "Karla", sans-serif;
+    font-weight: 1000;
+    color: #AC3E1B;
+    cursor: pointer;
+    margin-right: 10%;
+}
+
+.boton-nodal-exterior-cancelar:hover{
+    background-color: #AC3E1B;
+    border: 4px solid #AC3E1B;
+    color: white;
+}
+
+.boton-nodal-exterior-aceptar{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #1BAC55;
+    border: 4px solid #1BAC55;
+    width: 23%;
+    height: 2.7vw;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-family: "Karla", sans-serif;
+    font-weight: 1000;
+    color: white;
+    cursor: pointer;
+}
+
+.boton-nodal-exterior-aceptar:hover{
+    background-color: white;
+    border: 4px solid #1BAC55;
+    color: #1BAC55;
+}

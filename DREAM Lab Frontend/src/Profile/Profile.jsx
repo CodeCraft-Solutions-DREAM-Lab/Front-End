@@ -8,7 +8,8 @@ import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
 import BotonCelular from "./BotonCelular";
 import './Profile.css'
 import BotonBack from "../components/general/BotonBack";
-import {generateReservationCards, renderTarjetasLogro}from "./Funciones.jsx";
+import {generateReservationCards, renderTarjetasLogro} from "./Funciones.jsx";
+import CancelarReservacion from "./CancelarReservacion.jsx";
 
 const logrosData = [{
 	"nombre": "Big Dreamer",
@@ -59,6 +60,11 @@ const reservacionesData = [{
 function Profile() {
 
 	const [reservaciones, setReservaciones] = useState([]);
+	const [tipoNodal, setTipoNodal] = useState(1); 
+
+	const handleClickNodal = (tipo) => {
+        setTipoNodal(tipo);
+    };
 
 	useEffect(() => {
 		fetch('https://dreamlab-api.azurewebsites.net/reservaciones/usuario/A0XXXXXX1')
@@ -75,6 +81,35 @@ function Profile() {
 	return (
 
 		<div>
+
+			{tipoNodal === 1 ? (
+				<CancelarReservacion
+					titulo1="Estas a punto de cancelar tu reservación en: Sala Horizons"
+					titulo2="Martes - 15 de diciembre"
+					titulo3="15:00 - 17:00"
+					titulo4="¿Deseas continuar?"
+					funcionRojo={() => handleClickNodal(2)}
+					funcionVerde={() => handleClickNodal(0)}
+				/>
+			) : tipoNodal === 2 ? (
+				<CancelarReservacion
+					titulo1="Estas a punto de cancelar tu reservación en: Dimension Forge"
+					titulo2="Miércoles - 24 de enero"
+					titulo3="14:30 - 15:30"
+					titulo4="¿Deseas continuar?"
+					funcionRojo={() => handleClickNodal(3)}
+					funcionVerde={() => handleClickNodal(0)}
+				/>
+			) : tipoNodal === 3 ? (
+				<CancelarReservacion
+					titulo1="Estas a punto de cancelar tu reservación en: Lego Room"
+					titulo2="Martes - 26 de abril"
+					titulo3="08:00 - 11:00"
+					titulo4="¿Deseas continuar?"
+					funcionVerde={() => handleClickNodal(0)}
+				/>
+			) : null}
+
 			<div className="boton-atras">
 				<BotonBack className="imagen-boton" ruta="/home/"/>
 			</div>
@@ -116,7 +151,7 @@ function Profile() {
 
 					<div className="reservaciones-div-in">
 
-						{generateReservationCards(reservacionesData)}
+					{generateReservationCards(reservacionesData, handleClickNodal)}
 						<div className="degradado-down"></div>                 
 
 					</div>

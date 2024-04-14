@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import './BotonCelular.css'
-import { button } from "@nextui-org/react";
 import ImagenEstrella from "../Home/Images/estrella.jpg"
 import ImagenFlecha from "../Home/Images/flecha.png"
 import ImagenCalendario from "../Home/Images/calendario2.png";

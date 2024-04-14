@@ -1,6 +1,7 @@
 import TarjetaLogro from "./TarjetaLogro";
 import TarjetaReservacion from "./TarjetaReservacion";
 
+
 // Función para formatear la fecha en el formato deseado
 export function formatDate(dateString) {
     // Crear una nueva fecha en la zona horaria local a partir de la cadena de fecha
@@ -24,7 +25,7 @@ export function calculateEndTime(startTime, duration) {
 }
 
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
-export function generateReservationCards(reservacionesData) {
+export function generateReservationCards(reservacionesData, handleClickNodal) {
 
     const reservationCards = reservacionesData.map((reservation, index) => {
         const endTime = calculateEndTime(reservation.horaInicio, reservation.duracion);
@@ -40,6 +41,7 @@ export function generateReservationCards(reservacionesData) {
                 experiencia={reservation.experiencia}
                 hora={`${formattedTime} - ${formattedEndTime}`}
                 dia={formattedDate}
+                funcion={() => handleClickNodal(1)} // Aquí se llama a la función handleClickNodal
             />
         );
     });
