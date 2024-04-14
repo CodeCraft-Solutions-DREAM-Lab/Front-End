@@ -31,11 +31,13 @@ import Confirmacion from "./Reservaciones/Confirmacion.jsx";
 import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
 import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
+import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<LandingPage />} />
+      <Route path="landingpage" element={<LandingPageDev />} /> {/* ruta provisional para desarrollo de la landing */}
       <Route path="login" element={<LoginPage />} />
       <Route
         path="home"
