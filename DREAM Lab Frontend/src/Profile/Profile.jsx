@@ -60,7 +60,7 @@ const reservacionesData = [{
 function Profile() {
 
 	const [reservaciones, setReservaciones] = useState([]);
-	const [tipoNodal, setTipoNodal] = useState(1); 
+	const [tipoNodal, setTipoNodal] = useState(0); 
 
 	const handleClickNodal = (tipo) => {
         setTipoNodal(tipo);
@@ -84,28 +84,37 @@ function Profile() {
 
 			{tipoNodal === 1 ? (
 				<CancelarReservacion
-					titulo1="Estas a punto de cancelar tu reservación en: Sala Horizons"
+					nodalClasificacion = {1}
+					type = "tipo1"
+					titulo1="Tu reserva: Sala Horizons"
 					titulo2="Martes - 15 de diciembre"
 					titulo3="15:00 - 17:00"
-					titulo4="¿Deseas continuar?"
+					textoRojo = "Cancelar"
+					textoVerde = "Ok"
 					funcionRojo={() => handleClickNodal(2)}
 					funcionVerde={() => handleClickNodal(0)}
 				/>
 			) : tipoNodal === 2 ? (
 				<CancelarReservacion
+					nodalClasificacion = {2}
+					type = "tipo2"
 					titulo1="Estas a punto de cancelar tu reservación en: Dimension Forge"
 					titulo2="Miércoles - 24 de enero"
 					titulo3="14:30 - 15:30"
 					titulo4="¿Deseas continuar?"
+					textoRojo = "Si, cancelar"
+					textoVerde = "No"
 					funcionRojo={() => handleClickNodal(3)}
 					funcionVerde={() => handleClickNodal(0)}
 				/>
 			) : tipoNodal === 3 ? (
 				<CancelarReservacion
-					titulo1="Estas a punto de cancelar tu reservación en: Lego Room"
-					titulo2="Martes - 26 de abril"
-					titulo3="08:00 - 11:00"
-					titulo4="¿Deseas continuar?"
+					nodalClasificacion = {3}
+					type = "tipo3"
+					titulo1="Cancelación exitosa"
+					titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
+					titulo3="¿Necesitas ayuda? Contáctanos aquí"
+					textoVerde = "Cerrar"
 					funcionVerde={() => handleClickNodal(0)}
 				/>
 			) : null}
