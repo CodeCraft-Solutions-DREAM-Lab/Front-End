@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: center; 
     align-items: center; 
-    margin-top: 4%;
+    margin-top: 3%;
     margin-bottom: 5%;
     max-height: 120%;
     height: 120%;
@@ -120,7 +120,7 @@
     left: 0;
     width: 100%;
     height: 40px; /* Ajusta la altura según tus necesidades */
-    background: linear-gradient(to bottom,  transparent, #4A4997 30%); /* Crea un degradado de transparente a morado */
+    background: linear-gradient(to bottom,  transparent, #5E69C7 30%); /* Crea un degradado de transparente a morado */
     border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
     border-bottom-right-radius: 20px;
 }
@@ -132,7 +132,9 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
+    margin-left: 3%;
+    margin-top: 6%;
 }
 
 @media (max-width: 800px) {
@@ -196,6 +198,11 @@
     .reservaciones-div-in{
         height: 21vh;
     }
+
+    .degradado-down {
+        background: linear-gradient(to bottom,  transparent, #7477E6 30%); /* Crea un degradado de transparente a morado */
+    }
+    
     
 }
 

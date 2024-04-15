@@ -1,22 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+.slideC {
+	position: relative;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+	width: 650px;
+	height: 450px;
+	margin: 0 auto;
+}
 
-.imageCarousel {
-	user-select: none;
+.slide {
+	width: 650px;
+	height: 450px;
+	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
+		visibility 500ms ease 0s;
+	position: absolute;
+	top: 0;
+	border-radius: 12px;
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* 3D reflection effect */
+.reflection {
+	position: absolute;
 	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 2rem;
+	height: 60px;
+	bottom: -60px;
+	border-radius: 12px;
+	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
+		visibility 500ms ease 0s;
 }
 
-.carousel-container {
-    display: flex;
-    justify-content: center;
-}
-
-.processed-transcript-container {
+.slide {
 	display: flex;
-    justify-content: center;
-	font-family: 'Karla', sans-serif;
-	color: white;
-	font-size: large;
+	justify-content: left;
+	align-items: left;
 }
+
+.sliderContent {
+	display: flex;
+	flex-direction: column;
+	color: white;
+	padding: 30px;
+	align-items: flex-start;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+}
+
+.sliderContent h2 {
+	margin: 16px 0;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.textContainer {
+	width: 40%;
+}
+
+.textContainer p {
+	margin: 0;
+	margin-left: 5%;
+	margin-bottom: 16px;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100vh;
+}
+
+.btns {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 30px;
+}
+
+.btns .btn {
+	cursor: pointer;
+	padding-inline: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.btns .dots {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
+
+/* normal css  */

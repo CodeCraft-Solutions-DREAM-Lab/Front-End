@@ -1,7 +1,6 @@
 import TarjetaLogro from "./TarjetaLogro";
 import TarjetaReservacion from "./TarjetaReservacion";
 
-
 // Función para formatear la fecha en el formato deseado
 export function formatDate(dateString) {
     // Crear una nueva fecha en la zona horaria local a partir de la cadena de fecha

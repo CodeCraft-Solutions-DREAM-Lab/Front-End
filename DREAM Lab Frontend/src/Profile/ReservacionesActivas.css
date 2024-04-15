@@ -60,7 +60,7 @@
     left: 0;
     width: 100%;
     height: 100px; /* Ajusta la altura según tus necesidades */
-    background: linear-gradient(to bottom,  transparent, #6253AD 80%); /* Crea un degradado de transparente a morado */
+    background: linear-gradient(to bottom,  transparent, #5E69C7 80%); /* Crea un degradado de transparente a morado */
     border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
     border-bottom-right-radius: 20px;
 }

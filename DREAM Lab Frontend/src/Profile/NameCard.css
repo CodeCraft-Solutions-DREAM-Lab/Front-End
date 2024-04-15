@@ -3,7 +3,7 @@
     min-width: 30%;
     max-width: 40%;
     height: 80px;
-    transform: translateX(-10%);
+    transform: translateX(-8%);
 
     background: rgba(255, 231, 231, 0.06); /* Background color with transparency */
     border-radius: 15px;
@@ -15,7 +15,7 @@
     flex-wrap: wrap;
     align-items: center;
 
-    margin-top: 2%;
+    margin-top: 8%;
     margin-bottom: 2%;
     padding-left: 8%;
 
@@ -110,6 +110,11 @@
 
 @media (max-width: 820px), (height: 1366px) {
 
+    .div-exterior{
+        margin-top: 12vh;
+        transform: translateX(-1%);
+    }
+
     .nombre-usuario{
         font-weight: 650;
         font-size: x-large;
@@ -148,6 +153,11 @@
 
 @media (max-width: 710px) {
 
+    .div-exterior{
+        margin-top: 12vh;
+        transform: translateX(-8%);
+    }
+
     .nombre-usuario{
         font-weight: 650;
         font-size: medium;
@@ -172,7 +182,11 @@
 
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
+
+    .div-exterior{
+        margin-top: 13vh;
+    }
 
     .nombre-usuario{
         font-weight: 650;

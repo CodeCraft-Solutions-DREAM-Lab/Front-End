@@ -1,15 +1,13 @@
-import BotonRegresar from "../components/general/BotonRegresar";
 import ListaReservaciones from "./ListaReservaciones";
 import { useEffect, useState } from "react";
 import NameCard from "./NameCard";
-import TarjetaLogro from "./TarjetaLogro";
-import TarjetaReservacion from "./TarjetaReservacion";
 import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
 import BotonCelular from "./BotonCelular";
 import './Profile.css'
 import BotonBack from "../components/general/BotonBack";
-import {generateReservationCards, renderTarjetasLogro} from "./Funciones.jsx";
+import {generateReservationCards, renderTarjetasLogro} from "./Funciones.jsx"
 import CancelarReservacion from "./CancelarReservacion.jsx";
+import Navbar from "../components/general/NavBar.jsx";
 
 const logrosData = [{
 	"nombre": "Big Dreamer",
@@ -66,21 +64,24 @@ function Profile() {
         setTipoNodal(tipo);
     };
 
-	useEffect(() => {
-		fetch('https://dreamlab-api.azurewebsites.net/reservaciones/usuario/A0XXXXXX1')
-			.then(response => response.json())
-			.then(data => {
-				setReservaciones(data);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
-
-	}, []);
+  useEffect(() => {
+    fetch(
+      "https://dreamlab-api.azurewebsites.net/reservaciones/usuario/A0XXXXXX1"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setReservaciones(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
 	return (
 
 		<div>
+
+			<Navbar visible="visible" view="perfil"/>
 
 			{tipoNodal === 1 ? (
 				<CancelarReservacion
@@ -119,9 +120,9 @@ function Profile() {
 				/>
 			) : null}
 
-			<div className="boton-atras">
-				<BotonBack className="imagen-boton" ruta="/home/"/>
-			</div>
+			{/* <div className="boton-atras">
+    				<BotonBack className="imagen-boton" ruta="/home/"/>
+			</div> */}
 			
 			<NameCard/>
 
