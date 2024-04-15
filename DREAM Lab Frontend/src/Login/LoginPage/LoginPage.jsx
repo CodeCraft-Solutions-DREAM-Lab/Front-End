@@ -9,15 +9,21 @@ import Alert from "@mui/material/Alert";
 
 import "./LoginPage.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
 import { loginAction } from "../../Global/Auth";
 
+import { post } from "../../Global/Database";
+import { getFromLocalStorage } from "../../Global/Storage";
+
 import "../../components/general/GlassCard.css";
 import GlassCard from "../../components/general/GlassCard";
+
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../redux/Slices/userSlice";
 
 export default function LoginPage() {
   const [user, setUser] = useState("");
@@ -25,8 +31,21 @@ export default function LoginPage() {
   const [isLoading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getFromLocalStorage("token")) {
+      post("authToken", {
+        token: getFromLocalStorage("token") || "",
+      }).then((data) => {
+        if (data) {
+          dispatch(setAuth(true));
+          navigate("/home");
+        }
+      });
+    }
+  }, [dispatch, navigate]);
 
   // Funcion que se llama cuando se cierra el snackbar para resetear el estado
   const handleClose = (event, reason) => {
