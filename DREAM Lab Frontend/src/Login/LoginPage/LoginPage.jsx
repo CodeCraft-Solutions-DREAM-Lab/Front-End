@@ -72,12 +72,10 @@ export default function LoginPage() {
     setLoading(true);
     try {
       // Llamar a la acción de login y obtener el path al que se debe redirigir
-      console.log("User:", user, "Password:", password);
       const path = await loginAction(
         { user, password },
         () => {},
         () => {
-          console.log("Usuario o contraseña incorrectos");
           setOpen(true);
           setMessage("Usuario o contraseña incorrectos");
         }
@@ -85,7 +83,6 @@ export default function LoginPage() {
       setLoading(false);
       navigate(path);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
