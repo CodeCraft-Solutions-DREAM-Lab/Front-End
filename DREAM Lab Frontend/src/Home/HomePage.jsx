@@ -71,8 +71,8 @@ function HomePage() {
   const [processedTranscript, setProcessedTranscript] = useState("");
   const [data, setData] = useState(initialData);
   const [showRecommendations, setShowRecommendations] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
+  // const [prevScrollPos, setPrevScrollPos] = useState(0);
+  // const [visible, setVisible] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [ufs, setUfs] = useState([]);
   const [salas, setSalas] = useState([]);
@@ -83,29 +83,29 @@ function HomePage() {
   const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
   const [errorExperiences, setErrorExperiences] = useState(null);
 
-  const [currentScrollPos, setCurrentScrollPos] = useState(0);
+  // const [currentScrollPos, setCurrentScrollPos] = useState();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const newScrollPos = window.scrollY;
-      setCurrentScrollPos(newScrollPos); // Update current scroll position
-      setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
-      setPrevScrollPos(newScrollPos);
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const newScrollPos = window.scrollY;
+  //     setCurrentScrollPos(newScrollPos); // Update current scroll position
+  //     setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
+  //     setPrevScrollPos(newScrollPos);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    // Restore scroll position on component mount and data updates
-    const restoreScrollPosition = () => {
-      window.scrollTo(0, currentScrollPos); // Restore previous scroll position
-    };
+  //   // Restore scroll position on component mount and data updates
+  //   const restoreScrollPosition = () => {
+  //     window.scrollTo(0, currentScrollPos); // Restore previous scroll position
+  //   };
 
-    restoreScrollPosition(); // Call on initial mount
+  //   restoreScrollPosition(); // Call on initial mount
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []); // Only re-run on currentScrollPos changes
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []); // Only re-run on currentScrollPos changes
 
   useEffect(() => {
     setIsLoadingSalas(true);
@@ -192,7 +192,7 @@ function HomePage() {
 
   return (
     <>
-      <Navbar visible={visible} view="homeAlumno" />{" "}
+      <Navbar view="homeAlumno" autoHide={true} />
       {/* Use the Navbar component */}
       <div className="background-container">
         <div className="home-background-image-container">
