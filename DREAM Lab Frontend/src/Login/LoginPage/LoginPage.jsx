@@ -85,7 +85,7 @@ export default function LoginPage() {
     } catch (error) {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="login-container">
@@ -152,6 +152,5 @@ export default function LoginPage() {
         </Alert>
       </Snackbar>
     </div>
-
-  )
+  );
 }
