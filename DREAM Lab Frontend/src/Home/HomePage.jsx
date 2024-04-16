@@ -8,6 +8,8 @@ import "./HomePage.css";
 import axios from "axios";
 import { getFromLocalStorage } from "../Global/Storage.js";
 
+import { get } from "../Global/Database.js";
+
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
 const unsplash_prefix = "https://images.unsplash.com/photo-";
@@ -69,8 +71,6 @@ function HomePage() {
   const [processedTranscript, setProcessedTranscript] = useState("");
   const [data, setData] = useState(initialData);
   const [showRecommendations, setShowRecommendations] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [ufs, setUfs] = useState([]);
   const [salas, setSalas] = useState([]);
@@ -80,116 +80,81 @@ function HomePage() {
   const [errorUfs, setErrorUfs] = useState(null);
   const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
   const [errorExperiences, setErrorExperiences] = useState(null);
-  const defaultURL = "http://localhost:3000";
 
-  
-const [currentScrollPos, setCurrentScrollPos] = useState(0);
-
-useEffect(() => {
-  const handleScroll = () => {
-    const newScrollPos = window.pageYOffset;
-    setCurrentScrollPos(newScrollPos);  // Update current scroll position
-    setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
-    setPrevScrollPos(newScrollPos);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-
-  // Restore scroll position on component mount and data updates
-  const restoreScrollPosition = () => {
-    window.scrollTo(0, currentScrollPos);  // Restore previous scroll position
-  };
-
-  restoreScrollPosition();  // Call on initial mount
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, [currentScrollPos]); // Only re-run on currentScrollPos changes
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoadingSalas(true);
-      setErrorSalas(null);
-
-      try {
-        const response = await axios.get(defaultURL + "/salas");
-        const data = response.data;
-
-        if (typeof data === "string") {
-          setSalas(JSON.parse(data));
-        } else {
-          setSalas(data); // Assuming data is already an object
-        }
-      } catch (error) {
-        console.error("Error fetching salas:", error);
-        setErrorSalas(error);
-      } finally {
-        setIsLoadingSalas(false);
+  const handleResponse = (setState) => {
+    return (response) => {
+      if (typeof response === "string") {
+        setState(JSON.parse(response));
+      } else {
+        setState(response); // Assuming data is already an object
       }
     };
+  };
 
-    fetchData();
-  }, [data]);
+  const handleError = (setError) => {
+    return (error) => {
+      console.error("Error fetching data:", error);
+      setError(error);
+    };
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoadingExperiences(true);
-      setErrorExperiences(null);
+    setIsLoadingSalas(true);
+    setErrorSalas(null);
 
-      try {
-        const response = await axios.get(
-          defaultURL + "/experiencias/autodirigidas"
-        );
-        const data = response.data;
+    setIsLoadingExperiences(true);
+    setErrorExperiences(null);
 
-        if (typeof data === "string") {
-          setExperiences(JSON.parse(data));
-        } else {
-          setExperiences(data); // Assuming data is already an object
-        }
-      } catch (error) {
-        console.error("Error fetching experiences:", error);
-        setErrorExperiences(error);
-      } finally {
-        setIsLoadingExperiences(false);
-      }
-    };
+    setIsLoadingUfs(true);
+    setErrorUfs(null);
 
-    fetchData();
-  }, [data]);
+    const userID = getFromLocalStorage("user");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoadingUfs(true);
-      setErrorUfs(null);
+    // Promise.allSettled([
+    //   get("salas"),
+    //   get("experiencias/autodirigidas"),
+    //   get("experiencias/UFs", { user: userID }),
+    // ])
+    //   .then(([salasResult, experiencesResult, ufsResult]) => {
+    //     if (salasResult.status === "fulfilled") {
+    //       handleResponse(setSalas)(salasResult.value);
+    //     } else {
+    //       handleError(setErrorSalas)(salasResult.reason);
+    //     }
 
-      const userID = getFromLocalStorage("user");
+    //     if (experiencesResult.status === "fulfilled") {
+    //       handleResponse(setExperiences)(experiencesResult.value);
+    //     } else {
+    //       handleError(setErrorExperiences)(experiencesResult.reason);
+    //     }
 
-      try {
-        const response = await axios.get(defaultURL + "/experiencias/UFs", {
-          params: {
-            user: userID,
-          },
-        });
-        const data = response.data;
+    //     if (ufsResult.status === "fulfilled") {
+    //       handleResponse(setUfs)(ufsResult.value);
+    //     } else {
+    //       handleError(setErrorUfs)(ufsResult.reason);
+    //     }
+    //   })
+    //   .finally(() => {
+    //     setIsLoadingSalas(false);
+    //     setIsLoadingExperiences(false);
+    //     setIsLoadingUfs(false);
+    //   });
 
-        if (typeof data === "string") {
-          setUfs(JSON.parse(data));
-        } else {
-          setUfs(data); // Assuming data is already an object
-        }
-      } catch (error) {
-        console.error("Error fetching ufs:", error);
-        setErrorUfs(error);
-      } finally {
-        setIsLoadingUfs(false);
-      }
-    };
+    get("salas")
+      .then(handleResponse(setSalas))
+      .catch(handleError(setErrorSalas))
+      .finally(() => setIsLoadingSalas(false));
 
-    fetchData();
-  }, [data]);
+    get("experiencias/autodirigidas")
+      .then(handleResponse(setExperiences))
+      .catch(handleError(setErrorExperiences))
+      .finally(() => setIsLoadingExperiences(false));
+
+    get("experiencias/UFs", { user: userID })
+      .then(handleResponse(setUfs))
+      .catch(handleError(setErrorUfs))
+      .finally(() => setIsLoadingUfs(false));
+  }, []);
 
   useEffect(() => {
     if (processedTranscript) {
@@ -211,7 +176,8 @@ useEffect(() => {
 
   return (
     <>
-      <Navbar visible={visible} view="homeAlumno"/> {/* Use the Navbar component */}
+      <Navbar view="homeAlumno" autoHide={true} />
+      {/* Use the Navbar component */}
       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
