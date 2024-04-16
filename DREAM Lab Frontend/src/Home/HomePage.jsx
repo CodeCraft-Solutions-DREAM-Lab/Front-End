@@ -3,6 +3,7 @@ import ImageSlider from "./ImageSlider";
 import SpeechBotCard from "./SpeechBotCard";
 import "../App.css";
 import RecommendationsCarousel from "./RecommendationsCarousel";
+import RecomendacionesInvalidas from './RecomendacionesInvalidas';
 import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import axios from "axios";
@@ -47,30 +48,37 @@ const IMAGES = [
 ];
 
 const initialData = [
-  {
-    bgColor: "#F54748",
-    img: "https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg",
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
-  {
-    bgColor: "#7952B3",
-    img: "https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg",
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
-  {
-    bgColor: "#1597BB",
-    img: "https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg",
-    title: "Lorem Ipsum",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-  },
+      {
+        bgColor: "#F54748",
+        id: 1,
+        img: 'https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg',
+        title: "Lorem Ipsum",
+        desc:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    },
+    {
+        bgColor: "#7952B3",
+        id: 1,
+        img: 'https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg',
+        title: "Lorem Ipsum",
+        desc:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    },
+    {
+        bgColor: "#1597BB",
+        id: 1,
+        img: 'https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg',
+        title: "Lorem Ipsum",
+        desc:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    },
 ];
 
 function HomePage() {
   const [processedTranscript, setProcessedTranscript] = useState("");
   const [data, setData] = useState(initialData);
   const [showRecommendations, setShowRecommendations] = useState(false);
+  const [showInvalidNotice, setShowInvalidNotice] = useState(false);
   const [experiences, setExperiences] = useState([]);
   const [ufs, setUfs] = useState([]);
   const [salas, setSalas] = useState([]);
@@ -80,6 +88,72 @@ function HomePage() {
   const [errorUfs, setErrorUfs] = useState(null);
   const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
   const [errorExperiences, setErrorExperiences] = useState(null);
+  
+  useEffect(() => {
+        if (processedTranscript) {
+            const fetchData = async () => {
+                const newData = await Promise.all(processedTranscript.map(async (item, index) => {
+                    
+                    const type = item.type;
+                    const id = item.id;
+
+                    if (type === "error" || type ==="Error" || id === 0) {
+                        setShowInvalidNotice(true);
+                        return;
+                    }
+    
+                    try {
+                        let result;
+                        if (type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia") {
+                            result = await fetch('http://localhost:3000/experiencias/' + id);
+                        } else if (type === "salas" || type === "Salas" || type === "sala" || type === "Sala") {
+                            result = await fetch('http://localhost:3000/salas/' + id);
+                        }
+    
+                        if (result.ok) {
+                            const data = await result.json();
+                            if(type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia"){
+                                return {
+                                    ...item,
+                                    id: id,
+                                    img: data[0].portadaURL,
+                                    title: data[0].nombre,
+                                    desc: data[0].descripcion
+                                };
+                            }
+                            else{
+                                return {
+                                    ...item,
+                                    id: id,
+                                    img: data[0].fotoURL,
+                                    title: data[0].nombre,
+                                    desc: data[0].descripcion
+                                };
+                            }
+                            
+                        } else {
+                            console.error('Error fetching ${type} with id ${id}');
+                            return item; // Conservar el item original en caso de error
+                        }
+                    } catch (error) {
+                        console.error('Error fetching ${type} with id ${id}:', error);
+                        return item; // Conservar el item original en caso de error
+                    }
+                }));
+    
+                if (!showInvalidNotice) {
+                    setData(newData);
+                    setShowRecommendations(true);
+                }
+            };
+    
+            fetchData();
+        }
+    }, [processedTranscript]);
+  
+  const handleProcessedText = (processedText) => {
+    setProcessedTranscript(processedText);
+  };
 
   const handleResponse = (setState) => {
     return (response) => {
@@ -156,24 +230,6 @@ function HomePage() {
       .finally(() => setIsLoadingUfs(false));
   }, []);
 
-  useEffect(() => {
-    if (processedTranscript) {
-      const recommendations = processedTranscript
-        .split(/\d+\.\s+/)
-        .filter((item) => item.trim() !== "");
-      const newData = initialData.slice(0, recommendations.length);
-      newData.forEach((item, index) => {
-        item.title = recommendations[index];
-      });
-      setData(newData);
-      setShowRecommendations(true);
-    }
-  }, [processedTranscript]);
-
-  const handleProcessedText = (processedText) => {
-    setProcessedTranscript(processedText);
-  };
-
   return (
     <>
       <Navbar view="homeAlumno" autoHide={true} />
@@ -202,12 +258,13 @@ function HomePage() {
       <div className="page-content">
         <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
 
-        {showRecommendations && (
-          <RecommendationsCarousel
-            data={data}
-            activeSlide={parseInt(Math.floor(data.length / 2))}
-          />
-        )}
+        {showInvalidNotice ? (
+                <RecomendacionesInvalidas />
+            ) : (
+                showRecommendations && (
+                    <RecommendationsCarousel data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
+                )
+            )}
 
         <div className="carousel-container">
           <h1>RECOMENDACIONES</h1>
