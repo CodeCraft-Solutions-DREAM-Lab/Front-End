@@ -4,6 +4,7 @@ import SpeechBotCard from './SpeechBotCard'
 import '../App.css'
 import GlassCard from '../components/general/glass-card'
 import UserAvatar from '../components/general/UserAvatar'
+import RecomendacionesInvalidas from './RecomendacionesInvalidas';
 import RecommendationsCarousel from './RecommendationsCarousel'
 
 const OPTIONS = { dragFree: true, loop: true }
@@ -51,13 +52,20 @@ function HomePage() {
     const [processedTranscript, setProcessedTranscript] = useState('');
     const [data, setData] = useState(initialData);
     const [showRecommendations, setShowRecommendations] = useState(false);
+    const [showInvalidNotice, setShowInvalidNotice] = useState(false);
 
     useEffect(() => {
         if (processedTranscript) {
             const fetchData = async () => {
                 const newData = await Promise.all(processedTranscript.map(async (item, index) => {
+                    
                     const type = item.type;
                     const id = item.id;
+
+                    if (type === "error" || type ==="Error" || id === 0) {
+                        setShowInvalidNotice(true);
+                        return;
+                    }
     
                     try {
                         let result;
@@ -96,8 +104,10 @@ function HomePage() {
                     }
                 }));
     
-                setData(newData);
-                setShowRecommendations(true);
+                if (!showInvalidNotice) {
+                    setData(newData);
+                    setShowRecommendations(true);
+                }
             };
     
             fetchData();
@@ -125,8 +135,12 @@ function HomePage() {
 
             <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText} />
 
-            {showRecommendations && (
-                <RecommendationsCarousel data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
+            {showInvalidNotice ? (
+                <RecomendacionesInvalidas />
+            ) : (
+                showRecommendations && (
+                    <RecommendationsCarousel data={data} activeSlide={parseInt(Math.floor(data.length / 2))} />
+                )
             )}
 
             <br />
