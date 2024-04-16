@@ -16,19 +16,21 @@ body {
   z-index: 9;
   padding: 1%;
   transition: top 5s ease-in-out;
-  font-family: "Karla", sans-serif;
 }
 
+
+
 @media only screen and (min-height: 1025px) {
-  .navbar {
+  .navbar{
     height: 6vh;
   }
 
   .inputRecomendaciones {
     margin-top: 7rem;
     margin-bottom: 4rem;
+
   }
-}
+  }
 
 .navbar-positioning {
   position: absolute; /* Establishes stacking context */

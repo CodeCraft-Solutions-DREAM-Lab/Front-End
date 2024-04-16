@@ -3,14 +3,7 @@ import BotonCancelarReservacion from "./BotonCancelarReservacion";
 
 function ListaReservaciones(props) {
 
-
 	const { reservations, setReservations } = props;
-	
-	// Verificar si reservations es un arreglo
-	if (!Array.isArray(reservations)) {
-		// Si reservations no es un arreglo, mostrar un mensaje o devolver un componente que indique que no hay reservaciones
-		return <div>No hay reservaciones</div>;
-	}
 
 	return (
 		<Table aria-label="Example static collection table">
