@@ -27,6 +27,7 @@ const IMAGES = [
 const initialData = [
     {
         bgColor: "#F54748",
+        id: 1,
         img: 'https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg',
         title: "Lorem Ipsum",
         desc:
@@ -34,6 +35,7 @@ const initialData = [
     },
     {
         bgColor: "#7952B3",
+        id: 1,
         img: 'https://t3.ftcdn.net/jpg/01/38/61/48/360_F_138614801_Xx5aDLUQKTXkEqVl8IBoJInJEGvqmxh9.jpg',
         title: "Lorem Ipsum",
         desc:
@@ -41,6 +43,7 @@ const initialData = [
     },
     {
         bgColor: "#1597BB",
+        id: 1,
         img: 'https://img.freepik.com/fotos-premium/conexion-gafas-vr-tecnologia-linea-metaverse_10221-14040.jpg',
         title: "Lorem Ipsum",
         desc:
@@ -80,6 +83,7 @@ function HomePage() {
                             if(type === "experiencias" || type === "Experiencias" || type === "experiencia" || type === "Experiencia"){
                                 return {
                                     ...item,
+                                    id: id,
                                     img: data[0].portadaURL,
                                     title: data[0].nombre,
                                     desc: data[0].descripcion
@@ -88,6 +92,7 @@ function HomePage() {
                             else{
                                 return {
                                     ...item,
+                                    id: id,
                                     img: data[0].fotoURL,
                                     title: data[0].nombre,
                                     desc: data[0].descripcion
