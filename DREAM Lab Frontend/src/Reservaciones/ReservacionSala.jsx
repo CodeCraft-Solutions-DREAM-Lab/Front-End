@@ -1,6 +1,6 @@
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
-import GlassCard from "../components/general/glass-card";
+import GlassCard from "../components/general/GlassCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 

@@ -29,3 +29,8 @@ export function removeFromSessionStorage(key) {
 export function existsInSessionStorage(key) {
   return sessionStorage.getItem(key) !== null;
 }
+
+export function clearStorages() {
+  localStorage.clear();
+  sessionStorage.clear();
+}

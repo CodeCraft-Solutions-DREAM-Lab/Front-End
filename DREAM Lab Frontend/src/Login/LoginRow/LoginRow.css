@@ -1,0 +1,45 @@
+.login-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-flex-col {
+  flex-direction: column;
+}
+
+.login-flex-row {
+  flex-direction: row;
+}
+
+.login-justify-start {
+  justify-content: flex-start;
+}
+
+.login-justify-center {
+  justify-content: center;
+}
+
+.login-justify-end {
+  justify-content: flex-end;
+}
+
+.login-justify-between {
+  justify-content: space-between;
+}
+
+.login-align-start {
+  align-items: flex-start;
+}
+
+.login-align-center {
+  align-items: center;
+}
+
+.login-align-end {
+  align-items: flex-end;
+}
+
+.login-align-between {
+  align-items: space-between;
+}

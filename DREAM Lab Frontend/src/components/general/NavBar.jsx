@@ -1,22 +1,46 @@
-//import React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import UserAvatar from "./UserAvatar";
+import Logout from "./Logout";
 import "../../App.css";
 import SearchBar from "../general/SearchBar";
+import BotonCrearExperiencia from '../general/BotonCrearExperiencia';
 
-const Navbar = ({ visible }) => {
+const Navbar = ({ visible, view }) => {
+  // Definimos las vistas
+  let searchBar, userAction;
+  switch (view) {
+    case "homeAlumno":
+      searchBar = <SearchBar />; // barra de busqueda
+      userAction = <UserAvatar />; // Icono de perfil
+      break;
+    case "homeProfesor":
+      searchBar = <SearchBar />; // barra de busqueda
+      userAction = <> <BotonCrearExperiencia /> <UserAvatar /> </> // Icono de perfil y boton de creacion de experiencia
+      break;
+    case "perfil":
+      userAction = <Logout />; // Cerrar sesión
+      break;
+    case "soloPerfil":
+      userAction = <UserAvatar />; // Icono de perfil
+      break;
+    default:
+      searchBar = null;
+      userAction = null; // Para vistas desconocidas
+  }
+
   return (
     <div className={`navbar-positioning ${visible ? "visible" : "hidden"}`}>
-      <div className="navbar glass-card" height="4.5rem">
+      <div className="navbar glass-card" height="1rem">
         <div className="flex items-center justify-between w-full">
           <div className="logo-container">
             <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
             <h1 className="dreamlab">DREAM LAB</h1>
           </div>
-            <SearchBar/>
-
+          {searchBar} {/* Se ve la searchBar dependiendo de la vista */}
           <div className="user-avatar-container">
-            <UserAvatar />
+            {userAction}
+            {/* Se ven las acciones dependiendo de la vista (profile o logout o profile + create experience) */}
           </div>
         </div>
       </div>
@@ -26,7 +50,7 @@ const Navbar = ({ visible }) => {
 
 Navbar.propTypes = {
   visible: PropTypes.bool.isRequired,
+  view: PropTypes.string.isRequired,
 };
 
 export default Navbar;
-
