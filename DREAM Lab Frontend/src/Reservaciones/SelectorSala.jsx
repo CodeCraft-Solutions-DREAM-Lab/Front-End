@@ -9,36 +9,23 @@ import { useNavigate } from "react-router-dom";
 import {
     getFromSessionStorage,
 } from "../Global/Storage";
-import { get } from "../Global/Database";
 
 function SelectorSala(props) {
     let navigate = useNavigate();
 
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
     const [update, setUpdate] = useState(false);
-    const [freeHours, setFreeHours] = useState([]);
 
     useEffect(() => {
         if (!getFromSessionStorage("fecha") ||
             !getFromSessionStorage("horaInicio") || 
             !getFromSessionStorage("duration")) {
-            setIsButtonDisabled(true);
+            setIsNextButtonDisabled(true);
         } else {
-            setIsButtonDisabled(false);
+            setIsNextButtonDisabled(false);
         }
     }, [update]);
-
-    useEffect(() => {
-        get("salas/horasLibres", 
-            (data) => {
-                setFreeHours(data);
-            }, 
-            () => {
-                console.log("Error al obtener horas libres");
-            }
-        );
-    }, []);
 
     return (
         <div>
@@ -71,17 +58,9 @@ function SelectorSala(props) {
                         onClick={() => {
                             setIsFirstReminderOpen(true)
                         }}
-                        disabled={isButtonDisabled}
+                        disabled={isNextButtonDisabled}
                     >
                         Aceptar
-                    </Button>
-
-                    <Button 
-                        onClick={() => {
-                            console.log(freeHours);
-                        }}
-                    >
-                        Debug
                     </Button>
                     </div>
                 </Grid>

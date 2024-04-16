@@ -20,23 +20,26 @@ function ResumenReservacion(props) {
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: getFromSessionStorage("duration"),
             fecha: getFromSessionStorage("fechaIsoString"),
-            numMesa: 1,
+            idMesa: 1,
         };
 
         setIsLoading(true);
         await post("reservaciones", data, 
-        () => {
-            removeFromSessionStorage("horaInicio");
-            removeFromSessionStorage("horaInicioIsoString");
-            removeFromSessionStorage("duration");
-            removeFromSessionStorage("fecha");
-            removeFromSessionStorage("fechaIsoString");
-            setIsLoading(false);
-            setIsModalOpen(true);
-        },
+        () => {},
         () => {
             setIsLoading(false);
         }
+        )
+        .then(
+            (response) => {
+                removeFromSessionStorage("horaInicio");
+                removeFromSessionStorage("horaInicioIsoString");
+                removeFromSessionStorage("duration");
+                removeFromSessionStorage("fecha");
+                removeFromSessionStorage("fechaIsoString");
+                setIsLoading(false);
+                setIsModalOpen(true);
+            }
         );
     }
 
