@@ -19,66 +19,74 @@ import { existsInLocalStorage, getFromLocalStorage } from "./Storage";
 import { Navigate } from "react-router-dom";
 
 // Componentes de UI para mostrar mientras se carga la página
-import LoadingScreen from "./LoadingScreen";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function ProtectedRoutes({ children }) {
-    // Obtener el estado de autenticación del store de redux
-    const isAuth = useSelector(selectAuth);
-    const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(true);
+  // Obtener el estado de autenticación del store de redux
+  const isAuth = useSelector(selectAuth);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-    // Verificar si hay un token en el almacenamiento local
-    // Si hay un token, se pone la pantalla de carga para comenzar la
-    // autenticacion
-    // Si no hay un token, se quita la pantalla de carga, lo que redirige al login
-    useEffect(() => {
-        if (existsInLocalStorage("token")) {
-            setIsLoading(true);
-        } else {
-            setIsLoading(false);
-        }
-    }, []);
-
-    // Validar el token
-    useEffect(() => {
-        // Se valida si se esta cargando para dar oportunidad de desplegar la
-        // pantalla de carga. Tenicamente, dado que ya se valido que existe un token
-        // en el almacenamiento local, isLoading debería ser falso, pero se deja por
-        // si se quiere hacer alguna otra validación
-        if (isLoading && existsInLocalStorage("token")) {
-            // Llamada a la API para validar el token
-            post(
-                "authToken",
-                {
-                    token: getFromLocalStorage("token"),
-                },
-                () => setIsLoading(false),
-                () => setIsLoading(false)
-            ).then((res) => {
-                // Una vez que se cumpla la promesa, se actualiza el estado de
-                // autenticación con el valor recibido de la api
-                dispatch(setAuth(res));
-            });
-        }
-    }, [isLoading, dispatch]);
-
-    // Mientras se esta validando el token, se muestra la pantalla de carga
-    if (isLoading) {
-        return <LoadingScreen isLoading={isLoading} />;
+  // Verificar si hay un token en el almacenamiento local
+  // Si hay un token, se pone la pantalla de carga para comenzar la
+  // autenticacion
+  // Si no hay un token, se quita la pantalla de carga, lo que redirige al login
+  useEffect(() => {
+    if (existsInLocalStorage("token")) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
     }
-    // Una vez que se termina de validar el token, si resulto ser valido, se
-    // cargan los components hijos, de lo contrario, se redirige al login
-    else {
-        if (isAuth) {
-            return children;
-        } else {
-            return <Navigate to="/login" />;
-        }
+  }, []);
+
+  // Validar el token
+  useEffect(() => {
+    // Se valida si se esta cargando para dar oportunidad de desplegar la
+    // pantalla de carga. Tenicamente, dado que ya se valido que existe un token
+    // en el almacenamiento local, isLoading debería ser falso, pero se deja por
+    // si se quiere hacer alguna otra validación
+    if (isLoading && existsInLocalStorage("token")) {
+      // Llamada a la API para validar el token
+      post(
+        "authToken",
+        {
+          token: getFromLocalStorage("token"),
+        },
+        () => setIsLoading(false),
+        () => setIsLoading(false)
+      ).then((res) => {
+        // Una vez que se cumpla la promesa, se actualiza el estado de
+        // autenticación con el valor recibido de la api
+        dispatch(setAuth(res));
+      });
     }
+  }, [isLoading, dispatch]);
+
+  // Mientras se esta validando el token, se muestra la pantalla de carga
+  if (isLoading) {
+    return (
+      <Backdrop
+        open={isLoading}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
+  // Una vez que se termina de validar el token, si resulto ser valido, se
+  // cargan los components hijos, de lo contrario, se redirige al login
+  else {
+    if (isAuth) {
+      return children;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  }
 }
 
 ProtectedRoutes.propTypes = {
-    children: propTypes.node.isRequired,
+  children: propTypes.node.isRequired,
 };
 
 export default ProtectedRoutes;

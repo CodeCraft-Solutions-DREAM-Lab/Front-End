@@ -33,8 +33,6 @@ import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
 import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
 import Profile from "./Profile/Profile.jsx";
-import Logros from "./Profile/Logros.jsx"
-import ReservacionesActivas from "./Profile/ReservacionesActivas.jsx"
 
 function secured(Component) {
   return function WrappedComponent(props) {
@@ -66,8 +64,6 @@ const router = createBrowserRouter(
       <Route path="reservacion/sala" element={secured(SelectorSala)()} />
       <Route path="profile" element={secured(Profile)()} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/profile/logros" element={<Logros />} />
-      <Route path="/profile/reservaciones" element={<ReservacionesActivas />} />
     </Route>
   )
 );
