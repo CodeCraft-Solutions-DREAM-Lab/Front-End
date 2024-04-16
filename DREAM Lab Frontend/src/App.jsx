@@ -31,6 +31,7 @@ import Confirmacion from "./Reservaciones/Confirmacion.jsx";
 import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
 import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
+import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
 import Profile from "./Profile/Profile.jsx";
 
 function secured(Component) {
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<LandingPage />} />
+      <Route path="landingpage" element={<LandingPageDev />} /> {/* ruta provisional para desarrollo de la landing */}
       <Route path="login" element={<LoginPage />} />
       <Route path="home" element={secured(HomePage)()} />
       <Route path="reservacion" element={secured(ReservacionSala)()} />

@@ -48,7 +48,7 @@ function LoginTextField({
         }
         type={isVisible ? "text" : "password"}
         classNames={{
-          input: ["text-white text-xl"],
+          input: ["bg-transparent text-white text-xl"],
           inputWrapper: ["bg-transparent border-2  h-12"],
         }}
       />

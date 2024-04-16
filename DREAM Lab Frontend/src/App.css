@@ -18,6 +18,20 @@ body {
   transition: top 5s ease-in-out;
 }
 
+
+
+@media only screen and (min-height: 1025px) {
+  .navbar{
+    height: 6vh;
+  }
+
+  .inputRecomendaciones {
+    margin-top: 7rem;
+    margin-bottom: 4rem;
+
+  }
+  }
+
 .navbar-positioning {
   position: absolute; /* Establishes stacking context */
   z-index: 9;
