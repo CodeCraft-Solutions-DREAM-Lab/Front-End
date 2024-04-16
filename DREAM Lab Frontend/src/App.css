@@ -19,22 +19,21 @@ body {
 }
 
 .navbar-positioning {
-  position: relative; /* Establishes stacking context */
+  position: absolute; /* Establishes stacking context */
+  z-index: 9;
   padding: 2rem;
-  height: 100%;
+
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: top 5s ease-in-out;
-
-  /*Agregue esto de .visible*/
-  top: 0; /* Display navbar at the top */
 }
 
-/* .visible {
-  
+.visible {
+  top: 0;
   transition: top 5s ease-in-out;
-} */
+}
 
 .hidden {
   top: -9rem;
@@ -98,7 +97,7 @@ body {
   justify-content: space-between; /* Change to space-between */
   align-items: center; /* Center items vertically */
   width: 60%;
-  margin-top: 4.5rem;
+  margin-top: 12rem;
   margin-bottom: 4rem;
   margin-inline: auto;
   padding: 1.3rem;

@@ -86,10 +86,11 @@ class Navbar extends React.Component {
     this.state = {
       isVisible: true,
       prevScrollPos: 0,
-      scrollDiffThreshold: 90,
+      currentScrollPos: 0,
+      scrollDiffThreshold: 0, //90
     };
     this.hideBar = this.hideBar.bind(this);
-    this.debouncedHideBar = this.debounce(this.hideBar, 100); // Debounce the hideBar method
+    this.debouncedHideBar = this.debounce(this.hideBar, 10); // Debounce the hideBar method
   }
 
   debounce(func, wait) {
@@ -115,6 +116,7 @@ class Navbar extends React.Component {
     }
 
     this.setState({
+      currentScrollPos: newScrollPos,
       prevScrollPos: newScrollPos,
       isVisible: isVisible,
     });
@@ -155,7 +157,7 @@ class Navbar extends React.Component {
         userAction = null; // Para vistas desconocidas
     }
 
-    let classHide = "";
+    let classHide = "visible";
     if (autoHide && !this.state.isVisible) {
       classHide = "hidden";
     }
