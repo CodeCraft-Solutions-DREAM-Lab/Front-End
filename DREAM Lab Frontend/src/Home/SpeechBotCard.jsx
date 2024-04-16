@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GlassCard from "../components/general/glass-card.jsx";
+import GlassCard from "../components/general/GlassCard.jsx";
 import MicrophoneButton from "./MicrophoneButton.jsx";
 import SendButton from "./SendButton.jsx";
 import SpeechRecognition, {
@@ -7,7 +7,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import TextField from "./TextField.jsx";
 import "../App.css";
-import "../components/general/glass-card.css";
+import "../components/general/GlassCard.css";
 
 function SpeechBotCard(props) {
   // --- Para el reconocimiento de voz ---
