@@ -106,7 +106,6 @@ class Navbar extends React.Component {
 
   hideBar() {
     const newScrollPos = window.scrollY;
-    console.log(newScrollPos);
     const scrollDiff = Math.abs(this.state.prevScrollPos - newScrollPos);
     let isVisible = this.state.isVisible;
 

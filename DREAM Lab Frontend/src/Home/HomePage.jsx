@@ -71,8 +71,6 @@ function HomePage() {
   const [processedTranscript, setProcessedTranscript] = useState("");
   const [data, setData] = useState(initialData);
   const [showRecommendations, setShowRecommendations] = useState(false);
-  // const [prevScrollPos, setPrevScrollPos] = useState(0);
-  // const [visible, setVisible] = useState(true);
   const [experiences, setExperiences] = useState([]);
   const [ufs, setUfs] = useState([]);
   const [salas, setSalas] = useState([]);
@@ -83,93 +81,79 @@ function HomePage() {
   const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
   const [errorExperiences, setErrorExperiences] = useState(null);
 
-  // const [currentScrollPos, setCurrentScrollPos] = useState();
+  const handleResponse = (setState) => {
+    return (response) => {
+      if (typeof response === "string") {
+        setState(JSON.parse(response));
+      } else {
+        setState(response); // Assuming data is already an object
+      }
+    };
+  };
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const newScrollPos = window.scrollY;
-  //     setCurrentScrollPos(newScrollPos); // Update current scroll position
-  //     setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
-  //     setPrevScrollPos(newScrollPos);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Restore scroll position on component mount and data updates
-  //   const restoreScrollPosition = () => {
-  //     window.scrollTo(0, currentScrollPos); // Restore previous scroll position
-  //   };
-
-  //   restoreScrollPosition(); // Call on initial mount
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []); // Only re-run on currentScrollPos changes
+  const handleError = (setError) => {
+    return (error) => {
+      console.error("Error fetching data:", error);
+      setError(error);
+    };
+  };
 
   useEffect(() => {
     setIsLoadingSalas(true);
     setErrorSalas(null);
 
-    get("salas")
-      .then((response) => {
-        if (typeof response === "string") {
-          setSalas(JSON.parse(response));
-        } else {
-          setSalas(response); // Assuming data is already an object
-          console.log("data", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching salas:", error);
-        setErrorSalas(error);
-      })
-      .finally(() => {
-        setIsLoadingSalas(false);
-      });
-  }, []);
-
-  useEffect(() => {
     setIsLoadingExperiences(true);
     setErrorExperiences(null);
-    get("experiencias/autodirigidas")
-      .then((response) => {
-        if (typeof response === "string") {
-          setExperiences(JSON.parse(response));
-        } else {
-          setExperiences(response); // Assuming data is already an object
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching experiences:", error);
-        setErrorExperiences(error);
-      })
-      .finally(() => {
-        setIsLoadingExperiences(false);
-      });
-  }, []);
 
-  useEffect(() => {
     setIsLoadingUfs(true);
     setErrorUfs(null);
 
     const userID = getFromLocalStorage("user");
 
+    // Promise.allSettled([
+    //   get("salas"),
+    //   get("experiencias/autodirigidas"),
+    //   get("experiencias/UFs", { user: userID }),
+    // ])
+    //   .then(([salasResult, experiencesResult, ufsResult]) => {
+    //     if (salasResult.status === "fulfilled") {
+    //       handleResponse(setSalas)(salasResult.value);
+    //     } else {
+    //       handleError(setErrorSalas)(salasResult.reason);
+    //     }
+
+    //     if (experiencesResult.status === "fulfilled") {
+    //       handleResponse(setExperiences)(experiencesResult.value);
+    //     } else {
+    //       handleError(setErrorExperiences)(experiencesResult.reason);
+    //     }
+
+    //     if (ufsResult.status === "fulfilled") {
+    //       handleResponse(setUfs)(ufsResult.value);
+    //     } else {
+    //       handleError(setErrorUfs)(ufsResult.reason);
+    //     }
+    //   })
+    //   .finally(() => {
+    //     setIsLoadingSalas(false);
+    //     setIsLoadingExperiences(false);
+    //     setIsLoadingUfs(false);
+    //   });
+
+    get("salas")
+      .then(handleResponse(setSalas))
+      .catch(handleError(setErrorSalas))
+      .finally(() => setIsLoadingSalas(false));
+
+    get("experiencias/autodirigidas")
+      .then(handleResponse(setExperiences))
+      .catch(handleError(setErrorExperiences))
+      .finally(() => setIsLoadingExperiences(false));
+
     get("experiencias/UFs", { user: userID })
-      .then((response) => {
-        if (typeof response === "string") {
-          setUfs(JSON.parse(response));
-        } else {
-          setUfs(response); // Assuming data is already an object
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching ufs:", error);
-        setErrorUfs(error);
-      })
-      .finally(() => {
-        setIsLoadingUfs(false);
-      });
+      .then(handleResponse(setUfs))
+      .catch(handleError(setErrorUfs))
+      .finally(() => setIsLoadingUfs(false));
   }, []);
 
   useEffect(() => {
