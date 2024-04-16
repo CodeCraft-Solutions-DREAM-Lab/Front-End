@@ -1,0 +1,117 @@
+.home-background-image-container {
+    
+    display: flex;
+    justify-content: space-between; 
+    padding: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: blur(10px); /* Adjust the blur amount as needed */
+    z-index: 1; 
+    object-fit: cover;
+    height: 300px;
+}
+
+.left-blobs-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-image {
+    align-self: flex-start;
+    justify-content: left;
+    height: 90%;
+}
+.right-image {
+    height: 120%;
+}
+.mini-blob {
+    justify-content: center;
+    height: auto; /* Let the height adjust automatically */
+    max-width: 40%; /* Limit the maximum width */
+    margin-left: 20%;
+
+}
+
+
+/* Media query para móvil */
+@media only screen and (max-width: 480px) {
+    .home-background-image-container {
+        flex-direction: column; /* Se alinean las imagenes de manera vertical */
+        filter: blur(8px);
+        
+    }
+
+    .home-background-image-container .left-image {
+        height: 40%;
+    }
+
+    .home-background-image-container .right-image {
+        display: none; /* Quitar imagen de la derecha */
+    }
+    .home-background-image-container .mini-blob {
+        display: none; /* Quitar mini blob */
+    }
+}
+
+
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
+    .home-background-image-container .left-image {
+        height: 80%;
+    }
+
+    .home-background-image-container .right-image {
+        height: 80%;
+    }
+}
+
+
+.background-container {
+    background: linear-gradient(180deg, #042E55 0%, #7B7AFD 100%);
+    position: relative;
+    top: -4.5rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.page-content {
+    position: relative; /* Establishes stacking context */
+    z-index: 2; /* Above background and images */
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-container {
+    width: 100%;
+    margin-bottom: 5%;
+    overflow-x: auto; /* Enable horizontal scrolling by default */
+    white-space: nowrap; /* Prevent wrapping of carousel items */
+}
+
+.carousel-container h1 {
+    color: whitesmoke;
+    font-weight: 700;
+    padding-bottom: 1rem;
+    font-size: medium;
+}
+
+.border-gradient {
+    border: 3px solid transparent; /* Set initial border to transparent */
+    border-image: repeating-linear-gradient(to right, 
+                    #ff0000 0%, 
+                    #ff8000 16.67%, 
+                    #ffff00 33.33%, 
+                    #00ff00 50%, 
+                    #0000ff 66.67%, 
+                    #4b0082 83.33%, 
+                    #9400d3 100%); /* Define the repeating linear gradient border with hex colors */
+    border-image-slice: 1;
+    border-radius: 16px;
+}

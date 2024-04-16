@@ -1,31 +1,52 @@
 import { useState, useEffect } from "react";
-import ImageSlider from './ImageSlider'
-import SpeechBotCard from './SpeechBotCard'
-import '../App.css'
-import GlassCard from '../components/general/glass-card'
-import UserAvatar from '../components/general/UserAvatar'
+import ImageSlider from "./ImageSlider";
+import SpeechBotCard from "./SpeechBotCard";
+import "../App.css";
+import RecommendationsCarousel from "./RecommendationsCarousel";
 import RecomendacionesInvalidas from './RecomendacionesInvalidas';
-import RecommendationsCarousel from './RecommendationsCarousel'
+import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
+import "./HomePage.css";
+import axios from "axios";
+import { getFromLocalStorage } from "../Global/Storage.js";
 
-const OPTIONS = { dragFree: true, loop: true }
+const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
-const unsplash_prefix = 'https://images.unsplash.com/photo-'
-const unsplash_suffix = '?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+const unsplash_prefix = "https://images.unsplash.com/photo-";
+const unsplash_suffix =
+  "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
 const IMAGES = [
-    { 'id': 'sala-1', 'url': '/ImagenSalaVR.png' },
-    { 'id': 'Deep Net', 'url': '/ImagenUsoRouters.png' },
-    { 'id': 'Testing Land', 'url': '/ImagenExpGoogle.png' },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}` },
-    { 'id': 'Electric Garage', 'url': `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}` },
-    { 'id': 'Curso de Swift', 'url': '/ImagenCursoSwift.png' },
-    { 'id': 'Deep Net', 'url': '/ImagenConnections.png' },
+  { id: "1", url: "/ImagenSalaVR.png", title: "Sala VR" },
+  { id: "2", url: "/ImagenUsoRouters.png", title: "Deep Net" },
+  { id: "3", url: "/ImagenExpGoogle.png", title: "Testing Land" },
+  {
+    id: "4",
+    url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
+    title: "Electric Garage",
+  },
+  {
+    id: "5",
+    url: `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
+    title: "Electric Garage",
+  },
+  {
+    id: "6",
+    url: `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,
+    title: "Electric Garage",
+  },
+  {
+    id: "7",
+    url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
+    title: "Electric Garage",
+  },
+  { id: "8", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
+  { id: "9", url: "/ImagenConnections.png", title: "Deep Net" },
+  { id: "10", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
+  { id: "11", url: "/ImagenConnections.png", title: "Deep Net" },
 ];
 
 const initialData = [
-    {
+      {
         bgColor: "#F54748",
         id: 1,
         img: 'https://img.freepik.com/fotos-premium/holograma-circuito-chip-brillante-creativo-sobre-fondo-oscuro-cpu-lugar-simulado-concepto-metaverso-representacion-3d_670147-4751.jpg',
@@ -52,12 +73,26 @@ const initialData = [
 ];
 
 function HomePage() {
-    const [processedTranscript, setProcessedTranscript] = useState('');
-    const [data, setData] = useState(initialData);
-    const [showRecommendations, setShowRecommendations] = useState(false);
-    const [showInvalidNotice, setShowInvalidNotice] = useState(false);
+  const [processedTranscript, setProcessedTranscript] = useState("");
+  const [data, setData] = useState(initialData);
+  const [showRecommendations, setShowRecommendations] = useState(false);
+  const [showInvalidNotice, setShowInvalidNotice] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [experiences, setExperiences] = useState([]);
+  const [ufs, setUfs] = useState([]);
+  const [salas, setSalas] = useState([]);
+  const [isLoadingSalas, setIsLoadingSalas] = useState(false);
+  const [errorSalas, setErrorSalas] = useState(null);
+  const [isLoadingUfs, setIsLoadingUfs] = useState(false);
+  const [errorUfs, setErrorUfs] = useState(null);
+  const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
+  const [errorExperiences, setErrorExperiences] = useState(null);
+  const defaultURL = "http://localhost:3000";
 
-    useEffect(() => {
+  const [currentScrollPos, setCurrentScrollPos] = useState(0);
+  
+  useEffect(() => {
         if (processedTranscript) {
             const fetchData = async () => {
                 const newData = await Promise.all(processedTranscript.map(async (item, index) => {
@@ -118,29 +153,146 @@ function HomePage() {
             fetchData();
         }
     }, [processedTranscript]);
-    
+  
+  const handleProcessedText = (processedText) => {
+    setProcessedTranscript(processedText);
+  };
+  
+useEffect(() => {
+  const handleScroll = () => {
+    const newScrollPos = window.pageYOffset;
+    setCurrentScrollPos(newScrollPos);  // Update current scroll position
+    setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
+    setPrevScrollPos(newScrollPos);
+  };
 
-    const handleProcessedText = (processedText) => {
-        setProcessedTranscript(processedText);
+  window.addEventListener("scroll", handleScroll);
+
+  // Restore scroll position on component mount and data updates
+  const restoreScrollPosition = () => {
+    window.scrollTo(0, currentScrollPos);  // Restore previous scroll position
+  };
+
+  restoreScrollPosition();  // Call on initial mount
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [currentScrollPos]); // Only re-run on currentScrollPos changes
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingSalas(true);
+      setErrorSalas(null);
+
+      try {
+        const response = await axios.get(defaultURL + "/salas");
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setSalas(JSON.parse(data));
+        } else {
+          setSalas(data); // Assuming data is already an object
+        }
+      } catch (error) {
+        console.error("Error fetching salas:", error);
+        setErrorSalas(error);
+      } finally {
+        setIsLoadingSalas(false);
+      }
     };
 
-    return (
-        <>
-            <GlassCard className="navbar" height='4.5rem' padding='0.5rem'>
-                <div className="flex items-center justify-between w-full">
-                    <div className="logo-container">
-                        <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
-                        <h1 className="dreamlab">DREAM Lab</h1>
-                    </div>
-                    <div className="user-avatar-container">
-                        <UserAvatar />
-                    </div>
-                </div>
-            </GlassCard >
+    fetchData();
+  }, [data]);
 
-            <SpeechBotCard width='100%' height='25rem' onProcessedText={handleProcessedText} />
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingExperiences(true);
+      setErrorExperiences(null);
 
-            {showInvalidNotice ? (
+      try {
+        const response = await axios.get(
+          defaultURL + "/experiencias/autodirigidas"
+        );
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setExperiences(JSON.parse(data));
+        } else {
+          setExperiences(data); // Assuming data is already an object
+        }
+      } catch (error) {
+        console.error("Error fetching experiences:", error);
+        setErrorExperiences(error);
+      } finally {
+        setIsLoadingExperiences(false);
+      }
+    };
+ 
+    fetchData();
+  }, [data]);
+  
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingUfs(true);
+      setErrorUfs(null);
+
+      const userID = getFromLocalStorage("user");
+
+      try {
+        const response = await axios.get(defaultURL + "/experiencias/UFs", {
+          params: {
+            user: userID,
+          },
+        });
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setUfs(JSON.parse(data));
+        } else {
+          setUfs(data); // Assuming data is already an object
+        }
+      } catch (error) {
+        console.error("Error fetching ufs:", error);
+        setErrorUfs(error);
+      } finally {
+        setIsLoadingUfs(false);
+      }
+    };
+
+    fetchData();
+  }, [data]);
+
+  return (
+    <>
+      <Navbar visible={visible} view="homeAlumno"/> {/* Use the Navbar component */}
+      <div className="background-container">
+        <div className="home-background-image-container">
+          <div className="left-blobs-container">
+            <img
+              src="/src/images/blob-left.png"
+              alt="Left Image"
+              className="left-image"
+            />
+            <img
+              src="/src/images/small-blob.png"
+              alt="Mini blob"
+              className="mini-blob"
+            />
+          </div>
+          <img
+            src="/src/images/blob-right.png"
+            alt="Right Image"
+            className="right-image"
+          />
+        </div>
+      </div>
+      <div className="page-content">
+        <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
+
+        {showInvalidNotice ? (
                 <RecomendacionesInvalidas />
             ) : (
                 showRecommendations && (
@@ -148,16 +300,61 @@ function HomePage() {
                 )
             )}
 
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-            <br />
-            <ImageSlider images={IMAGES} options={OPTIONS} />
-        </>
-    )
+        <div className="carousel-container">
+          <h1>RECOMENDACIONES</h1>
+          <ImageSlider
+            images={IMAGES}
+            titles={IMAGES.map((item) => item.title)}
+            options={OPTIONS}
+          />
+        </div>
+        <div className="carousel-container">
+          {salas.length > 0 && !isLoadingSalas && (
+            <>
+              <h1>SALAS</h1>
+              <ImageSlider
+                images={salas.map((sala) => ({
+                  id: sala.idSala,
+                  url: sala.fotoURL,
+                  title: sala.nombre,
+                }))}
+                options={OPTIONS}
+              />
+            </>
+          )}
+        </div>
+        <div className="carousel-container">
+          {experiences.length > 0 && !isLoadingExperiences && (
+            <>
+              <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
+              <ImageSlider
+                images={experiences.map((experience) => ({
+                  id: experience.idExperiencia,
+                  url: experience.portadaURL,
+                  title: experience.nombre,
+                }))}
+                options={OPTIONS}
+              />
+            </>
+          )}
+        </div>
+        <div className="carousel-container">
+          {ufs.length > 0 && !isLoadingUfs && (
+            <>
+              <h1>UNIDADES DE FORMACIÓN</h1>
+              <ImageSlider
+                images={ufs.map((uf) => ({
+                  id: uf.idExperiencia,
+                  url: uf.portadaURL,
+                  title: uf.nombre,
+                }))}
+              />
+            </>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default HomePage;
