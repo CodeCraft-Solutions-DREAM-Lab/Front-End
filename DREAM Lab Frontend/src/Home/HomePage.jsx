@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ImageSlider from "./ImageSlider";
 import SpeechBotCard from "./SpeechBotCard";
 import "../App.css";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { getFromLocalStorage } from "../Global/Storage.js";
 
 import { get } from "../Global/Database.js";
+import Detalles from "./Detalles.jsx";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
@@ -98,6 +99,62 @@ function HomePage() {
     };
   };
 
+  const [detallesVisible, setDetallesVisible] = useState(false);
+  const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
+  const detallesRef = useRef(null);
+  const [detallesBD, setDetallesBD] = useState(null);
+  const [salasBD, setSalasBD] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const defaultURL = "http://localhost:3000";
+
+  // Función para mostrar Detalles
+  const mostrarDetalles = () => {
+    setDetallesVisible(true);
+  };
+
+  const handleCloseDetalles = () => {
+    setDetallesVisible(false);
+  };
+
+  // Manejador de eventos para detectar clics fuera de Detalles
+  const handleClickOutsideDetalles = (event) => {
+    // Si el apartado de detalles existe && el lugar donde se presionó no está conteindo en detalles = oculta detalles
+    if (detallesRef.current && !detallesRef.current.contains(event.target)) {
+      setDetallesVisible(false);
+    }
+  };
+
+  const handleImageClick = (imageId) => {
+    setImageID(imageId); // Actualiza el imageID cuando se hace clic en una imagen
+  };
+
+  const [currentScrollPos, setCurrentScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const newScrollPos = window.pageYOffset;
+      setCurrentScrollPos(newScrollPos); // Update current scroll position
+      setVisible(
+        prevScrollPos > newScrollPos || newScrollPos === 0 || detallesVisible
+      );
+      setPrevScrollPos(newScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Restore scroll position on component mount and data updates
+    const restoreScrollPosition = () => {
+      window.scrollTo(0, currentScrollPos); // Restore previous scroll position
+    };
+
+    restoreScrollPosition(); // Call on initial mount
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [currentScrollPos]); // Only re-run on currentScrollPos changes
+
   useEffect(() => {
     setIsLoadingSalas(true);
     setErrorSalas(null);
@@ -167,12 +224,61 @@ function HomePage() {
       });
       setData(newData);
       setShowRecommendations(true);
+      setDetallesVisible(true); // Mostrar detalles cuando se actualiza processedTranscript
     }
+
+    // Agregar el event listener cuando se monta el componente
+    document.addEventListener("mousedown", handleClickOutsideDetalles);
+
+    // Limpiar el event listener cuando se desmonta el componente
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideDetalles);
+    };
   }, [processedTranscript]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await get(
+          "experiencias",
+          () => setIsLoading(false),
+          () => setIsLoading(false)
+        );
+        setDetallesBD(result);
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await get(
+          "salas",
+          () => setIsLoading(false),
+          () => setIsLoading(false)
+        );
+        setSalasBD(result);
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleProcessedText = (processedText) => {
     setProcessedTranscript(processedText);
   };
+
+  console.log("Processed Transcript in HomePage:", processedTranscript);
+
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
 
   return (
     <>
@@ -200,6 +306,28 @@ function HomePage() {
         </div>
       </div>
       <div className="page-content">
+        <div ref={detallesRef}>
+          {detallesVisible && (
+            <Detalles
+              nombre={
+                detallesBD[imageID]?.nombre || "Experiencia D.R.E.A.M. Lab"
+              }
+              descripcion={
+                detallesBD[imageID]?.descripcion ||
+                "Lamentamos la falta de detalles. Estamos trabajando para brindarte una experiencia completa. Agradecemos tu paciencia y esperamos compartir pronto todos los detalles contigo."
+              }
+              autodirigido={detallesBD[imageID]?.esAutoDirigida || false}
+              exclusivoUF={detallesBD[imageID]?.esExclusivaUF || false}
+              imagenExp={
+                salasBD[imageID]?.detallesURL ||
+                "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+              }
+              handleClose={handleCloseDetalles}
+              imageID={imageID} // Pasa el imageID como prop al componente Detalles
+            />
+          )}
+        </div>
+
         <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
 
         {showRecommendations && (
@@ -215,6 +343,8 @@ function HomePage() {
             images={IMAGES}
             titles={IMAGES.map((item) => item.title)}
             options={OPTIONS}
+            mostrarDetalles={mostrarDetalles}
+            onImageClick={handleImageClick}
           />
         </div>
         <div className="carousel-container">
@@ -228,6 +358,8 @@ function HomePage() {
                   title: sala.nombre,
                 }))}
                 options={OPTIONS}
+                mostrarDetalles={mostrarDetalles}
+                onImageClick={handleImageClick}
               />
             </>
           )}
@@ -243,6 +375,8 @@ function HomePage() {
                   title: experience.nombre,
                 }))}
                 options={OPTIONS}
+                mostrarDetalles={mostrarDetalles}
+                onImageClick={handleImageClick}
               />
             </>
           )}
@@ -257,6 +391,8 @@ function HomePage() {
                   url: uf.portadaURL,
                   title: uf.nombre,
                 }))}
+                mostrarDetalles={mostrarDetalles}
+                onImageClick={handleImageClick}
               />
             </>
           )}

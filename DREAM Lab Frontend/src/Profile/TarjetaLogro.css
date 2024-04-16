@@ -1,0 +1,140 @@
+.div-exterior-logro {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    width: 100%;
+    border-radius: 20px;
+    font-family: 'Karla', sans-serif;
+    color: black;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    margin-bottom: 4%;
+    margin-left: 0px;
+    align-items: center;
+}
+
+.icono-logro{
+    width: 25%;
+}
+
+.div-info-logro{
+    width: 65%;
+    margin-left: 6%;
+}
+
+.nombre-logro-bloqueado{
+    text-transform: uppercase;
+    font-size: large;
+    font-weight:900;
+    color: #B7B7B7;
+}
+
+.nombre-logro-desbloqueado{
+    text-transform: uppercase;
+    font-size: large;
+    font-weight:900;
+}
+
+.descripcion-logro{
+    font-size: small;
+    font-weight:light;
+    line-height: 1.2;
+}
+
+@media (max-width: 1200px) {
+
+    .nombre-logro-bloqueado .nombre-logro-desbloqueado{
+        font-size: small;
+    }
+    .descripcion-logro{
+        font-size: small;
+    }
+}
+
+@media (max-width: 950px) {
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: x-small;
+    }
+    .descripcion-logro{
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 820px), (height: 1366px) {
+
+    .div-exterior-logro {
+        width: 100%;
+        height: auto;
+        padding-left: 4%;
+        padding-right: 4%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+    }
+    
+    .icono-logro{
+        display: block;
+        width: 8vw;
+    }
+
+    .div-info-logro{
+        width: 65%;
+        margin-left: 4%;
+    }
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: medium;
+    }
+    .descripcion-logro{
+        font-size: small;
+    }
+ 
+}
+
+@media (height: 1366px) {
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: large;
+    }
+    .descripcion-logro{
+        font-size: medium;
+    }
+  }
+
+@media (max-width: 500px) {
+
+    .div-exterior-logro {
+        display: flex;
+        flex-wrap: wrap;
+        width: 94%;
+        padding-left: 5.5%;
+        padding-right: 8%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+        margin-bottom: 4%;
+        margin-left: 3%;
+        align-items: center;
+    }
+
+    .icono-logro{
+        width: 15vw;
+    }
+
+    .div-info-logro{
+        width: 65%;
+        margin-left: 7%;
+    }
+
+    .nombre-logro-bloqueado, .nombre-logro-desbloqueado{
+        font-size: medium;
+        margin-bottom: 2%;
+    }
+    .descripcion-logro{
+        font-size: small;
+        margin-bottom: 9%;
+
+    }
+
+}
+
