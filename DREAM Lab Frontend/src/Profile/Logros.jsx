@@ -30,7 +30,7 @@ function Logros(){
 	];
 
     return(
-        <div>
+        <div className="out-div">
 
         <div className="back-subtitulo-div">
             <div className="boton-back"><BotonBack ruta="/profile/"/></div>

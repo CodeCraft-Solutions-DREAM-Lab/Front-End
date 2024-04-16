@@ -14,12 +14,11 @@ body {
     justify-content: center;
     background: rgba(255, 255, 255, 0.06);
     position: fixed;
-    z-index: 8;
+    z-index: 9;
     padding: 1%;
     transition: top 5s ease-in-out;
-
+    font-family: "Karla", sans-serif;
 }
-
 
 .navbar-positioning {
     position: relative; /* Establishes stacking context */
@@ -99,8 +98,8 @@ body {
   justify-content: space-between; /* Change to space-between */
   align-items: center; /* Center items vertically */
   width: 60%;
-  margin-top: 4.5rem;
-  margin-bottom: 4rem;
+  margin-top: 7.5rem;
+  margin-bottom: 5.5rem;
   margin-inline: auto;
   padding: 1.3rem;
   padding-left: 1.5rem;

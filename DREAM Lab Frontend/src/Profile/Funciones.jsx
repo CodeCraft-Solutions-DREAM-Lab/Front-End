@@ -10,32 +10,54 @@ export function formatDate(dateString) {
     return date.toLocaleDateString('es-ES', options);
 }
 
-// Función para formatear la hora en el formato deseado
 export function formatTime(timeString) {
     const time = new Date(`1970-01-01T${timeString}`);
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    // Sumar 6 horas
+    time.setHours(time.getHours() + 6);
+
+    // Formatear la hora y los minutos
+    const hour = time.getHours().toString().padStart(2, '0');
+    const minute = time.getMinutes().toString().padStart(2, '0');
+    
+    return `${hour}:${minute}`;
 }
 
-// Función para calcular la hora de finalización
 export function calculateEndTime(startTime, duration) {
     const start = new Date(`1970-01-01T${startTime}`);
+    
+    // Sumar la duración en milisegundos al tiempo de inicio
     const end = new Date(start.getTime() + duration * 60 * 60 * 1000);
-    return end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Sumar 6 horas adicionales
+    end.setHours(end.getHours() + 6);
+
+    // Formatear la hora y los minutos
+    const hour = end.getHours().toString().padStart(2, '0');
+    const minute = end.getMinutes().toString().padStart(2, '0');
+    
+    return `${hour}:${minute}`;
 }
+
 
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
 export function generateReservationCards(reservacionesData, handleClickNodal) {
-
     const reservationCards = reservacionesData.map((reservation, index) => {
-        const endTime = calculateEndTime(reservation.horaInicio, reservation.duracion);
-        const formattedDate = formatDate(reservation.fecha);
-        const formattedTime = formatTime(reservation.horaInicio);
-        const formattedEndTime = formatTime(endTime);
-
+        // Formatear la fecha y hora
+        const startDate = new Date(reservation.fecha).toISOString().split('T')[0];
+        const startTime = new Date(reservation.horaInicio).toISOString().split('T')[1];
+        const endTime = new Date(reservation.horaInicio);
+        endTime.setHours(endTime.getHours() + reservation.duracion);
+    
+        // Obtener las fechas y horas formateadas utilizando las funciones proporcionadas
+        const formattedDate = formatDate(startDate);
+        const formattedTime = formatTime(startTime);
+        const formattedEndTime = calculateEndTime(startTime, reservation.duracion);
+    
         // Crear instancia del componente TarjetaReservacion con las propiedades adecuadas y devolverla
-        return(
+        return (
             <TarjetaReservacion
-                key={index} 
+                key={index}
                 sala={reservation.sala}
                 experiencia={reservation.experiencia}
                 hora={`${formattedTime} - ${formattedEndTime}`}
@@ -44,6 +66,8 @@ export function generateReservationCards(reservacionesData, handleClickNodal) {
             />
         );
     });
+
+  
 
 return reservationCards;
 }

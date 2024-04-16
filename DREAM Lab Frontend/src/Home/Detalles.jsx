@@ -15,7 +15,12 @@ function ExperienceDetails(props){
 
 	const handleClose = () => {
 		setExitAnimation(true);
-    };
+	
+		// Esperar 500 milisegundos (por ejemplo)
+		setTimeout(() => {
+			props.handleClose();
+		}, 500); // ajusta el tiempo según tus necesidades
+	};
 
 	const handleSolicitarClick = () => {
         // Llama a la función de navegación pasada como prop
@@ -26,9 +31,7 @@ function ExperienceDetails(props){
 
     return(
 		<div className={`main-details-div ${animationClass}`}>
-
-			<Navbar visible="visible" view="homeAlumno"/> {/* Use the Navbar component */}
-			
+		
 			<div className="boton-cerrar-detalles">
 				<CloseButton onClick={handleClose}/>
 			</div>

@@ -8,6 +8,8 @@ import BotonBack from "../components/general/BotonBack";
 import {generateReservationCards, renderTarjetasLogro} from "./Funciones.jsx"
 import CancelarReservacion from "./CancelarReservacion.jsx";
 import Navbar from "../components/general/NavBar.jsx";
+import { get } from '../Home/Database.js';
+
 
 const logrosData = [{
 	"nombre": "Big Dreamer",
@@ -64,18 +66,21 @@ function Profile() {
         setTipoNodal(tipo);
     };
 
-  useEffect(() => {
-    fetch(
-      "https://dreamlab-api.azurewebsites.net/reservaciones/usuario/A0XXXXXX1"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setReservaciones(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+  
+	useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const result = await get('reservaciones');
+            setReservaciones(result);
+			console.log(reservaciones)
+          } catch (error) {
+            console.error('An error occurred:', error);
+          }
+    };
+        
+        fetchData();
+    }, []);
+
 
 	return (
 
@@ -161,7 +166,7 @@ function Profile() {
 
 					<div className="reservaciones-div-in">
 
-					{generateReservationCards(reservacionesData, handleClickNodal)}
+					{generateReservationCards(reservaciones, handleClickNodal)}
 						<div className="degradado-down"></div>                 
 
 					</div>
@@ -174,7 +179,6 @@ function Profile() {
 
 			</div>
 			
-			<ListaReservaciones reservations={reservaciones} setReservations={setReservaciones} />
 		</div>
 	);
 }

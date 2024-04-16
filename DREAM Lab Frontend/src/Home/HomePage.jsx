@@ -97,6 +97,10 @@ function HomePage() {
       setDetallesVisible(true);
     };
 
+     const handleCloseDetalles = () => {
+        setDetallesVisible(false);
+    };
+
   // Manejador de eventos para detectar clics fuera de Detalles
    const handleClickOutsideDetalles = (event) => {
     // Si el apartado de detalles existe && el lugar donde se presionó no está conteindo en detalles = oculta detalles
@@ -116,7 +120,7 @@ function HomePage() {
     const handleScroll = () => {
       const newScrollPos = window.pageYOffset;
       setCurrentScrollPos(newScrollPos);  // Update current scroll position
-      setVisible(prevScrollPos > newScrollPos || newScrollPos === 0);
+      setVisible(prevScrollPos > newScrollPos || newScrollPos === 0 || detallesVisible);
       setPrevScrollPos(newScrollPos);
     };
 
@@ -310,6 +314,7 @@ function HomePage() {
                     autodirigido = {detallesBD[imageID]?.esAutoDirigida || false}
                     exclusivoUF = {detallesBD[imageID]?.esExclusivaUF || false}
                     imagenExp = {salasBD[imageID]?.detallesURL || "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"}
+                    handleClose={handleCloseDetalles}
                     imageID={imageID} // Pasa el imageID como prop al componente Detalles
                 />}
         </div>

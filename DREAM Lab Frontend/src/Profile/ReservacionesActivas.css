@@ -1,3 +1,8 @@
+.out-div{
+    height: 100%;
+    padding-top: 33%;
+}
+
 .reservaciones-div-celular{
     background: rgba(255, 231, 231, 0.06); /* Background color with transparency */
     border-radius: 15px;
@@ -6,7 +11,8 @@
     -webkit-backdrop-filter: blur(17.5px);
     border: 1.5px solid rgba(255, 255, 255, 0.10); /* Border color with transparency */
 
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     border-radius: 20px;
     min-height: 70vh;
     padding: 2%;
@@ -41,7 +47,6 @@
 
 .back-subtitulo-div{
     max-width: 100%;
-    margin-top: 25%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -50,8 +55,13 @@
 }
 
 .boton-back{
+    display: flex;
+    position: fixed;
     width: 4%;
+    left: 0;
+    margin-left: 10%;
     cursor: pointer;
+    z-index: 5;
 }
 
 .degradado-down-celular {

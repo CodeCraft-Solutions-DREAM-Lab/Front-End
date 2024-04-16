@@ -15,7 +15,7 @@
     flex-wrap: wrap;
     align-items: center;
 
-    margin-top: 8%;
+    margin-top: 9%;
     margin-bottom: 2%;
     padding-left: 8%;
 
@@ -217,6 +217,7 @@
         font-weight: 650;
         font-size: small;
         margin-bottom: -8px;
+        
     }
     
     .apodo{

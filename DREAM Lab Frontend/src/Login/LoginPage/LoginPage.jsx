@@ -135,7 +135,7 @@ export default function LoginPage() {
           {message}
         </Alert>
       </Snackbar>
-      ;
+      
     </div>
   );
 }

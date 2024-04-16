@@ -9,29 +9,29 @@ function ReservacionesActivas(){
     const reservacionesData = [{
         "sala": "Sala Horizons",
         "experiencia": "VR Experience",
-        "horaInicio": "15:00:00",
+        "horaInicio": "1970-01-01T10:00:00.000Z",
         "duracion": 2,
-        "fecha": "2024-12-15"
+        "fecha": "2024-01-01T00:00:00.000Z"
         },
         {
         "sala": "Dimension Forge",
         "experiencia": "Make a Computer - Course",
-        "horaInicio": "14:30:00",
+        "horaInicio": "1970-01-01T10:00:00.000Z",
         "duracion": 1,
-        "fecha": "2024-01-24"
+        "fecha": "2024-01-01T00:00:00.000Z"
         },
         {
         "sala": "Lego Room",
         "experiencia": "Swift Course",
-        "horaInicio": "08:00:00",
+        "horaInicio": "1970-01-01T10:00:00.000Z",
         "duracion": 3,
-        "fecha": "2024-04-26"
+        "fecha": "2024-01-01T00:00:00.000Z"
         }
     ]
 
     return(
 
-        <div>
+        <div className="out-div">
             <div className="back-subtitulo-div">
                 <div className="boton-back"><BotonBack ruta="/profile/"/></div>
                 <h2 className="sub-celular">Reservaciones activas</h2>
