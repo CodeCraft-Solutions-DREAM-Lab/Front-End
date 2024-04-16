@@ -1,29 +1,65 @@
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
 import {
+    existsInSessionStorage,
     getFromSessionStorage,
     saveToSessionStorage,
 } from "../../Global/Storage";
+
+import { post } from "../../Global/Database";
 
 function FechaFormulario(props) {
 
     const {update, setUpdate} = props;
     
     const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
-    const [fecha, setFecha] = useState(dayjs(getFromSessionStorage("fecha")) || dayjs());
+    const [fecha, setFecha] = useState();
     const [fechaIsoString, setFechaIsoString] = useState(getFromSessionStorage("fechaIsoString") || "");
     const [horaInicio, setHoraInicio] = useState(getFromSessionStorage("horaInicio") || 0);
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(getFromSessionStorage("horaInicioIsoString") || "");
     const [duration, setDuration] = useState(getFromSessionStorage("duration") || 0);
+    const [freeHours, setFreeHours] = useState([]);
+    const [isSelectHoursDisabled, setIsSelectHoursDisabled] = useState(true);
+
+    const fetchFreeHoursArray = () => {
+        const date = new Date(getFromSessionStorage("fecha"));
+        post("salas/horasLibres", 
+            {
+                idSala: 1,
+                fecha: date.toISOString(),
+                personas: 3
+            }
+        )
+        .then((response) => {
+            setFreeHours(response);
+        })
+    }
+
+    const horaFormatter = (hora) => {
+        return hora < 12 ? `${hora} AM` : `${hora%13+Math.trunc(hora/13)} PM`;
+    }
 
     useEffect(() => {
-        if (!!fecha) {
+        if (existsInSessionStorage("fecha")) {
+            setFecha(dayjs(getFromSessionStorage("fecha")));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!!fecha && fecha !== 'Invalid Date') {
             saveToSessionStorage("fecha", fecha)
         }
+
+        if (!!getFromSessionStorage("fecha")) {
+            fetchFreeHoursArray();
+            setIsSelectHoursDisabled(false);
+        } else {
+            setIsSelectHoursDisabled(true);
+        }
+
     }, [fecha]);
 
     useEffect(() => {
@@ -69,13 +105,14 @@ function FechaFormulario(props) {
                 <Autocomplete 
                     className="max-w mb-3"
                     aria-label="Hora de inicio"
-                    selectedKey={horaInicio+"am"}
+                    selectedKey={horaFormatter(horaInicio)}
+                    disabled={isSelectHoursDisabled}
                 >
-                    {[9, 10, 11].map((hora) => (
+                    {freeHours.map((hora) => (
                         <AutocompleteItem
-                            key={hora + "am"}
+                            key={horaFormatter(hora)}
                             value={hora}
-                            textValue={`${hora} am`}
+                            textValue={horaFormatter(hora)}
                             onClick={() => {
                                 setHoraInicio(hora);
                                 const date = new Date();
@@ -88,7 +125,7 @@ function FechaFormulario(props) {
                                 setUpdate(!update);
                             }}
                         >
-                            {hora} am
+                            {horaFormatter(hora)}
                         </AutocompleteItem>
                     ))}
                 </Autocomplete>
@@ -98,6 +135,7 @@ function FechaFormulario(props) {
                     className="max-w"
                     aria-label="Duración"
                     selectedKey={duration+(duration == 1 ? " hora" : " horas")}
+                    disabled={isSelectHoursDisabled}
                 >
                     {["1 hora", "2 horas", "3 horas", "4 horas"].map((hora) => (
                         <AutocompleteItem
@@ -115,27 +153,6 @@ function FechaFormulario(props) {
                         </AutocompleteItem>
                     ))}
                 </Autocomplete>
-
-                {/* <Button onClick={ () => {
-                    // console.log("-----Session Storage:--------------");
-                    // console.log(getFromSessionStorage("fecha"));
-                    // console.log(getFromSessionStorage("fechaIsoString"));
-                    // console.log(getFromSessionStorage("horaInicio"));
-                    // console.log(getFromSessionStorage("horaInicioIsoString"));
-                    // console.log(getFromSessionStorage("duration"));
-                    // console.log("------Estados: -------------------");
-                    // console.log(fecha);
-                    // console.log(fechaIsoString);
-                    // console.log(horaInicio);
-                    // console.log(horaInicioIsoString);
-                    // console.log(duration);
-                    // console.log("----------------------------------")
-                    console.log(duration);
-                    console.log(selectedKeyInDuration);
-                }}>
-                    Session Storage
-                </Button> */}
-
         </div>
     );
 }

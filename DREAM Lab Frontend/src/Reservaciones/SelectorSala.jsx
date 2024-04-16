@@ -14,17 +14,16 @@ function SelectorSala(props) {
     let navigate = useNavigate();
 
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-
         if (!getFromSessionStorage("fecha") ||
             !getFromSessionStorage("horaInicio") || 
             !getFromSessionStorage("duration")) {
-            setIsButtonDisabled(true);
+            setIsNextButtonDisabled(true);
         } else {
-            setIsButtonDisabled(false);
+            setIsNextButtonDisabled(false);
         }
     }, [update]);
 
@@ -59,7 +58,7 @@ function SelectorSala(props) {
                         onClick={() => {
                             setIsFirstReminderOpen(true)
                         }}
-                        disabled={isButtonDisabled}
+                        disabled={isNextButtonDisabled}
                     >
                         Aceptar
                     </Button>
