@@ -21,6 +21,20 @@ body {
     
 }
 
+
+
+@media only screen and (min-height: 1025px) {
+  .navbar{
+    height: 6vh;
+  }
+
+  .inputRecomendaciones {
+    margin-top: 7rem;
+    margin-bottom: 4rem;
+
+  }
+  }
+
 .navbar-positioning {
     position: relative; /* Establishes stacking context */
     padding: 2rem;
