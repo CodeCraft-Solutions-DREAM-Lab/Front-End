@@ -211,7 +211,7 @@ useEffect(() => {
 
   return (
     <>
-      <Navbar visible={visible} view="homeAlumno"/> {/* Use the Navbar component */}
+      {/*<Navbar visible={visible} view="homeAlumno"/>  Use the Navbar component */}
       <div className="background-container">
         <div className="home-background-image-container">
           <div className="left-blobs-container">
