@@ -17,6 +17,7 @@ function LandingPage() {
       "token",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
     );
+    saveToLocalStorage("user", "test");
     dispatch(setAuth(true));
     navigate("home");
   };
