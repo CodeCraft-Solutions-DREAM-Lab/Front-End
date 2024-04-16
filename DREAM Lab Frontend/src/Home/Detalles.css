@@ -91,7 +91,7 @@
 }
 
 .boton-cerrar-detalles{
-    transform: translateX(95%) translateY(100px);
+    transform: translateX(95%) translateY(60px);
 }
 
 @media (max-width: 1065px){
