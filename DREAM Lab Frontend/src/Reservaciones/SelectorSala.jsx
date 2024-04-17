@@ -12,7 +12,7 @@ import imagePlaceholder from "./components/3D-model-placeholder.png";
 import GlassCard from "../components/general/GlassCard";
 import "./components/RoundedButton.css";
 
-import { getFromSessionStorage } from "../Global/Storage";
+import { getFromSessionStorage } from "../Global/Storage"; 
 
 function SelectorSala(props) {
 	let navigate = useNavigate();
@@ -60,7 +60,7 @@ function SelectorSala(props) {
 						{/* Sección de la derecha */}
 						<PrimerRecordatorio
 							isOpen={isFirstReminderOpen}
-							size="lg"
+							size="2xl"
 							onClose={() => {
 								setIsFirstReminderOpen(false);
 							}}
@@ -97,3 +97,4 @@ function SelectorSala(props) {
 }
 
 export default SelectorSala;
+
