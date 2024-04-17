@@ -4,6 +4,7 @@ import GlassCard from "../components/general/GlassCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Slider from "./Slider";
+import { get } from "../Global/Database.js";
 
 import {
   getFromSessionStorage,
@@ -30,6 +31,8 @@ function ReservacionCuarto() {
 
   const [fecha, setFecha] = useState(0);
   const [fechaIsoString, setFechaIsoString] = useState("");
+
+  const [espacio, setEspacio] = useState(10);
 
   async function handleClick() {
     const date = new Date(fecha);
@@ -65,6 +68,20 @@ function ReservacionCuarto() {
         console.error("Error:", error);
       });
   }
+
+  const salaId = 1; 
+
+  useEffect(() => {
+    get(`mesas/${salaId}`) 
+        .then((result) => {
+            const maxCupos = result.maxCupos;
+            setEspacio(maxCupos);
+            console.log(maxCupos)
+        })
+        .catch((error) => {
+            console.error("An error occurred:", error);
+        });
+}, []);
 
   return (
     <GlassCard padding="2rem">
@@ -136,7 +153,7 @@ function ReservacionCuarto() {
       <Button color="primary" variant="solid" onClick={handleClick}>
         Aceptar
       </Button>
-      <Slider minimo={1} maximo={8}/>
+      <Slider minimo={1} maximo={7}/>
     </GlassCard>
   );
 }
