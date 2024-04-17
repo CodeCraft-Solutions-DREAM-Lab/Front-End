@@ -6,9 +6,7 @@ import TextoFecha from "./components/TextoFecha";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-    getFromSessionStorage,
-} from "../Global/Storage";
+import { getFromSessionStorage } from "../Global/Storage";
 
 function SelectorSala(props) {
     let navigate = useNavigate();
@@ -18,9 +16,11 @@ function SelectorSala(props) {
     const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-        if (!getFromSessionStorage("fecha") ||
-            !getFromSessionStorage("horaInicio") || 
-            !getFromSessionStorage("duration")) {
+        if (
+            !getFromSessionStorage("fecha") ||
+            !getFromSessionStorage("horaInicio") ||
+            !getFromSessionStorage("duration")
+        ) {
             setIsNextButtonDisabled(true);
         } else {
             setIsNextButtonDisabled(false);
@@ -36,36 +36,32 @@ function SelectorSala(props) {
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    <PrimerRecordatorio 
+                    <PrimerRecordatorio
                         isOpen={isFirstReminderOpen}
-                        size="lg"
+                        size="2xl"
                         onClose={() => {
-                            setIsFirstReminderOpen(false)
+                            setIsFirstReminderOpen(false);
                         }}
                         onOk={() => {
-                            setIsFirstReminderOpen(false)
-                            navigate("/reservacion/resumen")
+                            setIsFirstReminderOpen(false);
+                            navigate("/reservacion/resumen");
                         }}
                     />
-                    <FechaFormulario 
-                        update={update}
-                        setUpdate={setUpdate}
-                    />
-                    <TextoFecha update={update}/>
+                    <FechaFormulario update={update} setUpdate={setUpdate} />
+                    <TextoFecha update={update} />
                     <div className="flex w-fit p-3">
-                    <Button 
-                        className="mt-4 px-2 justify-self-center"
-                        onClick={() => {
-                            setIsFirstReminderOpen(true)
-                        }}
-                        disabled={isNextButtonDisabled}
-                    >
-                        Aceptar
-                    </Button>
+                        <Button
+                            className="mt-4 px-2 justify-self-center"
+                            onClick={() => {
+                                setIsFirstReminderOpen(true);
+                            }}
+                            disabled={isNextButtonDisabled}
+                        >
+                            Aceptar
+                        </Button>
                     </div>
                 </Grid>
             </Grid>
-
         </div>
     );
 }
