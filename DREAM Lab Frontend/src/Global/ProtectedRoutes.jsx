@@ -48,7 +48,7 @@ function ProtectedRoutes({ children }) {
         if (isLoading && existsInLocalStorage("token")) {
             // Llamada a la API para validar el token
             post(
-                "authToken",
+                "auth/token",
                 {
                     token: getFromLocalStorage("token"),
                 },
