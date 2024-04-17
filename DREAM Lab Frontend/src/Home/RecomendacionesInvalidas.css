@@ -1,0 +1,30 @@
+
+.avisoRecomendacionesInvalidas{
+    display: flex;
+	justify-content: center;
+    padding-bottom: 20px;
+}
+
+.containerFondo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 45%;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 40px;;
+}
+
+.containerFondo p{
+    color: #5F5F5F;
+    width: 65%;
+    font-weight: 500;
+    padding-right: 5%;
+}
+
+.nubeError{
+    width: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 5%;
+}

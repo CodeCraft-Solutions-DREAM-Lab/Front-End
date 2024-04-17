@@ -3,13 +3,14 @@ import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
 import GlassCard from "../components/general/GlassCard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Slider from "./Slider";
 
 import {
   getFromSessionStorage,
   existsInSessionStorage,
 } from "../Global/Storage";
 
-function ReservacionCuarto(props) {
+function ReservacionCuarto() {
   const navigate = useNavigate();
 
   // Si no existe la experiencia en el sessionStorage, redirigir a la página de inicio
@@ -30,7 +31,7 @@ function ReservacionCuarto(props) {
   const [fecha, setFecha] = useState(0);
   const [fechaIsoString, setFechaIsoString] = useState("");
 
-  async function handleClick(imageId) {
+  async function handleClick() {
     const date = new Date(fecha);
     setFechaIsoString(date.toISOString());
     setHoraInicioIsoString(new Date(date.setHours(horaInicio)).toISOString());
@@ -135,6 +136,7 @@ function ReservacionCuarto(props) {
       <Button color="primary" variant="solid" onClick={handleClick}>
         Aceptar
       </Button>
+      <Slider minimo={1} maximo={8}/>
     </GlassCard>
   );
 }
