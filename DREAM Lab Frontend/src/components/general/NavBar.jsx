@@ -162,16 +162,21 @@ class Navbar extends React.Component {
       classHide = "hidden";
     }
 
+    const handleDivClick = () => {
+      // Redirige a la página deseada al hacer clic en el div
+      window.location.href = "/home/";
+    };
+
     return (
       <div className={`navbar-positioning ${classHide}`}>
         <div className="navbar glass-card" height="1rem">
           <div className="flex items-center justify-between w-full">
-            <div className="logo-container">
-              <img src="/LogoDreamLab.png" alt="Logo" className="logo" />
+            <div className="logo-container" onClick={handleDivClick} style={{cursor: 'pointer'}}>
+              <img src="/LogoDreamLab.png" alt="Logo" className="logo"/>
               <h1 className="dreamlab">DREAM LAB</h1>
             </div>
             {searchBar} {/* Se ve la searchBar dependiendo de la vista */}
-            <div className="user-avatar-container">
+            <div className="user-avatar-container" style={{cursor: 'pointer'}}>
               {userAction}
               {/* Se ven las acciones dependiendo de la vista (profile o logout o profile + create experience) */}
             </div>

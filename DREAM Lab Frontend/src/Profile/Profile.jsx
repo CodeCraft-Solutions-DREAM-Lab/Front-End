@@ -82,7 +82,10 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <Navbar autoHide={false} view="perfil" />
+
+      <div className="navbar-div-profile">
+        <Navbar autoHide={false} view="perfil" />
+      </div>
 
       {tipoNodal === 1 ? (
         <CancelarReservacion
