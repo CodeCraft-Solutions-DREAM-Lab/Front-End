@@ -150,7 +150,7 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    #5e69c7 30%
+    #6F75E1 30%
   ); /* Crea un degradado de transparente a morado */
   border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
   border-bottom-right-radius: 20px;
@@ -166,6 +166,10 @@
   margin-bottom: 1%;
   margin-left: 3%;
   margin-top: 6%;
+}
+
+.navbar-div-profile{
+  margin-bottom: 7vh;
 }
 
 @media (max-width: 800px) {
@@ -256,6 +260,10 @@
   .logros-div {
     height: 26vh;
     min-height: 0vh;
+  }
+
+  .navbar-div-profile{
+    margin-bottom: 3vh;
   }
 }
 
