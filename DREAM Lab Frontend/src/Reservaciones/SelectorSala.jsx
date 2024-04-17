@@ -33,18 +33,20 @@ function SelectorSala(props) {
 
 	return (
 		<div>
-            <NavBar view="soloPerfil" autoHide={false} />
+			<NavBar view="soloPerfil" autoHide={false} />
 			<div className="container">
 				{/* Contenedor principal */}
 				<div className="card-container">
 					{/* Sección de la izquierda */}
 
-                    {/* Nombre de la sala */}
-					<div>
+					{/* Nombre de la sala */}
+					<div className="nombre-sala">
 						<h1>Nombre de la sala</h1>
 					</div>
-                    <Slider minimo="1" maximo="8"/>
-                    <img src={imagePlaceholder} ></img> {/* Placeholder del modelo 3D */}
+					<Slider minimo="1" maximo="8" />
+					<div className="model">
+						<img src={imagePlaceholder}></img> {/* Placeholder del modelo 3D */}
+					</div>
 				</div>
 				<div className="form-container">
 					{" "}

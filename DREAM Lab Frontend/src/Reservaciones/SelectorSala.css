@@ -1,32 +1,45 @@
 .container {
-    display: flex;
-    justify-content: center; /* Optional here */
-    width: 100%; /* Set the container to take up the full width */
+	display: flex;
+	justify-content: center; /* Optional here */
+	width: 100%; /* Set the container to take up the full width */
+	height: auto;
+	padding-top: 10%;
+}
+
+.nombre-sala {
+	color: white;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.model {
+    width: 30%;
     height: auto;
-    padding-top: 10%;
-  }
-  
-  .card-container {
-    width: 70%; /* Set the left section to 70% width */
-    padding: 20px; /* Existing padding */
-  }
-  
-  .form-container {
-    width: 30%; /* Set the right section to 30% width */
-    display: flex; 
-    flex-direction: column;
-    gap: 10%; /* Existing styles */
-  }
-  
-  
-  .form-container {
-    display: flex; /* Make the form container a flexbox for vertical arrangement */
-    flex-direction: column; /* Stack elements vertically */
-    gap: 10px; /* Add some space between elements within the form container */
-  }
-  
-  .button-container {
-    /* Optional styles for the button container - adjust as needed */
-    text-align: center; /* Center the button horizontally */
-  }
-  
+}
+
+.card-container {
+	width: 70%; /* Set the left section to 70% width */
+	padding: 20px; /* Existing padding */
+	display: flex; /* Make the card container a flexbox container */
+	flex-direction: column;
+	justify-content: center; /* Center content horizontally within the card container */
+	align-items: center; /* Center content vertically within the card container */
+}
+
+.form-container {
+	width: 30%; /* Set the right section to 30% width */
+	display: flex;
+	flex-direction: column;
+	gap: 10%; /* Existing styles */
+}
+
+.form-container {
+	display: flex; /* Make the form container a flexbox for vertical arrangement */
+	flex-direction: column; /* Stack elements vertically */
+	gap: 10px; /* Add some space between elements within the form container */
+}
+
+.button-container {
+	/* Optional styles for the button container - adjust as needed */
+	text-align: center; /* Center the button horizontally */
+}
