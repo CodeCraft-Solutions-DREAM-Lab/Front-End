@@ -18,8 +18,14 @@ const ImageSlider = (props) => {
     mostrarDetalles(); 
     dispatch(setExperiencia(idExperiencia));
     saveToSessionStorage("experiencia", idExperiencia);
-    props.onImageClick(idExperiencia); // pasa el ID de la imagen al componente padre
+    props.onImageClick(idExperiencia - 1); // pasa el ID de la imagen al componente padre
     console.log("IMAGE SLIDER: " + idExperiencia);
+
+    // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
+    const isSalaImage = props.setImageType === "salas";
+
+    // Llamar a setIsSalaClicked con el valor correspondiente
+    props.setIsSalaClicked(isSalaImage);
 
   }
 
