@@ -2,14 +2,12 @@
 .slider-out{
     align-items: center;
     width: 40%;
-    margin: 5%;
     background-color: white, 0.5;
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 1%;
     padding-bottom: 1%;
     border-radius: 20px; /* Bordes redondeados */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Sombra difuminada */
 }
 
 .slider-container-in{
@@ -29,7 +27,8 @@
     font-family: 'Karla', sans-serif;
     color: #D1D1D1;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 0;
+    margin-bottom: 5%;
     text-transform: uppercase;
     text-align: center;
 }
@@ -66,7 +65,7 @@
         padding-right: 4%;
         width: 60%;
         margin: 0%;
-        margin-bottom: 15%;
+        margin-bottom: 10vh;
     }
 
 }
@@ -83,7 +82,7 @@
         padding-right: 4%;
         width: 100%;
         margin: 0%;
-        margin-bottom: 15%;
+        margin-bottom: 10vh;
     }
 }
 
@@ -99,7 +98,7 @@
         padding-right: 4%;
         width: 100%;
         margin: 0%;
-        margin-bottom: 15%;
+        margin-bottom: 10vh;
         padding: 5%;
     }
 
