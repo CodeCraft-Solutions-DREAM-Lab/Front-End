@@ -75,7 +75,7 @@ function SelectorSala(props) {
 							{/* Button container div */}
                             
 							<Button
-								className="rounded-full justify-self-center login-button"
+								className="mt-2 rounded-full justify-self-center login-button"
 								onClick={() => {
 									setIsFirstReminderOpen(true);
 								}}
