@@ -10,6 +10,7 @@ import {
 } from "../../Global/Storage";
 
 import { post } from "../../Global/Database";
+import { height, minHeight } from "@mui/system";
 
 function FechaFormulario(props) {
 
@@ -91,7 +92,16 @@ function FechaFormulario(props) {
         <div className="flex flex-col mx-3">
                 <p className="text-white">Fecha</p>
                 <DatePicker
-                    className="bg-white rounded font-bold"
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: '16px',
+                        "& .MuiInputBase-root": { // Target specific MUI class for background
+                            height: '3rem',
+                          backgroundColor: 'white',
+                          borderRadius: '16px'
+                        },
+                      }}
+                      className="rounded-24 font-bold" 
                     value={fecha}
                     minDate={minEligibleDate}
                     onChange={(newValue) => {
@@ -103,13 +113,21 @@ function FechaFormulario(props) {
 
                 <p className="text-white mt-6">Hora de inicio</p>
                 <Autocomplete 
-                    className="max-w mb-3"
+                    className="mb-3 "
                     aria-label="Hora de inicio"
                     selectedKey={horaFormatter(horaInicio)}
                     disabled={isSelectHoursDisabled}
+                    sx={{
+                        "& .MuiAutocomplete-input": { // Target specific MUI class for background
+                            height: '3rem',
+                          backgroundColor: 'white',
+                          borderRadius: '16px'
+                        },
+                      }}
                 >
                     {freeHours.map((hora) => (
                         <AutocompleteItem
+                        
                             key={horaFormatter(hora)}
                             value={hora}
                             textValue={horaFormatter(hora)}
@@ -124,6 +142,7 @@ function FechaFormulario(props) {
                                 setHoraInicioIsoString(date.toISOString());
                                 setUpdate(!update);
                             }}
+                           
                         >
                             {horaFormatter(hora)}
                         </AutocompleteItem>

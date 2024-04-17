@@ -9,6 +9,8 @@ import "../Reservaciones/SelectorSala.css";
 import NavBar from "../components/general/NavBar";
 import Slider from "./Slider";
 import imagePlaceholder from "./components/3D-model-placeholder.png";
+import GlassCard from "../components/general/GlassCard";
+import "./components/RoundedButton.css";
 
 import { getFromSessionStorage } from "../Global/Storage";
 
@@ -33,49 +35,60 @@ function SelectorSala(props) {
 
 	return (
 		<div>
-			<NavBar view="soloPerfil" autoHide={false} />
-			<div className="container">
-				{/* Contenedor principal */}
-				<div className="card-container">
-					{/* Sección de la izquierda */}
+			<NavBar view="soloPerfil" autoHide={true} />
+			<div className="outer-container">
+				<GlassCard className="menu-lateral">
+					<p>menu</p>
+				</GlassCard>
+				<div className="container">
+					{/* Contenedor principal */}
 
-					{/* Nombre de la sala */}
-					<div className="nombre-sala">
-						<h1>Nombre de la sala</h1>
+					<div className="card-container">
+						{/* Sección de la izquierda */}
+
+						{/* Nombre de la sala */}
+						<div className="nombre-sala">
+							<h1>DIMENSION FORGE</h1>
+						</div>
+						<Slider minimo="1" maximo="8" />
+						<div className="model">
+							<img src={imagePlaceholder}></img>{" "}
+							{/* Placeholder del modelo 3D */}
+						</div>
 					</div>
-					<Slider minimo="1" maximo="8" />
-					<div className="model">
-						<img src={imagePlaceholder}></img> {/* Placeholder del modelo 3D */}
-					</div>
-				</div>
-				<div className="form-container">
-					{" "}
-					{/* Sección de la derecha */}
-					<PrimerRecordatorio
-						isOpen={isFirstReminderOpen}
-						size="lg"
-						onClose={() => {
-							setIsFirstReminderOpen(false);
-						}}
-						onOk={() => {
-							setIsFirstReminderOpen(false);
-							navigate("/reservacion/resumen");
-						}}
-					/>
-					<FechaFormulario update={update} setUpdate={setUpdate} />
-					<TextoFecha update={update} />
-					<div className="button-container">
-						{" "}
-						{/* Button container div */}
-						<Button
-							className="mt-4 px-2 justify-self-center"
-							onClick={() => {
-								setIsFirstReminderOpen(true);
+					<div className="form-container">
+						{/* Sección de la derecha */}
+						<PrimerRecordatorio
+							isOpen={isFirstReminderOpen}
+							size="lg"
+							onClose={() => {
+								setIsFirstReminderOpen(false);
 							}}
-							disabled={isNextButtonDisabled}
-						>
-							Aceptar
-						</Button>
+							onOk={() => {
+								setIsFirstReminderOpen(false);
+								navigate("/reservacion/resumen");
+							}}
+						/>
+						<FechaFormulario update={update} setUpdate={setUpdate} />
+						<TextoFecha update={update} />
+						<div className="button-container">
+							{" "}
+							{/* Button container div */}
+                            
+							<Button
+								className="mt-4 rounded-full justify-self-center login-button"
+								onClick={() => {
+									setIsFirstReminderOpen(true);
+								}}
+                                color="white"
+								disabled={isNextButtonDisabled}
+							>
+								<p className="button-label">ACEPTAR</p>
+							</Button>
+						</div>
+                        <div className="alerta">
+                            <p>La asignación del lugar se hará hoy a las 3 pm. Compiten 10 reservaciones por 20 cupos.</p>
+                        </div>
 					</div>
 				</div>
 			</div>
