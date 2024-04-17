@@ -34,7 +34,7 @@ function SelectorSala(props) {
 
 	return (
 		<div>
-			<NavBar view="soloPerfil" autoHide={true} />
+			<NavBar view="soloPerfil" autoHide={false} />
 			<div className="outer-container">
 				<GlassCard className="menu-lateral">
 					<p>menu</p>
@@ -75,7 +75,7 @@ function SelectorSala(props) {
 							{/* Button container div */}
                             
 							<Button
-								className="mt-4 rounded-full justify-self-center login-button"
+								className="rounded-full justify-self-center login-button"
 								onClick={() => {
 									setIsFirstReminderOpen(true);
 								}}
