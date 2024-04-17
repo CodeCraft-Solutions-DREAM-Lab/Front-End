@@ -1,6 +1,5 @@
-import { Card, Button } from "@nextui-org/react";
-import { Grid } from "@mui/material";
 import FechaFormulario from "./components/FechaFormulario";
+import { Button } from "@nextui-org/react";
 import PrimerRecordatorio from "./components/PrimerRecordatorio";
 import TextoFecha from "./components/TextoFecha";
 import { useEffect, useState } from "react";
