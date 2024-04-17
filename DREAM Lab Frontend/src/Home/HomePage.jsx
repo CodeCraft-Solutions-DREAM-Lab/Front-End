@@ -8,7 +8,7 @@ import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar comp
 import "./HomePage.css";
 import { getFromLocalStorage } from "../Global/Storage.js";
 
-import { get } from "../Global/Database.js";
+import { get, post } from "../Global/Database.js";
 import Detalles from "./Detalles.jsx";
 
 import LoadingScreen from "../Global/LoadingScreen.jsx";
@@ -137,6 +137,16 @@ function HomePage() {
     };
 
     useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutsideDetalles);
+        return () => {
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutsideDetalles
+            );
+        };
+    }, [detallesRef]);
+
+    useEffect(() => {
         if (processedTranscript) {
             const fetchData = async () => {
                 const newData = await Promise.all(
@@ -247,15 +257,45 @@ function HomePage() {
             .catch(handleError(setErrorExperiences))
             .finally(() => setIsLoadingExperiences(false));
 
-        get("experiencias/UFs", { user: userID })
+        post("experiencias/UFs", { user: userID })
             .then(handleResponse(setUfs))
             .catch(handleError(setErrorUfs))
             .finally(() => setIsLoadingUfs(false));
     }, []);
 
+    useEffect(() => {
+        get(
+            "experiencias",
+            () => setIsLoading(false),
+            () => setIsLoading(false)
+        )
+            .then((result) => {
+                setDetallesBD(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+
+        get(
+            "salas",
+            () => setIsLoading(false),
+            () => setIsLoading(false)
+        )
+            .then((result) => {
+                setSalasBD(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
+    if (isLoading) {
+        return <LoadingScreen isLoading={isLoading} />;
+    }
+
     return (
         <>
-            <Navbar view="homeAlumno" autoHide={true} />
+            <Navbar view="homeAlumno" autoHide={!detallesVisible} />
             {/* Use the Navbar component */}
             <div className="background-container">
                 <div className="home-background-image-container">
