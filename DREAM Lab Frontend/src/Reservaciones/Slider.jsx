@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Slider.css'; 
 import unaPersona from '../Home/Images/onePerson.png'
 import grupoPersonas from '../Home/Images/group.png'
+import { saveToSessionStorage } from '../Global/Storage';
 
 function Slider({minimo, maximo}) {
   const [value, setValue] = useState(minimo); 
+
+  useEffect(() => {
+    const personas = sessionStorage.getItem("personas");
+    if (personas) {
+      setValue(parseInt(personas));
+    }
+  }, []);
+
+  useEffect(() => {
+    saveToSessionStorage("personas", value);
+  }, [value]);
 
   const handleChange = (event) => {
     setValue(event.target.value); 

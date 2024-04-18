@@ -15,6 +15,18 @@ const ImageSlider = (props) => {
   const { mostrarDetalles } = props;
 
   function handleClick(idExperiencia) {
+
+    // // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
+    // const isSalaImage = props.setImageType === "salas";
+
+    // if (isSalaImage) {
+    //   saveToSessionStorage("sala", idExperiencia);
+    // } else {
+    //   dispatch(setExperiencia(idExperiencia));
+    //   saveToSessionStorage("experiencia", idExperiencia);
+    // }
+    
+
     mostrarDetalles(); 
     dispatch(setExperiencia(idExperiencia));
     saveToSessionStorage("experiencia", idExperiencia);
