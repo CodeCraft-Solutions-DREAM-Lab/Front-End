@@ -18,6 +18,7 @@ function TextField({ value, onChange, onKeyDown }) {
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
+      placeholder="Escribe o habla para pedir una recomendación"
     />
   );
 }

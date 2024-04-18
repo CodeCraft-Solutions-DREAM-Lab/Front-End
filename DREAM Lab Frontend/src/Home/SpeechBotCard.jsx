@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GlassCard from "../components/general/GlassCard.jsx";
+import { Modal, Button } from "react-bootstrap";
 import MicrophoneButton from "./MicrophoneButton.jsx";
 import SendButton from "./SendButton.jsx";
 import SpeechRecognition, {
@@ -20,12 +20,18 @@ function SpeechBotCard(props) {
 
   const [clicked, setClicked] = useState(0);
 
+  const [showModal, setShowModal] = useState(false);
+
   // Función para activar el micrófono
   const onClick = () => {
-    setClicked(1);
-    console.log("Listening...");
-    resetTranscript();
-    SpeechRecognition.startListening({ language: "es-MX" });
+    if (!browserSupportsSpeechRecognition) {
+      window.alert("Speech recognition is not supported in your browser.");
+    } else {
+      setClicked(1);
+      console.log("Listening...");
+      resetTranscript();
+      SpeechRecognition.startListening({ language: "es-MX" });
+    }
   };
 
   const handleProcessedText = (processedText) => {
@@ -80,9 +86,10 @@ function SpeechBotCard(props) {
 
   return (
     <div className="inputRecomendaciones glass-card">
-      {browserSupportsSpeechRecognition && (
-        <MicrophoneButton onClick={onClick} isActive={listening} />
-      )}
+      <MicrophoneButton 
+        onClick={onClick} 
+        isActive={listening}
+      />
       <TextField
         value={text}
         onChange={handleChange}
