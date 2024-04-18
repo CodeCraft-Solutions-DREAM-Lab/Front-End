@@ -24,7 +24,7 @@ function ExperienceDetails(props){
 
 	const handleSolicitarClick = () => {
         // Llama a la función de navegación pasada como prop
-        navigate(`/reservacion/sala`);
+		navigate(`/reservacion/sala?idSala=${props.idSalaProp}&nombreSala=${props.nombre}`);
     };
 
 	const animationClass = exitAnimation ? 'slide-out' :  'slide-in';

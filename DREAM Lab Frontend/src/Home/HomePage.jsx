@@ -351,6 +351,7 @@ function HomePage() {
                             }
                             handleClose={handleCloseDetalles}
                             imageID={imageID}
+                            idSalaProp = {imageID}
                         />
                     )}
                 </div>
