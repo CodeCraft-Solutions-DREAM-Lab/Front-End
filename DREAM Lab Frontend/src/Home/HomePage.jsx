@@ -94,6 +94,7 @@ function HomePage() {
     const [detallesBD, setDetallesBD] = useState(null);
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSalaClicked, setIsSalaClicked] = useState(false);
 
     const handleResponse = (setState) => {
         return (response) => {
@@ -323,25 +324,34 @@ function HomePage() {
                     {detallesVisible && (
                         <Detalles
                             nombre={
-                                detallesBD[imageID]?.nombre ||
-                                "Experiencia D.R.E.A.M. Lab"
+                                isSalaClicked
+                                    ? (salasBD[imageID]?.nombre) || "Experiencia D.R.E.A.M. Lab"
+                                    : (detallesBD[imageID]?.nombre) || "Experiencia D.R.E.A.M. Lab"
                             }
                             descripcion={
-                                detallesBD[imageID]?.descripcion ||
-                                "Lamentamos la falta de detalles. Estamos trabajando para brindarte una experiencia completa. Agradecemos tu paciencia y esperamos compartir pronto todos los detalles contigo."
+                                isSalaClicked
+                                    ? (salasBD[imageID]?.descripcion) || "Lamentamos la falta de detalles..."
+                                    : (detallesBD[imageID]?.descripcion) || "Lamentamos la falta de detalles..."
                             }
                             autodirigido={
-                                detallesBD[imageID]?.esAutoDirigida || false
+                                isSalaClicked
+                                    ? (salasBD[imageID]?.esAutoDirigida) || false
+                                    : (detallesBD[imageID]?.esAutoDirigida) || false
                             }
                             exclusivoUF={
-                                detallesBD[imageID]?.esExclusivaUF || false
+                                isSalaClicked
+                                    ? (salasBD[imageID]?.esExclusivaUF) || false
+                                    : (detallesBD[imageID]?.esExclusivaUF) || false
                             }
                             imagenExp={
-                                salasBD[imageID]?.detallesURL ||
-                                "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                isSalaClicked
+                                ? (salasBD[imageID]?.detallesURL) || "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                : (salasBD[detallesBD[imageID].idSala - 1]?.detallesURL)|| "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                    
                             }
                             handleClose={handleCloseDetalles}
-                            imageID={imageID} // Pasa el imageID como prop al componente Detalles
+                            imageID={imageID}
+                            idSalaProp = {imageID}
                         />
                     )}
                 </div>
@@ -382,6 +392,8 @@ function HomePage() {
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
+                                setIsSalaClicked={setIsSalaClicked} 
+                                setImageType="salas" 
                             />
                         </>
                     )}
@@ -399,6 +411,8 @@ function HomePage() {
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
+                                setIsSalaClicked={setIsSalaClicked} 
+                                setImageType="experiencias" 
                             />
                         </>
                     )}
@@ -415,6 +429,8 @@ function HomePage() {
                                 }))}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
+                                setIsSalaClicked={setIsSalaClicked} 
+                                setImageType="experiencias" 
                             />
                         </>
                     )}

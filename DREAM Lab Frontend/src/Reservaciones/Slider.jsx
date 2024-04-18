@@ -3,9 +3,8 @@ import './Slider.css';
 import unaPersona from '../Home/Images/onePerson.png'
 import grupoPersonas from '../Home/Images/group.png'
 
-
 function Slider({minimo, maximo}) {
-  const [value, setValue] = useState(Math.floor(maximo/2)); 
+  const [value, setValue] = useState(minimo); 
 
   const handleChange = (event) => {
     setValue(event.target.value); 
