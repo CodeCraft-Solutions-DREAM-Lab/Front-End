@@ -4,10 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 // el estado
 import userReducer from "./Slices/userSlice.js";
 import experienciaReducer from "./Slices/experienciaSlice.js";
+import selectedItemSlice from "./Slices/selectedItemSlice.js";
 
 export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    experiencia: experienciaReducer,
-  },
+    reducer: {
+        user: userReducer,
+        experiencia: experienciaReducer,
+        selectedItem: selectedItemSlice,
+    },
 });

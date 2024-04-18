@@ -197,6 +197,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        isExperiencia: true,
                                         idSala: data[0].idSala,
                                         img: data[0].portadaURL,
                                         title: data[0].nombre,
@@ -206,6 +207,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        isExperiencia: false,
                                         idSala: data[0].idSala,
                                         img: data[0].fotoURL,
                                         title: data[0].nombre,
@@ -402,6 +404,7 @@ function HomePage() {
                             <ImageSlider
                                 images={salas.map((sala) => ({
                                     id: sala.idSala,
+                                    isExperiencia: false,
                                     url: sala.fotoURL,
                                     title: sala.nombre,
                                 }))}
@@ -421,6 +424,7 @@ function HomePage() {
                             <ImageSlider
                                 images={experiences.map((experience) => ({
                                     id: experience.idExperiencia,
+                                    isExperiencia: true,
                                     url: experience.portadaURL,
                                     title: experience.nombre,
                                 }))}
@@ -440,9 +444,11 @@ function HomePage() {
                             <ImageSlider
                                 images={ufs.map((uf) => ({
                                     id: uf.idExperiencia,
+                                    isExperiencia: true,
                                     url: uf.portadaURL,
                                     title: uf.nombre,
                                 }))}
+                                options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
                                 setIsSalaClicked={setIsSalaClicked}
