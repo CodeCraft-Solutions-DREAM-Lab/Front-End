@@ -43,7 +43,7 @@ function SelectorSala(props) {
 	useEffect(() => {
 		get(`mesas/${idSala}`) 
 			.then((result) => {
-				const maxCupos = result.recordsets[0][0].maxCupos;
+				const maxCupos = result.maxCupos;
 				setEspacioMax(maxCupos);
 			})
 			.catch((error) => {
