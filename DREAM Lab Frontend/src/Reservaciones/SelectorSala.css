@@ -6,11 +6,11 @@
     flex-grow: 1;
     margin: 0 auto;
     padding-right: 90px;
+    font-family: "Karla", sans-serif;
 }
 .outer-container{
     padding-top: 20vh;
     display: flex;
-
 }
 
 .nombre-sala {
