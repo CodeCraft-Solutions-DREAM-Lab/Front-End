@@ -8,6 +8,8 @@
 }
 
 .slide {
+	display: flex;
+	justify-content: left;
 	width: 650px;
 	height: 450px;
 	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
@@ -26,12 +28,6 @@
 	border-radius: 12px;
 	transition: transform 500ms ease 0s, opacity 500ms ease 0s,
 		visibility 500ms ease 0s;
-}
-
-.slide {
-	display: flex;
-	justify-content: left;
-	align-items: left;
 }
 
 .sliderContent {
