@@ -27,11 +27,26 @@ function SpeechBotCard(props) {
     SpeechRecognition.startListening({ language: "es-MX" });
   };
 
-  // Función para el manejo del transcript procesado
   const handleProcessedText = (processedText) => {
-    props.onProcessedText(processedText);
-    console.log("Results:\n", processedText);
-  };
+    // Expresión regular para encontrar tipo y ID
+    const regex = /(\w+),\s*Id:\s*(\d+)/g;
+
+    // Array para almacenar las coincidencias
+    const matches = [];
+
+    // Buscar todas las coincidencias en el texto procesado
+    let match;
+    while ((match = regex.exec(processedText)) !== null) {
+        // Agregar el tipo y el ID a las coincidencias encontradas
+        matches.push({
+            type: match[1], // Tipo (sala o experiencia)
+            id: parseInt(match[2]) // ID convertido a número
+        });
+    }
+
+    // Llamar a la función onProcessedText con las coincidencias encontradas
+    props.onProcessedText(matches);
+};
 
   // --- Para el input del teclado ---
   const [text, setText] = useState("");

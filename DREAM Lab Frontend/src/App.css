@@ -5,42 +5,52 @@ body {
 }
 
 .navbar {
-    
-    display: flex;
-    width: 95%;
-    height: 11%;
-    align-items: center;
-    margin: 0 auto;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
-    position: fixed;
-    z-index: 9;
-    padding: 1%;
-    transition: top 5s ease-in-out;
+  display: flex;
+  width: 95%;
+  height: 11%;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  position: fixed;
+  z-index: 9;
+  padding: 1%;
+  transition: top 5s ease-in-out;
+  font-family: "Karla", sans-serif;
+}
 
-    
+@media only screen and (min-height: 1025px) {
+  .navbar {
+    height: 6vh;
+  }
+
+  .inputRecomendaciones {
+    margin-top: 7rem;
+    margin-bottom: 4rem;
+  }
 }
 
 .navbar-positioning {
-    position: relative; /* Establishes stacking context */
-    padding: 2rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: top 5s ease-in-out;
+  position: absolute; /* Establishes stacking context */
+  z-index: 9;
+  padding: 2rem;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: top 5s ease-in-out;
 }
 
 .visible {
-    top: 0; /* Display navbar at the top */
-    transition: top 5s ease-in-out;
-  }
-  
+  top: 0;
+  transition: top 5s ease-in-out;
+}
+
 .hidden {
-    top: -9rem; /* Hide navbar above the viewport */
-    transition: top 5s ease-in-out;
-  }
-  
+  top: -9rem;
+  transition: top 5s ease-in-out;
+}
 
 .logo-container {
   display: flex;
@@ -99,7 +109,7 @@ body {
   justify-content: space-between; /* Change to space-between */
   align-items: center; /* Center items vertically */
   width: 60%;
-  margin-top: 4.5rem;
+  margin-top: 12rem;
   margin-bottom: 4rem;
   margin-inline: auto;
   padding: 1.3rem;

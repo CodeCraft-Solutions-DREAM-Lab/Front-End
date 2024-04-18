@@ -1,13 +1,17 @@
 .login-tf-container {
-  width: 60%;
+    width: 60%;
 }
 
 .login-tf-label-container {
-  margin-left: 6%;
-  margin-bottom: 2%;
+    margin-left: 6%;
+    margin-bottom: 2%;
 }
 
 .login-tf-label {
-  color: white;
-  font-size: max(1.5vh, 1.1vw);
+    color: white;
+    font-size: max(1.5vh, 1.1vw);
+}
+
+input[type="password"]::-ms-reveal {
+    display: none;
 }

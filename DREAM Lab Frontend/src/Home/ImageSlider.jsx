@@ -1,15 +1,10 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useEmblaCarousel from "embla-carousel-react";
 import "./ImageSlider.css";
-
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setExperiencia,
-  selectExperiencia,
-} from "../redux/Slices/experienciaSlice";
-
+import {setExperiencia, selectExperiencia} from "../redux/Slices/experienciaSlice";
 import { saveToSessionStorage } from "../Global/Storage";
 
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
@@ -17,11 +12,21 @@ const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax e
 const ImageSlider = (props) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
+  const { mostrarDetalles } = props;
 
   function handleClick(idExperiencia) {
+    mostrarDetalles(); 
     dispatch(setExperiencia(idExperiencia));
     saveToSessionStorage("experiencia", idExperiencia);
-    navigate(`/reservacion`);
+    props.onImageClick(idExperiencia - 1); // pasa el ID de la imagen al componente padre
+    console.log("IMAGE SLIDER: " + (idExperiencia - 1));
+
+    // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
+    const isSalaImage = props.setImageType === "salas";
+
+    // Llamar a setIsSalaClicked con el valor correspondiente
+    props.setIsSalaClicked(isSalaImage);
+
   }
 
   const { images, options } = props;

@@ -7,6 +7,15 @@ import {
 import "./RecommendationsCarousel.css";
 import { useNavigate } from 'react-router-dom';
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+	setExperiencia,
+	selectExperiencia,
+  } from "../redux/Slices/experienciaSlice";
+
+import { saveToSessionStorage } from "../Global/Storage";
+
+
 function RecomendationsCarousel(props) {
 	const [activeSlide, setActiveSlide] = useState(props.activeSlide);
 
@@ -14,7 +23,7 @@ function RecomendationsCarousel(props) {
 
 	const stopRotating = () =>{
 		setAutoRotate(false);
-	}
+	};
 
 	const next = () => {
 		setActiveSlide((activeSlide + 1) % props.data.length);
@@ -101,8 +110,7 @@ function RecomendationsCarousel(props) {
 						<div
 							className="slide"
 							style={{
-								//background: item.bgColor,
-								backgroundImage: `url(${item.img})`,
+								background: `linear-gradient(to right, rgba(0, 0, 0, 0.5) 40%, transparent), no-repeat center/cover url(${item.img})`,
 								boxShadow: `0 5px 20px ${item.bgColor}30`,
 								...getStyles(i),
 							}}
@@ -154,11 +162,14 @@ function RecomendationsCarousel(props) {
 
 const SliderContent = (props) => {
 	let navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	function handleClick() {
 		props.stopRotating();
 		if (props.index === props.activeSlide) {
-			navigate(`/reservacion/${props.title}`);
+			dispatch(setExperiencia(props.id));
+			saveToSessionStorage("experiencia", props.id);
+			navigate(`/reservacion`);
 		} else {
 			props.onClick(props.index);
 		}
