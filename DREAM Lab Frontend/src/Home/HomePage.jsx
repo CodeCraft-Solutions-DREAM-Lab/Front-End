@@ -197,6 +197,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        idSala: data[0].idSala,
                                         img: data[0].portadaURL,
                                         title: data[0].nombre,
                                         desc: data[0].descripcion,
@@ -205,6 +206,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        idSala: data[0].idSala,
                                         img: data[0].fotoURL,
                                         title: data[0].nombre,
                                         desc: data[0].descripcion,

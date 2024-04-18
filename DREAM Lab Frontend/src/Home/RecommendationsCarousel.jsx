@@ -169,7 +169,7 @@ const SliderContent = (props) => {
 		if (props.index === props.activeSlide) {
 			dispatch(setExperiencia(props.id));
 			saveToSessionStorage("experiencia", props.id);
-			navigate(`/reservacion`);
+			navigate(`/reservacion/sala?idSala=${props.idSala}&nombreSala=${props.title}`);
 		} else {
 			props.onClick(props.index);
 		}
