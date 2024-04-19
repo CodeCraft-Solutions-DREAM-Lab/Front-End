@@ -1,24 +1,79 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
-import './output.css'
-import './App.css'
-import HomePage from './Home/HomePage.jsx'
+import "./App.css";
+
+// Estructura base
+import Root from "./Global/Root.jsx";
+
+// Rutas protegidas
+import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
+
+// Pagina no encontrada
+import NotFound from "./Global/NotFound.jsx";
+
+// Login
+import LoginPage from "./Login/LoginPage/LoginPage.jsx";
+
+// Landing page
+import LandingPage from "./LandingPage/LandingPage.jsx";
+
+// Home
+import HomePage from "./Home/HomePage.jsx";
+
+// Reservaciones
 import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
-import Confirmacion from "./Confirmacion/Confirmacion.jsx";
+import Confirmacion from "./Reservaciones/Confirmacion.jsx";
+import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
+import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
+import SelectorSala from "./Reservaciones/SelectorSala.jsx";
+import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
 import Profile from "./Profile/Profile.jsx";
+import Logros from "./Profile/Logros.jsx"
+import ReservacionesActivas from "./Profile/ReservacionesActivas.jsx"
 
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/reservacion/:sala" element={<ReservacionSala />} />
-        <Route path="/confirmacion" element={<Confirmacion />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
-  );
+function secured(Component) {
+  return function WrappedComponent(props) {
+    return (
+      <ProtectedRoutes>
+        <Component {...props} />
+      </ProtectedRoutes>
+    );
+  };
 }
 
-export default App
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<LandingPage />} />
+      <Route path="landingpage" element={<LandingPageDev />} /> {/* ruta provisional para desarrollo de la landing */}
+      <Route path="login" element={<LoginPage />} />
+      <Route path="home" element={secured(HomePage)()} />
+      <Route path="reservacion" element={secured(ReservacionSala)()} />
+      <Route
+        path="reservacion/confirmacion"
+        element={secured(Confirmacion)()}
+      />
+      <Route
+        path="reservacion/resumen"
+        element={secured(ResumenReservacion)()}
+      />
+      <Route path="reservacion/equipo" element={secured(SelectorEquipo)()} />
+      <Route path="reservacion/sala" element={secured(SelectorSala)()} />
+      <Route path="profile" element={secured(Profile)()} />
+      <Route path="*" element={<NotFound />} />
+      <Route path="/profile/logros" element={<Logros />} />
+      <Route path="/profile/reservaciones" element={<ReservacionesActivas />} />
+    </Route>
+  )
+);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
+
+export default App;

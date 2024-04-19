@@ -1,0 +1,146 @@
+
+.navbar {
+    
+    display: flex;
+    width: 95%;
+    height: 11%;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    position: fixed;
+    z-index: 9;
+    padding: 1%;
+    transition: top 5s ease-in-out;
+
+    
+}
+
+
+
+@media only screen and (min-height: 1025px) {
+  .navbar{
+    height: 6vh;
+  }
+  
+  }
+
+  .navbar-positioning {
+    position: relative; /* Establishes stacking context */
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: top 5s ease-in-out;
+}
+
+.visible {
+    top: 0; /* Display navbar at the top */
+    transition: top 5s ease-in-out;
+  }
+  
+.hidden {
+    top: -9rem; /* Hide navbar above the viewport */
+    transition: top 5s ease-in-out;
+  }
+  
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 200px;
+}
+
+.logo {
+  width: 33%;
+  padding-left: 10%;
+  padding-bottom: 2%;
+  margin-right: 4%;
+  cursor: pointer;
+
+}
+
+.dreamlab {
+  padding-top: 1%;
+  color: white;
+  font-weight: 800;
+  font-size: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+  .logo {
+    width: 40%; /* Adjust the width for smaller screens */
+    padding-left: 10%; /* Adjust padding as needed */
+    padding-bottom: 1%; /* Adjust padding as needed */
+  }
+  .dreamlab {
+    display: none; /* Hide the Dream Lab text on phone screens */
+  }
+}
+
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.text-white {
+  color: white !important;
+}
+
+
+.searchBar {
+    border: 1.5px solid white; /* Changed border width and added border style */
+    border-radius: 25px;
+    width: 60%;
+    height: 2.3rem; /* Adjusted height */
+    padding: 0 20px 0 40px; /* Adjust for icon width and padding */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    text-align: left; /* Center text horizontally */
+    outline: none;
+    background-color: transparent;
+    color: white;
+    background-image: url("./images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+    background-size: 20px; /* Adjust size as needed */
+    background-position: 10% center; /* Adjust position as needed */
+    background-repeat: no-repeat;
+    align-self: flex-end;
+  }
+  
+  .searchBar:focus {
+    border-color: white; /* Change border color on focus */
+  }
+  
+  .searchBar::placeholder {
+    color: whitesmoke; /* Change placeholder color */
+  }
+  
+  .searchContainer {
+    margin-left: auto;
+    padding-right: 2rem;
+    position: relative;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .searchContainer {
+      margin: 0 auto; /* Center the search bar on phone screens */
+      width: 90%; /* Adjust width for phone screens */
+    }
+    .searchBar {
+      width: 100%; /* Set full width on phone screens */
+    }
+  }
