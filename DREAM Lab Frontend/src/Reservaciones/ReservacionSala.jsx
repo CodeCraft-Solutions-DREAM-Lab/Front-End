@@ -50,7 +50,7 @@ function ReservacionCuarto() {
       numMesa: 1,
     };
 
-    fetch("https://dreamlab-api.azurewebsites.net/reservaciones", {
+    fetch("http://localhost:3000/reservaciones", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
