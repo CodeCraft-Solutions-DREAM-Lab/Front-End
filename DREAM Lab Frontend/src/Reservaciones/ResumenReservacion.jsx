@@ -19,12 +19,13 @@ function ResumenReservacion(props) {
     const handleSubmit = async () => {
         const data = {
             idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
-            idSala: 1,
-            idExperiencia: 1,
+            idSala: getFromSessionStorage("idSala") || null,
+            idExperiencia: getFromSessionStorage("idExperiencia") || null,
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: getFromSessionStorage("duration"),
             fecha: getFromSessionStorage("fechaIsoString"),
-            idMesa: 1,
+            idMesa: null,
+            estatus: 5,
         };
 
         setIsLoading(true);
@@ -62,10 +63,7 @@ function ResumenReservacion(props) {
                     navigate("/home");
                 }}
             />
-            <Button
-                isLoading={isLoading}
-                onClick={handleSubmit}
-            >
+            <Button isLoading={isLoading} onClick={handleSubmit}>
                 Confirmar
             </Button>
         </div>

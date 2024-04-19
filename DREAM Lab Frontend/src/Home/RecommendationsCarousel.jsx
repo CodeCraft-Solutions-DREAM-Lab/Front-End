@@ -7,12 +7,6 @@ import {
 import "./RecommendationsCarousel.css";
 import { useNavigate } from 'react-router-dom';
 
-import { useSelector, useDispatch } from "react-redux";
-import {
-	setExperiencia,
-	selectExperiencia,
-  } from "../redux/Slices/experienciaSlice";
-
 import { saveToSessionStorage } from "../Global/Storage";
 
 
@@ -162,12 +156,10 @@ function RecomendationsCarousel(props) {
 
 const SliderContent = (props) => {
 	let navigate = useNavigate();
-	const dispatch = useDispatch();
 
 	function handleClick() {
 		props.stopRotating();
 		if (props.index === props.activeSlide) {
-			dispatch(setExperiencia(props.id));
 			saveToSessionStorage("experiencia", props.id);
 			navigate(`/reservacion/sala?idSala=${props.idSala}&nombreSala=${props.title}`);
 		} else {

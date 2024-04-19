@@ -34,3 +34,17 @@ export function clearStorages() {
   localStorage.clear();
   sessionStorage.clear();
 }
+
+export function removeReservationDataFromSessionStorage() {
+  removeFromSessionStorage("horaInicio");
+  removeFromSessionStorage("horaInicioIsoString");
+  removeFromSessionStorage("duration");
+  removeFromSessionStorage("fecha");
+  removeFromSessionStorage("fechaIsoString");
+  removeFromSessionStorage("personas");
+  removeFromSessionStorage("experiencia");
+  removeFromSessionStorage("sala");
+  removeFromSessionStorage("idExperiencia");
+  removeFromSessionStorage("idSala");
+  removeFromSessionStorage("reservType");
+}

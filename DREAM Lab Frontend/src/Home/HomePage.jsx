@@ -6,7 +6,11 @@ import RecommendationsCarousel from "./RecommendationsCarousel";
 import RecomendacionesInvalidas from "./RecomendacionesInvalidas";
 import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
-import { getFromLocalStorage } from "../Global/Storage.js";
+import {
+    getFromLocalStorage,
+    removeFromSessionStorage,
+    removeReservationDataFromSessionStorage,
+} from "../Global/Storage.js";
 
 import { get, post } from "../Global/Database.js";
 import Detalles from "./Detalles.jsx";
@@ -169,7 +173,7 @@ function HomePage() {
                                 type === "Experiencia"
                             ) {
                                 result = await fetch(
-                                    "http://localhost:3000/experiencias/" + id
+                                    "http://dreamlab-api.azurewebsites.net/experiencias/" + id
                                 );
                             } else if (
                                 type === "salas" ||
@@ -178,7 +182,7 @@ function HomePage() {
                                 type === "Sala"
                             ) {
                                 result = await fetch(
-                                    "http://localhost:3000/salas/" + id
+                                    "http://dreamlab-api.azurewebsites.net/salas/" + id
                                 );
                             }
 
@@ -193,6 +197,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        isExperiencia: true,
                                         idSala: data[0].idSala,
                                         img: data[0].portadaURL,
                                         title: data[0].nombre,
@@ -202,6 +207,7 @@ function HomePage() {
                                     return {
                                         ...item,
                                         id: id,
+                                        isExperiencia: false,
                                         idSala: data[0].idSala,
                                         img: data[0].fotoURL,
                                         title: data[0].nombre,
@@ -239,6 +245,8 @@ function HomePage() {
     };
 
     useEffect(() => {
+        removeReservationDataFromSessionStorage();
+
         setIsLoadingSalas(true);
         setErrorSalas(null);
 
@@ -327,29 +335,37 @@ function HomePage() {
                         <Detalles
                             nombre={
                                 isSalaClicked
-                                    ? (salasBD[imageID]?.nombre) || "Experiencia D.R.E.A.M. Lab"
-                                    : (detallesBD[imageID]?.nombre) || "Experiencia D.R.E.A.M. Lab"
+                                    ? salasBD[imageID]?.nombre ||
+                                      "Experiencia D.R.E.A.M. Lab"
+                                    : detallesBD[imageID]?.nombre ||
+                                      "Experiencia D.R.E.A.M. Lab"
                             }
                             descripcion={
                                 isSalaClicked
-                                    ? (salasBD[imageID]?.descripcion) || "Lamentamos la falta de detalles..."
-                                    : (detallesBD[imageID]?.descripcion) || "Lamentamos la falta de detalles..."
+                                    ? salasBD[imageID]?.descripcion ||
+                                      "Lamentamos la falta de detalles..."
+                                    : detallesBD[imageID]?.descripcion ||
+                                      "Lamentamos la falta de detalles..."
                             }
                             autodirigido={
                                 isSalaClicked
-                                    ? (salasBD[imageID]?.esAutoDirigida) || false
-                                    : (detallesBD[imageID]?.esAutoDirigida) || false
+                                    ? salasBD[imageID]?.esAutoDirigida || false
+                                    : detallesBD[imageID]?.esAutoDirigida ||
+                                      false
                             }
                             exclusivoUF={
                                 isSalaClicked
-                                    ? (salasBD[imageID]?.esExclusivaUF) || false
-                                    : (detallesBD[imageID]?.esExclusivaUF) || false
+                                    ? salasBD[imageID]?.esExclusivaUF || false
+                                    : detallesBD[imageID]?.esExclusivaUF ||
+                                      false
                             }
                             imagenExp={
                                 isSalaClicked
-                                ? (salasBD[imageID]?.detallesURL) || "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
-                                : (salasBD[detallesBD[imageID].idSala - 1]?.detallesURL)|| "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
-                                    
+                                    ? salasBD[imageID]?.detallesURL ||
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                    : salasBD[detallesBD[imageID].idSala - 1]
+                                          ?.detallesURL ||
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
                             }
                             handleClose={handleCloseDetalles}
                             imageID={imageID}
@@ -388,14 +404,15 @@ function HomePage() {
                             <ImageSlider
                                 images={salas.map((sala) => ({
                                     id: sala.idSala,
+                                    isExperiencia: false,
                                     url: sala.fotoURL,
                                     title: sala.nombre,
                                 }))}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked} 
-                                setImageType="salas" 
+                                setIsSalaClicked={setIsSalaClicked}
+                                setImageType="salas"
                             />
                         </>
                     )}
@@ -407,14 +424,15 @@ function HomePage() {
                             <ImageSlider
                                 images={experiences.map((experience) => ({
                                     id: experience.idExperiencia,
+                                    isExperiencia: true,
                                     url: experience.portadaURL,
                                     title: experience.nombre,
                                 }))}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked} 
-                                setImageType="experiencias" 
+                                setIsSalaClicked={setIsSalaClicked}
+                                setImageType="experiencias"
                             />
                         </>
                     )}
@@ -426,13 +444,15 @@ function HomePage() {
                             <ImageSlider
                                 images={ufs.map((uf) => ({
                                     id: uf.idExperiencia,
+                                    isExperiencia: true,
                                     url: uf.portadaURL,
                                     title: uf.nombre,
                                 }))}
+                                options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked} 
-                                setImageType="experiencias" 
+                                setIsSalaClicked={setIsSalaClicked}
+                                setImageType="experiencias"
                             />
                         </>
                     )}

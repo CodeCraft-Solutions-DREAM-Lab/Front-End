@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
-import './Slider.css'; 
-import unaPersona from '../Home/Images/onePerson.png'
-import grupoPersonas from '../Home/Images/group.png'
+import React, { useEffect, useState } from "react";
+import "./Slider.css";
+import unaPersona from "../Home/Images/onePerson.png";
+import grupoPersonas from "../Home/Images/group.png";
+import { getFromSessionStorage, saveToSessionStorage } from "../Global/Storage";
 
-function Slider({minimo, maximo}) {
-  const [value, setValue] = useState(minimo); 
+function Slider({
+    minimo,
+    maximo,
+    fetchFreeHoursAgain,
+    setFetchFreeHoursAgain,
+}) {
+    const [value, setValue] = useState(minimo);
 
-  const handleChange = (event) => {
-    setValue(event.target.value); 
-  };
+    useEffect(() => {
+        const personas = getFromSessionStorage("personas");
+        if (personas) {
+            setValue(parseInt(personas));
+        }
+    }, []);
 
-  return (
-    <div className="slider-out">
+    useEffect(() => {
+        saveToSessionStorage("personas", value);
+    }, [value]);
 
-        <div className='texto-num-personas'><output htmlFor="slider" id="slider-value"> {value} personas </output></div>
-        <div className='slider-container-in'>
-            <img className='foto-una-persona' src={unaPersona}/>
-            <input type="range" min={minimo} max={maximo} value={value} onChange={handleChange} className="range-slider"/>
-            <img className='foto-grupo' src={grupoPersonas}/>
+    const handleChange = (event) => {
+        setValue(event.target.value);
+        setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+    };
+
+    return (
+        <div className="slider-out">
+            <div className="texto-num-personas">
+                <output htmlFor="slider" id="slider-value">
+                    {" "}
+                    {value} personas{" "}
+                </output>
+            </div>
+            <div className="slider-container-in">
+                <img className="foto-una-persona" src={unaPersona} />
+                <input
+                    type="range"
+                    min={minimo}
+                    max={maximo}
+                    value={value}
+                    onChange={handleChange}
+                    className="range-slider"
+                />
+                <img className="foto-grupo" src={grupoPersonas} />
+            </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default Slider;

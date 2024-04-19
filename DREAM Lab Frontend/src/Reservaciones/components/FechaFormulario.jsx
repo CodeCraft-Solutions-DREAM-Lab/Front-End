@@ -14,7 +14,7 @@ import { post } from "../../Global/Database";
 import { height, minHeight } from "@mui/system";
 
 function FechaFormulario(props) {
-    const { update, setUpdate } = props;
+    const { update, setUpdate, fetchFreeHoursAgain } = props;
 
     const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
     const [fecha, setFecha] = useState();
@@ -36,9 +36,9 @@ function FechaFormulario(props) {
     const fetchFreeHoursArray = () => {
         const date = new Date(getFromSessionStorage("fecha"));
         post("salas/horasLibres", {
-            idSala: 1,
+            idSala: getFromSessionStorage("idSala"),
             fecha: date.toISOString(),
-            personas: 3,
+            personas: getFromSessionStorage("personas"),
         }).then((response) => {
             setFreeHours(response);
         });
@@ -81,6 +81,10 @@ function FechaFormulario(props) {
             setUpdate(!update);
         }
     }, [freeHours]);
+
+    useEffect(() => {
+        fetchFreeHoursArray();
+    }, [fetchFreeHoursAgain]);
 
     useEffect(() => {
         if (!!fechaIsoString) {
