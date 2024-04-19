@@ -25,8 +25,6 @@ function SelectorSala(props) {
     const [espacioMax, setEspacioMax] = useState(10);
     const [idSala, setIdSala] = useState(0);
     const [idExperiencia, setIdExperiencia] = useState(0);
-    const [nombreSala, setNombreSala] = useState("");
-    const [nombreExperiencia, setNombreExperiencia] = useState("");
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -41,14 +39,6 @@ function SelectorSala(props) {
 
 	useEffect(() => {
         if (idExperiencia != 0) {
-            get(`salas/nameFromExperienceId/${idExperiencia}`)
-                .then((result) => {
-                    setNombreSala(result.nombre);
-                })
-                .catch((error) => {
-                    console.error("An error occurred:", error);
-                });
-
 
             get(`experiencias/${idExperiencia}`)
                 .then((result) => {
@@ -56,17 +46,6 @@ function SelectorSala(props) {
                         "idSala",
                         result[0].idSala
                     );
-                    setNombreExperiencia(
-                        result[0].nombreExperiencia
-                    );
-                })
-                .catch((error) => {
-                    console.error("An error occurred:", error);
-                });
-        } else {
-            get(`salas/${idSala}`)
-                .then((result) => {
-                    setNombreSala(result.recordsets[0][0].nombreSala);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
@@ -113,9 +92,6 @@ function SelectorSala(props) {
                         {/* Sección de la izquierda */}
 
                         {/* Nombre de la sala */}
-                        {/* <div className="nombre-sala">
-							<h1>{nombreSala}</h1>
-						</div> */}
                         <TextoNombreSala />
                         <Slider minimo={1} maximo={espacioMax} />
                         <div className="model">
