@@ -44,4 +44,7 @@ export function removeReservationDataFromSessionStorage() {
   removeFromSessionStorage("personas");
   removeFromSessionStorage("experiencia");
   removeFromSessionStorage("sala");
+  removeFromSessionStorage("idExperiencia");
+  removeFromSessionStorage("idSala");
+  removeFromSessionStorage("reservType");
 }

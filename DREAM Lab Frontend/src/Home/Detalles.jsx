@@ -31,13 +31,21 @@ function ExperienceDetails(props) {
 
     const handleSolicitarClick = () => {
         // Llama a la función de navegación pasada como prop
-        saveToSessionStorage("reservItemId", selectedItem.id);
         saveToSessionStorage("reservType", selectedItem.type);
+
+		if (selectedItem.type == "sala") {
+			saveToSessionStorage("idSala", selectedItem.id);
+		} else {
+			saveToSessionStorage("idExperiencia", selectedItem.id);
+		}
 
         dispatch(deleteSelectedItem());
 
-        navigate(
-            `/reservacion/sala?idSala=${props.idSalaProp}&nombreSala=${props.nombre}`
+        // navigate(
+        //     `/reservacion/sala?idSala=${props.idSalaProp}&nombreSala=${props.nombre}`
+        // );
+		navigate(
+            `/reservacion/sala`
         );
     };
 
