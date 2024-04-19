@@ -25,6 +25,7 @@ function SelectorSala(props) {
     const [espacioMax, setEspacioMax] = useState(10);
     const [idSala, setIdSala] = useState(0);
     const [idExperiencia, setIdExperiencia] = useState(0);
+	const [fetchFreeHoursAgain, setFetchFreeHoursAgain] = useState(false);
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -93,7 +94,12 @@ function SelectorSala(props) {
 
                         {/* Nombre de la sala */}
                         <TextoNombreSala />
-                        <Slider minimo={1} maximo={espacioMax} />
+                        <Slider 
+							minimo={1} 
+							maximo={espacioMax} 
+							fetchFreeHoursAgain={fetchFreeHoursAgain}
+							setFetchFreeHoursAgain={setFetchFreeHoursAgain}
+						/>
                         <div className="model">
                             <img src={imagePlaceholder}></img>{" "}
                             {/* Placeholder del modelo 3D */}
@@ -115,6 +121,7 @@ function SelectorSala(props) {
                         <FechaFormulario
                             update={update}
                             setUpdate={setUpdate}
+							fetchFreeHoursAgain={fetchFreeHoursAgain}
                         />
                         <TextoFecha update={update} />
                         <div className="button-container">
