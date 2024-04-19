@@ -34,7 +34,6 @@ function FechaFormulario(props) {
     const [isSelectHoursDisabled, setIsSelectHoursDisabled] = useState(true);
 
     const fetchFreeHoursArray = () => {
-        console.log("fetchFreeHoursArray");
         const date = new Date(getFromSessionStorage("fecha"));
         post("salas/horasLibres", {
             idSala: getFromSessionStorage("idSala"),

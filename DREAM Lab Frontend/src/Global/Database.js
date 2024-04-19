@@ -70,7 +70,7 @@ function MyComponent() {
 export default MyComponent;
 */
 
-const defaultURL = "http://localhost:3000/";
+const defaultURL = "http://dreamlab-api.azurewebsites.net/";
 
 export async function apiRequest(
   method,
