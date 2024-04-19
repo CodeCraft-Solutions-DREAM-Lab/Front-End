@@ -39,19 +39,7 @@ function SelectorSala(props) {
         }
     }, []);
 
-    useEffect(() => {
-        if (
-            !getFromSessionStorage("fecha") ||
-            !getFromSessionStorage("horaInicio") ||
-            !getFromSessionStorage("duration")
-        ) {
-            setIsNextButtonDisabled(true);
-        } else {
-            setIsNextButtonDisabled(false);
-        }
-    }, [update]);
-
-    useEffect(() => {
+	useEffect(() => {
         if (idExperiencia != 0) {
             get(`salas/nameFromExperienceId/${idExperiencia}`)
                 .then((result) => {
@@ -60,6 +48,7 @@ function SelectorSala(props) {
                 .catch((error) => {
                     console.error("An error occurred:", error);
                 });
+
 
             get(`experiencias/${idExperiencia}`)
                 .then((result) => {
@@ -84,21 +73,41 @@ function SelectorSala(props) {
                 });
         }
 
-        get(`mesas/${idSala}`).then((result) => {
-            const maxCupos = result.recordsets[0][0].maxCupos;
-            setEspacioMax(maxCupos);
-        });
+		if (!!idSala) {
+			get(`mesas/${idSala}`)
+			.then((result) => {
+				const maxCupos = result.recordsets[0][0].maxCupos;
+				setEspacioMax(maxCupos);
+			})
+			.catch((error) => {
+				console.error("An error occurred:", error);
+			});
+		}
+
     }, [idSala, idExperiencia]);
 
-    return (
-        <div>
-            <NavBar view="soloPerfil" autoHide={false} />
-            <div className="outer-container">
-                <GlassCard className="menu-lateral">
-                    <p>menu</p>
-                </GlassCard>
-                <div className="container">
-                    {/* Contenedor principal */}
+
+    useEffect(() => {
+        if (
+            !getFromSessionStorage("fecha") ||
+            !getFromSessionStorage("horaInicio") ||
+            !getFromSessionStorage("duration")
+        ) {
+            setIsNextButtonDisabled(true);
+        } else {
+            setIsNextButtonDisabled(false);
+        }
+    }, [update]);
+
+	return (
+		<div>
+			<NavBar view="soloPerfil" autoHide={false} />
+			<div className="outer-container">
+				<GlassCard className="menu-lateral">
+					<p>menu</p>
+				</GlassCard>
+				<div className="container">
+					{/* Contenedor principal */}
 
                     <div className="card-container">
                         {/* Sección de la izquierda */}
