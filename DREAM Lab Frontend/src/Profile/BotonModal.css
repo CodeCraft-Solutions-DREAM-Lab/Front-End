@@ -1,46 +1,46 @@
-.boton-modal-exterior-cancelar{
+.boton-modal-exterior-cancelar {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    background-color: white;
-    border: 4px solid #AC3E1B;
+    align-items: center;
     width: 23%;
     height: 2.7vw;
-    border-radius: 20px;
-    text-transform: uppercase;
-    font-family: "Karla", sans-serif;
-    font-weight: 1000;
-    color: #AC3E1B;
-    cursor: pointer;
     margin-right: 10%;
+    background-color: white;
+    cursor: pointer;
+    border: 4px solid #ac3e1b;
+    border-radius: 20px;
+    font-family: "Karla", sans-serif;
+    font-weight: 1000;
+    color: #ac3e1b;
+    text-transform: uppercase;
 }
 
-.boton-modal-exterior-cancelar:hover{
-    background-color: #AC3E1B;
-    border: 4px solid #AC3E1B;
+.boton-modal-exterior-cancelar:hover {
+    background-color: #ac3e1b;
+    border: 4px solid #ac3e1b;
     color: white;
 }
 
-.boton-modal-exterior-aceptar{
+.boton-modal-exterior-aceptar {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    background-color: #1BAC55;
-    border: 4px solid #1BAC55;
+    align-items: center;
     width: 23%;
     height: 2.7vw;
+    background-color: #1bac55;
+    cursor: pointer;
+    border: 4px solid #1bac55;
     border-radius: 20px;
-    text-transform: uppercase;
     font-family: "Karla", sans-serif;
     font-weight: 1000;
     color: white;
-    cursor: pointer;
+    text-transform: uppercase;
 }
 
-.boton-modal-exterior-aceptar:hover{
+.boton-modal-exterior-aceptar:hover {
     background-color: white;
-    border: 4px solid #1BAC55;
-    color: #1BAC55;
+    border: 4px solid #1bac55;
+    color: #1bac55;
 }
