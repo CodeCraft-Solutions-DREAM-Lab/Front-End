@@ -1,34 +1,33 @@
 .close-button {
-    background-color: #042E55;
-    color: white;
-    border-radius: 100%;
     position: fixed;
-    z-index: 25; 
+    z-index: 25;
+    left: 10px;
     width: 30px;
     height: 30px;
-    left: 10px;
     padding-bottom: 2px;
+    background-color: #042e55;
+    border: 2px solid white; /* Agrega un borde blanco */
+    border-radius: 100%;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
-    border: 2px solid white; /* Agrega un borde blanco */
+    color: white;
 }
 
-.close-button:hover{
+.close-button:hover {
     background-color: white;
-    color: #042E55;
+    color: #042e55;
 }
 
-
-@media (max-width: 820px){
-    .close-button{
+@media (max-width: 820px) {
+    .close-button {
         transform: translateX(-30px) translateY(-30%);
     }
 }
 
-@media (max-width: 600px){
-    .close-button{
+@media (max-width: 600px) {
+    .close-button {
+        transform: translateX(-50px) translateY(-60%);
         width: 37px;
         height: 37px;
-        transform: translateX(-50px) translateY(-60%);
     }
 }
