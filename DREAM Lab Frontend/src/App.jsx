@@ -20,7 +20,7 @@ import NotFound from "./Global/NotFound.jsx";
 import LoginPage from "./Login/LoginPage/LoginPage.jsx";
 
 // Landing page
-import LandingPage from "./LandingPage/LandingPage.jsx";
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 
 // Home
 import HomePage from "./pages/HomePage/HomePage.jsx";
@@ -31,8 +31,8 @@ import Confirmacion from "./Reservaciones/Confirmacion.jsx";
 import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
 import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
-import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
-import Profile from "./Profile/Profile.jsx";
+import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./Profile/Logros.jsx";
 import ReservacionesActivas from "./Profile/ReservacionesActivas.jsx";
 
@@ -50,7 +50,7 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
             <Route index element={<LandingPage />} />
-            <Route path="landingpage" element={<LandingPageDev />} />{" "}
+            <Route path="landingpage" element={<LandingPageDev />} />
             {/* ruta provisional para desarrollo de la landing */}
             <Route path="login" element={<LoginPage />} />
             <Route path="home" element={secured(HomePage)()} />

@@ -6,7 +6,7 @@ import TextoFecha from "./components/TextoFecha";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Reservaciones/SelectorSala.css";
-import NavBar from "../components/general/NavBar";
+import NavBar from "../GlobalComponents/NavBar/NavBar";
 import Slider from "./Slider";
 import imagePlaceholder from "./components/3D-model-placeholder.png";
 import GlassCard from "../components/general/GlassCard";
@@ -25,7 +25,7 @@ function SelectorSala(props) {
     const [espacioMax, setEspacioMax] = useState(10);
     const [idSala, setIdSala] = useState(0);
     const [idExperiencia, setIdExperiencia] = useState(0);
-	const [fetchFreeHoursAgain, setFetchFreeHoursAgain] = useState(false);
+    const [fetchFreeHoursAgain, setFetchFreeHoursAgain] = useState(false);
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -38,34 +38,28 @@ function SelectorSala(props) {
         }
     }, []);
 
-	useEffect(() => {
+    useEffect(() => {
         if (idExperiencia != 0) {
-
             get(`experiencias/${idExperiencia}`)
                 .then((result) => {
-                    saveToSessionStorage(
-                        "idSala",
-                        result[0].idSala
-                    );
+                    saveToSessionStorage("idSala", result[0].idSala);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
                 });
         }
 
-		if (!!idSala) {
-			get(`mesas/${idSala}`)
-			.then((result) => {
-				const maxCupos = result.recordsets[0][0].maxCupos;
-				setEspacioMax(maxCupos);
-			})
-			.catch((error) => {
-				console.error("An error occurred:", error);
-			});
-		}
-
+        if (!!idSala) {
+            get(`mesas/${idSala}`)
+                .then((result) => {
+                    const maxCupos = result.recordsets[0][0].maxCupos;
+                    setEspacioMax(maxCupos);
+                })
+                .catch((error) => {
+                    console.error("An error occurred:", error);
+                });
+        }
     }, [idSala, idExperiencia]);
-
 
     useEffect(() => {
         if (
@@ -79,27 +73,27 @@ function SelectorSala(props) {
         }
     }, [update]);
 
-	return (
-		<div>
-			<NavBar view="soloPerfil" autoHide={false} />
-			<div className="outer-container">
-				<GlassCard className="menu-lateral">
-					<p>menu</p>
-				</GlassCard>
-				<div className="container">
-					{/* Contenedor principal */}
+    return (
+        <div>
+            <NavBar view="soloPerfil" autoHide={false} />
+            <div className="outer-container">
+                <GlassCard className="menu-lateral">
+                    <p>menu</p>
+                </GlassCard>
+                <div className="container">
+                    {/* Contenedor principal */}
 
                     <div className="card-container">
                         {/* Sección de la izquierda */}
 
                         {/* Nombre de la sala */}
                         <TextoNombreSala />
-                        <Slider 
-							minimo={1} 
-							maximo={espacioMax} 
-							fetchFreeHoursAgain={fetchFreeHoursAgain}
-							setFetchFreeHoursAgain={setFetchFreeHoursAgain}
-						/>
+                        <Slider
+                            minimo={1}
+                            maximo={espacioMax}
+                            fetchFreeHoursAgain={fetchFreeHoursAgain}
+                            setFetchFreeHoursAgain={setFetchFreeHoursAgain}
+                        />
                         <div className="model">
                             <img src={imagePlaceholder}></img>{" "}
                             {/* Placeholder del modelo 3D */}
@@ -121,7 +115,7 @@ function SelectorSala(props) {
                         <FechaFormulario
                             update={update}
                             setUpdate={setUpdate}
-							fetchFreeHoursAgain={fetchFreeHoursAgain}
+                            fetchFreeHoursAgain={fetchFreeHoursAgain}
                         />
                         <TextoFecha update={update} />
                         <div className="button-container">

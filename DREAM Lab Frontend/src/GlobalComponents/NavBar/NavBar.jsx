@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import UserAvatar from "./UserAvatar";
-import Logout from "./Logout";
+import UserAvatar from "../../components/general/UserAvatar";
+import Logout from "../../components/general/Logout";
 import "../../App.css";
-import SearchBar from "../general/SearchBar";
-import BotonCrearExperiencia from "../general/BotonCrearExperiencia";
+import SearchBar from "../../components/general/SearchBar";
+import BotonCrearExperiencia from "../BotonCrearExperiencia/BotonCrearExperiencia";
 
 import "./NavBar.css";
 

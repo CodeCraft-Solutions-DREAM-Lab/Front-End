@@ -1,14 +1,17 @@
-import ListaReservaciones from "./ListaReservaciones";
+import ListaReservaciones from "../../Profile/ListaReservaciones";
 import { useEffect, useState } from "react";
-import NameCard from "./NameCard";
-import EsferaPuntosPrioridad from "./EsferaPuntosPrioridad";
-import BotonCelular from "./BotonCelular";
+import NameCard from "../../Profile/NameCard";
+import EsferaPuntosPrioridad from "../../Profile/EsferaPuntosPrioridad";
+import BotonCelular from "../../Profile/BotonCelular";
 import "./Profile.css";
-import BotonBack from "../components/general/BotonBack";
-import { generateReservationCards, renderTarjetasLogro } from "./Funciones.jsx";
-import CancelarReservacion from "./CancelarReservacion.jsx";
-import Navbar from "../components/general/NavBar.jsx";
-import { get } from "../Global/Database.js";
+import BotonBack from "../../components/general/BotonBack";
+import {
+    generateReservationCards,
+    renderTarjetasLogro,
+} from "../../Profile/Funciones.jsx";
+import CancelarReservacion from "../../Profile/CancelarReservacion.jsx";
+import Navbar from "../../GlobalComponents/NavBar/NavBar.jsx";
+import { get } from "../../Global/Database.js";
 
 const logrosData = [
     {

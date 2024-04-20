@@ -1,8 +1,8 @@
 // TODO: remover esto ya que es solo un bypass temporal del login
 import { Button } from "@nextui-org/react";
-import { saveToLocalStorage } from "../Global/Storage";
+import { saveToLocalStorage } from "../../Global/Storage";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../redux/Slices/userSlice";
+import { setAuth } from "../../redux/Slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {

@@ -4,7 +4,7 @@ import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import "../../App.css";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "../../components/general/NavBar.jsx"; // Import the Navbar component
+import Navbar from "../../GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
     getFromLocalStorage,
@@ -309,18 +309,18 @@ function HomePage() {
                 <div className="home-background-image-container">
                     <div className="left-blobs-container">
                         <img
-                            src="/src/images/blob-left.png"
+                            src="/src/pages/HomePage/assets/images/blob-left.png"
                             alt="Left Image"
                             className="left-image"
                         />
                         <img
-                            src="/src/images/small-blob.png"
+                            src="/src/pages/HomePage/assets/images/small-blob.png"
                             alt="Mini blob"
                             className="mini-blob"
                         />
                     </div>
                     <img
-                        src="/src/images/blob-right.png"
+                        src="/src/pages/HomePage/assets/images/blob-right.png"
                         alt="Right Image"
                         className="right-image"
                     />
