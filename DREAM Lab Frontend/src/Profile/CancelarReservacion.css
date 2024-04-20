@@ -1,211 +1,202 @@
-
 /* Modal tipo 1*/
 
-
-.modal-blanco-tipo1{
-    position: relative;
+.modal-blanco-tipo1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-family: "Karla", sans-serif;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
+    padding-top: 3%;
     background-color: white;
     border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
-    height: 60vh; /* Utilizando viewport height para mantener la proporción */
-    width: 50%; /* Utilizando un porcentaje para el ancho */
-    padding-top: 3%;
+    font-family: "Karla", sans-serif;
 }
 
-.titulo1-modal-tipo1{
+.titulo1-modal-tipo1 {
     width: 70%;
-    font-size: 2.2vw;
-    color: #14247B;
-    font-weight: bolder;
-    text-align: center;
     margin-top: 1vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
     line-height: 95%;
+    color: #14247b;
+    text-align: center;
 }
 
-.titulo2-modal-tipo1{
+.titulo2-modal-tipo1 {
     width: 70%;
-    font-size: 2vw;
-    color: #646464;
-    font-weight: bold;
     margin-top: -1vw;
-    text-align: center;
-    line-height: 95%;
-}
-
-.titulo3-modal-tipo1{
-    width: 100%;
-    font-size: 1.7vw;
-    color: #868686;
+    font-size: 2vw;
     font-weight: bold;
-    margin-top: -3vw;
+    line-height: 95%;
+    color: #646464;
     text-align: center;
 }
 
-.botones-cancelacion-tipo1{
+.titulo3-modal-tipo1 {
+    width: 100%;
+    margin-top: -3vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo1 {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    text-align: center;
     margin-bottom: 7%;
+    text-align: center;
 }
-
 
 /* Modal tipo 2*/
 
-.blur-space-tipo2{
-    position: absolute;
+.blur-space-tipo2 {
     backdrop-filter: blur(5px); /* Aplicando el filtro de desenfoque */
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
     z-index: 26;
-    background-color: rgb(255, 255, 255, 0.2);
-    height:auto;
-    width:auto;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    width: auto;
+    height: auto;
+    background-color: rgb(255, 255, 255, 0.2);
 }
 
-.modal-blanco-tipo2{
-    position: relative;
+.modal-blanco-tipo2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    font-family: "Karla", sans-serif;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
+    padding-top: 2%;
     background-color: white;
     border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
-    height: 60vh; /* Utilizando viewport height para mantener la proporción */
-    width: 50%; /* Utilizando un porcentaje para el ancho */
-    padding-top: 2%;
+    font-family: "Karla", sans-serif;
 }
 
-
-.logo-modal-out-tipo2{
-    width: 100%;
+.logo-modal-out-tipo2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.logo-modal-tipo2{
+.logo-modal-tipo2 {
     width: 5vw;
     margin-top: 1%;
 }
 
-.titulo1-modal-tipo2{
+.titulo1-modal-tipo2 {
     width: 70%;
-    font-size: 2.2vw;
-    color: #14247B;
-    font-weight: bolder;
-    text-align: center;
     margin-top: -1.5vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
     line-height: 95%;
+    color: #14247b;
+    text-align: center;
 }
 
-.titulo2-modal-tipo2{
+.titulo2-modal-tipo2 {
     width: 70%;
-    font-size: 2vw;
-    color: #646464;
-    font-weight: bold;
     margin-top: -1vw;
-    text-align: center;
-    line-height: 95%;
-}
-
-.titulo3-modal-tipo2{
-    width: 100%;
-    font-size: 1.7vw;
-    color: #868686;
-    font-weight: bold;
-    margin-top: -5vw;
-    text-align: center;
-}
-
-.titulo4-modal-tipo2{
-    width: 100%;
     font-size: 2vw;
-    color: #646464;
     font-weight: bold;
-    margin-top: -2vw;
+    line-height: 95%;
+    color: #646464;
     text-align: center;
 }
 
-.botones-cancelacion-tipo2{
+.titulo3-modal-tipo2 {
+    width: 100%;
+    margin-top: -5vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.titulo4-modal-tipo2 {
+    width: 100%;
+    margin-top: -2vw;
+    font-size: 2vw;
+    font-weight: bold;
+    color: #646464;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo2 {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    text-align: center;
     margin-bottom: 5%;
+    text-align: center;
 }
 
 /* Modal tipo 3*/
 
-.modal-blanco-tipo3{
-    position: relative;
+.modal-blanco-tipo3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
     padding-top: 3%;
-    font-family: "Karla", sans-serif;
     background-color: white;
     border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
-    height: 60vh; /* Utilizando viewport height para mantener la proporción */
-    width: 50%; /* Utilizando un porcentaje para el ancho */
+    font-family: "Karla", sans-serif;
 }
 
-
-.titulo1-modal-tipo3{
+.titulo1-modal-tipo3 {
     width: 70%;
-    font-size: 2.2vw;
-    color: #14247B;
-    font-weight: bolder;
-    text-align: center;
     margin-top: 1.5vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
     line-height: 95%;
+    color: #14247b;
+    text-align: center;
 }
 
-.titulo2-modal-tipo3{
+.titulo2-modal-tipo3 {
     width: 70%;
-    font-size: 2vw;
-    color: #646464;
-    font-weight: bold;
     margin-top: 1vw;
-    text-align: center;
-    line-height: 95%;
-}
-
-.titulo3-modal-tipo3{
-    width: 100%;
-    font-size: 1.7vw;
-    color: #868686;
+    font-size: 2vw;
     font-weight: bold;
-    margin-top: 0vw;
+    line-height: 95%;
+    color: #646464;
     text-align: center;
 }
 
-.botones-cancelacion-tipo3{
+.titulo3-modal-tipo3 {
+    width: 100%;
+    margin-top: 0vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo3 {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    text-align: center;
     margin-bottom: 7%;
+    text-align: center;
 }
-
-
-
-
