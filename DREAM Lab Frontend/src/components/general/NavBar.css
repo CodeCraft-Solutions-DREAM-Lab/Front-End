@@ -2,13 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
     z-index: 9;
     width: 95%;
     height: 11%;
     margin: 0 auto;
     padding: 1%;
-    transition: top 5s ease-in-out;
     background: rgba(255, 255, 255, 0.06);
     font-family: "Karla", sans-serif;
 }
@@ -23,21 +21,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute; /* Establishes stacking context */
+    position: fixed;
     z-index: 9;
     width: 100%;
     padding: 2rem;
-    transition: top 5s ease-in-out;
+    animation-duration: 0.5s;
+}
+
+@keyframes slideIn {
+    from {
+        top: -9rem; /* Start off-screen */
+    }
+    to {
+        top: 0; /* Slide into view */
+    }
+}
+
+@keyframes slideOut {
+    from {
+        top: 0; /* Start on-screen */
+    }
+    to {
+        top: -9rem; /* Slide out of view */
+    }
 }
 
 .visible {
-    top: 0; /* Display navbar at the top */
-    transition: top 5s ease-in-out;
+    animation-name: slideIn; /* Apply slideIn animation */
 }
 
 .hidden {
-    top: -9rem; /* Hide navbar above the viewport */
-    transition: top 5s ease-in-out;
+    animation-name: slideOut; /* Apply slideOut animation */
 }
 
 .logo-container {
