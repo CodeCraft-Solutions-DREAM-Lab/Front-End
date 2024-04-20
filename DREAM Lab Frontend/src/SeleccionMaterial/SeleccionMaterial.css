@@ -1,0 +1,13 @@
+.main-container {
+    width:100%;
+    height:fit-content;
+    top: 20vh;
+}
+.card {
+    background-color: white;
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+
+
+}

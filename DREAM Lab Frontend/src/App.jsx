@@ -29,12 +29,12 @@ import HomePage from "./Home/HomePage.jsx";
 import ReservacionSala from "./Reservaciones/ReservacionSala.jsx";
 import Confirmacion from "./Reservaciones/Confirmacion.jsx";
 import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
-import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
 import LandingPageDev from "./LandingPage/LandingPageDev.jsx";
 import Profile from "./Profile/Profile.jsx";
 import Logros from "./Profile/Logros.jsx"
 import ReservacionesActivas from "./Profile/ReservacionesActivas.jsx"
+import SeleccionMaterial from "./SeleccionMaterial/SeleccionMaterial.jsx";
 
 function secured(Component) {
   return function WrappedComponent(props) {
@@ -53,7 +53,7 @@ const router = createBrowserRouter(
       <Route path="landingpage" element={<LandingPageDev />} /> {/* ruta provisional para desarrollo de la landing */}
       <Route path="login" element={<LoginPage />} />
       <Route path="home" element={secured(HomePage)()} />
-      <Route path="reservacion" element={secured(ReservacionSala)()} />
+      <Route path="reservacion" element={secured(ReservacionSala)()} /> {/* TODO: checar si se puede borrar esta ruta y componente */}
       <Route
         path="reservacion/confirmacion"
         element={secured(Confirmacion)()}
@@ -62,7 +62,7 @@ const router = createBrowserRouter(
         path="reservacion/resumen"
         element={secured(ResumenReservacion)()}
       />
-      <Route path="reservacion/equipo" element={secured(SelectorEquipo)()} />
+      <Route path="reservacion/material" element={<SeleccionMaterial />} /> {/* TODO: Agregar secured una vez que se empiece a desarrollar el back */}
       <Route path="reservacion/sala" element={secured(SelectorSala)()} />
       <Route path="profile" element={secured(Profile)()} />
       <Route path="*" element={<NotFound />} />
