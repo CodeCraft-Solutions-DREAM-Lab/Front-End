@@ -1,23 +1,22 @@
 @media screen and (orientation: landscape) {
     .login-button {
-      width: 40%;
+        width: 40%;
     }
-  }
-  
-  @media screen and (orientation: portrait) {
+}
+
+@media screen and (orientation: portrait) {
     .login-button {
-      width: 50%;
+        width: 50%;
     }
-  }
-  
-  .login-button {
+}
+
+.login-button {
     height: 4.5vh !important;
     background-color: white;
-  }
-  
-  .button-label {
-    color: #042e55;
+}
+
+.button-label {
     font-size: max(1.5vh, 1vw);
     font-weight: 700;
-  }
-  
+    color: #042e55;
+}
