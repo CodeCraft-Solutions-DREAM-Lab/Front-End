@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Etiqueta from "../../../../Home/Etiqueta.jsx";
 import "./Detalles.css";
-import BotonSolicitar from "../../../../Home/BotonSolicitar.jsx";
-import CloseButton from "../../../../Home/CloseButton.jsx";
+import BotonSolicitar from "./components/BotonSolicitar/BotonSolicitar.jsx";
+import CloseButton from "./components/CloseButton/CloseButton.jsx";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
