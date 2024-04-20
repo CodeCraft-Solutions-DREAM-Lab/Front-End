@@ -173,7 +173,7 @@ function HomePage() {
                                 type === "Experiencia"
                             ) {
                                 result = await fetch(
-                                    "http://dreamlab-api.azurewebsites.net/experiencias/" + id
+                                    "http:localhost:3000/experiencias/" + id
                                 );
                             } else if (
                                 type === "salas" ||
@@ -182,7 +182,7 @@ function HomePage() {
                                 type === "Sala"
                             ) {
                                 result = await fetch(
-                                    "http://dreamlab-api.azurewebsites.net/salas/" + id
+                                    "http:localhost:3000/salas/" + id
                                 );
                             }
 
