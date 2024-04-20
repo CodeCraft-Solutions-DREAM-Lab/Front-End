@@ -1,28 +1,27 @@
-
-.avisoRecomendacionesInvalidas{
+.avisoRecomendacionesInvalidas {
     display: flex;
-	justify-content: center;
+    justify-content: center;
     padding-bottom: 20px;
 }
 
-.containerFondo{
+.containerFondo {
     display: flex;
-    align-items: center;
     justify-content: space-around;
+    align-items: center;
     width: 65%;
+    margin-bottom: 40px;
     background: white;
     border-radius: 10px;
-    margin-bottom: 40px;;
 }
 
-.containerFondo p{
-    color: #5F5F5F;
+.containerFondo p {
     width: 65%;
-    font-weight: 500;
     padding-right: 1%;
+    font-weight: 500;
+    color: #5f5f5f;
 }
 
-.nubeError{
+.nubeError {
     width: 20%;
     margin-top: 10px;
     margin-bottom: 10px;
