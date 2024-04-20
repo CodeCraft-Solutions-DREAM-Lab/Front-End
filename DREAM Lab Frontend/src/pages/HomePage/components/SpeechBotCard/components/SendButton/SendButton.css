@@ -1,0 +1,10 @@
+.send-button {
+    width: 2rem;
+    margin-left: 0.5rem; /* Adjust margin */
+}
+
+@media only screen and (max-width: 700px) {
+    .send-button {
+        width: 2rem;
+    }
+}

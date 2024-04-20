@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import MicrophoneButton from "./components/MicrophoneButton/MicrophoneButton.jsx";
-import SendButton from "../../../../Home/SendButton.jsx";
+import SendButton from "./components/SendButton/SendButton.jsx";
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";

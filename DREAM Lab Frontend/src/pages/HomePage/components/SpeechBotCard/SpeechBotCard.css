@@ -19,24 +19,10 @@
     padding-right: 1.5rem;
 }
 
-.send-button {
-    width: 2rem;
-    margin-left: 0.5rem; /* Adjust margin */
-}
-
 @media only screen and (max-width: 700px) {
     .inputRecomendaciones {
         width: 100%;
         flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
         justify-content: flex-start; /* Align items to start on smaller screens */
-    }
-
-    .microphone-button {
-        font-size: 2.2rem;
-        justify-content: center;
-    }
-
-    .send-button {
-        width: 2rem;
     }
 }
