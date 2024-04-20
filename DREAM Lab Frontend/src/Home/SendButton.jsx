@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { API_URL } from "../Global/Database.js";
+
 function SendButton({
     transcript,
     onProcessedText,
@@ -13,16 +15,13 @@ function SendButton({
             setProcessing(true);
             // Simulate asynchronous processing by sending the data to the server
             console.log("processTranscript transcript var: ", transcript);
-            const response = await fetch(
-                "http://localhost:3000/chatbot",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ prompt: transcript }),
-                }
-            );
+            const response = await fetch(`${API_URL}chatbot`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ prompt: transcript }),
+            });
 
             if (!response.ok) {
                 throw new Error("Network response was not ok");
