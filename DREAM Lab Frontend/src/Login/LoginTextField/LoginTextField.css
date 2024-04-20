@@ -3,13 +3,13 @@
 }
 
 .login-tf-label-container {
-    margin-left: 6%;
     margin-bottom: 2%;
+    margin-left: 6%;
 }
 
 .login-tf-label {
-    color: white;
     font-size: max(1.5vh, 1.1vw);
+    color: white;
 }
 
 input[type="password"]::-ms-reveal {
