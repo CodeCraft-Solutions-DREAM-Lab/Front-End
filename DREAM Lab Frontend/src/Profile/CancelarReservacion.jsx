@@ -1,8 +1,8 @@
 import React from "react";
 import './CancelarReservacion.css';
-import errorLogo from "../Home/Images/errorLogo.png"
-import correctLogo from "../Home/Images/correctLogo.png"
-import infoLogo from "../Home/Images/infoLogo.png"
+import errorLogo from "../pages/Profile/assets/images/errorLogo.png"
+import correctLogo from "../pages/Profile/assets/images/correctLogo.png"
+import infoLogo from "../pages/Profile/assets/images/infoLogo.png"
 
 import BotonModal from "./BotonModal"
 

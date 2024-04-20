@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@nextui-org/react";
-import DeleteReservModal from "./DeleteReservModal";
+import DeleteReservModal from "./DeleteReservModal.jsx";
 import { useState } from "react";
 
 import { API_URL } from "../Global/Database.js";
