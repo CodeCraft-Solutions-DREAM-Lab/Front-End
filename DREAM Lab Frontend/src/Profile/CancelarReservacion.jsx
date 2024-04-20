@@ -4,49 +4,49 @@ import errorLogo from "../Home/Images/errorLogo.png"
 import correctLogo from "../Home/Images/correctLogo.png"
 import infoLogo from "../Home/Images/infoLogo.png"
 
-import BotonNodal from "./BotonNodal"
+import BotonModal from "./BotonModal"
 
 function CancelarReservacion(props){
 
     // Constantes para los nombres de clase que pueden ser modificados por props
     const blurSpaceClass = `blur-space-tipo2`;
-    const nodalBlancoClass = `nodal-blanco-${props.type}`;
-    const logoNodalOutClass = `logo-nodal-out-tipo2`;
-    const logoNodalClass = `logo-nodal-tipo2`;
-    const titulo1NodalClass = `titulo1-nodal-${props.type}`;
-    const titulo2NodalClass = `titulo2-nodal-${props.type}`;
-    const titulo3NodalClass = `titulo3-nodal-${props.type}`;
-    const titulo4NodalClass = `titulo4-nodal-tipo2`;
+    const modalBlancoClass = `modal-blanco-${props.type}`;
+    const logoModalOutClass = `logo-modal-out-tipo2`;
+    const logoModalClass = `logo-modal-tipo2`;
+    const titulo1ModalClass = `titulo1-modal-${props.type}`;
+    const titulo2ModalClass = `titulo2-modal-${props.type}`;
+    const titulo3ModalClass = `titulo3-modal-${props.type}`;
+    const titulo4ModalClass = `titulo4-modal-tipo2`;
     const botonesCancelacionClass = `botones-cancelacion-${props.type}`;
     let logo = errorLogo;
 
-    if(props.nodalClasificacion == 1){
+    if(props.modalClasificacion == 1){
         logo = infoLogo
-    } else if (props.nodalClasificacion == 2){
+    } else if (props.modalClasificacion == 2){
         logo = errorLogo
-    } else if (props.nodalClasificacion == 3){
+    } else if (props.modalClasificacion == 3){
         logo = correctLogo
     }
 
     return(
         <div className={blurSpaceClass}>
-            <div className={nodalBlancoClass}>
-                <div className={logoNodalOutClass}>
-                    {props.nodalClasificacion !== 4 && (
-                        <div className={logoNodalClass}><img src={logo} alt="Icono de notificación" /></div> 
+            <div className={modalBlancoClass}>
+                <div className={logoModalOutClass}>
+                    {props.modalClasificacion !== 4 && (
+                        <div className={logoModalClass}><img src={logo} alt="Icono de notificación" /></div> 
                     )}
                 </div>
-                <h1 className={titulo1NodalClass}>{props.titulo1}</h1>
-                <h1 className={titulo2NodalClass}>{props.titulo2}</h1>
-                <h1 className={titulo3NodalClass}>{props.titulo3}</h1>
-                {props.nodalClasificacion !== 2 && (
-                    <h1 className={titulo4NodalClass}>{props.titulo4}</h1>
+                <h1 className={titulo1ModalClass}>{props.titulo1}</h1>
+                <h1 className={titulo2ModalClass}>{props.titulo2}</h1>
+                <h1 className={titulo3ModalClass}>{props.titulo3}</h1>
+                {props.modalClasificacion !== 2 && (
+                    <h1 className={titulo4ModalClass}>{props.titulo4}</h1>
                 )}
                 <div className={botonesCancelacionClass}>
-                    {props.nodalClasificacion !== 3 && (
-                        <BotonNodal tipoBoton="Cancelar" nombre={props.textoRojo} funcion={props.funcionRojo}/>
+                    {props.modalClasificacion !== 3 && (
+                        <BotonModal tipoBoton="Cancelar" nombre={props.textoRojo} funcion={props.funcionRojo}/>
                     )}
-                    <BotonNodal tipoBoton="Aceptar" nombre={props.textoVerde} funcion={props.funcionVerde}/>
+                    <BotonModal tipoBoton="Aceptar" nombre={props.textoVerde} funcion={props.funcionVerde}/>
                 </div>
             </div>
         </div>

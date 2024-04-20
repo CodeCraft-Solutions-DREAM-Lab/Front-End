@@ -41,7 +41,7 @@ export function calculateEndTime(startTime, duration) {
 
 
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
-export function generateReservationCards(reservacionesData, handleClickNodal) {
+export function generateReservationCards(reservacionesData, handleClickModal) {
     const reservationCards = reservacionesData.map((reservation, index) => {
         // Formatear la fecha y hora
         const startDate = new Date(reservation.fecha).toISOString().split('T')[0];
@@ -62,7 +62,7 @@ export function generateReservationCards(reservacionesData, handleClickNodal) {
                 experiencia={reservation.experiencia}
                 hora={`${formattedTime} - ${formattedEndTime}`}
                 dia={formattedDate}
-                funcion={() => handleClickNodal(1)} // Aquí se llama a la función handleClickNodal
+                funcion={() => handleClickModal(1)} // Aquí se llama a la función handleClickModal
             />
         );
     });

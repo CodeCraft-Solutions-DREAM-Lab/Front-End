@@ -60,10 +60,10 @@ const reservacionesData = [
 
 function Profile() {
     const [reservaciones, setReservaciones] = useState([]);
-    const [tipoNodal, setTipoNodal] = useState(0);
+    const [tipoModal, setTipoModal] = useState(0);
 
-    const handleClickNodal = (tipo) => {
-        setTipoNodal(tipo);
+    const handleClickModal = (tipo) => {
+        setTipoModal(tipo);
     };
 
     useEffect(() => {
@@ -86,21 +86,21 @@ function Profile() {
                 <Navbar autoHide={false} view="perfil" />
             </div>
 
-            {tipoNodal === 1 ? (
+            {tipoModal === 1 ? (
                 <CancelarReservacion
-                    nodalClasificacion={1}
+                    modalClasificacion={1}
                     type="tipo1"
                     titulo1="Tu reserva: Sala Horizons"
                     titulo2="Viernes - 19 de abril"
                     titulo3="14:30 - 15:30"
                     textoRojo="Cancelar"
                     textoVerde="Ok"
-                    funcionRojo={() => handleClickNodal(2)}
-                    funcionVerde={() => handleClickNodal(0)}
+                    funcionRojo={() => handleClickModal(2)}
+                    funcionVerde={() => handleClickModal(0)}
                 />
-            ) : tipoNodal === 2 ? (
+            ) : tipoModal === 2 ? (
                 <CancelarReservacion
-                    nodalClasificacion={2}
+                    modalClasificacion={2}
                     type="tipo2"
                     titulo1="Estas a punto de cancelar tu reservación en: Dimension Forge"
                     titulo2="Viernes - 19 de abril"
@@ -108,18 +108,18 @@ function Profile() {
                     titulo4="¿Deseas continuar?"
                     textoRojo="Si, cancelar"
                     textoVerde="No"
-                    funcionRojo={() => handleClickNodal(3)}
-                    funcionVerde={() => handleClickNodal(0)}
+                    funcionRojo={() => handleClickModal(3)}
+                    funcionVerde={() => handleClickModal(0)}
                 />
-            ) : tipoNodal === 3 ? (
+            ) : tipoModal === 3 ? (
                 <CancelarReservacion
-                    nodalClasificacion={3}
+                    modalClasificacion={3}
                     type="tipo3"
                     titulo1="Cancelación exitosa"
                     titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
                     titulo3="¿Necesitas ayuda? Contáctanos aquí"
                     textoVerde="Cerrar"
-                    funcionVerde={() => handleClickNodal(0)}
+                    funcionVerde={() => handleClickModal(0)}
                 />
             ) : null}
 
@@ -159,7 +159,7 @@ function Profile() {
                     <div className="reservaciones-div-in">
                         {generateReservationCards(
                             reservaciones,
-                            handleClickNodal
+                            handleClickModal
                         )}
                         <div className="degradado-down"></div>
                     </div>
