@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Etiqueta from "../../../../Home/Etiqueta.jsx";
+import Etiqueta from "./components/Etiqueta/Etiqueta.jsx";
 import "./Detalles.css";
 import BotonSolicitar from "./components/BotonSolicitar/BotonSolicitar.jsx";
 import CloseButton from "./components/CloseButton/CloseButton.jsx";
