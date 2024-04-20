@@ -23,11 +23,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: top 5s ease-in-out;
     position: absolute; /* Establishes stacking context */
     z-index: 9;
-    padding: 2rem;
     width: 100%;
+    padding: 2rem;
+    transition: top 5s ease-in-out;
 }
 
 .visible {
