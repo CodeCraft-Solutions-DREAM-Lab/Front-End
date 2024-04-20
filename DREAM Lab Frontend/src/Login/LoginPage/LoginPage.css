@@ -1,126 +1,123 @@
 .glassCardContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .login-container {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  overflow: hidden;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 @media screen and (max-width: 1005px) {
-  .glassCard {
-    min-width: 300px;
-  }
+    .glassCard {
+        min-width: 300px;
+    }
 }
 
 @media screen and (min-width: 1006px) {
-  .glassCard {
-    width: 30vw;
-  }
+    .glassCard {
+        width: 30vw;
+    }
 }
 
 @media screen and (max-height: 615px) {
-  .glassCard {
-    min-height: 510px;
-  }
+    .glassCard {
+        min-height: 510px;
+    }
 }
 
 @media screen and (min-height: 616px) {
-  .glassCard {
-    height: 80vh;
-  }
+    .glassCard {
+        height: 80vh;
+    }
 }
 
 .glassCard {
-  z-index: 2;
+    z-index: 2;
 }
 
 .login-logo {
-  height: 3.8vh;
-  margin-right: max(1.2vh, 1vw);
+    height: 3.8vh;
+    margin-right: max(1.2vh, 1vw);
 }
 
 .login-dreamlab-title {
-  color: white;
-  /* font-size: 25px; */
-  font-size: max(2.5vh, 1.5vw);
-  font-weight: bold;
-
+    font-size: max(2.5vh, 1.5vw);
+    font-weight: bold;
+    color: white;
 }
 
 .login-titulo {
-  color: white;
-  /* font-size: 28px; */
-  font-size: max(3vh, 2vw);
-  text-align: center;
+    font-size: max(3vh, 2vw);
+    color: white;
+    text-align: center;
 }
 
 .grid-container {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1rem;
-  z-index: 4;
+    display: grid;
+    gap: 1rem;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    z-index: 4;
+    width: 100%;
+    height: 100%;
 }
 
 .blobs-container {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  pointer-events: none;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 @media screen and (orientation: landscape) {
-  .blob-image {
-    width: 35%;
-  }
+    .blob-image {
+        width: 35%;
+    }
 
-  .top-left-image {
-    left: 7vw;
-    top: -15vh;
-  }
+    .top-left-image {
+        top: -15vh;
+        left: 7vw;
+    }
 
-  .bottom-right-image {
-    bottom: -25vh;
-    right: 14vw;
-  }
+    .bottom-right-image {
+        bottom: -25vh;
+        right: 14vw;
+    }
 }
 
 @media screen and (orientation: portrait) {
-  .blob-image {
-    height: 35%;
-  }
+    .blob-image {
+        height: 35%;
+    }
 
-  .top-left-image {
-    left: -12%;
-    top: -12%;
-  }
+    .top-left-image {
+        top: -12%;
+        left: -12%;
+    }
 
-  .bottom-right-image {
-    bottom: -6%;
-    right: -10%;
-  }
+    .bottom-right-image {
+        bottom: -6%;
+        right: -10%;
+    }
 }
 
 .top-left-image {
-  position: absolute;
-  z-index: 1;
-  transform: rotate(-109deg);
+    position: absolute;
+    z-index: 1;
+    transform: rotate(-109deg);
 }
 
 .bottom-right-image {
-  position: absolute;
-  z-index: 3;
+    position: absolute;
+    z-index: 3;
 }
