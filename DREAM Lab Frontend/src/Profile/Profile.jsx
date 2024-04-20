@@ -8,7 +8,7 @@ import BotonBack from "../components/general/BotonBack";
 import { generateReservationCards, renderTarjetasLogro } from "./Funciones.jsx";
 import CancelarReservacion from "./CancelarReservacion.jsx";
 import Navbar from "../components/general/NavBar.jsx";
-import { get } from "../Home/Database.js";
+import { get } from "../Global/Database.js";
 
 const logrosData = [
     {
@@ -67,17 +67,14 @@ function Profile() {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await get("reservaciones");
-                setReservaciones(result);
-                console.log(reservaciones);
-            } catch (error) {
+        get("reservaciones")
+            .then((res) => {
+                console.log("Reservaciones:" + res);
+                setReservaciones(res);
+            })
+            .catch((error) => {
                 console.error("An error occurred:", error);
-            }
-        };
-
-        fetchData();
+            });
     }, []);
 
     return (
