@@ -10,6 +10,7 @@
     padding: 1%;
     transition: top 5s ease-in-out;
     background: rgba(255, 255, 255, 0.06);
+    font-family: "Karla", sans-serif;
 }
 
 @media only screen and (min-height: 1025px) {
@@ -22,10 +23,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative; /* Establishes stacking context */
-    height: 100%;
-    padding: 2rem;
     transition: top 5s ease-in-out;
+    position: absolute; /* Establishes stacking context */
+    z-index: 9;
+    padding: 2rem;
+    width: 100%;
 }
 
 .visible {
@@ -98,7 +100,7 @@
     height: 2.3rem; /* Adjusted height */
     padding: 0 20px 0 40px; /* Adjust for icon width and padding */
     background-color: transparent;
-    background-image: url("./images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+    background-image: url("../../images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
     background-repeat: no-repeat;
     background-position: 10% center; /* Adjust position as needed */
     background-size: 20px; /* Adjust size as needed */
