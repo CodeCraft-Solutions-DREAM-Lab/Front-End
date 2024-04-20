@@ -18,7 +18,7 @@ function BotonCancelarReservacion(props) {
 	const handleCancelReserv = () => {
 		console.log("cancelar reservacion");
 
-		fetch('http:localhost:3000/reservaciones/'+id, {
+		fetch('http://localhost:3000/reservaciones/'+id, {
 			method: 'DELETE', 
 			headers: {
 				'Content-Type': 'application/json',

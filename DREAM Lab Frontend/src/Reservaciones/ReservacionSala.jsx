@@ -50,7 +50,7 @@ function ReservacionCuarto() {
       numMesa: 1,
     };
 
-    fetch("http:localhost:3000/reservaciones", {
+    fetch("http://localhost:3000/reservaciones", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
