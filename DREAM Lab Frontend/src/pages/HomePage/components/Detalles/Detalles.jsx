@@ -1,18 +1,18 @@
 import { useState } from "react";
-import Etiqueta from "./Etiqueta.jsx";
+import Etiqueta from "../../../../Home/Etiqueta.jsx";
 import "./Detalles.css";
-import BotonSolicitar from "./BotonSolicitar.jsx";
-import CloseButton from "./CloseButton.jsx";
+import BotonSolicitar from "../../../../Home/BotonSolicitar.jsx";
+import CloseButton from "../../../../Home/CloseButton.jsx";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     deleteSelectedItem,
     selectSelectedItem,
-} from "../redux/Slices/selectedItemSlice.js";
+} from "../../../../redux/Slices/selectedItemSlice.js";
 import {
     getFromSessionStorage,
     saveToSessionStorage,
-} from "../Global/Storage.js";
+} from "../../../../Global/Storage.js";
 
 function ExperienceDetails(props) {
     const [exitAnimation, setExitAnimation] = useState(false);

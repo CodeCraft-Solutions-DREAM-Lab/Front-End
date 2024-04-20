@@ -12,7 +12,7 @@ import {
 } from "../../Global/Storage.js";
 
 import { get, post, API_URL } from "../../Global/Database.js";
-import Detalles from "../../Home/Detalles.jsx";
+import Detalles from "./components/Detalles/Detalles.jsx";
 
 import LoadingScreen from "../../Global/LoadingScreen.jsx";
 
