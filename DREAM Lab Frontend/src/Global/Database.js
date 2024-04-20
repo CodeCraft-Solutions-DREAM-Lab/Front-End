@@ -5,73 +5,68 @@ EJEMPLOS DE USO:
 
 =================================================================GET=======================================================================
 
-import React, { useState, useEffect } from 'react';
-import { get } from './Database';
+import React, { useState, useEffect } from "react";
+import { get } from "./Database";
 
 function MyComponent() {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await get('data', () => setIsLoading(false), () => setIsLoading(false));
-        setData(result);
-      } catch (error) {
-        console.error('An error occurred:', error);
-      }
-    };
+    useEffect(() => {
+        get("data")
+            .then((result) => {
+                setData(result);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+                setIsLoading(false);
+            });
+    }, []);
 
-    fetchData();
-  }, []);
+    if (isLoading) {
+        return <div>Cargando...</div>;
+    }
 
-  if (isLoading) {
-    return <div>Cargando...</div>;
-  }
-
-  return (
-    <div>CARGADO!!</div>
-    );
-  }
+    return <div>CARGADO!!</div>;
+}
 
 export default MyComponent;
 
 =================================================================POST=======================================================================
 
-import React, { useState, useEffect } from 'react';
-import { post } from './Database';
+import React, { useState, useEffect } from "react";
+import { post } from "./Database";
 
 function MyComponent() {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const postData = async () => {
-      try {
-        const result = await post('data', { name: 'John' }, () => setIsLoading(false), () => setIsLoading(false));
-        setData(result);
-      } catch (error) {
-        console.error('An error occurred:', error);
-      }
-    };
-
-    postData();
-  }, []);
-
-  if (isLoading) {
-    return <div>Cargando...</div>;
-  }
-
-  return (
-    <div>CARGADO!!</div>
-  );
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+        post("data", { name: "John" })
+            .then((result) => {
+                setData(result);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+                setIsLoading(false);
+            });
+    }, []);
+            
+    if (isLoading) {
+        return <div>Cargando...</div>;
+    }
+    
+    return <div>CARGADO!!</div>;
 }
-
+  
 export default MyComponent;
+
 */
 
 // const defaultURL = "http://dreamlab-api.azurewebsites.net/";
-const defaultURL = "http://localhost:3000/";
+export const API_URL = "http://localhost:3000/";
 
 export async function apiRequest(
     method,
@@ -83,7 +78,7 @@ export async function apiRequest(
     try {
         const response = await axios({
             method,
-            url: defaultURL + url,
+            url: API_URL + url,
             data,
             headers: {
                 "Content-Type": "application/json",

@@ -12,7 +12,7 @@ import {
     removeReservationDataFromSessionStorage,
 } from "../Global/Storage.js";
 
-import { get, post } from "../Global/Database.js";
+import { get, post, API_URL } from "../Global/Database.js";
 import Detalles from "./Detalles.jsx";
 
 import LoadingScreen from "../Global/LoadingScreen.jsx";
@@ -173,7 +173,7 @@ function HomePage() {
                                 type === "Experiencia"
                             ) {
                                 result = await fetch(
-                                    "http://localhost:3000/experiencias/" + id
+                                    `${API_URL}experiencias/` + id
                                 );
                             } else if (
                                 type === "salas" ||
@@ -181,9 +181,7 @@ function HomePage() {
                                 type === "sala" ||
                                 type === "Sala"
                             ) {
-                                result = await fetch(
-                                    "http://localhost:3000/salas/" + id
-                                );
+                                result = await fetch(`${API_URL}/salas/` + id);
                             }
 
                             if (result.ok) {
