@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import "../../App.css";
-import RecommendationsCarousel from "./components/RecommendationssCarousel/RecommendationsCarousel.jsx";
-import RecomendacionesInvalidas from "../../Home/RecomendacionesInvalidas.jsx";
+import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
+import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
 import Navbar from "../../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {

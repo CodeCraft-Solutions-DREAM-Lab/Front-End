@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import MicrophoneButton from "../../../../Home/MicrophoneButton.jsx";
+import MicrophoneButton from "./components/MicrophoneButton/MicrophoneButton.jsx";
 import SendButton from "../../../../Home/SendButton.jsx";
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
-import TextField from "../../../../Home/TextField.jsx";
+import TextField from "./components/TextField/TextField.jsx";
 import "./SpeechBotCard.css";
 import "../../../../components/general/GlassCard.css";
 
