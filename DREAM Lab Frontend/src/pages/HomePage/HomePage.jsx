@@ -1,21 +1,20 @@
 import { useState, useEffect, useRef } from "react";
-import ImageSlider from "./ImageSlider";
-import SpeechBotCard from "./SpeechBotCard";
-import "../App.css";
-import RecommendationsCarousel from "./RecommendationsCarousel";
-import RecomendacionesInvalidas from "./RecomendacionesInvalidas";
-import Navbar from "../components/general/NavBar.jsx"; // Import the Navbar component
+import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
+import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
+import "../../App.css";
+import RecommendationsCarousel from "./components/RecommendationssCarousel/RecommendationsCarousel.jsx";
+import RecomendacionesInvalidas from "../../Home/RecomendacionesInvalidas.jsx";
+import Navbar from "../../components/general/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
     getFromLocalStorage,
-    removeFromSessionStorage,
     removeReservationDataFromSessionStorage,
-} from "../Global/Storage.js";
+} from "../../Global/Storage.js";
 
-import { get, post, API_URL } from "../Global/Database.js";
-import Detalles from "./Detalles.jsx";
+import { get, post, API_URL } from "../../Global/Database.js";
+import Detalles from "../../Home/Detalles.jsx";
 
-import LoadingScreen from "../Global/LoadingScreen.jsx";
+import LoadingScreen from "../../Global/LoadingScreen.jsx";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
