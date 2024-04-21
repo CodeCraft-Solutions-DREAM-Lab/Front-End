@@ -133,7 +133,7 @@ const ImageSlider = (props) => {
                     url: item.fotoURL ? item.fotoURL : item.portadaURL,
                     title: item.nombre,
                 }));
-
+                console.log(res);
                 setBdImages(res);
             };
         };

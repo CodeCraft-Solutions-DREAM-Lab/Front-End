@@ -426,11 +426,16 @@ function HomePage() {
                 <div className="carousel-container">
                     <h1>RECOMENDACIONES</h1>
                     <ImageSlider
+                        api_url={null}
+                        request_type={null}
+                        isExperiencia={null}
                         images={IMAGES}
                         titles={IMAGES.map((item) => item.title)}
                         options={OPTIONS}
                         mostrarDetalles={mostrarDetalles}
                         onImageClick={handleImageClick}
+                        setIsSalaClicked={() => {}}
+                        setImageType={null}
                     />
                 </div>
                 <div className="carousel-container">
@@ -440,6 +445,8 @@ function HomePage() {
                             api_url="salas"
                             request_type="GET"
                             isExperiencia={false}
+                            images={null}
+                            titles={null}
                             options={OPTIONS}
                             mostrarDetalles={mostrarDetalles}
                             onImageClick={handleImageClick}
@@ -455,6 +462,8 @@ function HomePage() {
                             api_url="experiencias/autodirigidas"
                             request_type="GET"
                             isExperiencia={true}
+                            images={null}
+                            titles={null}
                             options={OPTIONS}
                             mostrarDetalles={mostrarDetalles}
                             onImageClick={handleImageClick}
