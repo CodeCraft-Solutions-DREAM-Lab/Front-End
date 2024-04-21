@@ -283,31 +283,31 @@ function HomePage() {
             "reservType",
         ]);
 
-        setIsLoadingSalas(true);
-        setErrorSalas(null);
+        // setIsLoadingSalas(true);
+        // setErrorSalas(null);
 
-        setIsLoadingExperiences(true);
-        setErrorExperiences(null);
+        // setIsLoadingExperiences(true);
+        // setErrorExperiences(null);
 
-        setIsLoadingUfs(true);
-        setErrorUfs(null);
+        // setIsLoadingUfs(true);
+        // setErrorUfs(null);
 
-        const userID = getFromLocalStorage("user");
+        // const userID = getFromLocalStorage("user");
 
-        get("salas")
-            .then(handleResponse(setSalas))
-            .catch(handleError(setErrorSalas))
-            .finally(() => setIsLoadingSalas(false));
+        // get("salas")
+        //     .then(handleResponse(setSalas))
+        //     .catch(handleError(setErrorSalas))
+        //     .finally(() => setIsLoadingSalas(false));
 
-        get("experiencias/autodirigidas")
-            .then(handleResponse(setExperiences))
-            .catch(handleError(setErrorExperiences))
-            .finally(() => setIsLoadingExperiences(false));
+        // get("experiencias/autodirigidas")
+        //     .then(handleResponse(setExperiences))
+        //     .catch(handleError(setErrorExperiences))
+        //     .finally(() => setIsLoadingExperiences(false));
 
-        post("experiencias/UFs", { user: userID })
-            .then(handleResponse(setUfs))
-            .catch(handleError(setErrorUfs))
-            .finally(() => setIsLoadingUfs(false));
+        // post("experiencias/UFs", { user: userID })
+        //     .then(handleResponse(setUfs))
+        //     .catch(handleError(setErrorUfs))
+        //     .finally(() => setIsLoadingUfs(false));
     }, []);
 
     useEffect(() => {
@@ -434,52 +434,49 @@ function HomePage() {
                     />
                 </div>
                 <div className="carousel-container">
-                    {salas.length > 0 && !isLoadingSalas && (
-                        <>
-                            <h1>SALAS</h1>
-                            <ImageSlider
-                                api_url="salas"
-                                isExperiencia={false}
-                                options={OPTIONS}
-                                mostrarDetalles={mostrarDetalles}
-                                onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked}
-                                setImageType="salas"
-                            />
-                        </>
-                    )}
+                    <>
+                        <h1>SALAS</h1>
+                        <ImageSlider
+                            api_url="salas"
+                            request_type="GET"
+                            isExperiencia={false}
+                            options={OPTIONS}
+                            mostrarDetalles={mostrarDetalles}
+                            onImageClick={handleImageClick}
+                            setIsSalaClicked={setIsSalaClicked}
+                            setImageType="salas"
+                        />
+                    </>
                 </div>
                 <div className="carousel-container">
-                    {experiences.length > 0 && !isLoadingExperiences && (
-                        <>
-                            <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
-                            <ImageSlider
-                                api_url="experiencias/autodirigidas"
-                                isExperiencia={true}
-                                options={OPTIONS}
-                                mostrarDetalles={mostrarDetalles}
-                                onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked}
-                                setImageType="experiencias"
-                            />
-                        </>
-                    )}
+                    <>
+                        <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
+                        <ImageSlider
+                            api_url="experiencias/autodirigidas"
+                            request_type="GET"
+                            isExperiencia={true}
+                            options={OPTIONS}
+                            mostrarDetalles={mostrarDetalles}
+                            onImageClick={handleImageClick}
+                            setIsSalaClicked={setIsSalaClicked}
+                            setImageType="experiencias"
+                        />
+                    </>
                 </div>
                 <div className="carousel-container">
-                    {ufs.length > 0 && !isLoadingUfs && (
-                        <>
-                            <h1>UNIDADES DE FORMACIÓN</h1>
-                            <ImageSlider
-                                api_url="experiencias/UFs"
-                                isExperiencia={true}
-                                options={OPTIONS}
-                                mostrarDetalles={mostrarDetalles}
-                                onImageClick={handleImageClick}
-                                setIsSalaClicked={setIsSalaClicked}
-                                setImageType="experiencias"
-                            />
-                        </>
-                    )}
+                    <>
+                        <h1>UNIDADES DE FORMACIÓN</h1>
+                        <ImageSlider
+                            api_url="experiencias/UFs"
+                            request_type="POST"
+                            isExperiencia={true}
+                            options={OPTIONS}
+                            mostrarDetalles={mostrarDetalles}
+                            onImageClick={handleImageClick}
+                            setIsSalaClicked={setIsSalaClicked}
+                            setImageType="experiencias"
+                        />
+                    </>
                 </div>
             </div>
         </>

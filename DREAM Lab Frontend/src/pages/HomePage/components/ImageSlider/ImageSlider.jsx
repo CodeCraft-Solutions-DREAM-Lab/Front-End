@@ -5,16 +5,16 @@ import "./ImageSlider.css";
 import { useDispatch } from "react-redux";
 import { setSelectedItem } from "src/redux/Slices/selectedItemSlice";
 
-import { get } from "src/utils/ApiRequests";
+import { get, post } from "src/utils/ApiRequests";
+import { getFromLocalStorage } from "src/utils/Storage";
 
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
     const dispatch = useDispatch();
     const { mostrarDetalles } = props;
-
     const [response, setResponse] = useState([]);
-    const [images, setImages] = useState([]);
+    const [bdImages, setBdImages] = useState([]);
 
     function handleClick(idExperiencia) {
         // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
@@ -49,8 +49,7 @@ const ImageSlider = (props) => {
         props.setIsSalaClicked(isSalaImage);
     }
 
-    const { options, api_url, isExperiencia } = props;
-    console.log(images);
+    const { options, api_url, isExperiencia, images, request_type } = props;
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const tweenFactor = useRef(0);
     const tweenNodes = useRef([]);
@@ -129,14 +128,18 @@ const ImageSlider = (props) => {
                     setState(res); // Assuming data is already an object
                 }
 
-                setImages(
-                    response.map((item) => ({
-                        id: item.idSala,
-                        isExperiencia: { isExperiencia },
-                        url: item.fotoURL,
-                        title: item.nombre,
-                    }))
-                );
+                console.log("PREV res: ", res);
+
+                res = res.map((item) => ({
+                    id: item.idSala,
+                    isExperiencia: { isExperiencia },
+                    url: item.fotoURL ? item.fotoURL : item.portadaURL,
+                    title: item.nombre,
+                }));
+
+                console.log("res: ", res);
+
+                setBdImages(res);
             };
         };
 
@@ -146,14 +149,30 @@ const ImageSlider = (props) => {
             };
         };
 
-        get(api_url).then(handleResponse(setResponse)).catch(handleError());
-    }, [api_url, isExperiencia, response]);
+        if (api_url) {
+            if (request_type === "GET") {
+                get(api_url)
+                    .then(handleResponse(setResponse))
+                    .catch(handleError());
+            } else if (request_type === "POST") {
+                post(api_url, { user: getFromLocalStorage("user") })
+                    .then(handleResponse(setResponse))
+                    .catch(handleError());
+            }
+        } else {
+            setBdImages(images);
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log(bdImages);
+    }, [bdImages]);
 
     return (
         <div className="embla">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
-                    {images.map((image, index) => (
+                    {bdImages.map((image, index) => (
                         <div className="embla__slide  " key={image.id}>
                             <div className="embla__parallax">
                                 <div className="embla__parallax__layer">
