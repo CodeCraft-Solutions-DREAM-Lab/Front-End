@@ -17,7 +17,7 @@ import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
 import NotFound from "./Global/NotFound.jsx";
 
 // Login
-import LoginPage from "./Login/LoginPage/LoginPage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
 // Landing page
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-import LoginTextField from "../LoginTextField/LoginTextField";
-import LoginButton from "../LoginButton/LoginButton";
-import LoginRow from "../LoginRow/LoginRow";
+import LoginTextField from "./components/LoginTextField/LoginTextField";
+import LoginButton from "./components/LoginButton/LoginButton";
+import LoginRow from "./components/LoginRow/LoginRow";
 
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -91,13 +91,13 @@ export default function LoginPage() {
         <div className="login-container">
             <div className="blobs-container">
                 <img
-                    src="/top-blob.png"
-                    alt="Logo"
+                    src="/src/pages/LoginPage/assets/images/top-blob.png"
+                    alt="Top Blob"
                     className="blob-image top-left-image"
                 />
                 <img
-                    src="/bottom-blob.png"
-                    alt="Logo"
+                    src="/src/pages/LoginPage/assets/images/bottom-blob.png"
+                    alt="Bottom Blob"
                     className="blob-image bottom-right-image"
                 />
             </div>
