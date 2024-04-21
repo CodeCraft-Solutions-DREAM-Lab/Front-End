@@ -1,4 +1,4 @@
-import { post } from "./Database";
+import { post } from "./ApiRequests";
 
 import { saveToLocalStorage } from "./Storage";
 

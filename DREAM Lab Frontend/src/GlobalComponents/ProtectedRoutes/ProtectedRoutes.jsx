@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAuth, selectAuth } from "../../redux/Slices/userSlice";
 
 // Funciones para manejar la base de datos
-import { post } from "../../Global/Database";
+import { post } from "../../Global/ApiRequests";
 
 // Funciones para manejar el almacenamiento local
 import {

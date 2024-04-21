@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { API_URL } from "../../../../../../Global/Database.js";
+import { API_URL } from "../../../../../../Global/ApiRequests.js";
 
 import "./SendButton.css";
 

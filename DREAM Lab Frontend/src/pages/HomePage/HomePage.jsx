@@ -11,7 +11,7 @@ import {
     removeReservationDataFromSessionStorage,
 } from "../../Global/Storage.js";
 
-import { get, post, API_URL } from "../../Global/Database.js";
+import { get, post, API_URL } from "../../Global/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
 import LoadingScreen from "../../globalComponents/LoadingScreen/LoadingScreen.jsx";

@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 // el local storage
 import { loginAction } from "../../Global/Auth";
 
-import { post } from "../../Global/Database";
+import { post } from "../../Global/ApiRequests";
 import { getFromLocalStorage } from "../../Global/Storage";
 
 import "../../globalComponents/GlassCard/GlassCard.css";

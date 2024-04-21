@@ -11,7 +11,7 @@ import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
 import GlassCard from "../../globalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
-import { get } from "../../Global/Database.js";
+import { get } from "../../Global/ApiRequests.js";
 import { useLocation } from "react-router-dom";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
 

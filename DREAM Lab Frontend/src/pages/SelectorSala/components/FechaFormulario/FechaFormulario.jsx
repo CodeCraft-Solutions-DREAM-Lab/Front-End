@@ -10,7 +10,7 @@ import {
     saveToSessionStorage,
 } from "../../../../Global/Storage";
 
-import { post } from "../../../../Global/Database";
+import { post } from "../../../../Global/ApiRequests";
 import { height, minHeight } from "@mui/system";
 
 function FechaFormulario(props) {

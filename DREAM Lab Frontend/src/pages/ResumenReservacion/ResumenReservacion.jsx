@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import { post } from "../../Global/Database";
+import { post } from "../../Global/ApiRequests";
 import { useState } from "react";
 import {
     getFromLocalStorage,
