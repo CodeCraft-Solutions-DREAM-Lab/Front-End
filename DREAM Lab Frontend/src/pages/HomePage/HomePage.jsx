@@ -4,7 +4,7 @@ import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import "../../App.css";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "../../GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import Navbar from "../../globalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
     getFromLocalStorage,

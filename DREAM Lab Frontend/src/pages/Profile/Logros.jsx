@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import BotonBack from "../../GlobalComponents/BotonBack/BotonBack";
+import BotonBack from "../../globalComponents/BotonBack/BotonBack";
 import TarjetaLogro from "./components/TarjetasLogro/TarjetaLogro";
 import "./ReservacionesActivas.css";
 import { renderTarjetasLogro } from "./utils/Funciones.jsx";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ReservacionesActivas.css";
 import TarjetaReservacion from "./components/TarjetaReservacion/TarjetaReservacion";
-import BotonBack from "../../GlobalComponents/BotonBack/BotonBack";
+import BotonBack from "../../globalComponents/BotonBack/BotonBack";
 import { generateReservationCards } from "./utils/Funciones.jsx";
 
 function ReservacionesActivas() {

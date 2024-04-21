@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import BackButton from "../../GlobalComponents/assets/images/backButton.png";
+import BackButton from "../../globalComponents/assets/images/backButton.png";
 import { useNavigate } from "react-router-dom";
 
 function BotonBack(props) {
