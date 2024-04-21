@@ -12,7 +12,7 @@ import {
 import {
     getFromSessionStorage,
     saveToSessionStorage,
-} from "../../../../Global/Storage.js";
+} from "../../../../utils/Storage.js";
 
 function ExperienceDetails(props) {
     const [exitAnimation, setExitAnimation] = useState(false);
@@ -33,20 +33,18 @@ function ExperienceDetails(props) {
         // Llama a la función de navegación pasada como prop
         saveToSessionStorage("reservType", selectedItem.type);
 
-		if (selectedItem.type == "sala") {
-			saveToSessionStorage("idSala", selectedItem.id);
-		} else {
-			saveToSessionStorage("idExperiencia", selectedItem.id);
-		}
+        if (selectedItem.type == "sala") {
+            saveToSessionStorage("idSala", selectedItem.id);
+        } else {
+            saveToSessionStorage("idExperiencia", selectedItem.id);
+        }
 
         dispatch(deleteSelectedItem());
 
         // navigate(
         //     `/reservacion/sala?idSala=${props.idSalaProp}&nombreSala=${props.nombre}`
         // );
-		navigate(
-            `/reservacion/sala`
-        );
+        navigate(`/reservacion/sala`);
     };
 
     const animationClass = exitAnimation ? "slide-out" : "slide-in";

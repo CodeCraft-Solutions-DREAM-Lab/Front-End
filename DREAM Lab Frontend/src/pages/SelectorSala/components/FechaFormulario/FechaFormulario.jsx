@@ -8,9 +8,9 @@ import {
     getFromSessionStorage,
     removeFromSessionStorage,
     saveToSessionStorage,
-} from "../../../../Global/Storage";
+} from "../../../../utils/Storage";
 
-import { post } from "../../../../Global/ApiRequests";
+import { post } from "../../../../utils/ApiRequests";
 import { height, minHeight } from "@mui/system";
 
 function FechaFormulario(props) {

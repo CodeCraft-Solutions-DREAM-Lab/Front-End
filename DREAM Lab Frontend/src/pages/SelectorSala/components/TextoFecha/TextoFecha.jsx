@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
     getFromSessionStorage,
     existsInSessionStorage,
-} from "../../../../Global/Storage";
+} from "../../../../utils/Storage";
 
 const TextoFecha = ({ update }) => {
     const [showText, setShowText] = useState(false);

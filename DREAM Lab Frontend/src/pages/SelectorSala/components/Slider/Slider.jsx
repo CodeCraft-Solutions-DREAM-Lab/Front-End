@@ -5,7 +5,7 @@ import grupoPersonas from "../../assets/images/group.png";
 import {
     getFromSessionStorage,
     saveToSessionStorage,
-} from "../../../../Global/Storage";
+} from "../../../../utils/Storage";
 
 function Slider({
     minimo,

@@ -11,7 +11,7 @@ import {
 } from "./utils/Funciones.jsx";
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 import Navbar from "../../globalComponents/NavBar/NavBar.jsx";
-import { get } from "../../Global/ApiRequests.js";
+import { get } from "../../utils/ApiRequests.js";
 
 const logrosData = [
     {

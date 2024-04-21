@@ -10,9 +10,9 @@ import {
     getFromLocalStorage,
     removeReservationDataFromSessionStorage,
     multiClearSessionStorage,
-} from "../../Global/Storage.js";
+} from "../../utils/Storage.js";
 
-import { get, post, API_URL } from "../../Global/ApiRequests.js";
+import { get, post, API_URL } from "../../utils/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
 import LoadingScreen from "../../globalComponents/LoadingScreen/LoadingScreen.jsx";

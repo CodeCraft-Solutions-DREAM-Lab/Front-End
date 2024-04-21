@@ -10,13 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAuth, selectAuth } from "../../redux/Slices/userSlice";
 
 // Funciones para manejar la base de datos
-import { post } from "../../Global/ApiRequests";
+import { post } from "../../utils/ApiRequests";
 
 // Funciones para manejar el almacenamiento local
-import {
-    existsInLocalStorage,
-    getFromLocalStorage,
-} from "../../Global/Storage";
+import { existsInLocalStorage, getFromLocalStorage } from "../../utils/Storage";
 
 // Componente para redirigir a otra página
 import { Navigate } from "react-router-dom";

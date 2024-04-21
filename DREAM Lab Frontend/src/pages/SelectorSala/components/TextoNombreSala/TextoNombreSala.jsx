@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getFromSessionStorage } from "../../../../Global/Storage";
-import { get } from "../../../../Global/ApiRequests";
+import { getFromSessionStorage } from "../../../../utils/Storage";
+import { get } from "../../../../utils/ApiRequests";
 
 const TextoNombreSala = () => {
     let id;

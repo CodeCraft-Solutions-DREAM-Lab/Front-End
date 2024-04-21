@@ -14,10 +14,10 @@ import { useState, useEffect } from "react";
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
-import { loginAction } from "../../Global/Auth";
+import { loginAction } from "../../utils/Auth";
 
-import { post } from "../../Global/ApiRequests";
-import { getFromLocalStorage } from "../../Global/Storage";
+import { post } from "../../utils/ApiRequests";
+import { getFromLocalStorage } from "../../utils/Storage";
 
 import "../../globalComponents/GlassCard/GlassCard.css";
 import GlassCard from "../../globalComponents/GlassCard/GlassCard";

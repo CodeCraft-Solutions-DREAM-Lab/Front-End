@@ -3,7 +3,7 @@ import LogoutIcon from "../../assets/images/logout.svg";
 import "./Logout.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../../redux/Slices/userSlice";
-import { clearStorages } from "../../../../Global/Storage";
+import { clearStorages } from "../../../../utils/Storage";
 
 function Logout() {
     let navigate = useNavigate();
