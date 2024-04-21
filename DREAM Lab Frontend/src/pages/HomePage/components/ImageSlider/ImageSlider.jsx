@@ -1,15 +1,20 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import useEmblaCarousel from "embla-carousel-react";
 import "./ImageSlider.css";
 import { useDispatch } from "react-redux";
 import { setSelectedItem } from "src/redux/Slices/selectedItemSlice";
 
+import { get } from "src/utils/ApiRequests";
+
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
 const ImageSlider = (props) => {
     const dispatch = useDispatch();
     const { mostrarDetalles } = props;
+
+    const [response, setResponse] = useState([]);
+    const [images, setImages] = useState([]);
 
     function handleClick(idExperiencia) {
         // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
@@ -44,7 +49,7 @@ const ImageSlider = (props) => {
         props.setIsSalaClicked(isSalaImage);
     }
 
-    const { images, options } = props;
+    const { options, api_url, isExperiencia } = props;
     console.log(images);
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const tweenFactor = useRef(0);
@@ -114,6 +119,35 @@ const ImageSlider = (props) => {
             .on("reInit", tweenParallax)
             .on("scroll", tweenParallax);
     }, [emblaApi, tweenParallax]);
+
+    useEffect(() => {
+        const handleResponse = (setState) => {
+            return (res) => {
+                if (typeof res === "string") {
+                    setState(JSON.parse(res));
+                } else {
+                    setState(res); // Assuming data is already an object
+                }
+
+                setImages(
+                    response.map((item) => ({
+                        id: item.idSala,
+                        isExperiencia: { isExperiencia },
+                        url: item.fotoURL,
+                        title: item.nombre,
+                    }))
+                );
+            };
+        };
+
+        const handleError = () => {
+            return (error) => {
+                console.error("Error fetching data:", error);
+            };
+        };
+
+        get(api_url).then(handleResponse(setResponse)).catch(handleError());
+    }, [api_url, isExperiencia, response]);
 
     return (
         <div className="embla">

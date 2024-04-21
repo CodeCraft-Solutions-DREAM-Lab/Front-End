@@ -438,12 +438,8 @@ function HomePage() {
                         <>
                             <h1>SALAS</h1>
                             <ImageSlider
-                                images={salas.map((sala) => ({
-                                    id: sala.idSala,
-                                    isExperiencia: false,
-                                    url: sala.fotoURL,
-                                    title: sala.nombre,
-                                }))}
+                                api_url="salas"
+                                isExperiencia={false}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
@@ -458,12 +454,8 @@ function HomePage() {
                         <>
                             <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
                             <ImageSlider
-                                images={experiences.map((experience) => ({
-                                    id: experience.idExperiencia,
-                                    isExperiencia: true,
-                                    url: experience.portadaURL,
-                                    title: experience.nombre,
-                                }))}
+                                api_url="experiencias/autodirigidas"
+                                isExperiencia={true}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
@@ -478,12 +470,8 @@ function HomePage() {
                         <>
                             <h1>UNIDADES DE FORMACIÓN</h1>
                             <ImageSlider
-                                images={ufs.map((uf) => ({
-                                    id: uf.idExperiencia,
-                                    isExperiencia: true,
-                                    url: uf.portadaURL,
-                                    title: uf.nombre,
-                                }))}
+                                api_url="experiencias/UFs"
+                                isExperiencia={true}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
