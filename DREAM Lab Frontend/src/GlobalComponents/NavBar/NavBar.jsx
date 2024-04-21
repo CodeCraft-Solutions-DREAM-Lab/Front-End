@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import UserAvatar from "../../components/general/UserAvatar";
-import Logout from "../../components/general/Logout";
+import Logout from "./components/Logout/Logout";
 import "../../App.css";
 import SearchBar from "../../components/general/SearchBar";
 import BotonCrearExperiencia from "../BotonCrearExperiencia/BotonCrearExperiencia";
