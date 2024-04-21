@@ -40,7 +40,6 @@ const ImageSlider = (props) => {
         // dispatch(setExperiencia(idExperiencia));
         // saveToSessionStorage("experiencia", idExperiencia);
         props.onImageClick(idExperiencia - 1); // pasa el ID de la imagen al componente padre
-        console.log("IMAGE SLIDER: " + (idExperiencia - 1));
 
         // // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
         // const isSalaImage = props.setImageType === "salas";
@@ -128,16 +127,12 @@ const ImageSlider = (props) => {
                     setState(res); // Assuming data is already an object
                 }
 
-                console.log("PREV res: ", res);
-
                 res = res.map((item) => ({
                     id: item.idSala,
                     isExperiencia: { isExperiencia },
                     url: item.fotoURL ? item.fotoURL : item.portadaURL,
                     title: item.nombre,
                 }));
-
-                console.log("res: ", res);
 
                 setBdImages(res);
             };
@@ -162,18 +157,14 @@ const ImageSlider = (props) => {
         } else {
             setBdImages(images);
         }
-    }, []);
-
-    useEffect(() => {
-        console.log(bdImages);
-    }, [bdImages]);
+    }, [api_url, request_type, images, isExperiencia]);
 
     return (
         <div className="embla">
             <div className="embla__viewport" ref={emblaRef}>
                 <div className="embla__container">
                     {bdImages.map((image, index) => (
-                        <div className="embla__slide  " key={image.id}>
+                        <div className="embla__slide  " key={index}>
                             <div className="embla__parallax">
                                 <div className="embla__parallax__layer">
                                     <img
