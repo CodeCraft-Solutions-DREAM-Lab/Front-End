@@ -8,7 +8,6 @@ import Navbar from "../../globalComponents/NavBar/NavBar.jsx"; // Import the Nav
 import "./HomePage.css";
 import {
     getFromLocalStorage,
-    removeReservationDataFromSessionStorage,
     multiClearSessionStorage,
 } from "../../utils/Storage.js";
 
@@ -24,9 +23,21 @@ const unsplash_suffix =
     "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
 const IMAGES = [
-    { id: "1", url: "/ImagenSalaVR.png", title: "Sala VR" },
-    { id: "2", url: "/ImagenUsoRouters.png", title: "Deep Net" },
-    { id: "3", url: "/ImagenExpGoogle.png", title: "Testing Land" },
+    {
+        id: "1",
+        url: "/src/pages/HomePage/assets/images/ImagenSalaVR.png",
+        title: "Sala VR",
+    },
+    {
+        id: "2",
+        url: "/src/pages/HomePage/assets/images/ImagenUsoRouters.png",
+        title: "Deep Net",
+    },
+    {
+        id: "3",
+        url: "/src/pages/HomePage/assets/images/ImagenExpGoogle.png",
+        title: "Testing Land",
+    },
     {
         id: "4",
         url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
@@ -47,10 +58,26 @@ const IMAGES = [
         url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
         title: "Electric Garage",
     },
-    { id: "8", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
-    { id: "9", url: "/ImagenConnections.png", title: "Deep Net" },
-    { id: "10", url: "/ImagenCursoSwift.png", title: "Curso de Swift" },
-    { id: "11", url: "/ImagenConnections.png", title: "Deep Net" },
+    {
+        id: "8",
+        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        title: "Curso de Swift",
+    },
+    {
+        id: "9",
+        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        title: "Deep Net",
+    },
+    {
+        id: "10",
+        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        title: "Curso de Swift",
+    },
+    {
+        id: "11",
+        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        title: "Deep Net",
+    },
 ];
 
 const initialData = [
@@ -181,7 +208,7 @@ function HomePage() {
                                 type === "sala" ||
                                 type === "Sala"
                             ) {
-                                result = await fetch(`${API_URL}/salas/` + id);
+                                result = await fetch(`${API_URL}salas/` + id);
                             }
 
                             if (result.ok) {

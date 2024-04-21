@@ -107,7 +107,7 @@ export default function LoginPage() {
                         <LoginRow flexDirection="col" justify="between">
                             <LoginRow margin="12vh 0 0 0">
                                 <img
-                                    src="/LogoDreamLabedited.png"
+                                    src="/src/images/LogoDreamLab.png"
                                     alt="Logo"
                                     className="login-logo"
                                 />
