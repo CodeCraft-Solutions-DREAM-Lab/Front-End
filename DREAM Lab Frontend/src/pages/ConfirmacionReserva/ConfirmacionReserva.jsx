@@ -1,4 +1,4 @@
-import BotonRegresar from "../../globalComponents/BotonRegresar/BotonRegresar";
+import BotonRegresar from "./components/BotonRegresar/BotonRegresar";
 import GlassCard from "../../globalComponents/GlassCard/GlassCard";
 
 function Confirmacion() {
