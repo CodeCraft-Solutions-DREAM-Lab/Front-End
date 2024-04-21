@@ -1,50 +1,56 @@
 export function saveToLocalStorage(key, value) {
-  localStorage.setItem(key, value);
+    localStorage.setItem(key, value);
 }
 
 export function getFromLocalStorage(key) {
-  return localStorage.getItem(key);
+    return localStorage.getItem(key);
 }
 
 export function removeFromLocalStorage(key) {
-  localStorage.removeItem(key);
+    localStorage.removeItem(key);
 }
 
 export function existsInLocalStorage(key) {
-  return localStorage.getItem(key) !== null;
+    return localStorage.getItem(key) !== null;
 }
 
 export function saveToSessionStorage(key, value) {
-  sessionStorage.setItem(key, value);
+    sessionStorage.setItem(key, value);
 }
 
 export function getFromSessionStorage(key) {
-  return sessionStorage.getItem(key);
+    return sessionStorage.getItem(key);
 }
 
 export function removeFromSessionStorage(key) {
-  sessionStorage.removeItem(key);
+    sessionStorage.removeItem(key);
 }
 
 export function existsInSessionStorage(key) {
-  return sessionStorage.getItem(key) !== null;
+    return sessionStorage.getItem(key) !== null;
 }
 
 export function clearStorages() {
-  localStorage.clear();
-  sessionStorage.clear();
+    localStorage.clear();
+    sessionStorage.clear();
 }
 
-export function removeReservationDataFromSessionStorage() {
-  removeFromSessionStorage("horaInicio");
-  removeFromSessionStorage("horaInicioIsoString");
-  removeFromSessionStorage("duration");
-  removeFromSessionStorage("fecha");
-  removeFromSessionStorage("fechaIsoString");
-  removeFromSessionStorage("personas");
-  removeFromSessionStorage("experiencia");
-  removeFromSessionStorage("sala");
-  removeFromSessionStorage("idExperiencia");
-  removeFromSessionStorage("idSala");
-  removeFromSessionStorage("reservType");
+export function clearLocalStorage() {
+    localStorage.clear();
+}
+
+export function clearSessionStorage() {
+    sessionStorage.clear();
+}
+
+export function multiClearLocalStorage(keys) {
+    keys.forEach((key) => {
+        removeFromLocalStorage(key);
+    });
+}
+
+export function multiClearSessionStorage(keys) {
+    keys.forEach((key) => {
+        removeFromSessionStorage(key);
+    });
 }

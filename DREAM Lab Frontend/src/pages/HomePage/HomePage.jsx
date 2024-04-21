@@ -9,6 +9,7 @@ import "./HomePage.css";
 import {
     getFromLocalStorage,
     removeReservationDataFromSessionStorage,
+    multiClearSessionStorage,
 } from "../../Global/Storage.js";
 
 import { get, post, API_URL } from "../../Global/ApiRequests.js";
@@ -242,7 +243,19 @@ function HomePage() {
     };
 
     useEffect(() => {
-        removeReservationDataFromSessionStorage();
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+        ]);
 
         setIsLoadingSalas(true);
         setErrorSalas(null);
