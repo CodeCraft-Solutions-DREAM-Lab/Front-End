@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { Grid } from "@mui/material";
-import infoLogo from "../../assets/infoicon.png";
+import infoLogo from "../../assets/images/infoicon.png";
 
 function PrimerRecordatorio(props) {
     return (

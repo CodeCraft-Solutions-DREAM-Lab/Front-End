@@ -1,16 +1,16 @@
 @media screen and (orientation: landscape) {
-    .login-button {
+    .rounded-button {
         width: 40%;
     }
 }
 
 @media screen and (orientation: portrait) {
-    .login-button {
+    .rounded-button {
         width: 50%;
     }
 }
 
-.login-button {
+.rounded-button {
     height: 4.5vh !important;
     background-color: white;
 }

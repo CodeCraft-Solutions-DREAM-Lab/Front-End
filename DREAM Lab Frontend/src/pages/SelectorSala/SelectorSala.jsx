@@ -1,20 +1,24 @@
-import FechaFormulario from "./components/FechaFormulario";
-import TextoNombreSala from "./components/TextoNombreSala.jsx";
+import FechaFormulario from "./components/FechaFormulario/FechaFormulario";
+import TextoNombreSala from "./components/TextoNombreSala/TextoNombreSala.jsx";
 import { Button } from "@nextui-org/react";
-import PrimerRecordatorio from "./components/PrimerRecordatorio";
-import TextoFecha from "./components/TextoFecha";
+import PrimerRecordatorio from "./components/PrimerRecordatorio/PrimerRecordatorio";
+import TextoFecha from "./components/TextoFecha/TextoFecha";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Reservaciones/SelectorSala.css";
-import NavBar from "../GlobalComponents/NavBar/NavBar";
-import Slider from "./Slider";
-import imagePlaceholder from "./components/3D-model-placeholder.png";
-import GlassCard from "../components/general/GlassCard";
-import "./components/RoundedButton.css";
-import { get } from "../Global/Database.js";
+import "./SelectorSala.css";
+import NavBar from "../../GlobalComponents/NavBar/NavBar";
+import Slider from "../../Reservaciones/Slider";
+import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
+import GlassCard from "../../components/general/GlassCard";
+import "./components/RoundedButton/RoundedButton.css";
+import { get } from "../../Global/Database.js";
 import { useLocation } from "react-router-dom";
+import RoundedButton from "./components/RoundedButton/RoundedButton";
 
-import { getFromSessionStorage, saveToSessionStorage } from "../Global/Storage";
+import {
+    getFromSessionStorage,
+    saveToSessionStorage,
+} from "../../Global/Storage";
 
 function SelectorSala(props) {
     let navigate = useNavigate();
@@ -119,18 +123,13 @@ function SelectorSala(props) {
                         />
                         <TextoFecha update={update} />
                         <div className="button-container">
-                            {" "}
-                            {/* Button container div */}
-                            <Button
-                                className="mt-2 rounded-full justify-self-center login-button"
+                            <RoundedButton
                                 onClick={() => {
                                     setIsFirstReminderOpen(true);
                                 }}
-                                color="white"
+                                text="ACEPTAR"
                                 disabled={isNextButtonDisabled}
-                            >
-                                <p className="button-label">ACEPTAR</p>
-                            </Button>
+                            />
                         </div>
                         <div className="alerta">
                             <p>

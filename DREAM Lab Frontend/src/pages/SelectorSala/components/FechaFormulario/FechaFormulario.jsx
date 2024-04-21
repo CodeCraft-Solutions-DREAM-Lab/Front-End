@@ -8,9 +8,9 @@ import {
     getFromSessionStorage,
     removeFromSessionStorage,
     saveToSessionStorage,
-} from "../../Global/Storage";
+} from "../../../../Global/Storage";
 
-import { post } from "../../Global/Database";
+import { post } from "../../../../Global/Database";
 import { height, minHeight } from "@mui/system";
 
 function FechaFormulario(props) {
@@ -67,7 +67,6 @@ function FechaFormulario(props) {
         } else {
             setIsSelectHoursDisabled(true);
         }
-
     }, [fecha]);
 
     useEffect(() => {
@@ -112,64 +111,64 @@ function FechaFormulario(props) {
 
     return (
         <div className="flex flex-col mx-3">
-                <p className="text-white">Fecha</p>
-                <DatePicker
-                    sx={{
-                        backgroundColor: 'white',
-                        borderRadius: '16px',
-                        "& .MuiInputBase-root": { // Target specific MUI class for background
-                            height: '3rem',
-                          backgroundColor: 'white',
-                          borderRadius: '16px'
-                        },
-                      }}
-                      className="rounded-24 font-bold" 
-                    value={fecha}
-                    minDate={minEligibleDate}
-                    onChange={(newValue) => {
-                        setFecha(newValue);
-                        setFechaIsoString(newValue.toISOString());
-                        setUpdate(!update);
-                    }}
-                />
+            <p className="text-white">Fecha</p>
+            <DatePicker
+                sx={{
+                    backgroundColor: "white",
+                    borderRadius: "16px",
+                    "& .MuiInputBase-root": {
+                        // Target specific MUI class for background
+                        height: "3rem",
+                        backgroundColor: "white",
+                        borderRadius: "16px",
+                    },
+                }}
+                className="rounded-24 font-bold"
+                value={fecha}
+                minDate={minEligibleDate}
+                onChange={(newValue) => {
+                    setFecha(newValue);
+                    setFechaIsoString(newValue.toISOString());
+                    setUpdate(!update);
+                }}
+            />
 
-                <p className="text-white mt-6">Hora de inicio</p>
-                <Autocomplete 
-                    className="mb-3 "
-                    aria-label="Hora de inicio"
-                    selectedKey={horaFormatter(horaInicio)}
-                    disabled={isSelectHoursDisabled}
-                    sx={{
-                        "& .MuiAutocomplete-input": { // Target specific MUI class for background
-                            height: '3rem',
-                          backgroundColor: 'white',
-                          borderRadius: '16px'
-                        },
-                      }}
-                >
-                    {freeHours.map((hora) => (
-                        <AutocompleteItem
-                        
-                            key={horaFormatter(hora)}
-                            value={hora}
-                            textValue={horaFormatter(hora)}
-                            onClick={() => {
-                                setHoraInicio(hora);
-                                const date = new Date();
-                                date.setHours(hora - 6);
-                                date.setMinutes(0);
-                                date.setSeconds(0);
-                                date.setMilliseconds(0);
+            <p className="text-white mt-6">Hora de inicio</p>
+            <Autocomplete
+                className="mb-3 "
+                aria-label="Hora de inicio"
+                selectedKey={horaFormatter(horaInicio)}
+                disabled={isSelectHoursDisabled}
+                sx={{
+                    "& .MuiAutocomplete-input": {
+                        // Target specific MUI class for background
+                        height: "3rem",
+                        backgroundColor: "white",
+                        borderRadius: "16px",
+                    },
+                }}
+            >
+                {freeHours.map((hora) => (
+                    <AutocompleteItem
+                        key={horaFormatter(hora)}
+                        value={hora}
+                        textValue={horaFormatter(hora)}
+                        onClick={() => {
+                            setHoraInicio(hora);
+                            const date = new Date();
+                            date.setHours(hora - 6);
+                            date.setMinutes(0);
+                            date.setSeconds(0);
+                            date.setMilliseconds(0);
 
-                                setHoraInicioIsoString(date.toISOString());
-                                setUpdate(!update);
-                            }}
-                           
-                        >
-                            {horaFormatter(hora)}
-                        </AutocompleteItem>
-                    ))}
-                </Autocomplete>
+                            setHoraInicioIsoString(date.toISOString());
+                            setUpdate(!update);
+                        }}
+                    >
+                        {horaFormatter(hora)}
+                    </AutocompleteItem>
+                ))}
+            </Autocomplete>
 
             <p className="text-white mt-3">Duración</p>
             <Autocomplete

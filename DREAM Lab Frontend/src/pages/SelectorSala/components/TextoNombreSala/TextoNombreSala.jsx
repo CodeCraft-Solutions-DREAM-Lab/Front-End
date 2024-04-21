@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getFromSessionStorage } from "../../Global/Storage";
-import { get } from "../../Global/Database";
+import { getFromSessionStorage } from "../../../../Global/Storage";
+import { get } from "../../../../Global/Database";
 
 const TextoNombreSala = () => {
     let id;
@@ -8,7 +8,8 @@ const TextoNombreSala = () => {
     const [nombreSala, setNombreSala] = useState("");
     const [nombreExperiencia, setNombreExperiencia] = useState("");
 
-    const bigTextFormat = "text-white text-3xl font-medium uppercase font-['Karla']";
+    const bigTextFormat =
+        "text-white text-3xl font-medium uppercase font-['Karla']";
     const smallTextFormat = "text-xl text-[#D1D1D1]";
 
     if (type == "sala") {
@@ -18,7 +19,6 @@ const TextoNombreSala = () => {
     }
 
     useEffect(() => {
-
         if (type === "sala") {
             get(`salas/${id}`)
                 .then((result) => {
@@ -48,14 +48,13 @@ const TextoNombreSala = () => {
 
     return (
         <>
-
-            { type === "sala" ? 
+            {type === "sala" ? (
                 <>
-                <div className={bigTextFormat}>
-                    <h1>{nombreSala}</h1>
-                </div>
+                    <div className={bigTextFormat}>
+                        <h1>{nombreSala}</h1>
+                    </div>
                 </>
-             : 
+            ) : (
                 <>
                     <div className={bigTextFormat}>
                         <h1>{nombreExperiencia}</h1>
@@ -65,12 +64,7 @@ const TextoNombreSala = () => {
                         <h1>{nombreSala}</h1>
                     </div>
                 </>
-    }
-
-
-
-
-            
+            )}
         </>
     );
 };
