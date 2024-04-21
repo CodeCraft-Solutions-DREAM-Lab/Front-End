@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import UserAvatar from "../../components/general/UserAvatar";
+import UserAvatar from "./components/UserAvatar/UserAvatar";
 import Logout from "./components/Logout/Logout";
 import "../../App.css";
 import SearchBar from "../../components/general/SearchBar";
