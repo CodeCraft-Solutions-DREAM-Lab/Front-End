@@ -26,9 +26,9 @@ import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 
 // Reservaciones
-import Confirmacion from "./Reservaciones/Confirmacion.jsx";
+import Confirmacion from "./pages/ConfirmacionReserva/ConfirmacionReserva.jsx";
 import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
-import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
+import SelectorEquipo from "./pages/SelectorEquipo/SelectorEquipo.jsx";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
 import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
 import Profile from "./pages/Profile/Profile.jsx";

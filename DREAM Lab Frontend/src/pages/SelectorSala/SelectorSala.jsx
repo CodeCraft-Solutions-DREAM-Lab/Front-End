@@ -9,7 +9,7 @@ import "./SelectorSala.css";
 import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import Slider from "../../Reservaciones/Slider";
 import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
-import GlassCard from "../../components/general/GlassCard";
+import GlassCard from "../../GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
 import { get } from "../../Global/Database.js";
 import { useLocation } from "react-router-dom";
