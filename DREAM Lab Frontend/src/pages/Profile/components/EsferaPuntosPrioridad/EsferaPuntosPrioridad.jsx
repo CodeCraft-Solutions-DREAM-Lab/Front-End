@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import './EsferaPuntosPrioridad.css'
+import "./EsferaPuntosPrioridad.css";
 
-function EsferaPuntosPrioridad(props){
-    return(
+function EsferaPuntosPrioridad(props) {
+    return (
         <div className="div-esfera-out agua-animada">
             <div className="div-esfera-in"></div>
             <div className="div-informacion">
@@ -10,7 +9,7 @@ function EsferaPuntosPrioridad(props){
                 <h2 className="subtitulo">{props.subtitulo}</h2>
             </div>
         </div>
-    )
+    );
 }
 
 export default EsferaPuntosPrioridad;

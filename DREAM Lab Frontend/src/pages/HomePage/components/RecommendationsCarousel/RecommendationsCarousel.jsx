@@ -7,7 +7,7 @@ import {
 import "./RecommendationsCarousel.css";
 import { useNavigate } from "react-router-dom";
 
-import { saveToSessionStorage } from "../../../../utils/Storage";
+import { saveToSessionStorage } from "src/utils/Storage";
 
 function RecomendationsCarousel(props) {
     const [activeSlide, setActiveSlide] = useState(props.activeSlide);

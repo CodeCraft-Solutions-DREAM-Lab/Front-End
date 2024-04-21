@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 import useEmblaCarousel from "embla-carousel-react";
 import "./ImageSlider.css";
 import { useDispatch } from "react-redux";
-import { setSelectedItem } from "../../../../redux/Slices/selectedItemSlice";
+import { setSelectedItem } from "src/redux/Slices/selectedItemSlice";
 
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 

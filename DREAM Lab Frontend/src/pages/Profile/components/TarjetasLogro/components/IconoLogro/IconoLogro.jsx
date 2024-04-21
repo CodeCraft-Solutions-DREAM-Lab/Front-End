@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import "./IconoLogro.css";
 import LogoBigDreamer from "../../../../assets/images/bigDreamer.png";
 import LogoRobot from "../../../../assets/images/robot-icon.png";

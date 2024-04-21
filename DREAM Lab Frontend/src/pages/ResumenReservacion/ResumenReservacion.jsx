@@ -1,12 +1,12 @@
 import { Button } from "@nextui-org/react";
-import { post } from "../../utils/ApiRequests";
+import { post } from "src/utils/ApiRequests";
 import { useState } from "react";
 import {
     getFromLocalStorage,
     getFromSessionStorage,
     removeFromLocalStorage,
     removeFromSessionStorage,
-} from "../../utils/Storage";
+} from "src/utils/Storage";
 import { useNavigate } from "react-router-dom";
 import AvisoFinal from "./components/AvisoFinal";
 

@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import "./BotonCelular.css";
 import ImagenEstrella from "../../assets/images/estrella.jpg";
 import ImagenFlecha from "../../assets/images/flecha.png";

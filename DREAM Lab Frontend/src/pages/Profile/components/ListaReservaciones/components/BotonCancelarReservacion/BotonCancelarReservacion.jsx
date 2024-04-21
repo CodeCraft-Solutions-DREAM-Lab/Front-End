@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/react";
 import DeleteReservModal from "./components/DeleteReservaModal/DeleteReservaModal.jsx";
 import { useState } from "react";
 
-import { API_URL } from "../../../../../../utils/ApiRequests.js";
+import { API_URL } from "src/utils/ApiRequests.js";
 
 function BotonCancelarReservacion(props) {
     const { id, reservaciones, setReservaciones } = props;

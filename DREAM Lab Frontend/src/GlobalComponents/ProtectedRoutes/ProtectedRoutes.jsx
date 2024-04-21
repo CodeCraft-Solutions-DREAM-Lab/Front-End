@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 
 // Hooks de redux
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, selectAuth } from "../../redux/Slices/userSlice";
+import { setAuth, selectAuth } from "src/redux/Slices/userSlice";
 
 // Funciones para manejar la base de datos
-import { post } from "../../utils/ApiRequests";
+import { post } from "src/utils/ApiRequests";
 
 // Funciones para manejar el almacenamiento local
-import { existsInLocalStorage, getFromLocalStorage } from "../../utils/Storage";
+import { existsInLocalStorage, getFromLocalStorage } from "src/utils/Storage";
 
 // Componente para redirigir a otra página
 import { Navigate } from "react-router-dom";

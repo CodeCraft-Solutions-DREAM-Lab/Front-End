@@ -1,24 +1,19 @@
 import FechaFormulario from "./components/FechaFormulario/FechaFormulario";
 import TextoNombreSala from "./components/TextoNombreSala/TextoNombreSala.jsx";
-import { Button } from "@nextui-org/react";
 import PrimerRecordatorio from "./components/PrimerRecordatorio/PrimerRecordatorio";
 import TextoFecha from "./components/TextoFecha/TextoFecha";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SelectorSala.css";
-import NavBar from "../../globalComponents/NavBar/NavBar";
+import NavBar from "src/globalComponents/NavBar/NavBar";
 import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
-import GlassCard from "../../globalComponents/GlassCard/GlassCard";
+import GlassCard from "src/globalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
-import { get } from "../../utils/ApiRequests.js";
+import { get } from "src/utils/ApiRequests.js";
 import { useLocation } from "react-router-dom";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
-
-import {
-    getFromSessionStorage,
-    saveToSessionStorage,
-} from "../../utils/Storage";
+import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 
 function SelectorSala(props) {
     let navigate = useNavigate();

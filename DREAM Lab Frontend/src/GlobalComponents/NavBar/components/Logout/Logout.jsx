@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import LogoutIcon from "../../assets/images/logout.svg";
 import "./Logout.css";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../../../redux/Slices/userSlice";
-import { clearStorages } from "../../../../utils/Storage";
+import { logoutUser } from "src/redux/Slices/userSlice";
+import { clearStorages } from "src/utils/Storage";
 
 function Logout() {
     let navigate = useNavigate();

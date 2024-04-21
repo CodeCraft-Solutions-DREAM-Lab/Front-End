@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
-import "../../App.css";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "../../globalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import Navbar from "src/globalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
     getFromLocalStorage,
     multiClearSessionStorage,
-} from "../../utils/Storage.js";
+} from "src/utils/Storage.js";
 
-import { get, post, API_URL } from "../../utils/ApiRequests.js";
+import { get, post, API_URL } from "src/utils/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
-import LoadingScreen from "../../globalComponents/LoadingScreen/LoadingScreen.jsx";
+import LoadingScreen from "src/globalComponents/LoadingScreen/LoadingScreen.jsx";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
@@ -182,7 +181,7 @@ function HomePage() {
         if (processedTranscript) {
             const fetchData = async () => {
                 const newData = await Promise.all(
-                    processedTranscript.map(async (item, index) => {
+                    processedTranscript.map(async (item) => {
                         const type = item.type;
                         const id = item.id;
 
@@ -263,7 +262,7 @@ function HomePage() {
 
             fetchData();
         }
-    }, [processedTranscript]);
+    }, [processedTranscript, showInvalidNotice]);
 
     const handleProcessedText = (processedText) => {
         setProcessedTranscript(processedText);

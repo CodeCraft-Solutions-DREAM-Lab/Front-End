@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import MicrophoneButton from "./components/MicrophoneButton/MicrophoneButton.jsx";
 import SendButton from "./components/SendButton/SendButton.jsx";
 import SpeechRecognition, {
@@ -7,7 +6,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import TextField from "./components/TextField/TextField.jsx";
 import "./SpeechBotCard.css";
-import "../../../../globalComponents/GlassCard/GlassCard.css";
+import "src/globalComponents/GlassCard/GlassCard.css";
 
 function SpeechBotCard(props) {
     // --- Para el reconocimiento de voz ---

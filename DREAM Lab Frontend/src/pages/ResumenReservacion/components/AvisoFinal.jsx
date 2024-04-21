@@ -6,7 +6,6 @@ import {
     ModalFooter,
     Button,
 } from "@nextui-org/react";
-import React from "react";
 import greenTickIcon from "../assets/images/greenTickIcon.png";
 
 function AvisoFinal(props) {

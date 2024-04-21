@@ -8,11 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     deleteSelectedItem,
     selectSelectedItem,
-} from "../../../../redux/Slices/selectedItemSlice.js";
-import {
-    getFromSessionStorage,
-    saveToSessionStorage,
-} from "../../../../utils/Storage.js";
+} from "src/redux/Slices/selectedItemSlice.js";
+import { saveToSessionStorage } from "src/utils/Storage.js";
 
 function ExperienceDetails(props) {
     const [exitAnimation, setExitAnimation] = useState(false);

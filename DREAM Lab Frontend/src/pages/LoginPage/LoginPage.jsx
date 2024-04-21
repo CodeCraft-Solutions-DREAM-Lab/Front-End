@@ -14,16 +14,16 @@ import { useState, useEffect } from "react";
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
 // el local storage
-import { loginAction } from "../../utils/Auth";
+import { loginAction } from "src/utils/Auth";
 
-import { post } from "../../utils/ApiRequests";
-import { getFromLocalStorage } from "../../utils/Storage";
+import { post } from "src/utils/ApiRequests";
+import { getFromLocalStorage } from "src/utils/Storage";
 
-import "../../globalComponents/GlassCard/GlassCard.css";
-import GlassCard from "../../globalComponents/GlassCard/GlassCard";
+import "src/globalComponents/GlassCard/GlassCard.css";
+import GlassCard from "src/globalComponents/GlassCard/GlassCard";
 
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../redux/Slices/userSlice";
+import { setAuth } from "src/redux/Slices/userSlice";
 
 export default function LoginPage() {
     const [user, setUser] = useState("");

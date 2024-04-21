@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import "./NameCard.css";
 import LogoRobot from "../../assets/images/robot-icon.png";
 
