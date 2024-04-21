@@ -69,12 +69,12 @@ const router = createBrowserRouter(
             />
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route path="profile" element={secured(Profile)()} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/profile/logros" element={<Logros />} />
+            <Route path="profile/logros" element={secured(Logros)()} />
             <Route
-                path="/profile/reservaciones"
-                element={<ReservacionesActivas />}
+                path="profile/reservaciones"
+                element={secured(ReservacionesActivas)()}
             />
+            <Route path="*" element={<NotFound />} />
         </Route>
     )
 );
