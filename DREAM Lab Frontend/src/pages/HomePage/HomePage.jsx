@@ -14,7 +14,7 @@ import {
 import { get, post, API_URL } from "../../Global/Database.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
-import LoadingScreen from "../../Global/LoadingScreen.jsx";
+import LoadingScreen from "../../globalComponents/LoadingScreen/LoadingScreen.jsx";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 

@@ -7,19 +7,22 @@ import { useEffect, useState } from "react";
 
 // Hooks de redux
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, selectAuth } from "../redux/Slices/userSlice";
+import { setAuth, selectAuth } from "../../redux/Slices/userSlice";
 
 // Funciones para manejar la base de datos
-import { post } from "./Database";
+import { post } from "../../Global/Database";
 
 // Funciones para manejar el almacenamiento local
-import { existsInLocalStorage, getFromLocalStorage } from "./Storage";
+import {
+    existsInLocalStorage,
+    getFromLocalStorage,
+} from "../../Global/Storage";
 
 // Componente para redirigir a otra página
 import { Navigate } from "react-router-dom";
 
 // Componentes de UI para mostrar mientras se carga la página
-import LoadingScreen from "./LoadingScreen";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 function ProtectedRoutes({ children }) {
     // Obtener el estado de autenticación del store de redux

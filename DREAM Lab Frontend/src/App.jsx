@@ -8,13 +8,13 @@ import {
 import "./App.css";
 
 // Estructura base
-import Root from "./Global/Root.jsx";
+import Root from "./pages/Root/Root.jsx";
 
 // Rutas protegidas
-import ProtectedRoutes from "./Global/ProtectedRoutes.jsx";
+import ProtectedRoutes from "./globalComponents/ProtectedRoutes/ProtectedRoutes.jsx";
 
 // Pagina no encontrada
-import NotFound from "./Global/NotFound.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 // Login
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
