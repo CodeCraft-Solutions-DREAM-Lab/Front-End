@@ -7,7 +7,7 @@ import {
     Button,
 } from "@nextui-org/react";
 import React from "react";
-import greenTickIcon from "../../assets/greenTickIcon.png";
+import greenTickIcon from "../assets/images/greenTickIcon.png";
 
 function AvisoFinal(props) {
     return (
@@ -34,7 +34,7 @@ function AvisoFinal(props) {
                         </ModalBody>
                         <ModalFooter className="justify-center">
                             <Button
-                                // className="rounded-full px-12 py-2 bg-white font-bold text-[#1bac55] 
+                                // className="rounded-full px-12 py-2 bg-white font-bold text-[#1bac55]
                                 //             hover:bg-[#1bac55] hover:text-white border-2 border-[#1bac55]"
                                 className="rounded-full px-12 py-2 font-bold border-2 bg-[#1bac55]
                                             hover:bg-white hover:text-[#1bac55] border-[#1bac55]"

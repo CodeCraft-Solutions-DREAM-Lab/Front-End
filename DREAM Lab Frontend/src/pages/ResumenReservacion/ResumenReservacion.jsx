@@ -1,12 +1,12 @@
 import { Button } from "@nextui-org/react";
-import { post } from "../Global/Database";
+import { post } from "../../Global/Database";
 import { useState } from "react";
 import {
     getFromLocalStorage,
     getFromSessionStorage,
     removeFromLocalStorage,
     removeFromSessionStorage,
-} from "../Global/Storage";
+} from "../../Global/Storage";
 import { useNavigate } from "react-router-dom";
 import AvisoFinal from "./components/AvisoFinal";
 
@@ -27,6 +27,8 @@ function ResumenReservacion(props) {
             idMesa: null,
             estatus: 5,
         };
+
+        console.log("Data: ", data);
 
         setIsLoading(true);
         await post(

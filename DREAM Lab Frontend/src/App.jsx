@@ -26,8 +26,8 @@ import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
 
 // Reservaciones
-import Confirmacion from "./pages/ConfirmacionReserva/ConfirmacionReserva.jsx";
-import ResumenReservacion from "./Reservaciones/ResumenReservacion.jsx";
+import ConfirmacionReserva from "./pages/ConfirmacionReserva/ConfirmacionReserva.jsx";
+import ResumenReservacion from "./pages/ResumenReservacion/ResumenReservacion.jsx";
 import SelectorEquipo from "./pages/SelectorEquipo/SelectorEquipo.jsx";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
 import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
@@ -60,7 +60,7 @@ const router = createBrowserRouter(
             />
             <Route
                 path="reservacion/confirmacion"
-                element={secured(Confirmacion)()}
+                element={secured(ConfirmacionReserva)()}
             />
             <Route
                 path="reservacion/resumen"
