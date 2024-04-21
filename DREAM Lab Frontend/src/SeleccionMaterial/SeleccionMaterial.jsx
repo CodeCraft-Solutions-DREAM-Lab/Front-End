@@ -32,7 +32,27 @@ function SeleccionMaterial() {
 				</div>
 				<div className="bottom-section">
 					{/* Aquí van las tarjetas con los materiales */}
-                    <div className="card">tarjeta</div>
+                    <div className="card-container-wrapper">
+                    <div className="card-container">
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+						<div className="card">tarjeta</div>
+					</div>
+                    </div>
 					<div className="button-container">
 						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>

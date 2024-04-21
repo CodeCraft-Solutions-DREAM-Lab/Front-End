@@ -1,23 +1,31 @@
-@media screen and (orientation: landscape) {
-    .login-button {
-      width: 40%;
-    }
-  }
+
   
-  @media screen and (orientation: portrait) {
-    .login-button {
-      width: 50%;
-    }
-  }
-  
-  .login-button {
-    height: 4.5vh !important;
+  .rounded-button {
+    height: 4.8vh !important;
     background-color: white;
+    width: 150px;
+    min-width: 10%;
+    max-width: 80%;
   }
+
+@media screen and (max-width: 700px) {
+  /* Portrait orientation */
+  .rounded-button {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  /* Portrait orientation */
+  .rounded-button {
+    width: 90%;
+  }
+}
+
   
   .button-label {
     color: #042e55;
-    font-size: max(1.5vh, 1vw);
+    font-size: max(2vh, 1vw);
     font-weight: 700;
   }
   

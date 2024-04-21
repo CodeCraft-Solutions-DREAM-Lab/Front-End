@@ -1,13 +1,60 @@
 .main-container {
-    width:100%;
-    height:fit-content;
-    top: 20vh;
-}
-.card {
-    background-color: white;
-    width: 200px;
-    height: 250px;
-    border-radius: 20px;
+	width: 100%;
+	height: fit-content;
+	padding-top: 18vh;
+	position: relative;
+    
 
+}
+
+.top-section {
+	padding: 1%;
+}
+.bottom-section {
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+
+.card-container-wrapper {
+    display: flex;
+    align-items: center; /* Center the card container horizontally */
+}
+
+.card-container {
+    flex: 1; /* Added to make the container take remaining vertical space */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Cards will wrap to the next row */
+    justify-content: flex-start; /* Align cards to the start of the container */
+    justify-self: center;
+    overflow-y: auto; /* Enable vertical scroll if needed */
+    padding: 0 1%; /* Added padding to prevent cards from touching the edges */
+    width: 60%;
+    height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
+
+  }
+
+.search-bar-container {
+	width: 100%;
+	display: flex;
+	justify-content: right;
+	padding-right: 10%;
+}
+
+.button-container{
+    padding: 3%;
+    width: 100%;
+}
+
+/* card component*/
+.card {
+	background-color: white;
+	width: 160px;
+	height: 190px;
+	border-radius: 20px;
+    margin: 1%;
 
 }
