@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Slider.css";
-import unaPersona from "../pages/SeleccionReserva/assets/images/onePerson.png";
-import grupoPersonas from "../pages/SeleccionReserva/assets/images/group.png";
-import { getFromSessionStorage, saveToSessionStorage } from "../Global/Storage";
+import unaPersona from "../../assets/images/onePerson.png";
+import grupoPersonas from "../../assets/images/group.png";
+import {
+    getFromSessionStorage,
+    saveToSessionStorage,
+} from "../../../../Global/Storage";
 
 function Slider({
     minimo,

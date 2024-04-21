@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SelectorSala.css";
 import NavBar from "../../GlobalComponents/NavBar/NavBar";
-import Slider from "../../Reservaciones/Slider";
+import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
 import GlassCard from "../../GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
