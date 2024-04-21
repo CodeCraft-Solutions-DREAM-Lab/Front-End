@@ -33,8 +33,8 @@ import SelectorEquipo from "./Reservaciones/SelectorEquipo.jsx";
 import SelectorSala from "./Reservaciones/SelectorSala.jsx";
 import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-import Logros from "./Profile/Logros.jsx";
-import ReservacionesActivas from "./Profile/ReservacionesActivas.jsx";
+import Logros from "./pages/Profile/Logros.jsx";
+import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
 
 function secured(Component) {
     return function WrappedComponent(props) {

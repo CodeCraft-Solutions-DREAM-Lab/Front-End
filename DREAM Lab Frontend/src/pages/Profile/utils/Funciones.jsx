@@ -1,5 +1,5 @@
-import TarjetaLogro from "./TarjetaLogro";
-import TarjetaReservacion from "./TarjetaReservacion";
+import TarjetaLogro from "../components/TarjetasLogro/TarjetaLogro";
+import TarjetaReservacion from "../components/TarjetaReservacion/TarjetaReservacion";
 
 // Función para formatear la fecha en el formato deseado
 export function formatDate(dateString) {

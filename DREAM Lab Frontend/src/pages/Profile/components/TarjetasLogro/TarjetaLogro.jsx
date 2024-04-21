@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
 import "./TarjetaLogro.css";
-import LogoBigDreamer from "../pages/Profile/assets/images/bigDreamer.png";
-import BarraProgreso from "./BarraProgreso";
-import IconoLogro from "./IconoLogro";
+import IconoLogro from "./components/IconoLogro/IconoLogro";
+import BarraProgreso from "./components/BarraProgreso/BarraProgreso";
 
 function TarjetaLogro(props) {
     {

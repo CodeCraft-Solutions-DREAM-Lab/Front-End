@@ -1,15 +1,15 @@
-import ListaReservaciones from "../../Profile/ListaReservaciones";
+import ListaReservaciones from "./components/ListaReservaciones/ListaReservaciones";
 import { useEffect, useState } from "react";
-import NameCard from "../../Profile/NameCard";
-import EsferaPuntosPrioridad from "../../Profile/EsferaPuntosPrioridad";
-import BotonCelular from "../../Profile/BotonCelular";
+import NameCard from "./components/NameCard/NameCard";
+import EsferaPuntosPrioridad from "./components/EsferaPuntosPrioridad/EsferaPuntosPrioridad";
+import BotonCelular from "./components/BotonCelular/BotonCelular";
 import "./Profile.css";
-import BotonBack from "../../components/general/BotonBack";
+import BotonBack from "../../GlobalComponents/BotonBack/BotonBack";
 import {
     generateReservationCards,
     renderTarjetasLogro,
-} from "../../Profile/Funciones.jsx";
-import CancelarReservacion from "../../Profile/CancelarReservacion.jsx";
+} from "./utils/Funciones.jsx";
+import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 import Navbar from "../../GlobalComponents/NavBar/NavBar.jsx";
 import { get } from "../../Global/Database.js";
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./BotonCelular.css";
-import ImagenEstrella from "../pages/Profile/assets/images/estrella.jpg";
-import ImagenFlecha from "../pages/Profile/assets/images/flecha.png";
-import ImagenCalendario from "../pages/Profile/assets/images/calendario2.png";
+import ImagenEstrella from "../../assets/images/estrella.jpg";
+import ImagenFlecha from "../../assets/images/flecha.png";
+import ImagenCalendario from "../../assets/images/calendario2.png";
 import { useNavigate } from "react-router-dom";
 
 function BotonCelular(props) {

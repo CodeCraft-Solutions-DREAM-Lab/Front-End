@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./NameCard.css";
-import LogoRobot from "../pages/Profile/assets/images/robot-icon.png";
+import LogoRobot from "../../assets/images/robot-icon.png";
 
 function NameCard(props) {
     return (

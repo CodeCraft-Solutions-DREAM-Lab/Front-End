@@ -1,13 +1,12 @@
 import React from "react";
-import './CancelarReservacion.css';
-import errorLogo from "../pages/Profile/assets/images/errorLogo.png"
-import correctLogo from "../pages/Profile/assets/images/correctLogo.png"
-import infoLogo from "../pages/Profile/assets/images/infoLogo.png"
+import "./CancelarReservacion.css";
+import errorLogo from "../../assets/images/errorLogo.png";
+import correctLogo from "../../assets/images/correctLogo.png";
+import infoLogo from "../../assets/images/infoLogo.png";
 
-import BotonModal from "./BotonModal"
+import BotonModal from "./components/BotonModal/BotonModal";
 
-function CancelarReservacion(props){
-
+function CancelarReservacion(props) {
     // Constantes para los nombres de clase que pueden ser modificados por props
     const blurSpaceClass = `blur-space-tipo2`;
     const modalBlancoClass = `modal-blanco-${props.type}`;
@@ -20,20 +19,22 @@ function CancelarReservacion(props){
     const botonesCancelacionClass = `botones-cancelacion-${props.type}`;
     let logo = errorLogo;
 
-    if(props.modalClasificacion == 1){
-        logo = infoLogo
-    } else if (props.modalClasificacion == 2){
-        logo = errorLogo
-    } else if (props.modalClasificacion == 3){
-        logo = correctLogo
+    if (props.modalClasificacion == 1) {
+        logo = infoLogo;
+    } else if (props.modalClasificacion == 2) {
+        logo = errorLogo;
+    } else if (props.modalClasificacion == 3) {
+        logo = correctLogo;
     }
 
-    return(
+    return (
         <div className={blurSpaceClass}>
             <div className={modalBlancoClass}>
                 <div className={logoModalOutClass}>
                     {props.modalClasificacion !== 4 && (
-                        <div className={logoModalClass}><img src={logo} alt="Icono de notificación" /></div> 
+                        <div className={logoModalClass}>
+                            <img src={logo} alt="Icono de notificación" />
+                        </div>
                     )}
                 </div>
                 <h1 className={titulo1ModalClass}>{props.titulo1}</h1>
@@ -44,13 +45,21 @@ function CancelarReservacion(props){
                 )}
                 <div className={botonesCancelacionClass}>
                     {props.modalClasificacion !== 3 && (
-                        <BotonModal tipoBoton="Cancelar" nombre={props.textoRojo} funcion={props.funcionRojo}/>
+                        <BotonModal
+                            tipoBoton="Cancelar"
+                            nombre={props.textoRojo}
+                            funcion={props.funcionRojo}
+                        />
                     )}
-                    <BotonModal tipoBoton="Aceptar" nombre={props.textoVerde} funcion={props.funcionVerde}/>
+                    <BotonModal
+                        tipoBoton="Aceptar"
+                        nombre={props.textoVerde}
+                        funcion={props.funcionVerde}
+                    />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default CancelarReservacion;
