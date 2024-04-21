@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import UserAvatar from "./components/UserAvatar/UserAvatar";
 import Logout from "./components/Logout/Logout";
 import "../../App.css";
-import SearchBar from "../../components/general/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import BotonCrearExperiencia from "./components/BotonCrearExperiencia/BotonCrearExperiencia";
 
 import "./NavBar.css";
