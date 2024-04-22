@@ -1,11 +1,11 @@
 .containerAnuncios {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 100%;
     margin: 0;
 }
 
-.slideAnuncio{
+.slideAnuncio {
     display: flex;
     justify-content: left;
     position: absolute;
