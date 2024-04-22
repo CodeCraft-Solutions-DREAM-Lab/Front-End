@@ -1,5 +1,5 @@
 import BotonRegresar from "./components/BotonRegresar/BotonRegresar";
-import GlassCard from "src/globalComponents/GlassCard/GlassCard";
+import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
 function Confirmacion() {
     return (

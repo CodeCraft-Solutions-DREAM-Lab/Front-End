@@ -1,6 +1,6 @@
 import "./ReservacionesActivas.css";
 import TarjetaReservacion from "./components/TarjetaReservacion/TarjetaReservacion";
-import BotonBack from "src/globalComponents/BotonBack/BotonBack";
+import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import { generateReservationCards } from "./utils/Funciones.jsx";
 
 function ReservacionesActivas() {
