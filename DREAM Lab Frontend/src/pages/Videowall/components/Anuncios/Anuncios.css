@@ -1,0 +1,16 @@
+.containerAnuncios {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin: 0;
+}
+
+.slideAnuncio{
+    display: flex;
+    justify-content: left;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 500ms ease 0s;
+}

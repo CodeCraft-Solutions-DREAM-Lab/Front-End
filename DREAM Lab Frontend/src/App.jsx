@@ -35,6 +35,9 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
 
+// Videowall
+import Videowall from "./pages/Videowall/Videowall.jsx";
+
 function secured(Component) {
     return function WrappedComponent(props) {
         return (
@@ -72,6 +75,7 @@ const router = createBrowserRouter(
                 path="profile/reservaciones"
                 element={secured(ReservacionesActivas)()}
             />
+            <Route path="videowall" element={<Videowall />} />
             <Route path="*" element={<NotFound />} />
         </Route>
     )

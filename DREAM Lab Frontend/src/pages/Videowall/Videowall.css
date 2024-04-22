@@ -1,0 +1,6 @@
+.containerVideowall{
+    display: grid;
+    background: papayawhip;
+    height: 100%;
+    grid-template-columns: 1fr 3fr;
+}
