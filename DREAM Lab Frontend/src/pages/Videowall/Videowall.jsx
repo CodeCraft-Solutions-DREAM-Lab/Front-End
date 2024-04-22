@@ -7,6 +7,7 @@ DIMENSIONES VIDEOWALL
 import { useState } from "react";
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";
+import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
 
 const anunciosDefault = [
     {
@@ -38,7 +39,7 @@ function Videowall() {
     return (
         <div className="container-videowall">
             <div className="container-reservaciones">
-                <p>Reservaciones</p>
+                <CarouselReservaciones />
             </div>
             <div className="container-anuncios">
                 <Anuncios
