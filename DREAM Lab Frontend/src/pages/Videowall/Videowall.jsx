@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";
 
@@ -30,11 +30,18 @@ function Videowall() {
     const [data, setData] = useState(anunciosDefault);
 
     return (
-      <div className="containerVideowall">
-        <p>Reservaciones</p>
-        <Anuncios data={data} activeSlide={parseInt(Math.floor(data.length / 2))}/>
-      </div>
+        <div className="container-videowall">
+            <div className="container-reservaciones">
+                <p>Reservaciones</p>
+            </div>
+            <div className="container-anuncios">
+                <Anuncios
+                    data={data}
+                    activeSlide={parseInt(Math.floor(data.length / 2))}
+                />
+            </div>
+        </div>
     );
-  }
-  
-  export default Videowall;
+}
+
+export default Videowall;
