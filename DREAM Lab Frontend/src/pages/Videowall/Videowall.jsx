@@ -1,3 +1,9 @@
+/*
+DIMENSIONES VIDEOWALL
+7680
+2160
+*/
+
 import { useState } from "react";
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";
