@@ -5,10 +5,11 @@ function CarouselReservaciones() {
     return (
         <div className="cr-container">
             <div className="cr-title-container">
-                <GlassCard classes={"cr-glasscard"}>
+                <GlassCard borderRadius="2vh" classes={"cr-glasscard"}>
                     <h1 className="cr-title">Reservaciones</h1>
                 </GlassCard>
             </div>
+            <div className="cr-carousel-container"></div>
         </div>
     );
 }
