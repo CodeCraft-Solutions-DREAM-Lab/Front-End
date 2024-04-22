@@ -11,7 +11,7 @@ import "./App.css";
 import Root from "./pages/Root/Root.jsx";
 
 // Rutas protegidas
-import ProtectedRoutes from "./globalComponents/ProtectedRoutes/ProtectedRoutes.jsx";
+import ProtectedRoutes from "./GlobalComponents/ProtectedRoutes/ProtectedRoutes.jsx";
 
 // Pagina no encontrada
 import NotFound from "./pages/NotFound/NotFound.jsx";
@@ -34,6 +34,9 @@ import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
+
+// Videowall
+import Videowall from "./pages/Videowall/Videowall.jsx";
 
 function secured(Component) {
     return function WrappedComponent(props) {
@@ -72,6 +75,7 @@ const router = createBrowserRouter(
                 path="profile/reservaciones"
                 element={secured(ReservacionesActivas)()}
             />
+            <Route path="videowall" element={<Videowall />} />
             <Route path="*" element={<NotFound />} />
         </Route>
     )

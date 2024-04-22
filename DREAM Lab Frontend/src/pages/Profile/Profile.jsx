@@ -4,13 +4,13 @@ import NameCard from "./components/NameCard/NameCard";
 import EsferaPuntosPrioridad from "./components/EsferaPuntosPrioridad/EsferaPuntosPrioridad";
 import BotonCelular from "./components/BotonCelular/BotonCelular";
 import "./Profile.css";
-import BotonBack from "src/globalComponents/BotonBack/BotonBack";
+import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import {
     generateReservationCards,
     renderTarjetasLogro,
 } from "./utils/Funciones.jsx";
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
-import Navbar from "src/globalComponents/NavBar/NavBar.jsx";
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import { get } from "src/utils/ApiRequests.js";
 
 const logrosData = [

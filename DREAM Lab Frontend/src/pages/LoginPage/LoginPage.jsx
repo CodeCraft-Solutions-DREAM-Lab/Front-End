@@ -19,8 +19,8 @@ import { loginAction } from "src/utils/Auth";
 import { post } from "src/utils/ApiRequests";
 import { getFromLocalStorage } from "src/utils/Storage";
 
-import "src/globalComponents/GlassCard/GlassCard.css";
-import GlassCard from "src/globalComponents/GlassCard/GlassCard";
+import "src/GlobalComponents/GlassCard/GlassCard.css";
+import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
 import { useDispatch } from "react-redux";
 import { setAuth } from "src/redux/Slices/userSlice";

@@ -1,4 +1,4 @@
-import BotonBack from "src/globalComponents/BotonBack/BotonBack";
+import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import TarjetaLogro from "./components/TarjetasLogro/TarjetaLogro";
 import "./ReservacionesActivas.css";
 import { renderTarjetasLogro } from "./utils/Funciones.jsx";

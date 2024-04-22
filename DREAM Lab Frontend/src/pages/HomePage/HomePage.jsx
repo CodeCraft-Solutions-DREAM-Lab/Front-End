@@ -3,7 +3,7 @@ import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "src/globalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
     getFromLocalStorage,
@@ -13,7 +13,7 @@ import {
 import { get, post, API_URL } from "src/utils/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
-import LoadingScreen from "src/globalComponents/LoadingScreen/LoadingScreen.jsx";
+import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen.jsx";
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 

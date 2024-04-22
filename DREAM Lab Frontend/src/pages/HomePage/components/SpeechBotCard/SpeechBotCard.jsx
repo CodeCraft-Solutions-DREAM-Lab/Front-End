@@ -6,7 +6,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import TextField from "./components/TextField/TextField.jsx";
 import "./SpeechBotCard.css";
-import "src/globalComponents/GlassCard/GlassCard.css";
+import "src/GlobalComponents/GlassCard/GlassCard.css";
 
 function SpeechBotCard(props) {
     // --- Para el reconocimiento de voz ---
