@@ -11,7 +11,7 @@ import "./App.css";
 import Root from "./pages/Root/Root.jsx";
 
 // Rutas protegidas
-import ProtectedRoutes from "./globalComponents/ProtectedRoutes/ProtectedRoutes.jsx";
+import ProtectedRoutes from "./GlobalComponents/ProtectedRoutes/ProtectedRoutes.jsx";
 
 // Pagina no encontrada
 import NotFound from "./pages/NotFound/NotFound.jsx";
