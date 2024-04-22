@@ -1,0 +1,106 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+    width: 95%;
+    height: 11%;
+    margin: 0 auto;
+    padding: 1%;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: "Karla", sans-serif;
+}
+
+@media only screen and (min-height: 1025px) {
+    .navbar {
+        height: 6vh;
+    }
+}
+
+.navbar-positioning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    padding: 2rem;
+    animation-duration: 0.5s;
+}
+
+@keyframes slideIn {
+    from {
+        top: -9rem; /* Start off-screen */
+    }
+    to {
+        top: 0; /* Slide into view */
+    }
+}
+
+@keyframes slideOut {
+    from {
+        top: 0; /* Start on-screen */
+    }
+    to {
+        top: -9rem; /* Slide out of view */
+    }
+}
+
+.visible {
+    animation-name: slideIn; /* Apply slideIn animation */
+}
+
+.hidden {
+    animation-name: slideOut; /* Apply slideOut animation */
+}
+
+.logo-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 200px;
+}
+
+.logo {
+    width: 28%;
+    margin-right: 4%;
+    padding-left: 10%;
+    cursor: pointer;
+}
+
+.dreamlab {
+    padding-top: 1%;
+    font-size: 100%;
+    font-weight: 800;
+    color: white;
+}
+
+@media only screen and (max-width: 480px) {
+    .logo {
+        width: 40%; /* Adjust the width for smaller screens */
+        padding-bottom: 1%; /* Adjust padding as needed */
+        padding-left: 10%; /* Adjust padding as needed */
+    }
+    .dreamlab {
+        display: none; /* Hide the Dream Lab text on phone screens */
+    }
+}
+
+.user-avatar-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.text-white {
+    color: white !important;
+}

@@ -1,0 +1,202 @@
+/* Modal tipo 1*/
+
+.modal-blanco-tipo1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
+    padding-top: 3%;
+    background-color: white;
+    border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
+    font-family: "Karla", sans-serif;
+}
+
+.titulo1-modal-tipo1 {
+    width: 70%;
+    margin-top: 1vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
+    line-height: 95%;
+    color: #14247b;
+    text-align: center;
+}
+
+.titulo2-modal-tipo1 {
+    width: 70%;
+    margin-top: -1vw;
+    font-size: 2vw;
+    font-weight: bold;
+    line-height: 95%;
+    color: #646464;
+    text-align: center;
+}
+
+.titulo3-modal-tipo1 {
+    width: 100%;
+    margin-top: -3vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 7%;
+    text-align: center;
+}
+
+/* Modal tipo 2*/
+
+.blur-space-tipo2 {
+    backdrop-filter: blur(5px); /* Aplicando el filtro de desenfoque */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 26;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    background-color: rgb(255, 255, 255, 0.2);
+}
+
+.modal-blanco-tipo2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
+    padding-top: 2%;
+    background-color: white;
+    border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
+    font-family: "Karla", sans-serif;
+}
+
+.logo-modal-out-tipo2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-modal-tipo2 {
+    width: 5vw;
+    margin-top: 1%;
+}
+
+.titulo1-modal-tipo2 {
+    width: 70%;
+    margin-top: -1.5vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
+    line-height: 95%;
+    color: #14247b;
+    text-align: center;
+}
+
+.titulo2-modal-tipo2 {
+    width: 70%;
+    margin-top: -1vw;
+    font-size: 2vw;
+    font-weight: bold;
+    line-height: 95%;
+    color: #646464;
+    text-align: center;
+}
+
+.titulo3-modal-tipo2 {
+    width: 100%;
+    margin-top: -5vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.titulo4-modal-tipo2 {
+    width: 100%;
+    margin-top: -2vw;
+    font-size: 2vw;
+    font-weight: bold;
+    color: #646464;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+/* Modal tipo 3*/
+
+.modal-blanco-tipo3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50%; /* Utilizando un porcentaje para el ancho */
+    height: 60vh; /* Utilizando viewport height para mantener la proporción */
+    padding-top: 3%;
+    background-color: white;
+    border-radius: 3%; /* Utilizando un porcentaje para el border-radius */
+    font-family: "Karla", sans-serif;
+}
+
+.titulo1-modal-tipo3 {
+    width: 70%;
+    margin-top: 1.5vw;
+    font-size: 2.2vw;
+    font-weight: bolder;
+    line-height: 95%;
+    color: #14247b;
+    text-align: center;
+}
+
+.titulo2-modal-tipo3 {
+    width: 70%;
+    margin-top: 1vw;
+    font-size: 2vw;
+    font-weight: bold;
+    line-height: 95%;
+    color: #646464;
+    text-align: center;
+}
+
+.titulo3-modal-tipo3 {
+    width: 100%;
+    margin-top: 0vw;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #868686;
+    text-align: center;
+}
+
+.botones-cancelacion-tipo3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 7%;
+    text-align: center;
+}
