@@ -154,3 +154,4 @@ export function put(
 export function del(url, successActions = () => {}, errorActions = () => {}) {
   return apiRequest("DELETE", url, null, successActions, errorActions);
 }
+
