@@ -48,7 +48,7 @@ function SelectorSala(props) {
         const fetchFreeHours = () => {
             console.log("Haciendo fetch de horas");
             const date = new Date(getFromSessionStorage("fecha"));
-            post("salas/horasLibres2", {
+            post("salas/horasLibres", {
                 idSala: getFromSessionStorage("idSala"),
                 fecha: date.toISOString(),
                 personas: getFromSessionStorage("personas"),
