@@ -10,10 +10,11 @@ import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
-import { get } from "src/utils/ApiRequests.js";
+import { get, post } from "src/utils/ApiRequests.js";
 import { useLocation } from "react-router-dom";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
+import { InfoReservCard } from "./components/InfoReservCard/InfoReservCard";
 
 function SelectorSala(props) {
     let navigate = useNavigate();
@@ -25,6 +26,12 @@ function SelectorSala(props) {
     const [idSala, setIdSala] = useState(0);
     const [idExperiencia, setIdExperiencia] = useState(0);
     const [fetchFreeHoursAgain, setFetchFreeHoursAgain] = useState(false);
+
+    const [freeHours, setFreeHours] = useState([]);
+    const [cuposArray, setCuposArray] = useState(new Array(25).fill(0));
+    const [competidoresArray, setCompetidoresArray] = useState(
+        new Array(25).fill(0)
+    );
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -38,8 +45,33 @@ function SelectorSala(props) {
     }, []);
 
     useEffect(() => {
-        console.log("idSala: ", idSala);
-        console.log("idExperiencia: ", idExperiencia);
+        const fetchFreeHours = () => {
+            console.log("Haciendo fetch de horas");
+            const date = new Date(getFromSessionStorage("fecha"));
+            post("salas/horasLibres2", {
+                idSala: getFromSessionStorage("idSala"),
+                fecha: date.toISOString(),
+                personas: getFromSessionStorage("personas"),
+            }).then((response) => {
+                setFreeHours(response.map((hora) => hora.hora));
+    
+                const newCuposArray = new Array(25).fill(0);
+                const newCompetidoresArray = new Array(25).fill(0);
+    
+                response.forEach((hora) => {
+                    newCuposArray[hora.hora] = hora.cupos;
+                    newCompetidoresArray[hora.hora] = hora.competidores;
+                });
+    
+                setCuposArray(newCuposArray);
+                setCompetidoresArray(newCompetidoresArray);
+            });
+        };
+
+        fetchFreeHours();
+    }, [fetchFreeHoursAgain]);
+
+    useEffect(() => {
         if (idExperiencia != 0) {
             get(`experiencias/${idExperiencia}`)
                 .then((result) => {
@@ -54,7 +86,6 @@ function SelectorSala(props) {
         if (!!idSala) {
             get(`mesas/${idSala}`)
                 .then((result) => {
-                    console.log("result de mesas: ", result);
                     const maxCupos = result.maxCupos;
                     setEspacioMax(maxCupos);
                 })
@@ -119,6 +150,8 @@ function SelectorSala(props) {
                             update={update}
                             setUpdate={setUpdate}
                             fetchFreeHoursAgain={fetchFreeHoursAgain}
+                            setFetchFreeHoursAgain={setFetchFreeHoursAgain}
+                            freeHours={freeHours}
                         />
                         <TextoFecha update={update} />
                         <div className="button-container">
@@ -130,12 +163,11 @@ function SelectorSala(props) {
                                 disabled={isNextButtonDisabled}
                             />
                         </div>
-                        <div className="alerta">
-                            <p>
-                                La asignación del lugar se hará hoy a las 3 pm.
-                                Compiten 10 reservaciones por 20 cupos.
-                            </p>
-                        </div>
+                        <InfoReservCard 
+                            cuposArray={cuposArray}
+                            competidoresArray={competidoresArray}
+                            update={update}
+                        />
                     </div>
                 </div>
             </div>

@@ -10,14 +10,17 @@ function Slider({
     fetchFreeHoursAgain,
     setFetchFreeHoursAgain,
 }) {
-    const [value, setValue] = useState(parseInt(getFromSessionStorage("personas")) || minimo);
+    const [value, setValue] = useState(
+        parseInt(getFromSessionStorage("personas")) || minimo
+    );
 
-    useEffect(() => {
-        saveToSessionStorage("personas", value);
-    }, [value]);
+    // useEffect(() => {
+        
+    // }, [value]);
 
     const handleChange = (event) => {
         setValue(event.target.value);
+        saveToSessionStorage("personas", event.target.value);
         setFetchFreeHoursAgain(!fetchFreeHoursAgain);
     };
 
