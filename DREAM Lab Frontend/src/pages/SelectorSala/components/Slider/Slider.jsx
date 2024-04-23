@@ -10,14 +10,7 @@ function Slider({
     fetchFreeHoursAgain,
     setFetchFreeHoursAgain,
 }) {
-    const [value, setValue] = useState(minimo);
-
-    useEffect(() => {
-        const personas = getFromSessionStorage("personas");
-        if (personas) {
-            setValue(parseInt(personas));
-        }
-    }, []);
+    const [value, setValue] = useState(parseInt(getFromSessionStorage("personas")) || minimo);
 
     useEffect(() => {
         saveToSessionStorage("personas", value);

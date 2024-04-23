@@ -21,7 +21,7 @@ function SelectorSala(props) {
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
     const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
     const [update, setUpdate] = useState(false);
-    const [espacioMax, setEspacioMax] = useState(10);
+    const [espacioMax, setEspacioMax] = useState(9);
     const [idSala, setIdSala] = useState(0);
     const [idExperiencia, setIdExperiencia] = useState(0);
     const [fetchFreeHoursAgain, setFetchFreeHoursAgain] = useState(false);
@@ -38,10 +38,13 @@ function SelectorSala(props) {
     }, []);
 
     useEffect(() => {
+        console.log("idSala: ", idSala);
+        console.log("idExperiencia: ", idExperiencia);
         if (idExperiencia != 0) {
             get(`experiencias/${idExperiencia}`)
                 .then((result) => {
                     saveToSessionStorage("idSala", result[0].idSala);
+                    setIdSala(result[0].idSala);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
@@ -51,7 +54,8 @@ function SelectorSala(props) {
         if (!!idSala) {
             get(`mesas/${idSala}`)
                 .then((result) => {
-                    const maxCupos = result.recordsets[0][0].maxCupos;
+                    console.log("result de mesas: ", result);
+                    const maxCupos = result.maxCupos;
                     setEspacioMax(maxCupos);
                 })
                 .catch((error) => {
