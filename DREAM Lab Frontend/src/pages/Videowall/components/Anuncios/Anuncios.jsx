@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from "react";
 import "./Anuncios.css";
+import Hora from "./components/Hora/Hora.jsx";
+import InfoEvento from "./components/InfoEvento/InfoEvento.jsx";
 
 const anunciosDefault = [
     {
@@ -83,7 +85,10 @@ function Anuncios() {
                                 background: `no-repeat center/cover url(${item.img})`,
                                 ...getStyles(i),
                             }}
-                        ></div>
+                        >
+                            <Hora/>
+                            <InfoEvento/>
+                        </div>
                     </React.Fragment>
                 ))}
         </div>
