@@ -1,0 +1,68 @@
+.main-container {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    padding-top: 18vh;
+}
+
+.top-section {
+    padding: 1%;
+}
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    margin: auto;
+}
+
+.card-container-wrapper {
+    display: flex;
+    align-items: center; /* Center the card container horizontally */;
+}
+
+.card-container {
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Cards will wrap to the next row */;
+    justify-content: flex-start; /* Align cards to the start of the container */;
+    flex: 1; /* Added to make the container take remaining vertical space */;
+    overflow-y: auto; /* Enable vertical scroll if needed */;
+    width: 60%;
+    height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */;
+    padding: 0 1%; /* Added padding to prevent cards from touching the edges */;
+  }
+
+.search-bar-container {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    padding-right: 10%;
+}
+
+@media only screen and (max-width: 968px) {
+
+.search-bar-container {
+        display: flex; /* Use flexbox for alignment */;
+        justify-content: center; /* Align items to the right */;
+        align-items: center; /* Align items vertically */;
+        width: 100%; /* Set full width on phone screens */;
+        margin: 0 ; /* Center the search bar on phone screens */;
+        padding-right: 0;
+    }
+}
+
+.button-container{
+    width: 100%;
+    padding: 3%;
+}
+
+/* card component*/
+.card {
+    width: 160px;
+    height: 190px;
+    margin: 1%;
+    background-color: white;
+    border-radius: 20px;
+}

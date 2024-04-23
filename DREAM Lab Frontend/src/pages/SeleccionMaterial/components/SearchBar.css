@@ -3,10 +3,10 @@
     align-self: flex-end;
     box-sizing: border-box; /* Ensure padding is included in width calculation */
     width: 80%;
-    height: 2.3rem; /* Adjusted height */
+    height: 2.5rem; /* Adjusted height */
     padding: 0 20px 0 40px; /* Adjust for icon width and padding */
     background-color: transparent;
-    background-image: url("../../assets/images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+    background-image: url("../../../GlobalComponents/NavBar/assets/images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
     background-repeat: no-repeat;
     background-position: 10% center; /* Adjust position as needed */
     background-size: 20px; /* Adjust size as needed */
@@ -33,28 +33,31 @@
     padding-right: 2rem;
 }
 
-@media only screen and (max-width: 480px) {
-    .searchContainer {
-        width: 180%; /* Adjust width for phone screens */
-        padding-right: 2rem;
-    }
-    .searchBar {
-        width: 100%; /* Set full width on phone screens */
-        margin: 0 auto; /* Center the search bar on phone screens */
-        display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Align items to the right */
-    align-items: center; /* Align items vertically */
-        
-    }
-}
 
-@media only screen and (max-width: 968px ) and (min-width: 481px) {
+@media only screen and (max-width: 968px ) and (min-width: 481px){
     .searchContainer {
         width: 60%; /* Adjust width for phone screens */
-        padding-right: 2rem;
+        justify-content: center; 
     }
     .searchBar {
-        width: 100%; /* Set full width on phone screens */
+        width: 70%; /* Set full width on phone screens */
+        margin: auto; /* Center the search bar on phone screens */
+        margin-left: 0;
+        display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Align items to the right */
+    align-items: center; /* Align items vertically */
+        
+    }
+}
+@media only screen and (max-width: 480px){
+    .searchContainer {
+        width: 90%; /* Adjust width for phone screens */
+        justify-content: center; 
+        margin-left: 0;
+        padding-right: 0;
+    }
+    .searchBar {
+        width: 70%; /* Set full width on phone screens */
         margin: 0 auto; /* Center the search bar on phone screens */
         display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Align items to the right */
@@ -62,4 +65,3 @@
         
     }
 }
-

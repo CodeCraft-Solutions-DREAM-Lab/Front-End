@@ -1,20 +1,7 @@
-/*
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    deleteSelectedItem,
-    selectSelectedItem,
-} from "../redux/Slices/selectedItemSlice.js";
-import {
-    getFromSessionStorage,
-    saveToSessionStorage,
-} from "../Global/Storage.js";
-*/
 import "./SeleccionMaterial.css";
-import NavBar from "../components/general/NavBar";
-import SearchBar from "../components/general/SearchBar";
-import RoundedButton from "../Reservaciones/components/RoundedButton";
+import NavBar from "../../GlobalComponents/NavBar/NavBar";
+import SearchBar from "./components/SearchBar";
+import RoundedButton from "./components/Button";
 
 function SeleccionMaterial() {
 	const handleSubmit = async () => {
@@ -23,6 +10,7 @@ function SeleccionMaterial() {
 	return (
 		<>
 			<NavBar view="soloPerfil" autoHide={false} />
+
 			<div className="main-container">
 				<div className="top-section">
 					{/* Aquí irá el resumen y la search bar */}
@@ -46,7 +34,6 @@ function SeleccionMaterial() {
 						<div className="card">tarjeta</div>
 						<div className="card">tarjeta</div>
 						<div className="card">tarjeta</div>
-
 						<div className="card">tarjeta</div>
 						<div className="card">tarjeta</div>
 						<div className="card">tarjeta</div>
@@ -57,7 +44,7 @@ function SeleccionMaterial() {
 						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>
 				</div>
-			</div>
+			</div> 
 		</>
 	);
 }
