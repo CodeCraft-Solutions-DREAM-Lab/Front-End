@@ -1,9 +1,9 @@
-import "./CarouselReservaciones.css";
+import "./ReservacionesVideowall.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
-import InfiniteMovingCards from "./components/infinite-moving-cards";
+import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
 
-function CarouselReservaciones() {
+function ReservacionesVideowall() {
     return (
         <div className="cr-container">
             <div className="cr-title-container">
@@ -12,10 +12,10 @@ function CarouselReservaciones() {
                 </GlassCard>
             </div>
             <div className="cr-carousel-container">
-                <InfiniteMovingCards />
+                <CarouselReservaciones />
             </div>
         </div>
     );
 }
 
-export default CarouselReservaciones;
+export default ReservacionesVideowall;
