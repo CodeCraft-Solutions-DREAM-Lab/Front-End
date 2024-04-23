@@ -7,7 +7,7 @@ DIMENSIONES VIDEOWALL
 import { useState } from "react";
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";
-import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
+import CarouselReservaciones from "./components/ListaReservaciones/ListaReservaciones";
 
 const anunciosDefault = [
     {
