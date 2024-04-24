@@ -2,6 +2,57 @@ import "./SeleccionMaterial.css";
 import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar";
 import RoundedButton from "./components/Button";
+import MaterialCard from "./components/MaterialCard.jsx";
+import { Provider } from 'react-redux';
+import store from '../../redux/store'; 
+
+const materials = [
+	{
+		id: 1,
+		name: "Material A",
+		image: "https://via.placeholder.com/90x90", // Placeholder image
+	},
+	{
+		id: 2,
+		name: "Material B",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	},
+	{
+		id: 3,
+		name: "Material C",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	} ,
+	{
+		id: 1,
+		name: "Material A",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	},
+	{
+		id: 2,
+		name: "Material B",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	},
+	{
+		id: 3,
+		name: "Material C",
+		image: "https://via.placeholder.com/90x90", // Placeholder image
+	},
+	{
+		id: 1,
+		name: "Material A",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	},
+	{
+		id: 2,
+		name: "Material B",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	},
+	{
+		id: 3,
+		name: "Material C",
+		image: "https://via.placeholder.com/100x100", // Placeholder image
+	}, 
+];
 
 function SeleccionMaterial() {
 	const handleSubmit = async () => {
@@ -20,31 +71,27 @@ function SeleccionMaterial() {
 				</div>
 				<div className="bottom-section">
 					{/* Aquí van las tarjetas con los materiales */}
-                    <div className="card-container-wrapper">
-                    <div className="card-container">
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
-						<div className="card">tarjeta</div>
+					<div className="card-container-wrapper">
+						<div className="card-container">
+							{materials.map((material) => (
+								<>
+								<Provider store={store}>
+								<MaterialCard
+									key={material.id}
+									materialId={material.id}
+									name={material.name}
+									image={material.image}
+								/>
+								</Provider>
+								</>
+							))}
+						</div>
 					</div>
-                    </div>
 					<div className="button-container">
 						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>
 				</div>
-			</div> 
+			</div>
 		</>
 	);
 }

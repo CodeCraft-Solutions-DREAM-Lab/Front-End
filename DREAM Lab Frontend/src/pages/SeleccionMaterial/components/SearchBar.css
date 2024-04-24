@@ -40,12 +40,13 @@
         justify-content: center; 
     }
     .searchBar {
-        width: 70%; /* Set full width on phone screens */
+        width: 60%; /* Set full width on phone screens */
         margin: auto; /* Center the search bar on phone screens */
-        margin-left: 0;
+        margin-left: auto;
         display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Align items to the right */
     align-items: center; /* Align items vertically */
+    background-position: 7% center;
         
     }
 }

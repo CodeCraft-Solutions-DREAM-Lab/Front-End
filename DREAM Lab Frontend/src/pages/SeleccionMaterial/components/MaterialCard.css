@@ -1,0 +1,104 @@
+/* card component*/
+.card {
+	width: 140px;
+	height: 190px;
+	margin: 1%;
+	margin-top: 0.5%;
+	background-color: #f3f3f3;
+	border-radius: 20px;
+	
+}
+
+@media only screen and (max-width: 480px) {
+	.card {
+		width: 140px;
+		height: 170px;
+		margin: 2%;
+	}
+}
+
+.nombre-material {
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+	font-size: small;
+	padding: 5%;
+	padding-top: 7%;
+}
+
+.card .material-image {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	
+}
+
+.card .material-image img {
+	width: 95px;
+	height:95px;
+	display: block;
+	text-align: center;
+}
+
+.card .icons {
+	display: flex; /* Enable flexbox for responsive layout */
+	justify-content: center; /* Center elements horizontally */
+	margin-top: 20px;
+}
+
+.card .icons img {
+	width: 23px;
+	height: auto;
+	margin: 0 12px; /* Add spacing between elements */
+	transition: transform 0.2s ease-in-out; /* Add transition for smooth animation */
+	cursor: pointer; /* Set cursor to pointer on hover */
+}
+
+.card .icons img:hover {
+	transform: scale(1.2); /* Scale up on hover */
+}
+
+.card .icons img:active {
+	/* Style for active state (click) */
+	transform: scale(0.9); /* Scale down slightly on click */
+}
+
+.card .icons p {
+	/* Make all elements within .icons the same size */
+	margin: 0 12px; /* Add spacing between elements */
+	font-size: medium;
+	font-weight: 400;
+
+	/* Add circular background and centering */
+	background-color: white;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px; /* Set height equal to width for a circle */
+	text-align: center;
+	line-height: 25px; /* Match line-height with height for vertical centering */
+}
+
+@media only screen and (max-width: 480px) {
+	.card .icons {
+		margin-top: 4px;
+	}
+
+	.card .icons img {
+		width: 23px;
+		height: auto;
+		margin: 0 12px; /* Add spacing between elements */
+	}
+
+	.card .icons p {
+		/* Make all elements within .icons the same size */
+		margin: 0 12px; /* Add spacing between elements */
+		width: 23px;
+	height: 23px;
+
+	text-align: center;
+	line-height: 23px;
+		font-size: medium;
+		font-weight: 400;
+	}
+}

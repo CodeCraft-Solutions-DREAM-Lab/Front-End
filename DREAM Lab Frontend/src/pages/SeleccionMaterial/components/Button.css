@@ -1,26 +1,33 @@
-.rounded-button {
-    height: 4.8vh !important;
+.round-button {
+    height: 5vh !important;
     background-color: white;
     width: 150px;
     min-width: 10%;
     max-width: 80%;
   }
 
+  .buttonlabel {
+    color: #042e55;
+    font-size: max(2vh, 1vw);
+    font-weight: 700;
+  }
+
 @media screen and (max-width: 700px) and (min-width: 400px){
-  .rounded-button {
+  .round-button {
     width: 40%;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .rounded-button {
+  .round-button {
     width: 90%;
+  }
+  .buttonlabel {
+    color: #042e55;
+    font-size: max(2vh, 2vw);
+    font-weight: 700;
   }
 }
 
 
-  .button-label {
-    color: #042e55;
-    font-size: max(2vh, 1vw);
-    font-weight: 700;
-  }
+

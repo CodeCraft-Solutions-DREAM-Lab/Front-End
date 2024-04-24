@@ -6,12 +6,12 @@ import "../components/Button.css";
 function RoundedButton({ text, onClick }) {
     return (
         <Button
-            className="mt-2 rounded-full justify-self-center rounded-button"
+            className="mt-2 rounded-full justify-self-center round-button"
             color="white"
             onClick={onClick}
             radius="full"
         >
-            <label className="button-label">{text}</label>
+            <label className="buttonlabel">{text}</label>
         </Button>
     );
 }
