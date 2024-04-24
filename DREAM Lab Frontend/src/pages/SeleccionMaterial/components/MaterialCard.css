@@ -6,7 +6,6 @@
 	margin-top: 0.5%;
 	background-color: #f3f3f3;
 	border-radius: 20px;
-	
 }
 
 @media only screen and (max-width: 480px) {
@@ -31,12 +30,11 @@
 	display: flex;
 	justify-content: center;
 	margin: 0 auto;
-	
 }
 
 .card .material-image img {
 	width: 95px;
-	height:95px;
+	height: 95px;
 	display: block;
 	text-align: center;
 }
@@ -50,7 +48,7 @@
 .card .icons img {
 	width: 23px;
 	height: auto;
-	margin: 0 12px; /* Add spacing between elements */
+	margin: 0 7px; /* Add spacing between elements */
 	transition: transform 0.2s ease-in-out; /* Add transition for smooth animation */
 	cursor: pointer; /* Set cursor to pointer on hover */
 }
@@ -66,7 +64,7 @@
 
 .card .icons p {
 	/* Make all elements within .icons the same size */
-	margin: 0 12px; /* Add spacing between elements */
+	margin: 0 7px; /* Add spacing between elements */
 	font-size: medium;
 	font-weight: 400;
 
@@ -87,17 +85,17 @@
 	.card .icons img {
 		width: 23px;
 		height: auto;
-		margin: 0 12px; /* Add spacing between elements */
+
 	}
 
 	.card .icons p {
 		/* Make all elements within .icons the same size */
-		margin: 0 12px; /* Add spacing between elements */
-		width: 23px;
-	height: 23px;
 
-	text-align: center;
-	line-height: 23px;
+		width: 23px;
+		height: 23px;
+
+		text-align: center;
+		line-height: 23px;
 		font-size: medium;
 		font-weight: 400;
 	}

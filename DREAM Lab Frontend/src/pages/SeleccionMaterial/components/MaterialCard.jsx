@@ -12,15 +12,15 @@ function MaterialCard({ materialId, name, image, hideQuantity }) {
 	const dispatch = useDispatch();
 
 	const handlePlus = () => {
-		if (quantity > 0) {
-			setQuantity(quantity - 1);
+		if (quantity >= 0) {
+			setQuantity(quantity + 1);
 			dispatch(updateMaterialQuantity(materialId, quantity + 1));
 		}
 	};
 
 	const handleMinus = () => {
-		setQuantity(quantity + 1);
 		if (quantity > 0) {
+            setQuantity(quantity - 1);
 			dispatch(updateMaterialQuantity(materialId, quantity - 1));
 		} else {
 			dispatch(removeMaterial(materialId)); // Remove if quantity reaches 0
