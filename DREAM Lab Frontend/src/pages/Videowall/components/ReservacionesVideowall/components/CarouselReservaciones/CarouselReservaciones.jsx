@@ -8,15 +8,18 @@ import "./CarouselReservaciones.css";
 
 // import required modules
 import { FreeMode, Mousewheel, Autoplay } from "swiper/modules";
-import GlassCard from "../../../../../../GlobalComponents/GlassCard/GlassCard";
 
-export default function App() {
+import ReservationCard from "./components/ReservationCard";
+
+function CarouselReservaciones() {
     return (
-        <>
+        <div className="cr-swiper-container">
+            <div className="top-blur"></div>
+            <div className="bottom-blur"></div>
             <Swiper
                 modules={[FreeMode, Mousewheel, Autoplay]}
-                slidesPerView={3}
-                spaceBetween={100}
+                slidesPerView={5}
+                spaceBetween={0}
                 mousewheel={true}
                 direction="vertical"
                 loop={true}
@@ -29,46 +32,35 @@ export default function App() {
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <GlassCard width="80%" height="80%">
-                        Hola
-                    </GlassCard>
+                    <ReservationCard />
                 </SwiperSlide>
-                <SwiperSlide>Slide 2</SwiperSlide>
-                <SwiperSlide>Slide 3</SwiperSlide>
-                <SwiperSlide>Slide 4</SwiperSlide>
-                <SwiperSlide>Slide 5</SwiperSlide>
-                <SwiperSlide>Slide 6</SwiperSlide>
-                <SwiperSlide>Slide 7</SwiperSlide>
-                <SwiperSlide>Slide 8</SwiperSlide>
-                <SwiperSlide>Slide 9</SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <ReservationCard />
+                </SwiperSlide>
             </Swiper>
-        </>
+        </div>
     );
 }
 
-// import React, { useRef, useState } from "react";
-// // Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
-
-// // Import Swiper styles
-// import "swiper/css";
-
-// import "./styles.css";
-
-// export default function App() {
-//   return (
-//     <>
-//       <Swiper className="mySwiper">
-//         <SwiperSlide>Slide 1</SwiperSlide>
-//         <SwiperSlide>Slide 2</SwiperSlide>
-//         <SwiperSlide>Slide 3</SwiperSlide>
-//         <SwiperSlide>Slide 4</SwiperSlide>
-//         <SwiperSlide>Slide 5</SwiperSlide>
-//         <SwiperSlide>Slide 6</SwiperSlide>
-//         <SwiperSlide>Slide 7</SwiperSlide>
-//         <SwiperSlide>Slide 8</SwiperSlide>
-//         <SwiperSlide>Slide 9</SwiperSlide>
-//       </Swiper>
-//     </>
-//   );
-// }
+export default CarouselReservaciones;

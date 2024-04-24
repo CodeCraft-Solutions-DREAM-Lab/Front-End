@@ -1,23 +1,5 @@
-#app {
-    height: 100%;
-}
-html,
-body {
-    position: relative;
-    height: 100%;
-}
-
-body {
-    background: #eee;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-}
-
 .swiper {
-    width: 100vh;
+    width: 100%;
     height: 80vh;
 }
 
@@ -37,4 +19,29 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.cr-swiper-container {
+    display: contents;
+    position: relative;
+}
+
+.top-blur {
+    position: absolute;
+    top: 15.5%;
+    height: 7vh;
+    width: 100%;
+    z-index: 2;
+    background: linear-gradient(to bottom, #042e55, #042e55c4, #042e5500);
+    filter: blur(1vh);
+}
+
+.bottom-blur {
+    position: absolute;
+    bottom: 1.5%;
+    height: 7vh;
+    width: 100%;
+    z-index: 2;
+    background: linear-gradient(to top, #042e55, #042e55c4, #042e5500);
+    filter: blur(1vh);
 }
