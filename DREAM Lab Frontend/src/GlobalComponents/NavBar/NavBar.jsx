@@ -4,7 +4,7 @@ import UserAvatar from "./components/UserAvatar/UserAvatar";
 import Logout from "./components/Logout/Logout";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BotonCrearExperiencia from "./components/BotonCrearExperiencia/BotonCrearExperiencia";
-import LoginButton from "../../pages/LoginPage/components/LoginButton/LoginButton";
+import LoginButton from "./components/LoginButton/LoginButton";
 
 import { useState } from "react";
 

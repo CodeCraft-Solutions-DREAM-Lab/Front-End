@@ -40,8 +40,8 @@
     flex-flow: column;
     align-items: center;
     gap: 1rem;
-    position: relative;
     z-index: 2;
+    margin-right: 70rem;
 }
 
 .button-more {
