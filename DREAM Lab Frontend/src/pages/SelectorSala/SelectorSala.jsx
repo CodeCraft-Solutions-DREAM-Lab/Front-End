@@ -143,7 +143,7 @@ function SelectorSala(props) {
                             }}
                             onOk={() => {
                                 setIsFirstReminderOpen(false);
-                                navigate("/reservacion/resumen");
+                                navigate("/reservacion/material");
                             }}
                         />
                         <FechaFormulario

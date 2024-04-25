@@ -5,6 +5,10 @@ import RoundedButton from "./components/Button";
 import MaterialCard from "./components/MaterialCard.jsx";
 import { Provider } from 'react-redux';
 import store from '../../redux/store'; 
+import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const materials = [
 	{
@@ -55,8 +59,11 @@ const materials = [
 ];
 
 function SeleccionMaterial() {
+	let navigate = useNavigate();
+	saveToSessionStorage("material", [])
+
 	const handleSubmit = async () => {
-		console.log("click");
+		navigate("/reservacion/resumen");
 	};
 	return (
 		<>
@@ -72,7 +79,7 @@ function SeleccionMaterial() {
 				<div className="bottom-section">
 					{/* Aquí van las tarjetas con los materiales */}
 					<div className="card-container-wrapper">
-						<div className="card-container">
+						<div className="card-container-sm">
 							{materials.map((material) => (
 								<>
 								<Provider store={store}>
