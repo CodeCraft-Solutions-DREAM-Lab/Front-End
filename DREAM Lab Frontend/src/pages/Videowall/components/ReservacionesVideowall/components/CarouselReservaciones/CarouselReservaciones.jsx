@@ -1,17 +1,39 @@
-// Import Swiper React components
+// Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { FreeMode, Mousewheel, Autoplay } from "swiper/modules";
 import "swiper/css";
 
+// Estilos
 import "./CarouselReservaciones.css";
 
-// import required modules
-import { FreeMode, Mousewheel, Autoplay } from "swiper/modules";
-
+// Componentes
 import ReservationCard from "./components/ReservationCard";
 
+// Hooks
+import { useEffect } from "react";
+
+// API Requests
+import { get } from "src/utils/ApiRequests";
+
 function CarouselReservaciones() {
+    // Detener el autoplay al hacer hover
+    useEffect(() => {
+        const swiper = document.querySelector(".mySwiper");
+        swiper.addEventListener("mouseenter", () => {
+            swiper.swiper.autoplay.stop();
+        });
+        swiper.addEventListener("mouseleave", () => {
+            swiper.swiper.autoplay.start();
+        });
+    }, []);
+
+    // Obtener los datos para las tarjetas de reservaciones
+    useEffect(() => {
+        // get("videowall/reservaciones").then((res) => {
+        //     console.log(res);
+        // });
+    }, []);
+
     return (
         <div className="cr-swiper-container">
             <div className="top-blur"></div>
