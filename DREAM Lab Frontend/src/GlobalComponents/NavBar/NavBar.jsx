@@ -4,6 +4,9 @@ import UserAvatar from "./components/UserAvatar/UserAvatar";
 import Logout from "./components/Logout/Logout";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BotonCrearExperiencia from "./components/BotonCrearExperiencia/BotonCrearExperiencia";
+import LoginButton from "./components/LoginButton/LoginButton";
+
+import { useState } from "react";
 
 import "./NavBar.css";
 
@@ -57,6 +60,7 @@ class Navbar extends React.Component {
     }
     render() {
         const { view, autoHide } = this.props;
+        let viewLandingPage = false;
 
         // Definimos las vistas
         let searchBar, userAction;
@@ -80,6 +84,9 @@ class Navbar extends React.Component {
             case "soloPerfil":
                 userAction = <UserAvatar />; // Icono de perfil
                 break;
+            case "landingPage":
+                viewLandingPage = true;
+                userAction = <LoginButton />; // Redireccionar al login
             default:
                 searchBar = null;
                 userAction = null; // Para vistas desconocidas
@@ -99,7 +106,7 @@ class Navbar extends React.Component {
             <div className={`navbar-positioning ${classHide}`}>
                 <div className="navbar glass-card" height="1rem">
                     <div className="flex items-center justify-between w-full">
-                        <div
+                        {!viewLandingPage && <div
                             className="logo-container"
                             onClick={handleDivClick}
                             style={{ cursor: "pointer" }}
@@ -110,7 +117,7 @@ class Navbar extends React.Component {
                                 className="logo"
                             />
                             <h1 className="dreamlab">DREAM LAB</h1>
-                        </div>
+                        </div>}
                         {searchBar}{" "}
                         {/* Se ve la searchBar dependiendo de la vista */}
                         <div
