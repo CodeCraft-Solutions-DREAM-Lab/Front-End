@@ -8,11 +8,7 @@ function ReservationCard({ nombre, horaInicio, horaFin, sala, icono }) {
     return (
         <div className="rc-container">
             <div className="rc-image-container">
-                <Image
-                    src="https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.png"
-                    alt="Logro del usuario"
-                    fullwidth={false}
-                />
+                <Image src={icono} alt="Logro del usuario" fullwidth={false} />
             </div>
             <div className="rc-data-container">
                 <div className="rc-top-container">
