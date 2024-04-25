@@ -3,6 +3,8 @@ import "./Anuncios.css";
 import Hora from "./components/Hora/Hora.jsx";
 import InfoEvento from "./components/InfoEvento/InfoEvento.jsx";
 
+import {useFirebaseApp} from "reactfire";
+
 const anunciosDefault = [
     {
         id: 1,
@@ -32,6 +34,9 @@ function Anuncios() {
     // Estados para manejar el anuncio mostrado y que rote automáticamente
     const [activeSlide, setActiveSlide] = useState(parseInt(Math.floor(data.length / 2)));
     const [autoRotate, setAutoRotate] = useState(true);
+
+    const firebase = useFirebaseApp();
+    //console.log(firebase);
 
     //console.log("Data: ", data);
 
