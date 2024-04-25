@@ -10,12 +10,14 @@ import "./CarouselReservaciones.css";
 import ReservationCard from "./components/ReservationCard";
 
 // Hooks
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // API Requests
 import { get } from "src/utils/ApiRequests";
 
 function CarouselReservaciones() {
+    const [reservaciones, setReservaciones] = useState([]);
+
     // Detener el autoplay al hacer hover
     useEffect(() => {
         const swiper = document.querySelector(".mySwiper");
@@ -29,9 +31,29 @@ function CarouselReservaciones() {
 
     // Obtener los datos para las tarjetas de reservaciones
     useEffect(() => {
-        // get("videowall/reservaciones").then((res) => {
-        //     console.log(res);
-        // });
+        get("videowall/reservaciones").then((res) => {
+            console.log(res);
+            res = res.map((item) => {
+                let horaInicioDate = new Date(item.horaInicio);
+                let horaFinDate = new Date(item.horaInicio);
+                horaFinDate.setUTCHours(
+                    horaInicioDate.getUTCHours() + item.duracion
+                );
+
+                let horaInicio = `${horaInicioDate.getUTCHours()}:${horaInicioDate
+                    .getUTCMinutes()
+                    .toString()
+                    .padStart(2, "0")}`;
+                let horaFin = `${horaFinDate.getUTCHours()}:${horaFinDate
+                    .getUTCMinutes()
+                    .toString()
+                    .padStart(2, "0")}`;
+
+                return { ...item, horaInicio, horaFin };
+            });
+            console.log(res);
+            setReservaciones(res);
+        });
     }, []);
 
     return (
@@ -53,7 +75,18 @@ function CarouselReservaciones() {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide>
+                {reservaciones.map((reservacion) => (
+                    <SwiperSlide key={reservacion.id}>
+                        <ReservationCard
+                            nombre={reservacion.nombre_usuario}
+                            horaInicio={reservacion.horaInicio}
+                            horaFin={reservacion.horaFin}
+                            sala={reservacion.nombre_sala}
+                            icono={reservacion.iconoURL}
+                        />
+                    </SwiperSlide>
+                ))}
+                {/* <SwiperSlide>
                     <ReservationCard />
                 </SwiperSlide>
                 <SwiperSlide>
@@ -70,7 +103,7 @@ function CarouselReservaciones() {
                 </SwiperSlide>
                 <SwiperSlide>
                     <ReservationCard />
-                </SwiperSlide>
+                </SwiperSlide> */}
             </Swiper>
         </div>
     );
