@@ -179,6 +179,8 @@ function HomePage() {
 
     useEffect(() => {
         if (processedTranscript) {
+            setShowInvalidNotice(false);
+            setShowRecommendations(false);
             const fetchData = async () => {
                 const newData = await Promise.all(
                     processedTranscript.map(async (item) => {
