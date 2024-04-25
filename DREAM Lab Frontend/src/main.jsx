@@ -17,6 +17,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 
+// Para utilizar firebase en el videowall
+import {FirebaseAppProvider} from "reactfire";
+import firebaseConfig from "../firebase-config.js";
+
 // Estilos
 import "./index.css";
 
@@ -27,7 +31,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <NextUIProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
-          <App />
+          <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+            <App />
+          </FirebaseAppProvider>
         </Provider>
       </LocalizationProvider>
     </NextUIProvider>
