@@ -103,49 +103,44 @@ export default function LoginPage() {
             </div>
             <div className="glassCardContainer">
                 <GlassCard classes={"glassCard"}>
-                    <form onSubmit={handleLogin}>
-                        <div className="grid-container">
-                            <LoginRow flexDirection="col" justify="between">
-                                <LoginRow margin="12vh 0 0 0">
-                                    <img
-                                        src="/src/images/LogoDreamLab.png"
-                                        alt="Logo"
-                                        className="login-logo"
-                                    />
-                                    <h1 className="login-dreamlab-title">
-                                        DREAM LAB
-                                    </h1>
-                                </LoginRow>
-                                <LoginRow margin="4vh 0 0 0">
-                                    <h1 className="login-titulo">
-                                        Inicia sesión
-                                    </h1>
-                                </LoginRow>
-                            </LoginRow>
-                            <LoginRow flexDirection="col">
-                                <LoginTextField
-                                    label={"Matrícula"}
-                                    marginBot={"5vh"}
-                                    value={user}
-                                    onValueChange={setUser}
+                    <div className="grid-container">
+                        <LoginRow flexDirection="col" justify="between">
+                            <LoginRow margin="12vh 0 0 0">
+                                <img
+                                    src="/src/images/LogoDreamLab.png"
+                                    alt="Logo"
+                                    className="login-logo"
                                 />
-                                <LoginTextField
-                                    label={"Contraseña"}
-                                    isLogin={true}
-                                    value={password}
-                                    onValueChange={setPassword}
-                                />
+                                <h1 className="login-dreamlab-title">
+                                    DREAM LAB
+                                </h1>
                             </LoginRow>
-                            <LoginRow margin="0 0 12vh 0">
-                                <LoginButton
-                                    text="ACEPTAR"
-                                    onClick={handleLogin}
-                                    isLoading={isLoading}
-                                    type="submit"
-                                />
+                            <LoginRow margin="4vh 0 0 0">
+                                <h1 className="login-titulo">Inicia sesión</h1>
                             </LoginRow>
-                        </div>
-                    </form>
+                        </LoginRow>
+                        <LoginRow flexDirection="col">
+                            <LoginTextField
+                                label={"Matrícula"}
+                                marginBot={"5vh"}
+                                value={user}
+                                onValueChange={setUser}
+                            />
+                            <LoginTextField
+                                label={"Contraseña"}
+                                isLogin={true}
+                                value={password}
+                                onValueChange={setPassword}
+                            />
+                        </LoginRow>
+                        <LoginRow margin="0 0 12vh 0">
+                            <LoginButton
+                                text="ACEPTAR"
+                                onClick={handleLogin}
+                                isLoading={isLoading}
+                            />
+                        </LoginRow>
+                    </div>
                 </GlassCard>
             </div>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
