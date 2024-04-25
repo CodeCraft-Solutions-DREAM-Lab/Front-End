@@ -10,11 +10,14 @@ import {
     saveToSessionStorage,
 } from "../../../../utils/Storage";
 
-import { post } from "../../../../utils/ApiRequests";
-import { height, minHeight } from "@mui/system";
-
 function FechaFormulario(props) {
-    const { update, setUpdate, fetchFreeHoursAgain } = props;
+    const {
+        update,
+        setUpdate,
+        setFetchFreeHoursAgain,
+        fetchFreeHoursAgain,
+        freeHours,
+    } = props;
 
     const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
     const [fecha, setFecha] = useState();
@@ -22,27 +25,15 @@ function FechaFormulario(props) {
         getFromSessionStorage("fechaIsoString") || ""
     );
     const [horaInicio, setHoraInicio] = useState(
-        getFromSessionStorage("horaInicio") || 0
+        parseInt(getFromSessionStorage("horaInicio")) || 0
     );
     const [horaInicioIsoString, setHoraInicioIsoString] = useState(
         getFromSessionStorage("horaInicioIsoString") || ""
     );
     const [duration, setDuration] = useState(
-        getFromSessionStorage("duration") || 0
+        parseInt(getFromSessionStorage("duration")) || 0
     );
-    const [freeHours, setFreeHours] = useState([]);
     const [isSelectHoursDisabled, setIsSelectHoursDisabled] = useState(true);
-
-    const fetchFreeHoursArray = () => {
-        const date = new Date(getFromSessionStorage("fecha"));
-        post("salas/horasLibres", {
-            idSala: getFromSessionStorage("idSala"),
-            fecha: date.toISOString(),
-            personas: getFromSessionStorage("personas"),
-        }).then((response) => {
-            setFreeHours(response);
-        });
-    };
 
     const horaFormatter = (hora) => {
         return hora < 12
@@ -54,6 +45,10 @@ function FechaFormulario(props) {
         if (existsInSessionStorage("fecha")) {
             setFecha(dayjs(getFromSessionStorage("fecha")));
         }
+
+        console.log("horaInicio", horaInicio);
+        console.log("horaInicioIsoString", horaInicioIsoString);
+        console.log("duration", duration);
     }, []);
 
     useEffect(() => {
@@ -62,28 +57,12 @@ function FechaFormulario(props) {
         }
 
         if (!!getFromSessionStorage("fecha")) {
-            fetchFreeHoursArray();
+            setFetchFreeHoursAgain(!fetchFreeHoursAgain);
             setIsSelectHoursDisabled(false);
         } else {
             setIsSelectHoursDisabled(true);
         }
     }, [fecha]);
-
-    useEffect(() => {
-        if (!!horaInicio && !freeHours.includes(horaInicio)) {
-            removeFromSessionStorage("horaInicio");
-            removeFromSessionStorage("horaInicioIsoString");
-            removeFromSessionStorage("duration");
-            setHoraInicio(0);
-            setHoraInicioIsoString("");
-            setDuration(0);
-            setUpdate(!update);
-        }
-    }, [freeHours]);
-
-    useEffect(() => {
-        fetchFreeHoursArray();
-    }, [fetchFreeHoursAgain]);
 
     useEffect(() => {
         if (!!fechaIsoString) {
