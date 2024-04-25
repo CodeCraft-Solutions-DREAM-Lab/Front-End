@@ -1,29 +1,29 @@
 .rc-container {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: row;
-    height: 80%;
     width: 90%;
+    height: 80%;
     background-color: #fff;
     border-radius: 2vh;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
 .rc-image-container {
-    margin-left: 0.5vw;
     display: flex;
-    width: 2.5vw;
     align-items: center;
+    width: 2.5vw;
+    margin-left: 0.5vw;
 }
 
 .rc-data-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 1vw;
+    overflow: hidden;
     width: 100%;
     height: 100%;
+    margin-left: 1vw;
     padding-right: 1.5vw;
-    overflow: hidden;
 }
 
 .rc-top-container {
@@ -45,9 +45,9 @@
 }
 
 span {
-    font-size: 3.2vh;
-    font-family: "Karla", sans-serif;
     overflow: hidden;
+    font-size: max(3vh, 0.8vw);
+    font-family: "Karla", sans-serif;
     text-overflow: ellipsis;
     white-space: nowrap;
 }

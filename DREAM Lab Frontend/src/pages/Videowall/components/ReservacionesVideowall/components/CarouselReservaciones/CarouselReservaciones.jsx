@@ -86,24 +86,6 @@ function CarouselReservaciones() {
                         />
                     </SwiperSlide>
                 ))}
-                {/* <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ReservationCard />
-                </SwiperSlide> */}
             </Swiper>
         </div>
     );
