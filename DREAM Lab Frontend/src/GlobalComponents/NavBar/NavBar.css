@@ -3,17 +3,29 @@
     justify-content: center;
     align-items: center;
     z-index: 9;
-    width: 95%;
-    height: 11%;
+    width: 98%;
+    height: 10%;
     margin: 0 auto;
-    padding: 1%;
+    padding: 1.25%;
     background: rgba(255, 255, 255, 0.06);
     font-family: "Karla", sans-serif;
 }
 
+@media only screen and (max-width: 480px) {
+    .navbar {
+        height: 10vh;
+    }
+}
+@media only screen and (max-width: 968px ) and (min-width: 481px) {
+    .navbar {
+        height: 10vh;
+    }
+}
+
 @media only screen and (min-height: 1025px) {
     .navbar {
-        height: 6vh;
+        height: 10vh;
+        
     }
 }
 
@@ -58,28 +70,43 @@
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 200px;
+    width: 100%;
 }
 
 .logo {
-    width: 28%;
-    margin-right: 4%;
-    padding-left: 10%;
+    width: 55px;
+    margin-right: 1.5%;
+    padding-left: 2%;
     cursor: pointer;
 }
 
 .dreamlab {
-    padding-top: 1%;
+    padding-top: 0.5%;
     font-size: 100%;
     font-weight: 800;
     color: white;
+    
+    
 }
 
 @media only screen and (max-width: 480px) {
     .logo {
-        width: 40%; /* Adjust the width for smaller screens */
-        padding-bottom: 1%; /* Adjust padding as needed */
-        padding-left: 10%; /* Adjust padding as needed */
+        width: 35px; /* Adjust the width for smaller screens */
+
+    /* Adjust padding as needed */
+        margin-left: 20px;
+    }
+    .dreamlab {
+        display: none; /* Hide the Dream Lab text on phone screens */
+    }
+}
+
+@media only screen and (max-width: 968px ) and (min-width: 481px) {
+    .logo {
+        width: 40px; /* Adjust the width for smaller screens */
+
+        margin-left: 10px;
+
     }
     .dreamlab {
         display: none; /* Hide the Dream Lab text on phone screens */

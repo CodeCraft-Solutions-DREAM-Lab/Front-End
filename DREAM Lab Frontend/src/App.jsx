@@ -28,7 +28,7 @@ import HomePage from "./pages/HomePage/HomePage.jsx";
 // Reservaciones
 import ConfirmacionReserva from "./pages/ConfirmacionReserva/ConfirmacionReserva.jsx";
 import ResumenReservacion from "./pages/ResumenReservacion/ResumenReservacion.jsx";
-import SelectorEquipo from "./pages/SelectorEquipo/SelectorEquipo.jsx";
+import SeleccionMaterial from "./pages/SeleccionMaterial/SeleccionMaterial";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
 import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
@@ -58,8 +58,8 @@ const router = createBrowserRouter(
             <Route path="home" element={secured(HomePage)()} />
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route
-                path="reservacion/equipo"
-                element={secured(SelectorEquipo)()}
+                path="reservacion/material"
+                element={<SeleccionMaterial />} // Agregar protected cuando se ocupe
             />
             <Route
                 path="reservacion/confirmacion"
