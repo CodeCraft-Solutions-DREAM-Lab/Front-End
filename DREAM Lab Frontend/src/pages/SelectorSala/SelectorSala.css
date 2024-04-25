@@ -83,14 +83,3 @@
         order: 3; /* Make form container appear last */
     }
 }
-
-.alerta {
-    margin-top: 8%;
-    margin-bottom: 8%;
-    padding: 3%;
-    padding-right: 4%;
-    padding-left: 4%;
-    background-color: white;
-    border-radius: 16px;
-    font-size: small;
-}

@@ -5,7 +5,7 @@
     -webkit-backdrop-filter: blur(17.5px);
     background: rgba(255, 231, 231, 0.06);
     border: 1.5px solid rgba(255, 255, 255, 0.1); /* Border color with transparency */
-    border-radius: 4vh;
+    border-radius: var(--border-radius, 4vh);
 }
 
 .glass-card::before {
@@ -31,5 +31,5 @@
         rgba(115, 129, 255, 0.45),
         rgba(0, 7, 73, 0.31)
     );
-    border-radius: 4vh;
+    border-radius: var(--border-radius, 4vh);
 }
