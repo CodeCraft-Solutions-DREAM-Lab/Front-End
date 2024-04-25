@@ -5,14 +5,14 @@ DIMENSIONES VIDEOWALL
 */
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";
-import ReservacionesVideowall from "./components/ReservacionesVideowall/ReservacionesVideowall";
+import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
 
 function Videowall() {
 
     return (
         <div className="container-videowall">
             <div className="container-reservaciones">
-                <ReservacionesVideowall />
+                <CarouselReservaciones />
             </div>
             <div className="container-anuncios">
                 <Anuncios />
