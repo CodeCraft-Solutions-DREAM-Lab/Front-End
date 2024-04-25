@@ -19,23 +19,23 @@
 .nombre-material {
 	display: flex;
 	justify-content: center;
-	font-weight: 600;
-	font-size: small;
 	padding: 5%;
 	padding-top: 7%;
+	font-size: small;
+	font-weight: 600;
 }
 
 .card .material-image {
-	width: 90%;
 	display: flex;
 	justify-content: center;
+	width: 90%;
 	margin: 0 auto;
 }
 
 .card .material-image img {
+	display: block;
 	width: 95px;
 	height: 95px;
-	display: block;
 	text-align: center;
 }
 
@@ -58,23 +58,19 @@
 }
 
 .card .icons img:active {
-	/* Style for active state (click) */
 	transform: scale(0.9); /* Scale down slightly on click */
 }
 
 .card .icons p {
-	/* Make all elements within .icons the same size */
-	margin: 0 7px; /* Add spacing between elements */
-	font-size: medium;
-	font-weight: 400;
-
-	/* Add circular background and centering */
-	background-color: white;
-	border-radius: 50%;
 	width: 25px;
 	height: 25px; /* Set height equal to width for a circle */
-	text-align: center;
+	margin: 0 7px; /* Add spacing between elements */
+	background-color: white;
+	border-radius: 50%;
+	font-size: medium;
+	font-weight: 400;
 	line-height: 25px; /* Match line-height with height for vertical centering */
+	text-align: center;
 }
 
 @media only screen and (max-width: 480px) {
@@ -85,18 +81,14 @@
 	.card .icons img {
 		width: 23px;
 		height: auto;
-
 	}
 
 	.card .icons p {
-		/* Make all elements within .icons the same size */
-
 		width: 23px;
 		height: 23px;
-
-		text-align: center;
-		line-height: 23px;
 		font-size: medium;
 		font-weight: 400;
+		line-height: 23px;
+		text-align: center;
 	}
 }
