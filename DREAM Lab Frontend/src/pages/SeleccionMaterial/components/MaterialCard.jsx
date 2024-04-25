@@ -1,31 +1,58 @@
 import "./MaterialCard.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-	updateMaterialQuantity,
-	removeMaterial,
-} from "../../../redux/Slices/selectedMaterialsSlice";
+import { useDispatch } from "react-redux"; // Remove unused import
+import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 function MaterialCard({ materialId, name, image, hideQuantity }) {
-	const [quantity, setQuantity] = useState(0);
-	const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(0);
 
-	const handlePlus = () => {
-		if (quantity >= 0) {
-			setQuantity(quantity + 1);
-			dispatch(updateMaterialQuantity(materialId, quantity + 1));
-		}
-	};
+  // Optimized storage key and retrieval logic
+  const storageKey = "selectedMaterials"; // Single key for all materials
 
-	const handleMinus = () => {
-		if (quantity > 0) {
-            setQuantity(quantity - 1);
-			dispatch(updateMaterialQuantity(materialId, quantity - 1));
-		} else {
-			dispatch(removeMaterial(materialId)); // Remove if quantity reaches 0
-		}
-	};
+  const materialsFromStorage = JSON.parse(getFromSessionStorage(storageKey)) || [];
+
+  // Find the material object based on ID in the array
+  const currentMaterial = materialsFromStorage.find((material) => material.id === materialId);
+
+  useEffect(() => {
+    if (currentMaterial) {
+      setQuantity(currentMaterial.quantity || 0);
+    } else {
+      // Material not found in storage, initialize with 0
+      setQuantity(0);
+    }
+  }, [materialId, materialsFromStorage, currentMaterial]);
+
+  const handlePlus = () => {
+    if (quantity >= 0) {
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+
+      const updatedMaterials = materialsFromStorage.map((material) => {
+        if (material.id === materialId) {
+          return { ...material, quantity: newQuantity }; // Update quantity for this material
+        }
+        return material; // Keep other materials unchanged
+      });
+
+      saveToSessionStorage(storageKey, updatedMaterials);
+    }
+  };
+
+  const handleMinus = () => {
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+
+      const updatedMaterials = materialsFromStorage.filter((material) => material.id !== materialId); // Remove material if quantity reaches 0
+      if (newQuantity === 0) {
+        updatedMaterials.splice(updatedMaterials.indexOf(currentMaterial), 1); // More efficient removal for specific object
+      }
+
+      saveToSessionStorage(storageKey, updatedMaterials);
+    }
+  };
 
 	return (
 		<>
