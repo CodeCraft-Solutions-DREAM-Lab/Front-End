@@ -1,0 +1,65 @@
+.rc-container {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 2vh;
+}
+
+.rc-image-container {
+    display: flex;
+    align-items: center;
+    width: 2.5vw;
+    margin-left: 0.5vw;
+}
+
+.rc-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin-left: 1vw;
+    padding-right: 1.5vw;
+}
+
+.rc-top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+    height: 50%;
+}
+
+.rc-bot-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    height: 50%;
+}
+
+span {
+    overflow: hidden;
+    font-size: max(3vh, 0.8vw);
+    font-family: "Karla", sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rc-nombre {
+    font-weight: 800;
+}
+
+.rc-horario {
+    font-weight: 500;
+}
+
+.rc-sala {
+    font-weight: 800;
+}
