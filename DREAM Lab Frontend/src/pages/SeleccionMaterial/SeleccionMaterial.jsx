@@ -5,6 +5,8 @@ import RoundedButton from "./components/Button";
 import MaterialCard from "./components/MaterialCard.jsx";
 import { Provider } from 'react-redux';
 import store from '../../redux/store'; 
+import { useNavigate } from "react-router-dom";
+
 
 const materials = [
 	{
@@ -55,7 +57,9 @@ const materials = [
 ];
 
 function SeleccionMaterial() {
+	let navigate = useNavigate();
 	const handleSubmit = async () => {
+		navigate("/reservacion/resumen");
 		console.log("click");
 	};
 	return (
