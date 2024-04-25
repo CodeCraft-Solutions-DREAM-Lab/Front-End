@@ -198,9 +198,7 @@ function HomePage() {
                                 type === "experiencia" ||
                                 type === "Experiencia"
                             ) {
-                                result = await fetch(
-                                    `${API_URL}experiencias/` + id
-                                );
+                                result = await fetch(`${API_URL}experiencias/` + id);
                             } else if (
                                 type === "salas" ||
                                 type === "Salas" ||
