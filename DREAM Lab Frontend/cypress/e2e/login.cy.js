@@ -1,6 +1,6 @@
 describe("Pruebas de login", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:5173/login");
+        cy.visit("/login");
     });
 
     it("Dejar todos los campos en blanco", () => {
