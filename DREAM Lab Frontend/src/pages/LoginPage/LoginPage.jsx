@@ -128,12 +128,14 @@ export default function LoginPage() {
                                     marginBot={"5vh"}
                                     value={user}
                                     onValueChange={setUser}
+                                    cypressSelector="login-user"
                                 />
                                 <LoginTextField
                                     label={"Contraseña"}
                                     isLogin={true}
                                     value={password}
                                     onValueChange={setPassword}
+                                    cypressSelector="login-password"
                                 />
                             </LoginRow>
                             <LoginRow margin="0 0 12vh 0">
@@ -142,6 +144,7 @@ export default function LoginPage() {
                                     onClick={handleLogin}
                                     isLoading={isLoading}
                                     type="submit"
+                                    cypressSelector="login-button"
                                 />
                             </LoginRow>
                         </div>
@@ -150,6 +153,7 @@ export default function LoginPage() {
             </div>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert
+                    data-cy="login-error"
                     onClose={handleClose}
                     severity="error"
                     variant="filled"

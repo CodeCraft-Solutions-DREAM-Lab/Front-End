@@ -15,6 +15,7 @@ function LoginTextField({
     isLogin = false,
     onValueChange,
     value,
+    cypressSelector,
 }) {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -25,6 +26,7 @@ function LoginTextField({
                 <label className="login-tf-label">{label}</label>
             </div>
             <Input
+                data-cy={cypressSelector}
                 labelPlacement="outside"
                 placeholder={placeholder}
                 value={value}
@@ -57,6 +59,7 @@ function LoginTextField({
                 <label className="login-tf-label">{label}</label>
             </div>
             <Input
+                data-cy={cypressSelector}
                 labelPlacement="outside"
                 placeholder={placeholder}
                 value={value}
