@@ -3,9 +3,10 @@ import propTypes from "prop-types";
 
 import "./LoginButton.css";
 
-function LoginButton({ text, onClick, isLoading, type }) {
+function LoginButton({ text, onClick, isLoading, type, cypressSelector }) {
     return (
         <Button
+            data-cy={cypressSelector}
             className="login-button"
             color="white"
             onClick={onClick}
@@ -23,6 +24,7 @@ LoginButton.propTypes = {
     onClick: propTypes.func,
     isLoading: propTypes.bool,
     type: propTypes.string,
+    cypressSelector: propTypes.string,
 };
 
 export default LoginButton;
