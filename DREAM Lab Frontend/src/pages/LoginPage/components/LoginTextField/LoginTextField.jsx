@@ -15,7 +15,8 @@ function LoginTextField({
     isLogin = false,
     onValueChange,
     value,
-    cypressSelector,
+    cypressSelectorInput,
+    cypressSelectorVisibility,
 }) {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -26,7 +27,7 @@ function LoginTextField({
                 <label className="login-tf-label">{label}</label>
             </div>
             <Input
-                data-cy={cypressSelector}
+                data-cy={cypressSelectorInput}
                 labelPlacement="outside"
                 placeholder={placeholder}
                 value={value}
@@ -38,6 +39,7 @@ function LoginTextField({
                         className="focus:outline-none"
                         type="button"
                         onClick={toggleVisibility}
+                        data-cy={cypressSelectorVisibility}
                     >
                         {isVisible ? (
                             <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
@@ -59,7 +61,7 @@ function LoginTextField({
                 <label className="login-tf-label">{label}</label>
             </div>
             <Input
-                data-cy={cypressSelector}
+                data-cy={cypressSelectorInput}
                 labelPlacement="outside"
                 placeholder={placeholder}
                 value={value}
@@ -85,6 +87,8 @@ LoginTextField.propTypes = {
     isLogin: propTypes.bool,
     onValueChange: propTypes.func,
     value: propTypes.string,
+    cypressSelectorInput: propTypes.string,
+    cypressSelectorVisibility: propTypes.string,
 };
 
 export default LoginTextField;

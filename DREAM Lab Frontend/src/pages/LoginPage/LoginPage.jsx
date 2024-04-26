@@ -128,14 +128,15 @@ export default function LoginPage() {
                                     marginBot={"5vh"}
                                     value={user}
                                     onValueChange={setUser}
-                                    cypressSelector="login-user"
+                                    cypressSelectorInput="login-user"
                                 />
                                 <LoginTextField
                                     label={"Contraseña"}
                                     isLogin={true}
                                     value={password}
                                     onValueChange={setPassword}
-                                    cypressSelector="login-password"
+                                    cypressSelectorInput="login-password"
+                                    cypressSelectorVisibility="login-password-visibility"
                                 />
                             </LoginRow>
                             <LoginRow margin="0 0 12vh 0">

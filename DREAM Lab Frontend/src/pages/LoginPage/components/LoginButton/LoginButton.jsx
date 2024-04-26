@@ -24,6 +24,7 @@ LoginButton.propTypes = {
     onClick: propTypes.func,
     isLoading: propTypes.bool,
     type: propTypes.string,
+    cypressSelector: propTypes.string,
 };
 
 export default LoginButton;
