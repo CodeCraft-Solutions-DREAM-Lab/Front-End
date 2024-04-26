@@ -3,12 +3,14 @@ import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar";
 import RoundedButton from "./components/Button";
 import MaterialCard from "./components/MaterialCard.jsx";
-import { Provider } from 'react-redux';
-import store from '../../redux/store'; 
-import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {
+	saveToSessionStorage,
+	getFromSessionStorage,
+	existsInSessionStorage,
+} from "../../utils/Storage";
 
 const materials = [
 	{
@@ -25,44 +27,91 @@ const materials = [
 		id: 3,
 		name: "Material C",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
-	} ,
+	},
 	{
-		id: 1,
+		id: 4,
 		name: "Material A",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
 	},
 	{
-		id: 2,
+		id: 5,
 		name: "Material B",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
 	},
 	{
-		id: 3,
+		id: 6,
 		name: "Material C",
 		image: "https://via.placeholder.com/90x90", // Placeholder image
 	},
 	{
-		id: 1,
+		id: 7,
 		name: "Material A",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
 	},
 	{
-		id: 2,
+		id: 8,
 		name: "Material B",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
 	},
 	{
-		id: 3,
+		id: 9,
 		name: "Material C",
 		image: "https://via.placeholder.com/100x100", // Placeholder image
-	}, 
+	},
 ];
 
 function SeleccionMaterial() {
-	let navigate = useNavigate();
-	saveToSessionStorage("material", [])
+	const navigate = useNavigate();
+	const [selectedMaterials, setSelectedMaterials] = useState(() => {
+		if (
+			existsInSessionStorage("materials") &&
+			getFromSessionStorage("materials")
+		) {
+			console.log(JSON.parse(getFromSessionStorage("materials")));
+			return JSON.parse(getFromSessionStorage("materials"));
+		} else {
+			return [];
+		}
+	});
+
+	useEffect(() => {
+		// Save selected materials to session storage whenever it changes
+		saveToSessionStorage("materials", JSON.stringify(selectedMaterials));
+	}, [selectedMaterials]);
+
+	const handleQuantityUpdate = (materialId, newQuantity) => {
+		// Retrieve the materials array from session storage
+		let materialsArray = JSON.parse(getFromSessionStorage("materials")) || [];
+
+		// Find the index of the material with the given materialId in the array
+		const materialIndex = materialsArray.findIndex(
+			(item) => item.materialId === materialId
+		);
+
+		// If the newQuantity is 0, remove the material from the array
+		if (newQuantity === 0) {
+			if (materialIndex !== -1) {
+				materialsArray.splice(materialIndex, 1);
+			}
+		} else {
+			// If the material exists in the array, update its quantity
+			if (materialIndex !== -1) {
+				materialsArray[materialIndex].quantity = newQuantity;
+			} else {
+				// If the material doesn't exist in the array, add it with the new quantity
+				materialsArray.push({ materialId, quantity: newQuantity });
+			}
+		}
+
+		// Save the updated materials array back to session storage
+		saveToSessionStorage("materials", JSON.stringify(materialsArray));
+		console.log(selectedMaterials);
+	};
+
 
 	const handleSubmit = async () => {
+		// Handle form submission logic (consider sending selected materials data)
+		//navigateButtonClicked.current = true;
 		navigate("/reservacion/resumen");
 	};
 	return (
@@ -81,20 +130,22 @@ function SeleccionMaterial() {
 					<div className="card-container-wrapper">
 						<div className="card-container-sm">
 							{materials.map((material) => (
-								<>
-								<Provider store={store}>
 								<MaterialCard
 									key={material.id}
 									materialId={material.id}
 									name={material.name}
 									image={material.image}
+									hideQuantity={false}
+									onQuantityUpdate={handleQuantityUpdate}
+									initialQuantity={
+										selectedMaterials.find((m) => m.materialId === material.id)
+											?.quantity || 0
+									}
 								/>
-								</Provider>
-								</>
 							))}
 						</div>
 					</div>
-					<div className="button-container">
+					<div className="button-container-sm">
 						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>
 				</div>

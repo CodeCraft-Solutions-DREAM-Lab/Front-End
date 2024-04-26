@@ -1,42 +1,16 @@
 import "./MaterialCard.css";
-import { useDispatch } from "react-redux"; // Remove unused import
-import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
-function MaterialCard({ materialId, name, image, hideQuantity }) {
-  const [quantity, setQuantity] = useState(0);
-
-  // Optimized storage key and retrieval logic
-  const storageKey = "selectedMaterials"; // Single key for all materials
-
-  const materialsFromStorage = JSON.parse(getFromSessionStorage(storageKey)) || [];
-
-  // Find the material object based on ID in the array
-  const currentMaterial = materialsFromStorage.find((material) => material.id === materialId);
-
-  useEffect(() => {
-    if (currentMaterial) {
-      setQuantity(currentMaterial.quantity || 0);
-    } else {
-      // Material not found in storage, initialize with 0
-      setQuantity(0);
-    }
-  }, [materialId, materialsFromStorage, currentMaterial]);
+function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate, initialQuantity }) {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
   const handlePlus = () => {
     if (quantity >= 0) {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
-
-      const updatedMaterials = materialsFromStorage.map((material) => {
-        if (material.id === materialId) {
-          return { ...material, quantity: newQuantity }; // Update quantity for this material
-        }
-        return material; // Keep other materials unchanged
-      });
-
-      saveToSessionStorage(storageKey, updatedMaterials);
+      // Call onQuantityUpdate prop to update in parent component
+      onQuantityUpdate(materialId, newQuantity);
     }
   };
 
@@ -44,13 +18,7 @@ function MaterialCard({ materialId, name, image, hideQuantity }) {
     if (quantity > 0) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-
-      const updatedMaterials = materialsFromStorage.filter((material) => material.id !== materialId); // Remove material if quantity reaches 0
-      if (newQuantity === 0) {
-        updatedMaterials.splice(updatedMaterials.indexOf(currentMaterial), 1); // More efficient removal for specific object
-      }
-
-      saveToSessionStorage(storageKey, updatedMaterials);
+      onQuantityUpdate(materialId, newQuantity);
     }
   };
 
@@ -93,7 +61,9 @@ MaterialCard.propTypes = {
 	materialId: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
-	hideQuantity: PropTypes.bool.isRequired,
+	hideQuantity: PropTypes.bool,
+	onQuantityUpdate: PropTypes.func.isRequired,
+	initialQuantity: PropTypes.number
 };
 
 export default MaterialCard;

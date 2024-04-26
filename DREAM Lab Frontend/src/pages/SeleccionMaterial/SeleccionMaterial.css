@@ -27,7 +27,6 @@
 	flex-direction: row !important;
 	flex-wrap: wrap; /* Cards will wrap to the next row */
 	justify-content: left !important; /* Align cards to the start of the container */
-	flex: 1 0 auto;
 	overflow-y: auto; /* Enable vertical scroll if needed */
 	min-width: 80vw;
 	height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
@@ -47,9 +46,10 @@
 	padding-right: 10%;
 }
 
-.button-container {
+.button-container-sm {
 	width: 100%;
 	padding: 3%;
+	text-align: center;
 }
 
 @media only screen and (max-width: 968px) and (min-width: 481px) {
@@ -62,13 +62,13 @@
 		padding-right: 0;
 	}
 
-	.button-container {
+	.button-container-sm {
 		margin-top: 3%;
 	}
 }
 
 @media only screen and (max-width: 480px) {
-	.button-container {
+	.button-container-sm {
 		margin-top: 6%;
 	}
 }
