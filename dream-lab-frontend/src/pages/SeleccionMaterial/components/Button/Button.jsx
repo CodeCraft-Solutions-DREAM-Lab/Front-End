@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react";
 import propTypes from "prop-types";
 
-import "../components/Button.css";
+import "./Button.css";
 
 function RoundedButton({ text, onClick }) {
     return (

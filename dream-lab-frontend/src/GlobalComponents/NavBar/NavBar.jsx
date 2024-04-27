@@ -8,6 +8,8 @@ import LoginButton from "./components/LoginButton/LoginButton";
 
 import "./NavBar.css";
 
+import logoDreamLab from "/src/assets/Logos/LogoDreamLab.png";
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -104,18 +106,20 @@ class Navbar extends React.Component {
             <div className={`navbar-positioning ${classHide}`}>
                 <div className="navbar glass-card" height="1rem">
                     <div className="flex items-center justify-between w-full">
-                        {!viewLandingPage && <div
-                            className="logo-container"
-                            onClick={handleDivClick}
-                            style={{ cursor: "pointer" }}
-                        >
-                            <img
-                                src="/Logos/LogoDreamLab.png"
-                                alt="Logo"
-                                className="logo"
-                            />
-                            <h1 className="dreamlab">DREAM LAB</h1>
-                        </div>}
+                        {!viewLandingPage && (
+                            <div
+                                className="logo-container"
+                                onClick={handleDivClick}
+                                style={{ cursor: "pointer" }}
+                            >
+                                <img
+                                    src={logoDreamLab}
+                                    alt="Logo"
+                                    className="logo"
+                                />
+                                <h1 className="dreamlab">DREAM LAB</h1>
+                            </div>
+                        )}
                         {searchBar}{" "}
                         {/* Se ve la searchBar dependiendo de la vista */}
                         <div

@@ -21,6 +21,11 @@ const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
     "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
+// Imagenes
+import blobLeft from "/src/assets/HomePage/blob-left.png";
+import smallBlob from "/src/assets/HomePage/small-blob.png";
+import blobRight from "/src/assets/HomePage/blob-right.png";
+
 const IMAGES = [
     {
         id: "1",
@@ -350,18 +355,18 @@ function HomePage() {
                 <div className="home-background-image-container">
                     <div className="left-blobs-container">
                         <img
-                            src="/HomePage/blob-left.png"
+                            src={blobLeft}
                             alt="Left Image"
                             className="left-image"
                         />
                         <img
-                            src="/HomePage/small-blob.png"
+                            src={smallBlob}
                             alt="Mini blob"
                             className="mini-blob"
                         />
                     </div>
                     <img
-                        src="/HomePage/blob-right.png"
+                        src={blobRight}
                         alt="Right Image"
                         className="right-image"
                     />

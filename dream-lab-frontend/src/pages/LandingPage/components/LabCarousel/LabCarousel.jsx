@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
+import cuartoLandingPage from "/src/assets/LandingPage/cuarto-landing-page.png";
+
 function LabCarousel() {
     const [index, setIndex] = useState(0);
 
@@ -11,10 +13,7 @@ function LabCarousel() {
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
             <Carousel.Item>
-                <img
-                    src="/LandingPage/cuarto-landing-page.png"
-                    text="First slide"
-                />
+                <img src={cuartoLandingPage} text="First slide" />
                 <Carousel.Caption>
                     <h3>First slide label</h3>
                     <p>
@@ -24,10 +23,7 @@ function LabCarousel() {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img
-                    src="/LandingPage/cuarto-landing-page.png"
-                    text="Second slide"
-                />
+                <img src={cuartoLandingPage} text="Second slide" />
                 <Carousel.Caption>
                     <h3>Second slide label</h3>
                     <p>
@@ -36,10 +32,7 @@ function LabCarousel() {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img
-                    src="/LandingPage/cuarto-landing-page.png"
-                    text="Third slide"
-                />
+                <img src={cuartoLandingPage} text="Third slide" />
                 <Carousel.Caption>
                     <h3>Third slide label</h3>
                     <p>

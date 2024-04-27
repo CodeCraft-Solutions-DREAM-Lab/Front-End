@@ -1,6 +1,6 @@
 import { Avatar } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import ProfileIcon from "/NavBar/profile.svg"; // Importing the SVG file
+import ProfileIcon from "src/assets/NavBar/profile.svg"; // Importing the SVG file
 
 function UserAvatar() {
     let navigate = useNavigate();
