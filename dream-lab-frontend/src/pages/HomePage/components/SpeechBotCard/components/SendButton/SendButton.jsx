@@ -66,16 +66,10 @@ function SendButton({
         >
             {processing ? (
                 // Render loading image when processing is ongoing
-                <img
-                    src="/src/pages/HomePage/components/SpeechBotCard/assets/images/loading.gif"
-                    alt="Processing..."
-                />
+                <img src="/SpeechBotCard/loading.gif" alt="Processing..." />
             ) : (
                 // Render send image when not processing
-                <img
-                    src="/src/pages/HomePage/components/SpeechBotCard/assets/images/simboloEnviar.png"
-                    alt="Enviar"
-                />
+                <img src="/SpeechBotCard/simboloEnviar.png" alt="Enviar" />
             )}
         </button>
     );

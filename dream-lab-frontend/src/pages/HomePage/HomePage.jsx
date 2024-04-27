@@ -24,17 +24,17 @@ const unsplash_suffix =
 const IMAGES = [
     {
         id: "1",
-        url: "/src/pages/HomePage/assets/images/ImagenSalaVR.png",
+        url: "/HomePage/ImagenSalaVR.png",
         title: "Sala VR",
     },
     {
         id: "2",
-        url: "/src/pages/HomePage/assets/images/ImagenUsoRouters.png",
+        url: "/HomePage/ImagenUsoRouters.png",
         title: "Deep Net",
     },
     {
         id: "3",
-        url: "/src/pages/HomePage/assets/images/ImagenExpGoogle.png",
+        url: "/HomePage/ImagenExpGoogle.png",
         title: "Testing Land",
     },
     {
@@ -59,22 +59,22 @@ const IMAGES = [
     },
     {
         id: "8",
-        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.png",
         title: "Curso de Swift",
     },
     {
         id: "9",
-        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.png",
         title: "Deep Net",
     },
     {
         id: "10",
-        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.png",
         title: "Curso de Swift",
     },
     {
         id: "11",
-        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.png",
         title: "Deep Net",
     },
 ];
@@ -200,7 +200,9 @@ function HomePage() {
                                 type === "experiencia" ||
                                 type === "Experiencia"
                             ) {
-                                result = await fetch(`${API_URL}experiencias/` + id);
+                                result = await fetch(
+                                    `${API_URL}experiencias/` + id
+                                );
                             } else if (
                                 type === "salas" ||
                                 type === "Salas" ||
@@ -348,18 +350,18 @@ function HomePage() {
                 <div className="home-background-image-container">
                     <div className="left-blobs-container">
                         <img
-                            src="/src/pages/HomePage/assets/images/blob-left.png"
+                            src="/HomePage/blob-left.png"
                             alt="Left Image"
                             className="left-image"
                         />
                         <img
-                            src="/src/pages/HomePage/assets/images/small-blob.png"
+                            src="/HomePage/small-blob.png"
                             alt="Mini blob"
                             className="mini-blob"
                         />
                     </div>
                     <img
-                        src="/src/pages/HomePage/assets/images/blob-right.png"
+                        src="/HomePage/blob-right.png"
                         alt="Right Image"
                         className="right-image"
                     />

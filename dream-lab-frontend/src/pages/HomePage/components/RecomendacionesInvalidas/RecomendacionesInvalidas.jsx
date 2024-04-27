@@ -5,7 +5,7 @@ function RecomendacionesInvalidas() {
         <div className="avisoRecomendacionesInvalidas">
             <div className="containerFondo">
                 <img
-                    src="/src/pages/Homepage/assets/images/nube_error.svg"
+                    src="/HomePage/nube_error.svg"
                     alt="Nube triste"
                     className="nubeError"
                 />
