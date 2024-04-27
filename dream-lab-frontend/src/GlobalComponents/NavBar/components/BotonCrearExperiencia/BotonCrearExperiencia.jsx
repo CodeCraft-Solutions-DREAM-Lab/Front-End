@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ExperienciaIcon from "../../assets/images/crearExperiencia.svg";
+import ExperienciaIcon from "/NavBar/crearExperiencia.svg";
 import "./BotonCrearExperiencia.css";
 
 function BotonCrearExperiencia() {

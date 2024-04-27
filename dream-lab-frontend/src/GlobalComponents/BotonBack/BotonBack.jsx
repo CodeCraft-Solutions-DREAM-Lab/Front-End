@@ -1,4 +1,4 @@
-import BackButton from "../assets/images/backButton.png";
+import BackButton from "/BotonBack/backButton.png";
 import { useNavigate } from "react-router-dom";
 
 import propTypes from "prop-types";

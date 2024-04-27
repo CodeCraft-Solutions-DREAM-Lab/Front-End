@@ -6,8 +6,6 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import BotonCrearExperiencia from "./components/BotonCrearExperiencia/BotonCrearExperiencia";
 import LoginButton from "./components/LoginButton/LoginButton";
 
-import { useState } from "react";
-
 import "./NavBar.css";
 
 class Navbar extends React.Component {

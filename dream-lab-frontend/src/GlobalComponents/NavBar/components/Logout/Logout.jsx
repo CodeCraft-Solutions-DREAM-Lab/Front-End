@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import LogoutIcon from "../../assets/images/logout.svg";
+import LogoutIcon from "/NavBar/logout.svg";
 import "./Logout.css";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "src/redux/Slices/userSlice";
