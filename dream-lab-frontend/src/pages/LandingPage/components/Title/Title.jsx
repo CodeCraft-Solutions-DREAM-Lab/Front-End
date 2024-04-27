@@ -8,7 +8,7 @@ function Title({ scroll }) {
             <h2 className="sub-heading">Construye tus sueños con nosotros.</h2>
             <div className="button-container">
                 <button className="button-more" onClick={scroll}>Conoce más</button>
-                <img src="src/pages/LandingPage/assets/images/Vector.png"/>
+                <img src="/LandingPage/Vector.png"/>
             </div>
         </div>
     )
