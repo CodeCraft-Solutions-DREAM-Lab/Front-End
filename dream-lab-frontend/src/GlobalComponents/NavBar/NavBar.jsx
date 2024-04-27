@@ -110,7 +110,7 @@ class Navbar extends React.Component {
                             style={{ cursor: "pointer" }}
                         >
                             <img
-                                src="/src/images/LogoDreamLab.png"
+                                src="/Logos/LogoDreamLab.png"
                                 alt="Logo"
                                 className="logo"
                             />
