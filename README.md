@@ -17,7 +17,7 @@ Este proyecto utiliza Vite para el desarrollo y el proceso de construcción.
     Usando la misma terminar con la que se clonó el repositorio, ejecuta el siguiente comando:
 
     ```
-     cd "dream-lab-frontend\Dream Lab Frontend"
+    cd "dream-lab-frontend\Dream Lab Frontend"
     ```
 
 3. Instala las dependencias del proyecto:
@@ -28,9 +28,9 @@ Este proyecto utiliza Vite para el desarrollo y el proceso de construcción.
 
 4. Agrega el archivo de variables de entorno:
     - Agregar en la carpeta "Dream Lab Frontend" un archivo llamada `.env`
-    - Agregar dentro del archivo la linea (aquí se coloca el url desde donde se sirve el API, en un entorno local, sería `localhost`, de lo contrario, incluir aquí el url a su API):
+    - Agregar dentro del archivo la linea (aquí se coloca el url desde donde se sirve el API, en un entorno local, sería `http://localhost:<PUERTO>/`, de lo contrario, incluir aquí el url a su API):
         ```
-        API_URL=http://localhost:3000/
+        VITE_API_URL=http://localhost:3000/
         ```
 
 ## Desarrollo
