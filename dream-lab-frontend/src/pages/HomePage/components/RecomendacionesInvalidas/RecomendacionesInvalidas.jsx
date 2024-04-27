@@ -1,6 +1,6 @@
 import "./RecomendacionesInvalidas.css";
 
-import nubeError from "/src/assets/HomePage/nube_error.svg";
+import nubeError from "src/assets/HomePage/nube_error.svg";
 
 function RecomendacionesInvalidas() {
     return (

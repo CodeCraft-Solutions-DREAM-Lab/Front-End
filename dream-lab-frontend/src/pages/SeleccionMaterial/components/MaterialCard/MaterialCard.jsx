@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // Imagenes
-import minusIcon from "/src/assets/SeleccionMaterial/minus-icon.svg";
-import plusIcon from "/src/assets/SeleccionMaterial/plus-icon.svg";
+import minusIcon from "src/assets/SeleccionMaterial/minus-icon.svg";
+import plusIcon from "src/assets/SeleccionMaterial/plus-icon.svg";
 
 function MaterialCard({ materialId, name, image, hideQuantity }) {
     const [quantity, setQuantity] = useState(0);

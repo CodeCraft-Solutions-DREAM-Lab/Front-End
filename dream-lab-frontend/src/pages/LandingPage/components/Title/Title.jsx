@@ -1,7 +1,7 @@
 import "./Title.css";
 
-import logoDreamLab from "/src/assets/Logos/LogoDreamLab.png";
-import arrowDown from "/src/assets/LandingPage/Vector.png";
+import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
+import arrowDown from "src/assets/LandingPage/Vector.png";
 
 function Title({ scroll }) {
     return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-import cuartoLandingPage from "/src/assets/LandingPage/cuarto-landing-page.png";
+import cuartoLandingPage from "src/assets/LandingPage/cuarto-landing-page.png";
 
 function LabCarousel() {
     const [index, setIndex] = useState(0);

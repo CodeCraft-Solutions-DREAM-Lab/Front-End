@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./SelectorSala.css";
 import NavBar from "src/GlobalComponents/NavBar/NavBar";
 import Slider from "./components/Slider/Slider";
-import imagePlaceholder from "./assets/images/3D-model-placeholder.png";
+import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.png";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
 import { get, post } from "src/utils/ApiRequests.js";
@@ -54,15 +54,15 @@ function SelectorSala(props) {
                 personas: getFromSessionStorage("personas"),
             }).then((response) => {
                 setFreeHours(response.map((hora) => hora.hora));
-    
+
                 const newCuposArray = new Array(25).fill(0);
                 const newCompetidoresArray = new Array(25).fill(0);
-    
+
                 response.forEach((hora) => {
                     newCuposArray[hora.hora] = hora.cupos;
                     newCompetidoresArray[hora.hora] = hora.competidores;
                 });
-    
+
                 setCuposArray(newCuposArray);
                 setCompetidoresArray(newCompetidoresArray);
             });
@@ -163,7 +163,7 @@ function SelectorSala(props) {
                                 disabled={isNextButtonDisabled}
                             />
                         </div>
-                        <InfoReservCard 
+                        <InfoReservCard
                             cuposArray={cuposArray}
                             competidoresArray={competidoresArray}
                             update={update}

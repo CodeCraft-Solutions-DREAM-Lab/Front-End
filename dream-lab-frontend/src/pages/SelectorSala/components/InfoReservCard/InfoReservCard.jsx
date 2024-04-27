@@ -1,10 +1,9 @@
-import { getFromSessionStorage } from "../../../../utils/Storage";
+import { getFromSessionStorage } from "src/utils/Storage";
 import "./InfoReservCard.css";
 import { useState, useEffect } from "react";
 
 export const InfoReservCard = (props) => {
-
-    const {cuposArray, competidoresArray, update} = props;
+    const { cuposArray, competidoresArray, update } = props;
     const [horaInicio, setHoraInicio] = useState(
         parseInt(getFromSessionStorage("horaInicio")) || 0
     );
@@ -26,12 +25,12 @@ export const InfoReservCard = (props) => {
 
     useEffect(() => {
         setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
-    }, [update])
+    }, [update]);
 
     useEffect(() => {
         setCupos(cuposArray[horaInicio]);
         setCompetidores(competidoresArray[horaInicio]);
-    })
+    });
 
     const getHoraDeCorte = () => {
         const horaActual = today.getHours();
@@ -50,20 +49,15 @@ export const InfoReservCard = (props) => {
                     La asignación del lugar se hará hoy a las{" "}
                     <span className="font-bold">
                         {horaFormatter(horaDeCorte)}
-                    </span >
+                    </span>
                     .{" "}
                 </p>
                 {cupos > 0 ? (
                     <>
-                    Compiten{" "}
-                    <span className="font-bold">
-                        {competidores}
-                    </span> 
-                    {" "}reservaciones por{" "}
-                    <span className="font-bold">
-                        {cupos}
-                    </span> 
-                    {" "}cupos.
+                        Compiten{" "}
+                        <span className="font-bold">{competidores}</span>{" "}
+                        reservaciones por{" "}
+                        <span className="font-bold">{cupos}</span> cupos.
                     </>
                 ) : (
                     <></>

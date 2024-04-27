@@ -8,15 +8,15 @@ import Footer from "./components/Footer/Footer";
 import { useRef } from "react";
 
 // Imagenes
-import pcbLandingPage from "/src/assets/LandingPage/pcb-landing-page.png";
-import blobLandingPage from "/src/assets/LandingPage/blob-landing-page.png";
-import vrLandingPage from "/src/assets/LandingPage/vr-landing-page.png";
-import moonLandingPage from "/src/assets/LandingPage/moon-landing-page.png";
-import astronautLandingPage from "/src/assets/LandingPage/astronauta-landing-page.png";
-import nubeLandingPage from "/src/assets/LandingPage/nube-landing-page.png";
-import vrBlancosLandingPage from "/src/assets/LandingPage/vr-blancos-landing-page.png";
-import circuitoLandingPage from "/src/assets/LandingPage/circuito-landing-page.png";
-import cuartoLandingPage from "/src/assets/LandingPage/cuarto-landing-page.png";
+import pcbLandingPage from "src/assets/LandingPage/pcb-landing-page.png";
+import blobLandingPage from "src/assets/LandingPage/blob-landing-page.png";
+import vrLandingPage from "src/assets/LandingPage/vr-landing-page.png";
+import moonLandingPage from "src/assets/LandingPage/moon-landing-page.png";
+import astronautLandingPage from "src/assets/LandingPage/astronauta-landing-page.png";
+import nubeLandingPage from "src/assets/LandingPage/nube-landing-page.png";
+import vrBlancosLandingPage from "src/assets/LandingPage/vr-blancos-landing-page.png";
+import circuitoLandingPage from "src/assets/LandingPage/circuito-landing-page.png";
+import cuartoLandingPage from "src/assets/LandingPage/cuarto-landing-page.png";
 
 function LandingPageDev() {
     const learnMoreRef = useRef(null);

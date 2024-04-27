@@ -8,7 +8,7 @@ import LoginButton from "./components/LoginButton/LoginButton";
 
 import "./NavBar.css";
 
-import logoDreamLab from "/src/assets/Logos/LogoDreamLab.png";
+import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
 
 class Navbar extends React.Component {
     constructor(props) {

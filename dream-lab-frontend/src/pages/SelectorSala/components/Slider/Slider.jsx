@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Slider.css";
-import unaPersona from "../../assets/images/onePerson.png";
-import grupoPersonas from "../../assets/images/group.png";
+import unaPersona from "src/assets/SelectorSala/onePerson.png";
+import grupoPersonas from "src/assets/SelectorSala/group.png";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 
 function Slider({
@@ -15,7 +15,7 @@ function Slider({
     );
 
     // useEffect(() => {
-        
+
     // }, [value]);
 
     const handleChange = (event) => {

@@ -1,6 +1,6 @@
 import "./Footer.css";
 
-import tecLogo from "/src/assets/LandingPage/tecnologico-de-monterrey-white.png";
+import tecLogo from "src/assets/LandingPage/tecnologico-de-monterrey-white.png";
 
 function Footer() {
     return (

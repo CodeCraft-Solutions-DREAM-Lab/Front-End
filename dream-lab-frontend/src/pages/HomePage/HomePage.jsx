@@ -22,9 +22,9 @@ const unsplash_suffix =
     "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
 // Imagenes
-import blobLeft from "/src/assets/HomePage/blob-left.png";
-import smallBlob from "/src/assets/HomePage/small-blob.png";
-import blobRight from "/src/assets/HomePage/blob-right.png";
+import blobLeft from "src/assets/HomePage/blob-left.png";
+import smallBlob from "src/assets/HomePage/small-blob.png";
+import blobRight from "src/assets/HomePage/blob-right.png";
 
 const IMAGES = [
     {
