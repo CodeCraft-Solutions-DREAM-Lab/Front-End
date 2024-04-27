@@ -6,7 +6,7 @@
     height: 2.3rem; /* Adjusted height */
     padding: 0 20px 0 40px; /* Adjust for icon width and padding */
     background-color: transparent;
-    background-image: url("../../assets/images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+    background-image: url("src/assets/NavBar/magnifyingGlassIcon.svg"); /* Path to your magnifying glass icon */
     background-repeat: no-repeat;
     background-position: 10% center; /* Adjust position as needed */
     background-size: 20px; /* Adjust size as needed */
@@ -42,13 +42,12 @@
         width: 100%; /* Set full width on phone screens */
         margin: 0 auto; /* Center the search bar on phone screens */
         display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Align items to the right */
-    align-items: center; /* Align items vertically */
-        
+        justify-content: center; /* Align items to the right */
+        align-items: center; /* Align items vertically */
     }
 }
 
-@media only screen and (max-width: 968px ) and (min-width: 481px) {
+@media only screen and (max-width: 968px) and (min-width: 481px) {
     .searchContainer {
         width: 60%; /* Adjust width for phone screens */
         padding-right: 2rem;
@@ -57,9 +56,7 @@
         width: 100%; /* Set full width on phone screens */
         margin: 0 auto; /* Center the search bar on phone screens */
         display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Align items to the right */
-    align-items: center; /* Align items vertically */
-        
+        justify-content: center; /* Align items to the right */
+        align-items: center; /* Align items vertically */
     }
 }
-

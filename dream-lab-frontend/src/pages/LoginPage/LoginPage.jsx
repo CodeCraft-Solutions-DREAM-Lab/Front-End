@@ -25,6 +25,10 @@ import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import { useDispatch } from "react-redux";
 import { setAuth } from "src/redux/Slices/userSlice";
 
+import topBlob from "src/assets/Login/top-blob.png";
+import bottomBlob from "src/assets/Login/bottom-blob.png";
+import dreamLabLogo from "src/assets/Logos/LogoDreamLab.png";
+
 export default function LoginPage() {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
@@ -91,12 +95,12 @@ export default function LoginPage() {
         <div className="login-container">
             <div className="blobs-container">
                 <img
-                    src="/src/pages/LoginPage/assets/images/top-blob.png"
+                    src={topBlob}
                     alt="Top Blob"
                     className="blob-image top-left-image"
                 />
                 <img
-                    src="/src/pages/LoginPage/assets/images/bottom-blob.png"
+                    src={bottomBlob}
                     alt="Bottom Blob"
                     className="blob-image bottom-right-image"
                 />
@@ -108,7 +112,7 @@ export default function LoginPage() {
                             <LoginRow flexDirection="col" justify="between">
                                 <LoginRow margin="12vh 0 0 0">
                                     <img
-                                        src="/src/images/LogoDreamLab.png"
+                                        src={dreamLabLogo}
                                         alt="Logo"
                                         className="login-logo"
                                     />

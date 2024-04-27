@@ -1,4 +1,5 @@
 import "./SearchBar.css";
+
 import magnifyingGlass from "src/assets/NavBar/magnifyingGlassIcon.svg";
 import { Input } from "@nextui-org/react";
 

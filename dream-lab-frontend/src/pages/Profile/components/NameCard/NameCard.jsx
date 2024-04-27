@@ -1,5 +1,5 @@
 import "./NameCard.css";
-import LogoRobot from "../../assets/images/robot-icon.png";
+import LogoRobot from "src/assets/Profile/robot-icon.png";
 
 function NameCard(props) {
     return (

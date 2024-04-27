@@ -1,11 +1,13 @@
-import "./Footer.css"
+import "./Footer.css";
+
+import tecLogo from "src/assets/LandingPage/tecnologico-de-monterrey-white.png";
 
 function Footer() {
     return (
         <div className="footer-container">
-            <img className="tec-logo" src="src/pages/LandingPage/assets/images/tecnologico-de-monterrey-white.png"/>
+            <img className="tec-logo" src={tecLogo} />
         </div>
-    )
+    );
 }
 
 export default Footer;

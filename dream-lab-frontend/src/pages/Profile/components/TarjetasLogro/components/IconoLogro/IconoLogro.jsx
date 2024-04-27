@@ -1,6 +1,6 @@
 import "./IconoLogro.css";
-import LogoBigDreamer from "../../../../assets/images/bigDreamer.png";
-import LogoRobot from "../../../../assets/images/robot-icon.png";
+import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
+import LogoRobot from "src/assets/Profile/robot-icon.png";
 
 function IconoLogro(props) {
     return (

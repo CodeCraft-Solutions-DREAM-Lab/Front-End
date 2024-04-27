@@ -21,20 +21,25 @@ const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
     "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
+// Imagenes
+import blobLeft from "src/assets/HomePage/blob-left.png";
+import smallBlob from "src/assets/HomePage/small-blob.png";
+import blobRight from "src/assets/HomePage/blob-right.png";
+
 const IMAGES = [
     {
         id: "1",
-        url: "/src/pages/HomePage/assets/images/ImagenSalaVR.png",
+        url: "/HomePage/ImagenSalaVR.png",
         title: "Sala VR",
     },
     {
         id: "2",
-        url: "/src/pages/HomePage/assets/images/ImagenUsoRouters.png",
+        url: "/HomePage/ImagenUsoRouters.png",
         title: "Deep Net",
     },
     {
         id: "3",
-        url: "/src/pages/HomePage/assets/images/ImagenExpGoogle.png",
+        url: "/HomePage/ImagenExpGoogle.png",
         title: "Testing Land",
     },
     {
@@ -59,22 +64,22 @@ const IMAGES = [
     },
     {
         id: "8",
-        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.png",
         title: "Curso de Swift",
     },
     {
         id: "9",
-        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.png",
         title: "Deep Net",
     },
     {
         id: "10",
-        url: "/src/pages/HomePage/assets/images/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.png",
         title: "Curso de Swift",
     },
     {
         id: "11",
-        url: "/src/pages/HomePage/assets/images/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.png",
         title: "Deep Net",
     },
 ];
@@ -200,7 +205,9 @@ function HomePage() {
                                 type === "experiencia" ||
                                 type === "Experiencia"
                             ) {
-                                result = await fetch(`${API_URL}experiencias/` + id);
+                                result = await fetch(
+                                    `${API_URL}experiencias/` + id
+                                );
                             } else if (
                                 type === "salas" ||
                                 type === "Salas" ||
@@ -348,18 +355,18 @@ function HomePage() {
                 <div className="home-background-image-container">
                     <div className="left-blobs-container">
                         <img
-                            src="/src/pages/HomePage/assets/images/blob-left.png"
+                            src={blobLeft}
                             alt="Left Image"
                             className="left-image"
                         />
                         <img
-                            src="/src/pages/HomePage/assets/images/small-blob.png"
+                            src={smallBlob}
                             alt="Mini blob"
                             className="mini-blob"
                         />
                     </div>
                     <img
-                        src="/src/pages/HomePage/assets/images/blob-right.png"
+                        src={blobRight}
                         alt="Right Image"
                         className="right-image"
                     />

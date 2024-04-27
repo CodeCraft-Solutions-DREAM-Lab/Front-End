@@ -4,6 +4,10 @@ import { API_URL } from "src/utils/ApiRequests.js";
 
 import "./SendButton.css";
 
+// Imagenes
+import loadingIcon from "src/assets/SpeechBotCard/loading.gif";
+import sendIcon from "src/assets/SpeechBotCard/simboloEnviar.png";
+
 function SendButton({
     transcript,
     onProcessedText,
@@ -66,16 +70,10 @@ function SendButton({
         >
             {processing ? (
                 // Render loading image when processing is ongoing
-                <img
-                    src="/src/pages/HomePage/components/SpeechBotCard/assets/images/loading.gif"
-                    alt="Processing..."
-                />
+                <img src={loadingIcon} alt="Processing..." />
             ) : (
                 // Render send image when not processing
-                <img
-                    src="/src/pages/HomePage/components/SpeechBotCard/assets/images/simboloEnviar.png"
-                    alt="Enviar"
-                />
+                <img src={sendIcon} alt="Enviar" />
             )}
         </button>
     );
