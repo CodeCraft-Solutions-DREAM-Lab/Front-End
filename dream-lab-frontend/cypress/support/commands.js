@@ -39,6 +39,11 @@ Cypress.Commands.add("typeDataCy", (name, text) => {
     return cy.getDataCy(name).type(text);
 });
 
+// Checa si un elemento con el atributo data-cy contiene un texto específico
+Cypress.Commands.add("containsDataCy", (name, text) => {
+    return cy.getDataCy(name).contains(text);
+});
+
 // Verifica si un elemento tiene un atributo con un valor específico
 Cypress.Commands.add(
     "hasAttribute",

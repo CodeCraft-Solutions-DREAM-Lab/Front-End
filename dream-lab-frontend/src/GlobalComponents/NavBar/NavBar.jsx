@@ -87,6 +87,7 @@ class Navbar extends React.Component {
             case "landingPage":
                 viewLandingPage = true;
                 userAction = <LoginButton />; // Redireccionar al login
+                break;
             default:
                 searchBar = null;
                 userAction = null; // Para vistas desconocidas
@@ -104,7 +105,11 @@ class Navbar extends React.Component {
 
         return (
             <div className={`navbar-positioning ${classHide}`}>
-                <div className="navbar glass-card" height="1rem">
+                <div
+                    data-cy="navbar"
+                    className="navbar glass-card"
+                    height="1rem"
+                >
                     <div className="flex items-center justify-between w-full">
                         {!viewLandingPage && (
                             <div
