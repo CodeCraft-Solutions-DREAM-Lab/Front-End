@@ -91,12 +91,12 @@ export default function LoginPage() {
         <div className="login-container">
             <div className="blobs-container">
                 <img
-                    src="/src/pages/LoginPage/assets/images/top-blob.png"
+                    src="/Login/top-blob.png"
                     alt="Top Blob"
                     className="blob-image top-left-image"
                 />
                 <img
-                    src="/src/pages/LoginPage/assets/images/bottom-blob.png"
+                    src="/Login/bottom-blob.png"
                     alt="Bottom Blob"
                     className="blob-image bottom-right-image"
                 />
