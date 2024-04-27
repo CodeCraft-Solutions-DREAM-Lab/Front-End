@@ -24,6 +24,26 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+// Obtiene un elemento por el atributo data-cy
 Cypress.Commands.add("getDataCy", (name) => {
-    return cy.get(`[data-cy=login-password]`)
+    return cy.get(`[data-cy=${name}]`);
 });
+
+// Hace click en un elemento por el atributo data-cy
+Cypress.Commands.add("clickDataCy", (name) => {
+    return cy.getDataCy(name).click();
+});
+
+// Escribe en un elemento por el atributo data-cy
+Cypress.Commands.add("typeDataCy", (name, text) => {
+    return cy.getDataCy(name).type(text);
+});
+
+// Verifica si un elemento tiene un atributo con un valor específico
+Cypress.Commands.add(
+    "hasAttribute",
+    { prevSubject: "element" },
+    (subject, attr, value) => {
+        return cy.wrap(subject).should("have.attr", attr, value);
+    }
+);
