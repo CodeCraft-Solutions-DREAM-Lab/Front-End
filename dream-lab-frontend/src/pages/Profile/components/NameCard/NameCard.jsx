@@ -1,20 +1,29 @@
+// Estilos
 import "./NameCard.css";
-import LogoRobot from "src/assets/Profile/robot-icon.png";
 
-function NameCard(props) {
+// Tipos de datos de props
+import propTypes from "prop-types";
+
+// Components
+import IconoLogroPerfil from "./components/IconoLogroPerfil/IconoLogroPerfil";
+
+function NameCard({ nombre, apodo }) {
     return (
         <div className="div-exterior">
-            <div className="logo-div">
-                <img src={LogoRobot} alt="logotipo-usuario" />
-            </div>
+            <IconoLogroPerfil />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">
-                    {props.nombre}Efraín Martínez Garza
+                    {nombre}Efraín Martínez Garza
                 </h1>
-                <h2 className="apodo">{props.apodo}Robot Expert</h2>
+                <h2 className="apodo">{apodo}Robot Expert</h2>
             </div>
         </div>
     );
 }
+
+NameCard.propTypes = {
+    nombre: propTypes.string,
+    apodo: propTypes.string,
+};
 
 export default NameCard;
