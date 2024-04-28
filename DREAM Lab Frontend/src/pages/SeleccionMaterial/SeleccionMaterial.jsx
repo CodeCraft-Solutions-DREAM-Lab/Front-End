@@ -5,12 +5,14 @@ import RoundedButton from "./components/Button";
 import MaterialCard from "./components/MaterialCard.jsx";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+//import CircularProgress from "@mui/material/CircularProgress";
 
 import {
 	saveToSessionStorage,
 	getFromSessionStorage,
 	existsInSessionStorage,
 } from "../../utils/Storage";
+import { post, get } from "../../utils/ApiRequests";
 
 const materials = [
 	{
@@ -73,6 +75,31 @@ function SeleccionMaterial() {
 			return [];
 		}
 	});
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const date = new Date(getFromSessionStorage("fecha"));
+
+		// Parametros Stored Procedure
+		const params = {
+			idSala: getFromSessionStorage("idSala"), 
+			fecha: date.toISOString(), 
+			horaInicio: getFromSessionStorage("horaInicioIsoString"), 
+			duracion: parseInt(getFromSessionStorage("duration")), 
+		};
+
+		post("materiales", params)
+			.then((result) => {
+				setData(result);
+				setIsLoading(false);
+				console.log(data);
+			})
+			.catch((error) => {
+				console.error("An error occurred:", error);
+				setIsLoading(false);
+			});
+	}, []);
 
 	useEffect(() => {
 		// Save selected materials to session storage whenever it changes
@@ -105,13 +132,10 @@ function SeleccionMaterial() {
 
 		// Save the updated materials array back to session storage
 		saveToSessionStorage("materials", JSON.stringify(materialsArray));
-		console.log(selectedMaterials);
+		//console.log(selectedMaterials);
 	};
 
-
 	const handleSubmit = async () => {
-		// Handle form submission logic (consider sending selected materials data)
-		//navigateButtonClicked.current = true;
 		navigate("/reservacion/resumen");
 	};
 	return (
@@ -129,7 +153,7 @@ function SeleccionMaterial() {
 					{/* Aquí van las tarjetas con los materiales */}
 					<div className="card-container-wrapper">
 						<div className="card-container-sm">
-							{materials.map((material) => (
+							{data.map((material) => (
 								<MaterialCard
 									key={material.id}
 									materialId={material.id}
@@ -141,6 +165,7 @@ function SeleccionMaterial() {
 										selectedMaterials.find((m) => m.materialId === material.id)
 											?.quantity || 0
 									}
+									maxQuantity={material.cantidadDisponible}
 								/>
 							))}
 						</div>

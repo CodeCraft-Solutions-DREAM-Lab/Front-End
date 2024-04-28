@@ -63,13 +63,16 @@
 	}
 
 	.button-container-sm {
-		margin-top: 3%;
+		margin-top: 1%;
 	}
 }
 
 @media only screen and (max-width: 480px) {
 	.button-container-sm {
 		margin-top: 6%;
+	}
+	.search-bar-container {
+		margin-bottom: 4%;
 	}
 }
 

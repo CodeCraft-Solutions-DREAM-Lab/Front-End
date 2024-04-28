@@ -281,33 +281,9 @@ function HomePage() {
             "idExperiencia",
             "idSala",
             "reservType",
+            "materials"
         ]);
 
-        // setIsLoadingSalas(true);
-        // setErrorSalas(null);
-
-        // setIsLoadingExperiences(true);
-        // setErrorExperiences(null);
-
-        // setIsLoadingUfs(true);
-        // setErrorUfs(null);
-
-        // const userID = getFromLocalStorage("user");
-
-        // get("salas")
-        //     .then(handleResponse(setSalas))
-        //     .catch(handleError(setErrorSalas))
-        //     .finally(() => setIsLoadingSalas(false));
-
-        // get("experiencias/autodirigidas")
-        //     .then(handleResponse(setExperiences))
-        //     .catch(handleError(setErrorExperiences))
-        //     .finally(() => setIsLoadingExperiences(false));
-
-        // post("experiencias/UFs", { user: userID })
-        //     .then(handleResponse(setUfs))
-        //     .catch(handleError(setErrorUfs))
-        //     .finally(() => setIsLoadingUfs(false));
     }, []);
 
     useEffect(() => {

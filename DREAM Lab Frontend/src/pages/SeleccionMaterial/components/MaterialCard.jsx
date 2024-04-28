@@ -2,11 +2,11 @@ import "./MaterialCard.css";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate, initialQuantity }) {
+function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate, initialQuantity, maxQuantity }) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
   const handlePlus = () => {
-    if (quantity >= 0) {
+    if (quantity >= 0 && quantity < maxQuantity) {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
       // Call onQuantityUpdate prop to update in parent component
@@ -63,7 +63,8 @@ MaterialCard.propTypes = {
 	image: PropTypes.string.isRequired,
 	hideQuantity: PropTypes.bool,
 	onQuantityUpdate: PropTypes.func.isRequired,
-	initialQuantity: PropTypes.number
+	initialQuantity: PropTypes.number,
+	maxQuantity: PropTypes.number.isRequired
 };
 
 export default MaterialCard;
