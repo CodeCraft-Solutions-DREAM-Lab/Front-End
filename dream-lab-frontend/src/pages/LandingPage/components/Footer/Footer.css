@@ -1,0 +1,11 @@
+.footer-container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2E3972;
+}
+
+.tec-logo {
+    width: 8rem;
+}
