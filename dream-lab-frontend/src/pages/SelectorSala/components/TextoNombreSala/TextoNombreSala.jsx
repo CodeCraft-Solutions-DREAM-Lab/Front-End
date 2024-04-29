@@ -44,23 +44,23 @@ const TextoNombreSala = () => {
                     console.error("An error occurred:", error);
                 });
         }
-    }, []);
+    });
 
     return (
         <>
             {type === "sala" ? (
                 <>
-                    <div className={bigTextFormat}>
+                    <div data-cy="nombre-sala" className={bigTextFormat}>
                         <h1>{nombreSala}</h1>
                     </div>
                 </>
             ) : (
                 <>
-                    <div className={bigTextFormat}>
+                    <div data-cy="nombre-experiencia" className={bigTextFormat}>
                         <h1>{nombreExperiencia}</h1>
                     </div>
 
-                    <div className={smallTextFormat}>
+                    <div data-cy="nombre-sala" className={smallTextFormat}>
                         <h1>{nombreSala}</h1>
                     </div>
                 </>
