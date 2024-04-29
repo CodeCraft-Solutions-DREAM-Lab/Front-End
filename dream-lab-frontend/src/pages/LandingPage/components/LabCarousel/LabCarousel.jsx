@@ -1,3 +1,4 @@
+// Swiper
 import {
   Navigation,
   Pagination,
@@ -12,6 +13,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "./LabCarousel.css";
+
+// Imagenes
+import Logo from "src/assets/Logos/LogoDreamLab.png";
+import SocialNetworking from "src/assets/LandingPage/social-networking.jpg";
+import LegoRoom from "src/assets/LandingPage/lego-room.jpg";
+import ElectricGarage from "src/assets/LandingPage/electric-garage.jpg";
+import DimensionForge from "src/assets/LandingPage/dimension-forge.jpg";
+import NewHorizons from "src/assets/LandingPage/new-horizons.jpg";
+import DeepNet from "src/assets/LandingPage/deep-net.jpg";
+import Graveyard from "src/assets/LandingPage/graveyard.jpg";
 
 function LabSwiper() {
   // const swiper = useSwiper();
@@ -47,12 +58,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Social Networking Room</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/social-networking.jpg"
+                src={SocialNetworking}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Espacio abierto</li>
@@ -67,12 +78,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Lego Room</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/lego-room.jpg"
+                src={LegoRoom}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Experimentación</li>
@@ -87,12 +98,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Electric Garage</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/electric-garage.jpg"
+                src={ElectricGarage}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Electrónicos</li>
@@ -107,12 +118,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Dimension Forge</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/dimension-forge.jpg"
+                src={DimensionForge}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Tecnología para 3D</li>
@@ -127,12 +138,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">New Horizons</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/new-horizons.jpg"
+                src={NewHorizons}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Realidad virtual</li>
@@ -147,12 +158,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Deep Net</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/deep-net.jpg"
+                src={DeepNet}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Redes</li>
@@ -167,12 +178,12 @@ function LabSwiper() {
             <div className="landing-carousel-card">
               <img
                 className="landing-carousel-logo"
-                src="src/images/LogoDreamLab.png"
+                src={Logo}
               />
               <h3 className="landing-carousel-title">Graveyard</h3>
               <img
                 className="landing-carousel-img"
-                src="src/assets/LandingPage/graveyard.jpg"
+                src={Graveyard}
               />
               <ul className="landing-carousel-desc">
                 <li className="landing-list-element">Cómputo viejo</li>
