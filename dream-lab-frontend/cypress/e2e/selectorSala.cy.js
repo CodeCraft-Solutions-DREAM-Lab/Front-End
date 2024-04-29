@@ -49,7 +49,6 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("nombre-sala").should("exist");
         cy.getDataCy("nombre-experiencia").contains("Nombre de Experiencia");
         cy.getDataCy("nombre-sala").contains("Electric Garage");
-
         
     });
 });
