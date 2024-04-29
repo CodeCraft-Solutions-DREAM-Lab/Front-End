@@ -2,16 +2,16 @@
 
 .landing-page-container {
     background-image: 
-    url("src/pages/LandingPage/assets/images/glass-circle-top-left.svg"),
-    url("src/pages/LandingPage/assets/images/glass-circle-bottom-left.svg"),
-    url("src/pages/LandingPage/assets/images/glass-circle-right.svg"), 
-    url("src/pages/LandingPage/assets/images/glass-circle-right.svg"), 
-    url("src/pages/LandingPage/assets/images/oval-blob-top-left.svg"),
-    url("src/pages/LandingPage/assets/images/oval-blob-top-right.svg"),
-    url("src/pages/LandingPage/assets/images/oval-blob-bottom-left.svg"),
-    url("src/pages/LandingPage/assets/images/oval-blob-bottom-right.svg"),
-    url("src/pages/LandingPage/assets/images/WavesLandingPage.svg"),
-    url("src/pages/LandingPage/assets/images/LandingWavesFadeout.svg");/* 9 imgs */
+    url("src/assets/LandingPage/glass-circle-top-left.svg"),
+    url("src/assets/LandingPage/glass-circle-bottom-left.svg"),
+    url("src/assets/LandingPage/glass-circle-right.svg"), 
+    url("src/assets/LandingPage/glass-circle-right.svg"), 
+    url("src/assets/LandingPage/oval-blob-top-left.svg"),
+    url("src/assets/LandingPage/oval-blob-top-right.svg"),
+    url("src/assets/LandingPage/oval-blob-bottom-left.svg"),
+    url("src/assets/LandingPage/oval-blob-bottom-right.svg"),
+    url("src/assets/LandingPage/WavesLandingPage.svg"),
+    url("src/assets/LandingPage/LandingWavesFadeout.svg"); /* 10 imgs */
     background-repeat: 
     no-repeat,
     no-repeat,
