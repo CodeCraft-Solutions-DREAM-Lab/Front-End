@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+.landing-lab-carousel-component {
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+.landing-carousel-card {
+    justify-items: center;
+    /* align-items: center; */;
+    display: grid;
+    grid-template-rows: [row1] 0.1rem [row2] 1fr [row3] 1fr [row4] 0.1rem [row5];
+    grid-template-columns: [col1] 0.1rem [col2] 1fr [col3] 1fr [col4] 0.1rem [col5];
+}
+
+.landing-carousel-img {
+    grid-row-start: row1;
+    grid-row-end: row5;
+    grid-column-start: col3;
+    grid-column-end: col5;
+    border-radius: 10%;
+}
+
+.landing-carousel-logo {
+    grid-row-start: row1;
+    grid-row-end: row5;
+    grid-column-start: col1;
+    grid-column-end: col3;
+    transform: scale(0.1) translateY(-70rem);
+}
+
+.landing-carousel-left {
+    grid-row-start: row2;
+    grid-row-end: row4;
+    grid-column-start: col1;
+    grid-column-end: col2;
+    transform: scale(0.6);
+}
+
+.landing-carousel-right {
+    grid-row-start: row2;
+    grid-row-end: row4;
+    grid-column-start: col4;
+    grid-column-end: col5;
+    transform: scale(0.1);
+}
+
+.landing-carousel-title {
+    align-self: end;
+    grid-row-start: row1;
+    grid-row-end: row3;
+    grid-column-start: col1;
+    grid-column-end: col3;
+    font-size: 48px;
+    font-family: "Kanit", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: white;
+}
+
+.landing-carousel-desc {
+    align-self: start;
+    grid-row-start: row3;
+    grid-row-end: row5;
+    grid-column-start: col1;
+    grid-column-end: col3;
+    font-size: 36px;
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    color: white;
+    list-style-type: disc;
+}
+
+.landing-list-element {
+    justify-self: start;
+}

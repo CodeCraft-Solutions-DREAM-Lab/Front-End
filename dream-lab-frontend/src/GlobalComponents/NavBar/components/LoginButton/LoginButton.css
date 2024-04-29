@@ -1,0 +1,32 @@
+.landing-login-button-container {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: end; /* Align items to the right */
+    align-items: center; /* Align items vertically */
+    position: relative;
+    left: 72rem;
+}
+
+.landing-login-button {
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    height: 2.3rem; /* Adjusted height */
+    padding: 0 30px 0 30px; /* Adjust for icon width and padding */
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 18px;
+    color: #042E55;
+    cursor: pointer;
+    font-family: "Karla", sans-serif;
+    font-weight: bolder;
+}
+
+.landing-login-button:hover {
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    height: 2.3rem; /* Adjusted height */
+    padding: 0 30px 0 30px; /* Adjust for icon width and padding */
+    background-color: #042E55;
+    border: 2px solid white;
+    border-radius: 18px;
+    color: white;
+    font-family: "Karla", sans-serif;
+    font-weight: bolder;
+}
