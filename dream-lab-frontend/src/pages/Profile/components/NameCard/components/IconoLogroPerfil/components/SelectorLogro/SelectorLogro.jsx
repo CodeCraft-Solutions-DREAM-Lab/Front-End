@@ -1,5 +1,5 @@
 // Componentes NextUI
-import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
+import { Modal, ModalBody, ModalHeader, ModalContent } from "@nextui-org/react";
 
 // Proptypes
 import PropTypes from "prop-types";
@@ -7,26 +7,37 @@ import PropTypes from "prop-types";
 // Hooks
 import { useState } from "react";
 
-// Estilos
-import "./SelectorLogro.css";
+export const Row = ({
+    span,
+    children,
+    classNames,
+    verticalCenter,
+    horizontalCenter,
+}) => {
+    let classes = `flex row-span-${span} h-full w-full ${classNames}`;
 
-export const Row = ({ span, children, classNames }) => {
-    let classes = ``;
-    span ? (classes += `row-span-${span}`) : null;
-    classNames ? (classes += ` ${classNames}`) : null;
+    if (verticalCenter) {
+        classes += " items-center";
+    }
+    if (horizontalCenter) {
+        classes += " justify-center";
+    }
     return <div className={classes}>{children}</div>;
 };
 Row.propTypes = {
     span: PropTypes.number,
     children: PropTypes.node,
     classNames: PropTypes.string,
+    verticalCenter: PropTypes.bool,
+    horizontalCenter: PropTypes.bool,
 };
 
 export const Col = ({ span, children, classNames }) => {
-    let classes = ``;
-    span ? (classes += `col-span-${span}`) : null;
-    classNames ? (classes += ` ${classNames}`) : null;
-    return <div className={classes}>{children}</div>;
+    return (
+        <div className={`col-span-${span} h-full w-full ${classNames}`}>
+            {children}
+        </div>
+    );
 };
 Col.propTypes = {
     span: PropTypes.number,
@@ -35,11 +46,13 @@ Col.propTypes = {
 };
 
 export const Grid = ({ cols, rows, children, classNames }) => {
-    let classes = `h-full w-full grid`;
-    cols ? (classes += ` grid-cols-${cols}`) : null;
-    rows ? (classes += ` grid-rows-${rows}`) : null;
-    classNames ? (classes += ` ${classNames}`) : null;
-    return <div className={classes}>{children}</div>;
+    return (
+        <div
+            className={`grid grid-cols-${cols} grid-rows-${rows} h-full w-full ${classNames}`}
+        >
+            {children}
+        </div>
+    );
 };
 Grid.propTypes = {
     cols: PropTypes.number,
@@ -56,35 +69,44 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
             <ModalContent>
                 <ModalBody>
-                    <div className="sl-contenedor-modal">
-                        <div className="grid grid-cols-3 h-full">
-                            <div className="col-span-1 h-full">
-                                <div className="grid grid-rows-4 h-full">
-                                    <div className="row-span-1 h-full bg-yellow-500">
-                                        <span>{titulo}</span>
-                                    </div>
-                                    <div className="row-span-2 h-full bg-red-500">
-                                        <img src={icono} alt="icono-logro" />
-                                    </div>
-                                    <div className="row-span-1 h-full bg-green-500">
-                                        <button onClick={onOpen}>
-                                            Cambiar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-span-2 h-full">
-                                <div className="grid grid-rows-5 h-full">
-                                    <div className="row-span-4 h-full bg-indigo-500">
-                                        Selector
-                                    </div>
-                                    <div className="row-span-1 h-full">
-                                        Colores
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Grid cols={3} rows={1}>
+                        <Col span={1}>
+                            <Grid rows={4} cols={1}>
+                                <Row
+                                    span={1}
+                                    classNames="bg-yellow-500"
+                                    horizontalCenter
+                                    verticalCenter
+                                >
+                                    <span>{titulo}</span>
+                                </Row>
+                                <Row
+                                    span={2}
+                                    classNames="bg-red-500"
+                                    horizontalCenter
+                                    verticalCenter
+                                >
+                                    <img src={icono} alt="icono-logro" />
+                                </Row>
+                                <Row
+                                    span={1}
+                                    classNames="bg-green-500"
+                                    horizontalCenter
+                                    verticalCenter
+                                >
+                                    <button onClick={onOpen}>Cambiar</button>
+                                </Row>
+                            </Grid>
+                        </Col>
+                        <Col span={2}>
+                            <Grid rows={4} cols={1}>
+                                <Row span={3} classNames="bg-indigo-500">
+                                    Selector
+                                </Row>
+                                <Row span={1}>Colores</Row>
+                            </Grid>
+                        </Col>
+                    </Grid>
                 </ModalBody>
             </ModalContent>
         </Modal>
