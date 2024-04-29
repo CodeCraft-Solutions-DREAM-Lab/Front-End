@@ -47,9 +47,9 @@ function LandingPageDev() {
                     description="Contamos con instalaciones de primer nivel, encuentra lo que necesitas en nuestros laboratorios."
                 />
                 <InfoCard
-                    title="Visualización 3D"
+                    title="Reconocimiento de Voz"
                     image="src/pages/LandingPage/assets/images/cuarto-landing-page.png"
-                    description="Escoge tu lugar de trabajo mediante un mapa trdimensional y completamente interactivo."
+                    description="Reserva con solo tu voz. Simplifica tus reservaciones con nuestra tecnología de reconocimiento de voz. Rápido, preciso y sin complicaciones."
                 />
             </div>
             <h1 className="carousel-header">CONOCE EL DREAM LAB</h1>
