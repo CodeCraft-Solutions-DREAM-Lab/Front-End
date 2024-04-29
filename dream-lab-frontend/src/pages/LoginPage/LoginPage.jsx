@@ -59,7 +59,8 @@ export default function LoginPage() {
         setOpen(false);
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (event) => {
+        event.preventDefault();
         // Si no se ha introducido un usuario, mostrar un snackbar
         if (user === "") {
             setOpen(true);
