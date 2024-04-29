@@ -1,3 +1,66 @@
-.sl-contenedor-modal {
-    height: 50vh;
+@media only screen and (orientation: portrait) {
+    .sl-main-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sl-left-container {
+        width: 100%;
+        height: 50%;
+    }
+
+    .sl-center-container {
+        width: 100%;
+        height: 2px;
+    }
+
+    .sl-right-container {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .sl-main-container {
+        height: 592px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .sl-left-container {
+        width: 363px;
+        height: 100%;
+    }
+
+    .sl-center-container {
+        width: 2px;
+        height: 85%;
+    }
+
+    .sl-right-container {
+        width: 613px;
+        height: 100%;
+    }
+}
+
+.sl-center-container {
+    border-radius: 20px;
+    background-color: #c3c3c3;
+}
+
+.sl-title {
+    font-size: max(2vh, 2.2vw);
+    font-weight: bold;
+    color: #6c7084;
+    font-family: "Karla", sans-serif;
+}
+
+.sl-title-container {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
