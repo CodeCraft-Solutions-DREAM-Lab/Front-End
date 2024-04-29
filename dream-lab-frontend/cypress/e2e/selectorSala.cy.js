@@ -21,7 +21,7 @@ describe("Probando pantalla de selector de sala", () => {
             body: {
                 nombre: "Electric Garage",
             },
-        }).as("getSalaName");
+        });
 
         cy.intercept("GET", API_URL + "experiencias/**", {
             body: [
@@ -29,7 +29,7 @@ describe("Probando pantalla de selector de sala", () => {
                     nombre: "Nombre de Experiencia",
                 },
             ],
-        }).as("getExperiencia");
+        });
 
         cy.intercept("POST", API_URL + "salas/horasLibres", {
             body: [
@@ -39,9 +39,9 @@ describe("Probando pantalla de selector de sala", () => {
                     competidores: 2,
                 },
             ],
-        }).as("getHorasLibres");
+        });
 
-        cy.wait(["@getSalaName", "@getExperiencia", "@getHorasLibres"]);
+        cy.wait(1000);
 
         // cy.wait(['@getSala', '@getExperiencia', '@getHorasLibres']);
 
