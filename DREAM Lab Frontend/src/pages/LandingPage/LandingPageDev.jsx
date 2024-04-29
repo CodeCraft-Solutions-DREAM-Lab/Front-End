@@ -1,9 +1,10 @@
-import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import "./LandingPage.css";
 import Title from "./components/Title/Title";
 import InfoCard from "./components/InfoCard/InfoCard";
 import LabCarousel from "./components/LabCarousel/LabCarousel";
 import Footer from "./components/Footer/Footer";
+
 //import { ReactComponent as MySVG } from "src/pages/LandingPage/assets/images/WavesLandingPage.svg";
 import { useRef } from "react";
 
@@ -23,11 +24,11 @@ function LandingPageDev() {
             <Navbar view="landingPage" autoHide={true} />
             <Title scroll={scrollToLearnMore}/>
             <div className="landing-images">
-                <img className="pcb" src="src/pages/LandingPage/assets/images/pcb-landing-page.png" />
-                <img className="blob" src="src/pages/LandingPage/assets/images/blob-landing-page.png" />
-                <img className="vr" src="src/pages/LandingPage/assets/images/vr-landing-page.png" />
-                <img className="moon" src="src/pages/LandingPage/assets/images/moon-landing-page.png" />
-                <img className="astronaut" src="src/pages/LandingPage/assets/images/astronauta-landing-page.png" />
+                <img className="landing-image pcb" src="src/pages/LandingPage/assets/images/pcb-landing-page.png" />
+                <img className="landing-image blob" src="src/pages/LandingPage/assets/images/blob-landing-page.png" />
+                <img className="landing-image vr" src="src/pages/LandingPage/assets/images/vr-landing-page.png" />
+                <img className="landing-image moon" src="src/pages/LandingPage/assets/images/moon-landing-page.png" />
+                <img className="landing-image astronaut" src="src/pages/LandingPage/assets/images/astronauta-landing-page.png" />
             </div>
             <div className="info-cards" ref={learnMoreRef}>
                 <InfoCard
@@ -52,6 +53,7 @@ function LandingPageDev() {
                 />
             </div>
             <h1 className="carousel-header">CONOCE EL DREAM LAB</h1>
+            <LabCarousel/>
             <Footer/>
         </div>
     );

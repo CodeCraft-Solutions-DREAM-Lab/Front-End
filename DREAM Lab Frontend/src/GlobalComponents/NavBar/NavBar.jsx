@@ -87,6 +87,7 @@ class Navbar extends React.Component {
             case "landingPage":
                 viewLandingPage = true;
                 userAction = <LoginButton />; // Redireccionar al login
+                break;
             default:
                 searchBar = null;
                 userAction = null; // Para vistas desconocidas

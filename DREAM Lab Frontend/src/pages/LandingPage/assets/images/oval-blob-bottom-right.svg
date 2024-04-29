@@ -1,0 +1,26 @@
+<svg width="520" height="663" viewBox="0 0 520 663" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M270.261 0.831456C28.5744 9.57114 -68.4634 283.567 52.4362 530.563C165.999 762.57 313.773 639.812 467.181 528.249C682.068 371.975 479.822 -6.74645 270.261 0.831456Z" fill="url(#paint0_radial_225_77)"/>
+<path d="M270.261 0.831456C28.5744 9.57114 -68.4634 283.567 52.4362 530.563C165.999 762.57 313.773 639.812 467.181 528.249C682.068 371.975 479.822 -6.74645 270.261 0.831456Z" fill="url(#paint1_radial_225_77)"/>
+<path d="M270.261 0.831456C28.5744 9.57114 -68.4634 283.567 52.4362 530.563C165.999 762.57 313.773 639.812 467.181 528.249C682.068 371.975 479.822 -6.74645 270.261 0.831456Z" fill="url(#paint2_radial_225_77)"/>
+<path d="M270.261 0.831456C28.5744 9.57114 -68.4634 283.567 52.4362 530.563C165.999 762.57 313.773 639.812 467.181 528.249C682.068 371.975 479.822 -6.74645 270.261 0.831456Z" fill="url(#paint3_radial_225_77)"/>
+<defs>
+<radialGradient id="paint0_radial_225_77" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(157.689 191.295) rotate(31.4073) scale(414.367 390.167)">
+<stop stop-color="#00FFFF"/>
+<stop offset="1" stop-color="#00C4FF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint1_radial_225_77" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(219.89 452.841) rotate(-92.1221) scale(442.964 349.59)">
+<stop stop-color="#FF6666"/>
+<stop offset="0.695057" stop-color="#FF00B8" stop-opacity="0.239583"/>
+<stop offset="1" stop-color="#0052CD" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_225_77" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(461.277 71.5427) rotate(138.485) scale(368.646 350.929)">
+<stop stop-color="#620CE1"/>
+<stop offset="1" stop-color="#620CE1" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint3_radial_225_77" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(23.339 734.716) rotate(-68.1259) scale(489.784 526.488)">
+<stop stop-color="#FF00E5"/>
+<stop offset="0.228083" stop-color="#FF00E5" stop-opacity="0.771917"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

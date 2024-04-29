@@ -35,7 +35,7 @@
     color: white;
 }
 
-.button-container {
+.button-container-landing-page {
     display: flex;
     flex-flow: column;
     align-items: center;
