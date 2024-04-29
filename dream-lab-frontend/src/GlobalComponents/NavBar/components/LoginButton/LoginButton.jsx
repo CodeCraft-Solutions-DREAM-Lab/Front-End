@@ -7,8 +7,8 @@ const SearchBar = () => {
         navigate(`/login/`);
     }
     return (
-        <div className="searchContainer">
-            <button onClick={handleClick}>Login</button>
+        <div className="landing-login-button-container">
+            <button className="landing-login-button" onClick={handleClick}>INICIAR SESIÓN</button>
         </div>
     );
 };
