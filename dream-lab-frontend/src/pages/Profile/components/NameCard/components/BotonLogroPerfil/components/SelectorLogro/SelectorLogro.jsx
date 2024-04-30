@@ -126,7 +126,19 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                     </div>
                                 ))}
                             </div>
-                            <div className="sl-boton-guardar-container"></div>
+                            <div className="sl-save-button-container">
+                                <Button
+                                    className="sl-save-button"
+                                    radius="full"
+                                    style={{
+                                        backgroundColor: "#1BAC55",
+                                    }}
+                                >
+                                    <span className="sl-save-button-text">
+                                        Guardar
+                                    </span>
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </ModalBody>
