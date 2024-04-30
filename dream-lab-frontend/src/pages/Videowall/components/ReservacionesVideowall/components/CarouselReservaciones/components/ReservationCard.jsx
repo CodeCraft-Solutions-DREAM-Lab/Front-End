@@ -4,11 +4,27 @@ import { Image } from "@nextui-org/react";
 
 import propTypes from "prop-types";
 
-function ReservationCard({ nombre, horaInicio, horaFin, sala, icono }) {
+import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+
+function ReservationCard({
+    nombre,
+    horaInicio,
+    horaFin,
+    sala,
+    icono,
+    colorPreferido,
+}) {
+    console.log(icono);
     return (
         <div className="rc-container">
             <div className="rc-image-container">
-                <Image src={icono} alt="Logro del usuario" fullwidth={false} />
+                <div className="rc-logro">
+                    <NuevoIconoLogro
+                        icono={icono}
+                        colorFondo={colorPreferido}
+                    />
+                    {/* <Image src={icono} alt="Logro del usuario" fullwidth={false} /> */}
+                </div>
             </div>
             <div className="rc-data-container">
                 <div className="rc-top-container">
@@ -31,6 +47,7 @@ ReservationCard.propTypes = {
     horaFin: propTypes.string,
     sala: propTypes.string,
     icono: propTypes.string,
+    colorPreferido: propTypes.string,
 };
 
 ReservationCard.defaultProps = {
