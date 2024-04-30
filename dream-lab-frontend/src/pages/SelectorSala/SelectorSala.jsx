@@ -168,6 +168,7 @@ function SelectorSala() {
                             competidoresArray={competidoresArray}
                             update={update}
                         />
+
                     </div>
                 </div>
             </div>

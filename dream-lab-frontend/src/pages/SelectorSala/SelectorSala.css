@@ -83,3 +83,22 @@
         order: 3; /* Make form container appear last */
     }
 }
+
+.reservation-summary-button {
+    font-family: "Karla", sans-serif;
+    font-size: 24px;
+    font-weight: 661;
+    background-color: white;
+    border-radius: 18px;
+    color: #042E55;
+    margin-inline: 6rem;
+    padding: 0.5rem;
+}
+.reservation-summary-button:hover {
+    font-family: "Karla", sans-serif;
+    font-size: 24px;
+    font-weight: 661;
+    background-color: #042E55;
+    border-radius: 18px;
+    color: white;
+}
