@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
     getFromSessionStorage,
     existsInSessionStorage,
+    saveToSessionStorage,
 } from "src/utils/Storage";
 
 const TextoFecha = ({ update }) => {
@@ -81,6 +82,8 @@ const TextoFecha = ({ update }) => {
             setHoraFinTexto(
                 getHoraFinTexto(getFromSessionStorage("horaInicio"))
             );
+            saveToSessionStorage("formattedDate", `${diaTexto} - ${diaNumero} de ${mes}`);
+            saveToSessionStorage("formattedTime", `${horaInicioTexto} - ${horaFinTexto}`);
         } else {
             setShowText(false);
         }

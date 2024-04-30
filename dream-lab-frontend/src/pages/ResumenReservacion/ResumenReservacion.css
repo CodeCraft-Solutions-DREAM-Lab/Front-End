@@ -1,0 +1,139 @@
+.reservation-summary-view {
+    display: flex;
+    transform: translateY(8rem);
+}
+
+.material-summary-title {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+
+.back-arrow {
+    cursor: pointer;
+}
+
+.material-summary-container {
+    height: 40vh;
+}
+
+.material-summary-title-text {
+    font-family: "Karla", sans-serif;
+    font-size: 36px;
+    font-weight: 668;
+    color: white;
+    margin-top: 5rem;
+    margin-right: 9rem;
+}
+
+.material-summary-wrapper {
+    display: flex;
+	align-items: center; /* Center the card container horizontally */
+    margin-left: 2rem;
+    position: relative;
+}
+
+.material-summary-sm {
+    justify-self: center;
+	display: flex;
+	flex-flow: row wrap; /* Cards wrap to next row */
+	justify-content: start; /* Align cards to the start of the container */
+	overflow-y: auto; /* Enable vertical scroll if needed */
+    width: 50vw;
+	height: 45vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
+    margin: 5%;
+	padding: 0 1%; /* Added padding to prevent cards from touching the edges */
+    column-gap: 2.5rem;
+    row-gap: 1rem;
+}
+
+.reservation-summary-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.reservation-summary-container-inner {
+    display: flex;
+    flex-flow: column;
+    gap: 1.4rem;
+}
+
+.reservation-summary-title {
+    font-family: "Karla", sans-serif;
+    font-size: 48px;
+    font-weight: 662;
+    color: white;
+    text-align: center;
+}
+
+.reservation-summary-name {
+    font-family: "Karla", sans-serif;
+    font-size: 48px;
+    font-weight: 662;
+    color: white;
+    text-align: center;
+}
+
+.reservation-summary-people {
+    font-family: "Karla", sans-serif;
+    font-size: 36px;
+    font-weight: 662;
+    color: #D1D1D1;
+    text-align: center;
+}
+
+.reservation-summary-date {
+    font-family: "Karla", sans-serif;
+    font-size: 24px;
+    font-weight: 662;
+    color: #DADADA;
+    text-align: center;
+}
+
+.reservation-summary-time {
+    font-family: "Karla", sans-serif;
+    font-size: 36px;
+    font-weight: 662;
+    color: white;
+    text-align: center;
+}
+
+.reservation-summary-button {
+    font-family: "Karla", sans-serif;
+    font-size: 24px;
+    font-weight: 661;
+    background-color: white;
+    border-radius: 18px;
+    color: #042E55;
+    margin-inline: 6rem;
+    padding: 0.5rem;
+}
+.reservation-summary-button:hover {
+    font-family: "Karla", sans-serif;
+    font-size: 24px;
+    font-weight: 661;
+    background-color: #042E55;
+    border-radius: 18px;
+    color: white;
+}
+
+.reservation-summary-warning {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    text-wrap: wrap;
+    max-width: 40vw;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 24px;
+    margin-left: 1.3rem;
+}
+
+.warning-icon {
+    margin-left: 2rem;
+}
+
+.reservation-summary-warning-message {
+    color: #042E55;
+}
+
