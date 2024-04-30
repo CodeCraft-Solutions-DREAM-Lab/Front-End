@@ -13,7 +13,7 @@
 
     .sl-center-container {
         width: 100%;
-        height: 2px;
+        height: 0.2vh;
     }
 
     .sl-right-container {
@@ -40,24 +40,24 @@
 
 @media only screen and (orientation: landscape) {
     .sl-main-container {
-        height: 592px;
+        height: 60vh;
         display: flex;
         flex-direction: row;
         align-items: center;
     }
 
     .sl-left-container {
-        width: 363px;
+        width: 35%;
         height: 100%;
     }
 
     .sl-center-container {
-        width: 2px;
+        width: 0.2vw;
         height: 85%;
     }
 
     .sl-right-container {
-        width: 613px;
+        width: 65%;
         height: 100%;
     }
 
@@ -68,7 +68,7 @@
 
     .sl-color-button {
         width: 75%;
-        min-height: 3.5rem;
+        min-height: 2.5rem;
     }
 }
 
@@ -112,4 +112,11 @@
     font-weight: bold;
     color: #6c7084;
     font-family: "Karla", sans-serif;
+}
+
+.sl-icon {
+    width: max(10vh, 15vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

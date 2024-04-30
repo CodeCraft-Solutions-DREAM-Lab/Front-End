@@ -21,7 +21,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [icono, setIcono] = useState("robot-icon.png");
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
             <ModalContent>
                 <ModalBody>
                     <div className="sl-main-container">
@@ -52,7 +52,10 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                             </div>
                         </div>
                         <div className="sl-center-container"></div>
-                        <div className="sl-right-container">RIGHT</div>
+                        <div className="sl-right-container">
+                            <div className="sl-opciones-logros-container"></div>
+                            <div className="sl-boton-guardar-container"></div>
+                        </div>
                     </div>
                 </ModalBody>
             </ModalContent>
