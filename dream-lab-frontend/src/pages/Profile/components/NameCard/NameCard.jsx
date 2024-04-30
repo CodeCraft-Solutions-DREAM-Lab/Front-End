@@ -15,7 +15,7 @@ import { get } from "src/utils/ApiRequests";
 // Storage
 import { getFromLocalStorage } from "src/utils/Storage";
 
-function NameCard({ nombre, apodo }) {
+function NameCard({ nombre }) {
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
     const [logroSeleccionado, setLogroSeleccionado] = useState({});
     const [colorSeleccionado, setColorSeleccionado] = useState("");
@@ -45,13 +45,15 @@ function NameCard({ nombre, apodo }) {
                 setLogroSeleccionado={setLogroSeleccionado}
             />
             <div className="div-usuario">
-                <h1 className="nombre-usuario">
-                    {props.nombre}
-                </h1>
+                <h1 className="nombre-usuario">{nombre}</h1>
                 <h2 className="apodo">{logroSeleccionado.nombre}</h2>
             </div>
         </div>
     );
 }
+
+NameCard.propTypes = {
+    nombre: propTypes.string.isRequired,
+};
 
 export default NameCard;

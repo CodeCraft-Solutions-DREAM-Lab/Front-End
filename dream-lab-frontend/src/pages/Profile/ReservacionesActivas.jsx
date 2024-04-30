@@ -8,32 +8,31 @@ import { getFromLocalStorage } from "../../utils/Storage";
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 
 function ReservacionesActivas() {
-
     const [refreshValue, setRefreshValue] = useState(0);
     const [datosReservas, setDatosReservas] = useState([]);
     const [tipoModal, setTipoModal] = useState(0);
 
-     // Variables llenadas por la BD
-     const [salaReserva, setSalaReserva] = useState(null);
-     const [experienciaReserva, setExperienciaReserva] = useState(null);
-     const [horaReserva, setHoraReserva] = useState(null);
-     const [diaReserva, setDiaReserva] = useState(null);
-     const [idResReserva, setIdResReserva] = useState(null);
+    // Variables llenadas por la BD
+    const [salaReserva, setSalaReserva] = useState(null);
+    const [experienciaReserva, setExperienciaReserva] = useState(null);
+    const [horaReserva, setHoraReserva] = useState(null);
+    const [diaReserva, setDiaReserva] = useState(null);
+    const [idResReserva, setIdResReserva] = useState(null);
 
-     // Actualización de modales
-     const handleClickModal = (tipo, sala, experiencia, hora, dia, idReserv) => {
-        setTipoModal(tipo)
-        setSalaReserva(sala)
-        setExperienciaReserva(experiencia)
-        setHoraReserva(hora)
-        setDiaReserva(dia)
-        setIdResReserva(idReserv)
+    // Actualización de modales
+    const handleClickModal = (tipo, sala, experiencia, hora, dia, idReserv) => {
+        setTipoModal(tipo);
+        setSalaReserva(sala);
+        setExperienciaReserva(experiencia);
+        setHoraReserva(hora);
+        setDiaReserva(dia);
+        setIdResReserva(idReserv);
     };
-  
+
     const idUsuario = getFromLocalStorage("user");
 
     useEffect(() => {
-        get(`perfil_info/${idUsuario}`)
+        get(`perfil/${idUsuario}`)
             .then((result) => {
                 const perfilInfo = result;
                 setDatosReservas(perfilInfo.recordsets[1]);
@@ -44,56 +43,93 @@ function ReservacionesActivas() {
     }, [idUsuario, refreshValue]);
 
     const handleCancelarReserva = (idReserva) => {
-        
         const url = `reservaciones/${idReserva}`;
-        console.log(idReserva)
-        
+        console.log(idReserva);
+
         const data = JSON.stringify({
             estatus: 4,
-          }); // Aquí podrías enviar datos adicionales si es necesario
-    
-        put(url, data, () => {
-            console.log("La reserva se canceló satisfactoriamente.");
+        }); // Aquí podrías enviar datos adicionales si es necesario
 
-            // Pasar al siguiente modal
-            handleClickModal(4, salaReserva, experienciaReserva, horaReserva, diaReserva)
-            setRefreshValue(refreshValue + 1)
+        put(
+            url,
+            data,
+            () => {
+                console.log("La reserva se canceló satisfactoriamente.");
 
-        }, (error) => {
-            console.error("Error al cancelar la reserva:", error);
-        });
+                // Pasar al siguiente modal
+                handleClickModal(
+                    4,
+                    salaReserva,
+                    experienciaReserva,
+                    horaReserva,
+                    diaReserva
+                );
+                setRefreshValue(refreshValue + 1);
+            },
+            (error) => {
+                console.error("Error al cancelar la reserva:", error);
+            }
+        );
     };
 
     return (
         <div className="out-div">
-
-    {tipoModal === 1 ? (
+            {tipoModal === 1 ? (
                 <CancelarReservacion
                     modalClasificacion={1}
                     type="tipo1"
                     titulo1={salaReserva}
-                    tituloExperiencia = {experienciaReserva}
+                    tituloExperiencia={experienciaReserva}
                     titulo2={diaReserva}
                     titulo3={horaReserva}
                     textoRojo="Cancelar reservación"
-                    funcionRojo={() => handleClickModal(2, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
-                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
+                    funcionRojo={() =>
+                        handleClickModal(
+                            2,
+                            salaReserva,
+                            experienciaReserva,
+                            horaReserva,
+                            diaReserva,
+                            idResReserva
+                        )
+                    }
+                    funcionVerde={() =>
+                        handleClickModal(
+                            0,
+                            salaReserva,
+                            experienciaReserva,
+                            horaReserva,
+                            diaReserva,
+                            idResReserva
+                        )
+                    }
                 />
-                ) : tipoModal === 2 ? (
+            ) : tipoModal === 2 ? (
                 <CancelarReservacion
                     modalClasificacion={2}
                     type="tipo2"
                     titulo1={"¿Quieres cancelar tu reserva?"}
-                    titulo2={salaReserva }
-                    titulo3={diaReserva.split(" - ")[1] + " (" + horaReserva + ")"}
+                    titulo2={salaReserva}
+                    titulo3={
+                        diaReserva.split(" - ")[1] + " (" + horaReserva + ")"
+                    }
                     titulo4="¡Perderás puntos de prioridad!"
                     textoRojo="Sí"
                     textoVerde="No"
                     funcionRojo={() => handleCancelarReserva(idResReserva)}
                     /*funcionRojo={() =>handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)}*/
-                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
+                    funcionVerde={() =>
+                        handleClickModal(
+                            0,
+                            salaReserva,
+                            experienciaReserva,
+                            horaReserva,
+                            diaReserva,
+                            idResReserva
+                        )
+                    }
                 />
-                ) : tipoModal === 3 ? (
+            ) : tipoModal === 3 ? (
                 <CancelarReservacion
                     modalClasificacion={3}
                     type="tipo3"
@@ -101,7 +137,16 @@ function ReservacionesActivas() {
                     titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
                     titulo3="¿Necesitas ayuda? Contáctanos aquí"
                     textoVerde="Cerrar"
-                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
+                    funcionVerde={() =>
+                        handleClickModal(
+                            0,
+                            salaReserva,
+                            experienciaReserva,
+                            horaReserva,
+                            diaReserva,
+                            idResReserva
+                        )
+                    }
                 />
             ) : null}
 
