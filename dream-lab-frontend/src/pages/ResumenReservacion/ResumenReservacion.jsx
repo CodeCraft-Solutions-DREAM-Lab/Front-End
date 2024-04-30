@@ -114,7 +114,7 @@ function ResumenReservacion(props) {
 
     return (
         <div>
-            <Navbar case="soloPerfil" autohide={false}/>
+            <Navbar view="soloPerfil" autohide={true}/>
             <div className="reservation-summary-view">
                 <div className="material-summary-container">
                     <div className="material-summary-title">
@@ -123,7 +123,10 @@ function ResumenReservacion(props) {
                     </div>
                     <div className="material-summary-wrapper">
                         <div className="material-summary-sm">
-                        {data.map((material) => {
+                            {data.length > 0 && selectedMaterials.length === 0 && (
+                                <p className="material-summary-empty">No seleccionaste ningún material.</p>
+                            )}
+                            {data.map((material) => {
                             const selectedMaterial = selectedMaterials.find((m) => m.materialId === material.id);
                             if (selectedMaterial && selectedMaterial.quantity > 0) {
                                 return (
@@ -147,7 +150,10 @@ function ResumenReservacion(props) {
                 <div className="reservation-summary-container">
                     <GlassCard margin="2rem" padding="3rem">
                         <div className="reservation-summary-container-inner">
-                            <h1 className="reservation-summary-title">Confirma tu solicitud</h1>
+                            <div className="reservation-summary-title-row">
+                                <img className="back-arrow-responsive" src={BackArrow} onClick={handleClick}/>
+                                <h1 className="reservation-summary-title">Confirma tu solicitud</h1>
+                            </div>
                             <p className="reservation-summary-name">{reservationData.nombre}</p>
                             <p className="reservation-summary-people">{reservationData.personas} Persona(s)</p>
                             <p className="reservation-summary-date">{reservationData.fecha}</p>
@@ -162,7 +168,7 @@ function ResumenReservacion(props) {
                         <p className="reservation-summary-warning-message">La asignación del lugar se hará hoy a las <strong>{reservationData.horaCorte}</strong>. Compiten <strong>{reservationData.competidores}</strong> reservaciones por <strong>{reservationData.cupos}</strong> cupos.</p>
                     </div>
                 </div>
-                {/* <AvisoFinal
+                <AvisoFinal
                     isOpen={isModalOpen}
                     size="xl"
                     onOk={() => {
@@ -173,7 +179,7 @@ function ResumenReservacion(props) {
                         setIsModalOpen(false);
                         navigate("/home");
                     }}
-                /> */}
+                />
             </div>
         </div>
     );
