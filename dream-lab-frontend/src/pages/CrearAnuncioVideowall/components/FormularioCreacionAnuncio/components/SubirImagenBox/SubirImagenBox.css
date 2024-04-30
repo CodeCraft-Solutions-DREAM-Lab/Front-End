@@ -1,0 +1,51 @@
+.subir-imagen-box-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.228);
+    border-radius: 10px;
+    font-family: "Karla", sans-serif;
+    cursor: pointer;
+}
+
+.icono-sube-imagen{
+    width: 3vw;
+    height: 3vw;
+}
+
+.icono-sube-imagen-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-top: 2vw;
+}
+
+.textos-subir-imagen-contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+    height: auto;
+
+}
+
+.titulo-sube-imagen{
+    width: 100%;
+    font-size: medium;
+    text-align: center;
+}
+
+.advertencia-sube-imagen{
+    width: 100%;
+    font-size: small;
+    font-weight: lighter;
+    text-align: center;
+}
