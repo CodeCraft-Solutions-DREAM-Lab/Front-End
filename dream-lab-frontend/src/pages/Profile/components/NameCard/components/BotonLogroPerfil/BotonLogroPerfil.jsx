@@ -12,7 +12,17 @@ import { Button, useDisclosure } from "@nextui-org/react";
 import SelectorLogro from "./components/SelectorLogro/SelectorLogro";
 import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
 
-function IconoLogroPerfil() {
+// Proptypes
+import propTypes from "prop-types";
+
+function IconoLogroPerfil({
+    setRefresh,
+    colorSeleccionado,
+    setColorSeleccionado,
+    logrosObtenidos,
+    logroSeleccionado,
+    setLogroSeleccionado,
+}) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const abrirSelector = () => {
@@ -28,8 +38,8 @@ function IconoLogroPerfil() {
                     onPress={abrirSelector}
                 >
                     <NuevoIconoLogro
-                        icono={LogoBigDreamer}
-                        colorFondo="#d9d9d9"
+                        icono={logroSeleccionado.iconoURL}
+                        colorFondo={colorSeleccionado}
                     />
                 </Button>
             </div>
@@ -37,9 +47,24 @@ function IconoLogroPerfil() {
                 isOpen={isOpen}
                 onOpen={onOpen}
                 onOpenChange={onOpenChange}
+                setRefresh={setRefresh}
+                colorSeleccionado={colorSeleccionado}
+                setColorSeleccionado={setColorSeleccionado}
+                logrosObtenidos={logrosObtenidos}
+                logroSeleccionado={logroSeleccionado}
+                setLogroSeleccionado={setLogroSeleccionado}
             />
         </>
     );
 }
+
+IconoLogroPerfil.propTypes = {
+    setRefresh: propTypes.func,
+    colorSeleccionado: propTypes.string,
+    setColorSeleccionado: propTypes.func,
+    logrosObtenidos: propTypes.array,
+    logroSeleccionado: propTypes.object,
+    setLogroSeleccionado: propTypes.func,
+};
 
 export default IconoLogroPerfil;

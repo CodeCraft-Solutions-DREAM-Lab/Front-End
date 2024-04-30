@@ -21,36 +21,24 @@ import { get, post } from "src/utils/ApiRequests";
 import { getFromLocalStorage } from "src/utils/Storage";
 import SelectorColores from "./components/SelectorLogroItem/SelectorColores/SelectorColores";
 
-function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
-    const [logrosObtenidos, setLogrosObtenidos] = useState([]);
-    const [logroSeleccionado, setLogroSeleccionado] = useState({});
-    const [colorSeleccionado, setColorSeleccionado] = useState("");
-
-    useEffect(() => {
-        if (isOpen) {
-            get(`perfil/logros/${getFromLocalStorage("user")}`).then(
-                (response) => {
-                    console.log(response);
-                    setLogrosObtenidos(response.logros);
-                    setLogroSeleccionado({
-                        idLogro: response.configuracionLogro[0].idLogro,
-                        nombre: response.configuracionLogro[0].nombre,
-                        iconoURL: response.configuracionLogro[0].iconoURL,
-                    });
-                    setColorSeleccionado(
-                        response.configuracionLogro[0].colorPreferido
-                    );
-                }
-            );
-        }
-    }, [isOpen]);
-
+function SelectorLogro({
+    isOpen,
+    onOpen,
+    onOpenChange,
+    setRefresh,
+    colorSeleccionado,
+    setColorSeleccionado,
+    logrosObtenidos,
+    logroSeleccionado,
+    setLogroSeleccionado,
+}) {
     const handleSave = () => {
         post(`perfil/logros/${getFromLocalStorage("user")}`, {
             idLogro: logroSeleccionado.idLogro,
             colorPreferido: colorSeleccionado,
         }).then((response) => {
             console.log(response);
+            setRefresh((prev) => !prev);
             onOpenChange();
         });
     };
@@ -126,6 +114,12 @@ SelectorLogro.propTypes = {
     isOpen: PropTypes.bool,
     onOpen: PropTypes.func,
     onOpenChange: PropTypes.func,
+    setRefresh: PropTypes.func,
+    colorSeleccionado: PropTypes.string,
+    setColorSeleccionado: PropTypes.func,
+    logrosObtenidos: PropTypes.array,
+    logroSeleccionado: PropTypes.object,
+    setLogroSeleccionado: PropTypes.func,
 };
 
 export default SelectorLogro;
