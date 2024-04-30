@@ -1,5 +1,5 @@
 // Componentes NextUI
-import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent } from "@nextui-org/react";
 
 // Proptypes
 import PropTypes from "prop-types";
@@ -9,6 +9,12 @@ import { useState } from "react";
 
 // Estilos
 import "./SelectorLogro.css";
+
+// Componentes
+import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+
+// Iconos temporales
+import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
 
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
@@ -23,8 +29,27 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                             <div className="sl-title-container">
                                 <h1 className="sl-title">{titulo}</h1>
                             </div>
-                            <div className="sl-icon-container"></div>
-                            <div className="sl-color-button-container"></div>
+                            <div className="sl-icon-container">
+                                <div className="sl-icon">
+                                    <NuevoIconoLogro
+                                        icono={LogoBigDreamer}
+                                        colorFondo="#AFB7FF"
+                                    />
+                                </div>
+                            </div>
+                            <div className="sl-color-button-container">
+                                <Button
+                                    className="sl-color-button"
+                                    radius="full"
+                                    style={{
+                                        backgroundColor: "#AFB7FF",
+                                    }}
+                                >
+                                    <span className="sl-color-button-text">
+                                        Cambiar color
+                                    </span>
+                                </Button>
+                            </div>
                         </div>
                         <div className="sl-center-container"></div>
                         <div className="sl-right-container">RIGHT</div>
