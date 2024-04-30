@@ -48,7 +48,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     }, [isOpen]);
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
             <ModalContent>
                 <ModalBody>
                     <div className="sl-main-container">

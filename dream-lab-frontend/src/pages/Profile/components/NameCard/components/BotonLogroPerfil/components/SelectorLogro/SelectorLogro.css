@@ -82,7 +82,7 @@
     }
 
     .sl-icon {
-        width: 75%;
+        width: 80%;
         height: 100%;
     }
 
@@ -120,6 +120,8 @@
     font-family: "Karla", sans-serif;
     font-weight: bold;
     color: #6c7084;
+    word-wrap: break-word;
+    text-align: center;
 }
 
 .sl-title-container {
@@ -164,7 +166,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: max(10vh, 15vw);
 }
 
 .sl-logro-item {
