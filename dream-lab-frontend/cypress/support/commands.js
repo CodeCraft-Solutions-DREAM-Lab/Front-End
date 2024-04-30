@@ -1,5 +1,4 @@
 import "cypress-localstorage-commands";
-import { API_URL } from "../../src/utils/ApiRequests";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -26,6 +25,8 @@ import { API_URL } from "../../src/utils/ApiRequests";
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+let API_URL = "http://localhost:3000/";
 
 // Obtiene un elemento por el atributo data-cy
 Cypress.Commands.add("getDataCy", (name) => {

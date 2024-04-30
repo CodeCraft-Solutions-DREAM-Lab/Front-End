@@ -1,14 +1,15 @@
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem, DatePicker } from "@nextui-org/react";
 import { useState, useEffect } from "react";
-import dayjs from "dayjs";
+import { CalendarDate, isWeekend } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
 
 import {
     existsInSessionStorage,
     getFromSessionStorage,
-    removeFromSessionStorage,
     saveToSessionStorage,
 } from "../../../../utils/Storage";
+
+import propTypes from "prop-types";
 
 function FechaFormulario(props) {
     const {
@@ -19,7 +20,9 @@ function FechaFormulario(props) {
         freeHours,
     } = props;
 
-    const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
+    let { locale } = useLocale();
+
+    // const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
     const [fecha, setFecha] = useState();
     const [fechaIsoString, setFechaIsoString] = useState(
         getFromSessionStorage("fechaIsoString") || ""
@@ -41,22 +44,61 @@ function FechaFormulario(props) {
             : `${(hora % 13) + Math.trunc(hora / 13)} PM`;
     };
 
+    const getNextAvailableDay = () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        while (date.getDay() === 0 || date.getDay() === 6) {
+            date.setDate(date.getDate() + 1);
+        }
+        return date;
+    };
+
+    let nextAvailableDate = getNextAvailableDay();
+
+    let isDateUnavailable = (date) => {
+        isWeekend(date, locale);
+    };
+
     useEffect(() => {
         if (existsInSessionStorage("fecha")) {
-            setFecha(dayjs(getFromSessionStorage("fecha")));
+            const dateFromFecha = new Date(getFromSessionStorage("fecha"));
+            const year = dateFromFecha.getFullYear();
+            const month = dateFromFecha.getMonth() + 1;
+            const day = dateFromFecha.getDate() + 1;
+            setFecha(new CalendarDate(year, month, day));
+            setFechaIsoString(
+                new CalendarDate(year, month, day).toDate().toISOString()
+            );
+        } else {
+            setFecha(
+                new CalendarDate(
+                    nextAvailableDate.getFullYear(),
+                    nextAvailableDate.getMonth() + 1,
+                    nextAvailableDate.getDate()
+                )
+            );
+            setFechaIsoString(
+                new CalendarDate(
+                    nextAvailableDate.getFullYear(),
+                    nextAvailableDate.getMonth() + 1,
+                    nextAvailableDate.getDate()
+                )
+                    .toDate()
+                    .toISOString()
+            );
+            setFetchFreeHoursAgain(!fetchFreeHoursAgain);
         }
-
-        console.log("horaInicio", horaInicio);
-        console.log("horaInicioIsoString", horaInicioIsoString);
-        console.log("duration", duration);
     }, []);
 
     useEffect(() => {
+        console.log("fecha", fecha);
+
         if (!!fecha && fecha !== "Invalid Date") {
+            console.log("fecha", fecha);
             saveToSessionStorage("fecha", fecha);
         }
 
-        if (!!getFromSessionStorage("fecha")) {
+        if (getFromSessionStorage("fecha")) {
             setFetchFreeHoursAgain(!fetchFreeHoursAgain);
             setIsSelectHoursDisabled(false);
         } else {
@@ -65,25 +107,25 @@ function FechaFormulario(props) {
     }, [fecha]);
 
     useEffect(() => {
-        if (!!fechaIsoString) {
+        if (fechaIsoString) {
             saveToSessionStorage("fechaIsoString", fechaIsoString);
         }
     }, [fechaIsoString]);
 
     useEffect(() => {
-        if (!!horaInicio) {
+        if (horaInicio) {
             saveToSessionStorage("horaInicio", horaInicio);
         }
     }, [horaInicio]);
 
     useEffect(() => {
-        if (!!horaInicioIsoString) {
+        if (horaInicioIsoString) {
             saveToSessionStorage("horaInicioIsoString", horaInicioIsoString);
         }
     }, [horaInicioIsoString]);
 
     useEffect(() => {
-        if (!!duration) {
+        if (duration) {
             saveToSessionStorage("duration", duration);
         }
     }, [duration]);
@@ -91,26 +133,29 @@ function FechaFormulario(props) {
     return (
         <div className="flex flex-col mx-3">
             <p className="text-white">Fecha</p>
-            <DatePicker
-                sx={{
-                    backgroundColor: "white",
-                    borderRadius: "16px",
-                    "& .MuiInputBase-root": {
-                        // Target specific MUI class for background
-                        height: "3rem",
-                        backgroundColor: "white",
-                        borderRadius: "16px",
-                    },
-                }}
-                className="rounded-24 font-bold"
-                value={fecha}
-                minDate={minEligibleDate}
-                onChange={(newValue) => {
-                    setFecha(newValue);
-                    setFechaIsoString(newValue.toISOString());
-                    setUpdate(!update);
-                }}
-            />
+            <div data-cy="selector-fecha">
+                <DatePicker
+                    value={fecha}
+                    onChange={(newValue) => {
+                        try {
+                            setFecha(newValue);
+                            setFechaIsoString(newValue.toDate().toISOString());
+                            setUpdate(!update);
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }}
+                    isDateUnavailable={isDateUnavailable}
+                    aria-label="Selector de fecha"
+                    minValue={
+                        new CalendarDate(
+                            nextAvailableDate.getFullYear(),
+                            nextAvailableDate.getMonth() + 1,
+                            nextAvailableDate.getDate()
+                        )
+                    }
+                />
+            </div>
 
             <p className="text-white mt-6">Hora de inicio</p>
             <Autocomplete
@@ -175,5 +220,13 @@ function FechaFormulario(props) {
         </div>
     );
 }
+
+FechaFormulario.propTypes = {
+    update: propTypes.bool,
+    setUpdate: propTypes.func,
+    setFetchFreeHoursAgain: propTypes.func,
+    fetchFreeHoursAgain: propTypes.bool,
+    freeHours: propTypes.array,
+};
 
 export default FechaFormulario;

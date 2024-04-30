@@ -11,12 +11,12 @@ import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.png";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
 import { get, post } from "src/utils/ApiRequests.js";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import { InfoReservCard } from "./components/InfoReservCard/InfoReservCard";
 
-function SelectorSala(props) {
+function SelectorSala() {
     let navigate = useNavigate();
 
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
@@ -33,8 +33,8 @@ function SelectorSala(props) {
         new Array(25).fill(0)
     );
 
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
+    // const location = useLocation();
+    // const searchParams = new URLSearchParams(location.search);
 
     useEffect(() => {
         if (getFromSessionStorage("reservType") == "sala") {
@@ -83,7 +83,7 @@ function SelectorSala(props) {
                 });
         }
 
-        if (!!idSala) {
+        if (idSala) {
             get(`mesas/${idSala}`)
                 .then((result) => {
                     const maxCupos = result.maxCupos;

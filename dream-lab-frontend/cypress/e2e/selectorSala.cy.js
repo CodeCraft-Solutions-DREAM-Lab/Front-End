@@ -1,27 +1,24 @@
 import "cypress-localstorage-commands";
-import { API_URL } from "/src/utils/ApiRequests";
 
 describe("Probando pantalla de selector de sala", () => {
+    const API_URL = "http://localhost:3000/";
+
     beforeEach(() => {
         cy.loginWithTest();
-    });
-
-    it("Entrar con experiencia", () => {
-        cy.visit("/reservacion/sala", {
-            onBeforeLoad(win) {
-                win.sessionStorage.setItem("reservType", "experiencia");
-                win.sessionStorage.setItem("idExperiencia", 1);
-            },
-        });
-
-        cy.getDataCy("nombre-experiencia").should("be.not.visible");
-        cy.getDataCy("nombre-sala").should("be.not.visible");
 
         cy.intercept("GET", API_URL + "salas/nameFromExperienceId/**", {
             body: {
-                nombre: "Electric Garage",
+                nombre: "Nombre de Sala",
             },
-        }).as("getSalaName");
+        }).as("getSalaNameFromExperienceId");
+
+        cy.intercept("GET", API_URL + "salas/1", {
+            body: [
+                {
+                    nombre: "Nombre de Sala",
+                },
+            ],
+        }).as("getSala");
 
         cy.intercept("GET", API_URL + "experiencias/**", {
             body: [
@@ -31,6 +28,12 @@ describe("Probando pantalla de selector de sala", () => {
             ],
         }).as("getExperiencia");
 
+        cy.intercept("GET", API_URL + "mesas/1", {
+            body: {
+                maxCupos: 10,
+            },
+        }).as("getMaxCupos");
+
         cy.intercept("POST", API_URL + "salas/horasLibres", {
             body: [
                 {
@@ -38,17 +41,100 @@ describe("Probando pantalla de selector de sala", () => {
                     cupos: 3,
                     competidores: 2,
                 },
+                {
+                    hora: 10,
+                    cupos: 1,
+                    competidores: 4,
+                },
+                {
+                    hora: 13,
+                    cupos: 7,
+                    competidores: 1,
+                },
             ],
         }).as("getHorasLibres");
+    });
 
-        cy.wait(["@getSalaName", "@getExperiencia", "@getHorasLibres"]);
+    it("Probando nombre entrando con experiencia", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "experiencia");
+                win.sessionStorage.setItem("idExperiencia", 1);
+            },
+        });
 
-        // cy.wait(['@getSala', '@getExperiencia', '@getHorasLibres']);
+        cy.getDataCy("nombre-experiencia").should("not.be.visible");
+        cy.getDataCy("nombre-sala-chico").should("not.be.visible");
+
+        cy.wait([
+            "@getSalaNameFromExperienceId",
+            "@getExperiencia",
+            "@getHorasLibres",
+        ]);
 
         cy.getDataCy("nombre-experiencia").should("exist");
-        cy.getDataCy("nombre-sala").should("exist");
+        cy.getDataCy("nombre-sala-chico").should("exist");
         cy.getDataCy("nombre-experiencia").contains("Nombre de Experiencia");
-        cy.getDataCy("nombre-sala").contains("Electric Garage");
-        
+        cy.getDataCy("nombre-sala-chico").contains("Nombre de Sala");
     });
+
+    it("Probando nombre entrando con sala", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
+
+        cy.getDataCy("nombre-sala-grande").should("not.be.visible");
+
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        cy.getDataCy("nombre-sala-grande").should("exist");
+        cy.getDataCy("nombre-sala-grande").contains("Nombre de Sala");
+    });
+
+    it.only("Escribir la fecha directamente", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
+
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        // cy.typeDataCy("selector-fecha", "09092003");
+        cy.get("[data-cy=selector-fecha] input").type("09092003", { delay: 0 });
+    });
+
+    it("Seleccionar fecha con mouse", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
+
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        // cy.get("[data-cy=selector-fecha] button").click();
+
+        cy.get("[data-cy=selector-fecha] button").type(
+            "{rightArrow}{enter}{enter}",
+            {
+                delay: 2000,
+            }
+        );
+
+        cy.pause();
+        // cy.getDataCy("selector-fecha").click();
+        // cy.getDataCy("selector-fecha").should("have.value", "2021-09-09");
+    });
+
+    it("Seleccionar una hora sin duración");
+
+    it("Seleccionar una duración sin hora");
+
+    it("Seleccionar una hora y una duración");
 });
