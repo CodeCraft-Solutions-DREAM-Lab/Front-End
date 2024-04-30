@@ -15,7 +15,7 @@ import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogr
 import SelectorLogroItem from "./components/SelectorLogroItem/SelectorLogroItem";
 
 // API Requests
-import { get } from "src/utils/ApiRequests";
+import { get, post } from "src/utils/ApiRequests";
 
 // Local Storage
 import { getFromLocalStorage } from "src/utils/Storage";
@@ -46,6 +46,16 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
             );
         }
     }, [isOpen]);
+
+    const handleSave = () => {
+        post(`perfil/logros/${getFromLocalStorage("user")}`, {
+            idLogro: logroSeleccionado.idLogro,
+            colorPreferido: colorSeleccionado,
+        }).then((response) => {
+            console.log(response);
+            onOpenChange();
+        });
+    };
 
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
@@ -99,6 +109,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                     style={{
                                         backgroundColor: "#1BAC55",
                                     }}
+                                    onPress={handleSave}
                                 >
                                     <span className="sl-save-button-text">
                                         Guardar
