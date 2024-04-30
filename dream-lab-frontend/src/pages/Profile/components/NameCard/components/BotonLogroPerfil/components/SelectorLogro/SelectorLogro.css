@@ -89,6 +89,7 @@
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 2%;
+        row-gap: 5%;
         padding: 5%;
     }
 
@@ -152,4 +153,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.sl-opciones-logros-container {
+    max-height: 60%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}
+
+.sl-opciones-logros-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sl-opciones-logros-container::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.7);
+    border-radius: 6px;
 }

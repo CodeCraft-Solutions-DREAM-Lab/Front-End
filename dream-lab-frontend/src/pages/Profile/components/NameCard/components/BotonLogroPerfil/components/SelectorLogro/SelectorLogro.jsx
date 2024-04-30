@@ -50,6 +50,36 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
             iconoURL:
                 "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
         },
+        {
+            nombre: "Robot Expert",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+        },
+        {
+            nombre: "Ancient Soul",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+        },
+        {
+            nombre: "Five-Star Player",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+        },
+        {
+            nombre: "Robot Expert",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+        },
+        {
+            nombre: "Ancient Soul",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+        },
+        {
+            nombre: "Five-Star Player",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+        },
     ]);
 
     return (
