@@ -22,8 +22,6 @@ import { getFromLocalStorage } from "src/utils/Storage";
 import SelectorColores from "./components/SelectorLogroItem/SelectorColores/SelectorColores";
 
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
-    const [titulo, setTitulo] = useState("Robot Expert");
-    const [icono, setIcono] = useState("robot-icon.png");
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
     const [logroSeleccionado, setLogroSeleccionado] = useState({});
     const [colorSeleccionado, setColorSeleccionado] = useState("");
