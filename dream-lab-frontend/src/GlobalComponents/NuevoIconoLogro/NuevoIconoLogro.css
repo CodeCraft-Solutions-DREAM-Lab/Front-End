@@ -1,0 +1,10 @@
+.ic-contenedor-logro {
+    width: 100%;
+    padding: 15%;
+    border-radius: 100%;
+    background-color: var(--color-fondo, #c3c3c3);
+}
+
+.ic-icono-logro {
+    opacity: 50%;
+}
