@@ -1,7 +1,3 @@
-// Imagenes
-import LogoRobot from "src/assets/Profile/robot-icon.png";
-import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
-
 // Estilos
 import "./BotonLogroPerfil.css";
 
@@ -22,6 +18,7 @@ function IconoLogroPerfil({
     logrosObtenidos,
     logroSeleccionado,
     setLogroSeleccionado,
+    handleLogroArtista,
 }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -53,6 +50,7 @@ function IconoLogroPerfil({
                 logrosObtenidos={logrosObtenidos}
                 logroSeleccionado={logroSeleccionado}
                 setLogroSeleccionado={setLogroSeleccionado}
+                handleLogroArtista={handleLogroArtista}
             />
         </>
     );
@@ -65,6 +63,7 @@ IconoLogroPerfil.propTypes = {
     logrosObtenidos: propTypes.array,
     logroSeleccionado: propTypes.object,
     setLogroSeleccionado: propTypes.func,
+    handleLogroArtista: propTypes.func,
 };
 
 export default IconoLogroPerfil;

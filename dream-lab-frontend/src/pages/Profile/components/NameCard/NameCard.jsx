@@ -15,7 +15,7 @@ import { get } from "src/utils/ApiRequests";
 // Storage
 import { getFromLocalStorage } from "src/utils/Storage";
 
-function NameCard({ nombre }) {
+function NameCard({ nombre, handleLogroArtista }) {
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
     const [logroSeleccionado, setLogroSeleccionado] = useState({});
     const [colorSeleccionado, setColorSeleccionado] = useState("");
@@ -43,6 +43,7 @@ function NameCard({ nombre }) {
                 logrosObtenidos={logrosObtenidos}
                 logroSeleccionado={logroSeleccionado}
                 setLogroSeleccionado={setLogroSeleccionado}
+                handleLogroArtista={handleLogroArtista}
             />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">{nombre}</h1>
@@ -54,6 +55,7 @@ function NameCard({ nombre }) {
 
 NameCard.propTypes = {
     nombre: propTypes.string.isRequired,
+    handleLogroArtista: propTypes.func.isRequired,
 };
 
 export default NameCard;

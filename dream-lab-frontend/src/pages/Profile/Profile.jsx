@@ -129,55 +129,51 @@ function Profile() {
     };
 
     const handleLogroArtista = (logroId) => {
-        const url = `logros/${idUsuario}/${logroId}`;
-        let nuevoValorLogro = estadoLogros[logroId - 1].valorActual + 1;
-        console.log("NUEVO VALOR LOGRO = " + nuevoValorLogro);
-        console.log(datosLogros[logroId - 1].nombre);
-        const valorMaxLogro = datosLogros[logroId - 1].valorMax;
-        console.log("VALOR MAX LOGRO = " + valorMaxLogro);
+        return new Promise((resolve, reject) => {
+            const url = `logros/${idUsuario}/${logroId}`;
+            let nuevoValorLogro = estadoLogros[logroId - 1].valorActual + 1;
+            const valorMaxLogro = datosLogros[logroId - 1].valorMax;
 
-        if (nuevoValorLogro >= valorMaxLogro) {
-            nuevoValorLogro = valorMaxLogro;
-        }
-
-        const data = JSON.stringify({
-            valorActual: nuevoValorLogro,
-        }); // Aquí podrías enviar datos adicionales si es necesario
-
-        put(
-            url,
-            data,
-            () => {
-                console.log(
-                    "El progreso del logro se actualizó satisfactoriamente."
-                );
-
-                if (nuevoValorLogro == valorMaxLogro) {
-                    const url2 = `logros/${idUsuario}/${logroId}`;
-                    const data2 = JSON.stringify({
-                        obtenido: true,
-                    });
-
-                    put(
-                        url2,
-                        data2,
-                        () => {
-                            console.log("El logro se ha obtenido.");
-                        },
-                        (error) => {
-                            console.error("Error al obtener el logro.", error);
-                        }
-                    );
-                }
-
-                setRefreshValue(refreshValue + 1);
-            },
-            (error) => {
-                console.error("Error al guardar el progreso del logro.", error);
+            if (nuevoValorLogro >= valorMaxLogro) {
+                nuevoValorLogro = valorMaxLogro;
             }
-        );
-    };
 
+            const data = JSON.stringify({
+                valorActual: nuevoValorLogro,
+            });
+
+            put(
+                url,
+                data,
+                () => {
+                    if (nuevoValorLogro == valorMaxLogro) {
+                        const url2 = `logros/${idUsuario}/${logroId}`;
+                        const data2 = JSON.stringify({
+                            obtenido: true,
+                        });
+
+                        put(
+                            url2,
+                            data2,
+                            () => {
+                                resolve();
+                            },
+                            (error) => {
+                                reject("Error al obtener el logro.");
+                            }
+                        );
+                    } else {
+                        resolve();
+                    }
+
+                    setRefreshValue(refreshValue + 1);
+                },
+                (error) => {
+                    reject("Error al guardar el progreso del logro.");
+                }
+            );
+        });
+    };
     return (
         <div className="profile-container">
             <div className="navbar-div-profile">
@@ -272,6 +268,7 @@ function Profile() {
                           datosUsuario.apellidoP
                         : "Mi perfil"
                 }
+                handleLogroArtista={handleLogroArtista}
             />
 
             <div className="div-exterior-perfil">
