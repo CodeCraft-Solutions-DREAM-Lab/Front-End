@@ -1,0 +1,13 @@
+@media only screen and (orientation: portrait) {
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
+    }
+}

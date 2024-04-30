@@ -12,6 +12,7 @@ import "./SelectorLogro.css";
 
 // Componentes
 import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+import SelectorLogroItem from "./components/SelectorLogroItem/SelectorLogroItem";
 
 // Iconos temporales
 import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
@@ -85,11 +86,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                             <div className="sl-opciones-logros-container">
                                 {logrosObtenidos.map((logro, index) => (
                                     <div key={index} className="sl-logro-item">
-                                        <div className="sl-logro-item-icon">
-                                            <NuevoIconoLogro
-                                                icono={logro.iconoURL}
-                                            />
-                                        </div>
+                                        <SelectorLogroItem logro={logro} />
                                     </div>
                                 ))}
                             </div>
