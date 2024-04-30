@@ -1,5 +1,6 @@
 import TarjetaLogro from "../components/TarjetasLogro/TarjetaLogro";
 import TarjetaReservacion from "../components/TarjetaReservacion/TarjetaReservacion";
+import AnuncioSinReservas from "../components/TarjetaReservacion/components/AnuncioSinReservas/AnuncioSinReservas";
 
 // Función para formatear la fecha en el formato deseado
 export function formatDate(dateString) {
@@ -39,10 +40,28 @@ export function calculateEndTime(startTime, duration) {
     return `${hour}:${minute}`;
 }
 
+
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
 export function generateReservationCards(reservacionesData, handleClickModal) {
-    console.log(reservacionesData);
+
+    const reservacionesConfirmadas = reservacionesData.filter(reservation => reservation.estatus === 3);
+
+    // Despleigue de mensaje: "No hay reservaciones activas"
+    if (reservacionesConfirmadas.length === 0) {
+        return (
+            <AnuncioSinReservas/>
+        );
+    }
+
     const reservationCards = reservacionesData.map((reservation, index) => {
+        
+        // Formateo de día de la semana
+        const now = new Date(reservation.fecha);
+        now.setDate(now.getDate() + 1);
+        const options = { weekday: "long" };
+        const dayOfWeek = now.toLocaleDateString("es-ES", options);
+        const dayOfWeekFinal = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1)
+
         // Formatear la fecha y hora
         const startDate = new Date(reservation.fecha)
             .toISOString()
@@ -61,15 +80,30 @@ export function generateReservationCards(reservacionesData, handleClickModal) {
             reservation.duracion
         );
 
+        if (reservation.estatus !== 3) {
+            // Si el estatus no es igual a "Confirmada", no generamos la tarjeta de reservación
+            return null;
+        }
+
         // Crear instancia del componente TarjetaReservacion con las propiedades adecuadas y devolverla
         return (
+
             <TarjetaReservacion
                 key={index}
-                sala={reservation.sala}
-                experiencia={reservation.experiencia}
-                hora={`${formattedTime} - ${formattedEndTime}`}
-                dia={formattedDate}
-                funcion={() => handleClickModal(1)} // Aquí se llama a la función handleClickModal
+                sala={reservation.nombre_sala ? reservation.nombre_sala : "D.R.E.A.M. Lab"}
+                experiencia={reservation.nombre_experiencia ? reservation.nombre_experiencia : "Visita de Exploración"}
+                hora={(reservation.horaInicio && reservation.duracion) ? `${formattedTime} - ${formattedEndTime}` : "Pendiente"}
+                dia={reservation.fecha ? formattedDate : "Pendiente"}
+                
+                funcion={() => 
+                    handleClickModal(
+                        1,
+                        reservation.nombre_sala ? reservation.nombre_sala : "D.R.E.A.M. Lab",
+                        reservation.nombre_experiencia ? reservation.nombre_experiencia : "Visita de Exploración", 
+                        (reservation.horaInicio && reservation.duracion) ? `${formattedTime} - ${formattedEndTime}` : "Pendiente", 
+                        reservation.fecha ? (dayOfWeekFinal + " - " + formattedDate) : "Pendiente",
+                        reservation.idReservacion
+                    )}
             />
         );
     });
@@ -78,15 +112,15 @@ export function generateReservationCards(reservacionesData, handleClickModal) {
 }
 
 // Función para generar las tarjetas de logros
-export const renderTarjetasLogro = (logrosData) => {
+export const renderTarjetasLogro = (logrosData, estadoData) => {
     return logrosData.map((logro) => (
         <TarjetaLogro
-            key={logro.nombre} // Asegúrate de tener una clave única para cada elemento en el mapa
-            progresoLogro={logro.progreso}
-            nombreLogro={logro.nombre}
-            descripcion={logro.descripcion}
-            colorFondo={logro.color}
-            iconoUtilizado={logro.logo} // Puedes dejar esta línea si quieres usar un icono específico o eliminarla si los iconos están incluidos en los datos del logro
+            key={logro.idLogro} // Asegúrate de tener una clave única para cada elemento en el mapa
+            progresoLogro={estadoData[logro.idLogro - 1].valorActual ? ((estadoData[logro.idLogro - 1].valorActual) / logro.valorMax) : 0} // Accede al estado del logro desde estadoData y calcula el progreso
+            nombreLogro={logro.nombre ? logro.nombre : "Logro"}
+            descripcion={logro.descripcion ? logro.descripcion : "Descripción pendiente."}
+            colorFondo={logro.color ? logro.color : "#6F75E1"}
+            iconoUtilizado={logro.iconoURL ? logro.iconoURL : "https://dreamlabstorage.blob.core.windows.net/logros/Star.gif"} // Puedes dejar esta línea si quieres usar un icono específico o eliminarla si los iconos están incluidos en los datos del logro
         />
     ));
 };

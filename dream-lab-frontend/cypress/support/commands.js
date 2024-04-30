@@ -1,5 +1,4 @@
 import "cypress-localstorage-commands";
-import { API_URL } from "../../src/utils/ApiRequests";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -57,7 +56,7 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add("loginWithTest", () => {
-    cy.intercept("POST", API_URL + "auth/token", {
+    cy.intercept("POST", import.meta.env.VITE_API_URL + "auth/token", {
         data: "token",
     });
 

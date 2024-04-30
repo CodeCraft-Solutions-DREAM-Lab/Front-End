@@ -15,6 +15,11 @@
     margin-left: 0.5vw;
 }
 
+.rc-logro {
+    width: 2.5vw;
+    height: auto;
+}
+
 .rc-data-container {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,192 @@
+@media only screen and (orientation: portrait) {
+    .sl-main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
+    .sl-left-container {
+        width: 100%;
+        height: 50%;
+    }
+
+    .sl-center-container {
+        width: 100%;
+        height: 0.2vh;
+    }
+
+    .sl-right-container {
+        width: 100%;
+        height: 50%;
+    }
+
+    .sl-icon {
+        width: 50%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .sl-title {
+        margin-bottom: 10px;
+    }
+
+    .sl-save-button {
+        width: 75%;
+        min-height: 3rem;
+        margin-bottom: 15px;
+    }
+
+    .sl-opciones-logros-container {
+        display: grid;
+        gap: 3%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 2%;
+        padding: 2%;
+    }
+
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
+    }
+
+    .sl-save-button-container {
+        margin-top: 4%;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .sl-main-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 60vh;
+    }
+
+    .sl-left-container {
+        width: 35%;
+        height: 100%;
+    }
+
+    .sl-center-container {
+        width: 0.2vw;
+        height: 85%;
+    }
+
+    .sl-right-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 65%;
+        height: 100%;
+    }
+
+    .sl-icon {
+        width: 70%;
+        height: auto;
+    }
+
+    .sl-save-button {
+        width: 75%;
+        min-height: 2.5rem;
+    }
+
+    .sl-opciones-logros-container {
+        display: grid;
+        gap: 2%;
+        row-gap: 5%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 10%;
+        padding: 5%;
+    }
+
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
+    }
+
+    .sl-save-button-container {
+        margin-bottom: 5%;
+    }
+}
+
+.sl-center-container {
+    background-color: #c3c3c3;
+    border-radius: 20px;
+}
+
+.sl-title {
+    font-size: max(3.5vh, 2.2vw);
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    color: #6c7084;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.sl-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+}
+
+.sl-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.sl-color-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.sl-save-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+.sl-save-button-text {
+    font-size: max(2vh, 1.2vw);
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.sl-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sl-logro-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sl-opciones-logros-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+    overflow-y: auto;
+    max-height: 60%;
+}
+
+.sl-opciones-logros-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sl-opciones-logros-container::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.7);
+    border-radius: 6px;
+}
