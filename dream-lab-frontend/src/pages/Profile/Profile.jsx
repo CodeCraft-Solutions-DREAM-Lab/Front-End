@@ -80,6 +80,26 @@ function Profile() {
         put(url, data, () => {
             console.log("La reserva se canceló satisfactoriamente.");
 
+            const url2 = `usuarios/${idUsuario}`;
+            let prioridadPenalizada;
+            let prioridadActual=datosUsuario.prioridad;
+
+            if (prioridadActual - 5 >= 0) {
+                prioridadPenalizada = prioridadActual - 5;
+            } else if (prioridadActual - 5 < 0){
+                prioridadPenalizada = 0;
+            }            
+
+            const data2 = JSON.stringify({
+                prioridad: prioridadPenalizada
+            });
+            
+            put(url2, data2, () => {
+                console.log("Penalización aplicada.");
+            }, (error) => {
+                console.error("Error al aplicar penalización:", error);
+            });
+            
             // Pasar al siguiente modal
             handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)
             setRefreshValue(refreshValue + 1)
@@ -88,6 +108,44 @@ function Profile() {
             console.error("Error al cancelar la reserva:", error);
         });
     };
+
+    const handleLogroArtista = (logroId) => {
+        const url = `logros/${idUsuario}/${logroId}`;
+        let nuevoValorLogro = estadoLogros[logroId - 1].valorActual + 1;
+        console.log("NUEVO VALOR LOGRO = " + nuevoValorLogro);
+        console.log(datosLogros[logroId - 1].nombre)
+        const valorMaxLogro = datosLogros[logroId - 1].valorMax;
+        console.log("VALOR MAX LOGRO = " + valorMaxLogro);
+
+        if (nuevoValorLogro >= valorMaxLogro) {
+            nuevoValorLogro = valorMaxLogro;
+        }
+
+        const data = JSON.stringify({
+            valorActual: nuevoValorLogro,
+        }); // Aquí podrías enviar datos adicionales si es necesario
+
+        put(url, data, () => {
+            console.log("El progreso del logro se actualizó satisfactoriamente.");
+
+            if (nuevoValorLogro == valorMaxLogro) {
+                const url2 = `logros/${idUsuario}/${logroId}`;
+                const data2 = JSON.stringify({
+                    obtenido: true,
+                });
+
+                put(url2, data2, () => {
+                    console.log("El logro se ha obtenido.");
+                }, (error) => {
+                    console.error("Error al obtener el logro.", error);
+                });
+            }
+
+            setRefreshValue(refreshValue + 1)
+        }, (error) => {
+            console.error("Error al guardar el progreso del logro.", error);
+        });
+    }
 
     return (
         <div className="profile-container">
@@ -147,8 +205,8 @@ function Profile() {
                 }
                 apodo={datosUsuario.apodo}
                 icono={datosUsuario.iconoURL? datosUsuario.iconoURL : LogoRobot}
-                
-            />
+                onClick={() => handleLogroArtista(10)}
+                />
 
             <div className="div-exterior-perfil">
                 <div className="esfera-div-celular">
@@ -178,12 +236,12 @@ function Profile() {
                 <div className="esfera-div">
                     <EsferaPuntosPrioridad
                         puntos={
-                            datosUsuario.prioridad
+                            (datosUsuario.prioridad >= 0)
                                 ? datosUsuario.prioridad
                                 : "..."
                         }
                         subtitulo={
-                            datosUsuario.prioridad
+                            (datosUsuario.prioridad >= 0)
                                 ? "Puntos de prioridad"
                                 : "Cargando"
                         }

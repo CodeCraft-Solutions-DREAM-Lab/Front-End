@@ -3,8 +3,8 @@ import "./NameCard.css";
 function NameCard(props) {
     return (
         <div className="div-exterior">
-            <div className="logo-div">
-                <img src={props.icono} alt="logotipo-usuario" />
+            <div className="logo-div" onClick={props.onClick}>
+                <img src={props.icono} alt="logotipo-usuario"/>
             </div>
             <div className="div-usuario">
                 <h1 className="nombre-usuario">
