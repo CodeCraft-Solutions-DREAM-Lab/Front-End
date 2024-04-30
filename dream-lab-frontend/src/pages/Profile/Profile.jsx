@@ -11,74 +11,141 @@ import {
 } from "./utils/Funciones.jsx";
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
-import { get } from "src/utils/ApiRequests.js";
-
-const logrosData = [
-    {
-        nombre: "Big Dreamer",
-        descripcion: "Asiste a más de 35 eventos en el Dream Lab.",
-        progreso: 0.75,
-        color: "#7885F8",
-        logo: "LogoBigDreamer",
-    },
-    {
-        nombre: "Robot Expert",
-        descripcion: "Asiste a 3 talleres en el Dimesion Forge.",
-        progreso: 1,
-        color: "#7885F8",
-        logo: "LogoRobot",
-    },
-    {
-        nombre: "Apple Developer",
-        descripcion: "Asiste a 3 talleres de Swift.",
-        progreso: 0.25,
-        color: "#7885F8",
-        logo: "LogoBigDreamer",
-    },
-];
-
-const reservacionesData = [
-    {
-        sala: "Sala Horizons",
-        experiencia: "VR Experience",
-        horaInicio: "15:00:00",
-        duracion: 2,
-        fecha: "2024-12-15",
-    },
-    {
-        sala: "Dimension Forge",
-        experiencia: "Make a Computer - Course",
-        horaInicio: "14:30:00",
-        duracion: 1,
-        fecha: "2024-01-24",
-    },
-    {
-        sala: "Lego Room",
-        experiencia: "Swift Course",
-        horaInicio: "08:00:00",
-        duracion: 3,
-        fecha: "2024-04-26",
-    },
-];
+import { get, put} from "src/utils/ApiRequests.js";
+import LogoRobot from "../../assets/Profile/Star.gif";
+import { getFromLocalStorage } from "../../utils/Storage";
 
 function Profile() {
     const [reservaciones, setReservaciones] = useState([]);
     const [tipoModal, setTipoModal] = useState(0);
+    const [infoPerfil, setInfoPerfil] = useState([]);
 
-    const handleClickModal = (tipo) => {
-        setTipoModal(tipo);
+    const [datosUsuario, setDatosUsuario] = useState([]);
+    const [datosReservas, setDatosReservas] = useState([]);
+    const [datosLogros, setDatosLogros] = useState([]);
+    const [estadoLogros, setEstadoLogros] = useState([]);
+
+    // Variables llenadas por la BD
+    const [salaReserva, setSalaReserva] = useState(null);
+    const [experienciaReserva, setExperienciaReserva] = useState(null);
+    const [horaReserva, setHoraReserva] = useState(null);
+    const [diaReserva, setDiaReserva] = useState(null);
+    const [idResReserva, setIdResReserva] = useState(null);
+    const [refreshValue, setRefreshValue] = useState(0);
+
+    // Enlace de ayuda para el modal
+    const mensajeAyuda = (
+        <span>
+          ¿Necesitas ayuda? {" "}
+          <a style={{ textDecoration: 'underline' }} href="https://n9.cl/zfqn2">Contáctanos aquí</a>
+        </span>
+    );      
+
+    // Actualización de modales
+    const handleClickModal = (tipo, sala, experiencia, hora, dia, idReserv) => {
+        setTipoModal(tipo)
+        setSalaReserva(sala)
+        setExperienciaReserva(experiencia)
+        setHoraReserva(hora)
+        setDiaReserva(dia)
+        setIdResReserva(idReserv)
     };
 
+    /*console.log(getFromSessionStorage("idUsuario"))*/
+    const idUsuario = (getFromLocalStorage("user"));
+
     useEffect(() => {
-        get("reservaciones")
-            .then((res) => {
-                console.log("Reservaciones:" + res);
-                setReservaciones(res);
+        get(`perfil_info/${idUsuario}`)
+            .then((result) => {
+                const perfilInfo = result;
+                setDatosUsuario(perfilInfo.recordsets[0][0]);
+                setDatosReservas(perfilInfo.recordsets[1]);
+                setDatosLogros(perfilInfo.recordsets[2]);
+                setEstadoLogros(perfilInfo.recordsets[3]);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
             });
-    }, []);
+    }, [idUsuario, refreshValue]);
+    
+    const handleCancelarReserva = (idReserva) => {
+        
+        const url = `reservaciones/${idReserva}`;
+        console.log(idReserva)
+        
+        const data = JSON.stringify({
+            estatus: 4,
+          }); // Aquí podrías enviar datos adicionales si es necesario
+    
+        put(url, data, () => {
+            console.log("La reserva se canceló satisfactoriamente.");
+
+            const url2 = `usuarios/${idUsuario}`;
+            let prioridadPenalizada;
+            let prioridadActual=datosUsuario.prioridad;
+
+            if (prioridadActual - 5 >= 0) {
+                prioridadPenalizada = prioridadActual - 5;
+            } else if (prioridadActual - 5 < 0){
+                prioridadPenalizada = 0;
+            }            
+
+            const data2 = JSON.stringify({
+                prioridad: prioridadPenalizada
+            });
+            
+            put(url2, data2, () => {
+                console.log("Penalización aplicada.");
+            }, (error) => {
+                console.error("Error al aplicar penalización:", error);
+            });
+            
+            // Pasar al siguiente modal
+            handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)
+            setRefreshValue(refreshValue + 1)
+
+        }, (error) => {
+            console.error("Error al cancelar la reserva:", error);
+        });
+    };
+
+    const handleLogroArtista = (logroId) => {
+        const url = `logros/${idUsuario}/${logroId}`;
+        let nuevoValorLogro = estadoLogros[logroId - 1].valorActual + 1;
+        console.log("NUEVO VALOR LOGRO = " + nuevoValorLogro);
+        console.log(datosLogros[logroId - 1].nombre)
+        const valorMaxLogro = datosLogros[logroId - 1].valorMax;
+        console.log("VALOR MAX LOGRO = " + valorMaxLogro);
+
+        if (nuevoValorLogro >= valorMaxLogro) {
+            nuevoValorLogro = valorMaxLogro;
+        }
+
+        const data = JSON.stringify({
+            valorActual: nuevoValorLogro,
+        }); // Aquí podrías enviar datos adicionales si es necesario
+
+        put(url, data, () => {
+            console.log("El progreso del logro se actualizó satisfactoriamente.");
+
+            if (nuevoValorLogro == valorMaxLogro) {
+                const url2 = `logros/${idUsuario}/${logroId}`;
+                const data2 = JSON.stringify({
+                    obtenido: true,
+                });
+
+                put(url2, data2, () => {
+                    console.log("El logro se ha obtenido.");
+                }, (error) => {
+                    console.error("Error al obtener el logro.", error);
+                });
+            }
+
+            setRefreshValue(refreshValue + 1)
+        }, (error) => {
+            console.error("Error al guardar el progreso del logro.", error);
+        });
+    }
 
     return (
         <div className="profile-container">
@@ -90,26 +157,27 @@ function Profile() {
                 <CancelarReservacion
                     modalClasificacion={1}
                     type="tipo1"
-                    titulo1="Tu reserva: Sala Horizons"
-                    titulo2="Viernes - 19 de abril"
-                    titulo3="14:30 - 15:30"
-                    textoRojo="Cancelar"
-                    textoVerde="Ok"
-                    funcionRojo={() => handleClickModal(2)}
-                    funcionVerde={() => handleClickModal(0)}
+                    titulo1={salaReserva}
+                    tituloExperiencia = {experienciaReserva}
+                    titulo2={diaReserva}
+                    titulo3={horaReserva}
+                    textoRojo="Cancelar reservación"
+                    funcionRojo={() => handleClickModal(2, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
+                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
                 />
             ) : tipoModal === 2 ? (
                 <CancelarReservacion
                     modalClasificacion={2}
                     type="tipo2"
-                    titulo1="Estas a punto de cancelar tu reservación en: Dimension Forge"
-                    titulo2="Viernes - 19 de abril"
-                    titulo3="14:30 - 15:30"
-                    titulo4="¿Deseas continuar?"
-                    textoRojo="Si, cancelar"
+                    titulo1={"¿Quieres cancelar tu reserva?"}
+                    titulo2={salaReserva }
+                    titulo3={diaReserva.split(" - ")[1] + " (" + horaReserva + ")"}
+                    titulo4="¡Perderás puntos de prioridad!"
+                    textoRojo="Sí"
                     textoVerde="No"
-                    funcionRojo={() => handleClickModal(3)}
-                    funcionVerde={() => handleClickModal(0)}
+                    funcionRojo={() => handleCancelarReserva(idResReserva)}
+                    /*funcionRojo={() =>handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)}*/
+                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
                 />
             ) : tipoModal === 3 ? (
                 <CancelarReservacion
@@ -117,9 +185,9 @@ function Profile() {
                     type="tipo3"
                     titulo1="Cancelación exitosa"
                     titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
-                    titulo3="¿Necesitas ayuda? Contáctanos aquí"
+                    titulo3={mensajeAyuda}
                     textoVerde="Cerrar"
-                    funcionVerde={() => handleClickModal(0)}
+                    funcionVerde={() => handleClickModal(0, salaReserva, experienciaReserva, horaReserva, diaReserva, idResReserva)}
                 />
             ) : null}
 
@@ -127,13 +195,32 @@ function Profile() {
     				<BotonBack className="imagen-boton" ruta="/home/"/>
 			</div> */}
 
-            <NameCard />
+            <NameCard
+                nombre={
+                    datosUsuario.nombre
+                        ? datosUsuario.nombre.split(" ")[0] +
+                          " " +
+                          datosUsuario.apellidoP
+                        : "Mi perfil"
+                }
+                apodo={datosUsuario.apodo}
+                icono={datosUsuario.iconoURL? datosUsuario.iconoURL : LogoRobot}
+                onClick={() => handleLogroArtista(10)}
+                />
 
             <div className="div-exterior-perfil">
                 <div className="esfera-div-celular">
                     <EsferaPuntosPrioridad
-                        puntos="367"
-                        subtitulo="Puntos de prioridad"
+                        puntos={
+                            datosUsuario.prioridad
+                                ? datosUsuario.prioridad
+                                : "?"
+                        }
+                        subtitulo={
+                            datosUsuario.prioridad
+                                ? "Puntos de prioridad"
+                                : "Cargando"
+                        }
                     />
                 </div>
 
@@ -141,24 +228,32 @@ function Profile() {
                     <h2 className="sub">Logros</h2>
 
                     <div className="logros-div-in">
-                        {renderTarjetasLogro(logrosData)}
+                        {renderTarjetasLogro(datosLogros, estadoLogros)}
                         <div className="degradado-down"></div>
                     </div>
                 </div>
 
                 <div className="esfera-div">
                     <EsferaPuntosPrioridad
-                        puntos="367"
-                        subtitulo="Puntos de prioridad"
+                        puntos={
+                            (datosUsuario.prioridad >= 0)
+                                ? datosUsuario.prioridad
+                                : "..."
+                        }
+                        subtitulo={
+                            (datosUsuario.prioridad >= 0)
+                                ? "Puntos de prioridad"
+                                : "Cargando"
+                        }
                     />
                 </div>
 
                 <div className="reservaciones-div">
                     <h2 className="sub">Reservaciones activas</h2>
 
-                    <div className="reservaciones-div-in">
+                    <div className="reservaciones-div-in" data-cy="reservationCard">
                         {generateReservationCards(
-                            reservaciones,
+                            datosReservas,
                             handleClickModal
                         )}
                         <div className="degradado-down"></div>
@@ -166,10 +261,16 @@ function Profile() {
                 </div>
 
                 <div className="botones-modo-celular">
-                    <BotonCelular texto="Logros" tipo="logros" />
+                    <BotonCelular 
+                        texto="Logros" 
+                        tipo="logros" 
+                        datosLogros={datosLogros}
+                        estadoLogros={estadoLogros}
+                    />
                     <BotonCelular
                         texto="Reservaciones activas"
                         tipo="calendario"
+                        datosReservas={datosReservas}
                     />
                 </div>
             </div>

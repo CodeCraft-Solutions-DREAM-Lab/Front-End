@@ -1,0 +1,21 @@
+.boton-agregar-div{
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #042e55;
+    cursor: pointer;
+    width: 17vw;
+    height: 2.6vw;
+}
+
+.boton-agregar-div:hover{
+    background-color: rgba(255, 255, 255, 0.562);
+}
+
+

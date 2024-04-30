@@ -1,4 +1,3 @@
-// Estilos
 import "./NameCard.css";
 
 // Tipos de datos de props
@@ -47,17 +46,12 @@ function NameCard({ nombre, apodo }) {
             />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">
-                    {nombre}Efraín Martínez Garza
+                    {props.nombre}
                 </h1>
                 <h2 className="apodo">{logroSeleccionado.nombre}</h2>
             </div>
         </div>
     );
 }
-
-NameCard.propTypes = {
-    nombre: propTypes.string,
-    apodo: propTypes.string,
-};
 
 export default NameCard;
