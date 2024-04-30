@@ -25,77 +25,23 @@ import { getFromLocalStorage } from "src/utils/Storage";
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
     const [icono, setIcono] = useState("robot-icon.png");
-    const [logrosObtenidos, setLogrosObtenidos] = useState([
-        {
-            nombre: "Robot Expert",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
-        },
-        {
-            nombre: "Ancient Soul",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
-        },
-        {
-            nombre: "Five-Star Player",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
-        },
-        {
-            nombre: "Robot Expert",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
-        },
-        {
-            nombre: "Ancient Soul",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
-        },
-        {
-            nombre: "Five-Star Player",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
-        },
-        {
-            nombre: "Robot Expert",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
-        },
-        {
-            nombre: "Ancient Soul",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
-        },
-        {
-            nombre: "Five-Star Player",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
-        },
-        {
-            nombre: "Robot Expert",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
-        },
-        {
-            nombre: "Ancient Soul",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
-        },
-        {
-            nombre: "Five-Star Player",
-            iconoURL:
-                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
-        },
-    ]);
-    const [configuracionLogro, setConfiguracionLogro] = useState();
+    const [logrosObtenidos, setLogrosObtenidos] = useState([]);
+    const [configuracionLogro, setConfiguracionLogro] = useState("Titulo");
+    const [logroSeleccionado, setLogroSeleccionado] = useState({
+        titulo: "",
+        icono: "",
+    });
 
     useEffect(() => {
         if (isOpen) {
             get(`perfil/logros/${getFromLocalStorage("user")}`).then(
                 (response) => {
                     setLogrosObtenidos(response.logros);
-                    setConfiguracionLogro(response.configuracionLogro);
-                    console.log(response);
+                    setConfiguracionLogro(response.configuracionLogro[0]);
+                    setLogroSeleccionado({
+                        titulo: response.configuracionLogro[0].nombre,
+                        icono: response.configuracionLogro[0].iconoURL,
+                    });
                 }
             );
         }
@@ -108,12 +54,14 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                     <div className="sl-main-container">
                         <div className="sl-left-container">
                             <div className="sl-title-container">
-                                <h1 className="sl-title">{titulo}</h1>
+                                <h1 className="sl-title">
+                                    {logroSeleccionado.titulo}
+                                </h1>
                             </div>
                             <div className="sl-icon-container">
                                 <div className="sl-icon">
                                     <NuevoIconoLogro
-                                        icono={LogoBigDreamer}
+                                        icono={logroSeleccionado.icono}
                                         colorFondo="#AFB7FF"
                                     />
                                 </div>
