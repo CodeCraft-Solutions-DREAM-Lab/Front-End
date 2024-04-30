@@ -5,7 +5,7 @@ import { Button, Modal, ModalBody, ModalContent } from "@nextui-org/react";
 import PropTypes from "prop-types";
 
 // Hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Estilos
 import "./SelectorLogro.css";
@@ -15,6 +15,12 @@ import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogr
 
 // Iconos temporales
 import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
+
+// API Requests
+import { get } from "src/utils/ApiRequests";
+
+// Local Storage
+import { getFromLocalStorage } from "src/utils/Storage";
 
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
@@ -81,6 +87,19 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                 "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
         },
     ]);
+    const [configuracionLogro, setConfiguracionLogro] = useState();
+
+    useEffect(() => {
+        if (isOpen) {
+            get(`perfil/logros/${getFromLocalStorage("user")}`).then(
+                (response) => {
+                    setLogrosObtenidos(response.logros);
+                    setConfiguracionLogro(response.configuracionLogro);
+                    console.log(response);
+                }
+            );
+        }
+    }, [isOpen]);
 
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
