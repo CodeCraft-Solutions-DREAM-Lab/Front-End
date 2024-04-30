@@ -1,4 +1,3 @@
-// Estilos
 import "./NameCard.css";
 
 // Tipos de datos de props
@@ -16,7 +15,7 @@ import { get } from "src/utils/ApiRequests";
 // Storage
 import { getFromLocalStorage } from "src/utils/Storage";
 
-function NameCard({ nombre, apodo }) {
+function NameCard({ nombre, handleLogroArtista }) {
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
     const [logroSeleccionado, setLogroSeleccionado] = useState({});
     const [colorSeleccionado, setColorSeleccionado] = useState("");
@@ -44,11 +43,10 @@ function NameCard({ nombre, apodo }) {
                 logrosObtenidos={logrosObtenidos}
                 logroSeleccionado={logroSeleccionado}
                 setLogroSeleccionado={setLogroSeleccionado}
+                handleLogroArtista={handleLogroArtista}
             />
             <div className="div-usuario">
-                <h1 className="nombre-usuario">
-                    {nombre}Efraín Martínez Garza
-                </h1>
+                <h1 className="nombre-usuario">{nombre}</h1>
                 <h2 className="apodo">{logroSeleccionado.nombre}</h2>
             </div>
         </div>
@@ -56,8 +54,8 @@ function NameCard({ nombre, apodo }) {
 }
 
 NameCard.propTypes = {
-    nombre: propTypes.string,
-    apodo: propTypes.string,
+    nombre: propTypes.string.isRequired,
+    handleLogroArtista: propTypes.func.isRequired,
 };
 
 export default NameCard;

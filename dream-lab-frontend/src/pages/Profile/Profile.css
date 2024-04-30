@@ -170,6 +170,14 @@
     margin-bottom: 7vh;
 }
 
+@media (max-width: 1200px){
+
+    .navbar-div-profile {
+        margin-top: 7vh;
+    }
+    
+}
+
 @media (max-width: 800px) {
     .sub {
         font-size: small;
@@ -199,7 +207,7 @@
     }
 
     .esfera-div-celular {
-        display: block;
+        display:flex;
         justify-content: center;
         align-items: center;
         width: 100%;
@@ -238,6 +246,11 @@
             transparent,
             #7477e6 30%
         ); /* Crea un degradado de transparente a morado */
+    }
+
+    .navbar-div-profile {
+        margin-top: 4vh;
+        margin-bottom: 2vh;
     }
 }
 
@@ -365,7 +378,7 @@
 
 @media (max-width: 376px) {
     .esfera-div-celular {
-        display: block;
+        display:flex;
         justify-content: center;
         align-items: center;
         width: 100%;
