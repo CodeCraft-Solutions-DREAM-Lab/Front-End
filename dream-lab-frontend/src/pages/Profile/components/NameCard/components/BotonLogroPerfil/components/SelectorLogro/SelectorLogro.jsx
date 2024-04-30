@@ -19,6 +19,7 @@ import { get } from "src/utils/ApiRequests";
 
 // Local Storage
 import { getFromLocalStorage } from "src/utils/Storage";
+import SelectorColores from "./components/SelectorLogroItem/SelectorColores/SelectorColores";
 
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
@@ -66,20 +67,10 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                 </div>
                             </div>
                             <div className="sl-color-button-container">
-                                <Button
-                                    className="sl-color-button"
-                                    radius="full"
-                                    style={{
-                                        backgroundColor: colorSeleccionado,
-                                    }}
-                                    onPress={() => {
-                                        setColorSeleccionado("#FF0000");
-                                    }}
-                                >
-                                    <span className="sl-color-button-text">
-                                        Cambiar color
-                                    </span>
-                                </Button>
+                                <SelectorColores
+                                    colorSeleccionado={colorSeleccionado}
+                                    setColorSeleccionado={setColorSeleccionado}
+                                />
                             </div>
                         </div>
                         <div className="sl-center-container"></div>

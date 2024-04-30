@@ -31,12 +31,6 @@
         margin-bottom: 10px;
     }
 
-    .sl-color-button {
-        width: 75%;
-        min-height: 3rem;
-        margin-bottom: 15px;
-    }
-
     .sl-save-button {
         width: 75%;
         min-height: 3rem;
@@ -90,11 +84,6 @@
     .sl-icon {
         width: 75%;
         height: 100%;
-    }
-
-    .sl-color-button {
-        width: 75%;
-        min-height: 2.5rem;
     }
 
     .sl-save-button {
@@ -154,13 +143,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.sl-color-button-text {
-    font-size: max(2vh, 1.2vw);
-    font-weight: bold;
-    color: rgba(39, 39, 39, 0.5);
-    font-family: "Karla", sans-serif;
 }
 
 .sl-save-button-container {
