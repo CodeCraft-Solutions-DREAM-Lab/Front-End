@@ -3,7 +3,7 @@ import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import RoundedButton from "./components/Button/Button";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import CircularProgress from "@mui/material/CircularProgress";
 
@@ -30,6 +30,7 @@ function SeleccionMaterial() {
 	});
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [searchTerm, setSearchTerm] = useState("");
 
 	useEffect(() => {
 		const date = new Date(getFromSessionStorage("fecha"));
@@ -91,6 +92,11 @@ function SeleccionMaterial() {
 	const handleSubmit = async () => {
 		navigate("/reservacion/resumen");
 	};
+
+	const filteredData = data.filter(material =>
+        material.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
 	return (
 		<>
 			<NavBar view="soloPerfil" autoHide={false} />
@@ -99,14 +105,14 @@ function SeleccionMaterial() {
 				<div className="top-section">
 					{/* Aquí irá el resumen y la search bar */}
 					<div className="search-bar-container">
-						<SearchBar />
+						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 					</div>
 				</div>
 				<div className="bottom-section">
 					{/* Aquí van las tarjetas con los materiales */}
 					<div className="card-container-wrapper">
 						<div className="card-container-sm">
-							{data.map((material) => (
+							{filteredData.map(material => (
 								<MaterialCard
 									key={material.id}
 									materialId={material.id}
