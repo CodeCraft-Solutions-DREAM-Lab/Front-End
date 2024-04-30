@@ -5,12 +5,12 @@ import "./NameCard.css";
 import propTypes from "prop-types";
 
 // Components
-import IconoLogroPerfil from "./components/IconoLogroPerfil/IconoLogroPerfil";
+import BotonLogroPerfil from "./components/BotonLogroPerfil/BotonLogroPerfil";
 
 function NameCard({ nombre, apodo }) {
     return (
         <div className="div-exterior">
-            <IconoLogroPerfil />
+            <BotonLogroPerfil />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">
                     {nombre}Efraín Martínez Garza

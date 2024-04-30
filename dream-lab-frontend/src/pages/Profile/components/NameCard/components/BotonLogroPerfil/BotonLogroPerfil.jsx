@@ -2,7 +2,7 @@
 import LogoRobot from "src/assets/Profile/robot-icon.png";
 
 // Estilos
-import "./IconoLogroPerfil.css";
+import "./BotonLogroPerfil.css";
 
 // Componentes NextUI
 import { Button, useDisclosure } from "@nextui-org/react";
