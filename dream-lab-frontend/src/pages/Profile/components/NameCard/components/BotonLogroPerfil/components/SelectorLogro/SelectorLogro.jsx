@@ -24,21 +24,19 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
     const [icono, setIcono] = useState("robot-icon.png");
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
-    const [logroSeleccionado, setLogroSeleccionado] = useState({
-        titulo: "",
-        icono: "",
-    });
-    const [colorSeleccionado, setColorSeleccionado] = useState();
+    const [logroSeleccionado, setLogroSeleccionado] = useState({});
+    const [colorSeleccionado, setColorSeleccionado] = useState("");
 
     useEffect(() => {
         if (isOpen) {
             get(`perfil/logros/${getFromLocalStorage("user")}`).then(
                 (response) => {
+                    console.log(response);
                     setLogrosObtenidos(response.logros);
                     setLogroSeleccionado({
-                        id: response.configuracionLogro[0].idLogro,
-                        titulo: response.configuracionLogro[0].nombre,
-                        icono: response.configuracionLogro[0].iconoURL,
+                        idLogro: response.configuracionLogro[0].idLogro,
+                        nombre: response.configuracionLogro[0].nombre,
+                        iconoURL: response.configuracionLogro[0].iconoURL,
                     });
                     setColorSeleccionado(
                         response.configuracionLogro[0].colorPreferido
@@ -56,13 +54,13 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                         <div className="sl-left-container">
                             <div className="sl-title-container">
                                 <h1 className="sl-title">
-                                    {logroSeleccionado.titulo}
+                                    {logroSeleccionado.nombre}
                                 </h1>
                             </div>
                             <div className="sl-icon-container">
                                 <div className="sl-icon">
                                     <NuevoIconoLogro
-                                        icono={logroSeleccionado.icono}
+                                        icono={logroSeleccionado.iconoURL}
                                         colorFondo={colorSeleccionado}
                                     />
                                 </div>
@@ -73,6 +71,9 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                     radius="full"
                                     style={{
                                         backgroundColor: colorSeleccionado,
+                                    }}
+                                    onPress={() => {
+                                        setColorSeleccionado("#FF0000");
                                     }}
                                 >
                                     <span className="sl-color-button-text">
@@ -86,7 +87,17 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                             <div className="sl-opciones-logros-container">
                                 {logrosObtenidos.map((logro, index) => (
                                     <div key={index} className="sl-logro-item">
-                                        <SelectorLogroItem logro={logro} />
+                                        <SelectorLogroItem
+                                            logro={logro}
+                                            setLogroSeleccionado={
+                                                setLogroSeleccionado
+                                            }
+                                            selected={
+                                                logro.idLogro ===
+                                                logroSeleccionado.idLogro
+                                            }
+                                            selectedColor={colorSeleccionado}
+                                        />
                                     </div>
                                 ))}
                             </div>

@@ -7,9 +7,27 @@ import "./SelectorLogroItem.css";
 // Proptypes
 import PropTypes from "prop-types";
 
-function SelectorLogroItem({ logro, selected, onClick }) {
+// Nextui components
+import { Button } from "@nextui-org/react";
+
+function SelectorLogroItem({
+    logro,
+    selected,
+    setLogroSeleccionado,
+    selectedColor,
+}) {
+    const handleClick = () => {
+        setLogroSeleccionado(logro);
+    };
+    const className = selected
+        ? "sli-logro-item-icon sli-selected"
+        : "sli-logro-item-icon";
     return (
-        <div className="sl-logro-item-icon">
+        <div
+            className={className}
+            onClick={handleClick}
+            style={{ borderColor: selectedColor }}
+        >
             <NuevoIconoLogro icono={logro.iconoURL} />
         </div>
     );
@@ -18,7 +36,8 @@ function SelectorLogroItem({ logro, selected, onClick }) {
 SelectorLogroItem.propTypes = {
     logro: PropTypes.object,
     selected: PropTypes.bool,
-    onClick: PropTypes.func,
+    setLogroSeleccionado: PropTypes.func,
+    selectedColor: PropTypes.string,
 };
 
 export default SelectorLogroItem;
