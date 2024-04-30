@@ -14,9 +14,6 @@ import "./SelectorLogro.css";
 import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
 import SelectorLogroItem from "./components/SelectorLogroItem/SelectorLogroItem";
 
-// Iconos temporales
-import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
-
 // API Requests
 import { get } from "src/utils/ApiRequests";
 
@@ -27,22 +24,25 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
     const [icono, setIcono] = useState("robot-icon.png");
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
-    const [configuracionLogro, setConfiguracionLogro] = useState("Titulo");
     const [logroSeleccionado, setLogroSeleccionado] = useState({
         titulo: "",
         icono: "",
     });
+    const [colorSeleccionado, setColorSeleccionado] = useState("");
 
     useEffect(() => {
         if (isOpen) {
             get(`perfil/logros/${getFromLocalStorage("user")}`).then(
                 (response) => {
                     setLogrosObtenidos(response.logros);
-                    setConfiguracionLogro(response.configuracionLogro[0]);
                     setLogroSeleccionado({
+                        id: response.configuracionLogro[0].idLogro,
                         titulo: response.configuracionLogro[0].nombre,
                         icono: response.configuracionLogro[0].iconoURL,
                     });
+                    setColorSeleccionado(
+                        response.configuracionLogro[0].colorPreferido
+                    );
                 }
             );
         }
