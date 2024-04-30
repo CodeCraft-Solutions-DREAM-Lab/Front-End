@@ -39,7 +39,6 @@ function Anuncios() {
         let interval;
         if (autoRotate && data.length > 0) {
             interval = setInterval(() => {
-                console.log("data before next", data);
                 next();
             }, 5000);
         }
