@@ -23,7 +23,9 @@ export function getFromSessionStorage(key) {
 }
 
 export function removeFromSessionStorage(key) {
-    sessionStorage.removeItem(key);
+    if (existsInLocalStorage(key)) {
+        sessionStorage.removeItem(key);
+    }
 }
 
 export function existsInSessionStorage(key) {
