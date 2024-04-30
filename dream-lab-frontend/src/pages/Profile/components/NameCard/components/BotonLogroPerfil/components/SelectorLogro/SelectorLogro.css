@@ -36,6 +36,19 @@
         min-height: 3rem;
         margin-bottom: 15px;
     }
+
+    .sl-opciones-logros-container {
+        margin-top: 2%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3%;
+        padding: 2%;
+    }
+
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
+    }
 }
 
 @media only screen and (orientation: landscape) {
@@ -69,6 +82,19 @@
     .sl-color-button {
         width: 75%;
         min-height: 2.5rem;
+    }
+
+    .sl-opciones-logros-container {
+        margin-top: 10%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2%;
+        padding: 5%;
+    }
+
+    .sl-logro-item-icon {
+        width: 75%;
+        height: auto;
     }
 }
 
@@ -116,6 +142,13 @@
 
 .sl-icon {
     width: max(10vh, 15vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sl-logro-item {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

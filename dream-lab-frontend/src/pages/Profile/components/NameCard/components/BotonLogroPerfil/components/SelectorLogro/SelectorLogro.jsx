@@ -19,9 +19,41 @@ import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
 function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
     const [titulo, setTitulo] = useState("Robot Expert");
     const [icono, setIcono] = useState("robot-icon.png");
+    const [logrosObtenidos, setLogrosObtenidos] = useState([
+        {
+            nombre: "Robot Expert",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+        },
+        {
+            nombre: "Ancient Soul",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+        },
+        {
+            nombre: "Five-Star Player",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+        },
+        {
+            nombre: "Robot Expert",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+        },
+        {
+            nombre: "Ancient Soul",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+        },
+        {
+            nombre: "Five-Star Player",
+            iconoURL:
+                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+        },
+    ]);
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
             <ModalContent>
                 <ModalBody>
                     <div className="sl-main-container">
@@ -53,7 +85,17 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                         </div>
                         <div className="sl-center-container"></div>
                         <div className="sl-right-container">
-                            <div className="sl-opciones-logros-container"></div>
+                            <div className="sl-opciones-logros-container">
+                                {logrosObtenidos.map((logro, index) => (
+                                    <div key={index} className="sl-logro-item">
+                                        <div className="sl-logro-item-icon">
+                                            <NuevoIconoLogro
+                                                icono={logro.iconoURL}
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                             <div className="sl-boton-guardar-container"></div>
                         </div>
                     </div>
