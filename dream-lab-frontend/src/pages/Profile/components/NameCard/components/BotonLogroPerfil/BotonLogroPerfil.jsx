@@ -26,11 +26,10 @@ function IconoLogroPerfil() {
                     isIconOnly
                     className="h-full w-full bg-transparent"
                     onPress={abrirSelector}
-                    style={{ backgroundColor: "d9d9d9" }}
                 >
                     <NuevoIconoLogro
                         icono={LogoBigDreamer}
-                        colorIcono="#d9d9d9"
+                        colorFondo="#d9d9d9"
                     />
                 </Button>
             </div>
