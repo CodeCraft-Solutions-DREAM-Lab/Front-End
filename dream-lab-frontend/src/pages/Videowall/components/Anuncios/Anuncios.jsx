@@ -2,26 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Anuncios.css";
 import Hora from "./components/Hora/Hora.jsx";
 import InfoEvento from "./components/InfoEvento/InfoEvento.jsx";
-import axios from "axios";
-
-//import {useFirebaseApp} from "reactfire";
-
-/* const anunciosDefault = [
-    {
-        id: 1,
-        img: "",
-        title: "Titulo 1",
-        sala: "Sala 1",
-        date: "Fecha 1",
-    },
-    {
-        id: 2,
-        img: "",
-        title: "Titulo 2",
-        sala: "Sala 2",
-        date: "Martes 16 de Febrero 3:00pm a 5:00pm",
-    },
-]; */
 
 function Anuncios() {
     const [data, setData] = useState([]);
@@ -29,26 +9,19 @@ function Anuncios() {
     const [activeSlide, setActiveSlide] = useState(parseInt(Math.floor(data.length / 2)));
     const [autoRotate, setAutoRotate] = useState(true);
 
+    const fetchData = async () => {
+        try {
+            const response = await fetch("https://readanuncios-j5zt2ysdwq-uc.a.run.app/");
+            const jsonData = await response.json();
+            setData(jsonData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
     useEffect(() => {
-        // Realiza la solicitud HTTP la primera vez que se renderice el componente
-        const fetchData = async () => {
-            try {
-                const response = await axios.get("https://readanuncios-j5zt2ysdwq-uc.a.run.app");
-                setData(response.data); // Actualiza el estado `data` con los datos recibidos
-                console.log("Data ahora es: ", data);
-            } catch (error) {
-                console.error("Error al obtener datos:", error);
-            }
-        };
-
-        fetchData(); // Llama a la función para realizar la solicitud HTTP
+        fetchData();
     }, []);
-
-    //const firebase = useFirebaseApp();
-    //console.log(firebase);
-
-    //console.log("Data: ", data);
-
 
     // Funciones para rotar el carrusel
     const next = () => {
@@ -64,14 +37,15 @@ function Anuncios() {
     // Rotar cada cierto tiempo
     useEffect(() => {
         let interval;
-        if (autoRotate) {
+        if (autoRotate && data.length > 0) {
             interval = setInterval(() => {
+                console.log("data before next", data);
                 next();
             }, 5000);
         }
 
         return () => clearInterval(interval);
-    }, [activeSlide, autoRotate]);
+    }, [activeSlide, autoRotate, data]);
 
     // Cambio de estilos dependiendo de la posición del anuncio
     const getStyles = (index) => {
@@ -95,7 +69,7 @@ function Anuncios() {
                             className="slideAnuncio"
                             style={{
                                 height: '100%',
-                                background: `no-repeat center/cover url(${item.img})`,
+                                background: `no-repeat center/cover url(${item.urlImagen})`,
                                 ...getStyles(i),
                             }}
                         >

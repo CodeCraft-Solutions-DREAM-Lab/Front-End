@@ -1,5 +1,6 @@
+/* eslint-disable linebreak-style */
 /**
- * Import function triggers from their respective submodules:
+ *  * Import function triggers from their respective submodules:
  *
  * const {onCall} = require("firebase-functions/v2/https");
  * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
@@ -19,13 +20,15 @@ const {getFirestore} = require("firebase-admin/firestore");
 
 initializeApp();
 
-exports.readAnuncios = onRequest(async (req, res) => {
+exports.readAnuncios = onRequest( async (req, res) => {
   try {
     // Accede a la instancia de Firestore
-    // const firestore = getFirestore();
+    const firestore = getFirestore();
+
+    res.set("Access-Control-Allow-Origin", "*");
 
     // Obtiene todos los documentos de la colección "AnunciosVideowall"
-    const querySnapshot = await getFirestore()
+    const querySnapshot = await firestore
         .collection("AnunciosVideowall")
         .get();
     console.log("QuerySnapshot:", querySnapshot.docs);
@@ -71,6 +74,8 @@ exports.readAnuncios = onRequest(async (req, res) => {
 });
 
 
+// Funciones de ejemplo/tutorial
+
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Firestore under the path /messages/:documentId/original
 exports.addmessage = onRequest(async (req, res) => {
@@ -103,10 +108,3 @@ exports.makeuppercase = onDocumentCreated("/messages/{documentId}", (event) => {
   return event.data.ref.set({uppercase}, {merge: true});
 });
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
