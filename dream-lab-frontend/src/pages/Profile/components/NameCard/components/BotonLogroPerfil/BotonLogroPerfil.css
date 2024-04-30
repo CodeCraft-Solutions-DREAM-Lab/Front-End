@@ -1,5 +1,6 @@
 .ilp-logo-div {
-    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 10%;
-    cursor: pointer;
 }

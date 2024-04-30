@@ -1,5 +1,6 @@
 // Imagenes
 import LogoRobot from "src/assets/Profile/robot-icon.png";
+import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
 
 // Estilos
 import "./BotonLogroPerfil.css";
@@ -9,6 +10,7 @@ import { Button, useDisclosure } from "@nextui-org/react";
 
 // Componentes
 import SelectorLogro from "./components/SelectorLogro/SelectorLogro";
+import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
 
 function IconoLogroPerfil() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -19,13 +21,17 @@ function IconoLogroPerfil() {
 
     return (
         <>
-            <div className="ilp-logo-div">
+            <div className="ilp-logo-div" onClick={abrirSelector}>
                 <Button
                     isIconOnly
                     className="h-full w-full bg-transparent"
                     onPress={abrirSelector}
+                    style={{ backgroundColor: "d9d9d9" }}
                 >
-                    <img src={LogoRobot} alt="logotipo-usuario" />
+                    <NuevoIconoLogro
+                        icono={LogoBigDreamer}
+                        colorIcono="#d9d9d9"
+                    />
                 </Button>
             </div>
             <SelectorLogro
