@@ -28,7 +28,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
         titulo: "",
         icono: "",
     });
-    const [colorSeleccionado, setColorSeleccionado] = useState("");
+    const [colorSeleccionado, setColorSeleccionado] = useState();
 
     useEffect(() => {
         if (isOpen) {
@@ -63,7 +63,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                 <div className="sl-icon">
                                     <NuevoIconoLogro
                                         icono={logroSeleccionado.icono}
-                                        colorFondo="#AFB7FF"
+                                        colorFondo={colorSeleccionado}
                                     />
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ function SelectorLogro({ isOpen, onOpen, onOpenChange }) {
                                     className="sl-color-button"
                                     radius="full"
                                     style={{
-                                        backgroundColor: "#AFB7FF",
+                                        backgroundColor: colorSeleccionado,
                                     }}
                                 >
                                     <span className="sl-color-button-text">
