@@ -1,32 +1,27 @@
+import React, { useEffect, useState } from "react";
 import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
-import TarjetaLogro from "./components/TarjetasLogro/TarjetaLogro";
-import "./ReservacionesActivas.css";
 import { renderTarjetasLogro } from "./utils/Funciones.jsx";
+import { getFromLocalStorage } from "../../utils/Storage";
+import { get } from "src/utils/ApiRequests.js";
 
 function Logros() {
-    const logrosData = [
-        {
-            nombre: "Big Dreamer",
-            descripcion: "Asiste a más de 35 eventos en el Dream Lab.",
-            progreso: 0.75,
-            color: "#7885F8",
-            logo: "LogoBigDreamer",
-        },
-        {
-            nombre: "Robot Expert",
-            descripcion: "Asiste a 3 talleres en el Dimesion Forge.",
-            progreso: 1,
-            color: "#7885F8",
-            logo: "LogoRobot",
-        },
-        {
-            nombre: "Apple Developer",
-            descripcion: "Asiste a 3 talleres de Swift.",
-            progreso: 0.25,
-            color: "#7885F8",
-            logo: "LogoBigDreamer",
-        },
-    ];
+    const [datosLogros, setDatosLogros] = useState([]);
+    const [estadoLogros, setEstadoLogros] = useState([]);
+    const [refreshValue, setRefreshValue] = useState(0);
+
+    const idUsuario = getFromLocalStorage("user");
+
+    useEffect(() => {
+        get(`perfil_info/${idUsuario}`)
+            .then((result) => {
+                const perfilInfo = result;
+                setDatosLogros(perfilInfo.recordsets[2]);
+                setEstadoLogros(perfilInfo.recordsets[3]);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, [idUsuario, refreshValue]);
 
     return (
         <div className="out-div">
@@ -36,27 +31,9 @@ function Logros() {
                 </div>
                 <h2 className="sub-celular">Logros</h2>
             </div>
-
             <div className="reservaciones-div-celular">
                 <div className="reservaciones-div-in-celular">
-                    {renderTarjetasLogro(logrosData)}
-
-                    <TarjetaLogro
-                        progresoLogro="0.2"
-                        nombreLogro="Apple Developer"
-                        descripcion="Asiste a 3 talleres de Swift."
-                        colorFondo="#7885F8"
-                        iconoUtilizado="LogoRobot"
-                    />
-
-                    <TarjetaLogro
-                        progresoLogro="1"
-                        nombreLogro="Apple Developer"
-                        descripcion="Asiste a 3 talleres de Swift."
-                        colorFondo="#7885F8"
-                        iconoUtilizado="LogoRobot"
-                    />
-
+                    {renderTarjetasLogro(datosLogros, estadoLogros)}
                     <div className="degradado-down-celular"></div>
                 </div>
             </div>

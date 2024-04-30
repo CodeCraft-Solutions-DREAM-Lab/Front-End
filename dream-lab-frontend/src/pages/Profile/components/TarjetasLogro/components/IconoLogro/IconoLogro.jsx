@@ -1,6 +1,4 @@
 import "./IconoLogro.css";
-import LogoBigDreamer from "src/assets/Profile/bigDreamer.png";
-import LogoRobot from "src/assets/Profile/robot-icon.png";
 
 function IconoLogro(props) {
     return (
@@ -18,7 +16,7 @@ function IconoLogro(props) {
         >
             <img
                 className="logo-logro"
-                src={LogoBigDreamer}
+                src={props.icono}
                 alt="Icono del logro"
             />
         </div>
