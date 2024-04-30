@@ -2,8 +2,8 @@
     display: flex;
     flex-flow: row;
     align-items: center;
-    background-color: #2E3972;
     padding: 1rem;
+    background-color: #2E3972;
 }
 
 .tec-logo {

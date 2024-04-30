@@ -1,3 +1,5 @@
+import "cypress-localstorage-commands";
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -52,3 +54,15 @@ Cypress.Commands.add(
         return cy.wrap(subject).should("have.attr", attr, value);
     }
 );
+
+Cypress.Commands.add("loginWithTest", () => {
+    cy.intercept("POST", import.meta.env.VITE_API_URL + "auth/token", {
+        data: "token",
+    });
+
+    cy.setLocalStorage(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
+    );
+    cy.setLocalStorage("user", "test");
+});

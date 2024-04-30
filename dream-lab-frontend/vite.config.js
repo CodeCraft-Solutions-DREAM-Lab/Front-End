@@ -9,4 +9,7 @@ export default defineConfig({
             src: "/src",
         },
     },
+    optimizeDeps: {
+        exclude: ['js-big-decimal']
+      }
 });

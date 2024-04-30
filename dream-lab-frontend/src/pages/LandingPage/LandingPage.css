@@ -1,5 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+.landing-page-container {
+    background-image: 
+    url("src/assets/LandingPage/glass-circle-top-left.svg"),
+    url("src/assets/LandingPage/glass-circle-bottom-left.svg"),
+    url("src/assets/LandingPage/glass-circle-right.svg"), 
+    url("src/assets/LandingPage/glass-circle-right.svg"), 
+    url("src/assets/LandingPage/oval-blob-top-left.svg"),
+    url("src/assets/LandingPage/oval-blob-top-right.svg"),
+    url("src/assets/LandingPage/oval-blob-bottom-left.svg"),
+    url("src/assets/LandingPage/oval-blob-bottom-right.svg"),
+    url("src/assets/LandingPage/WavesLandingPage.svg"),
+    url("src/assets/LandingPage/LandingWavesFadeout.svg"); /* 10 imgs */
+    background-repeat: 
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
+    background-position-y: 
+    120rem,
+    175rem,
+    94rem,
+    178rem,
+    100rem,
+    100rem,
+    160rem,
+    160rem,
+    65rem,
+    132rem;
+    background-position-x: 
+    4rem,
+    7rem,
+    right,
+    right,
+    left,
+    right,
+    left,
+    right,
+    center,
+    center;
+}
+
 .pcb {
     position: absolute;
     left: 30rem;
@@ -40,7 +87,7 @@
     flex-flow: row wrap;
     margin-top: 60rem;
     margin-inline: 20rem;
-    gap: 5rem;
+    gap: 15rem;
 }
 
 .carousel-header {
