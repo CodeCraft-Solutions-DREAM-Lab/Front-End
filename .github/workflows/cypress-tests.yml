@@ -18,9 +18,14 @@ jobs:
               with:
                   path: ./dream-lab-frontend
                   fetch-depth: 0
+
+            - name: List files in dream-lab-frontend
+              run: ls -la ./dream-lab-frontend
+
             - name: Install Dependencies
               run: npm ci
               working-directory: ./dream-lab-frontend
+
             - name: Cypress run
               # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
               uses: cypress-io/github-action@v6
