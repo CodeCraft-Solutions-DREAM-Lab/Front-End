@@ -29,35 +29,36 @@ describe("Pruebas de selección de material", () => {
         cy.intercept('POST', '/materiales').as('getMaterials');
         cy.wait('@getMaterials');
 
-        cy.get('[data-cy="material-card-1"]').should('exist');
+        cy.get('.card-container-sm > :nth-child(1)').should('exist');
 
-		cy.get('[data-cy="material-card-11"]').find(".minus-button").click(); // Quitar 1
-		cy.get('[data-cy="material-card-11"]')
+		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="minus-button"]').click(); // Quitar 1
+		cy.get('.card-container-sm > :nth-child(1)')
 			.find(".quantity")
 			.should("contain", 0); // Verificar que el contador no se va a valores negativos
 
-		cy.get('[data-cy="material-card-11"]').find(".plus-button").click(); // Agregar 1
-		cy.get('[data-cy="material-card-11"]')
+		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
+		cy.get('.card-container-sm > :nth-child(1)')
 			.find(".quantity")
 			.should("contain", 1); // Verificar que incrementó el contador
 
-		cy.get('[data-cy="material-card-11"]').find(".plus-button").click(); // Agregar 1
-		cy.get('[data-cy="material-card-11"]')
+		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
+		cy.get('.card-container-sm > :nth-child(1)')
 			.find(".quantity")
 			.should("contain", 1); // Verificar que e contador no incrementó (la cantidad disponible es 1)
 
-		cy.get('[data-cy="material-card-11"]').find(".minus-button").click(); // Quitar 1
-		cy.get('[data-cy="material-card-11"]')
+		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="minus-button"]').click(); // Quitar 1
+		cy.get('.card-container-sm > :nth-child(1)')
 			.find(".quantity")
 			.should("contain", 0); // Verificar que decrementó el contador
 
-		cy.get('[data-cy="material-card-11"]').find(".plus-button").click(); // Agregar 1
+		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
 
 		cy.reload().then(() => {
 			// Recargamos la página
 			// Una vez recargada la página, checamos que el valor del contador se quedó con
 			// el valor asignado previamente
-			cy.get('[data-cy="material-card-1"]')
+            cy.wait('@getMaterials');
+			cy.get('.card-container-sm > :nth-child(1)')
 				.find(".quantity")
 				.should("contain", 1); // Verificar que el valor (1) sigue ahí 
 		});

@@ -42,6 +42,7 @@ function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate,
 								onClick={handleMinus}
 								src={minusIcon}
 								alt="Menos"
+								data-cy="minus-button"
 							/>
 							<div className="quantity">
 								<p>{quantity}</p>
@@ -50,6 +51,7 @@ function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate,
 								onClick={handlePlus}
 								src={plusIcon}
 								alt="Más"
+								data-cy="plus-button"
 							/>
 						</>
 					)}

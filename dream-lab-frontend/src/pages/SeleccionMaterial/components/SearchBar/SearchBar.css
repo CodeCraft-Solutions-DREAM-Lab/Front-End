@@ -36,11 +36,11 @@
 
 @media only screen and (max-width: 968px ) and (min-width: 481px){
     .searchContainer {
-        width: 60%; /* Adjust width for phone screens */
+        width: 40%; /* Adjust width for phone screens */
         justify-content: center; 
     }
     .searchBar {
-        width: 60%; /* Set full width on phone screens */
+        width: 40%; /* Set full width on phone screens */
         margin: auto; /* Center the search bar on phone screens */
         margin-left: auto;
         display: flex; /* Use flexbox for alignment */
