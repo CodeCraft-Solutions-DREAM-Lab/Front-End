@@ -216,7 +216,7 @@
 
     .logros-div {
         width: 45%;
-        height: 28vh;
+        height: 26vh;
         min-height: 0vh;
         margin-top: 5%;
         margin-right: 3%;
@@ -224,20 +224,20 @@
 
     .logros-div-in {
         overflow-y: auto;
-        height: 21vh;
+        height: 20vh;
         min-height: 0vh;
         padding-right: 3%;
     }
 
     .reservaciones-div {
         width: 45%;
-        height: 28vh;
+        height: 26vh;
         min-height: 0vh;
         margin-top: 5%;
     }
 
     .reservaciones-div-in {
-        height: 21vh;
+        height: 20vh;
     }
 
     .degradado-down {
