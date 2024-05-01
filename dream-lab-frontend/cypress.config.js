@@ -8,7 +8,9 @@ export default defineConfig({
             // implement node event listeners here
         },
     },
-
+    env: {
+        API_URL: "https://dreamlab-api.azurewebsites.net/",
+    },
     component: {
         devServer: {
             framework: "react",
