@@ -24,6 +24,16 @@ function Slider({
         setFetchFreeHoursAgain(!fetchFreeHoursAgain);
     };
 
+    const setOnePerson =  () => {
+        if (getFromSessionStorage("personas") == null) {
+            saveToSessionStorage("personas", 1);
+        };
+    };
+
+    useEffect(() => {
+        setOnePerson();
+    }, []);
+
     return (
         <div className="slider-out" data-cy="slider-container-personas">
             <div className="texto-num-personas">
