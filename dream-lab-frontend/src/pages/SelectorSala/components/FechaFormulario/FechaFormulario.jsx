@@ -55,8 +55,8 @@ function FechaFormulario(props) {
 
     let nextAvailableDate = getNextAvailableDay();
 
-    let isDateUnavailable = (date) => {
-        isWeekend(date, locale);
+    const isDateUnavailable = (date) => {
+        return isWeekend(date, locale);
     };
 
     useEffect(() => {
