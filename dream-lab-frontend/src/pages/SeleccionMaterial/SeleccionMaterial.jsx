@@ -125,6 +125,7 @@ function SeleccionMaterial() {
 											?.quantity || 0
 									}
 									maxQuantity={material.cantidadDisponible}
+									data-cy={`material-card-${material.id}`}
 								/>
 							))}
 						</div>
