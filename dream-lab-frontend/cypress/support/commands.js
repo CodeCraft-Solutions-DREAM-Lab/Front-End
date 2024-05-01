@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+const API_URL = "http://localhost:3000/";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -94,7 +95,7 @@ Cypress.Commands.add("getLength", (name) => {
 });
 
 Cypress.Commands.add("loginWithTest", () => {
-    cy.intercept("POST", import.meta.env.VITE_API_URL + "auth/token", {
+    cy.intercept("POST", API_URL + "auth/token", {
         data: "token",
     });
 

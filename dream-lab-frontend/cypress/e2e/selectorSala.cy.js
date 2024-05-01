@@ -1,5 +1,5 @@
 import "cypress-localstorage-commands";
-import { API_URL } from "/src/utils/ApiRequests";
+const API_URL = "http://localhost:3000/";
 
 describe("Probando pantalla de selector de sala", () => {
     beforeEach(() => {
@@ -49,7 +49,5 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("nombre-sala").should("exist");
         cy.getDataCy("nombre-experiencia").contains("Nombre de Experiencia");
         cy.getDataCy("nombre-sala").contains("Electric Garage");
-
-        
     });
 });
