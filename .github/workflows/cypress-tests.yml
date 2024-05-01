@@ -19,12 +19,12 @@ jobs:
                   path: dream-lab-frontend
             - name: Install Dependencies
               run: npm ci
-              working-directory: dream-lab-frontend
+              working-directory: ./dream-lab-frontend
             - name: Cypress run
               # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
               uses: cypress-io/github-action@v6
               with:
-                  working-directory: dream-lab-frontend
+                  working-directory: ./dream-lab-frontend
                   # Starts web server for E2E tests - replace with your own server invocation
                   # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
                   start: npm start
