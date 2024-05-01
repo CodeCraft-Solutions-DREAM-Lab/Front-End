@@ -25,9 +25,9 @@ function Slider({
     };
 
     return (
-        <div className="slider-out">
+        <div className="slider-out" data-cy="slider-container-personas">
             <div className="texto-num-personas">
-                <output htmlFor="slider" id="slider-value">
+                <output htmlFor="slider" id="slider-value" data-cy="slider-output-texto">
                     {" "}
                     {value} personas{" "}
                 </output>

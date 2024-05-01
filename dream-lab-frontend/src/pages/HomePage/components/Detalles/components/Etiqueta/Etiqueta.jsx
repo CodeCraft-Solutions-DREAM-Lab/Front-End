@@ -12,7 +12,7 @@ function Etiqueta(props) {
     }
 
     return (
-        <div className="etiqueta-div" style={{ color: color }}>
+        <div data-cy="etiqueta-sala-experiencia" className="etiqueta-div" style={{ color: color }}>
             <p>{props.nombre}</p>
         </div>
     );
