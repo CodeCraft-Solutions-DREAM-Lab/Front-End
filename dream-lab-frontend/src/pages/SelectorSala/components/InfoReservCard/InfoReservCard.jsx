@@ -3,6 +3,8 @@ import "./InfoReservCard.css";
 import { useState, useEffect } from "react";
 import WarningIcon from "src/assets/ResumenReservaciones/warning.png";
 
+import propTypes from "prop-types";
+
 export const InfoReservCard = (props) => {
     const { cuposArray, competidoresArray, update } = props;
     const [horaInicio, setHoraInicio] = useState(
@@ -22,14 +24,15 @@ export const InfoReservCard = (props) => {
     };
 
     useEffect(() => {
-        getHoraDeCorte();
-    }, []);
-
-    useEffect(() => {
         setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
+        setCupos(cuposArray[horaInicio]);
+        setCompetidores(competidoresArray[horaInicio]);
     }, [update]);
 
     useEffect(() => {
+        console.log("Cupos array: ", cuposArray);
+        console.log("Competidores array: ", competidoresArray);
+        getHoraDeCorte();
         setCupos(cuposArray[horaInicio]);
         setCompetidores(competidoresArray[horaInicio]);
     }, []);
@@ -46,34 +49,35 @@ export const InfoReservCard = (props) => {
 
     return (
         <>
-            <div className="alerta">
-                <p>
+            <div className="reservation-summary-warning">
+                <img className="warning-icon" src={WarningIcon} />
+                {/* <p>
                     La asignación del lugar se hará hoy a las{" "}
                     <strong>{horaFormatter(horaDeCorte)}</strong>. La asignación
                     del lugar se hará hoy a las{" "}
-                    {/* <span className="font-bold">
-                        {horaFormatter(horaDeCorte)}
-                    </span>
-                    .{" "} */}
-                </p>
+                    
+                </p> */}
                 {cupos > 0 ? (
-                    <div className="reservation-summary-warning">
-                        <img className="warning-icon" src={WarningIcon} />
-                        <p className="reservation-summary-warning-message">
-                            Compiten <strong>{competidores}</strong>{" "}
-                            reservaciones por <strong>{cupos}</strong> cupos.
-                        </p>
-                    </div>
+                    <p className="reservation-summary-warning-message">
+                        La asignación del lugar se hará hoy a las{" "}
+                        <strong>{horaFormatter(horaDeCorte)}</strong>. La
+                        asignación del lugar se hará hoy a las Compiten{" "}
+                        <strong>{competidores}</strong> reservaciones por{" "}
+                        <strong>{cupos}</strong> cupos.
+                    </p>
                 ) : (
-                    // <>
-                    //     Compiten{" "}
-                    //     <span className="font-bold">{competidores}</span>{" "}
-                    //     reservaciones por{" "}
-                    //     <span className="font-bold">{cupos}</span> cupos.
-                    // </>
-                    <></>
+                    <p className="reservation-summary-warning-message">
+                        La asignación del lugar se hará hoy a las{" "}
+                        <strong>{horaFormatter(horaDeCorte)}</strong>.
+                    </p>
                 )}
             </div>
         </>
     );
+};
+
+InfoReservCard.propTypes = {
+    cuposArray: propTypes.array,
+    competidoresArray: propTypes.array,
+    update: propTypes.bool,
 };

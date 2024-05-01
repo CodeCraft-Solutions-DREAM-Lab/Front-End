@@ -87,14 +87,12 @@ function FechaFormulario(props) {
                     .toISOString()
             );
             setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+            setUpdate(!update);
         }
     }, []);
 
     useEffect(() => {
-        console.log("fecha", fecha);
-
         if (!!fecha && fecha !== "Invalid Date") {
-            console.log("fecha", fecha);
             saveToSessionStorage("fecha", fecha);
         }
 

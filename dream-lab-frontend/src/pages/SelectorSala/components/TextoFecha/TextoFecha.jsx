@@ -3,6 +3,7 @@ import {
     getFromSessionStorage,
     existsInSessionStorage,
 } from "src/utils/Storage";
+import { CalendarDate, parseDate } from "@internationalized/date";
 
 const TextoFecha = ({ update }) => {
     const [showText, setShowText] = useState(false);
@@ -13,41 +14,45 @@ const TextoFecha = ({ update }) => {
     const [horaInicioTexto, setHoraInicioTexto] = useState("");
     const [horaFinTexto, setHoraFinTexto] = useState("");
 
-    const getFechaTexto = (fecha) => {
+    const getFechaTexto = (dia) => {
         const days = {
-            Mon: "Lunes",
-            Tue: "Martes",
-            Wed: "Miércoles",
-            Thu: "Jueves",
-            Fri: "Viernes",
-            Sat: "Sábado",
-            Sun: "Domingo",
+            1: "Lunes",
+            2: "Martes",
+            3: "Miércoles",
+            4: "Jueves",
+            5: "Viernes",
+            6: "Sábado",
+            0: "Domingo",
         };
 
-        return days[fecha.substring(0, 3)];
+        return days[dia];
     };
 
-    const getFechaNumero = (fecha) => {
-        return fecha.substring(5, 7);
+    const getFechaNumero = (dia) => {
+        if (dia < 10) {
+            return `0${dia}`;
+        } else {
+            return dia;
+        }
     };
 
-    const getFechaMes = (fecha) => {
+    const getFechaMes = (mes) => {
         const months = {
-            Jan: "Enero",
-            Feb: "Febrero",
-            Mar: "Marzo",
-            Apr: "Abril",
-            May: "Mayo",
-            Jun: "Junio",
-            Jul: "Julio",
-            Aug: "Agosto",
-            Sep: "Septiembre",
-            Oct: "Octubre",
-            Nov: "Noviembre",
-            Dec: "Diciembre",
+            0: "Enero",
+            1: "Febrero",
+            2: "Marzo",
+            3: "Abril",
+            4: "Mayo",
+            5: "Junio",
+            6: "Julio",
+            7: "Agosto",
+            8: "Septiembre",
+            9: "Octubre",
+            10: "Noviembre",
+            11: "Diciembre",
         };
 
-        return months[fecha.substring(8, 11)];
+        return months[mes];
     };
 
     const getHoraInicioTexto = (horaInicio) => {
@@ -66,24 +71,29 @@ const TextoFecha = ({ update }) => {
 
     useEffect(() => {
         if (
-            existsInSessionStorage("fecha") &&
-            existsInSessionStorage("horaInicio") &&
-            existsInSessionStorage("duration")
+            !existsInSessionStorage("fecha") ||
+            !existsInSessionStorage("horaInicio") ||
+            !existsInSessionStorage("duration")
         ) {
-            setShowText(true);
-
-            setDiaTexto(getFechaTexto(getFromSessionStorage("fecha")));
-            setDiaNumero(getFechaNumero(getFromSessionStorage("fecha")));
-            setMes(getFechaMes(getFromSessionStorage("fecha")));
-            setHoraInicioTexto(
-                getHoraInicioTexto(getFromSessionStorage("horaInicio"))
-            );
-            setHoraFinTexto(
-                getHoraFinTexto(getFromSessionStorage("horaInicio"))
-            );
-        } else {
             setShowText(false);
+            return;
         }
+
+        setShowText(true);
+
+        const date = parseDate(getFromSessionStorage("fecha"));
+        const dateInDateFormat = date.toDate();
+
+        setDiaTexto(getFechaTexto(dateInDateFormat.getDay()));
+        setDiaNumero(getFechaNumero(dateInDateFormat.getDate()));
+        setMes(getFechaMes(dateInDateFormat.getMonth()));
+        setHoraInicioTexto(
+            getHoraInicioTexto(getFromSessionStorage("horaInicio"))
+        );
+        setHoraFinTexto(
+            getHoraFinTexto(getFromSessionStorage("horaInicio"))
+        );
+
     }, [update]);
 
     return (
