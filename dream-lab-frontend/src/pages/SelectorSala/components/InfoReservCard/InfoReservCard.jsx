@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import WarningIcon from "src/assets/ResumenReservaciones/warning.png";
 
 import propTypes from "prop-types";
+import { Button } from "@mui/material";
 
 export const InfoReservCard = (props) => {
     const { cuposArray, competidoresArray, update } = props;
@@ -23,18 +24,14 @@ export const InfoReservCard = (props) => {
             : `${(hora % 13) + Math.trunc(hora / 13)} pm`;
     };
 
-    useEffect(() => {
-        setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
-        setCupos(cuposArray[horaInicio]);
-        setCompetidores(competidoresArray[horaInicio]);
-    }, [update]);
+    // useEffect(() => {
+    //     setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
+    //     setCupos(cuposArray[horaInicio]);
+    //     setCompetidores(competidoresArray[horaInicio]);
+    // }, [update]);
 
     useEffect(() => {
-        console.log("Cupos array: ", cuposArray);
-        console.log("Competidores array: ", competidoresArray);
         getHoraDeCorte();
-        setCupos(cuposArray[horaInicio]);
-        setCompetidores(competidoresArray[horaInicio]);
     }, []);
 
     const getHoraDeCorte = () => {
@@ -46,6 +43,12 @@ export const InfoReservCard = (props) => {
             }
         }
     };
+
+    useEffect(() => {
+        setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
+        setCupos(cuposArray[horaInicio]);
+        setCompetidores(competidoresArray[horaInicio]);
+    }, [horaDeCorte, horaInicio, cuposArray, competidoresArray, update])
 
     return (
         <>
@@ -60,10 +63,11 @@ export const InfoReservCard = (props) => {
                 {cupos > 0 ? (
                     <p className="reservation-summary-warning-message">
                         La asignación del lugar se hará hoy a las{" "}
-                        <strong>{horaFormatter(horaDeCorte)}</strong>. La
-                        asignación del lugar se hará hoy a las Compiten{" "}
-                        <strong>{competidores}</strong> reservaciones por{" "}
-                        <strong>{cupos}</strong> cupos.
+                        <strong>{horaFormatter(horaDeCorte)}</strong>.
+                        <br/>
+                        Compiten{" "}
+                        <strong>{competidores}</strong> reservacion(es) por{" "}
+                        <strong>{cupos}</strong> cupo(s).
                     </p>
                 ) : (
                     <p className="reservation-summary-warning-message">
@@ -71,7 +75,15 @@ export const InfoReservCard = (props) => {
                         <strong>{horaFormatter(horaDeCorte)}</strong>.
                     </p>
                 )}
+                {/* <Button
+                    onClick={() => {
+                        console.log(cupos);
+                    }}
+                >
+                    Test
+                </Button> */}
             </div>
+            
         </>
     );
 };
