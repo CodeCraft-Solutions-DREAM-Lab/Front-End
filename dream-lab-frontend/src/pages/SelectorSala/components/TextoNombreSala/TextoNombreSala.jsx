@@ -44,7 +44,7 @@ const TextoNombreSala = () => {
                     console.error("An error occurred:", error);
                 });
         }
-    });
+    }, []);
 
     return (
         <>
@@ -60,7 +60,10 @@ const TextoNombreSala = () => {
                         <h1>{nombreExperiencia}</h1>
                     </div>
 
-                    <div data-cy="nombre-sala-chico" className={smallTextFormat}>
+                    <div
+                        data-cy="nombre-sala-chico"
+                        className={smallTextFormat}
+                    >
                         <h1>{nombreSala}</h1>
                     </div>
                 </>

@@ -3,7 +3,9 @@ import {
     getFromSessionStorage,
     existsInSessionStorage,
 } from "src/utils/Storage";
-import { CalendarDate, parseDate } from "@internationalized/date";
+import { parseDate } from "@internationalized/date";
+
+import propTypes from "prop-types";
 
 const TextoFecha = ({ update }) => {
     const [showText, setShowText] = useState(false);
@@ -112,6 +114,10 @@ const TextoFecha = ({ update }) => {
             )}
         </>
     );
+};
+
+TextoFecha.propTypes = {
+    update: propTypes.bool,
 };
 
 export default TextoFecha;
