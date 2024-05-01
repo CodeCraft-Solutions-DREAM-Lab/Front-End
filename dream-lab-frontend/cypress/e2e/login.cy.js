@@ -40,6 +40,7 @@ describe("Pruebas de login", () => {
         cy.typeDataCy("login-user", "test");
         cy.typeDataCy("login-password", "test");
         cy.clickDataCy("login-button");
+        cy.urlContains("/home");
         cy.containsDataCy("navbar", "DREAM LAB");
     });
 });

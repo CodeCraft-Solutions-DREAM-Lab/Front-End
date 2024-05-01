@@ -67,3 +67,7 @@ Cypress.Commands.add("loginWithTest", () => {
     );
     cy.setLocalStorage("user", "test");
 });
+
+Cypress.Commands.add('urlContains', (url) => {
+    cy.url().should('include', url);
+});
