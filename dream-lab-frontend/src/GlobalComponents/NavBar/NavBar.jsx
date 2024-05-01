@@ -127,6 +127,7 @@ class Navbar extends React.Component {
                         <div
                             className="user-avatar-container"
                             style={{ cursor: "pointer" }}
+                            data-cy="userIconNavBar"
                         >
                             {userAction}
                             {/* Se ven las acciones dependiendo de la vista (profile o logout o profile + create experience) */}
