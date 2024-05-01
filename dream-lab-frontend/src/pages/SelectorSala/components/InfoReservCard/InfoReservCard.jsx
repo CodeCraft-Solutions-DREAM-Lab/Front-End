@@ -1,4 +1,4 @@
-import { getFromSessionStorage } from "src/utils/Storage";
+import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import "./InfoReservCard.css";
 import { useState, useEffect } from "react";
 
@@ -14,9 +14,14 @@ export const InfoReservCard = (props) => {
     const horasDeCorte = [3, 6, 9, 12, 15, 18, 21, 24];
 
     const horaFormatter = (hora) => {
-        return hora < 12
-            ? `${hora} am`
-            : `${(hora % 13) + Math.trunc(hora / 13)} pm`;
+        let formattedHora;
+        if (hora < 12) {
+            formattedHora = `${hora} am`;
+        } else {
+            formattedHora = `${(hora % 13) + Math.trunc(hora / 13)} pm`;
+        }
+        saveToSessionStorage("horaCorte", formattedHora);
+        return formattedHora;
     };
 
     useEffect(() => {
@@ -30,6 +35,8 @@ export const InfoReservCard = (props) => {
     useEffect(() => {
         setCupos(cuposArray[horaInicio]);
         setCompetidores(competidoresArray[horaInicio]);
+        saveToSessionStorage("competidores", competidores);
+        saveToSessionStorage("cupos", cupos);
     });
 
     const getHoraDeCorte = () => {
