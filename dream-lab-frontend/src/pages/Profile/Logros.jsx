@@ -12,7 +12,7 @@ function Logros() {
     const idUsuario = getFromLocalStorage("user");
 
     useEffect(() => {
-        get(`perfil_info/${idUsuario}`)
+        get(`perfil/${idUsuario}`)
             .then((result) => {
                 const perfilInfo = result;
                 setDatosLogros(perfilInfo.recordsets[2]);

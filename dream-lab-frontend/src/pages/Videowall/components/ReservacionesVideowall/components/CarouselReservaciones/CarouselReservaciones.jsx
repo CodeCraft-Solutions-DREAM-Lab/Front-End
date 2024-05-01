@@ -75,14 +75,15 @@ function CarouselReservaciones() {
                 }}
                 className="mySwiper"
             >
-                {reservaciones.map((reservacion) => (
-                    <SwiperSlide key={reservacion.id}>
+                {reservaciones.map((reservacion, index) => (
+                    <SwiperSlide key={index}>
                         <ReservationCard
                             nombre={reservacion.nombre_usuario}
                             horaInicio={reservacion.horaInicio}
                             horaFin={reservacion.horaFin}
                             sala={reservacion.nombre_sala}
                             icono={reservacion.iconoURL}
+                            colorPreferido={reservacion.colorPreferido}
                         />
                     </SwiperSlide>
                 ))}
