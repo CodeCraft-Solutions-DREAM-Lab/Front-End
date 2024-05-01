@@ -15,9 +15,6 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-              with:
-                  path: ./dream-lab-frontend
-                  fetch-depth: 0
 
             - name: List files in dream-lab-frontend
               run: ls -la ./dream-lab-frontend
