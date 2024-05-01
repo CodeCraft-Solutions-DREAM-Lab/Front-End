@@ -9,7 +9,8 @@ export default defineConfig({
         },
     },
     env: {
-        API_URL: "https://dreamlab-api.azurewebsites.net/",
+        // API_URL: 'https://dreamlab-api.azurewebsites.net/',
+        API_URL: "http://localhost:3000/",
     },
     component: {
         devServer: {
