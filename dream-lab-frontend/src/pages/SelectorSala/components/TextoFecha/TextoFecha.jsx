@@ -82,12 +82,15 @@ const TextoFecha = ({ update }) => {
             setHoraFinTexto(
                 getHoraFinTexto(getFromSessionStorage("horaInicio"))
             );
-            saveToSessionStorage("formattedDate", `${diaTexto} - ${diaNumero} de ${mes}`);
-            saveToSessionStorage("formattedTime", `${horaInicioTexto} - ${horaFinTexto}`);
         } else {
             setShowText(false);
         }
-    }, [update]);
+    }, [update, diaTexto, horaFinTexto]);
+
+    useEffect(() => {
+        saveToSessionStorage("formattedDate", `${diaTexto} - ${diaNumero} de ${mes}`);
+        saveToSessionStorage("formattedTime", `${horaInicioTexto} - ${horaFinTexto}`);
+    }, [diaTexto, horaFinTexto])
 
     return (
         <>
