@@ -8,15 +8,14 @@ import "./SelectorSala.css";
 import NavBar from "src/GlobalComponents/NavBar/NavBar";
 import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.png";
-import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
 import { get, post } from "src/utils/ApiRequests.js";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import { InfoReservCard } from "./components/InfoReservCard/InfoReservCard";
 
-function SelectorSala(props) {
+function SelectorSala() {
     let navigate = useNavigate();
 
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
@@ -32,9 +31,6 @@ function SelectorSala(props) {
     const [competidoresArray, setCompetidoresArray] = useState(
         new Array(25).fill(0)
     );
-
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
 
     useEffect(() => {
         if (getFromSessionStorage("reservType") == "sala") {
@@ -83,7 +79,7 @@ function SelectorSala(props) {
                 });
         }
 
-        if (!!idSala) {
+        if (idSala) {
             get(`mesas/${idSala}`)
                 .then((result) => {
                     const maxCupos = result.maxCupos;
@@ -111,9 +107,9 @@ function SelectorSala(props) {
         <div>
             <NavBar view="soloPerfil" autoHide={false} />
             <div className="outer-container">
-                <GlassCard className="menu-lateral">
+                {/* <GlassCard className="menu-lateral">
                     <p>menu</p>
-                </GlassCard>
+                </GlassCard> */}
                 <div className="container">
                     {/* Contenedor principal */}
 
@@ -136,6 +132,7 @@ function SelectorSala(props) {
                     <div className="form-container">
                         {/* Sección de la derecha */}
                         <PrimerRecordatorio
+                            data-cy="primer-recordatorio-sala"
                             isOpen={isFirstReminderOpen}
                             size="2xl"
                             onClose={() => {
@@ -161,6 +158,7 @@ function SelectorSala(props) {
                                 }}
                                 text="ACEPTAR"
                                 disabled={isNextButtonDisabled}
+                                className="mb-3"
                             />
                         </div>
                         <InfoReservCard
@@ -168,6 +166,7 @@ function SelectorSala(props) {
                             competidoresArray={competidoresArray}
                             update={update}
                         />
+
                     </div>
                 </div>
             </div>

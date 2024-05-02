@@ -1,13 +1,17 @@
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import "./InfoReservCard.css";
 import { useState, useEffect } from "react";
+import WarningIcon from "src/assets/ResumenReservaciones/warning.png";
+
+import propTypes from "prop-types";
 
 export const InfoReservCard = (props) => {
     const { cuposArray, competidoresArray, update } = props;
     const [horaInicio, setHoraInicio] = useState(
         parseInt(getFromSessionStorage("horaInicio")) || 0
     );
-    const [today, setToday] = useState(new Date());
+    const today = new Date();
+    // const [today, setToday] = useState(new Date());
     const [horaDeCorte, setHoraDeCorte] = useState(0);
     const [cupos, setCupos] = useState(0);
     const [competidores, setCompetidores] = useState(0);
@@ -49,27 +53,39 @@ export const InfoReservCard = (props) => {
         }
     };
 
+    useEffect(() => {
+        setHoraInicio(parseInt(getFromSessionStorage("horaInicio")) || 0);
+        setCupos(cuposArray[horaInicio]);
+        setCompetidores(competidoresArray[horaInicio]);
+    }, [horaDeCorte, horaInicio, cuposArray, competidoresArray, update])
+
     return (
         <>
-            <div className="alerta">
-                <p>
-                    La asignación del lugar se hará hoy a las{" "}
-                    <span className="font-bold">
-                        {horaFormatter(horaDeCorte)}
-                    </span>
-                    .{" "}
-                </p>
+            <div className="IRC-warning">
+                <img className="IRC-warning-icon" src={WarningIcon} />
                 {cupos > 0 ? (
-                    <>
+                    <p className="IRC-warning-message">
+                        La asignación del lugar se hará hoy a las{" "}
+                        <strong>{horaFormatter(horaDeCorte)}</strong>.
+                        <br/>
                         Compiten{" "}
-                        <span className="font-bold">{competidores}</span>{" "}
-                        reservaciones por{" "}
-                        <span className="font-bold">{cupos}</span> cupos.
-                    </>
+                        <strong>{competidores}</strong> reservacion(es) por{" "}
+                        <strong>{cupos}</strong> cupo(s).
+                    </p>
                 ) : (
-                    <></>
+                    <p className="IRC-warning-message">
+                        La asignación del lugar se hará hoy a las{" "}
+                        <strong>{horaFormatter(horaDeCorte)}</strong>.
+                    </p>
                 )}
             </div>
+            
         </>
     );
+};
+
+InfoReservCard.propTypes = {
+    cuposArray: propTypes.array,
+    competidoresArray: propTypes.array,
+    update: propTypes.bool,
 };
