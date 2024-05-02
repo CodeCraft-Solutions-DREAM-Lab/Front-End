@@ -8,7 +8,6 @@ import "./SelectorSala.css";
 import NavBar from "src/GlobalComponents/NavBar/NavBar";
 import Slider from "./components/Slider/Slider";
 import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.png";
-import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "./components/RoundedButton/RoundedButton.css";
 import { get, post } from "src/utils/ApiRequests.js";
 // import { useLocation } from "react-router-dom";
@@ -108,9 +107,9 @@ function SelectorSala() {
         <div>
             <NavBar view="soloPerfil" autoHide={false} />
             <div className="outer-container">
-                <GlassCard className="menu-lateral">
+                {/* <GlassCard className="menu-lateral">
                     <p>menu</p>
-                </GlassCard>
+                </GlassCard> */}
                 <div className="container">
                     {/* Contenedor principal */}
 
@@ -159,6 +158,7 @@ function SelectorSala() {
                                 }}
                                 text="ACEPTAR"
                                 disabled={isNextButtonDisabled}
+                                className="mb-3"
                             />
                         </div>
                         <InfoReservCard

@@ -61,10 +61,10 @@ export const InfoReservCard = (props) => {
 
     return (
         <>
-            <div className="reservation-summary-warning">
-                <img className="warning-icon" src={WarningIcon} />
+            <div className="IRC-warning">
+                <img className="IRC-warning-icon" src={WarningIcon} />
                 {cupos > 0 ? (
-                    <p className="reservation-summary-warning-message">
+                    <p className="IRC-warning-message">
                         La asignación del lugar se hará hoy a las{" "}
                         <strong>{horaFormatter(horaDeCorte)}</strong>.
                         <br/>
@@ -73,7 +73,7 @@ export const InfoReservCard = (props) => {
                         <strong>{cupos}</strong> cupo(s).
                     </p>
                 ) : (
-                    <p className="reservation-summary-warning-message">
+                    <p className="IRC-warning-message">
                         La asignación del lugar se hará hoy a las{" "}
                         <strong>{horaFormatter(horaDeCorte)}</strong>.
                     </p>

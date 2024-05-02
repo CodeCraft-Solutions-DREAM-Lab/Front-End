@@ -7,7 +7,7 @@
     font-size: small;
 }
 
-.reservation-summary-warning {
+.IRC-warning {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -19,30 +19,30 @@
 }
 
 @media screen and (max-width: 770px) {
-    .reservation-summary-warning {
+    .IRC-warning {
         gap: 1rem;
         /* max-width: 8vw; */
         margin: 1.5rem;
     }
 }
 
-.warning-icon {
+.IRC-warning-icon {
     margin-left: 2rem;
 }
 
 @media screen and (max-width: 480px) {
-    .warning-icon {
+    .IRC-warning-icon {
         width: 25px;
         margin-left: 1.5rem;
     }
 }
 @media screen and (max-width: 430px) {
-    .warning-icon {
+    .IRC-warning-icon {
         width: 25px;
     }
 }
 @media screen and (max-width: 390px) {
-    .warning-icon {
+    .IRC-warning-icon {
         width: 25px;
     }
 }
