@@ -225,13 +225,6 @@ function FechaFormulario(props) {
                     </SelectItem>
                 ))}
             </Select>
-            <Button
-                onClick={() => {
-                    console.log(horaInicio);
-                }}
-            >
-                Debbuging
-            </Button>
         </div>
     );
 }
