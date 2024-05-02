@@ -1,4 +1,7 @@
+[![DREAM Lab](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/detailed/vyayrg&style=flat-square&logo=cypress)](https://cloud.cypress.io/projects/vyayrg/runs)
+
 # Dream Lab Frontend
+
 
 Este proyecto utiliza Vite para el desarrollo y el proceso de construcción.
 

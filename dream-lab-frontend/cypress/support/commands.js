@@ -1,5 +1,5 @@
 import "cypress-localstorage-commands";
-const API_URL = "http://localhost:3000/";
+const API_URL = Cypress.env("API_URL");
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -106,3 +106,7 @@ Cypress.Commands.add("loginWithTest", () => {
     cy.setLocalStorage("user", "test");
 });
 
+
+Cypress.Commands.add('urlContains', (url) => {
+    cy.url().should('include', url);
+});
