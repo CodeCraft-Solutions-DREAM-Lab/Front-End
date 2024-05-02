@@ -101,7 +101,7 @@ const TextoFecha = ({ update }) => {
     return (
         <>
             {showText ? (
-                <div className="p-5 text-white flex flex-col items-center">
+                <div className="p-5 text-white flex flex-col items-center text-nowrap" data-cy="texto-fecha">
                     <p>
                         {diaTexto} - {diaNumero} de {mes}
                     </p>

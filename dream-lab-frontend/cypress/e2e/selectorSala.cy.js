@@ -124,7 +124,7 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("primer-recordatorio-sala").should("not.exist");
     });
 
-    it.only("Probando Autocomplete Hora de Inicio", () => {
+    it("Probando Autocomplete Hora de Inicio", () => {
         cy.visit("/reservacion/sala", {
             onBeforeLoad(win) {
                 win.sessionStorage.setItem("reservType", "sala");
@@ -134,26 +134,70 @@ describe("Probando pantalla de selector de sala", () => {
 
         cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
 
-        // cy.getDataCy("selector-hora-inicio").select("9 AM");
         cy.getDataCy("selector-hora-inicio").click();
-        // cy.pause();
         cy.getDataCy("hora-0").click();
 
-        cy.get("[data-cy=selector-hora-inicio-container] input").hasAttribute(
-            "value",
-            "9 AM"
-        );
+        cy.containsDataCy("selector-hora-inicio", "9 AM");
 
-        // cy.getDataCy("selector-hora-inicio").click();
-        // cy.getDataCy("hora-2").click();
+        cy.getDataCy("selector-hora-inicio").click();
+        cy.getDataCy("hora-2").click();
 
-        // cy.get("[data-cy=selector-hora-inicio-container] input").hasAttribute(
-        //     "value",
-        //     "1 PM"
-        // );
+        cy.containsDataCy("selector-hora-inicio", "1 PM");
+
+        cy.getDataCy("boton-aceptar-sala").click({ force: true });
+        cy.getDataCy("primer-recordatorio-sala").should("not.exist");
     });
 
-    it("Seleccionar una duración sin hora");
+    it("Probando Autocomplete de Duracion", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
 
-    it("Happy Path");
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        cy.getDataCy("selector-duracion").click();
+        cy.getDataCy("duracion-1").click();
+
+        cy.containsDataCy("selector-duracion", "2 horas");
+
+        cy.getDataCy("boton-aceptar-sala").click({ force: true });
+        cy.getDataCy("primer-recordatorio-sala").should("not.exist");
+    });
+
+    it("Happy Path", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
+
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        cy.get(
+            "[data-cy=selector-fecha] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)"
+        ).type("09092060");
+
+        cy.getDataCy("selector-hora-inicio").click();
+        cy.getDataCy("hora-1").click();
+
+        cy.getDataCy("selector-duracion").click();
+        cy.getDataCy("duracion-2").click();
+        
+        cy.containsDataCy("texto-fecha", "Jueves - 09 de Septiembre");
+        cy.containsDataCy("texto-fecha", "10 AM - 1 PM");
+
+        cy.getDataCy("primer-recordatorio-sala").should("not.exist");
+
+        cy.getDataCy("boton-aceptar-sala").click({ force: true });
+
+        cy.getDataCy("primer-recordatorio-sala").should("be.visible");
+
+        cy.clickDataCy("primer-recordatorio-ok");
+
+        cy.url().should("include", "/reservacion/material");
+    });
 });

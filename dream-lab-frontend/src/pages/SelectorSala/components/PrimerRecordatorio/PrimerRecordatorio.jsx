@@ -6,9 +6,10 @@ import {
     ModalFooter,
     Button,
 } from "@nextui-org/react";
-import React from "react";
 import { Grid } from "@mui/material";
 import infoLogo from "src/assets/SelectorSala/infoicon.png";
+
+import propTypes from "prop-types";
 
 function PrimerRecordatorio(props) {
     return (
@@ -18,9 +19,10 @@ function PrimerRecordatorio(props) {
             onClose={props.onClose}
             hideCloseButton={true}
             backdrop="blur"
+            data-cy="primer-recordatorio-sala"
         >
             <ModalContent className="p-3">
-                {(onClose) => (
+                {() => (
                     <>
                         <ModalHeader className="text-[#14247b] px-4 pt-4 pb-2 justify-center text-xl">
                             ¡Recordatorio!
@@ -55,6 +57,7 @@ function PrimerRecordatorio(props) {
                                             hover:bg-[#1bac55] hover:text-white border-2 border-[#1bac55]"
                                 color="primary"
                                 onPress={props.onOk}
+                                data-cy="primer-recordatorio-ok"
                             >
                                 OK ✓
                             </Button>
@@ -65,5 +68,12 @@ function PrimerRecordatorio(props) {
         </Modal>
     );
 }
+
+PrimerRecordatorio.propTypes = {
+    size: propTypes.string,
+    isOpen: propTypes.bool,
+    onClose: propTypes.func,
+    onOk: propTypes.func,
+};
 
 export default PrimerRecordatorio;

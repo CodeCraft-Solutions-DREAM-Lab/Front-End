@@ -1,4 +1,4 @@
-import { DatePicker, Button, Select, SelectItem } from "@nextui-org/react";
+import { DatePicker, Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import {
     CalendarDate,
@@ -174,6 +174,7 @@ function FechaFormulario(props) {
                 selectedKeys={[horaInicio]}
                 disabled={isSelectHoursDisabled}
                 placeholder="Selecciona una hora"
+                data-cy="selector-hora-inicio"
                 onSelectionChange={(hora) => {
                     const horaInt = parseInt(hora.anchorKey);
                     setHoraInicio(horaInt);
@@ -208,11 +209,13 @@ function FechaFormulario(props) {
                 aria-label="Duración"
                 selectedKeys={[duration + (duration == 1 ? " hora" : " horas")]}
                 disabled={isSelectHoursDisabled}
+                data-cy="selector-duracion"
             >
-                {["1 hora", "2 horas", "3 horas", "4 horas"].map((hora) => (
+                {["1 hora", "2 horas", "3 horas", "4 horas"].map((hora, index) => (
                     <SelectItem
                         key={hora}
                         value={hora}
+                        data-cy={`duracion-${index}`}
                         onClick={() => {
                             if (hora === "1 hora") setDuration(1);
                             if (hora === "2 horas") setDuration(2);
