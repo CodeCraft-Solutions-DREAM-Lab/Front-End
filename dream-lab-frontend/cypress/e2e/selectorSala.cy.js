@@ -63,19 +63,21 @@ describe("Probando pantalla de selector de sala", () => {
             },
         });
 
-        cy.getDataCy("nombre-experiencia").should("not.be.visible");
-        cy.getDataCy("nombre-sala-chico").should("not.be.visible");
-
         cy.wait([
             "@getSalaNameFromExperienceId",
             "@getExperiencia",
             "@getHorasLibres",
         ]);
 
-        cy.getDataCy("nombre-experiencia").should("exist");
-        cy.getDataCy("nombre-sala-chico").should("exist");
-        cy.getDataCy("nombre-experiencia").contains("Nombre de Experiencia");
-        cy.getDataCy("nombre-sala-chico").contains("Nombre de Sala");
+        cy.getDataCy("nombre-experiencia").should(
+            "contain.text",
+            "Nombre de Experiencia"
+        );
+        cy.getDataCy("nombre-sala-chico").should(
+            "contain.text",
+            "Nombre de Sala"
+        );
+        cy.getDataCy("nombre-sala-grande").should("not.exist");
     });
 
     it("Probando nombre entrando con sala", () => {
@@ -86,15 +88,15 @@ describe("Probando pantalla de selector de sala", () => {
             },
         });
 
-        cy.getDataCy("nombre-sala-grande").should("not.be.visible");
-
         cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
 
         cy.getDataCy("nombre-sala-grande").should("exist");
         cy.getDataCy("nombre-sala-grande").contains("Nombre de Sala");
+        cy.getDataCy("nombre-sala-chico").should("not.exist");
+        cy.getDataCy("nombre-experiencia").should("not.exist");
     });
 
-    it.only("Escribir la fecha directamente", () => {
+    it("Probando Date Picker", () => {
         cy.visit("/reservacion/sala", {
             onBeforeLoad(win) {
                 win.sessionStorage.setItem("reservType", "sala");
@@ -104,37 +106,54 @@ describe("Probando pantalla de selector de sala", () => {
 
         cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
 
-        // cy.typeDataCy("selector-fecha", "09092003");
-        cy.get("[data-cy=selector-fecha] input").type("09092003", { delay: 0 });
-    });
+        cy.get(
+            "[data-cy=selector-fecha] > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)"
+        ).type("09092060");
 
-    it("Seleccionar fecha con mouse", () => {
-        cy.visit("/reservacion/sala", {
-            onBeforeLoad(win) {
-                win.sessionStorage.setItem("reservType", "sala");
-                win.sessionStorage.setItem("idSala", 1);
-            },
-        });
+        cy.getDataCy("selector-fecha").should("contain.text", "09/09/2060");
 
-        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
-
-        // cy.get("[data-cy=selector-fecha] button").click();
-
+        cy.get("[data-cy=selector-fecha] button").click();
         cy.get("[data-cy=selector-fecha] button").type(
-            "{rightArrow}{enter}{enter}",
-            {
-                delay: 2000,
-            }
+            "{enter}{rightarrow}{enter}",
+            { delay: 200 }
         );
 
-        cy.pause();
-        // cy.getDataCy("selector-fecha").click();
-        // cy.getDataCy("selector-fecha").should("have.value", "2021-09-09");
+        cy.getDataCy("selector-fecha").should("contain.text", "10/09/2060");
+
+        cy.getDataCy("boton-aceptar-sala").click({ force: true });
+        cy.getDataCy("primer-recordatorio-sala").should("not.exist");
     });
 
-    it("Seleccionar una hora sin duración");
+    it.only("Probando Autocomplete Hora de Inicio", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 1);
+            },
+        });
+
+        cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+
+        // cy.getDataCy("selector-hora-inicio").select("9 AM");
+        cy.getDataCy("selector-hora-inicio").click();
+        // cy.pause();
+        cy.getDataCy("hora-0").click();
+
+        cy.get("[data-cy=selector-hora-inicio-container] input").hasAttribute(
+            "value",
+            "9 AM"
+        );
+
+        // cy.getDataCy("selector-hora-inicio").click();
+        // cy.getDataCy("hora-2").click();
+
+        // cy.get("[data-cy=selector-hora-inicio-container] input").hasAttribute(
+        //     "value",
+        //     "1 PM"
+        // );
+    });
 
     it("Seleccionar una duración sin hora");
 
-    it("Seleccionar una hora y una duración");
+    it("Happy Path");
 });

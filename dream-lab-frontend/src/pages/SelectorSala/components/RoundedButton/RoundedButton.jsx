@@ -6,6 +6,7 @@ import "./RoundedButton.css";
 function RoundedButton({ text, onClick, disabled }) {
     return (
         <Button
+            data-cy="boton-aceptar-sala"
             className="mt-2 rounded-full justify-self-center rounded-button"
             color="white"
             onClick={onClick}

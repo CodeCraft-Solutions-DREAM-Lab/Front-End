@@ -1,7 +1,11 @@
-import { Autocomplete, AutocompleteItem, DatePicker } from "@nextui-org/react";
+import { DatePicker, Button, Select, SelectItem } from "@nextui-org/react";
 import { useState, useEffect } from "react";
-import { CalendarDate, isWeekend } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
+import {
+    CalendarDate,
+    isWeekend,
+    getLocalTimeZone,
+} from "@internationalized/date";
+import { useDateFormatter, I18nProvider } from "@react-aria/i18n";
 
 import {
     existsInSessionStorage,
@@ -20,7 +24,8 @@ function FechaFormulario(props) {
         freeHours,
     } = props;
 
-    let { locale } = useLocale();
+    const locale = "es-MX";
+    let formatter = useDateFormatter({ dateStyle: "long" });
 
     // const [minEligibleDate, setMinEligibleDate] = useState(dayjs());
     const [fecha, setFecha] = useState();
@@ -93,6 +98,7 @@ function FechaFormulario(props) {
 
     useEffect(() => {
         if (!!fecha && fecha !== "Invalid Date") {
+            console.log(formatter.format(fecha.toDate(getLocalTimeZone())));
             saveToSessionStorage("fecha", fecha);
         }
 
@@ -131,76 +137,80 @@ function FechaFormulario(props) {
     return (
         <div className="flex flex-col mx-3">
             <p className="text-white">Fecha</p>
-            <div data-cy="selector-fecha">
-                <DatePicker
-                    value={fecha}
-                    onChange={(newValue) => {
-                        try {
-                            setFecha(newValue);
-                            setFechaIsoString(newValue.toDate().toISOString());
-                            setUpdate(!update);
-                        } catch (err) {
-                            console.log(err);
+            <div data-cy={"selector-fecha"}>
+                <I18nProvider locale={locale}>
+                    <DatePicker
+                        value={fecha}
+                        onChange={(newValue) => {
+                            try {
+                                setFecha(newValue);
+                                setFechaIsoString(
+                                    newValue.toDate().toISOString()
+                                );
+                                setUpdate(!update);
+                            } catch (err) {
+                                console.log(err);
+                            }
+                        }}
+                        isDateUnavailable={isDateUnavailable}
+                        aria-label="Selector de fecha"
+                        minValue={
+                            new CalendarDate(
+                                nextAvailableDate.getFullYear(),
+                                nextAvailableDate.getMonth() + 1,
+                                nextAvailableDate.getDate()
+                            )
                         }
-                    }}
-                    isDateUnavailable={isDateUnavailable}
-                    aria-label="Selector de fecha"
-                    minValue={
-                        new CalendarDate(
-                            nextAvailableDate.getFullYear(),
-                            nextAvailableDate.getMonth() + 1,
-                            nextAvailableDate.getDate()
-                        )
-                    }
-                />
+                    />
+                </I18nProvider>
             </div>
 
             <p className="text-white mt-6">Hora de inicio</p>
-            <Autocomplete
+            <div data-cy="selector-hora-inicio-container">            
+
+            <Select
                 className="mb-3 "
                 aria-label="Hora de inicio"
-                selectedKey={horaFormatter(horaInicio)}
+                selectedKeys={[horaInicio]}
                 disabled={isSelectHoursDisabled}
-                sx={{
-                    "& .MuiAutocomplete-input": {
-                        // Target specific MUI class for background
-                        height: "3rem",
-                        backgroundColor: "white",
-                        borderRadius: "16px",
-                    },
+                placeholder="Selecciona una hora"
+                onSelectionChange={(hora) => {
+                    const horaInt = parseInt(hora.anchorKey);
+                    setHoraInicio(horaInt);
+                    const date = new Date();
+                    date.setHours(horaInt - 6);
+                    date.setMinutes(0);
+                    date.setSeconds(0);
+                    date.setMilliseconds(0);
+
+                    setHoraInicioIsoString(date.toISOString());
+                    setUpdate(!update);
                 }}
             >
-                {freeHours.map((hora) => (
-                    <AutocompleteItem
-                        key={horaFormatter(hora)}
+                {freeHours.map((hora, index) => (
+                    <SelectItem
+                        data-cy={`hora-${index}`}
+                        key={hora}
                         value={hora}
                         textValue={horaFormatter(hora)}
-                        onClick={() => {
-                            setHoraInicio(hora);
-                            const date = new Date();
-                            date.setHours(hora - 6);
-                            date.setMinutes(0);
-                            date.setSeconds(0);
-                            date.setMilliseconds(0);
-
-                            setHoraInicioIsoString(date.toISOString());
-                            setUpdate(!update);
-                        }}
                     >
                         {horaFormatter(hora)}
-                    </AutocompleteItem>
+                    </SelectItem>
                 ))}
-            </Autocomplete>
+            </Select>
+            
+            </div>
 
             <p className="text-white mt-3">Duración</p>
-            <Autocomplete
+
+            <Select
                 className="max-w"
                 aria-label="Duración"
-                selectedKey={duration + (duration == 1 ? " hora" : " horas")}
+                selectedKeys={[duration + (duration == 1 ? " hora" : " horas")]}
                 disabled={isSelectHoursDisabled}
             >
                 {["1 hora", "2 horas", "3 horas", "4 horas"].map((hora) => (
-                    <AutocompleteItem
+                    <SelectItem
                         key={hora}
                         value={hora}
                         onClick={() => {
@@ -212,9 +222,16 @@ function FechaFormulario(props) {
                         }}
                     >
                         {hora}
-                    </AutocompleteItem>
+                    </SelectItem>
                 ))}
-            </Autocomplete>
+            </Select>
+            <Button
+                onClick={() => {
+                    console.log(horaInicio);
+                }}
+            >
+                Debbuging
+            </Button>
         </div>
     );
 }

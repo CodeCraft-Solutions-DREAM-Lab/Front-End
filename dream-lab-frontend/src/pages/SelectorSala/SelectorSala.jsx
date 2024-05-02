@@ -33,9 +33,6 @@ function SelectorSala() {
         new Array(25).fill(0)
     );
 
-    // const location = useLocation();
-    // const searchParams = new URLSearchParams(location.search);
-
     useEffect(() => {
         if (getFromSessionStorage("reservType") == "sala") {
             setIdSala(getFromSessionStorage("idSala"));
@@ -136,6 +133,7 @@ function SelectorSala() {
                     <div className="form-container">
                         {/* Sección de la derecha */}
                         <PrimerRecordatorio
+                            data-cy="primer-recordatorio-sala"
                             isOpen={isFirstReminderOpen}
                             size="2xl"
                             onClose={() => {
