@@ -22,6 +22,7 @@
     font-style: normal;
     font-weight: 700;
     color: white;
+    z-index: 2;
 }
 
 @media screen and (max-width: 431px) {
@@ -30,13 +31,38 @@
     }
 }
 
+@media screen and (max-width: 415px) {
+    .heading {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .heading {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .heading {
+        font-size: 24px;
+    }
+}
+
 .landing-logo {
     width: 4rem;
+    z-index: 2;
 }
 
 @media screen and (max-width: 431px) {
     .landing-logo {
         width: 2rem;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .landing-logo {
+        width: 1.5rem;
     }
 }
 
@@ -51,6 +77,7 @@
     font-weight: 300;
     line-height: 4rem;
     color: white;
+    z-index: 2;
 }
 
 @media screen and (max-width: 431px) {
@@ -60,6 +87,26 @@
         margin-right: 1rem;
         margin-bottom: 2rem;
         line-height: 3rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sub-heading {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .sub-heading {
+        font-size: 22px;
+        line-height: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sub-heading {
+        font-size: 21px;
+        line-height: 2.4rem;
     }
 }
 
@@ -74,7 +121,6 @@
 
 @media screen and (max-width: 431px) {
     .button-container-landing-page {
-        z-index: 2;
         margin-right: 70rem;
     }
 }
@@ -100,6 +146,20 @@
     }
 }
 
+@media screen and (max-width: 415px) {
+    .button-more {
+        padding-block: 6px;
+        padding-inline: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .button-more {
+        padding-block: 3px;
+        padding-inline: 1.4rem;
+    }
+}
+
 .button-more:hover {
     padding-block: 5px;
     padding-inline: 30px;
@@ -118,6 +178,20 @@
         padding-inline: 2rem;
         border-radius: 28px;
         text-wrap: nowrap;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .button-more:hover {
+        padding-block: 6px;
+        padding-inline: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .button-more:hover {
+        padding-block: 3px;
+        padding-inline: 1.4rem;
     }
 }
 

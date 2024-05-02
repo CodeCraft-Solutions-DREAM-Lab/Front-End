@@ -9,3 +9,15 @@
 .tec-logo {
     width: 8rem;
 }
+
+@media screen and (max-width: 431px) {
+    .tec-logo {
+        width: 5rem;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .tec-logo {
+        width: 4.2rem;
+    }
+}

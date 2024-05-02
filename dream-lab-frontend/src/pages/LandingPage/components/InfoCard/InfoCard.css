@@ -22,6 +22,12 @@
     }
 }
 
+@media screen and (max-width: 391px) {
+    .info-card-glass-card {
+        width: 360px;
+    }
+}
+
 .title {
     font-family: "Poppins", sans-serif;
     font-size: 32px;
@@ -34,6 +40,13 @@
 @media screen and (max-width: 431px) {
     .title {
         font-size: 25px;
+        margin-right: 0rem;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .title {
+        font-size: 20px;
     }
 }
 
@@ -52,6 +65,12 @@
     }
 }
 
+@media screen and (max-width: 391px) {
+    .description {
+        font-size: 13px;
+    }
+}
+
 .picture {
     width: 180px;
 }
@@ -59,5 +78,11 @@
 @media screen and (max-width: 431px) {
     .picture {
         width: 100px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .picture {
+        width: 90px;
     }
 }

@@ -11,7 +11,8 @@
     url("src/assets/LandingPage/oval-blob-bottom-left.svg"), /* Oval blob bottom left */
     url("src/assets/LandingPage/oval-blob-bottom-right.svg"), /* Oval blob bottom right */
     url("src/assets/LandingPage/WavesLandingPage.svg"), /* Waves Landing Page */
-    url("src/assets/LandingPage/LandingWavesFadeout.svg"); /* Landing Waves Fadout */
+    url("src/assets/LandingPage/LandingWavesFadeout.svg"), /* Landing Waves Fadout */
+    url("src/assets/LandingPage/black.png"); /* black background */
     background-repeat: 
     no-repeat, /* Glass circle top left */
     no-repeat, /* Glass circle bottom left */
@@ -22,7 +23,8 @@
     no-repeat, /* Oval blob bottom left */
     no-repeat, /* Oval blob bottom right */
     no-repeat, /* Waves Landing Page */
-    no-repeat; /* Landing Waves Fadout */
+    no-repeat, /* Landing Waves Fadout */
+    no-repeat; /* black background */
     background-position-y: 
     120rem, /* Glass circle top left */
     175rem, /* Glass circle bottom left */
@@ -33,7 +35,8 @@
     160rem, /* Oval blob bottom left */
     160rem, /* Oval blob bottom right */
     65rem, /* Waves Landing Page */
-    132rem; /* Landing Waves Fadout */
+    182rem, /* Landing Waves Fadout */
+    132rem; /* black background */
     background-position-x: 
     4rem, /* Glass circle top left */
     7rem, /* Glass circle bottom left */
@@ -44,7 +47,66 @@
     left, /* Oval blob bottom left */
     right, /* Oval blob bottom right */
     center, /* Waves Landing Page */
-    center; /* Landing Waves Fadout */
+    center, /* Landing Waves Fadout */
+    center; /* black background */
+}
+
+@media screen and (max-width: 431px) {
+    .landing-page-container {
+        background-position-y: 
+        60rem, /* Glass circle top left */
+        100rem, /* Glass circle bottom left */
+        79rem, /* Glass circle top right */
+        125rem, /* Glass circle bottom right */
+        50rem, /* Oval blob top left */
+        82rem, /* Oval blob top right */
+        95rem, /* Oval blob bottom left */
+        115rem, /* Oval blob bottom right */
+        36rem, /* Waves Landing Page */
+        112rem, /* Landing Waves Fadout */
+        102rem; /* black background */
+        background-position-x: 
+        12rem, /* Glass circle top left */
+        8rem, /* Glass circle bottom left */
+        -5rem, /* Glass circle top right */
+        2rem, /* Glass circle bottom right */
+        -10rem, /* Oval blob top left */
+        10rem, /* Oval blob top right */
+        -16rem, /* Oval blob bottom left */
+        20rem, /* Oval blob bottom right */
+        center, /* Waves Landing Page */
+        center, /* Landing Waves Fadout */
+        center; /* black background */
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .landing-page-container {
+        background-position-y: 
+        54rem, /* Glass circle top left */
+        94rem, /* Glass circle bottom left */
+        73rem, /* Glass circle top right */
+        119rem, /* Glass circle bottom right */
+        42rem, /* Oval blob top left */
+        76rem, /* Oval blob top right */
+        89rem, /* Oval blob bottom left */
+        109rem, /* Oval blob bottom right */
+        30rem, /* Waves Landing Page */
+        106rem, /* Landing Waves Fadout */
+        96rem; /* black background */
+        background-position-x: 
+        12rem, /* Glass circle top left */
+        8rem, /* Glass circle bottom left */
+        -5rem, /* Glass circle top right */
+        2rem, /* Glass circle bottom right */
+        -10rem, /* Oval blob top left */
+        10rem, /* Oval blob top right */
+        -16rem, /* Oval blob bottom left */
+        20rem, /* Oval blob bottom right */
+        center, /* Waves Landing Page */
+        center, /* Landing Waves Fadout */
+        center; /* black background */
+    }
 }
 
 .pcb {
@@ -62,6 +124,30 @@
     }
 }
 
+@media screen and (max-width: 415px) {
+    .pcb {
+        left: 16rem;
+        bottom: 31rem;
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .pcb {
+        left: 15.5rem;
+        bottom: 27rem;
+        width: 110px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .pcb {
+        left: 15.5rem;
+        bottom: 19rem;
+        width: 90px;
+    }
+}
+
 .blob {
     position: absolute;
     right: 0rem;
@@ -72,6 +158,18 @@
 @media screen and (max-width: 431px) {
     .blob {
         width: 170px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .blob {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .blob {
+        width: 150px;
     }
 }
 
@@ -90,6 +188,26 @@
     }
 }
 
+@media screen and (max-width: 415px) {
+    .vr {
+        top: 23rem;
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .vr {
+        width: 220px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .vr {
+        top: 21rem;
+        width: 200px;
+    }
+}
+
 .moon {
     position: absolute;
     right: 14rem;
@@ -98,9 +216,32 @@
 
 @media screen and (max-width: 431px) {
     .moon {
-        bottom: 19rem;
+        bottom: 18rem;
         right: 1rem;
         width: 150px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .moon {
+        bottom: 16rem;
+        right: 1rem;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .moon {
+        bottom: 14rem;
+        right: 3rem;
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .moon {
+        bottom: 8rem;
+        right: 2rem;
     }
 }
 
@@ -116,6 +257,30 @@
         top: 42rem;
         right: 1rem;
         width: 250px;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 230px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .astronaut {
+        top: 37rem;
+        right: 2rem;
+        width: 190px;
     }
 }
 
@@ -135,6 +300,19 @@
     }
 }
 
+@media screen and (max-width: 415px) {
+    .info-cards {
+        margin-inline: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .info-cards {
+        margin-top: 30rem;
+        margin-inline: 0.45rem;
+    }
+}
+
 .carousel-header {
     margin-top: 9rem;
     margin-inline: 11rem;
@@ -143,4 +321,38 @@
     font-style: normal;
     font-weight: 700;
     color: white;
+}
+
+@media screen and (max-width: 431px) {
+    .carousel-header {
+        margin-top: 5rem;
+        margin-bottom: -3rem;
+        margin-inline: 3rem;
+        font-size: 30px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .carousel-header {
+        margin-top: 5rem;
+        margin-bottom: -3rem;
+        margin-inline: 3rem;
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .carousel-header {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .carousel-header {
+        margin-top: 7rem;
+        margin-bottom: 1rem;
+        font-size: 24px;
+    }
 }

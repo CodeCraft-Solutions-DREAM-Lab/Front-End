@@ -1,4 +1,4 @@
-// Swiper
+import React from "react";
 import {
   Navigation,
   Pagination,
@@ -6,7 +6,7 @@ import {
   A11y,
   Autoplay,
 } from "swiper/modules";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "./LabCarousel.css";
 
-// Imagenes
+// Import your images
 import Logo from "src/assets/Logos/LogoDreamLab.png";
 import SocialNetworking from "src/assets/LandingPage/social-networking.jpg";
 import LegoRoom from "src/assets/LandingPage/lego-room.jpg";
@@ -24,25 +24,60 @@ import NewHorizons from "src/assets/LandingPage/new-horizons.jpg";
 import DeepNet from "src/assets/LandingPage/deep-net.jpg";
 import Graveyard from "src/assets/LandingPage/graveyard.jpg";
 
-function LabSwiper() {
-  // const swiper = useSwiper();
+function LabCarousel() {
+  // Array of swiper card information
+  const swiperCards = [
+    {
+      title: "Social Networking Room",
+      image: SocialNetworking,
+      description: ["Espacio abierto", "Conoce personas", "Video Wall"],
+    },
+    {
+      title: "Lego Room",
+      image: LegoRoom,
+      description: ["Experimentación", "Windows", "MacOS"],
+    },
+    {
+      title: "Electric Garage",
+      image: ElectricGarage,
+      description: ["Electrónicos", "Sensores", "Medidores"],
+    },
+    {
+      title: "Dimension Forge",
+      image: DimensionForge,
+      description: ["Tecnología para 3D", "Impresoras 3D", "Scanners"],
+    },
+    {
+      title: "New Horizons",
+      image: NewHorizons,
+      description: ["Realidad virtual", "Realidad aumentada", "Holodeck"],
+    },
+    {
+      title: "Deep Net",
+      image: DeepNet,
+      description: ["Redes", "Red Aislada", "Hacking"],
+    },
+    {
+      title: "Graveyard",
+      image: Graveyard,
+      description: ["Cómputo viejo", "Software antiguo", "Reverse engineering"],
+    },
+    // Add more swiper card objects as needed
+  ];
 
   return (
     <div className="landing-lab-carousel-component">
       <Swiper
-        // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={1}
-        loop="true"
+        loop={true}
         autoplay={true}
-        longSwipes="false"
-        grabCursor="true"
+        longSwipes={false}
+        grabCursor={true}
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
         style={{
           "--swiper-pagination-color": "#FFFFFF",
           "--swiper-pagination-bullet-inactive-color": "#D9D9D9",
@@ -50,153 +85,39 @@ function LabSwiper() {
           "--swiper-pagination-bullet-size": "12px",
           "--swiper-pagination-bullet-horizontal-gap": "6px",
           "--swiper-navigation-color": "#FFFFFF",
-          "--swiper-navigation-sides-offset": "5.2rem",
+          "--swiper-navigation-sides-offset": "4.7rem",
+          "--swiper-pagination-bottom": "55px"
         }}
       >
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Social Networking Room</h3>
-              <img
-                className="landing-carousel-img"
-                src={SocialNetworking}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Espacio abierto</li>
-                <li className="landing-list-element">Conoce personas</li>
-                <li className="landing-list-element">Video Wall</li>
-              </ul>
+        {swiperCards.map((card, index) => (
+          <SwiperSlide key={index}>
+            <div className="carousel-card-glass-card">
+              <GlassCard>
+                <div className="landing-carousel-card">
+                  <img
+                    className="landing-carousel-logo"
+                    src={Logo}
+                    alt="Logo"
+                  />
+                  <h3 className="landing-carousel-title">{card.title}</h3>
+                  <img
+                    className="landing-carousel-img"
+                    src={card.image}
+                    alt={card.title}
+                  />
+                  <ul className="landing-carousel-desc">
+                    {card.description.map((item, idx) => (
+                      <li key={idx} className="landing-list-element">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </GlassCard>
             </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Lego Room</h3>
-              <img
-                className="landing-carousel-img"
-                src={LegoRoom}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Experimentación</li>
-                <li className="landing-list-element">Windows</li>
-                <li className="landing-list-element">MacOS</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Electric Garage</h3>
-              <img
-                className="landing-carousel-img"
-                src={ElectricGarage}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Electrónicos</li>
-                <li className="landing-list-element">Sensores</li>
-                <li className="landing-list-element">Medidores</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Dimension Forge</h3>
-              <img
-                className="landing-carousel-img"
-                src={DimensionForge}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Tecnología para 3D</li>
-                <li className="landing-list-element">Impresoras 3D</li>
-                <li className="landing-list-element">Scanners</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">New Horizons</h3>
-              <img
-                className="landing-carousel-img"
-                src={NewHorizons}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Realidad virtual</li>
-                <li className="landing-list-element">Realidad aumentada</li>
-                <li className="landing-list-element">Holodeck</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Deep Net</h3>
-              <img
-                className="landing-carousel-img"
-                src={DeepNet}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Redes</li>
-                <li className="landing-list-element">Red Aislada</li>
-                <li className="landing-list-element">Hacking</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        <SwiperSlide>
-          <GlassCard margin="4rem" padding="4rem">
-            <div className="landing-carousel-card">
-              <img
-                className="landing-carousel-logo"
-                src={Logo}
-              />
-              <h3 className="landing-carousel-title">Graveyard</h3>
-              <img
-                className="landing-carousel-img"
-                src={Graveyard}
-              />
-              <ul className="landing-carousel-desc">
-                <li className="landing-list-element">Cómputo viejo</li>
-                <li className="landing-list-element">Software antiguo</li>
-                <li className="landing-list-element">Reverse engineering</li>
-              </ul>
-            </div>
-          </GlassCard>
-        </SwiperSlide>
-        ...
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
 }
 
-export default LabSwiper;
+export default LabCarousel;
