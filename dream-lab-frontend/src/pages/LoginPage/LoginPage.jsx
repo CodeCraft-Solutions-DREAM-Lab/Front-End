@@ -29,10 +29,13 @@ import topBlob from "src/assets/Login/top-blob.png";
 import bottomBlob from "src/assets/Login/bottom-blob.png";
 import dreamLabLogo from "src/assets/Logos/LogoDreamLab.png";
 
+import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen";
+
 export default function LoginPage() {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setLoading] = useState(false);
+    const [isAuthenticating, setAuthenticating] = useState(true);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState("");
     const dispatch = useDispatch();
@@ -40,14 +43,24 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (getFromLocalStorage("token")) {
+            setAuthenticating(true);
             post("auth/token", {
                 token: getFromLocalStorage("token") || "",
-            }).then((data) => {
-                if (data) {
-                    dispatch(setAuth(true));
-                    navigate("/home");
-                }
-            });
+            })
+                .then((data) => {
+                    if (data) {
+                        dispatch(setAuth(true));
+                        navigate("/home");
+                    }
+                })
+                .catch(() => {
+                    setAuthenticating(false);
+                })
+                .finally(() => {
+                    setAuthenticating(false);
+                });
+        } else {
+            setAuthenticating(false);
         }
     }, [dispatch, navigate]);
 
@@ -92,82 +105,90 @@ export default function LoginPage() {
         }
     };
 
-    return (
-        <div className="login-container">
-            <div className="blobs-container">
-                <img
-                    src={topBlob}
-                    alt="Top Blob"
-                    className="blob-image top-left-image"
-                />
-                <img
-                    src={bottomBlob}
-                    alt="Bottom Blob"
-                    className="blob-image bottom-right-image"
-                />
-            </div>
-            <div className="glassCardContainer">
-                <GlassCard classes={"glassCard"}>
-                    <form onSubmit={handleLogin}>
-                        <div className="grid-container">
-                            <LoginRow flexDirection="col" justify="between">
-                                <LoginRow margin="12vh 0 0 0">
-                                    <img
-                                        src={dreamLabLogo}
-                                        alt="Logo"
-                                        className="login-logo"
+    if (isAuthenticating) {
+        return <LoadingScreen />;
+    } else {
+        return (
+            <div className="login-container">
+                <div className="blobs-container">
+                    <img
+                        src={topBlob}
+                        alt="Top Blob"
+                        className="blob-image top-left-image"
+                    />
+                    <img
+                        src={bottomBlob}
+                        alt="Bottom Blob"
+                        className="blob-image bottom-right-image"
+                    />
+                </div>
+                <div className="glassCardContainer">
+                    <GlassCard classes={"glassCard"}>
+                        <form onSubmit={handleLogin}>
+                            <div className="grid-container">
+                                <LoginRow flexDirection="col" justify="between">
+                                    <LoginRow margin="12vh 0 0 0">
+                                        <img
+                                            src={dreamLabLogo}
+                                            alt="Logo"
+                                            className="login-logo"
+                                        />
+                                        <h1 className="login-dreamlab-title">
+                                            DREAM LAB
+                                        </h1>
+                                    </LoginRow>
+                                    <LoginRow margin="4vh 0 0 0">
+                                        <h1 className="login-titulo">
+                                            Inicia sesión
+                                        </h1>
+                                    </LoginRow>
+                                </LoginRow>
+                                <LoginRow flexDirection="col">
+                                    <LoginTextField
+                                        label={"Matrícula"}
+                                        marginBot={"5vh"}
+                                        value={user}
+                                        onValueChange={setUser}
+                                        cypressSelectorInput="login-user"
                                     />
-                                    <h1 className="login-dreamlab-title">
-                                        DREAM LAB
-                                    </h1>
+                                    <LoginTextField
+                                        label={"Contraseña"}
+                                        isLogin={true}
+                                        value={password}
+                                        onValueChange={setPassword}
+                                        cypressSelectorInput="login-password"
+                                        cypressSelectorVisibility="login-password-visibility"
+                                    />
                                 </LoginRow>
-                                <LoginRow margin="4vh 0 0 0">
-                                    <h1 className="login-titulo">
-                                        Inicia sesión
-                                    </h1>
+                                <LoginRow margin="0 0 12vh 0">
+                                    <LoginButton
+                                        text="ACEPTAR"
+                                        onClick={handleLogin}
+                                        isLoading={isLoading}
+                                        type="submit"
+                                        cypressSelector="login-button"
+                                    />
                                 </LoginRow>
-                            </LoginRow>
-                            <LoginRow flexDirection="col">
-                                <LoginTextField
-                                    label={"Matrícula"}
-                                    marginBot={"5vh"}
-                                    value={user}
-                                    onValueChange={setUser}
-                                    cypressSelectorInput="login-user"
-                                />
-                                <LoginTextField
-                                    label={"Contraseña"}
-                                    isLogin={true}
-                                    value={password}
-                                    onValueChange={setPassword}
-                                    cypressSelectorInput="login-password"
-                                    cypressSelectorVisibility="login-password-visibility"
-                                />
-                            </LoginRow>
-                            <LoginRow margin="0 0 12vh 0">
-                                <LoginButton
-                                    text="ACEPTAR"
-                                    onClick={handleLogin}
-                                    isLoading={isLoading}
-                                    type="submit"
-                                    cypressSelector="login-button"
-                                />
-                            </LoginRow>
-                        </div>
-                    </form>
-                </GlassCard>
-            </div>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert
-                    data-cy="login-error"
+                            </div>
+                        </form>
+                    </GlassCard>
+                </div>
+                <Snackbar
+                    open={open}
+                    autoHideDuration={6000}
                     onClose={handleClose}
-                    severity="error"
-                    variant="filled"
-                    sx={{ width: "100%" }}
                 >
-                    {message}
-                </Alert>
-            </Snackbar>
-        </div>
-    );
+                    <Alert
+                        data-cy="login-error"
+                        onClose={handleClose}
+                        severity="error"
+                        variant="filled"
+                        sx={{ width: "100%" }}
+                    >
+                        {message}
+                    </Alert>
+                </Snackbar>
+            </div>
+        );
+    }
 }

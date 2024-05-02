@@ -38,6 +38,9 @@ import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
 // Videowall
 import Videowall from "./pages/Videowall/Videowall.jsx";
 
+// Admin
+import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
+
 function secured(Component) {
     return function WrappedComponent(props) {
         return (
@@ -77,6 +80,7 @@ const router = createBrowserRouter(
             />
             <Route path="videowall" element={<Videowall />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="crearAnuncio" element={secured(CrearAnuncioVideowall)()} />
         </Route>
     )
 );

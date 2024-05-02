@@ -4,7 +4,7 @@ import "./BotonSolicitar.css";
 
 function BotonSolicitar(props){
     return(
-        <button className="boton-solicitar" onClick={props.onClick}>
+        <button data-cy="boton-solicitar-detalles" className="boton-solicitar" onClick={props.onClick}>
             {props.nombreBoton}
         </button>
     )

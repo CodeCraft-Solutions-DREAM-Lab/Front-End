@@ -31,16 +31,24 @@ function SelectorLogro({
     logrosObtenidos,
     logroSeleccionado,
     setLogroSeleccionado,
+    handleLogroArtista,
 }) {
-    const handleSave = () => {
-        post(`perfil/logros/${getFromLocalStorage("user")}`, {
-            idLogro: logroSeleccionado.idLogro,
-            colorPreferido: colorSeleccionado,
-        }).then((response) => {
+    const handleSave = async () => {
+        try {
+            const response = await post(
+                `perfil/logros/${getFromLocalStorage("user")}`,
+                {
+                    idLogro: logroSeleccionado.idLogro,
+                    colorPreferido: colorSeleccionado,
+                }
+            );
             console.log(response);
+            await handleLogroArtista(10);
             setRefresh((prev) => !prev);
             onOpenChange();
-        });
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -120,6 +128,7 @@ SelectorLogro.propTypes = {
     logrosObtenidos: PropTypes.array,
     logroSeleccionado: PropTypes.object,
     setLogroSeleccionado: PropTypes.func,
+    handleLogroArtista: PropTypes.func,
 };
 
 export default SelectorLogro;

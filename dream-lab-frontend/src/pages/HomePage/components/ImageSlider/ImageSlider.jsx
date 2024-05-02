@@ -17,9 +17,10 @@ const ImageSlider = (props) => {
     const [bdImages, setBdImages] = useState([]);
 
     function handleClick(idExperiencia) {
+
         // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
         const isSalaImage = props.setImageType === "salas";
-
+        
         if (isSalaImage) {
             dispatch(
                 setSelectedItem({
@@ -27,6 +28,7 @@ const ImageSlider = (props) => {
                     type: "sala",
                 })
             );
+
         } else {
             dispatch(
                 setSelectedItem({
@@ -128,7 +130,7 @@ const ImageSlider = (props) => {
                 }
 
                 res = res.map((item) => ({
-                    id: item.idSala,
+                    id: (props.setImageType==="salas"? item.idSala : item.idExperiencia),
                     isExperiencia: { isExperiencia },
                     url: item.fotoURL ? item.fotoURL : item.portadaURL,
                     title: item.nombre,
@@ -168,6 +170,7 @@ const ImageSlider = (props) => {
                             <div className="embla__parallax">
                                 <div className="embla__parallax__layer">
                                     <img
+                                        data-cy="imagen-experiencia"
                                         className="embla__slide__img embla__parallax__img"
                                         src={image.url}
                                         alt="Your alt text"

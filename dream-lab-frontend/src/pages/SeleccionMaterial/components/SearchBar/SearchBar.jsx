@@ -8,6 +8,12 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
         setSearchTerm(event.target.value);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.target.blur(); // Deja de enfocar el input al presionar Enter
+        }
+    };
+
     return (
         <div className="searchContainer">
             <Input
@@ -22,6 +28,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
                 fullWidth={true}
                 value={searchTerm}
                 onChange={handleSearch}
+                onKeyDown={handleKeyDown}
                 data-cy="search-bar-material"
             ></Input>
             {/* <input type="text" className="searchBar" placeholder="" /> */}

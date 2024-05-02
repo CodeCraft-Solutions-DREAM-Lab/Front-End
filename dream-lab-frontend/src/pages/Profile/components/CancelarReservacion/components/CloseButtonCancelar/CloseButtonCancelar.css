@@ -1,0 +1,34 @@
+.close-button-cancelar {
+    width: 4.5vh;
+    height: 4.5vh;
+    padding-bottom: 2px;
+    background-color: white;
+    border: 4px solid #14247b;
+; /* Agrega un borde blanco */
+    border-radius: 100%;
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    color: #14247b;
+    font-size: large;
+}
+
+.close-button-cancelar:hover {
+    background-color: #14247b;
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .close-button-cancelar {
+        width: 3.5vh;
+        height: 3.5vh;
+        font-size: small;
+    }
+}
+
+@media (max-width: 376px) {
+    .close-button-cancelar {
+        width: 4.5vh;
+        height: 4.5vh;
+    }
+}
+

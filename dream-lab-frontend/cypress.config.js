@@ -1,17 +1,21 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  e2e: {
-    baseUrl: "http://localhost:5173",
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
+    projectId: "vyayrg",
+    e2e: {
+        baseUrl: "http://localhost:5173",
+        setupNodeEvents(on, config) {
+            // implement node event listeners here
+        },
     },
-  },
-
-  component: {
-    devServer: {
-      framework: "react",
-      bundler: "vite",
+    env: {
+        // API_URL: 'https://dreamlab-api.azurewebsites.net/',
+        API_URL: "http://localhost:3000/",
     },
-  },
+    component: {
+        devServer: {
+            framework: "react",
+            bundler: "vite",
+        },
+    },
 });
