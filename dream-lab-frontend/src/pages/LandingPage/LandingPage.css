@@ -2,49 +2,49 @@
 
 .landing-page-container {
     background-image: 
-    url("src/assets/LandingPage/glass-circle-top-left.svg"),
-    url("src/assets/LandingPage/glass-circle-bottom-left.svg"),
-    url("src/assets/LandingPage/glass-circle-right.svg"), 
-    url("src/assets/LandingPage/glass-circle-right.svg"), 
-    url("src/assets/LandingPage/oval-blob-top-left.svg"),
-    url("src/assets/LandingPage/oval-blob-top-right.svg"),
-    url("src/assets/LandingPage/oval-blob-bottom-left.svg"),
-    url("src/assets/LandingPage/oval-blob-bottom-right.svg"),
-    url("src/assets/LandingPage/WavesLandingPage.svg"),
-    url("src/assets/LandingPage/LandingWavesFadeout.svg"); /* 10 imgs */
+    url("src/assets/LandingPage/glass-circle-top-left.svg"), /* Glass circle top left */
+    url("src/assets/LandingPage/glass-circle-bottom-left.svg"), /* Glass circle bottom left */
+    url("src/assets/LandingPage/glass-circle-right.svg"), /* Glass circle top right */
+    url("src/assets/LandingPage/glass-circle-right.svg"), /* Glass circle bottom right */
+    url("src/assets/LandingPage/oval-blob-top-left.svg"), /* Oval blob top left */
+    url("src/assets/LandingPage/oval-blob-top-right.svg"), /* Oval blob top right */
+    url("src/assets/LandingPage/oval-blob-bottom-left.svg"), /* Oval blob bottom left */
+    url("src/assets/LandingPage/oval-blob-bottom-right.svg"), /* Oval blob bottom right */
+    url("src/assets/LandingPage/WavesLandingPage.svg"), /* Waves Landing Page */
+    url("src/assets/LandingPage/LandingWavesFadeout.svg"); /* Landing Waves Fadout */
     background-repeat: 
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat;
+    no-repeat, /* Glass circle top left */
+    no-repeat, /* Glass circle bottom left */
+    no-repeat, /* Glass circle top right */
+    no-repeat, /* Glass circle bottom right */
+    no-repeat, /* Oval blob top left */
+    no-repeat, /* Oval blob top right */
+    no-repeat, /* Oval blob bottom left */
+    no-repeat, /* Oval blob bottom right */
+    no-repeat, /* Waves Landing Page */
+    no-repeat; /* Landing Waves Fadout */
     background-position-y: 
-    120rem,
-    175rem,
-    94rem,
-    178rem,
-    100rem,
-    100rem,
-    160rem,
-    160rem,
-    65rem,
-    132rem;
+    120rem, /* Glass circle top left */
+    175rem, /* Glass circle bottom left */
+    94rem, /* Glass circle top right */
+    178rem, /* Glass circle bottom right */
+    100rem, /* Oval blob top left */
+    100rem, /* Oval blob top right */
+    160rem, /* Oval blob bottom left */
+    160rem, /* Oval blob bottom right */
+    65rem, /* Waves Landing Page */
+    132rem; /* Landing Waves Fadout */
     background-position-x: 
-    4rem,
-    7rem,
-    right,
-    right,
-    left,
-    right,
-    left,
-    right,
-    center,
-    center;
+    4rem, /* Glass circle top left */
+    7rem, /* Glass circle bottom left */
+    right, /* Glass circle top right */
+    right, /* Glass circle bottom right */
+    left, /* Oval blob top left */
+    right, /* Oval blob top right */
+    left, /* Oval blob bottom left */
+    right, /* Oval blob bottom right */
+    center, /* Waves Landing Page */
+    center; /* Landing Waves Fadout */
 }
 
 .pcb {
@@ -54,11 +54,25 @@
     width: 350px;
 }
 
+@media screen and (max-width: 431px) {
+    .pcb {
+        left: 15rem;
+        bottom: 30rem;
+        width: 140px;
+    }
+}
+
 .blob {
     position: absolute;
     right: 0rem;
     top: 0rem;
     width: 600px;
+}
+
+@media screen and (max-width: 431px) {
+    .blob {
+        width: 170px;
+    }
 }
 
 .vr {
@@ -69,10 +83,25 @@
     z-index: 0;
 }
 
+@media screen and (max-width: 431px) {
+    .vr {
+        top: 22rem;
+        width: 280px;
+    }
+}
+
 .moon {
     position: absolute;
     right: 14rem;
     width: 400px;
+}
+
+@media screen and (max-width: 431px) {
+    .moon {
+        bottom: 19rem;
+        right: 1rem;
+        width: 150px;
+    }
 }
 
 .astronaut {
@@ -82,12 +111,28 @@
     width: 500px;
 }
 
+@media screen and (max-width: 431px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 250px;
+    }
+}
+
 .info-cards {
     display: flex;
     flex-flow: row wrap;
     margin-top: 60rem;
     margin-inline: 20rem;
     gap: 15rem;
+}
+
+@media screen and (max-width: 431px) {
+    .info-cards {
+        margin-top: 37rem;
+        margin-inline: 1.3rem;
+        gap: 5rem;
+    }
 }
 
 .carousel-header {
