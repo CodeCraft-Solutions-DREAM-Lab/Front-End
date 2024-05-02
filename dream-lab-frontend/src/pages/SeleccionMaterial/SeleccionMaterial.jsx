@@ -105,7 +105,7 @@ function SeleccionMaterial() {
 				<div className="top-section">
 					{/* Aquí irá el resumen y la search bar */}
 					<div className="search-bar-container">
-						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 					</div>
 				</div>
 				<div className="bottom-section">

@@ -33,22 +33,22 @@ describe("Pruebas de selección de material", () => {
 
 		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="minus-button"]').click(); // Quitar 1
 		cy.get('.card-container-sm > :nth-child(1)')
-			.find(".quantity")
+			.find('[data-cy="quantity"]')
 			.should("contain", 0); // Verificar que el contador no se va a valores negativos
 
 		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
 		cy.get('.card-container-sm > :nth-child(1)')
-			.find(".quantity")
+			.find('[data-cy="quantity"]')
 			.should("contain", 1); // Verificar que incrementó el contador
 
 		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
 		cy.get('.card-container-sm > :nth-child(1)')
-			.find(".quantity")
+			.find('[data-cy="quantity"]')
 			.should("contain", 1); // Verificar que e contador no incrementó (la cantidad disponible es 1)
 
 		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="minus-button"]').click(); // Quitar 1
 		cy.get('.card-container-sm > :nth-child(1)')
-			.find(".quantity")
+			.find('[data-cy="quantity"]')
 			.should("contain", 0); // Verificar que decrementó el contador
 
 		cy.get('.card-container-sm > :nth-child(1)').find('[data-cy="plus-button"]').click(); // Agregar 1
@@ -59,8 +59,13 @@ describe("Pruebas de selección de material", () => {
 			// el valor asignado previamente
             cy.wait('@getMaterials');
 			cy.get('.card-container-sm > :nth-child(1)')
-				.find(".quantity")
+				.find('[data-cy="quantity"]')
 				.should("contain", 1); // Verificar que el valor (1) sigue ahí 
 		});
+
+        cy.get('[data-cy="search-bar-material"]').type("router") // Hacemos una búsqueda
+        cy.get('.card-container-sm > :nth-child(1)') // Verificar resultado
+			.find('[data-cy="material-name"]')
+			.should("contain", "Router");
 	});
 });

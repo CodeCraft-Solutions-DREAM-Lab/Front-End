@@ -22,6 +22,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
                 fullWidth={true}
                 value={searchTerm}
                 onChange={handleSearch}
+                data-cy="search-bar-material"
             ></Input>
             {/* <input type="text" className="searchBar" placeholder="" /> */}
         </div>
