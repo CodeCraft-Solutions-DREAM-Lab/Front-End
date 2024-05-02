@@ -5,6 +5,24 @@
     margin-bottom: 1rem;
 }
 
+@media screen and (max-width: 431px) {
+    .landing-lab-carousel-component {
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.carousel-card-glass-card {
+    margin: 2rem;
+    padding: 2rem;
+}
+
+@media screen and (max-width: 431px) {
+    .carousel-card-glass-card {
+        margin: 0.5rem;
+    }
+}
+
 .landing-carousel-card {
     justify-items: center;
     /* align-items: center; */;
@@ -19,6 +37,18 @@
     grid-column-start: col3;
     grid-column-end: col5;
     border-radius: 10%;
+    padding: 3rem;
+}
+
+@media screen and (max-width: 431px) {
+    .landing-carousel-img {
+        grid-row-start: row1;
+        grid-row-end: row3;
+        grid-column-start: col2;
+        grid-column-end: col4;
+        padding-inline: 1.5rem;
+        transform: translateY(-1rem);
+    }
 }
 
 .landing-carousel-logo {
@@ -29,20 +59,11 @@
     transform: scale(0.1) translateY(-70rem);
 }
 
-.landing-carousel-left {
-    grid-row-start: row2;
-    grid-row-end: row4;
-    grid-column-start: col1;
-    grid-column-end: col2;
-    transform: scale(0.6);
-}
-
-.landing-carousel-right {
-    grid-row-start: row2;
-    grid-row-end: row4;
-    grid-column-start: col4;
-    grid-column-end: col5;
-    transform: scale(0.1);
+@media screen and (max-width: 431px) {
+    .landing-carousel-logo {
+        transform: scale(0);
+        visibility: hidden;
+    }
 }
 
 .landing-carousel-title {
@@ -58,6 +79,36 @@
     color: white;
 }
 
+@media screen and (max-width: 431px) {
+    .landing-carousel-title {
+        grid-row-start: row2;
+        grid-row-end: row4;
+        grid-column-start: col2;
+        grid-column-end: col4;
+        font-size: 24px;
+        align-self: center;
+        margin: 3rem;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    .landing-carousel-title {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .landing-carousel-title {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .landing-carousel-title {
+        font-size: 18px;
+    }
+}
+
 .landing-carousel-desc {
     align-self: start;
     grid-row-start: row3;
@@ -70,6 +121,37 @@
     font-weight: 300;
     color: white;
     list-style-type: disc;
+}
+
+@media screen and (max-width: 431px) {
+    .landing-carousel-desc {
+        grid-row-start: row3;
+        grid-row-end: row5;
+        grid-column-start: col2;
+        grid-column-end: col4;
+        align-self: center;
+        font-size: 22px;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .landing-carousel-desc {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .landing-carousel-desc {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .landing-carousel-desc {
+        font-size: 16px;
+        line-height: 2rem;
+    }
 }
 
 .landing-list-element {
