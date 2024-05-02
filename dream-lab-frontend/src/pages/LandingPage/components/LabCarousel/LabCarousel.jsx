@@ -66,7 +66,7 @@ function LabCarousel() {
   ];
 
   return (
-    <div className="landing-lab-carousel-component">
+    <div data-cy="landing-lab-carousel" className="landing-lab-carousel-component">
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
@@ -91,7 +91,7 @@ function LabCarousel() {
       >
         {swiperCards.map((card, index) => (
           <SwiperSlide key={index}>
-            <div className="carousel-card-glass-card">
+            <div data-cy="landing-carousel-card" className="carousel-card-glass-card">
               <GlassCard>
                 <div className="landing-carousel-card">
                   <img
@@ -99,8 +99,9 @@ function LabCarousel() {
                     src={Logo}
                     alt="Logo"
                   />
-                  <h3 className="landing-carousel-title">{card.title}</h3>
+                  <h3 data-cy="landing-carousel-lab-name" className="landing-carousel-title">{card.title}</h3>
                   <img
+                    data-cy="landing-carousel-image"
                     className="landing-carousel-img"
                     src={card.image}
                     alt={card.title}

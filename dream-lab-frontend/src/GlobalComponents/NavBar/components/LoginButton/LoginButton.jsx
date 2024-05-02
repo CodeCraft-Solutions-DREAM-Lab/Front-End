@@ -8,7 +8,7 @@ const SearchBar = () => {
     }
     return (
         <div className="landing-login-button-container">
-            <button className="landing-login-button" onClick={handleClick}>INICIAR SESIÓN</button>
+            <button data-cy="landing-login-button" className="landing-login-button" onClick={handleClick}>INICIAR SESIÓN</button>
         </div>
     );
 };
