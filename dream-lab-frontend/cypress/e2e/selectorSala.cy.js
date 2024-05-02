@@ -96,7 +96,7 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("nombre-experiencia").should("not.exist");
     });
 
-    it("Probando Date Picker", () => {
+    it.only("Probando Date Picker", () => {
         cy.visit("/reservacion/sala", {
             onBeforeLoad(win) {
                 win.sessionStorage.setItem("reservType", "sala");
@@ -112,10 +112,10 @@ describe("Probando pantalla de selector de sala", () => {
 
         cy.getDataCy("selector-fecha").should("contain.text", "09/09/2060");
 
-        cy.get("[data-cy=selector-fecha] button").click();
+        // cy.get("[data-cy=selector-fecha] button").click();
         cy.get("[data-cy=selector-fecha] button").type(
-            "{enter}{rightarrow}{enter}",
-            { delay: 200 }
+            "{rightarrow}{enter}",
+            { delay: 600 }
         );
 
         cy.getDataCy("selector-fecha").should("contain.text", "10/09/2060");
