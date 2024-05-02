@@ -19,34 +19,7 @@ select:-webkit-autofill:focus {
   
   height:fit-content;
 }
-/* Define scrollbar styles */
-::-webkit-scrollbar {
-  width: 8px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: none; 
-}
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.525); 
-  border-radius: 20px;
-}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.7); 
-}
-
-/* Optional: Hide scrollbar when not hovered */
-/* ::-webkit-scrollbar {
-  display: none;
-} */
-
-/* Optional: Show scrollbar only on hover */
-/* html:hover::-webkit-scrollbar {
-  display: initial;
-} */
 

@@ -29,6 +29,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
                 value={searchTerm}
                 onChange={handleSearch}
                 onKeyDown={handleKeyDown}
+                data-cy="search-bar-material"
             ></Input>
             {/* <input type="text" className="searchBar" placeholder="" /> */}
         </div>
