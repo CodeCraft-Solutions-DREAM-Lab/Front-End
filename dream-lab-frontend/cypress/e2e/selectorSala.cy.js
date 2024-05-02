@@ -96,7 +96,7 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("nombre-experiencia").should("not.exist");
     });
 
-    it.only("Probando Date Picker", () => {
+    it("Probando Date Picker", () => {
         cy.visit("/reservacion/sala", {
             onBeforeLoad(win) {
                 win.sessionStorage.setItem("reservType", "sala");
