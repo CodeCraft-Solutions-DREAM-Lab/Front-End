@@ -24,22 +24,31 @@ describe("Pruebas de login", () => {
         cy.typeDataCy("login-user", "test");
         cy.typeDataCy("login-password", "test");
         cy.clickDataCy("login-password-visibility");
-        cy.getDataCy("login-password").hasAttribute("type", "text");
+        cy.isTypeDataCy("login-password", "text");
         cy.clickDataCy("login-password-visibility");
-        cy.getDataCy("login-password").hasAttribute("type", "password");
+        cy.isTypeDataCy("login-password", "password");
     });
 
     it("Usuario y contraseña incorrectos", () => {
         cy.typeDataCy("login-user", "usuario");
         cy.typeDataCy("login-password", "contraseña");
+        cy.intercept("POST", "auth/usuario").as("authUsuario");
         cy.clickDataCy("login-button");
+        // Verificar que ya se haya verificado las credenciales
+        cy.wait("@authUsuario");
         cy.containsDataCy("login-error", "Usuario o contraseña incorrectos");
     });
 
     it("Usuario y contraseña correctos", () => {
         cy.typeDataCy("login-user", "test");
         cy.typeDataCy("login-password", "test");
+        cy.intercept("POST", "auth/usuario").as("authUsuario");
+        cy.intercept("POST", "auth/token").as("getToken");
         cy.clickDataCy("login-button");
+        // Verificar que ya se haya verificado las credenciales
+        cy.wait("@authUsuario");
+        cy.wait("@getToken");
+        // Verificar que se haya redirigido a la página de Home
         cy.urlContains("/home");
         cy.containsDataCy("navbar", "DREAM LAB");
     });
