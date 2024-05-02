@@ -10,6 +10,8 @@ import "./NavBar.css";
 
 import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
 
+import { Link } from "react-router-dom";
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -98,11 +100,6 @@ class Navbar extends React.Component {
             classHide = "hidden";
         }
 
-        const handleDivClick = () => {
-            // Redirige a la página deseada al hacer clic en el div
-            window.location.href = "/home/";
-        };
-
         return (
             <div className={`navbar-positioning ${classHide}`}>
                 <div
@@ -112,9 +109,9 @@ class Navbar extends React.Component {
                 >
                     <div className="flex items-center justify-between w-full">
                         {!viewLandingPage && (
-                            <div
+                            <Link
                                 className="logo-container"
-                                onClick={handleDivClick}
+                                to={"/home"}
                                 style={{ cursor: "pointer" }}
                             >
                                 <img
@@ -123,13 +120,14 @@ class Navbar extends React.Component {
                                     className="logo"
                                 />
                                 <h1 className="dreamlab">DREAM LAB</h1>
-                            </div>
+                            </Link>
                         )}
                         {searchBar}{" "}
                         {/* Se ve la searchBar dependiendo de la vista */}
                         <div
                             className="user-avatar-container"
                             style={{ cursor: "pointer" }}
+                            data-cy="userIconNavBar"
                         >
                             {userAction}
                             {/* Se ven las acciones dependiendo de la vista (profile o logout o profile + create experience) */}

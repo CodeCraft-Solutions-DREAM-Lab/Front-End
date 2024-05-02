@@ -1,3 +1,6 @@
+
+
+
 .div-externo-reservacion {
     display: flex;
     flex-wrap: wrap;
@@ -9,16 +12,39 @@
     padding-bottom: 4%;
     padding-left: 8%;
     background-color: white;
-    cursor: pointer;
     border-radius: 20px;
     font-family: "Karla", sans-serif;
     color: black;
+}
+
+.first-section-reservacion-card{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .sala-reservacion {
     margin-bottom: -5px;
     font-size: large;
     font-weight: bolder;
+}
+
+.div-datos-reservacion{
+    width: 70%;
+}
+
+.clic-image{
+    width: 2vh;
+    height: 2vh;
+    justify-content: flex-end; /* Alinea al final del contenedor */
+    cursor: pointer;
+}
+
+.clic-tarjeta-reservacion {
+    width: 30%;
+    opacity: 0.3; /* 10% opacity */
+    display: flex;
+    justify-content: flex-end;
 }
 
 .linea {
@@ -46,6 +72,8 @@
     font-weight: bold;
     text-align: right;
 }
+
+
 
 @media (max-width: 1200px) {
     .sala-reservacion {
@@ -83,6 +111,12 @@
         width: 45%;
         margin-left: none; /* Alinea a la derecha */
     }
+
+    .clic-image{
+        width: 1.8vh;
+        height: 1.8vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
+    }
 }
 
 @media (max-width: 820px), (height: 1366px) {
@@ -119,6 +153,7 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
+   
 }
 
 @media (max-width: 500px) {
@@ -157,6 +192,12 @@
 
     .dia-reservacion {
         width: 45%;
+    }
+
+    .clic-image{
+        width: 3.1vh;
+        height: 3.1vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
     }
 }
 

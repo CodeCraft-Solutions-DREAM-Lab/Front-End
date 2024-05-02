@@ -27,7 +27,6 @@
 	flex-direction: row !important;
 	flex-wrap: wrap; /* Cards will wrap to the next row */
 	justify-content: left !important; /* Align cards to the start of the container */
-	flex: 1 0 auto;
 	overflow-y: auto; /* Enable vertical scroll if needed */
 	min-width: 80vw;
 	height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
@@ -47,9 +46,10 @@
 	padding-right: 10%;
 }
 
-.button-container {
+.button-container-sm {
 	width: 100%;
 	padding: 3%;
+	text-align: center;
 }
 
 @media only screen and (max-width: 968px) and (min-width: 481px) {
@@ -62,15 +62,40 @@
 		padding-right: 0;
 	}
 
-	/* .button-container {
-		margin-top: 3%;
-	} */
+	.button-container-sm {
+		margin-top: 1%;
+	}
 }
 /* 
 @media only screen and (max-width: 480px) {
-	.button-container {
+	.button-container-sm {
 		margin-top: 6%;
 	}
-} */
+	.search-bar-container {
+		margin-bottom: 4%;
+	}
+}
 
+
+/* Define scrollbar styles */
+.card-container-sm::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  /* Track */
+.card-container-sm::-webkit-scrollbar-track {
+	background: none; 
+  }
+  
+  /* Handle */
+.card-container-sm::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.525); 
+	border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+.card-container-sm::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7); 
+  }
+  
 

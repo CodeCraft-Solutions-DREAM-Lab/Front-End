@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
     getFromSessionStorage,
     existsInSessionStorage,
+    saveToSessionStorage,
 } from "src/utils/Storage";
 import { parseDate } from "@internationalized/date";
 
@@ -96,7 +97,12 @@ const TextoFecha = ({ update }) => {
             getHoraFinTexto(getFromSessionStorage("horaInicio"))
         );
 
-    }, [update]);
+    }, [update, diaTexto, horaFinTexto]);
+
+    useEffect(() => {
+        saveToSessionStorage("formattedDate", `${diaTexto} - ${diaNumero} de ${mes}`);
+        saveToSessionStorage("formattedTime", `${horaInicioTexto} - ${horaFinTexto}`);
+    }, [diaTexto, horaFinTexto])
 
     return (
         <>

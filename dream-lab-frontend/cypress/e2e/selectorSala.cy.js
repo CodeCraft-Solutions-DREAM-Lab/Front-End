@@ -1,7 +1,7 @@
 import "cypress-localstorage-commands";
+const API_URL = Cypress.env("API_URL");
 
 describe("Probando pantalla de selector de sala", () => {
-    const API_URL = "http://localhost:3000/";
 
     beforeEach(() => {
         cy.loginWithTest();

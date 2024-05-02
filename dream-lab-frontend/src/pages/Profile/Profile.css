@@ -170,6 +170,14 @@
     margin-bottom: 7vh;
 }
 
+@media (max-width: 1200px){
+
+    .navbar-div-profile {
+        margin-top: 7vh;
+    }
+    
+}
+
 @media (max-width: 800px) {
     .sub {
         font-size: small;
@@ -199,7 +207,7 @@
     }
 
     .esfera-div-celular {
-        display: block;
+        display:flex;
         justify-content: center;
         align-items: center;
         width: 100%;
@@ -208,7 +216,7 @@
 
     .logros-div {
         width: 45%;
-        height: 28vh;
+        height: 26vh;
         min-height: 0vh;
         margin-top: 5%;
         margin-right: 3%;
@@ -216,20 +224,20 @@
 
     .logros-div-in {
         overflow-y: auto;
-        height: 21vh;
+        height: 20vh;
         min-height: 0vh;
         padding-right: 3%;
     }
 
     .reservaciones-div {
         width: 45%;
-        height: 28vh;
+        height: 26vh;
         min-height: 0vh;
         margin-top: 5%;
     }
 
     .reservaciones-div-in {
-        height: 21vh;
+        height: 20vh;
     }
 
     .degradado-down {
@@ -238,6 +246,11 @@
             transparent,
             #7477e6 30%
         ); /* Crea un degradado de transparente a morado */
+    }
+
+    .navbar-div-profile {
+        margin-top: 4vh;
+        margin-bottom: 2vh;
     }
 }
 
@@ -365,7 +378,7 @@
 
 @media (max-width: 376px) {
     .esfera-div-celular {
-        display: block;
+        display:flex;
         justify-content: center;
         align-items: center;
         width: 100%;

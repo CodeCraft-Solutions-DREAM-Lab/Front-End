@@ -1,0 +1,125 @@
+/* card-dupe component*/
+.card-dupe {
+	width: 24%;
+	height: 50%;
+	margin: 1%;
+	margin-top: 0.5%;
+    margin-left: 3%;
+	background-color: #f3f3f3;
+	border-radius: 20px;
+	align-items: flex-end;
+}
+
+@media only screen and (max-width: 1380px) and (min-width: 1080px)  {
+    .card-dupe {
+        width: 28%;
+        height: 50%;
+        margin: 0%;
+    }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 801px)  {
+	.card-dupe {
+		width: 20%;
+		height: 170px;
+		margin: 2%;
+	}
+}
+
+@media only screen and (max-width: 800px) and (min-width: 601px)  {
+	.card-dupe {
+		width: 26%;
+		height: 170px;
+		margin: 2%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.card-dupe {
+		width: 45%;
+		height: 170px;
+		margin: 2%;
+	}
+}
+
+.nombre-material-dupe {
+	display: flex;
+	justify-content: center;
+	padding: 5%;
+	padding-top: 7%;
+	padding-bottom:0%;
+	font-size: small;
+	font-weight: 600;
+	text-align: center;
+	min-height: 30%;
+}
+
+.card-dupe .material-image-dupe {
+	display: flex;
+	justify-content: center;
+	width: auto;
+	height: 40%;
+	margin: 0 auto;
+	margin-bottom: 10%;
+}
+
+.card-dupe .material-image-dupe img {
+	display: block;
+	width: auto;
+	text-align: center;
+}
+
+.card-dupe .icons-dupe {
+	display: flex; /* Enable flexbox for responsive layout */
+	justify-content: center; /* Center elements horizontally */
+	align-items: flex-end;
+	
+}
+
+.card-dupe .icons-dupe img {
+	width: 23px;
+	height: auto;
+	margin: 0 7px; /* Add spacing between elements */
+	transition: transform 0.2s ease-in-out; /* Add transition for smooth animation */
+	cursor: pointer; /* Set cursor to pointer on hover */
+}
+
+.card-dupe .icons-dupe img:hover {
+	transform: scale(1.2); /* Scale up on hover */
+}
+
+.card-dupe .icons-dupe img:active {
+	transform: scale(0.9); /* Scale down slightly on click */
+}
+
+.card-dupe .icons-dupe p {
+	width: 25px;
+	height: 25px; /* Set height equal to width for a circle */
+	margin: 0 7px; /* Add spacing between elements */
+	background-color: white;
+	border-radius: 50%;
+	font-size: medium;
+	font-weight: 400;
+	line-height: 25px; /* Match line-height with height for vertical centering */
+	text-align: center;
+}
+
+@media only screen and (max-width: 480px) {
+	.card-dupe .material-image-dupe {
+		margin-bottom: 7%;
+	}
+
+	.card-dupe .icons-dupe img {
+		width: 23px;
+		height: auto;
+	}
+
+	.card-dupe .icons-dupe p {
+		width: 23px;
+		height: 23px;
+		font-size: medium;
+		font-weight: 400;
+		line-height: 23px;
+		text-align: center;
+	}
+}

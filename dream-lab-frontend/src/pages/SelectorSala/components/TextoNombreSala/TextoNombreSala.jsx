@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFromSessionStorage } from "src/utils/Storage";
+import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import { get } from "src/utils/ApiRequests";
 
 const TextoNombreSala = () => {
@@ -23,6 +23,7 @@ const TextoNombreSala = () => {
             get(`salas/${id}`)
                 .then((result) => {
                     setNombreSala(result[0].nombre);
+                    saveToSessionStorage("nameSalaExperiencia", nombreSala);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
@@ -31,6 +32,7 @@ const TextoNombreSala = () => {
             get(`experiencias/${id}`)
                 .then((result) => {
                     setNombreExperiencia(result[0].nombre);
+                    saveToSessionStorage("nameSalaExperiencia", nombreExperiencia);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);

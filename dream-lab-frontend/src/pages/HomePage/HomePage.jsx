@@ -6,11 +6,10 @@ import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/Reco
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
 import {
-    getFromLocalStorage,
-    multiClearSessionStorage,
+    multiClearSessionStorage
 } from "src/utils/Storage.js";
 
-import { get, post, API_URL } from "src/utils/ApiRequests.js";
+import { get, API_URL } from "src/utils/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
 
 import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen.jsx";
@@ -113,15 +112,7 @@ function HomePage() {
     const [data, setData] = useState(initialData);
     const [showRecommendations, setShowRecommendations] = useState(false);
     const [showInvalidNotice, setShowInvalidNotice] = useState(false);
-    const [experiences, setExperiences] = useState([]);
-    const [ufs, setUfs] = useState([]);
-    const [salas, setSalas] = useState([]);
-    const [isLoadingSalas, setIsLoadingSalas] = useState(false);
-    const [errorSalas, setErrorSalas] = useState(null);
-    const [isLoadingUfs, setIsLoadingUfs] = useState(false);
-    const [errorUfs, setErrorUfs] = useState(null);
-    const [isLoadingExperiences, setIsLoadingExperiences] = useState(false);
-    const [errorExperiences, setErrorExperiences] = useState(null);
+
 
     const [detallesVisible, setDetallesVisible] = useState(false);
     const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
@@ -131,22 +122,6 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
 
-    const handleResponse = (setState) => {
-        return (response) => {
-            if (typeof response === "string") {
-                setState(JSON.parse(response));
-            } else {
-                setState(response); // Assuming data is already an object
-            }
-        };
-    };
-
-    const handleError = (setError) => {
-        return (error) => {
-            console.error("Error fetching data:", error);
-            setError(error);
-        };
-    };
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -288,33 +263,9 @@ function HomePage() {
             "idExperiencia",
             "idSala",
             "reservType",
+            "materials"
         ]);
 
-        // setIsLoadingSalas(true);
-        // setErrorSalas(null);
-
-        // setIsLoadingExperiences(true);
-        // setErrorExperiences(null);
-
-        // setIsLoadingUfs(true);
-        // setErrorUfs(null);
-
-        // const userID = getFromLocalStorage("user");
-
-        // get("salas")
-        //     .then(handleResponse(setSalas))
-        //     .catch(handleError(setErrorSalas))
-        //     .finally(() => setIsLoadingSalas(false));
-
-        // get("experiencias/autodirigidas")
-        //     .then(handleResponse(setExperiences))
-        //     .catch(handleError(setErrorExperiences))
-        //     .finally(() => setIsLoadingExperiences(false));
-
-        // post("experiencias/UFs", { user: userID })
-        //     .then(handleResponse(setUfs))
-        //     .catch(handleError(setErrorUfs))
-        //     .finally(() => setIsLoadingUfs(false));
     }, []);
 
     useEffect(() => {
@@ -348,7 +299,7 @@ function HomePage() {
     }
 
     return (
-        <>
+        <div className="homepage">
             <Navbar view="homeAlumno" autoHide={!detallesVisible} />
             {/* Use the Navbar component */}
             <div className="background-container">
@@ -495,7 +446,7 @@ function HomePage() {
                     </>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
