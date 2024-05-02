@@ -27,7 +27,7 @@ function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate,
 	return (
 		<>
 			<div className="card">
-				<div className="nombre-material">
+				<div className="nombre-material" data-cy="material-name">
 					<h1>{name}</h1>
 				</div>
 				<div className="material-image">
@@ -42,14 +42,16 @@ function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate,
 								onClick={handleMinus}
 								src={minusIcon}
 								alt="Menos"
+								data-cy="minus-button"
 							/>
-							<div className="quantity">
+							<div className="quantity" data-cy="quantity">
 								<p>{quantity}</p>
 							</div>
 							<img
 								onClick={handlePlus}
 								src={plusIcon}
 								alt="Más"
+								data-cy="plus-button"
 							/>
 						</>
 					)}

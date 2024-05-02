@@ -77,3 +77,25 @@
 }
 
 
+/* Define scrollbar styles */
+.card-container-sm::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  /* Track */
+.card-container-sm::-webkit-scrollbar-track {
+	background: none; 
+  }
+  
+  /* Handle */
+.card-container-sm::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.525); 
+	border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+.card-container-sm::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7); 
+  }
+  
+
