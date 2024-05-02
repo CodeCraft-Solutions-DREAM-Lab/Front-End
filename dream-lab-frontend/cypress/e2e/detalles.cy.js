@@ -29,7 +29,7 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
   
       // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
       cy.wait(3000);
-      cy.containsDataCy_Alt("nombre-sala", nombreSala);
+      cy.containsDataCy_Alt("nombre-sala-grande", nombreSala);
     });
   
     it("Despleigue de detalles de una experiencia.", () => {
@@ -61,7 +61,7 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
       // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
       cy.wait(3000);
       cy.containsDataCy_Alt("nombre-experiencia", nombreExp);
-      cy.containsDataCy_Alt("nombre-sala", nombreSala)
+      cy.containsDataCy_Alt("nombre-sala-chico", nombreSala)
     });
     
   });
