@@ -130,6 +130,7 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
         cy.clickDataCy("boton-solicitar-detalles");
 
         cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
+        cy.wait(2000);
 
         // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
         cy.containsDataCy_Alt("nombre-sala-grande", nombreSala);
@@ -173,6 +174,7 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
             "@getExperiencia",
             "@getHorasLibres",
         ]);
+        cy.wait(2000);
 
         // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
         cy.containsDataCy_Alt("nombre-experiencia", nombreExp);
