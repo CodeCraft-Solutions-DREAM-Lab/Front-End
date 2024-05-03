@@ -1,6 +1,6 @@
 describe("Despliegue correcto del componente 'Detalles'", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:5173/login");
+      cy.visit("/login");
     });
   
     it("Despliegue de detalles de una sala.", () => {

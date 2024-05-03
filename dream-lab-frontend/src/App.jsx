@@ -54,7 +54,7 @@ function secured(Component) {
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
-            <Route index element={<LandingPage />} />
+            <Route index element={<LandingPageDev />} />
             <Route path="landingpage" element={<LandingPageDev />} />
             {/* ruta provisional para desarrollo de la landing */}
             <Route path="login" element={<LoginPage />} />

@@ -1,6 +1,6 @@
 describe("Despliegue adecuado del componente 'Slider'.", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:5173/login");
+      cy.visit("/login");
     });
 
     it("Funcionamiento adecuado del slider", () => {

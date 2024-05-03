@@ -1,7 +1,7 @@
 describe("Cancelación exitosa de una reservación.", () => {
 	beforeEach(() => {
 		// Ingresar a la página del D.R.E.A.M. Lab
-		cy.visit("http://localhost:5173/login");
+		cy.visit("/login");
 	});
 
 	// Variables: Almacenan la cantidad inicial y final de reservaciones
