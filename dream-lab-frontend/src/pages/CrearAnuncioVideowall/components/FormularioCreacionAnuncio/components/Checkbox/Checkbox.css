@@ -1,0 +1,16 @@
+.checkbox-input{
+    height: 1.5vw;
+    width: 1.5vw;
+    cursor: pointer;
+}
+
+.checkbox-div-exterior{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.titulo-checkbox{
+   margin-left: 2%;
+}

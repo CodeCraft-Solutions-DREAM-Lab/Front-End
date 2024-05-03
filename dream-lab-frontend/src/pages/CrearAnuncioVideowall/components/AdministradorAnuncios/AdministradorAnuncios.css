@@ -1,0 +1,57 @@
+.contenedor-admin-anuncios{
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.5px);
+    -webkit-backdrop-filter: blur(17.5px);
+    width: 35vw;
+    height: 33.5vw;
+    background: rgba(255,231,231,0.06); /* Background color with transparency */
+    border: 1.5px solid rgba(255, 255, 255, 0.1); /* Border color with transparency */
+    border-radius: 25px;
+    font-family: "Karla", sans-serif;
+    color: white;
+    padding: 4%;
+    padding-top: 5%;
+    margin-top: 3vw;
+}
+
+.contenedor-admin-anuncios-in{
+    overflow-y: auto;
+    max-height: 26vw;
+    padding-right: 3%;
+}
+
+.sub-admin-anuncios{
+    max-height: 100px;
+    margin-bottom: 5%;
+    font-weight: bold;
+    color: white;
+}
+
+.contenedor-admin-anuncios-in::-webkit-scrollbar{
+    width: 7px; /* Ancho de la barra de desplazamiento */
+}
+
+.contenedor-admin-anuncios-in::-webkit-scrollbar-thumb {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.3
+    ); /* Color del "pulgar" del scroll */
+    border-radius: 6px; /* Radio del borde del "pulgar" del scroll */
+}
+
+.degradado-down-anuncios {
+    position: absolute; /* Establece posición absoluta */
+    bottom: 0; /* Lo posiciona en la parte inferior del padre */
+    left: 0;
+    width: 100%;
+    height: 38px; /* Ajusta la altura según tus necesidades */
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        #6f75e1 30%
+    ); /* Crea un degradado de transparente a morado */
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
+}

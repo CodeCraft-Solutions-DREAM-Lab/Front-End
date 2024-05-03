@@ -1,0 +1,31 @@
+@media screen and (orientation: landscape) {
+    .rounded-button {
+        width: 60%;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .rounded-button {
+        width: 50%;
+    }
+}
+
+.rounded-button {
+    height: 5.5vh !important;
+    background-color: white;
+}
+
+.button-label {
+    font-size: max(2.0vh, 1.0vw);
+    font-weight: 700;
+    color: #042e55;
+}
+
+@media screen and (max-width: 768px) {
+    .button-label {
+        font-size: max(2.0vh, 2vw);
+    }
+    .rounded-button {
+        height: 7.5vh !important;
+    }
+}

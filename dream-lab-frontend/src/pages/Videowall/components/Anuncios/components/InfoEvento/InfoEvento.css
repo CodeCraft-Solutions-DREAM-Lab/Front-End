@@ -1,0 +1,41 @@
+.info-container {
+    display: flex;
+    width: 60vh;
+    height: 17%;
+    margin-bottom: 8vh;
+    margin-left: 8vh;
+    background-color: #3f3e7e8e;
+    border-radius: 2vh;
+}
+
+.info-glasscard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    padding-left: 10%;
+}
+
+.info-title {
+    margin-top: 2vh;
+    font-size: 3.5vh;
+    font-family: "Kanit", sans-serif;
+    font-weight: 550;
+    color: white;
+}
+
+.info-sala {
+    font-size: 3vh;
+    font-family: "Karla", sans-serif;
+    color: white;
+}
+
+.info-date {
+    margin-bottom: 3.5vh;
+    font-size: 2.5vh;
+    font-family: "Karla", sans-serif;
+    color: white;
+}

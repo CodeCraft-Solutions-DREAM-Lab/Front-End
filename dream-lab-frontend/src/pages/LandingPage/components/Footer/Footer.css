@@ -1,0 +1,23 @@
+.footer-container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2E3972;
+}
+
+.tec-logo {
+    width: 8rem;
+}
+
+@media screen and (max-width: 431px) {
+    .tec-logo {
+        width: 5rem;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .tec-logo {
+        width: 4.2rem;
+    }
+}

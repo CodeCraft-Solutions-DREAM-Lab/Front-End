@@ -1,0 +1,23 @@
+.hora-container {
+    display: flex;
+    justify-content: center;
+    width: 28vh;
+    height: 10%;
+    margin-top: 4vh;
+    margin-left: 8vh;
+    background-color: #3f3e7e8e;
+    border-radius: 2vh;
+}
+
+.hora-glasscard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.hora-text {
+    font-size: 3.5vh;
+    font-weight: 650;
+    color: white;
+}

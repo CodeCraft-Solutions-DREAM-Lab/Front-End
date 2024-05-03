@@ -1,0 +1,17 @@
+.div-logro-bloqueado {
+    width: 100%;
+    padding: 15%;
+    background-color: #d9d9d9;
+    border-radius: 100%;
+}
+
+.div-logro-desbloqueado {
+    width: 100%;
+    padding: 15%;
+    background-color: #6771c1;
+    border-radius: 100%;
+}
+
+.logo-logro {
+    opacity: 25%;
+}

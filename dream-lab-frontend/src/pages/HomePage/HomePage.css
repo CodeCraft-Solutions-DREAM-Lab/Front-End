@@ -1,0 +1,113 @@
+.home-background-image-container {
+    filter: blur(10px); /* Adjust the blur amount as needed */
+    object-fit: cover;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    padding: 0%;
+}
+
+.left-blobs-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-image {
+    justify-content: left;
+    align-self: flex-start;
+    height: 90%;
+}
+.right-image {
+    height: 120%;
+}
+.mini-blob {
+    justify-content: center;
+    max-width: 40%; /* Limit the maximum width */
+    height: auto; /* Let the height adjust automatically */
+    margin-left: 20%;
+}
+
+/* Media query para móvil */
+@media only screen and (max-width: 480px) {
+    .home-background-image-container {
+        filter: blur(8px);
+        flex-direction: column; /* Se alinean las imagenes de manera vertical */
+    }
+
+    .home-background-image-container .left-image {
+        height: 40%;
+    }
+
+    .home-background-image-container .right-image {
+        display: none; /* Quitar imagen de la derecha */
+    }
+    .home-background-image-container .mini-blob {
+        display: none; /* Quitar mini blob */
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
+    .home-background-image-container .left-image {
+        height: 80%;
+    }
+
+    .home-background-image-container .right-image {
+        height: 80%;
+    }
+}
+
+.background-container {
+    position: relative;
+    z-index: 0;
+    top: -4.5rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #042e55 0%, #7b7afd 100%);
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Establishes stacking context */
+    z-index: 2; /* Above background and images */
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100%;
+    padding: 2rem;
+}
+
+.carousel-container {
+    overflow-x: auto; /* Enable horizontal scrolling by default */
+    width: 100%;
+    margin-bottom: 5%;
+    white-space: nowrap; /* Prevent wrapping of carousel items */
+}
+
+.carousel-container h1 {
+    padding-bottom: 1rem;
+    font-size: medium;
+    font-weight: 700;
+    color: whitesmoke;
+}
+
+.border-gradient {
+    border: 3px solid transparent; /* Set initial border to transparent */
+    border-radius: 16px;
+    border-image: repeating-linear-gradient(
+        to right,
+        #ff0000 0%,
+        #ff8000 16.67%,
+        #ffff00 33.33%,
+        #00ff00 50%,
+        #0000ff 66.67%,
+        #4b0082 83.33%,
+        #9400d3 100%
+    );
+    border-image-slice: 1;
+}

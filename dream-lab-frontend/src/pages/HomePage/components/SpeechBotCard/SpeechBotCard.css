@@ -1,0 +1,28 @@
+@media only screen and (min-height: 1025px) {
+    .inputRecomendaciones {
+        margin-top: 7rem;
+        margin-bottom: 4rem;
+    }
+}
+
+.inputRecomendaciones {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between; /* Change to space-between */
+    align-items: center; /* Center items vertically */
+    width: 60%;
+    margin-top: 12rem;
+    margin-bottom: 4rem;
+    margin-inline: auto;
+    padding: 1.3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .inputRecomendaciones {
+        width: 100%;
+        flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
+        justify-content: flex-start; /* Align items to start on smaller screens */
+    }
+}

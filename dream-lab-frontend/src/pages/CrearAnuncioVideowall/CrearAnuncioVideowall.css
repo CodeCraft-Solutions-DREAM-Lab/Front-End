@@ -1,0 +1,16 @@
+.componente-visualizar-videowall-button{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.elementos-creacion-anuncio{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 11vw;
+}
+
+.creacion-anuncio-columna-izq{
+    margin-right: 3vw;
+}
