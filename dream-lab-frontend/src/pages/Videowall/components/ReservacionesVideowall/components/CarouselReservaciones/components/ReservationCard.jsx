@@ -14,7 +14,6 @@ function ReservationCard({
     icono,
     colorPreferido,
 }) {
-    console.log(icono);
     return (
         <div className="rc-container">
             <div className="rc-image-container">
