@@ -5,9 +5,7 @@ import RecommendationsCarousel from "./components/RecommendationsCarousel/Recomm
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
 import "./HomePage.css";
-import {
-    multiClearSessionStorage
-} from "src/utils/Storage.js";
+import { multiClearSessionStorage } from "src/utils/Storage.js";
 
 import { get, API_URL } from "src/utils/ApiRequests.js";
 import Detalles from "./components/Detalles/Detalles.jsx";
@@ -113,7 +111,6 @@ function HomePage() {
     const [showRecommendations, setShowRecommendations] = useState(false);
     const [showInvalidNotice, setShowInvalidNotice] = useState(false);
 
-
     const [detallesVisible, setDetallesVisible] = useState(false);
     const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
     const detallesRef = useRef(null);
@@ -121,7 +118,6 @@ function HomePage() {
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
-
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -263,9 +259,14 @@ function HomePage() {
             "idExperiencia",
             "idSala",
             "reservType",
-            "materials"
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
         ]);
-
     }, []);
 
     useEffect(() => {

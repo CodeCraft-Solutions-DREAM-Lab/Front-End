@@ -42,7 +42,6 @@ function SelectorLogro({
                     colorPreferido: colorSeleccionado,
                 }
             );
-            console.log(response);
             await handleLogroArtista(10);
             setRefresh((prev) => !prev);
             onOpenChange();
