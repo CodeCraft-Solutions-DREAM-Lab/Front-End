@@ -4,7 +4,7 @@ import { Input } from "@nextui-org/react";
 
 const SearchBar = () => {
     return (
-        <div className="searchContainer">
+        <div className="searchContainer-navbar">
             <Input
                 type="text"
                 classNames={{
