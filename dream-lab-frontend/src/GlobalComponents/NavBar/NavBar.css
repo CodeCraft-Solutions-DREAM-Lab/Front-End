@@ -99,6 +99,10 @@
     .dreamlab {
         display: none; /* Hide the Dream Lab text on phone screens */
     }
+
+    .logo-container {
+        width: 40%;
+    }
 }
 
 @media only screen and (max-width: 968px ) and (min-width: 481px) {

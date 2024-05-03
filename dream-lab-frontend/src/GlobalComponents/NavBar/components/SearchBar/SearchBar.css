@@ -37,6 +37,7 @@
     .searchContainer {
         width: 180%; /* Adjust width for phone screens */
         padding-right: 2rem;
+        margin-right: 1rem;
     }
     .searchBar {
         width: 100%; /* Set full width on phone screens */
