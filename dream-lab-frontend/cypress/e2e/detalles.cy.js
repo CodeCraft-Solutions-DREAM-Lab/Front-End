@@ -96,8 +96,14 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
             ],
         }).as("getExperiencia");
 
-        cy.intercept("GET", "mesas/1", {}).as("getMaxCupos");
-        cy.intercept("POST", "salas/horasLibres", {}).as("getHorasLibres");
+        cy.intercept("GET", "mesas/1", {
+            body: {
+                maxCupos: 0,
+            },
+        }).as("getMaxCupos");
+        cy.intercept("POST", "salas/horasLibres", { body: [] }).as(
+            "getHorasLibres"
+        );
     });
 
     it("Despliegue de detalles de una sala.", () => {
@@ -118,22 +124,18 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
         ).click();
 
         // Comparación 1: Nombre de la experiencia coincide con la tarjeta presionada
-        cy.containsDataCy_Alt("nombre-experiencia-detalles", nombreSala);
+        cy.containsDataCy("nombre-experiencia-detalles", nombreSala);
 
         // Comparacion 2: Descripción de la experiencia coincide con la tarjeta presionada
-        cy.containsDataCy_Alt(
-            "descripcion-experiencia-detalles",
-            descripcionSala
-        );
+        cy.containsDataCy("descripcion-experiencia-detalles", descripcionSala);
 
         // Presionar botón "Solicitar" sala
         cy.clickDataCy("boton-solicitar-detalles");
 
         cy.wait(["@getHorasLibres", "@getSala", "@getMaxCupos"]);
-        cy.wait(2000);
 
         // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
-        cy.containsDataCy_Alt("nombre-sala-grande", nombreSala);
+        cy.containsDataCy("nombre-sala-grande", nombreSala);
     });
 
     it("Despleigue de detalles de una experiencia.", () => {
@@ -155,13 +157,10 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
         ).click();
 
         // Comparación 1: Nombre de la experiencia coincide con la tarjeta presionada
-        cy.containsDataCy_Alt("nombre-experiencia-detalles", nombreExp);
+        cy.containsDataCy("nombre-experiencia-detalles", nombreExp);
 
         // Comparacion 2: Descripción de la experiencia coincide con la tarjeta presionada
-        cy.containsDataCy_Alt(
-            "descripcion-experiencia-detalles",
-            descripcionExp
-        );
+        cy.containsDataCy("descripcion-experiencia-detalles", descripcionExp);
 
         // Verificar si las etiquetas de la sala están presentes
         cy.containsDataCy("etiqueta-sala-experiencia", "Autodirigido");
@@ -170,14 +169,13 @@ describe("Despliegue correcto del componente 'Detalles'", () => {
         cy.clickDataCy("boton-solicitar-detalles");
 
         cy.wait([
-            "@getSalaNameFromExperienceId",
             "@getExperiencia",
+            "@getSalaNameFromExperienceId",
             "@getHorasLibres",
         ]);
-        cy.wait(2000);
 
         // Comparación 3: Nombre de la sala en pantalla "Reserva de espacio" coincide con la tarjeta presionada
-        cy.containsDataCy_Alt("nombre-experiencia", nombreExp);
-        cy.containsDataCy_Alt("nombre-sala-chico", nombreSala);
+        cy.containsDataCy("nombre-experiencia", nombreExp);
+        cy.containsDataCy("nombre-sala-chico", nombreSala);
     });
 });
