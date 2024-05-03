@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+import { warning } from "framer-motion";
 const API_URL = Cypress.env("API_URL");
 
 // ***********************************************
@@ -97,16 +98,16 @@ Cypress.Commands.add("getLength", (name) => {
         });
 });
 
-Cypress.Commands.add("loginWithTest", () => {
+Cypress.Commands.add("loginWith", (user) => {
     cy.intercept("POST", API_URL + "auth/token", {
         data: "token",
-    });
+    }).as("login");
 
     cy.setLocalStorage(
         "token",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
     );
-    cy.setLocalStorage("user", "test");
+    cy.setLocalStorage("user", user);
 });
 
 Cypress.Commands.add("urlContains", (url) => {
