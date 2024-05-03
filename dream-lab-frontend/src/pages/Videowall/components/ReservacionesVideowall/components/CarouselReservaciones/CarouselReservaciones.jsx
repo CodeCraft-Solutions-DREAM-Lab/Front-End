@@ -32,7 +32,6 @@ function CarouselReservaciones() {
     // Obtener los datos para las tarjetas de reservaciones
     useEffect(() => {
         get("videowall/reservaciones").then((res) => {
-            console.log(res);
             res = res.map((item) => {
                 let horaInicioDate = new Date(item.horaInicio);
                 let horaFinDate = new Date(item.horaInicio);
@@ -51,7 +50,6 @@ function CarouselReservaciones() {
 
                 return { ...item, horaInicio, horaFin };
             });
-            console.log(res);
             setReservaciones(res);
         });
     }, []);

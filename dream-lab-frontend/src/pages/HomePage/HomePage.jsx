@@ -247,7 +247,6 @@ function HomePage() {
     };
 
     useEffect(() => {
-        console.log("HomePage: useEffect: Clearing sessionStorage");
         multiClearSessionStorage([
             "horaInicio",
             "horaInicioIsoString",
