@@ -105,7 +105,7 @@ function RecomendationsCarousel(props) {
     return (
         <>
             {/* carousel */}
-            <div className="slideC">
+            <div className="slideC" data-cy="container-recomendaciones">
                 {props.data.map((item, i) => (
                     <React.Fragment key={i}>
                         <div
