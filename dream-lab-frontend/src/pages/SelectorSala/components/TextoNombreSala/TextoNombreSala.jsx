@@ -23,7 +23,6 @@ const TextoNombreSala = () => {
             get(`salas/${id}`)
                 .then((result) => {
                     setNombreSala(result[0].nombre);
-                    saveToSessionStorage("nameSalaExperiencia", nombreSala);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
@@ -32,7 +31,6 @@ const TextoNombreSala = () => {
             get(`experiencias/${id}`)
                 .then((result) => {
                     setNombreExperiencia(result[0].nombre);
-                    saveToSessionStorage("nameSalaExperiencia", nombreExperiencia);
                 })
                 .catch((error) => {
                     console.error("An error occurred:", error);
@@ -47,6 +45,14 @@ const TextoNombreSala = () => {
                 });
         }
     }, []);
+
+    useEffect(() => {
+        if (type === "sala") {
+            saveToSessionStorage("nameSalaExperiencia", nombreSala);
+        } else {
+            saveToSessionStorage("nameSalaExperiencia", nombreExperiencia);
+        }
+    }, [nombreSala, nombreExperiencia]);
 
     return (
         <>
