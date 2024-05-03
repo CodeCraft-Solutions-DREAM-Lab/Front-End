@@ -1,6 +1,6 @@
 describe("Interacción correcta en landing page", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:5173/landingpage");
+        cy.visit("/");
     });
 
     it("Botón de 'CONOCE MÁS' hace scroll a detalles", () => {
