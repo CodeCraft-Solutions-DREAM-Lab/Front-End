@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+import { warning } from "framer-motion";
 const API_URL = Cypress.env("API_URL");
 
 // ***********************************************
@@ -42,11 +43,6 @@ Cypress.Commands.add("typeDataCy", (name, text) => {
     return cy.getDataCy(name).type(text);
 });
 
-// Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy", (name, text) => {
-    return cy.getDataCy(name).contains(text);
-});
-
 // Verifica si un elemento tiene un atributo con un valor específico
 Cypress.Commands.add(
     "hasAttribute",
@@ -55,6 +51,11 @@ Cypress.Commands.add(
         return cy.wrap(subject).should("have.attr", attr, value);
     }
 );
+
+// Checa si un elemento con el atributo data-cy contiene un texto específico
+Cypress.Commands.add("containsDataCy", (name, text) => {
+    return cy.getDataCy(name).contains(text);
+});
 
 // Checa si un elemento con el atributo data-cy contiene un texto específico
 Cypress.Commands.add("containsDataCy_Alt", (name, text) => {
@@ -97,16 +98,16 @@ Cypress.Commands.add("getLength", (name) => {
         });
 });
 
-Cypress.Commands.add("loginWithTest", () => {
+Cypress.Commands.add("loginWith", (user) => {
     cy.intercept("POST", API_URL + "auth/token", {
         data: "token",
-    });
+    }).as("login");
 
     cy.setLocalStorage(
         "token",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
     );
-    cy.setLocalStorage("user", "test");
+    cy.setLocalStorage("user", user);
 });
 
 Cypress.Commands.add("urlContains", (url) => {
