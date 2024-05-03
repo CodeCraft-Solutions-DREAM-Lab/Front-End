@@ -170,13 +170,6 @@
     margin-bottom: 7vh;
 }
 
-@media (max-width: 1200px){
-
-    .navbar-div-profile {
-        margin-top: 7vh;
-    }
-    
-}
 
 @media (max-width: 800px) {
     .sub {
@@ -249,7 +242,7 @@
     }
 
     .navbar-div-profile {
-        margin-top: 4vh;
+ 
         margin-bottom: 2vh;
     }
 }

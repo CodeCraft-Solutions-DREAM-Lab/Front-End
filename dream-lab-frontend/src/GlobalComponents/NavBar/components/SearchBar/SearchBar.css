@@ -24,7 +24,7 @@
     color: whitesmoke; /* Change placeholder color */
 }
 
-.searchContainer {
+.searchContainer-navbar {
     display: flex; /* Use flexbox for alignment */
     justify-content: flex-end; /* Align items to the right */
     align-items: center; /* Align items vertically */
@@ -34,9 +34,10 @@
 }
 
 @media only screen and (max-width: 480px) {
-    .searchContainer {
+    .searchContainer-navbar {
         width: 180%; /* Adjust width for phone screens */
         padding-right: 2rem;
+        margin-right: 1rem;
     }
     .searchBar {
         width: 100%; /* Set full width on phone screens */
@@ -48,7 +49,7 @@
 }
 
 @media only screen and (max-width: 968px) and (min-width: 481px) {
-    .searchContainer {
+    .searchContainer-navbar {
         width: 60%; /* Adjust width for phone screens */
         padding-right: 2rem;
     }

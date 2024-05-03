@@ -23,7 +23,6 @@ function NameCard({ nombre, handleLogroArtista }) {
 
     useEffect(() => {
         get(`perfil/logros/${getFromLocalStorage("user")}`).then((response) => {
-            console.log(response);
             setLogrosObtenidos(response.logros);
             setLogroSeleccionado({
                 idLogro: response.configuracionLogro[0].idLogro,
