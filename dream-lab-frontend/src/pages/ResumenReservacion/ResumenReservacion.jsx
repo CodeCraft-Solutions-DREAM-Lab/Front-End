@@ -73,7 +73,7 @@ function ResumenReservacion(props) {
     };
 
     const handleClick = () => {
-        navigate(-1); // Navigate back to the previous page
+        navigate(`/reservacion/material/`); // Navigate back to the previous page
     };
 
     const [selectedMaterials, setSelectedMaterials] = useState(() => {
@@ -118,7 +118,7 @@ function ResumenReservacion(props) {
             <div className="reservation-summary-view">
                 <div className="material-summary-container">
                     <div className="material-summary-title">
-                        <img className="back-arrow" src={BackArrow} onClick={handleClick}/>
+                        <img data-cy="summmary-back-button" className="back-arrow" src={BackArrow} onClick={handleClick}/>
                         <h1 className="material-summary-title-text">Resumen de pedido</h1>
                     </div>
                     <div className="material-summary-wrapper">
@@ -154,18 +154,18 @@ function ResumenReservacion(props) {
                                 <img className="back-arrow-responsive" src={BackArrow} onClick={handleClick}/>
                                 <h1 className="reservation-summary-title">Confirma tu solicitud</h1>
                             </div>
-                            <p className="reservation-summary-name">{reservationData.nombre}</p>
-                            <p className="reservation-summary-people">{reservationData.personas} Persona(s)</p>
-                            <p className="reservation-summary-date">{reservationData.fecha}</p>
-                            <p className="reservation-summary-time">{reservationData.hora}</p>
-                            <button className="reservation-summary-button" isLoading={isLoading} onClick={handleSubmit}>
+                            <p data-cy="summary-lab-name" className="reservation-summary-name">{reservationData.nombre}</p>
+                            <p data-cy="summary-lab-people" className="reservation-summary-people">{reservationData.personas} Persona(s)</p>
+                            <p data-cy="summary-lab-date" className="reservation-summary-date">{reservationData.fecha}</p>
+                            <p data-cy="summary-lab-time" className="reservation-summary-time">{reservationData.hora}</p>
+                            <button data-cy="summary-submit-button" className="reservation-summary-button" isLoading={isLoading} onClick={handleSubmit}>
                                 CONFIRMAR
                             </button>
                         </div>
                     </GlassCard>
                     <div className="reservation-summary-warning">
                         <img className="warning-icon" src={WarningIcon} />
-                        <p className="reservation-summary-warning-message">La asignación del lugar se hará hoy a las <strong>{reservationData.horaCorte}</strong>. Compiten <strong>{reservationData.competidores}</strong> reservaciones por <strong>{reservationData.cupos}</strong> cupos.</p>
+                        <p className="reservation-summary-warning-message">La asignación del lugar se hará hoy a las <strong data-cy="summary-lab-cutoff">{reservationData.horaCorte}</strong>. Compiten <strong data-cy="summary-lab-contestants">{reservationData.competidores}</strong> reservaciones por <strong data-cy="summary-lab-spots">{reservationData.cupos}</strong> cupos.</p>
                     </div>
                 </div>
                 <AvisoFinal
