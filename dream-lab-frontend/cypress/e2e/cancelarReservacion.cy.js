@@ -494,6 +494,12 @@ describe("Cancelación exitosa de una reservación.", () => {
                 rowsAffected: [],
             },
         }).as("getPerfil");
+
+        cy.intercept("PUT", "reservaciones/**", {
+            body: {
+                rowsAffected: 0,
+            },
+        }).as("cancelarReservacion");
     });
 
     it("Eliminar reservacion satiafactoriamente.", () => {
@@ -519,6 +525,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
         // Reserva cancelada: Despliegue de mensaje de cancelación exitosa
         cy.checkVisible("boton-aceptar-modal-cancelacion");
+        cy.wait("@cancelarReservacion");
         cy.containsDataCy("titulo-cancelacion", "Cancelación exitosa");
         cy.clickDataCy("boton-aceptar-modal-cancelacion");
     });
