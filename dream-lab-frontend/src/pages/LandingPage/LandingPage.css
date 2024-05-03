@@ -111,177 +111,42 @@
 
 .pcb {
     position: absolute;
-    left: 30rem;
-    bottom: 6rem;
-    width: 350px;
-}
-
-@media screen and (max-width: 431px) {
-    .pcb {
-        left: 15rem;
-        bottom: 30rem;
-        width: 140px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .pcb {
-        left: 16rem;
-        bottom: 31rem;
-        width: 120px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .pcb {
-        left: 15.5rem;
-        bottom: 27rem;
-        width: 110px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .pcb {
-        left: 15.5rem;
-        bottom: 19rem;
-        width: 90px;
-    }
+    margin-left: 30%;
+    top: 24rem;
+    width: 24%;
+    max-width: 350px;
 }
 
 .blob {
     position: absolute;
     right: 0rem;
     top: 0rem;
-    width: 600px;
-}
-
-@media screen and (max-width: 431px) {
-    .blob {
-        width: 170px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .blob {
-        width: 160px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .blob {
-        width: 150px;
-    }
+    width: 41%;
+    max-width: 600px; 
 }
 
 .vr {
     position: absolute;
     left: 0rem;
     top: 25rem;
-    width: 800px;
+    width: 54%;
+    max-width: 800px;
     z-index: 0;
-}
-
-@media screen and (max-width: 431px) {
-    .vr {
-        top: 22rem;
-        width: 280px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .vr {
-        top: 23rem;
-        width: 240px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .vr {
-        width: 220px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .vr {
-        top: 21rem;
-        width: 200px;
-    }
 }
 
 .moon {
     position: absolute;
-    right: 14rem;
-    width: 400px;
-}
-
-@media screen and (max-width: 431px) {
-    .moon {
-        bottom: 18rem;
-        right: 1rem;
-        width: 150px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .moon {
-        bottom: 16rem;
-        right: 1rem;
-        width: 150px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .moon {
-        bottom: 14rem;
-        right: 3rem;
-        width: 130px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .moon {
-        bottom: 8rem;
-        right: 2rem;
-    }
+    margin-left: 55%;
+    width: 27%;
+    max-width: 400px;
 }
 
 .astronaut {
     position: absolute;
     right: 5rem;
     top: 63rem;
-    width: 500px;
-}
-
-@media screen and (max-width: 431px) {
-    .astronaut {
-        top: 42rem;
-        right: 1rem;
-        width: 250px;
-    }
-}
-
-@media screen and (max-width: 431px) {
-    .astronaut {
-        top: 42rem;
-        right: 1rem;
-        width: 230px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .astronaut {
-        top: 42rem;
-        right: 1rem;
-        width: 200px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .astronaut {
-        top: 37rem;
-        right: 2rem;
-        width: 190px;
-    }
+    width: 34%;
+    max-width: 500px;
 }
 
 .info-cards {
@@ -316,7 +181,7 @@
 .carousel-header {
     margin-top: 9rem;
     margin-inline: 11rem;
-    font-size: 64px;
+    font-size: 4.3vw;
     font-family: "Kanit", sans-serif;
     font-style: normal;
     font-weight: 700;

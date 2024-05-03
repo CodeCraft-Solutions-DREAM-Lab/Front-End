@@ -82,35 +82,39 @@ function LabCarousel() {
           "--swiper-pagination-color": "#FFFFFF",
           "--swiper-pagination-bullet-inactive-color": "#D9D9D9",
           "--swiper-pagination-bullet-inactive-opacity": "0.5",
-          "--swiper-pagination-bullet-size": "12px",
-          "--swiper-pagination-bullet-horizontal-gap": "6px",
+          "--swiper-pagination-bullet-size": "1vw",
+          "--swiper-pagination-bullet-horizontal-gap": "0.5vw",
           "--swiper-navigation-color": "#FFFFFF",
-          "--swiper-navigation-sides-offset": "4.7rem",
-          "--swiper-pagination-bottom": "55px"
+          "--swiper-navigation-sides-offset": "4vw",
+          "--swiper-pagination-bottom": "7%"
         }}
       >
         {swiperCards.map((card, index) => (
           <SwiperSlide key={index}>
             <div data-cy="landing-carousel-card" className="carousel-card-glass-card">
               <GlassCard>
-                <div className="landing-carousel-card">
-                  <img
-                    className="landing-carousel-logo"
-                    src={Logo}
-                    alt="Logo"
-                  />
-                  <h3 data-cy="landing-carousel-lab-name" className="landing-carousel-title">{card.title}</h3>
-                  <img
-                    data-cy="landing-carousel-image"
-                    className="landing-carousel-img"
-                    src={card.image}
-                    alt={card.title}
-                  />
-                  <ul className="landing-carousel-desc">
-                    {card.description.map((item, idx) => (
-                      <li key={idx} className="landing-list-element">{item}</li>
-                    ))}
-                  </ul>
+              <div className="landing-carousel-card">
+                  <div className="landing-carousel-info-container">
+                    <img
+                      className="landing-carousel-logo"
+                      src={Logo}
+                      alt="Logo"
+                    />
+                    <h3 data-cy="landing-carousel-lab-name" className="landing-carousel-title">{card.title}</h3>
+                    <ul className="landing-carousel-desc">
+                      {card.description.map((item, idx) => (
+                        <li key={idx} className="landing-list-element">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="landing-carousel-image-container">
+                    <img
+                      data-cy="landing-carousel-image"
+                      className="landing-carousel-img"
+                      src={card.image}
+                      alt={card.title}
+                    />
+                  </div>
                 </div>
               </GlassCard>
             </div>
