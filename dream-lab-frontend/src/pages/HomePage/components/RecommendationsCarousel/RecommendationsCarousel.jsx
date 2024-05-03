@@ -145,7 +145,6 @@ function RecomendationsCarousel(props) {
                 <div className="dots">
                     {props.data.map((item, i) => (
                         <div
-                            data-cy="dot-recomendaciones"
                             key={i}
                             className="dot"
                             style={getStylesDots(i)}

@@ -29,19 +29,47 @@ describe("Pruebas de recomendaciones por voz", () => {
         cy.wait("@chatbot");
 
         // Revisa que funcione navegación por tiempo
-        const TiempoCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
+        const tiempoCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
         cy.wait(5010);
-        const TiempoCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
+        const tiempoCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
         // Verifica que el objeto cypress de antes y después del periodo de tiempo sean distintos
-        expect(TiempoCurrentStateBefore).not.to.equal(TiempoCurrentStateAfter);
+        expect(tiempoCurrentStateBefore).not.to.equal(tiempoCurrentStateAfter);
 
         // Revisa que funcione navegación por flechas
-        const FlechaCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
+        const flechaCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
         cy.clickDataCy("flecha-derecha-recomendaciones");
-        cy.wait(200);
-        const FlechaCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
+        cy.wait(100);
+        const flechaCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
         // Verifica que el objeto cypress de antes y después de hacer click en la flecha sean distintos
-        expect(FlechaCurrentStateBefore).not.to.equal(FlechaCurrentStateAfter);
+        expect(flechaCurrentStateBefore).not.to.equal(flechaCurrentStateAfter);
+
+        // Revisa que funcione navegación por dots
+        const dotsCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
+        cy.get('.dots > :nth-child(2)').click()
+        cy.wait(100);
+        const dotsCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
+        // Verifica que el objeto cypress de antes y después de hacer click en el dot sean distintos
+        expect(dotsCurrentStateBefore).not.to.equal(dotsCurrentStateAfter);
+
+        // Revisa que funcione navegación por click en slide 
+        const slideCurrentStateBefore = cy.getDataCy("titulo-recomendaciones");
+        // Se hace click en la izquierda por que el centro se cubre por la slide activa del momento
+        cy.get('.slide').eq(0).click("left"); 
+        cy.wait(100);
+        const slideCurrentStateAfter = cy.getDataCy("titulo-recomendaciones");
+        // Verifica que el objeto cypress de antes y después de hacer click en la slide sean distintos
+        expect(slideCurrentStateBefore).not.to.equal(slideCurrentStateAfter);
+    })
+
+    it("Aviso Recomendaciones Inválidas", () => {
+        // Se consultan recomendaciones no existentes
+        cy.typeDataCy("input-recomendaciones", "clases de cocina");
+        cy.intercept("POST", "/chatbot").as("chatbot");
+        cy.clickDataCy("button-enviar-recomendaciones");
+        cy.wait("@chatbot");
+
+        // Revisa que se muestre el aviso de recomendaciones invalidas
+        cy.checkVisible("aviso-recomendaciones-invalidas");
     })
 
 })
