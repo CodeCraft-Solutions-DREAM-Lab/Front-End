@@ -60,7 +60,7 @@ const router = createBrowserRouter(
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route
                 path="reservacion/material"
-                element={secured(SeleccionMaterial)} 
+                element={<SeleccionMaterial />} // Agregar protected cuando se ocupe
             />
             <Route
                 path="reservacion/confirmacion"
