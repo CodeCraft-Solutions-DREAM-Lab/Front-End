@@ -1,30 +1,29 @@
 describe("Despliegue adecuado del componente 'Slider'.", () => {
     beforeEach(() => {
-      
-        cy.visit("/login");
-        
         // Iniciar sesión
         cy.loginWith("test");
 
         cy.intercept("GET", "mesas/2", {
-          body: {
-              maxCupos: 8,
-          },
-      }).as("getMaxCupos");
+            body: {
+                maxCupos: 8,
+            },
+        }).as("getMaxCupos");
 
+        cy.intercept("GET", "salas/2").as("getSala");
+
+        cy.intercept("POST", "salas/horasLibres").as("getHorasLibres");
     });
 
     it("Funcionamiento adecuado del slider", () => {
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 2);
+            },
+        });
 
-      cy.visit("/reservacion/sala", {
-        onBeforeLoad(win) {
-            win.sessionStorage.setItem("reservType", "sala");
-            win.sessionStorage.setItem("idSala", 2);
-          },
-      });
-        
-      cy.wait("@getMaxCupos");
-      
+        cy.wait(["@getMaxCupos", "@getSala", "@getHorasLibres"]);
+
         // Verificar que el slider de personas está presente
         cy.checkExist("slider-container-personas");
 
