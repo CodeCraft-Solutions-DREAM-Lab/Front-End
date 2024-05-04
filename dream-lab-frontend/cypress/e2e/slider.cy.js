@@ -1,29 +1,65 @@
 describe("Despliegue adecuado del componente 'Slider'.", () => {
     beforeEach(() => {
-      cy.visit("/login");
+        // Iniciar sesión
+        cy.loginWith("test");
+
+        cy.intercept("GET", "mesas/2", {
+            body: {
+                maxCupos: 8,
+            },
+        }).as("getMaxCupos");
+
+        cy.intercept("GET", "salas/**", {
+            body: [
+                {
+                    idSala: 2,
+                    nombre: "Dimension Forge",
+                    cantidadMesas: 6,
+                    descripcion:
+                        "Un laboratorio de vanguardia donde la creatividad se fusiona con la tecnología. Aquí, los innovadores pueden explorar libremente nuevas ideas y experimentar con las últimas herramientas de diseño y fabricación.",
+                    fotoURL:
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/vr-lede.jpg",
+                    detallesURL:
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/dimension-forge.png",
+                },
+            ],
+        }).as("getSala");
+
+        cy.intercept("POST", "salas/horasLibres", {
+            body: [
+                {
+                    hora: 4,
+                    cupos: 10,
+                    competidores: 1,
+                },
+            ],
+        }).as("getHorasLibres");
     });
 
     it("Funcionamiento adecuado del slider", () => {
-        // Iniciar sesión
-        cy.login("test", "test");
+        cy.visit("/reservacion/sala", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem("reservType", "sala");
+                win.sessionStorage.setItem("idSala", 2);
+            },
+        });
 
-        // Hacer clic en sala "Dimnsion Forge"
-        cy.wait(3000);
-        cy.get(':nth-child(4) > .embla > .embla__viewport > .embla__container > :nth-child(2) > .embla__parallax > .embla__parallax__layer > [data-cy="imagen-experiencia"]').click();
-
-        cy.wait(3000);
-        // Presionar botón "Solicitar" sala
-        cy.clickDataCy("boton-solicitar-detalles");
+        cy.wait(["@getMaxCupos", "@getSala", "@getHorasLibres"]);
 
         // Verificar que el slider de personas está presente
         cy.checkExist("slider-container-personas");
 
-        cy.wait(3000);
         // Checar el valor máximo del slider
-        cy.get('[data-cy="slider-container-personas"] input[type="range"]').invoke("attr", "max").should("equal", "8");
+        cy.get('[data-cy="slider-container-personas"] input[type="range"]')
+            .invoke("attr", "max")
+            .should("equal", "8");
 
         // Mover el slider a la derecha
-        cy.get('[data-cy="slider-container-personas"] input[type="range"]', { timeout: 10000 }).type("val", "5").trigger("input");
+        cy.get('[data-cy="slider-container-personas"] input[type="range"]', {
+            timeout: 10000,
+        })
+            .type("val", "5")
+            .trigger("input");
 
         // Checar si el output del slider es igual a "4 personas"
         cy.containsDataCy("slider-output-texto", " 5 personas ");
