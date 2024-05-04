@@ -1,6 +1,6 @@
 describe("Interacción correcta en landing page", () => {
     beforeEach(() => {
-        cy.loginWithTest();
+        cy.loginWith("test");
     });
 
     it("Botón de regreso", () => {
