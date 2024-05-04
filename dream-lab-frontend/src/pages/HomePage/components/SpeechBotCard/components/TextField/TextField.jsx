@@ -14,6 +14,7 @@ function TextField({ value, onChange, onKeyDown }) {
 
     return (
         <input
+            data-cy="input-recomendaciones"
             ref={inputRef}
             name="asistente de voz"
             className="text-field"
