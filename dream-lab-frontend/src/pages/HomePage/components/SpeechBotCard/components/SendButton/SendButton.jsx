@@ -64,6 +64,7 @@ function SendButton({
 
     return (
         <button
+            data-cy="button-enviar-recomendaciones"
             className="send-button"
             onClick={handleClick}
             disabled={processing}

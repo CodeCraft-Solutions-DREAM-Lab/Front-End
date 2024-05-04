@@ -39,6 +39,7 @@ function AvisoFinal(props) {
                                             hover:bg-white hover:text-[#1bac55] border-[#1bac55]"
                                 color="primary"
                                 onPress={props.onOk}
+                                data-cy="summary-modal-button"
                             >
                                 CERRAR
                             </Button>

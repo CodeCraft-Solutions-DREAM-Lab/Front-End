@@ -1,8 +1,6 @@
-import "cypress-localstorage-commands";
-
 describe("Probando pantalla de selector de sala", () => {
     beforeEach(() => {
-        cy.loginWithTest();
+        cy.loginWith("test");
 
         cy.intercept("GET", "salas/nameFromExperienceId/**", {
             body: {
@@ -104,7 +102,7 @@ describe("Probando pantalla de selector de sala", () => {
         ).type("09092060");
 
         cy.containsDataCy("selector-fecha", "09/09/2060");
-        
+
         cy.get("[data-cy=selector-fecha] button").type("{rightarrow}{enter}", {
             delay: 600,
         });
@@ -157,7 +155,7 @@ describe("Probando pantalla de selector de sala", () => {
         cy.getDataCy("primer-recordatorio-sala").should("not.exist");
     });
 
-    it.only("Happy Path", () => {
+    it("Happy Path", () => {
         cy.visit("/reservacion/sala", {
             onBeforeLoad(win) {
                 win.sessionStorage.setItem("reservType", "sala");

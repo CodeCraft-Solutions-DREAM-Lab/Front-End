@@ -105,7 +105,7 @@ function RecomendationsCarousel(props) {
     return (
         <>
             {/* carousel */}
-            <div className="slideC">
+            <div className="slideC" data-cy="container-recomendaciones">
                 {props.data.map((item, i) => (
                     <React.Fragment key={i}>
                         <div
@@ -131,6 +131,7 @@ function RecomendationsCarousel(props) {
 
             <div className="btns">
                 <FontAwesomeIcon
+                    data-cy="flecha-izquierda-recomendaciones"
                     className="btn"
                     onClick={() => {
                         prev();
@@ -153,6 +154,7 @@ function RecomendationsCarousel(props) {
                 </div>
 
                 <FontAwesomeIcon
+                    data-cy="flecha-derecha-recomendaciones"
                     className="btn"
                     onClick={() => {
                         next();
@@ -185,9 +187,9 @@ const SliderContent = (props) => {
     return (
         <div className="sliderContent" onClick={handleClick}>
             {props.icon}
-            <h2>{props.title}</h2>
+            <h2 data-cy="titulo-recomendaciones">{props.title}</h2>
             <div className="textContainer">
-                <p>{props.desc}</p>
+                <p data-cy="descripcion-recomendaciones">{props.desc}</p>
             </div>
         </div>
     );
