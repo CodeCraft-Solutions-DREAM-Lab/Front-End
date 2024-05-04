@@ -9,9 +9,31 @@ describe("Despliegue adecuado del componente 'Slider'.", () => {
             },
         }).as("getMaxCupos");
 
-        cy.intercept("GET", "salas/2").as("getSala");
+        cy.intercept("GET", "salas/**", {
+            body: [
+                {
+                    idSala: 2,
+                    nombre: "Dimension Forge",
+                    cantidadMesas: 6,
+                    descripcion:
+                        "Un laboratorio de vanguardia donde la creatividad se fusiona con la tecnología. Aquí, los innovadores pueden explorar libremente nuevas ideas y experimentar con las últimas herramientas de diseño y fabricación.",
+                    fotoURL:
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/vr-lede.jpg",
+                    detallesURL:
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/dimension-forge.png",
+                },
+            ],
+        }).as("getSala");
 
-        cy.intercept("POST", "salas/horasLibres").as("getHorasLibres");
+        cy.intercept("POST", "salas/horasLibres", {
+            body: [
+                {
+                    hora: 4,
+                    cupos: 10,
+                    competidores: 1,
+                },
+            ],
+        }).as("getHorasLibres");
     });
 
     it("Funcionamiento adecuado del slider", () => {
