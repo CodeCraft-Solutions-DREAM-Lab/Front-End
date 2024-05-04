@@ -99,8 +99,8 @@ Cypress.Commands.add("getLength", (name) => {
 });
 
 Cypress.Commands.add("loginWith", (user) => {
-    cy.intercept("POST", API_URL + "auth/token", {
-        data: "token",
+    cy.intercept("POST", "auth/token", {
+        body: { isAuth: "true" },
     }).as("login");
 
     cy.setLocalStorage(

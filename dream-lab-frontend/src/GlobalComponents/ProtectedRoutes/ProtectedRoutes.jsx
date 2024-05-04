@@ -57,7 +57,7 @@ function ProtectedRoutes({ children }) {
             ).then((res) => {
                 // Una vez que se cumpla la promesa, se actualiza el estado de
                 // autenticación con el valor recibido de la api
-                dispatch(setAuth(res));
+                dispatch(setAuth(res.isAuth));
             });
         }
     }, [isLoading, dispatch]);
