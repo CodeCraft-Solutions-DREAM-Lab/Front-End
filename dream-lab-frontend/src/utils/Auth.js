@@ -19,7 +19,7 @@ export async function loginAction(
             if (jwt) {
                 // Guardar el token y el usuario en el local storage
                 saveToLocalStorage("token", jwt);
-                saveToLocalStorage("user", user);
+                saveToLocalStorage("user", user.toLowerCase());
                 // Llamar a la función de éxito
                 success();
                 // Regresar la dirección a la que se debe redirigir
