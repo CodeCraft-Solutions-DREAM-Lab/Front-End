@@ -40,6 +40,7 @@ import Videowall from "./pages/Videowall/Videowall.jsx";
 
 // Admin
 import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
+import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 
 function secured(Component) {
     return function WrappedComponent(props) {
@@ -81,6 +82,7 @@ const router = createBrowserRouter(
             <Route path="videowall" element={<Videowall />} />
             <Route path="*" element={<NotFound />} />
             <Route path="crearAnuncio" element={secured(CrearAnuncioVideowall)()} />
+            <Route path="admin" element={<CronogramaAdmin/>} />
         </Route>
     )
 );
