@@ -53,8 +53,11 @@ Cypress.Commands.add(
 );
 
 // Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy", (name, text) => {
-    return cy.getDataCy(name).contains(text);
+Cypress.Commands.add("containsDataCy", (name, text, timeout) => {
+    if (timeout === undefined) {
+        timeout = 4000;
+    }
+    return cy.getDataCy(name).contains(text, { timeout: timeout });
 });
 
 // Checa si un elemento con el atributo data-cy contiene un texto específico

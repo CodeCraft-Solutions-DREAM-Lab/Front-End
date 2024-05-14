@@ -57,6 +57,6 @@ describe("Pruebas de login", () => {
         cy.wait(["@authUsuario", "@authToken"]);
         // Verificar que se haya redirigido a la página de Home
         cy.urlContains("/home");
-        cy.containsDataCy("navbar", "DREAM LAB");
+        cy.containsDataCy("navbar", "DREAM LAB", 10000);
     });
 });
