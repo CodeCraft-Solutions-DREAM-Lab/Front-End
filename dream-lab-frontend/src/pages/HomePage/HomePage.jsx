@@ -16,7 +16,7 @@ const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
 const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
-    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80";
 
 // Imagenes
 import blobLeft from "src/assets/HomePage/blob-left.webp";
