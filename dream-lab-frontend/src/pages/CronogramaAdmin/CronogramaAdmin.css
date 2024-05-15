@@ -31,6 +31,14 @@
   
 }
 
+.group-line {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin-bottom: 5px; /* Adjust as needed */
+}
+
+
 
 /* Style for timeline items */
 .react-calendar-timeline .rct-item {
