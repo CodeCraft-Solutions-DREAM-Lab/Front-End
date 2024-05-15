@@ -54,7 +54,7 @@ ReservationCard.defaultProps = {
     horaInicio: "00:00",
     horaFin: "00:00",
     sala: "Sala",
-    icono: "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.png",
+    icono: "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
 };
 
 export default ReservationCard;

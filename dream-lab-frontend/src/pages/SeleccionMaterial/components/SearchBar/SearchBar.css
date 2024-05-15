@@ -6,7 +6,7 @@
     height: 2.5rem; /* Adjusted height */
     padding: 0 20px 0 40px; /* Adjust for icon width and padding */
     background-color: transparent;
-    background-image: url("../../../GlobalComponents/NavBar/assets/images/magnifying-glass-icon.svg"); /* Path to your magnifying glass icon */
+    background-image: url("src/assets/NavBar/magnifyingGlassIcon.svg"); /* Path to your magnifying glass icon */
     background-repeat: no-repeat;
     background-position: 10% center; /* Adjust position as needed */
     background-size: 20px; /* Adjust size as needed */
@@ -33,27 +33,25 @@
     padding-right: 2rem;
 }
 
-
-@media only screen and (max-width: 968px ) and (min-width: 481px){
+@media only screen and (max-width: 968px) and (min-width: 481px) {
     .searchContainer {
         width: 40%; /* Adjust width for phone screens */
-        justify-content: center; 
+        justify-content: center;
     }
     .searchBar {
         width: 40%; /* Set full width on phone screens */
         margin: auto; /* Center the search bar on phone screens */
         margin-left: auto;
         display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Align items to the right */
-    align-items: center; /* Align items vertically */
-    background-position: 7% center;
-        
+        justify-content: center; /* Align items to the right */
+        align-items: center; /* Align items vertically */
+        background-position: 7% center;
     }
 }
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 480px) {
     .searchContainer {
         width: 90%; /* Adjust width for phone screens */
-        justify-content: center; 
+        justify-content: center;
         margin-left: 0;
         padding-right: 0;
     }
@@ -61,8 +59,7 @@
         width: 70%; /* Set full width on phone screens */
         margin: 0 auto; /* Center the search bar on phone screens */
         display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Align items to the right */
-    align-items: center; /* Align items vertically */
-        
+        justify-content: center; /* Align items to the right */
+        align-items: center; /* Align items vertically */
     }
 }

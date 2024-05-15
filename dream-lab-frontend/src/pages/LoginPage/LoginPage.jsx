@@ -25,9 +25,9 @@ import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import { useDispatch } from "react-redux";
 import { setAuth } from "src/redux/Slices/userSlice";
 
-import topBlob from "src/assets/Login/top-blob.png";
-import bottomBlob from "src/assets/Login/bottom-blob.png";
-import dreamLabLogo from "src/assets/Logos/LogoDreamLab.png";
+import topBlob from "src/assets/Login/top-blob.webp";
+import bottomBlob from "src/assets/Login/bottom-blob.webp";
+import dreamLabLogo from "src/assets/Logos/LogoDreamLab.webp";
 
 import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen";
 

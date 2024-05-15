@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import "./CancelarReservacion.css";
-import errorLogo from "src/assets/Profile/errorLogo.png";
-import correctLogo from "src/assets/Profile/correctLogo.png";
-import infoLogo from "src/assets/Profile/infoLogo.png";
+import errorLogo from "src/assets/Profile/errorLogo.webp";
+import correctLogo from "src/assets/Profile/correctLogo.webp";
+import infoLogo from "src/assets/Profile/infoLogo.webp";
 import BotonCerrar from "./components/CloseButtonCancelar/CloseButtonCancelar";
 import BotonModal from "./components/BotonModal/BotonModal";
 
@@ -36,7 +36,10 @@ function CancelarReservacion(props) {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (blurSpaceRef.current && !blurSpaceRef.current.contains(event.target)) {
+            if (
+                blurSpaceRef.current &&
+                !blurSpaceRef.current.contains(event.target)
+            ) {
                 // Si el clic fue fuera del modal, ejecuta la función handleClickModal
                 props.funcionVerde(0, null, null, null, null);
             }
@@ -52,14 +55,13 @@ function CancelarReservacion(props) {
 
     return (
         <div className={blurSpaceClass}>
-            <div className={modalBlancoClass}  ref={blurSpaceRef}>
-                
+            <div className={modalBlancoClass} ref={blurSpaceRef}>
                 <div className="boton-cerrar-cancelacion-reserva">
                     {props.modalClasificacion !== 3 && (
-                        <BotonCerrar onClick={handleClickCloseButton}/>
-                    )}                   
+                        <BotonCerrar onClick={handleClickCloseButton} />
+                    )}
                 </div>
-                
+
                 <div className={logoModalOutClass}>
                     {props.modalClasificacion !== 4 && (
                         <div className={logoModalClass}>
@@ -68,7 +70,9 @@ function CancelarReservacion(props) {
                     )}
                 </div>
 
-                <h1 data-cy="titulo-cancelacion" className={titulo1ModalClass}>{props.titulo1}</h1>
+                <h1 data-cy="titulo-cancelacion" className={titulo1ModalClass}>
+                    {props.titulo1}
+                </h1>
                 <h1 className={titulo1Medio}>{props.tituloExperiencia}</h1>
                 <h1 className={titulo2ModalClass}>{props.titulo2}</h1>
                 <h1 className={titulo3ModalClass}>{props.titulo3}</h1>
@@ -101,7 +105,6 @@ function CancelarReservacion(props) {
                             funcion={props.funcionVerde}
                         />
                     )}
-
                 </div>
             </div>
         </div>
