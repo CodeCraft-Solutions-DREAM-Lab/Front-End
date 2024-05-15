@@ -7,9 +7,6 @@ import "./SelectorLogroItem.css";
 // Proptypes
 import PropTypes from "prop-types";
 
-// Nextui components
-import { Button } from "@nextui-org/react";
-
 function SelectorLogroItem({
     logro,
     selected,
