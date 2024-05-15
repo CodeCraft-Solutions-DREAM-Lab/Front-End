@@ -12,7 +12,6 @@ import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogr
 import propTypes from "prop-types";
 
 function IconoLogroPerfil({
-    setRefresh,
     colorSeleccionado,
     setColorSeleccionado,
     logrosObtenidos,
@@ -22,17 +21,14 @@ function IconoLogroPerfil({
 }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-    const abrirSelector = () => {
-        onOpenChange();
-    };
-
     return (
         <>
-            <div className="ilp-logo-div" onClick={abrirSelector}>
+            <div className="ilp-logo-div">
                 <Button
                     isIconOnly
                     className="h-full w-full bg-transparent"
-                    onPress={abrirSelector}
+                    onPress={() => onOpenChange()}
+                    data-cy="boton-logro-perfil"
                 >
                     <NuevoIconoLogro
                         icono={logroSeleccionado.iconoURL}
@@ -44,7 +40,6 @@ function IconoLogroPerfil({
                 isOpen={isOpen}
                 onOpen={onOpen}
                 onOpenChange={onOpenChange}
-                setRefresh={setRefresh}
                 colorSeleccionado={colorSeleccionado}
                 setColorSeleccionado={setColorSeleccionado}
                 logrosObtenidos={logrosObtenidos}
@@ -57,7 +52,6 @@ function IconoLogroPerfil({
 }
 
 IconoLogroPerfil.propTypes = {
-    setRefresh: propTypes.func,
     colorSeleccionado: propTypes.string,
     setColorSeleccionado: propTypes.func,
     logrosObtenidos: propTypes.array,
