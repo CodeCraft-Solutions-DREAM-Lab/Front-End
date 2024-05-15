@@ -91,7 +91,7 @@ function SelectorLogro({
                                 </h1>
                             </div>
                             <div className="sl-icon-container">
-                                <div className="sl-icon">
+                                <div className="sl-icon" data-cy='selector-logro-modal-icon'>
                                     <NuevoIconoLogro
                                         icono={logroPreSeleccionado.iconoURL}
                                         colorFondo={colorPreSeleccionado}

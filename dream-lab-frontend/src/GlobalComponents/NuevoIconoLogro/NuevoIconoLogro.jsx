@@ -6,8 +6,14 @@ function NuevoIconoLogro({ icono, colorFondo }) {
         <div
             className={`ic-contenedor-logro`}
             style={{ "--color-fondo": colorFondo }}
+            data-cy="contenedor-icono-logro"
         >
-            <img className="ic-icono-logro" src={icono} alt="Icono del logro" />
+            <img
+                className="ic-icono-logro"
+                src={icono}
+                alt="Icono del logro"
+                data-cy="icono-logro"
+            />
         </div>
     );
 }

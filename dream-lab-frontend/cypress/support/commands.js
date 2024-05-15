@@ -33,6 +33,11 @@ Cypress.Commands.add("getDataCy", (name) => {
     return cy.get(`[data-cy=${name}]`);
 });
 
+// Encuentra un elemento hijo de un elemento con el atributo data-cy
+Cypress.Commands.add("findDataCy", (name, child) => {
+    return cy.getDataCy(name).find(`[data-cy=${child}]`);
+});
+
 // Obtiene el nth hijo dentro del componente con el atributo data-cy
 Cypress.Commands.add("getDataCyNth", (name, n) => {
     return cy.getDataCy(name).children().eq(n);
@@ -59,6 +64,15 @@ Cypress.Commands.add(
     { prevSubject: "element" },
     (subject, attr, value) => {
         return cy.wrap(subject).should("have.attr", attr, value);
+    }
+);
+
+// Verifica si un elemento tiene un estilo de css con un valor específico
+Cypress.Commands.add(
+    "hasStyle",
+    { prevSubject: "element" },
+    (subject, style, value) => {
+        return cy.wrap(subject).should("have.css", style, value);
     }
 );
 
