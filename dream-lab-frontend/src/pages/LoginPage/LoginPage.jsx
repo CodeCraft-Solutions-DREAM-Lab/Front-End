@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import LoginTextField from "./components/LoginTextField/LoginTextField";
 import LoginButton from "./components/LoginButton/LoginButton";
@@ -8,8 +10,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 import "./LoginPage.css";
-
-import { useState, useEffect } from "react";
 
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
@@ -30,6 +30,7 @@ import bottomBlob from "src/assets/Login/bottom-blob.webp";
 import dreamLabLogo from "src/assets/Logos/LogoDreamLab.webp";
 
 import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen";
+import { saveToLocalStorage } from "../../utils/Storage";
 
 export default function LoginPage() {
     const [user, setUser] = useState("");
@@ -40,9 +41,28 @@ export default function LoginPage() {
     const [message, setMessage] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const jwt = searchParams.get("jwt");
 
     useEffect(() => {
-        if (getFromLocalStorage("token")) {
+        if (jwt) {
+            setAuthenticating(true);
+            post("auth/token", { token: jwt })
+                .then((data) => {
+                    if (data) {
+                        saveToLocalStorage("token", jwt);
+                        saveToLocalStorage("user", data.token_data.usuario);
+                        dispatch(setAuth(true));
+                        navigate("/home");
+                    }
+                })
+                .catch(() => {
+                    setAuthenticating(false);
+                })
+                .finally(() => {
+                    setAuthenticating(false);
+                });
+        } else if (getFromLocalStorage("token")) {
             setAuthenticating(true);
             post("auth/token", {
                 token: getFromLocalStorage("token") || "",
