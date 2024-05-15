@@ -69,7 +69,7 @@ export default MyComponent;
 // export const API_URL = "http://localhost:3000/";
 export const API_URL = import.meta.env.VITE_API_URL;
 
-export async function apiRequest(
+async function apiRequest(
     method,
     url,
     data = null,
@@ -77,15 +77,20 @@ export async function apiRequest(
     errorActions = () => {}
 ) {
     try {
-        const response = await axios({
+        const options = {
             method,
             url: API_URL + url,
-            data,
             headers: {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             },
-        });
+        };
+
+        if (data !== null) {
+            options.data = data;
+        }
+
+        const response = await axios(options);
 
         successActions();
         return response.data;
