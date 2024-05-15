@@ -28,10 +28,12 @@
 .formulario-sala-pregunta{
     width: 48%;
     margin-right: 3%;
+    margin-top: 1.5%;
 }
 
 .formulario-fecha-pregunta{
     width: 48%;
+    margin-top: 1.5%;
 }
 
 .formulario-horario-pregunta{
@@ -63,7 +65,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 3%;
+    margin-top: 5%;
 }
 
 .espacio-forms{

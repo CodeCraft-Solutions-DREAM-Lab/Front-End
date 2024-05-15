@@ -24,7 +24,8 @@
     align-items: center;
     width: 100%;
     height: auto;
-    margin-top: 2vw;
+    margin-top: 2.8vw;
+    margin-bottom: 0.8vw;
 }
 
 .textos-subir-imagen-contenedor{
@@ -48,4 +49,22 @@
     font-size: small;
     font-weight: lighter;
     text-align: center;
+}
+
+.subir-imagen-box-div {
+    position: relative;
+    overflow: hidden; /* Para recortar la imagen si es más grande que el contenedor */
+}
+
+.image-container {
+    position: relative;
+    width: 100%; /* Ajustar el ancho del contenedor al 100% del div padre */
+    height: 100%; /* Ajustar el alto del contenedor al 100% del div padre */
+}
+
+.imagen-seleccionada {
+    width: 100%; /* Ocupar el 100% del ancho del contenedor */
+    height: 100%; /* Ocupar el 100% del alto del contenedor */
+    object-fit: cover; /* Escalar la imagen para llenar el contenedor, recortando la parte sobrante */
+    border-radius: 15px;
 }
