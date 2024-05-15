@@ -45,14 +45,19 @@ export default function LoginPage() {
     const jwt = searchParams.get("jwt");
 
     useEffect(() => {
+        // Validar si hay un token en los parametros del url
         if (jwt) {
+            // Autenticar el token de los parametros
             setAuthenticating(true);
             post("auth/token", { token: jwt })
                 .then((data) => {
                     if (data) {
+                        // Guardar los datos regresados en el local storage
                         saveToLocalStorage("token", jwt);
                         saveToLocalStorage("user", data.token_data.usuario);
+                        // Guardar en redux que ya se hizo login
                         dispatch(setAuth(true));
+                        // Redirigir a la página de home
                         navigate("/home");
                     }
                 })
@@ -62,7 +67,10 @@ export default function LoginPage() {
                 .finally(() => {
                     setAuthenticating(false);
                 });
-        } else if (getFromLocalStorage("token")) {
+        }
+        // Si no hay token en los parametros, validar si hay un token en el
+        // local storage
+        else if (getFromLocalStorage("token")) {
             setAuthenticating(true);
             post("auth/token", {
                 token: getFromLocalStorage("token") || "",
@@ -79,7 +87,10 @@ export default function LoginPage() {
                 .finally(() => {
                     setAuthenticating(false);
                 });
-        } else {
+        }
+        // Si no hay token en los parametros ni en el local storage, terminar de
+        // autenticar para permitir hacer login convencional
+        else {
             setAuthenticating(false);
         }
     }, [dispatch, navigate]);
