@@ -28,6 +28,7 @@ function IconoLogroPerfil({
                     isIconOnly
                     className="h-full w-full bg-transparent"
                     onPress={() => onOpenChange()}
+                    data-cy="boton-logro-perfil"
                 >
                     <NuevoIconoLogro
                         icono={logroSeleccionado.iconoURL}

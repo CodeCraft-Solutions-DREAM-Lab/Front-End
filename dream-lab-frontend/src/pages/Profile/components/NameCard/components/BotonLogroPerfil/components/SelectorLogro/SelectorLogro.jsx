@@ -86,7 +86,7 @@ function SelectorLogro({
                     <div className="sl-main-container">
                         <div className="sl-left-container">
                             <div className="sl-title-container">
-                                <h1 className="sl-title">
+                                <h1 className="sl-title" data-cy='selector-logro-titulo'>
                                     {logroPreSeleccionado.nombre}
                                 </h1>
                             </div>
@@ -109,7 +109,7 @@ function SelectorLogro({
                         </div>
                         <div className="sl-center-container"></div>
                         <div className="sl-right-container">
-                            <div className="sl-opciones-logros-container">
+                            <div className="sl-opciones-logros-container" data-cy='selector-logro-container'>
                                 {logrosObtenidos.map((logro, index) => (
                                     <div key={index} className="sl-logro-item">
                                         <SelectorLogroItem

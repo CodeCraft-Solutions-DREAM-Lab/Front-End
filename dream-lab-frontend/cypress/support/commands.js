@@ -33,9 +33,19 @@ Cypress.Commands.add("getDataCy", (name) => {
     return cy.get(`[data-cy=${name}]`);
 });
 
+// Obtiene el nth hijo dentro del componente con el atributo data-cy
+Cypress.Commands.add("getDataCyNth", (name, n) => {
+    return cy.getDataCy(name).children().eq(n);
+});
+
 // Hace click en un elemento por el atributo data-cy
 Cypress.Commands.add("clickDataCy", (name) => {
     return cy.getDataCy(name).click();
+});
+
+// Hace click en el hijo nth de un elemento con el atributo data-cy
+Cypress.Commands.add("clickDataCyNth", (name, n) => {
+    return cy.getDataCyNth(name, n).click();
 });
 
 // Escribe en un elemento por el atributo data-cy
@@ -58,14 +68,6 @@ Cypress.Commands.add("containsDataCy", (name, text, timeout) => {
         timeout = 4000;
     }
     return cy.getDataCy(name).contains(text, { timeout: timeout });
-});
-
-// Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy_Alt", (name, text) => {
-    return cy.getDataCy(name).then(($elemento) => {
-        const texto = $elemento.text();
-        expect(texto).to.equal(text);
-    });
 });
 
 // Iniciar sesión con usuario y contraseña

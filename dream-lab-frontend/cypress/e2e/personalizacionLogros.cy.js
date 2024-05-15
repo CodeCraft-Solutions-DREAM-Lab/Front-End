@@ -390,5 +390,9 @@ describe("Pruebas de personalización de los logros", () => {
     it("Modificar icono y color de logro", () => {
         cy.wait("@getPerfil");
         cy.wait("@getLogros");
+        cy.clickDataCy("boton-logro-perfil");
+        cy.containsDataCy("selector-logro-titulo", "Ancient Soul");
+        cy.clickDataCyNth("selector-logro-container", 1);
+        cy.containsDataCy("selector-logro-titulo", "Robot Expert");
     });
 });
