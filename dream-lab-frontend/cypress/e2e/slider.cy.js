@@ -18,9 +18,9 @@ describe("Despliegue adecuado del componente 'Slider'.", () => {
                     descripcion:
                         "Un laboratorio de vanguardia donde la creatividad se fusiona con la tecnología. Aquí, los innovadores pueden explorar libremente nuevas ideas y experimentar con las últimas herramientas de diseño y fabricación.",
                     fotoURL:
-                        "https://dreamlabstorage.blob.core.windows.net/archivos/vr-lede.jpg",
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/vr-lede.webp",
                     detallesURL:
-                        "https://dreamlabstorage.blob.core.windows.net/archivos/dimension-forge.png",
+                        "https://dreamlabstorage.blob.core.windows.net/archivos/dimension-forge.webp",
                 },
             ],
         }).as("getSala");
