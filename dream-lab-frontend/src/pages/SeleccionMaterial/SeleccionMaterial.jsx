@@ -3,6 +3,9 @@ import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import RoundedButton from "./components/Button/Button";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
+import MiniMaterialCard from "./components/MiniMaterialCard/MiniMaterialCard";
+import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
+import {Badge} from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import CircularProgress from "@mui/material/CircularProgress";
@@ -13,7 +16,6 @@ import {
 	existsInSessionStorage,
 } from "../../utils/Storage";
 import { post } from "../../utils/ApiRequests";
-
 
 function SeleccionMaterial() {
 	const navigate = useNavigate();
@@ -61,33 +63,48 @@ function SeleccionMaterial() {
 	}, [selectedMaterials]);
 
 	const handleQuantityUpdate = (materialId, newQuantity) => {
-		// Retrieve the materials array from session storage
-		let materialsArray = JSON.parse(getFromSessionStorage("materials")) || [];
-
+		// Create a copy of the selectedMaterials array
+		let updatedSelectedMaterials = [...selectedMaterials];
+	
 		// Find the index of the material with the given materialId in the array
-		const materialIndex = materialsArray.findIndex(
+		const materialIndex = updatedSelectedMaterials.findIndex(
 			(item) => item.materialId === materialId
 		);
-
+	
 		// If the newQuantity is 0, remove the material from the array
 		if (newQuantity === 0) {
 			if (materialIndex !== -1) {
-				materialsArray.splice(materialIndex, 1);
+				updatedSelectedMaterials.splice(materialIndex, 1);
 			}
 		} else {
 			// If the material exists in the array, update its quantity
 			if (materialIndex !== -1) {
-				materialsArray[materialIndex].quantity = newQuantity;
+				updatedSelectedMaterials[materialIndex].quantity = newQuantity;
 			} else {
 				// If the material doesn't exist in the array, add it with the new quantity
-				materialsArray.push({ materialId, quantity: newQuantity });
+				const materialToAdd = data.find((item) => item.id === materialId);
+				if (materialToAdd) {
+					updatedSelectedMaterials.push({
+						materialId: materialId,
+						quantity: newQuantity,
+						image: materialToAdd.image // Include the image property
+					});
+				}
 			}
 		}
+	
+		// Update the state with the updated materials array
+		setSelectedMaterials(updatedSelectedMaterials);
 
-		// Save the updated materials array back to session storage
-		saveToSessionStorage("materials", JSON.stringify(materialsArray));
-		//console.log(selectedMaterials);
+		// After adding the new item to the container
+		const container = document.querySelector('.material-resumen-container');
+		// Add a small delay to ensure the container has updated its layout
+		setTimeout(() => {
+		container.scrollLeft = container.scrollWidth - container.clientWidth;
+		}, 100); // Adjust the delay time as needed
+
 	};
+	
 
 	const handleSubmit = async () => {
 		navigate("/reservacion/resumen");
@@ -103,13 +120,28 @@ function SeleccionMaterial() {
 
 			<div className="main-container">
 				<div className="top-section">
-					{/* Aquí irá el resumen y la search bar */}
+					{/* Div to display selected materials */}
+					<div className="seleccion-material-boton-back">
+						<BotonBack ruta="/reservacion/sala/"/>
+					</div>
+					<div className="material-resumen-container">
+						{selectedMaterials.map((selectedMaterial) => (
+							<Badge content={selectedMaterial.quantity} color="default" placement="top-left">
+								<MiniMaterialCard
+									key={selectedMaterial.materialId}
+									image={selectedMaterial.image}
+								/>
+							</Badge>
+						))}
+					</div>
+
+					{/* Search bar for filtering materials */}
 					<div className="search-bar-container">
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 					</div>
 				</div>
 				<div className="bottom-section">
-					{/* Aquí van las tarjetas con los materiales */}
+					{/* Div to display all selectable materials */}
 					<div className="card-container-wrapper">
 						<div className="card-container-sm">
 							{filteredData.map(material => (

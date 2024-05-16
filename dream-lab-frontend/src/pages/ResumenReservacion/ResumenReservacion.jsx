@@ -131,13 +131,9 @@ function ResumenReservacion(props) {
                             if (selectedMaterial && selectedMaterial.quantity > 0) {
                                 return (
                                     <MaterialCardDupe
-                                        key={material.id}
-                                        materialId={material.id}
                                         name={material.name}
                                         image={material.image}
-                                        hideQuantity={true}
                                         initialQuantity={selectedMaterial.quantity}
-                                        maxQuantity={material.cantidadDisponible}
                                     />
                                 );
                             } else {
