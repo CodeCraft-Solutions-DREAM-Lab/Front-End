@@ -14,14 +14,25 @@ import QRCode from "react-qr-code";
 import { post } from "src/utils/ApiRequests";
 
 const HiddenInputLogger = () => {
-    const [idUsuario, setIdUsuario] = useState("");
-    const [isLogging, setIsLogging] = useState(false);
+    // const [idUsuario, setIdUsuario] = useState("");
+    // const [isLogging, setIsLogging] = useState(false);
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
+    // const timeoutId = useRef(null);
+    const [idUsuario, setIdUsuario] = useState("");
+    const idUsuarioRef = useRef(idUsuario);
+    const [isLogging, setIsLogging] = useState(false);
+    const isLoggingRef = useRef(isLogging);
     const timeoutId = useRef(null);
 
-    const createQR = (e) => {
+    useEffect(() => {
+        idUsuarioRef.current = idUsuario;
+        isLoggingRef.current = isLogging;
+    }, [idUsuario, isLogging]);
+
+    const createQR = (e, idUsuario) => {
         e.preventDefault();
+        console.log("idUsuario: ", idUsuario);
         post("auth/usuario", { usuario: idUsuario, origen: "qr" })
             .then((response) => {
                 const jwt = response.jwt;
@@ -42,18 +53,18 @@ const HiddenInputLogger = () => {
             const char = e.key.toLowerCase();
 
             // Check if logging should start
-            if (!isLogging) {
+            if (!isLoggingRef.current) {
                 setIsLogging(true);
                 setIdUsuario(char);
-            } else if (isLogging) {
+            } else if (isLoggingRef.current) {
                 // Log the input and stop logging if "Enter" is pressed
                 if (char === "enter") {
-                    console.log(idUsuario);
+                    console.log(idUsuarioRef.current);
+                    createQR(e, idUsuarioRef.current);
                     setIsLogging(false);
                     setIdUsuario("");
-                    createQR(e);
                 } else {
-                    const newInput = idUsuario + char;
+                    const newInput = idUsuarioRef.current + char;
                     setIdUsuario(newInput);
                 }
             }
@@ -62,7 +73,7 @@ const HiddenInputLogger = () => {
             clearTimeout(timeoutId.current);
             timeoutId.current = setTimeout(() => {
                 setIsLogging(false);
-                setIdUsuario((prevIdUsuario) => "");
+                setIdUsuario("");
             }, 5000);
         };
 
@@ -73,7 +84,7 @@ const HiddenInputLogger = () => {
             document.removeEventListener("keydown", handleKeyDown);
             clearTimeout(timeoutId.current);
         };
-    }, [idUsuario, isLogging]);
+    }, []);
 
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
