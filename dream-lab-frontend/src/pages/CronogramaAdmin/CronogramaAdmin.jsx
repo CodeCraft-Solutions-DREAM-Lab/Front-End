@@ -22,6 +22,7 @@ import {
 	Checkbox,
 	ListItemText,
 } from "@mui/material";
+import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 
 const monthTranslations = {
 	January: "Enero",
@@ -66,32 +67,46 @@ const CustomLabel = ({ interval }) => {
 	);
 };
 
+// Mock data 
 const groups = [
-	{ id: 3, title: "Sala VR", sala: true },
-	{ id: 1, title: "group 1", sala: false },
-	{ id: 2, title: "group 2", sala: false },
+    { id: 1, title: "Sala VR", sala: true },
+    { id: 2, title: "Mesa 1", sala: false },
+    { id: 3, title: "Mesa 2", sala: false },
+    { id: 4, title: "Mesa 3", sala: false },
+    { id: 5, title: "Mesa 4", sala: false },
+    { id: 6, title: "Sala VR", sala: true },
+    { id: 7, title: "Mesa 1", sala: false },
+    { id: 8, title: "Mesa 2", sala: false },
+    { id: 9, title: "Mesa 3", sala: false },
+    { id: 10, title: "Mesa 4", sala: false },
+    { id: 11, title: "Sala VR", sala: true },
+    { id: 12, title: "Mesa 1", sala: false },
+    { id: 13, title: "Mesa 2", sala: false },
+    { id: 14, title: "Mesa 3", sala: false },
+    { id: 15, title: "Mesa 4", sala: false },
 ];
+
 
 const items = [
 	{
 		id: 1,
-		group: 1,
-		title: "item 1",
+		group: 3,
+		title: "Jinelle Flores",
 		start_time: moment(),
 		end_time: moment().add(2, "hour"),
 		sala: 1,
 	},
 	{
 		id: 2,
-		group: 2,
-		title: "item 2",
+		group: 4,
+		title: "Roberto Reyes",
 		start_time: moment().add(-1, "hour"),
 		end_time: moment().add(1, "hour"),
 	},
 	{
 		id: 3,
-		group: 1,
-		title: "item 3",
+		group: 3,
+		title: "Christopher Pedraza",
 		start_time: moment().add(3, "hour"),
 		end_time: moment().add(6, "hour"),
 	},
@@ -103,10 +118,10 @@ const handleToggleClick = (groupId) => {
 };
 const customGroupRenderer = ({ group }) => {
     const groupClass = group.sala ? "sala" : "";
-    const groupLine = group.sala ? <div className="group-line"></div> : null;
+    //const groupLine = group.sala ? <div className="group-line"></div> : null;
     return (
         <div className={`rct-sidebar-row ${groupClass}`}>
-            {groupLine}
+            
             {group.title}
             {!group.sala && (
                 <Switch
@@ -185,7 +200,7 @@ const MenuProps = {
 };
 
 const areas = ["Sala VR", "Electric Garage", "New Horizons"];
-const estados = ["Option 1", "Option 2", "Option 3"];
+const estados = ["Preparado", "En proceso", "Sin preparar"];
 
 function CronogramaAdmin() {
 	// Set the locale to Spanish
@@ -218,6 +233,9 @@ function CronogramaAdmin() {
 	};
 
 	return (
+		<>
+		<NavBarAdmin />
+		<div className="timeline-container-cronograma-admin">
 		<Timeline
 			groups={groups}
 			items={items}
@@ -387,6 +405,8 @@ function CronogramaAdmin() {
 				<DateHeader />
 			</TimelineHeaders>
 		</Timeline>
+		</div>
+		</>
 	);
 }
 

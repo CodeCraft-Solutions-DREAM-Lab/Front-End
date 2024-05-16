@@ -92,3 +92,7 @@
   display: flex;
   align-items: center; /* Center items vertically */
 }
+
+.timeline-container-cronograma-admin {
+padding-top: 6%;
+}
