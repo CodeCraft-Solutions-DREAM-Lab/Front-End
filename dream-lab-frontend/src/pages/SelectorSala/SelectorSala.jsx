@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./SelectorSala.css";
 import NavBar from "src/GlobalComponents/NavBar/NavBar";
 import Slider from "./components/Slider/Slider";
-import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.png";
+import imagePlaceholder from "src/assets/SelectorSala/3D-model-placeholder.webp";
 import "./components/RoundedButton/RoundedButton.css";
 import { get, post } from "src/utils/ApiRequests.js";
 // import { useLocation } from "react-router-dom";
@@ -166,7 +166,6 @@ function SelectorSala() {
                             competidoresArray={competidoresArray}
                             update={update}
                         />
-
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Slider.css";
-import unaPersona from "src/assets/SelectorSala/onePerson.png";
-import grupoPersonas from "src/assets/SelectorSala/group.png";
+import unaPersona from "src/assets/SelectorSala/onePerson.webp";
+import grupoPersonas from "src/assets/SelectorSala/group.webp";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 
 function Slider({
@@ -24,10 +24,10 @@ function Slider({
         setFetchFreeHoursAgain(!fetchFreeHoursAgain);
     };
 
-    const setOnePerson =  () => {
+    const setOnePerson = () => {
         if (getFromSessionStorage("personas") == null) {
             saveToSessionStorage("personas", 1);
-        };
+        }
     };
 
     useEffect(() => {
@@ -37,7 +37,11 @@ function Slider({
     return (
         <div className="slider-out" data-cy="slider-container-personas">
             <div className="texto-num-personas">
-                <output htmlFor="slider" id="slider-value" data-cy="slider-output-texto">
+                <output
+                    htmlFor="slider"
+                    id="slider-value"
+                    data-cy="slider-output-texto"
+                >
                     {" "}
                     {value} personas{" "}
                 </output>

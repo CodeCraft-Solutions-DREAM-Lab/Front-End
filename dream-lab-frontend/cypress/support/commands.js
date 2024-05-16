@@ -33,9 +33,24 @@ Cypress.Commands.add("getDataCy", (name) => {
     return cy.get(`[data-cy=${name}]`);
 });
 
+// Encuentra un elemento hijo de un elemento con el atributo data-cy
+Cypress.Commands.add("findDataCy", (name, child) => {
+    return cy.getDataCy(name).find(`[data-cy=${child}]`);
+});
+
+// Obtiene el nth hijo dentro del componente con el atributo data-cy
+Cypress.Commands.add("getDataCyNth", (name, n) => {
+    return cy.getDataCy(name).children().eq(n);
+});
+
 // Hace click en un elemento por el atributo data-cy
 Cypress.Commands.add("clickDataCy", (name) => {
     return cy.getDataCy(name).click();
+});
+
+// Hace click en el hijo nth de un elemento con el atributo data-cy
+Cypress.Commands.add("clickDataCyNth", (name, n) => {
+    return cy.getDataCyNth(name, n).click();
 });
 
 // Escribe en un elemento por el atributo data-cy
@@ -52,17 +67,21 @@ Cypress.Commands.add(
     }
 );
 
-// Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy", (name, text) => {
-    return cy.getDataCy(name).contains(text);
-});
+// Verifica si un elemento tiene un estilo de css con un valor específico
+Cypress.Commands.add(
+    "hasStyle",
+    { prevSubject: "element" },
+    (subject, style, value) => {
+        return cy.wrap(subject).should("have.css", style, value);
+    }
+);
 
 // Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy_Alt", (name, text) => {
-    return cy.getDataCy(name).then(($elemento) => {
-        const texto = $elemento.text();
-        expect(texto).to.equal(text);
-    });
+Cypress.Commands.add("containsDataCy", (name, text, timeout) => {
+    if (timeout === undefined) {
+        timeout = 4000;
+    }
+    return cy.getDataCy(name).contains(text, { timeout: timeout });
 });
 
 // Iniciar sesión con usuario y contraseña
