@@ -1,5 +1,5 @@
 // Componentes
-import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+import IconoLogro from "src/GlobalComponents/IconoLogro/IconoLogro";
 
 // Estilos
 import "./SelectorLogroItem.css";
@@ -22,7 +22,7 @@ function SelectorLogroItem({
             onClick={() => setLogroSeleccionado(logro)}
             style={{ borderColor: selectedColor }}
         >
-            <NuevoIconoLogro icono={logro.iconoURL} />
+            <IconoLogro icono={logro.iconoURL} />
         </div>
     );
 }

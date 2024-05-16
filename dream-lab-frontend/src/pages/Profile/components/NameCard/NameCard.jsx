@@ -46,7 +46,9 @@ function NameCard({ nombre, handleLogroArtista }) {
             />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">{nombre}</h1>
-                <h2 className="apodo" data-cy="namecard-titulo-logro">{logroSeleccionado.nombre}</h2>
+                <h2 className="apodo" data-cy="namecard-titulo-logro">
+                    {logroSeleccionado.nombre}
+                </h2>
             </div>
         </div>
     );
