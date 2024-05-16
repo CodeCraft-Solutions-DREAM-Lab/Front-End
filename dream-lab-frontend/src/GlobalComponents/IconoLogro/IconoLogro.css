@@ -8,5 +8,5 @@
 }
 
 .ic-icono-logro {
-    opacity: 50%;
+    opacity: var(--opacidad, 50%);
 }

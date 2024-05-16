@@ -6,7 +6,7 @@ import { Button, useDisclosure } from "@nextui-org/react";
 
 // Componentes
 import SelectorLogro from "./components/SelectorLogro/SelectorLogro";
-import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+import IconoLogro from "src/GlobalComponents/IconoLogro/IconoLogro";
 
 // Proptypes
 import propTypes from "prop-types";
@@ -30,7 +30,7 @@ function IconoLogroPerfil({
                     onPress={() => onOpenChange()}
                     data-cy="boton-logro-perfil"
                 >
-                    <NuevoIconoLogro
+                    <IconoLogro
                         icono={logroSeleccionado.iconoURL}
                         colorFondo={colorSeleccionado}
                     />

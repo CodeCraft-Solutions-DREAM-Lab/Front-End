@@ -1,11 +1,11 @@
-import "./NuevoIconoLogro.css";
+import "./IconoLogro.css";
 import propTypes from "prop-types";
 
-function NuevoIconoLogro({ icono, colorFondo }) {
+function IconoLogro({ icono, colorFondo, opacidad }) {
     return (
         <div
             className={`ic-contenedor-logro`}
-            style={{ "--color-fondo": colorFondo }}
+            style={{ "--color-fondo": colorFondo, "--opacidad": opacidad }}
             data-cy="contenedor-icono-logro"
         >
             <img
@@ -18,9 +18,9 @@ function NuevoIconoLogro({ icono, colorFondo }) {
     );
 }
 
-NuevoIconoLogro.propTypes = {
+IconoLogro.propTypes = {
     icono: propTypes.string,
     colorFondo: propTypes.string,
 };
 
-export default NuevoIconoLogro;
+export default IconoLogro;
