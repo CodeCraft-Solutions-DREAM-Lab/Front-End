@@ -1,8 +1,7 @@
 import "./TarjetaAnuncio.css";
-import ClicImage from "../../../../../assets/Profile/trash.png";
-import OpenEye from "../../../../../assets/CrearAnuncioVideowall/openEye.png";
-import ClosedEye from "../../../../../assets/CrearAnuncioVideowall/closedEye.png";
-import SalonClases from "../../../../../assets/CrearAnuncioVideowall/salonClases.jpg";
+import ClicImage from "../../../../../../assets/Profile/trash.png";
+import OpenEye from "../../../../../../assets/CrearAnuncioVideowall/openEye.png";
+import ClosedEye from "../../../../../../assets/CrearAnuncioVideowall/closedEye.png";
 
 function TarjetaReservacion(props) {
     return (
@@ -51,9 +50,9 @@ function TarjetaReservacion(props) {
                     </div>
                 </div>
 
-                {props.personalizado !== "agua" ? (
-                    <div className="linea"></div>
-                ) : null}
+              
+                <div className="linea"></div>
+                
 
                 <div className="div-fecha-anuncio">
                     <div className="hora-anuncio">

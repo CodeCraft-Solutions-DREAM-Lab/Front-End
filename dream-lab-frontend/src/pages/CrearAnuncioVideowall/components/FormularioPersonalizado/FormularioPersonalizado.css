@@ -1,4 +1,4 @@
-.div-exterior-formulario-creacion-anuncio{
+.div-exterior-formulario-creacion-anuncio-personalizado{
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(17.5px);
     -webkit-backdrop-filter: blur(17.5px);
@@ -14,44 +14,44 @@
     padding-top: 5%;
 }
 
-.formulario-creacion-anuncio{
+.formulario-creacion-anuncio-personalizado{
     height: 20vw;
 }
 
-.sala-fecha-anuncio-formulario{
+.sala-fecha-anuncio-formulario-personalizado{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: -0.5%;
+    margin-top: 1%;
 }
 
-.formulario-sala-pregunta{
-    width: 48%;
+.formulario-descripcion-pregunta-personalizado{
+    width: 100%;
     margin-right: 3%;
     margin-top: 1.5%;
 }
 
-.formulario-fecha-pregunta{
+.formulario-fecha-pregunta-personalizado{
     width: 48%;
     margin-top: 1.5%;
 }
 
-.formulario-horario-pregunta{
+.formulario-horario-pregunta-personalizado{
     width: 100%;
 }
 
-.sub-formulario {
+.sub-formulario-personalizado {
     max-height: 100px;
     margin-bottom: 5%;
     font-weight: bold;
     color: white;
 }
 
-.label-formulario-anuncio{
+.label-formulario-anuncio-personalizado{
     font-weight: bold;
 }
 
-.input-formulario-anuncio{
+.input-formulario-anuncio-personalizado{
     padding-left: 1vw;
     border-radius: 12px;
     width: 100%;
@@ -61,51 +61,60 @@
     font-size: medium;
 }
 
-.contenedor-mitad-2-formulario{
+.contenedor-mitad-2-formulario-personalizado{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2.5%;
 }
 
 .espacio-forms{
     height: 1vh;
 }
 
-.horario-div-anuncio-formulario{
+.horario-div-anuncio-formulario-personalizado{
     width: 48%;
     margin-right: 3%;
 }
 
-.subir-imagen-div-formulario{
-    width: 48%;
+.subir-imagen-div-formulario-personalizado{
+    width: 100%;
     height: 11vw;
 }
 
-.boton-agregar-div-out{
+.boton-agregar-div-out-personalizado{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 1vw;
 }
 
-.checkbox-formulario-anuncio{
+.checkbox-formulario-anuncio-personalizado{
     text-align: right; /* Alinea el contenido a la derecha */
+    margin-top: 4%;
 }
 
-.formulario-primera-mitad{
+.formulario-primera-mitad-personalizado{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 4%;
 }
 
-.formulario-primera-mitad-pt1{
+.formulario-primera-mitad-pt1-personalizado{
     width: 25vw;
 }
 
-.formulario-primera-mitad-pt2{
+.formulario-primera-mitad-pt2-personalizado{
     width: 10vw;    
 }
 
+.mitad2-personalizado-crear-anuncio{
+    margin-top: 0.2%;
+}
 
+.footer-input-formulario-anuncio{
+    text-align: right;
+    font-weight: lighter;
+    font-size: small;
+}

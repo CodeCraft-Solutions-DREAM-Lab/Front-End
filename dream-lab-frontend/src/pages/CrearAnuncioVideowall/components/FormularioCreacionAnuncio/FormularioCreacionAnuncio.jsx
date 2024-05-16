@@ -5,13 +5,10 @@ import Checkbox from "./components/Checkbox/Checkbox";
 import SubirImagenBox from "./components/SubirImagenBox/SubirImagenBox";
 import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.png";
 import BotonAgregar from "./components/BotonAgregar/BotonAgregar";
-import SelectorPersonalizado from "./components/SelectorPersonalizado/SelectorPersonalizado";
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
-import HoraSelector from "./components/HoraSelector/HoraSelector";
 import { DatePicker } from "@nextui-org/react";
 import { get, API_URL } from "src/utils/ApiRequests.js";
 import { TimeInput } from "@nextui-org/react";
-import { Select, SelectItem } from "@nextui-org/react";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
@@ -39,6 +36,10 @@ function FormularioCreacionAnuncio(props) {
     const cambiarEstadoOpciones = () => {
         setOpcionPersonalizadoSeleccionado(!opcionPersonalizadoSeleccionado);
         setOpcionExperienciaSeleccionado(!opcionExperienciaSeleccionado);
+        props.handleTipoAnuncioSeleccionado(
+            !opcionPersonalizadoSeleccionado,
+            !opcionExperienciaSeleccionado
+        );
     };
 
     const [salasBD, setSalasBD] = useState([]);
@@ -54,16 +55,6 @@ function FormularioCreacionAnuncio(props) {
             });
     }, []);
 
-    const [selectedOption, setSelectedOption] = useState("");
-
-    const handleSelectChange = (value) => {
-        setSelectedOption(value);
-    };
-
-    const handleInputChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
-
     const staticOptions = salasBD
         ? salasBD.map((sala) => ({
               label: sala.nombre,
@@ -71,8 +62,15 @@ function FormularioCreacionAnuncio(props) {
           }))
         : [];
 
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
+    const [titulo, setTitulo] = useState("");
+    const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
+
+    // Contador: Título de anuncio
+    const handleTituloChange = (event) => {
+        const inputTitulo = event.target.value;
+        const remainingChars = 50 - inputTitulo.length;
+        setTitulo(inputTitulo);
+        setCaracteresRestantesTit(remainingChars);
     };
 
     return (
@@ -104,20 +102,17 @@ function FormularioCreacionAnuncio(props) {
                         </label>{" "}
                         <br></br>
                         <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                            {isCheckedSoloImage === true ? (
-                                <Input
-                                    type="text"
-                                    aria-label="Selector de sala"
-                                    placeholder="Título del anuncio"
-                                    isDisabled
-                                />
-                            ) : (
-                                <Input
-                                    type="text"
-                                    aria-label="Selector de sala"
-                                    placeholder="Título del anuncio"
-                                />
-                            )}
+                            <Input
+                                type="text"
+                                aria-label="Selector de sala"
+                                placeholder="Título del anuncio"
+                                onChange={handleTituloChange}
+                                maxLength={50}
+                                isDisabled={isCheckedSoloImage ? true : false}
+                            />
+                        </div>
+                        <div className="footer-input-formulario-anuncio">
+                            ({caracteresRestantesTit} caracteres restantes)
                         </div>
                         <div className="sala-fecha-anuncio-formulario">
                             <div className="formulario-sala-pregunta">
@@ -125,50 +120,36 @@ function FormularioCreacionAnuncio(props) {
                                     Ubicación
                                 </label>{" "}
                                 <br></br>
-                                {isCheckedSoloImage === true ? (
-                                    <Autocomplete
-                                        defaultItems={staticOptions}
-                                        aria-label="Selector de sala"
-                                        placeholder="Ingresa la ubicación"
-                                        className="max-w-xs"
-                                        allowsCustomValue
-                                        isDisabled
-                                    >
-                                        {(sala) => (
-                                            <AutocompleteItem key={sala.value}>
-                                                {sala.label}
-                                            </AutocompleteItem>
-                                        )}
-                                    </Autocomplete>
-                                ) : (
-                                    <Autocomplete
-                                        defaultItems={staticOptions}
-                                        aria-label="Selector de sala"
-                                        placeholder="Ingresa la ubicación"
-                                        className="max-w-xs"
-                                        allowsCustomValue
-                                    >
-                                        {(sala) => (
-                                            <AutocompleteItem key={sala.value}>
-                                                {sala.label}
-                                            </AutocompleteItem>
-                                        )}
-                                    </Autocomplete>
-                                )}
+                                <Autocomplete
+                                    defaultItems={staticOptions}
+                                    aria-label="Selector de sala"
+                                    placeholder="Ingresa la ubicación"
+                                    className="max-w-xs"
+                                    allowsCustomValue
+                                    maxLength={35}
+                                    isDisabled={
+                                        isCheckedSoloImage ? true : false
+                                    }
+                                >
+                                    {(sala) => (
+                                        <AutocompleteItem key={sala.value}>
+                                            {sala.label}
+                                        </AutocompleteItem>
+                                    )}
+                                </Autocomplete>
                             </div>
 
                             <div className="formulario-fecha-pregunta flex flex-col mx-0">
                                 <label className="label-formulario-anuncio">
                                     Fecha
                                 </label>
-                                {isCheckedSoloImage === true ? (
-                                    <DatePicker
-                                        aria-label="Selector de fecha"
-                                        isDisabled
-                                    />
-                                ) : (
-                                    <DatePicker aria-label="Selector de fecha" />
-                                )}
+
+                                <DatePicker
+                                    aria-label="Selector de fecha"
+                                    isDisabled={
+                                        isCheckedSoloImage ? true : false
+                                    }
+                                />
                             </div>
                         </div>
                     </div>
@@ -180,35 +161,25 @@ function FormularioCreacionAnuncio(props) {
                                     Hora de inicio
                                 </label>{" "}
                                 <br></br>
-                                {isCheckedSoloImage === true ? (
-                                    <TimeInput
-                                        label={null}
-                                        isDisabled
-                                        aria-label="Selector de hora de inicio"
-                                    />
-                                ) : (
-                                    <TimeInput
-                                        label={null}
-                                        aria-label="Selector de hora de inicio"
-                                    />
-                                )}
+                                <TimeInput
+                                    label={null}
+                                    aria-label="Selector de hora de inicio"
+                                    isDisabled={
+                                        isCheckedSoloImage ? true : false
+                                    }
+                                />
                                 <div className="espacio-forms"></div>
                                 <label className="label-formulario-anuncio">
                                     Hora de fin
                                 </label>{" "}
                                 <br></br>
-                                {isCheckedSoloImage === true ? (
-                                    <TimeInput
-                                        label={null}
-                                        isDisabled
-                                        aria-label="Selector de hora de fin"
-                                    />
-                                ) : (
-                                    <TimeInput
-                                        label={null}
-                                        aria-label="Selector de hora de fin"
-                                    />
-                                )}{" "}
+                                <TimeInput
+                                    label={null}
+                                    aria-label="Selector de hora de fin"
+                                    isDisabled={
+                                        isCheckedSoloImage ? true : false
+                                    }
+                                />{" "}
                             </div>
                         </div>
 

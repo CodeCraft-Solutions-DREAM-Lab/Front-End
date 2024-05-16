@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./AdministradorAnuncios.css";
-import TarjetaAnuncio from "./components/TarjetaAnuncio";
+import TarjetaAnuncio from "./components/TarjetaAnuncio/TarjetaAnuncio";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import ModalEliminacionAnuncio from "./components/ModalEliminacionAnuncio/ModalEliminacionAnuncio";
 
 function AdministradorAnuncios(props) {
     const [datosAnuncios, setDatosAnuncios] = useState([
@@ -45,6 +46,8 @@ function AdministradorAnuncios(props) {
         },
     ]);
 
+    const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar la visibilidad del modal
+
     const toggleTarjeta = (index) => {
         const newDatosAnuncios = [...datosAnuncios];
         newDatosAnuncios[index].encendido = !newDatosAnuncios[index].encendido;
@@ -76,6 +79,16 @@ function AdministradorAnuncios(props) {
         return { ...anuncio, descripcionReducida };
     });
 
+    // Función para abrir el modal
+    const abrirModal = () => {
+        setMostrarModal(true);
+    };
+
+    // Función para cerrar el modal
+    const cerrarModal = () => {
+        setMostrarModal(false);
+    };
+
     const Anuncio = ({ anuncio, index }) => {
         const [{ isDragging }, drag] = useDrag({
             type: "anuncio",
@@ -106,6 +119,7 @@ function AdministradorAnuncios(props) {
                         isDragging={isDragging}
                         imagen={anuncio.imagen}
                         personalizado={true}
+                        funcionTrash={abrirModal}
                     />
                 ) : anuncio.soloImagen ? (
                     <TarjetaAnuncio
@@ -116,6 +130,7 @@ function AdministradorAnuncios(props) {
                         isDragging={isDragging}
                         imagen={anuncio.imagen}
                         personalizado={false}
+                        funcionTrash={abrirModal}
                     />
                 ) : (
                     <TarjetaAnuncio
@@ -128,6 +143,7 @@ function AdministradorAnuncios(props) {
                         isDragging={isDragging}
                         imagen={anuncio.imagen}
                         personalizado={false}
+                        funcionTrash={abrirModal}
                     />
                 )}
             </div>
@@ -151,6 +167,20 @@ function AdministradorAnuncios(props) {
                     ))}
                     <div className="degradado-down-anuncios"></div>
                 </div>
+
+                {mostrarModal && (
+                    <ModalEliminacionAnuncio
+                        size="2xl"
+                        cerrarModal={cerrarModal}
+                        isOpen={true}
+                        onClose={() => {
+                            cerrarModal();
+                        }}
+                        onOk={() => {
+                            cerrarModal();
+                        }}
+                    />
+                )}
             </div>
         </DndProvider>
     );

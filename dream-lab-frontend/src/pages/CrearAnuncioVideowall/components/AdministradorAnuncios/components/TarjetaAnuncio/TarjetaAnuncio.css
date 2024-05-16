@@ -28,9 +28,8 @@
     background-image: url('../../../../../assets/CrearAnuncioVideowall/salonClases.jpg'); /* Ruta a tu imagen */
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el div */
     background-position: center; /* Centra la imagen dentro del div */
-    opacity: 0.6;
-    filter: grayscale(50%);
-    background-color: blueviolet;
+    opacity: 0.8;
+    filter: grayscale(30%);
 }
 
 .div-texto-del-anuncio{

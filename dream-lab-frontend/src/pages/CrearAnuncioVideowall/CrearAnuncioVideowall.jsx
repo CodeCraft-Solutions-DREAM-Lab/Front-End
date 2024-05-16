@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CrearAnuncioVideowall.css";
 import BotonVisualizarVideowall from "./components/BotonVisualizarVideowall/BotonVisualizarVideowall/BotonVisualizarVideowall";
 import imagenExpandir from "../../assets/CrearAnuncioVideowall/expandir.png";
@@ -7,25 +7,53 @@ import { useNavigate } from "react-router-dom";
 import FormularioCreacionAnuncio from "./components/FormularioCreacionAnuncio/FormularioCreacionAnuncio";
 import Navbar from "../../GlobalComponents/NavBar/NavBar";
 import AdministradorAnuncios from "../CrearAnuncioVideowall/components/AdministradorAnuncios/AdministradorAnuncios";
-import TipoAnuncioSelector from "./components/TipoAnuncioSelector/TipoAnuncioSelector";
+import FormularioPersonalizado from "../CrearAnuncioVideowall/components/FormularioPersonalizado/FormularioPersonalizado";
 
 function CrearAnuncioVideowall() {
-
     let navigate = useNavigate();
 
     const handleClickVideowall = () => {
         navigate(`/videowall`);
     };
 
-    return(
+    const [opcionPersonalizadoSeleccionado, setOpcionPersonalizadoSeleccionado] = useState(false);
+    const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] = useState(true);
+
+    const handleTipoAnuncioSeleccionado = (opcionPersonalizado, opcionExperiencia) => {
+        setOpcionPersonalizadoSeleccionado(opcionPersonalizado);
+        setOpcionExperienciaSeleccionado(opcionExperiencia);
+    };
+
+    return (
         <div>
-            
-            <Navbar/>
+            <Navbar />
 
             <div className="elementos-creacion-anuncio">
-
                 <div className="creacion-anuncio-columna-izq">
-                    <FormularioCreacionAnuncio/>
+                    {opcionExperienciaSeleccionado ? (
+                        <FormularioCreacionAnuncio
+                            opcionPersonalizadoSeleccionado={
+                                opcionPersonalizadoSeleccionado
+                            }
+                            opcionExperienciaSeleccionado={
+                                opcionExperienciaSeleccionado
+                            }
+                            handleTipoAnuncioSeleccionado={
+                                handleTipoAnuncioSeleccionado
+                            }
+                        />
+                    ) : (
+                        <FormularioPersonalizado 
+                            opcionPersonalizadoSeleccionado={
+                                opcionPersonalizadoSeleccionado
+                            }
+                            opcionExperienciaSeleccionado={
+                                opcionExperienciaSeleccionado
+                            }
+                            handleTipoAnuncioSeleccionado={
+                                handleTipoAnuncioSeleccionado
+                        }/>
+                    )}
                 </div>
 
                 <div className="creacion-anuncio-columna-der">
@@ -39,13 +67,12 @@ function CrearAnuncioVideowall() {
                     </div>
 
                     <div className="componente-admin-anuncios-div">
-                        <AdministradorAnuncios/>
+                        <AdministradorAnuncios />
                     </div>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
 
 export default CrearAnuncioVideowall;
