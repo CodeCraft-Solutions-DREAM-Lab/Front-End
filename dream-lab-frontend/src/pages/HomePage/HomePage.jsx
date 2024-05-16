@@ -3,7 +3,7 @@ import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import "./HomePage.css";
 import { multiClearSessionStorage } from "src/utils/Storage.js";
 
@@ -118,6 +118,7 @@ function HomePage() {
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -220,14 +221,14 @@ function HomePage() {
                                 console.error(
                                     "Error fetching ${type} with id ${id}"
                                 );
-                                return item; // Conservar el item original en caso de error
+                                return item;
                             }
                         } catch (error) {
                             console.error(
                                 "Error fetching ${type} with id ${id}:",
                                 error
                             );
-                            return item; // Conservar el item original en caso de error
+                            return item;
                         }
                     })
                 );
@@ -295,13 +296,17 @@ function HomePage() {
             });
     }, []);
 
+    const handleSearchInputChange = (isActive) => {
+        setIsSearchActive(isActive);
+    };
+
     if (isLoading) {
         return <LoadingScreen isLoading={isLoading} />;
     }
 
     return (
         <div className="homepage">
-            <Navbar view="homeAlumno" autoHide={!detallesVisible} />
+            <Navbar view="homeAlumno" autoHide={!detallesVisible} onSearchInputChange={handleSearchInputChange}/>
             {/* Use the Navbar component */}
             <div className="background-container">
                 <div className="home-background-image-container">
@@ -368,84 +373,91 @@ function HomePage() {
                         />
                     )}
                 </div>
-                <SpeechBotCard
-                    height="25rem"
-                    onProcessedText={handleProcessedText}
-                />
-                {showInvalidNotice ? (
-                    <RecomendacionesInvalidas />
-                ) : (
-                    showRecommendations && (
-                        <RecommendationsCarousel
-                            data={data}
-                            activeSlide={parseInt(Math.floor(data.length / 2))}
-                        />
-                    )
+                {!isSearchActive && (
+                    <>
+                        <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
+                        {showInvalidNotice ? ( <RecomendacionesInvalidas /> ) : (
+                        showRecommendations && (
+                            <RecommendationsCarousel
+                                data={data}
+                                activeSlide={parseInt(Math.floor(data.length / 2))}
+                            />
+                        )
+                        )}
+                        <div className="carousel-container">
+                            <h1>RECOMENDACIONES</h1>
+                            <ImageSlider
+                                api_url={null}
+                                request_type={null}
+                                isExperiencia={null}
+                                images={IMAGES}
+                                titles={IMAGES.map((item) => item.title)}
+                                options={OPTIONS}
+                                mostrarDetalles={mostrarDetalles}
+                                onImageClick={handleImageClick}
+                                setIsSalaClicked={() => {}}
+                                setImageType={null}
+                            />
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>SALAS</h1>
+                                <ImageSlider
+                                    api_url="salas"
+                                    request_type="GET"
+                                    isExperiencia={false}
+                                    images={null}
+                                    titles={null}
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="salas"
+                                />
+                            </>
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
+                                <ImageSlider
+                                    api_url="experiencias/autodirigidas"
+                                    request_type="GET"
+                                    isExperiencia={true}
+                                    images={null}
+                                    titles={null}
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="experiencias"
+                                />
+                            </>
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>UNIDADES DE FORMACIÓN</h1>
+                                <ImageSlider
+                                    api_url="experiencias/UFs"
+                                    request_type="POST"
+                                    isExperiencia={true}
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="experiencias"
+                                />
+                            </>
+                        </div>
+                    </>
                 )}
-                <div className="carousel-container">
-                    <h1>RECOMENDACIONES</h1>
-                    <ImageSlider
-                        api_url={null}
-                        request_type={null}
-                        isExperiencia={null}
-                        images={IMAGES}
-                        titles={IMAGES.map((item) => item.title)}
-                        options={OPTIONS}
-                        mostrarDetalles={mostrarDetalles}
-                        onImageClick={handleImageClick}
-                        setIsSalaClicked={() => {}}
-                        setImageType={null}
-                    />
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>SALAS</h1>
-                        <ImageSlider
-                            api_url="salas"
-                            request_type="GET"
-                            isExperiencia={false}
-                            images={null}
-                            titles={null}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="salas"
-                        />
-                    </>
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
-                        <ImageSlider
-                            api_url="experiencias/autodirigidas"
-                            request_type="GET"
-                            isExperiencia={true}
-                            images={null}
-                            titles={null}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="experiencias"
-                        />
-                    </>
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>UNIDADES DE FORMACIÓN</h1>
-                        <ImageSlider
-                            api_url="experiencias/UFs"
-                            request_type="POST"
-                            isExperiencia={true}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="experiencias"
-                        />
-                    </>
-                </div>
+                {isSearchActive && (
+                    <div className="search-results-container">
+                        <p>Resultados</p>
+                        {/* Aquí puedes poner los resultados de la búsqueda */}
+                    </div>
+                )}
+                
+                
             </div>
         </div>
     );

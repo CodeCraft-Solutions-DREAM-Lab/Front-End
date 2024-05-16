@@ -82,6 +82,16 @@
     padding: 2rem;
 }
 
+.search-results-container {
+    width: 100%;
+    height: calc(100vh - 200px); /* Ajusta según la altura de tu navbar */
+    background-color: #f0f0f0; /* Color gris */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px; /* Ajusta según sea necesario */
+}
+
 .carousel-container {
     overflow-x: auto; /* Enable horizontal scrolling by default */
     width: 100%;
