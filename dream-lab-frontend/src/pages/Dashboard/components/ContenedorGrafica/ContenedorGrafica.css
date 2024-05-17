@@ -1,0 +1,11 @@
+.cg-contenedor {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cg-contenedor-grafica {
+    flex-grow: 1;
+    position: relative;
+}
