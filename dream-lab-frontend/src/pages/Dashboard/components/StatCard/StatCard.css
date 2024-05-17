@@ -1,0 +1,15 @@
+.sc-card-container {
+    background-color: white;
+    border-radius: max(1vw, 2vh);
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sc-card-header {
+    font-size: max(1.5vw, 2vh);
+    font-weight: 600;
+    color: #000;
+}
