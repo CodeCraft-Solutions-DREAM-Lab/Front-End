@@ -6,7 +6,7 @@ import "./Dashboard.css";
 
 function Dashboard() {
     return (
-        <div className="p-8">
+        <div className="dashboard-main-container">
             <div className="dashboard-statcards-container">
                 <StatCard
                     nombre="Reservaciones totales"
@@ -21,6 +21,7 @@ function Dashboard() {
                 <StatCard nombre="Penalizaciones" valor={100} cambio={0} />
                 <StatCard nombre="Cancelaciones" valor={100} cambio={-10} />
             </div>
+            <div className="dashboard-graphs-container"></div>
         </div>
     );
 }

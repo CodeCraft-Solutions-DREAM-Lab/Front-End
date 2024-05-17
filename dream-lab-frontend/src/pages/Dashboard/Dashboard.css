@@ -1,6 +1,22 @@
+.dashboard-main-container {
+    display: grid;
+    padding: 2vw;
+    height: 100vh;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
 .dashboard-statcards-container {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-row: span 1 / span 1;
     gap: 2vw;
-    min-height: 18vh;
+    height: 100%;
+}
+
+.dashboard-graphs-container {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-row: span 3 / span 3;
+    height: 100%;
 }
