@@ -28,7 +28,7 @@ function StatCard({ nombre, valor, cambio }) {
 
                 <div className="sc-card-value-change-container">
                     <div>
-                        <span>{cambio}%</span>
+                        <span className="sc-card-value-change">{cambio}%</span>
                     </div>
                     <img src={imagen} alt="arrow" />
                 </div>

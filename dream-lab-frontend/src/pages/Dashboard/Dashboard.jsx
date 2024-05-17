@@ -21,7 +21,12 @@ function Dashboard() {
                 <StatCard nombre="Penalizaciones" valor={100} cambio={0} />
                 <StatCard nombre="Cancelaciones" valor={100} cambio={-10} />
             </div>
-            <div className="dashboard-graphs-container"></div>
+            <div className="dashboard-graphs-container">
+                <div className="dashboard-grafica-materiales-container"></div>
+                <div className="dashboard-grafica-reservaciones-totales-container"></div>
+                <div className="dashboard-grafica-reservaiones-sala-container"></div>
+                <div className="dashboard-grafica-disponbilidad-container"></div>
+            </div>
         </div>
     );
 }
