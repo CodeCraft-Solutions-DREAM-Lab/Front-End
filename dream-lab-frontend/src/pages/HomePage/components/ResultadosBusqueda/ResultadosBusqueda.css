@@ -1,0 +1,9 @@
+.search-results-container {
+    width: 98%;
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-top: 14vh;
+    row-gap: 3vh;
+}

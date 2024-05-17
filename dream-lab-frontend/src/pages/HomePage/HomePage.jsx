@@ -3,6 +3,7 @@ import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
+import ResultadosBusqueda from "./components/ResultadosBusqueda/ResultadosBusqueda.jsx";
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import "./HomePage.css";
 import { multiClearSessionStorage } from "src/utils/Storage.js";
@@ -451,10 +452,7 @@ function HomePage() {
                     </>
                 )}
                 {isSearchActive && (
-                    <div className="search-results-container">
-                        <p>Resultados</p>
-                        {/* Aquí puedes poner los resultados de la búsqueda */}
-                    </div>
+                    <ResultadosBusqueda />
                 )}
                 
                 
