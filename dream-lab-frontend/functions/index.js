@@ -31,6 +31,7 @@ exports.readAnuncios = onRequest( async (req, res) => {
     const querySnapshot = await firestore
         .collection("AnunciosVideowall")
         .get();
+        
     console.log("QuerySnapshot:", querySnapshot.docs);
 
     // Array para almacenar los documentos formateados
@@ -50,12 +51,16 @@ exports.readAnuncios = onRequest( async (req, res) => {
       const horaInicio = format(data.horaInicio.toDate(), "p", {locale: es});
       // Formatea los campos según lo especificado
       const anuncio = {
+        descripcion: data.descripcion,
+        encendido: data.encendido,
         fecha: fecha,
         horaFin: horaFin,
         horaInicio: horaInicio,
         id: data.id,
         nombreEvento: data.nombreEvento,
         nombreSala: data.nombreSala,
+        personalizado: data.personalizado,
+        posicion: data.posicion,
         soloImagen: data.soloImagen,
         urlImagen: data.urlImagen,
       };

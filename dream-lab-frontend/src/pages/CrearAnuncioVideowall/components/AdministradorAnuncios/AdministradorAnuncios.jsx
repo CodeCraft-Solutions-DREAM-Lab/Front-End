@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./AdministradorAnuncios.css";
 import TarjetaAnuncio from "./components/TarjetaAnuncio/TarjetaAnuncio";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -6,89 +6,83 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import ModalEliminacionAnuncio from "./components/ModalEliminacionAnuncio/ModalEliminacionAnuncio";
 
 function AdministradorAnuncios(props) {
-    const [datosAnuncios, setDatosAnuncios] = useState([
-        {
-            id: "1",
-            sala: "Sala Horizons",
-            experiencia: "VR Experience",
-            descripcion: "",
-            hora: "13:00 - 15:00",
-            dia: "15 de diciembre",
-            encendido: true,
-            imagen: "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/AnuncioSeminarioCiberseguridad.jpeg?alt=media&token=44017c35-7e65-49d3-b526-e0043db6b3ab",
-            soloImagen: true,
-            personalizado: false,
-        },
-        {
-            id: "2",
-            sala: "Sala Sunset",
-            experiencia: "AR Adventure",
-            descripcion: "",
-            hora: "10:00 - 12:00",
-            dia: "16 de diciembre",
-            encendido: true,
-            imagen: "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
-            soloImagen: false,
-            personalizado: false,
-        },
-        {
-            id: "3",
-            sala: "Sala Galaxy",
-            experiencia: "Space Exploration",
-            descripcion:
-                "Explora el espacio con la realidad virtual. ¡Vive la experiencia el día de las madres!",
-            hora: "15:00 - 17:00",
-            dia: "17 de diciembre",
-            encendido: true,
-            imagen: "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/TallerDeImpresion3D.jpeg?alt=media&token=902c0779-3519-4ad6-81c7-29cfe26c0379",
-            soloImagen: false,
-            personalizado: true,
-        },
-    ]);
+    const [data, setData] = useState([]);
 
-    const [mostrarModal, setMostrarModal] = useState(false); // Estado para controlar la visibilidad del modal
+    const fetchData = async () => {
+        try {
+            const response = await fetch("https://readanuncios-j5zt2ysdwq-uc.a.run.app/");
+            const jsonData = await response.json();
+            console.log(jsonData);
+            setData(jsonData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     const toggleTarjeta = (index) => {
-        const newDatosAnuncios = [...datosAnuncios];
-        newDatosAnuncios[index].encendido = !newDatosAnuncios[index].encendido;
-        setDatosAnuncios(newDatosAnuncios);
+        const newData = [...data];
+        newData[index].encendido = !newData[index].encendido;
+        setData(newData);
     };
 
     const moveAnuncio = (dragIndex, hoverIndex) => {
-        const draggedAnuncio = datosAnuncios[dragIndex];
-        const newDatosAnuncios = [...datosAnuncios];
-        newDatosAnuncios.splice(dragIndex, 1);
-        newDatosAnuncios.splice(hoverIndex, 0, draggedAnuncio);
-        setDatosAnuncios(newDatosAnuncios);
+        const draggedAnuncio = data[dragIndex];
+        const newData = [...data];
+        newData.splice(dragIndex, 1);
+        newData.splice(hoverIndex, 0, draggedAnuncio);
+        setData(newData);
     };
 
-    // Función para reducir la descripción a 20 palabras
     const reducirDescripcion = (descripcion) => {
-        if (descripcion.length > 64) {
+        if (descripcion && descripcion.length > 64) {
             return descripcion.slice(0, 64) + "...";
         }
         return descripcion;
     };
 
-    // Dentro de la función que actualiza los datos de los anuncios
-    const datosAnunciosActualizados = datosAnuncios.map((anuncio) => {
-        let descripcionReducida = anuncio.descripcion;
-        if (anuncio.descripcion.length > 64) {
-            descripcionReducida = reducirDescripcion(anuncio.descripcion);
+    const dataActualizada = data.map((anuncio) => {
+        let descripcionReducida = "";
+        if (anuncio.descripcion) {
+            descripcionReducida = anuncio.descripcion.length > 64 ? reducirDescripcion(anuncio.descripcion) : anuncio.descripcion;
         }
         return { ...anuncio, descripcionReducida };
     });
+    
 
-    // Función para abrir el modal
     const abrirModal = () => {
         setMostrarModal(true);
     };
 
-    // Función para cerrar el modal
     const cerrarModal = () => {
         setMostrarModal(false);
     };
 
+    function ajustarHoras(hora) {
+        // Parseamos la hora en formato "hh:mm"
+        const [horaStr, minutoStr] = hora.split(":");
+        let horaNum = parseInt(horaStr, 10);
+        let minutoNum = parseInt(minutoStr, 10);
+    
+        // Restamos 6 horas
+        horaNum -= 6;
+    
+        // Si la hora es negativa, restamos un día y ajustamos la hora
+        if (horaNum < 0) {
+            horaNum += 24;
+        }
+    
+        // Convertimos de nuevo a cadena y formateamos
+        const horaAjustada = `${horaNum.toString().padStart(2, "0")}:${minutoNum.toString().padStart(2, "0")}`;
+    
+        return horaAjustada;
+    }
+    
     const Anuncio = ({ anuncio, index }) => {
         const [{ isDragging }, drag] = useDrag({
             type: "anuncio",
@@ -108,44 +102,41 @@ function AdministradorAnuncios(props) {
             },
         });
 
+        const fechaFormateada = anuncio.fecha.split(" ")[0] + " " + anuncio.fecha.split(" ")[2] + ", " + anuncio.fecha.split(" ")[4];
+
+        const horaInicioAjustada = ajustarHoras(anuncio.horaInicio);
+        const horaFinAjustada = ajustarHoras(anuncio.horaFin);
+
         return (
             <div ref={(node) => drag(drop(node))}>
-                {anuncio.personalizado ? (
-                    <TarjetaAnuncio
-                        sala={anuncio.sala}
-                        experiencia={anuncio.descripcionReducida}
-                        encendido={anuncio.encendido}
-                        funcion={() => toggleTarjeta(index)}
-                        isDragging={isDragging}
-                        imagen={anuncio.imagen}
-                        personalizado={true}
-                        funcionTrash={abrirModal}
-                    />
-                ) : anuncio.soloImagen ? (
-                    <TarjetaAnuncio
-                        sala="Imagen en videowall"
-                        experiencia="Anuncio sencillo"
-                        encendido={anuncio.encendido}
-                        funcion={() => toggleTarjeta(index)}
-                        isDragging={isDragging}
-                        imagen={anuncio.imagen}
-                        personalizado={false}
-                        funcionTrash={abrirModal}
-                    />
-                ) : (
-                    <TarjetaAnuncio
-                        sala={anuncio.sala}
-                        experiencia={anuncio.experiencia}
-                        hora={anuncio.hora}
-                        dia={anuncio.dia}
-                        encendido={anuncio.encendido}
-                        funcion={() => toggleTarjeta(index)}
-                        isDragging={isDragging}
-                        imagen={anuncio.imagen}
-                        personalizado={false}
-                        funcionTrash={abrirModal}
-                    />
-                )}
+                <TarjetaAnuncio
+                    experiencia={
+                        anuncio.soloImagen
+                            ? "Imagen en videowall"
+                            : anuncio.personalizado
+                            ? anuncio.descripcionReducida
+                            : anuncio.nombreSala
+                    }
+                    sala={
+                        anuncio.soloImagen
+                            ? "Anuncio sencillo"
+                            : anuncio.nombreEvento
+                    }
+                    hora={
+                        anuncio.soloImagen || anuncio.personalizado
+                            ? null
+                            : horaInicioAjustada + " - " + horaFinAjustada
+                    }
+                    dia={anuncio.soloImagen ? null : fechaFormateada}
+                    encendido={anuncio.encendido}
+                    funcion={() => toggleTarjeta(index)}
+                    isDragging={isDragging}
+                    soloImagen={anuncio.soloImagen}
+                    imagen={anuncio.urlImagen}
+                    funcionTrash={abrirModal}
+                    posicion={anuncio.posicion}
+                    personalizado={anuncio.personalizado}
+                />
             </div>
         );
     };
@@ -158,7 +149,7 @@ function AdministradorAnuncios(props) {
                 </h1>
 
                 <div className="contenedor-admin-anuncios-in">
-                    {datosAnunciosActualizados.map((anuncio, index) => (
+                    {dataActualizada.map((anuncio, index) => (
                         <Anuncio
                             key={anuncio.id}
                             anuncio={anuncio}
@@ -187,3 +178,5 @@ function AdministradorAnuncios(props) {
 }
 
 export default AdministradorAnuncios;
+
+

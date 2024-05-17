@@ -1,9 +1,13 @@
+import React from 'react';
 import "./TarjetaAnuncio.css";
 import ClicImage from "../../../../../../assets/Profile/trash.png";
 import OpenEye from "../../../../../../assets/CrearAnuncioVideowall/openEye.png";
 import ClosedEye from "../../../../../../assets/CrearAnuncioVideowall/closedEye.png";
 
 function TarjetaReservacion(props) {
+    // Truncar el título si tiene más de 20 caracteres
+    const tituloTruncado = props.sala && props.sala.length > 20 ? `${props.sala.slice(0, 20)}...` : props.sala;
+
     return (
         <div
             className={`div-externo-anuncio ${
@@ -18,8 +22,7 @@ function TarjetaReservacion(props) {
             <div className="div-texto-del-anuncio">
                 <div className="first-section-anuncio-card">
                     <div className="div-datos-anuncio">
-                        <h1 className="sala-anuncio">{props.sala}</h1>
-
+                        <h1 className="sala-anuncio" title={props.sala}>{tituloTruncado}</h1> {/* Utilizar el título completo como atributo title */}
                         <p
                             className="experiencia-anuncio"
                             style={{
@@ -50,9 +53,7 @@ function TarjetaReservacion(props) {
                     </div>
                 </div>
 
-              
                 <div className="linea"></div>
-                
 
                 <div className="div-fecha-anuncio">
                     <div className="hora-anuncio">
