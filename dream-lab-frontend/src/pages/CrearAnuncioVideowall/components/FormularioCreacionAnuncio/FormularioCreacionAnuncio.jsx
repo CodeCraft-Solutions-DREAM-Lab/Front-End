@@ -3,7 +3,7 @@ import "./FormularioCreacionAnuncio.css";
 import { useState } from "react";
 import Checkbox from "./components/Checkbox/Checkbox";
 import SubirImagenBox from "./components/SubirImagenBox/SubirImagenBox";
-import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.png";
+import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.webp";
 import BotonAgregar from "./components/BotonAgregar/BotonAgregar";
 import SelectorPersonalizado from "./components/SelectorPersonalizado/SelectorPersonalizado";
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector"

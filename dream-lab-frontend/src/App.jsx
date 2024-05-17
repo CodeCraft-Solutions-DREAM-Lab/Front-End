@@ -34,12 +34,14 @@ import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
+import QRLogin from "./pages/QRLogin/QRLogin.jsx";
 
 // Videowall
 import Videowall from "./pages/Videowall/Videowall.jsx";
 
 // Admin
 import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
+import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 
 function secured(Component) {
     return function WrappedComponent(props) {
@@ -79,8 +81,13 @@ const router = createBrowserRouter(
                 element={secured(ReservacionesActivas)()}
             />
             <Route path="videowall" element={<Videowall />} />
+            <Route
+                path="crearAnuncio"
+                element={secured(CrearAnuncioVideowall)()}
+            />
+            <Route path="admin" element={<CronogramaAdmin />} />
+            <Route path="qr" element={<QRLogin />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="crearAnuncio" element={secured(CrearAnuncioVideowall)()} />
         </Route>
     )
 );

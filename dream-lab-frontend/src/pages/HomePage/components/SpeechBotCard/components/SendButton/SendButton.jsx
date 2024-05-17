@@ -6,7 +6,7 @@ import "./SendButton.css";
 
 // Imagenes
 import loadingIcon from "src/assets/SpeechBotCard/loading.gif";
-import sendIcon from "src/assets/SpeechBotCard/simboloEnviar.png";
+import sendIcon from "src/assets/SpeechBotCard/simboloEnviar.webp";
 
 function SendButton({
     transcript,

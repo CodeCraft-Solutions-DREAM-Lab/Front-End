@@ -19,8 +19,9 @@ function NameCard({ nombre, handleLogroArtista }) {
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
     const [logroSeleccionado, setLogroSeleccionado] = useState({});
     const [colorSeleccionado, setColorSeleccionado] = useState("");
-    const [refresh, setRefresh] = useState(false);
 
+    // Obtener los logros del usuario, el logro seleccionado y el color
+    // seleccionado de su preferencia cada que se carga la página
     useEffect(() => {
         get(`perfil/logros/${getFromLocalStorage("user")}`).then((response) => {
             setLogrosObtenidos(response.logros);
@@ -31,12 +32,11 @@ function NameCard({ nombre, handleLogroArtista }) {
             });
             setColorSeleccionado(response.configuracionLogro[0].colorPreferido);
         });
-    }, [refresh]);
+    }, []);
 
     return (
         <div className="div-exterior">
             <BotonLogroPerfil
-                setRefresh={setRefresh}
                 colorSeleccionado={colorSeleccionado}
                 setColorSeleccionado={setColorSeleccionado}
                 logrosObtenidos={logrosObtenidos}
@@ -46,7 +46,9 @@ function NameCard({ nombre, handleLogroArtista }) {
             />
             <div className="div-usuario">
                 <h1 className="nombre-usuario">{nombre}</h1>
-                <h2 className="apodo">{logroSeleccionado.nombre}</h2>
+                <h2 className="apodo" data-cy="namecard-titulo-logro">
+                    {logroSeleccionado.nombre}
+                </h2>
             </div>
         </div>
     );
