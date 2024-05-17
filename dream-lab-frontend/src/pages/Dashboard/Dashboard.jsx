@@ -39,8 +39,8 @@ function Dashboard() {
                 <StatCard nombre="Cancelaciones" valor={100} cambio={-10} />
             </div>
             <div className="dashboard-graphs-container">
-                <div className="dashboard-grafica-materiales-container"></div>
-                <div className="dashboard-grafica-reservaciones-totales-container">
+                <div className="dashboard-grafica-default dashboard-grafica-materiales-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-reservaciones-totales-container">
                     <ContenedorGrafica titulo="Reservaciones totales">
                         <GraficaLinea
                             chartData={data}
@@ -49,8 +49,8 @@ function Dashboard() {
                         />
                     </ContenedorGrafica>
                 </div>
-                <div className="dashboard-grafica-reservaiones-sala-container"></div>
-                <div className="dashboard-grafica-disponbilidad-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-reservaiones-sala-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container"></div>
             </div>
         </div>
     );

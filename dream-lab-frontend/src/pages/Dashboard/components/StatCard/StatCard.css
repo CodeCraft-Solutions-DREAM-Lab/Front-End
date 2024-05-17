@@ -1,4 +1,6 @@
 .sc-card-container {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +15,7 @@
 .sc-card-header {
     font-size: max(1.5vw, 2vh);
     font-weight: 600;
-    color: #000;
+    color: #313131;
 }
 
 .sc-card-value-container {
@@ -25,7 +27,7 @@
 .sc-card-value {
     font-size: max(2.5vw, 2vh);
     font-weight: 700;
-    color: #000;
+    color: #313131;
 }
 
 .sc-card-value-change-container {
@@ -37,5 +39,5 @@
 .sc-card-value-change {
     font-size: max(1.5vw, 1.5vh);
     font-weight: 600;
-    color: #000;
+    color: #313131;
 }

@@ -1,6 +1,6 @@
 .dashboard-main-container {
     display: grid;
-    gap: 2vw;
+    gap: max(2vw, 2vh);
     grid-template-rows: repeat(4, minmax(0, 1fr));
     height: 100vh;
     padding: 2vw;
@@ -8,7 +8,7 @@
 
 .dashboard-statcards-container {
     display: grid;
-    gap: 2vw;
+    gap: max(2vw, 2vh);
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-row: span 1 / span 1;
     height: 100%;
@@ -16,37 +16,35 @@
 
 .dashboard-graphs-container {
     display: grid;
-    gap: 2vw;
+    gap: max(2vw, 2vh);
     grid-template-rows: repeat(3, minmax(0, 1fr));
     grid-template-columns: repeat(5, minmax(0, 1fr));
     grid-row: span 3 / span 3;
     height: 100%;
 }
 
-.dashboard-grafica-materiales-container {
+.dashboard-grafica-default {
     background-color: white;
+    border-radius: max(1vw, 2vh);
+    padding: max(1vw, 2vh);
+}
+
+.dashboard-grafica-materiales-container {
     grid-row: span 2 / span 2;
     grid-column: span 2 / span 2;
-    border-radius: max(1vw, 2vh);
 }
 
 .dashboard-grafica-reservaciones-totales-container {
-    background-color: white;
     grid-row: span 2 / span 2;
     grid-column: span 2 / span 2;
-    border-radius: max(1vw, 2vh);
 }
 
 .dashboard-grafica-reservaiones-sala-container {
-    background-color: white;
     grid-row: span 3 / span 3;
     grid-column: span 1 / span 1;
-    border-radius: max(1vw, 2vh);
 }
 
 .dashboard-grafica-disponbilidad-container {
-    background-color: white;
     grid-row: span 1 / span 1;
     grid-column: span 4 / span 4;
-    border-radius: max(1vw, 2vh);
 }

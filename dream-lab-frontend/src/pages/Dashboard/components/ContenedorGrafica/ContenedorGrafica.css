@@ -9,3 +9,9 @@
     flex-grow: 1;
     position: relative;
 }
+
+.cg-titulo-grafica {
+    font-size: max(1.2vw, 2vh);
+    font-weight: 600;
+    color: #313131;
+}
