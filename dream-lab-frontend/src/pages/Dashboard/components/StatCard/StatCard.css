@@ -3,13 +3,34 @@
     border-radius: max(1vw, 2vh);
     padding-left: 1.5vw;
     padding-right: 1.5vw;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .sc-card-header {
     font-size: max(1.5vw, 2vh);
     font-weight: 600;
     color: #000;
+}
+
+.sc-card-value-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.sc-card-value {
+    font-size: max(2.5vw, 2vh);
+    font-weight: 700;
+    color: #000;
+}
+
+.sc-card-value-change-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
