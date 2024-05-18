@@ -2,12 +2,13 @@
 import StatCard from "./components/StatCard/StatCard";
 import GraficaLinea from "./components/GraficaLinea/GraficaLinea";
 import ContenedorGrafica from "./components/ContenedorGrafica/ContenedorGrafica";
+import GraficaBarras from "./components/GraficaBarras/GraficaBarras";
 
 // Estilos
 import "./Dashboard.css";
 
 function Dashboard() {
-    const data = [
+    const datosReservaciones = [
         { cantidadReservaciones: 100, fecha: "Ene" },
         { cantidadReservaciones: 50, fecha: "Feb" },
         { cantidadReservaciones: 75, fecha: "Mar" },
@@ -20,6 +21,21 @@ function Dashboard() {
         { cantidadReservaciones: 17, fecha: "Oct" },
         { cantidadReservaciones: 94, fecha: "Nov" },
         { cantidadReservaciones: 111, fecha: "Dic" },
+    ];
+
+    const datosUsoMateriales = [
+        { uso: 100, material: "Laptop" },
+        { uso: 50, material: "Proyector" },
+        { uso: 75, material: "Cable HDMI" },
+        { uso: 120, material: "Cable VGA" },
+        { uso: 30, material: "Bocinas" },
+        { uso: 95, material: "Micrófono" },
+        { uso: 44, material: "Cámara" },
+        { uso: 28, material: "Pantalla" },
+        { uso: 143, material: "Control" },
+        { uso: 17, material: "Audífonos" },
+        { uso: 94, material: "Teclado" },
+        { uso: 111, material: "Mouse" },
     ];
 
     return (
@@ -39,11 +55,20 @@ function Dashboard() {
                 <StatCard nombre="Cancelaciones" valor={100} cambio={-10} />
             </div>
             <div className="dashboard-graphs-container">
-                <div className="dashboard-grafica-default dashboard-grafica-materiales-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-materiales-container">
+                    <ContenedorGrafica titulo="Uso de materiales">
+                        <GraficaBarras
+                            chartData={datosUsoMateriales}
+                            index="material"
+                            categories={["uso"]}
+                            colors={["indigo-300"]}
+                        />
+                    </ContenedorGrafica>
+                </div>
                 <div className="dashboard-grafica-default dashboard-grafica-reservaciones-totales-container">
                     <ContenedorGrafica titulo="Reservaciones totales">
                         <GraficaLinea
-                            chartData={data}
+                            chartData={datosReservaciones}
                             index="fecha"
                             categories={["cantidadReservaciones"]}
                         />
