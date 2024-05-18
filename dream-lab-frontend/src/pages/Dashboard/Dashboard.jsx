@@ -4,6 +4,7 @@ import GraficaLinea from "./components/GraficaLinea/GraficaLinea";
 import ContenedorGrafica from "./components/ContenedorGrafica/ContenedorGrafica";
 import GraficaBarras from "./components/GraficaBarras/GraficaBarras";
 import GraficaPie from "./components/GraficaPie/GraficaPie";
+import ReservacionesPorSala from "./components/ReservacionesPorSala/ReservacionesPorSala";
 
 // Estilos
 import "./Dashboard.css";
@@ -80,25 +81,7 @@ function Dashboard() {
                     </ContenedorGrafica>
                 </div>
                 <div className="dashboard-grafica-default dashboard-grafica-reservaiones-sala-container">
-                    <div className="overflow-y-auto h-full">
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                        <p>Elemento 1</p>
-                    </div>
+                    <ReservacionesPorSala />
                 </div>
                 <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container"></div>
             </div>

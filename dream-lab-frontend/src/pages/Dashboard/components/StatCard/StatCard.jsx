@@ -30,7 +30,12 @@ function StatCard({ nombre, valor, cambio }) {
                     <div>
                         <span className="sc-card-value-change">{cambio}%</span>
                     </div>
-                    <img src={imagen} alt="arrow" />
+                    <img
+                        src={imagen}
+                        alt="arrow"
+                        className="sc-card-image"
+                        draggable="false"
+                    />
                 </div>
             </div>
         </div>

@@ -27,6 +27,7 @@
     background-color: white;
     border-radius: max(1vw, 2vh);
     padding: max(1vw, 2vh);
+    overflow-y: auto;
 }
 
 .dashboard-grafica-materiales-container {

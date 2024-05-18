@@ -1,0 +1,20 @@
+/* Define scrollbar styles */
+.dnowangjwadw::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.dnowangjwadw::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+.dnowangjwadw::-webkit-scrollbar-thumb {
+    background: rgba(57, 57, 57, 0.15);
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+.dnowangjwadw::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 57, 57, 0.35);
+}

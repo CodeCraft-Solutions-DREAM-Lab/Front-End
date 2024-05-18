@@ -41,3 +41,7 @@
     font-weight: 600;
     color: #313131;
 }
+
+.sc-card-image {
+    pointer-events: none;
+}
