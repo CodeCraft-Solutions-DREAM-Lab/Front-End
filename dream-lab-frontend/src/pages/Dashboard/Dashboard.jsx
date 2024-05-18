@@ -3,6 +3,7 @@ import StatCard from "./components/StatCard/StatCard";
 import GraficaLinea from "./components/GraficaLinea/GraficaLinea";
 import ContenedorGrafica from "./components/ContenedorGrafica/ContenedorGrafica";
 import GraficaBarras from "./components/GraficaBarras/GraficaBarras";
+import GraficaPie from "./components/GraficaPie/GraficaPie";
 
 // Estilos
 import "./Dashboard.css";
@@ -56,13 +57,17 @@ function Dashboard() {
             </div>
             <div className="dashboard-graphs-container">
                 <div className="dashboard-grafica-default dashboard-grafica-materiales-container">
-                    <ContenedorGrafica titulo="Uso de materiales">
-                        <GraficaBarras
+                    <ContenedorGrafica titulo="Materiales más utilizados">
+                        <GraficaPie
                             chartData={datosUsoMateriales}
                             index="material"
-                            categories={["uso"]}
-                            colors={["indigo-300"]}
+                            category={"uso"}
                         />
+                        {/* <GraficaBarras
+                            chartData={datosUsoMateriales}
+                            index="material"
+                            category={"uso"}
+                        /> */}
                     </ContenedorGrafica>
                 </div>
                 <div className="dashboard-grafica-default dashboard-grafica-reservaciones-totales-container">
@@ -74,7 +79,27 @@ function Dashboard() {
                         />
                     </ContenedorGrafica>
                 </div>
-                <div className="dashboard-grafica-default dashboard-grafica-reservaiones-sala-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-reservaiones-sala-container">
+                    <div className="overflow-y-auto h-full">
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                        <p>Elemento 1</p>
+                    </div>
+                </div>
                 <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container"></div>
             </div>
         </div>
