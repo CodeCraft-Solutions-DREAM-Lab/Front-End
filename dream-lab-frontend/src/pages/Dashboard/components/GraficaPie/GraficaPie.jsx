@@ -4,9 +4,6 @@ import { propTypes } from "react-bootstrap/esm/Image";
 // Hooks
 import { useState } from "react";
 
-// Estilos
-import "./GraficaPie.css";
-
 function GraficaPie({ chartData, index, category }) {
     const [selectedLabel, setSelectedLabel] = useState(null);
 
