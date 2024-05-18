@@ -86,7 +86,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 1vw;
+    margin-top: 0.1vw;
 }
 
 .checkbox-formulario-anuncio{
@@ -106,6 +106,14 @@
 
 .formulario-primera-mitad-pt2{
     width: 10vw;    
+}
+
+.mensaje-enviado-anuncio{
+    color: white;
+    font-weight: lighter;
+    font-size: small;
+    text-align: center;
+    margin-top: 0.5%;
 }
 
 

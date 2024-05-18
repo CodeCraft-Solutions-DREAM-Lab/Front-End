@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./FormularioCreacionAnuncio.css";
-import { useState, useEffect } from "react";
 import Checkbox from "./components/Checkbox/Checkbox";
 import SubirImagenBox from "./components/SubirImagenBox/SubirImagenBox";
 import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.png";
@@ -9,19 +8,106 @@ import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnunci
 import { DatePicker } from "@nextui-org/react";
 import { get, API_URL } from "src/utils/ApiRequests.js";
 import { TimeInput } from "@nextui-org/react";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
+import {
+    Autocomplete,
+    AutocompleteItem,
+    Select,
+    SelectItem,
+} from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 
 function FormularioCreacionAnuncio(props) {
+    const [titulo, setTitulo] = useState("");
+    const [ubicacion, setUbicacion] = useState("");
+    const [fecha, setFecha] = useState(null);
+    const [horaInicio, setHoraInicio] = useState("");
+    const [horaFin, setHoraFin] = useState("");
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
-    const [isCheckedMensajePersonalizado, setisCheckedMensajePersonalizado] =
-        useState(false);
+    const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
+
+    const handleTituloChange = (event) => {
+        setTitulo(event.target.value);
+        setCaracteresRestantesTit(30 - event.target.value.length);
+    };
+
+    const handleUbicacionChange = (event) => {
+        setUbicacion(event.target.value);
+    };
+
+    const handleFechaChange = (date) => {
+        setFecha(date);
+    };
+
+    const handleHoraInicioChange = (time) => {
+        setHoraInicio(time);
+    };
+
+    const handleHoraFinChange = (time) => {
+        setHoraFin(time);
+    };
+
+    const postData = async (anuncio) => {
+        try {
+            const response = await fetch(
+                "https://createanuncio-j5zt2ysdwq-uc.a.run.app",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(anuncio),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Error al enviar datos al servidor.");
+            }
+
+            console.log("Datos enviados correctamente al servidor.");
+            // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
+            setTitulo("");
+            setUbicacion("");
+            setFecha(null);
+            setHoraInicio("");
+            setHoraFin("");
+            setEnviado(true);
+            setCaracteresRestantesTit(30);
+
+            // Reiniciar el mensaje de enviado después de unos segundos
+            setTimeout(() => {
+                setEnviado(false);
+            }, 3000);
+            
+        } catch (error) {
+            console.error("Error al enviar datos:", error);
+        }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = {
+            descripcion: "",
+            encendido: true,
+            fecha: formatDate(fecha),
+            horaInicio: formatTime(horaInicio),
+            horaFin: formatTime(horaFin),
+            id: 5,
+            nombreEvento: titulo,
+            nombreSala: ubicacion,
+            personalizado: opcionPersonalizadoSeleccionado,
+            posicion: 6,
+            soloImagen: isCheckedSoloImage,
+            urlImagen:
+                "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
+        };
+
+        await postData(formData);
+    };
 
     const handleCheckboxChange = (type) => {
         if (type === "soloImagen") {
             setisCheckedSoloImage(!isCheckedSoloImage);
-        } else if (type === "mensajePersonalizado") {
-            setisCheckedMensajePersonalizado(!isCheckedMensajePersonalizado);
         }
     };
 
@@ -32,7 +118,6 @@ function FormularioCreacionAnuncio(props) {
     const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] =
         useState(true);
 
-    // Función para cambiar el estado de las opciones
     const cambiarEstadoOpciones = () => {
         setOpcionPersonalizadoSeleccionado(!opcionPersonalizadoSeleccionado);
         setOpcionExperienciaSeleccionado(!opcionExperienciaSeleccionado);
@@ -44,6 +129,7 @@ function FormularioCreacionAnuncio(props) {
 
     const [salasBD, setSalasBD] = useState([]);
 
+    {/*  
     useEffect(() => {
         get("salas")
             .then((result) => {
@@ -60,18 +146,22 @@ function FormularioCreacionAnuncio(props) {
               label: sala.nombre,
               value: sala.idSala.toString(),
           }))
-        : [];
+        : [];*/}
 
-    const [titulo, setTitulo] = useState("");
-    const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
-
-    // Contador: Título de anuncio
-    const handleTituloChange = (event) => {
-        const inputTitulo = event.target.value;
-        const remainingChars = 50 - inputTitulo.length;
-        setTitulo(inputTitulo);
-        setCaracteresRestantesTit(remainingChars);
+    const formatDate = (date) => {
+        if (!date) return ""; // Manejar el caso en que date sea null
+        return `${date.day} de ${new Intl.DateTimeFormat("es-ES", {
+            month: "long",
+        }).format(new Date(date.year, date.month - 1))}, ${date.year}`;
     };
+
+    const formatTime = (time) => {
+        if (!time) return ""; // Manejar el caso en que time sea null
+        const hour = time.hour.toString().padStart(2, "0"); // Agregar cero adelante si es necesario
+        const minute = time.minute.toString().padStart(2, "0"); // Agregar cero adelante si es necesario
+        return `${hour}:${minute}`;
+    };
+    const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(30);
 
     return (
         <div className="div-exterior-formulario-creacion-anuncio">
@@ -95,7 +185,7 @@ function FormularioCreacionAnuncio(props) {
             </div>
 
             <div className="formulario-creacion-anuncio">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="experiencia-anuncio-formulario">
                         <label className="label-formulario-anuncio">
                             Título
@@ -107,8 +197,9 @@ function FormularioCreacionAnuncio(props) {
                                 aria-label="Selector de sala"
                                 placeholder="Título del anuncio"
                                 onChange={handleTituloChange}
-                                maxLength={50}
+                                maxLength={30}
                                 isDisabled={isCheckedSoloImage ? true : false}
+                                value={titulo}
                             />
                         </div>
                         <div className="footer-input-formulario-anuncio">
@@ -120,23 +211,17 @@ function FormularioCreacionAnuncio(props) {
                                     Ubicación
                                 </label>{" "}
                                 <br></br>
-                                <Autocomplete
-                                    defaultItems={staticOptions}
-                                    aria-label="Selector de sala"
-                                    placeholder="Ingresa la ubicación"
-                                    className="max-w-xs"
-                                    allowsCustomValue
+                                <Input
+                                    type="text"
+                                    aria-label="Selector de ubicación"
+                                    placeholder="Ubicación"
+                                    onChange={handleUbicacionChange}
                                     maxLength={35}
                                     isDisabled={
                                         isCheckedSoloImage ? true : false
                                     }
-                                >
-                                    {(sala) => (
-                                        <AutocompleteItem key={sala.value}>
-                                            {sala.label}
-                                        </AutocompleteItem>
-                                    )}
-                                </Autocomplete>
+                                    value={ubicacion}
+                                />
                             </div>
 
                             <div className="formulario-fecha-pregunta flex flex-col mx-0">
@@ -149,6 +234,8 @@ function FormularioCreacionAnuncio(props) {
                                     isDisabled={
                                         isCheckedSoloImage ? true : false
                                     }
+                                    value={fecha}
+                                    onChange={handleFechaChange}
                                 />
                             </div>
                         </div>
@@ -167,6 +254,8 @@ function FormularioCreacionAnuncio(props) {
                                     isDisabled={
                                         isCheckedSoloImage ? true : false
                                     }
+                                    value={horaInicio}
+                                    onChange={handleHoraInicioChange}
                                 />
                                 <div className="espacio-forms"></div>
                                 <label className="label-formulario-anuncio">
@@ -179,6 +268,8 @@ function FormularioCreacionAnuncio(props) {
                                     isDisabled={
                                         isCheckedSoloImage ? true : false
                                     }
+                                    value={horaFin}
+                                    onChange={handleHoraFinChange}
                                 />{" "}
                             </div>
                         </div>
@@ -191,21 +282,27 @@ function FormularioCreacionAnuncio(props) {
                             />
                         </div>
                     </div>
+
+                    <div className="checkbox-formulario-anuncio">
+                        <Checkbox
+                            label="Solo imagen"
+                            isChecked={isCheckedSoloImage}
+                            handleCheckboxChange={() =>
+                                handleCheckboxChange("soloImagen")
+                            }
+                        />
+                    </div>
+
+                    <div className="boton-agregar-div-out">
+                        <button type="submit">
+                            <BotonAgregar 
+                                texto="Agregar"/>
+                        </button>
+                        
+                    </div>
+                    {enviado && <p className="mensaje-enviado-anuncio">¡Datos enviados correctamente!</p>} 
+
                 </form>
-
-                <div className="checkbox-formulario-anuncio">
-                    <Checkbox
-                        label="Solo imagen"
-                        isChecked={isCheckedSoloImage}
-                        handleCheckboxChange={() =>
-                            handleCheckboxChange("soloImagen")
-                        }
-                    />
-                </div>
-
-                <div className="boton-agregar-div-out">
-                    <BotonAgregar />
-                </div>
             </div>
         </div>
     );

@@ -7,6 +7,9 @@ import BotonAgregar from "../FormularioCreacionAnuncio/components/BotonAgregar/B
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
 import { get } from "src/utils/ApiRequests.js";
 import { Input } from "@nextui-org/react";
+import { Timestamp } from "firebase/firestore";
+// import firebase from "firebase/compat/app";
+// import "firebase/compat/firestore";
 
 function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
@@ -20,6 +23,7 @@ function FormularioCreacionAnuncio(props) {
     const [descripcion, setDescripcion] = useState("");
     const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
     const [caracteresRestantesDesc, setCaracteresRestantesDesc] = useState(100);
+    const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -59,6 +63,94 @@ function FormularioCreacionAnuncio(props) {
         );
     };
 
+    const postData = async (anuncio) => {
+        try {
+            const response = await fetch(
+                "https://createanuncio-j5zt2ysdwq-uc.a.run.app",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(anuncio), // Aquí pasamos directamente el objeto 'anuncio'
+                }
+            );
+    
+            if (!response.ok) {
+                throw new Error("Error al enviar datos al servidor.");
+            }
+    
+            console.log("Datos enviados correctamente al servidor.");
+
+            console.log("Datos enviados correctamente al servidor.");
+            // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
+            setTitulo("");
+            setDescripcion("");
+            setCaracteresRestantesTit(30);
+            setCaracteresRestantesDesc(100);
+            setEnviado(true);
+
+            // Reiniciar el mensaje de enviado después de unos segundos
+            setTimeout(() => {
+                setEnviado(false);
+            }, 3000);
+
+        } catch (error) {
+            console.error("Error al enviar datos:", error);
+        }
+    };
+
+    const formatDate = (date) => {
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return new Intl.DateTimeFormat('es-ES', options).format(date);
+    };
+    
+    const formatTime = (date) => {
+        const options = { hour: 'numeric', minute: 'numeric' };
+        return new Intl.DateTimeFormat('es-ES', options).format(date);
+    };
+    
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+    
+        // Recolectar los datos del formulario
+        const fechaActual = new Date();
+        const fechaYHoraInicio = new Date(
+            fechaActual.getFullYear(),
+            fechaActual.getMonth(),
+            fechaActual.getDate(),
+            13,
+            0,
+            0
+        ); // 13:00:00
+        const fechaYHoraFin = new Date(
+            fechaActual.getFullYear(),
+            fechaActual.getMonth(),
+            fechaActual.getDate(),
+            16,
+            40,
+            0
+        ); // 16:40:00
+    
+        const formData = {
+            descripcion: descripcion,
+            encendido: true,
+            fecha: formatDate(new Date()), // Convertir y formatear la fecha
+            horaInicio: formatTime(fechaYHoraInicio), // Convertir y formatear la hora de inicio
+            horaFin: formatTime(fechaYHoraFin), // Convertir y formatear la hora de fin
+            id: 5,
+            nombreEvento: "",
+            nombreSala: titulo,
+            personalizado: opcionPersonalizadoSeleccionado,
+            posicion: 5,
+            soloImagen: isCheckedSoloImage,
+            urlImagen:"https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
+        };
+    
+        // Enviar los datos al servidor
+        await postData(formData);
+    };
+
     return (
         <div className="div-exterior-formulario-creacion-anuncio-personalizado">
             <div className="formulario-primera-mitad-personalizado">
@@ -81,7 +173,7 @@ function FormularioCreacionAnuncio(props) {
             </div>
 
             <div className="formulario-creacion-anuncio-personalizado">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="experiencia-anuncio-formulario-personalizado">
                         <label className="label-formulario-anuncio-personalizado">
                             Título
@@ -136,21 +228,25 @@ function FormularioCreacionAnuncio(props) {
                             />
                         </div>
                     </div>
+
+                    <div className="checkbox-formulario-anuncio-personalizado">
+                        <Checkbox
+                            label="Solo imagen"
+                            isChecked={isCheckedSoloImage}
+                            handleCheckboxChange={() =>
+                                handleCheckboxChange("soloImagen")
+                            }
+                        />
+                    </div>
+
+                    <div className="boton-agregar-div-out-personalizado">
+                        <button type="submit">
+                            <BotonAgregar 
+                             texto="Agregar"/>
+                        </button>
+                    </div>
                 </form>
-
-                <div className="checkbox-formulario-anuncio-personalizado">
-                    <Checkbox
-                        label="Solo imagen"
-                        isChecked={isCheckedSoloImage}
-                        handleCheckboxChange={() =>
-                            handleCheckboxChange("soloImagen")
-                        }
-                    />
-                </div>
-
-                <div className="boton-agregar-div-out-personalizado">
-                    <BotonAgregar />
-                </div>
+                {enviado && <p className="mensaje-enviado-anuncio">¡Datos enviados correctamente!</p>} 
             </div>
         </div>
     );

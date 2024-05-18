@@ -14,6 +14,8 @@ function AdministradorAnuncios(props) {
             const jsonData = await response.json();
             console.log(jsonData);
             setData(jsonData);
+            console.log("jsonData");
+            console.log(jsonData);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -102,7 +104,7 @@ function AdministradorAnuncios(props) {
             },
         });
 
-        const fechaFormateada = anuncio.fecha.split(" ")[0] + " " + anuncio.fecha.split(" ")[2] + ", " + anuncio.fecha.split(" ")[4];
+        //const fechaFormateada = anuncio.fecha.split(" ")[0] + " " + anuncio.fecha.split(" ")[2] + ", " + anuncio.fecha.split(" ")[4];
 
         const horaInicioAjustada = ajustarHoras(anuncio.horaInicio);
         const horaFinAjustada = ajustarHoras(anuncio.horaFin);
@@ -120,14 +122,16 @@ function AdministradorAnuncios(props) {
                     sala={
                         anuncio.soloImagen
                             ? "Anuncio sencillo"
+                            : anuncio.personalizado
+                            ? anuncio.nombreSala
                             : anuncio.nombreEvento
                     }
                     hora={
                         anuncio.soloImagen || anuncio.personalizado
                             ? null
-                            : horaInicioAjustada + " - " + horaFinAjustada
+                            : anuncio.horaInicio + " - " + anuncio.horaFin
                     }
-                    dia={anuncio.soloImagen ? null : fechaFormateada}
+                    dia={anuncio.soloImagen || anuncio.personalizado ? null : anuncio.fecha}
                     encendido={anuncio.encendido}
                     funcion={() => toggleTarjeta(index)}
                     isDragging={isDragging}

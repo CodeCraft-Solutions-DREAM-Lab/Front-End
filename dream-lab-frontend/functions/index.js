@@ -7,8 +7,8 @@
  *
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
-const {format} = require("date-fns");
-const {es} = require("date-fns/locale");
+// const {format} = require("date-fns");
+// const {es} = require("date-fns/locale");
 // The Cloud Functions for Firebase SDK to create Cloud Functions and triggers.
 const {logger} = require("firebase-functions");
 const {onRequest} = require("firebase-functions/v2/https");
@@ -31,7 +31,6 @@ exports.readAnuncios = onRequest( async (req, res) => {
     const querySnapshot = await firestore
         .collection("AnunciosVideowall")
         .get();
-        
     console.log("QuerySnapshot:", querySnapshot.docs);
 
     // Array para almacenar los documentos formateados
@@ -44,18 +43,22 @@ exports.readAnuncios = onRequest( async (req, res) => {
       const data = doc.data();
       // Formatea los campos fecha, horaFin y horaInicio
       // Formatea la fecha sin el día de la semana
-      const fechaFormatted = format(data.fecha.toDate(), "PPPP", {locale: es});
-      const fecha = fechaFormatted.replace(/^.*, /, "");
+      // const fechaFormatted = format(data.fecha.toDate(),
+      // "PPPP", {locale: es});
 
-      const horaFin = format(data.horaFin.toDate(), "p", {locale: es});
-      const horaInicio = format(data.horaInicio.toDate(), "p", {locale: es});
+      // const fecha = fechaFormatted.replace(/^.*, /, "");
+
+      // const horaFin = format(data.horaFin.toDate(), "p", {locale: es});
+
+      // const horaInicio = format(data.horaInicio.toDate(), "p", {locale: es});
+
       // Formatea los campos según lo especificado
       const anuncio = {
         descripcion: data.descripcion,
         encendido: data.encendido,
-        fecha: fecha,
-        horaFin: horaFin,
-        horaInicio: horaInicio,
+        fecha: data.fecha,
+        horaFin: data.horaFin,
+        horaInicio: data.horaInicio,
         id: data.id,
         nombreEvento: data.nombreEvento,
         nombreSala: data.nombreSala,
@@ -75,6 +78,60 @@ exports.readAnuncios = onRequest( async (req, res) => {
   } catch (error) {
     console.error("Error al leer anuncios:", error);
     res.status(500).send("Error al leer anuncios.");
+  }
+});
+
+// Creación de anuncios
+exports.createAnuncio = onRequest(async (req, res) => {
+  try {
+    const firestore = getFirestore();
+    // Configurar los encabezados CORS
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // Si la solicitud es una solicitud OPTIONS, responder con un estado "ok"
+    if (req.method === "OPTIONS") {
+      res.status(200).send();
+      return;
+    }
+
+    // Obtener los datos del anuncio del cuerpo de la solicitud
+    const {
+      descripcion,
+      encendido,
+      fecha,
+      horaFin,
+      horaInicio,
+      id,
+      nombreEvento,
+      nombreSala,
+      personalizado,
+      posicion,
+      soloImagen,
+      urlImagen} = req.body;
+
+    // Crear un nuevo documento de anuncio en la colección "AnunciosVideowall"
+    await firestore.collection("AnunciosVideowall").add({
+      descripcion,
+      encendido,
+      fecha,
+      horaFin,
+      horaInicio,
+      id,
+      nombreEvento,
+      nombreSala,
+      personalizado,
+      posicion,
+      soloImagen,
+      urlImagen});
+
+    // Enviar una respuesta de éxito
+    res.status(200).send("Anuncio creado exitosamente.");
+  } catch (error) {
+    console.error("Error al crear anuncio:", error);
+    // Enviar una respuesta de error
+    res.status(500).send("Error al crear anuncio.");
   }
 });
 
