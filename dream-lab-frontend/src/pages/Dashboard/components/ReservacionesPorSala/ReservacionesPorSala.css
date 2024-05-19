@@ -1,20 +1,49 @@
+.rps-titulo-grafica {
+    margin-bottom: 1vh;
+    padding-right: 0vw;
+    padding-left: 0vw;
+    font-size: max(1.4vw, 2vh);
+    font-weight: 700;
+    color: #313131;
+    text-align: center;
+}
+
+.rps-contenedor {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rps-contenedor-barras-outer {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+
+    
+}
+
+.rps-contenedor-barras-inner {
+    width: 90%;
+}
+
 /* Define scrollbar styles */
-.dnowangjwadw::-webkit-scrollbar {
+.rps-contenedor-barras-outer::-webkit-scrollbar {
     width: 8px;
 }
 
 /* Track */
-.dnowangjwadw::-webkit-scrollbar-track {
+.rps-contenedor-barras-outer::-webkit-scrollbar-track {
     background: none;
 }
 
 /* Handle */
-.dnowangjwadw::-webkit-scrollbar-thumb {
+.rps-contenedor-barras-outer::-webkit-scrollbar-thumb {
     background: rgba(57, 57, 57, 0.15);
     border-radius: 20px;
 }
 
 /* Handle on hover */
-.dnowangjwadw::-webkit-scrollbar-thumb:hover {
+.rps-contenedor-barras-outer::-webkit-scrollbar-thumb:hover {
     background: rgba(57, 57, 57, 0.35);
 }

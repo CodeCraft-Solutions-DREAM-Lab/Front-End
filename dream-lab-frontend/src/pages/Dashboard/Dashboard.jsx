@@ -40,6 +40,21 @@ function Dashboard() {
         { uso: 111, material: "Mouse" },
     ];
 
+    const datosReservacionesPorSala = [
+        { name: "Electric Garage", value: 23 },
+        { name: "Dimension Forge", value: 45 },
+        { name: "New Horizons", value: 12 },
+        { name: "Deep Net", value: 37 },
+        { name: "Graveyard", value: 29 },
+        { name: "PCB Factory", value: 41 },
+        { name: "Hack Battlefield", value: 33 },
+        { name: "Testing Land", value: 48 },
+        { name: "War Headquarters", value: 27 },
+        { name: "Biometrics Flexible Hall", value: 39 },
+        { name: "Beyond Digits", value: 16 },
+        { name: "Open Innovation Lab", value: 50 },
+    ];
+
     return (
         <div className="dashboard-main-container">
             <div className="dashboard-statcards-container">
@@ -81,7 +96,10 @@ function Dashboard() {
                     </ContenedorGrafica>
                 </div>
                 <div className="dashboard-grafica-default dashboard-grafica-reservaiones-sala-container">
-                    <ReservacionesPorSala />
+                    <ReservacionesPorSala
+                        titulo="Reservaciones por sala"
+                        data={datosReservacionesPorSala}
+                    />
                 </div>
                 <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container"></div>
             </div>
