@@ -5,6 +5,7 @@ import ContenedorGrafica from "./components/ContenedorGrafica/ContenedorGrafica"
 import GraficaBarras from "./components/GraficaBarras/GraficaBarras";
 import GraficaPie from "./components/GraficaPie/GraficaPie";
 import ReservacionesPorSala from "./components/ReservacionesPorSala/ReservacionesPorSala";
+import ContenedorDisponibilidadSalas from "./components/ContenedorDisponibilidadSalas/ContenedorDisponibilidadSalas";
 
 // Estilos
 import "./Dashboard.css";
@@ -101,7 +102,9 @@ function Dashboard() {
                         data={datosReservacionesPorSala}
                     />
                 </div>
-                <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container"></div>
+                <div className="dashboard-grafica-default dashboard-grafica-disponbilidad-container">
+                    <ContenedorDisponibilidadSalas titulo="Disponibilidad de salas" />
+                </div>
             </div>
         </div>
     );

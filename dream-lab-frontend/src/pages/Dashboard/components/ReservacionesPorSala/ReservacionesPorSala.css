@@ -1,7 +1,5 @@
 .rps-titulo-grafica {
     margin-bottom: 1vh;
-    padding-right: 0vw;
-    padding-left: 0vw;
     font-size: max(1.4vw, 2vh);
     font-weight: 700;
     color: #313131;
@@ -9,18 +7,16 @@
 }
 
 .rps-contenedor {
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .rps-contenedor-barras-outer {
     overflow-y: auto;
-    height: 100%;
     width: 100%;
-
-    
+    height: 100%;
 }
 
 .rps-contenedor-barras-inner {
