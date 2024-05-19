@@ -111,7 +111,7 @@ function FormularioCreacionAnuncio(props) {
             nombreEvento: titulo,
             nombreSala: ubicacion,
             personalizado: opcionPersonalizadoSeleccionado,
-            posicion: 6,
+            posicion: props.numeroAnuncios + 1,
             soloImagen: isCheckedSoloImage,
             urlImagen: urlFoto,
         };

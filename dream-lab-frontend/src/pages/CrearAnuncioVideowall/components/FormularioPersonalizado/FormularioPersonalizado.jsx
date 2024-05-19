@@ -145,11 +145,10 @@ function FormularioCreacionAnuncio(props) {
             fecha: formatDate(new Date()), // Convertir y formatear la fecha
             horaInicio: formatTime(fechaYHoraInicio), // Convertir y formatear la hora de inicio
             horaFin: formatTime(fechaYHoraFin), // Convertir y formatear la hora de fin
-            id: 5,
             nombreEvento: "",
             nombreSala: titulo,
             personalizado: opcionPersonalizadoSeleccionado,
-            posicion: 5,
+            posicion: props.numeroAnuncios + 1,
             soloImagen: isCheckedSoloImage,
             urlImagen: urlFoto,
         };

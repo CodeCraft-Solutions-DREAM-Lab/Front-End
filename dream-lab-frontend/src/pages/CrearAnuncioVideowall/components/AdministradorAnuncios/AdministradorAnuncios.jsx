@@ -14,12 +14,15 @@ function AdministradorAnuncios(props) {
   const [mostrarCambiosAplicados, setMostrarCambiosAplicados] = useState(false);
   const timerRef = useRef(null);
 
+
+
   const fetchData = async () => {
     try {
       const response = await fetch("https://readanuncios-j5zt2ysdwq-uc.a.run.app/");
       const jsonData = await response.json();
       jsonData.sort((a, b) => a.posicion - b.posicion);
       setData(jsonData);
+      props.onNumElementosChange(jsonData.length);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
