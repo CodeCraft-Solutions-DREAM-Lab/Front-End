@@ -73,7 +73,7 @@ function FormularioCreacionAnuncio(props) {
     const postData = async (anuncio) => {
         try {
             const response = await fetch(
-                "https://createanuncio-j5zt2ysdwq-uc.a.run.app",
+                "https://createanuncio2-j5zt2ysdwq-uc.a.run.app",
                 {
                     method: "POST",
                     headers: {

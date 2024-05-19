@@ -7,15 +7,14 @@ import ModalEliminacionAnuncio from "./components/ModalEliminacionAnuncio/ModalE
 
 function AdministradorAnuncios(props) {
     const [data, setData] = useState([]);
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [anuncioIdEliminar, setAnuncioIdEliminar] = useState(null);
 
     const fetchData = async () => {
         try {
             const response = await fetch("https://readanuncios-j5zt2ysdwq-uc.a.run.app/");
             const jsonData = await response.json();
-            console.log(jsonData);
             setData(jsonData);
-            console.log("jsonData");
-            console.log(jsonData);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -24,8 +23,6 @@ function AdministradorAnuncios(props) {
     useEffect(() => {
         fetchData();
     }, []);
-
-    const [mostrarModal, setMostrarModal] = useState(false);
 
     const toggleTarjeta = (index) => {
         const newData = [...data];
@@ -55,10 +52,10 @@ function AdministradorAnuncios(props) {
         }
         return { ...anuncio, descripcionReducida };
     });
-    
 
-    const abrirModal = () => {
+    const abrirModal = (anuncioId) => {
         setMostrarModal(true);
+        setAnuncioIdEliminar(anuncioId);
     };
 
     const cerrarModal = () => {
@@ -66,20 +63,16 @@ function AdministradorAnuncios(props) {
     };
 
     function ajustarHoras(hora) {
-        // Parseamos la hora en formato "hh:mm"
         const [horaStr, minutoStr] = hora.split(":");
         let horaNum = parseInt(horaStr, 10);
         let minutoNum = parseInt(minutoStr, 10);
     
-        // Restamos 6 horas
         horaNum -= 6;
     
-        // Si la hora es negativa, restamos un día y ajustamos la hora
         if (horaNum < 0) {
             horaNum += 24;
         }
     
-        // Convertimos de nuevo a cadena y formateamos
         const horaAjustada = `${horaNum.toString().padStart(2, "0")}:${minutoNum.toString().padStart(2, "0")}`;
     
         return horaAjustada;
@@ -103,8 +96,6 @@ function AdministradorAnuncios(props) {
                 }
             },
         });
-
-        //const fechaFormateada = anuncio.fecha.split(" ")[0] + " " + anuncio.fecha.split(" ")[2] + ", " + anuncio.fecha.split(" ")[4];
 
         const horaInicioAjustada = ajustarHoras(anuncio.horaInicio);
         const horaFinAjustada = ajustarHoras(anuncio.horaFin);
@@ -137,7 +128,7 @@ function AdministradorAnuncios(props) {
                     isDragging={isDragging}
                     soloImagen={anuncio.soloImagen}
                     imagen={anuncio.urlImagen}
-                    funcionTrash={abrirModal}
+                    funcionTrash={() => abrirModal(anuncio.firebaseId)} // Pasar el ID del anuncio al abrir el modal
                     posicion={anuncio.posicion}
                     personalizado={anuncio.personalizado}
                 />
@@ -168,12 +159,9 @@ function AdministradorAnuncios(props) {
                         size="2xl"
                         cerrarModal={cerrarModal}
                         isOpen={true}
-                        onClose={() => {
-                            cerrarModal();
-                        }}
-                        onOk={() => {
-                            cerrarModal();
-                        }}
+                        onClose={cerrarModal}
+                        onOk={cerrarModal}
+                        anuncioId={anuncioIdEliminar} // Pasar el ID del anuncio a eliminar como prop
                     />
                 )}
             </div>
@@ -182,5 +170,3 @@ function AdministradorAnuncios(props) {
 }
 
 export default AdministradorAnuncios;
-
-

@@ -59,13 +59,13 @@ exports.readAnuncios = onRequest( async (req, res) => {
         fecha: data.fecha,
         horaFin: data.horaFin,
         horaInicio: data.horaInicio,
-        id: data.id,
         nombreEvento: data.nombreEvento,
         nombreSala: data.nombreSala,
         personalizado: data.personalizado,
         posicion: data.posicion,
         soloImagen: data.soloImagen,
         urlImagen: data.urlImagen,
+        firebaseId: doc.id,
       };
 
       // Agrega el anuncio al array
@@ -132,6 +132,180 @@ exports.createAnuncio = onRequest(async (req, res) => {
     console.error("Error al crear anuncio:", error);
     // Enviar una respuesta de error
     res.status(500).send("Error al crear anuncio.");
+  }
+});
+
+
+// Creación de anuncios
+exports.createAnuncio2 = onRequest(async (req, res) => {
+  try {
+    const firestore = getFirestore();
+    // Configurar los encabezados CORS
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // Si la solicitud es una solicitud OPTIONS, responder con un estado "ok"
+    if (req.method === "OPTIONS") {
+      res.status(200).send();
+      return;
+    }
+
+    // Obtener los datos del anuncio del cuerpo de la solicitud
+    const {
+      descripcion,
+      encendido,
+      fecha,
+      horaFin,
+      horaInicio,
+      nombreEvento,
+      nombreSala,
+      personalizado,
+      posicion,
+      soloImagen,
+      urlImagen,
+    } = req.body;
+
+    // Crear un nuevo documento
+    const newAnuncioRef = await firestore.collection("AnunciosVideowall").doc();
+    const newId = newAnuncioRef.id; // Obtener el ID autogenerado por Firebase
+
+    // Añadir el documento
+    await newAnuncioRef.set({
+      descripcion,
+      encendido,
+      fecha,
+      horaFin,
+      horaInicio,
+      nombreEvento,
+      nombreSala,
+      personalizado,
+      posicion,
+      soloImagen,
+      urlImagen,
+      firebaseId: newId, // Agregar el ID autogenerado por Firebase
+    });
+
+    // Enviar una respuesta de éxito
+    res.status(200).send("Anuncio creado exitosamente.");
+  } catch (error) {
+    console.error("Error al crear anuncio:", error);
+    // Enviar una respuesta de error
+    res.status(500).send("Error al crear anuncio.");
+  }
+});
+
+
+// Eliminación de anuncios
+exports.deleteAnuncio = onRequest(async (req, res) => {
+  try {
+    const firestore = getFirestore();
+    // Configurar los encabezados CORS
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "DELETE, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // Si la solicitud es una solicitud OPTIONS, responder con un estado "ok"
+    if (req.method === "OPTIONS") {
+      res.status(200).send();
+      return;
+    }
+
+    // Obtener el ID del anuncio a eliminar de los parámetros de la solicitud
+    const anuncioId = req.query.id;
+    console.log("ID del anuncio a eliminar INDEX:", anuncioId);
+
+    // Verificar si se proporcionó un ID válido
+    if (!anuncioId) {
+      res.status(400).send("Se requiere un ID de anuncio válido.");
+      return;
+    }
+
+    // Eliminar el anuncio de la colección "AnunciosVideowall"
+    await firestore.collection("AnunciosVideowall").doc(anuncioId).delete();
+
+    // Enviar una respuesta de éxito
+    res.status(200).send("Anuncio eliminado exitosamente.");
+  } catch (error) {
+    console.error("Error al eliminar anuncio:", error);
+    // Enviar una respuesta de error
+    res.status(500).send("Error al eliminar anuncio.");
+  }
+});
+
+
+// Edición de anuncios
+exports.updateAnuncio = onRequest(async (req, res) => {
+  try {
+    const firestore = getFirestore();
+    // Configurar los encabezados CORS
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "PUT, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // Si la solicitud es una solicitud OPTIONS, responder con un estado "ok"
+    if (req.method === "OPTIONS") {
+      res.status(200).send();
+      return;
+    }
+
+    // Obtener el ID del anuncio a editar de los parámetros de la solicitud
+    const anuncioId = req.query.id;
+
+    // Verificar si se proporcionó un ID válido
+    if (!anuncioId) {
+      res.status(400).send("Se requiere un ID de anuncio válido.");
+      return;
+    }
+
+    // Obtener los datos actualizados del anuncio del cuerpo de la solicitud
+    const {
+      descripcion,
+      encendido,
+      fecha,
+      horaFin,
+      horaInicio,
+      nombreEvento,
+      nombreSala,
+      personalizado,
+      posicion,
+      soloImagen,
+      urlImagen,
+    } = req.body;
+
+    // Verificar si se proporcionaron datos válidos
+    if (!descripcion && !encendido && !fecha && !horaFin &&
+      !horaInicio && !nombreEvento && !nombreSala &&
+      !personalizado && !posicion && !soloImagen && !urlImagen) {
+      res.status(400).send("Al menos un campo debe ser proporcionado.");
+      return;
+    }
+
+    // Crear un objeto con los campos a actualizar
+    const fieldsToUpdate = {};
+    if (descripcion) fieldsToUpdate.descripcion = descripcion;
+    if (encendido !== undefined) fieldsToUpdate.encendido = encendido;
+    if (fecha) fieldsToUpdate.fecha = fecha;
+    if (horaFin) fieldsToUpdate.horaFin = horaFin;
+    if (horaInicio) fieldsToUpdate.horaInicio = horaInicio;
+    if (nombreEvento) fieldsToUpdate.nombreEvento = nombreEvento;
+    if (nombreSala) fieldsToUpdate.nombreSala = nombreSala;
+    // eslint-disable-next-line max-len
+    if (personalizado !== undefined) fieldsToUpdate.personalizado = personalizado;
+    if (posicion) fieldsToUpdate.posicion = posicion;
+    if (soloImagen !== undefined) fieldsToUpdate.soloImagen = soloImagen;
+    if (urlImagen) fieldsToUpdate.urlImagen = urlImagen;
+
+    // Actualizar el anuncio en la colección "AnunciosVideowall"
+    // eslint-disable-next-line max-len
+    await firestore.collection("AnunciosVideowall").doc(anuncioId).update(fieldsToUpdate);
+
+    // Enviar una respuesta de éxito
+    res.status(200).send("Anuncio actualizado exitosamente.");
+  } catch (error) {
+    console.error("Error al actualizar anuncio:", error);
+    // Enviar una respuesta de error
+    res.status(500).send("Error al actualizar anuncio.");
   }
 });
 
