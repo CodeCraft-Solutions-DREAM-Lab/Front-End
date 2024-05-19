@@ -1,151 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import UserAvatar from "../NavBar/components/UserAvatar/UserAvatar";
-import Logout from "../NavBar/components/Logout/Logout";
-import SearchBar from "../NavBar/components/SearchBar/SearchBar";
-import BotonCrearExperiencia from "../NavBar/components/BotonCrearExperiencia/BotonCrearExperiencia";
-import LoginButton from "../NavBar/components/LoginButton/LoginButton";
-
-import "./NavBarAdmin.css";
-
-import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
-
 import { Link } from "react-router-dom";
+import "./NavBarAdmin.css";
+import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
+import userAvatarIcon from "src/assets/icons/user-avatar-icon.png";
+import settingsIcon from "src/assets/icons/settings-icon.png";
 
-class NavBarAdmin extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isVisible: true,
-            prevScrollPos: 0,
-            currentScrollPos: 0,
-            scrollDiffThreshold: 0, //90
-        };
-        this.hideBar = this.hideBar.bind(this);
-        this.debouncedHideBar = this.debounce(this.hideBar, 10); // Debounce the hideBar method
-    }
+function NavBarAdmin() {
+    const [activeTab, setActiveTab] = useState("dashboard");
 
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
 
-    hideBar() {
-        const newScrollPos = window.scrollY;
-        const scrollDiff = Math.abs(this.state.prevScrollPos - newScrollPos);
-        let isVisible = this.state.isVisible;
-
-        // Only update isVisible if scrollDiff is greater than scrollDiffThreshold
-        if (scrollDiff > this.state.scrollDiffThreshold || newScrollPos === 0) {
-            isVisible =
-                this.state.prevScrollPos > newScrollPos || newScrollPos === 0;
-        }
-
-        this.setState({
-            currentScrollPos: newScrollPos,
-            prevScrollPos: newScrollPos,
-            isVisible: isVisible,
-        });
-    }
-    componentDidMount() {
-        window.addEventListener("scroll", this.debouncedHideBar);
-    }
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.debouncedHideBar);
-    }
-    render() {
-        const { view, autoHide } = this.props;
-        let viewLandingPage = false;
-
-        // Definimos las vistas
-        let searchBar, userAction;
-        switch (view) {
-            case "homeAlumno":
-                searchBar = <SearchBar />; // barra de busqueda
-                userAction = <UserAvatar />; // Icono de perfil
-                break;
-            case "homeProfesor":
-                searchBar = <SearchBar />; // barra de busqueda
-                userAction = (
-                    <>
-                        {" "}
-                        <BotonCrearExperiencia /> <UserAvatar />{" "}
-                    </>
-                ); // Icono de perfil y boton de creacion de experiencia
-                break;
-            case "perfil":
-                userAction = <Logout />; // Cerrar sesión
-                break;
-            case "soloPerfil":
-                userAction = <UserAvatar />; // Icono de perfil
-                break;
-            case "landingPage":
-                viewLandingPage = true;
-                userAction = <LoginButton />; // Redireccionar al login
-                break;
-            default:
-                searchBar = null;
-                userAction = null; // Para vistas desconocidas
-        }
-
-        let classHide = "visible";
-        if (autoHide && !this.state.isVisible) {
-            classHide = "hidden";
-        }
-
-        return (
-            <div className={`navbar-positioning ${classHide}`}>
-                <div
-                    data-cy="navbar"
-                    className="navbar glass-card"
-                    height="1rem"
-                >
-                    <div className="flex items-center justify-between w-full">
-                        {!viewLandingPage && (
-                            <Link
-                                className="logo-container"
-                                to={"/home"}
-                                style={{ cursor: "pointer" }}
-                            >
-                                <img
-                                    src={logoDreamLab}
-                                    alt="Logo"
-                                    className="logo"
-                                />
-                                <h1 className="dreamlab">DREAM LAB</h1>
-                            </Link>
-                        )}
-                        {searchBar}{" "}
-                        {/* Se ve la searchBar dependiendo de la vista */}
-                        <div
-                            className="user-avatar-container"
-                            style={{ cursor: "pointer" }}
-                            data-cy="userIconNavBar"
-                        >
-                            {userAction}
-                            {/* Se ven las acciones dependiendo de la vista (profile o logout o profile + create experience) */}
-                        </div>
-                    </div>
+    return (
+        <div data-cy="navbar-admin" className="navbar-admin glass-card">
+            <div className="centered-container">
+                <div className="navigation-buttons">
+                    <Link
+                        to={"/admin"}
+                        className={`nav-button ${activeTab === "dashboard" ? "active" : ""}`}
+                        onClick={() => handleTabClick("dashboard")}
+                    >
+                        Dashboard
+                    </Link>
+                    <Link
+                        to={"/admin"}
+                        className={`nav-button ${activeTab === "projects" ? "active" : ""}`}
+                        onClick={() => handleTabClick("projects")}
+                    >
+                        Projects
+                    </Link>
+                    <Link
+                        to={"/admin"}
+                        className={`nav-button ${activeTab === "users" ? "active" : ""}`}
+                        onClick={() => handleTabClick("users")}
+                    >
+                        Users
+                    </Link>
+                </div>
+                <Link to={"/admin"} className="logo-container-admin">
+                    <img src={logoDreamLab} alt="Logo" className="logo-admin" />
+                    <h1 className="dreamlab-admin">DREAM LAB</h1>
+                </Link>
+                <div className="user-icons">
+                    <img src={userAvatarIcon} alt="User Avatar" className="user-avatar-icon" />
+                    <img src={settingsIcon} alt="Settings" className="settings-icon" />
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 NavBarAdmin.propTypes = {
-    view: PropTypes.string.isRequired,
-    autoHide: PropTypes.bool,
-};
-
-NavBarAdmin.defaultProps = {
-    autoHide: false,
+    view: PropTypes.string,
 };
 
 export default NavBarAdmin;

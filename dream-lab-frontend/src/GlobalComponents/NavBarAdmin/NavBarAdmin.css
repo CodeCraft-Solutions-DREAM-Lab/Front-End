@@ -1,0 +1,94 @@
+.navbar-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    width: 100%;
+    height: 11vh;
+    margin: 0 auto;
+    padding: 1.25%;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: "Karla", sans-serif;
+}
+
+
+.navbar-positioning-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    padding: 2rem;
+    animation-duration: 0.5s;
+}
+
+.logo-container-admin {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-admin {
+    width: 55px;
+    margin-right: 1.5%;
+    padding-left: 2%;
+    cursor: pointer;
+}
+
+.dreamlab-admin {
+    padding-top: 0.5%;
+    font-size: 100%;
+    font-weight: 800;
+    color: white;
+    
+    
+}
+
+@media only screen and (max-width: 480px) {
+    .logo-admin {
+        width: 35px; /* Adjust the width for smaller screens */
+
+    /* Adjust padding as needed */
+        margin-left: 20px;
+    }
+    .dreamlab-admin {
+        display: none; /* Hide the Dream Lab text on phone screens */
+    }
+
+    .logo-container-admin {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 968px ) and (min-width: 481px) {
+    .logo-admin {
+        width: 40px; /* Adjust the width for smaller screens */
+
+        margin-left: 10px;
+
+    }
+    .dreamlab-admin {
+        display: none; /* Hide the Dream Lab text on phone screens */
+    }
+}
+
+.user-avatar-container-admin {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.text-white {
+    color: white !important;
+}
