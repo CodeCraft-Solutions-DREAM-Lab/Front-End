@@ -1,9 +1,9 @@
 import { propTypes } from "react-bootstrap/esm/Image";
 
 // Icons
-import stat_arrow_down from "src/assets/Admin/stat_arrow_down.svg";
-import stat_arrow_up from "src/assets/Admin/stat_arrow_up.svg";
-import stat_no_change from "src/assets/Admin/stat_no_change.svg";
+import stat_arrow_down from "src/assets/Admin/Dashboard/stat_arrow_down.svg";
+import stat_arrow_up from "src/assets/Admin/Dashboard/stat_arrow_up.svg";
+import stat_no_change from "src/assets/Admin/Dashboard/stat_no_change.svg";
 
 // Estilos
 import "./StatCard.css";
