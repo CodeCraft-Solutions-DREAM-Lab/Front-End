@@ -8,8 +8,8 @@ import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnunci
 import { get } from "src/utils/ApiRequests.js";
 import { Input } from "@nextui-org/react";
 import { Timestamp } from "firebase/firestore";
-// import firebase from "firebase/compat/app";
-// import "firebase/compat/firestore";
+import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
+
 
 function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
@@ -24,6 +24,13 @@ function FormularioCreacionAnuncio(props) {
     const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
     const [caracteresRestantesDesc, setCaracteresRestantesDesc] = useState(100);
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
+    const [fileSeleccionado, setFileSeleccionado] = useState(null);
+
+    const handleFileSelected = (file) => {
+        // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
+        setFileSeleccionado(file);
+        console.log("Archivo seleccionado:", file);
+    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -131,6 +138,8 @@ function FormularioCreacionAnuncio(props) {
             40,
             0
         ); // 16:40:00
+
+        const urlFoto = await uploadFile(fileSeleccionado); // Subir el archivo seleccionado
     
         const formData = {
             descripcion: descripcion,
@@ -144,7 +153,7 @@ function FormularioCreacionAnuncio(props) {
             personalizado: opcionPersonalizadoSeleccionado,
             posicion: 5,
             soloImagen: isCheckedSoloImage,
-            urlImagen:"https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
+            urlImagen: urlFoto,
         };
     
         // Enviar los datos al servidor
@@ -225,7 +234,8 @@ function FormularioCreacionAnuncio(props) {
                                 imagen={AgregarImagen}
                                 titulo="Sube una imagen"
                                 advertencia="Resolución recomendada: 2880 x 2160"
-                            />
+                                onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
+                                />
                         </div>
                     </div>
 
@@ -235,7 +245,7 @@ function FormularioCreacionAnuncio(props) {
                             isChecked={isCheckedSoloImage}
                             handleCheckboxChange={() =>
                                 handleCheckboxChange("soloImagen")
-                            }
+                            }                            
                         />
                     </div>
 

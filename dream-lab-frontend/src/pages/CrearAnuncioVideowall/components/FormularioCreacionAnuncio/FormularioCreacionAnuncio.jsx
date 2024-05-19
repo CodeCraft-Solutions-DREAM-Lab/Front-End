@@ -15,6 +15,7 @@ import {
     SelectItem,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
+import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
 
 function FormularioCreacionAnuncio(props) {
     const [titulo, setTitulo] = useState("");
@@ -24,6 +25,13 @@ function FormularioCreacionAnuncio(props) {
     const [horaFin, setHoraFin] = useState("");
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
+    const [fileSeleccionado, setFileSeleccionado] = useState(null);
+
+    const handleFileSelected = (file) => {
+        // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
+        setFileSeleccionado(file);
+        console.log("Archivo seleccionado:", file);
+    };
 
     const handleTituloChange = (event) => {
         setTitulo(event.target.value);
@@ -77,7 +85,6 @@ function FormularioCreacionAnuncio(props) {
             setTimeout(() => {
                 setEnviado(false);
             }, 3000);
-            
         } catch (error) {
             console.error("Error al enviar datos:", error);
         }
@@ -85,6 +92,8 @@ function FormularioCreacionAnuncio(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const urlFoto = await uploadFile(fileSeleccionado); // Subir el archivo seleccionado
 
         const formData = {
             descripcion: "",
@@ -98,8 +107,7 @@ function FormularioCreacionAnuncio(props) {
             personalizado: opcionPersonalizadoSeleccionado,
             posicion: 6,
             soloImagen: isCheckedSoloImage,
-            urlImagen:
-                "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
+            urlImagen: urlFoto,
         };
 
         await postData(formData);
@@ -129,7 +137,8 @@ function FormularioCreacionAnuncio(props) {
 
     const [salasBD, setSalasBD] = useState([]);
 
-    {/*  
+    {
+        /*  
     useEffect(() => {
         get("salas")
             .then((result) => {
@@ -146,7 +155,8 @@ function FormularioCreacionAnuncio(props) {
               label: sala.nombre,
               value: sala.idSala.toString(),
           }))
-        : [];*/}
+        : [];*/
+    }
 
     const formatDate = (date) => {
         if (!date) return ""; // Manejar el caso en que date sea null
@@ -279,6 +289,7 @@ function FormularioCreacionAnuncio(props) {
                                 imagen={AgregarImagen}
                                 titulo="Sube una imagen"
                                 advertencia="Resolución recomendada: 2880 x 2160"
+                                onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
                             />
                         </div>
                     </div>
@@ -295,13 +306,14 @@ function FormularioCreacionAnuncio(props) {
 
                     <div className="boton-agregar-div-out">
                         <button type="submit">
-                            <BotonAgregar 
-                                texto="Agregar"/>
+                            <BotonAgregar texto="Agregar" />
                         </button>
-                        
                     </div>
-                    {enviado && <p className="mensaje-enviado-anuncio">¡Datos enviados correctamente!</p>} 
-
+                    {enviado && (
+                        <p className="mensaje-enviado-anuncio">
+                            ¡Datos enviados correctamente!
+                        </p>
+                    )}
                 </form>
             </div>
         </div>

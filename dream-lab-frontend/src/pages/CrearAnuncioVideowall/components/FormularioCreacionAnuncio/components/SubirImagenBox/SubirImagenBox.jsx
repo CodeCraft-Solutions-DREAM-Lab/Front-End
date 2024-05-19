@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./SubirImagenBox.css";
+import { uploadFile } from "../../../../../../firebase/config";
 
 function SubirImagenBox(props) {
     const fileInputRef = useRef(null);
@@ -9,12 +10,13 @@ function SubirImagenBox(props) {
         fileInputRef.current.click();
     };
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
+        console.log(file);
         if (file) {
-            const imageUrl = URL.createObjectURL(file); // URL de la imagen seleccionada
-            setSelectedImage(imageUrl); // Actualizar el estado con la URL de la imagen
-            //props.onFileSelected(file); // Pasar el archivo seleccionado al componente padre si es necesario
+            const imageUrl = URL.createObjectURL(file);
+            setSelectedImage(imageUrl);
+            props.onFileSelected(file); // Llamar a la función de devolución de llamada para pasar el archivo al padre
         }
     };
 
@@ -26,13 +28,13 @@ function SubirImagenBox(props) {
                 ref={fileInputRef}
                 style={{ display: "none" }}
                 onChange={handleFileChange}
+                // onChange={console.log(e.target.files[0])}
             />
             <div className="image-container">
                 {selectedImage && (
-                    <img src={selectedImage} alt="Foto" className="imagen-seleccionada" /> // Mostrar la imagen seleccionada
+                    <img src={selectedImage} alt="Foto" className="imagen-seleccionada" />
                 )}
                 {!selectedImage && (
-                    // Mostrar el contenido predeterminado si no se ha seleccionado una foto
                     <div className="placeholder">
                         <div className="icono-sube-imagen-div">
                             <img className="icono-sube-imagen" src={props.imagen} alt="" />
