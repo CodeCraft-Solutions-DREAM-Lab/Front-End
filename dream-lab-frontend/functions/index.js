@@ -309,6 +309,56 @@ exports.updateAnuncio = onRequest(async (req, res) => {
   }
 });
 
+exports.updateAnuncio2 = onRequest(async (req, res) => {
+  try {
+    const firestore = getFirestore();
+    // Configurar los encabezados CORS
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "PUT, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // Si la solicitud es una solicitud OPTIONS, responder con un estado "ok"
+    if (req.method === "OPTIONS") {
+      res.status(200).send();
+      return;
+    }
+
+    // Obtener el ID del anuncio a editar de los parámetros de la solicitud
+    const anuncioId = req.query.id;
+
+    // Verificar si se proporcionó un ID válido
+    if (!anuncioId) {
+      res.status(400).send("Se requiere un ID de anuncio válido.");
+      return;
+    }
+
+    // Obtener los datos actualizados del anuncio del cuerpo de la solicitud
+    const {encendido, posicion} = req.body;
+
+    // Verificar si se proporcionaron datos válidos
+    if (encendido === undefined && posicion === undefined) {
+      res.status(400).send("Se debe proporcionar al menos un campo.");
+      return;
+    }
+
+    // Crear un objeto con los campos a actualizar
+    const fieldsToUpdate = {};
+    if (encendido !== undefined) fieldsToUpdate.encendido = encendido;
+    if (posicion !== undefined) fieldsToUpdate.posicion = posicion;
+
+    // Actualizar el anuncio en la colección "AnunciosVideowall"
+    // eslint-disable-next-line max-len
+    await firestore.collection("AnunciosVideowall").doc(anuncioId).update(fieldsToUpdate);
+
+    // Enviar una respuesta de éxito
+    res.status(200).send("Anuncio actualizado exitosamente.");
+  } catch (error) {
+    console.error("Error al actualizar anuncio:", error);
+    // Enviar una respuesta de error
+    res.status(500).send("Error al actualizar anuncio.");
+  }
+});
+
 
 // Funciones de ejemplo/tutorial
 

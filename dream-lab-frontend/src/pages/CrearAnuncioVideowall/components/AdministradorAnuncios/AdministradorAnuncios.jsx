@@ -24,11 +24,28 @@ function AdministradorAnuncios(props) {
         fetchData();
     }, []);
 
-    const toggleTarjeta = (index) => {
+    const toggleTarjeta = async (index) => {
         const newData = [...data];
         newData[index].encendido = !newData[index].encendido;
+        console.log(newData[index].firebaseId, newData[index].encendido, newData[index].posicion);
         setData(newData);
+    
+        try {
+            await fetch(`https://updateanuncio2-j5zt2ysdwq-uc.a.run.app?id=${newData[index].firebaseId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    encendido: newData[index].encendido,
+                    posicion: newData[index].posicion,
+                }),
+            });
+        } catch (error) {
+            console.error("Error al actualizar el estado de encendido:", error);
+        }
     };
+    
 
     const moveAnuncio = (dragIndex, hoverIndex) => {
         const draggedAnuncio = data[dragIndex];

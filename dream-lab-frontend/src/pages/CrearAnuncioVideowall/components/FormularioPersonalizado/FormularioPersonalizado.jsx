@@ -10,21 +10,17 @@ import { Input } from "@nextui-org/react";
 import { Timestamp } from "firebase/firestore";
 import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
 
-
 function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
-    const [
-        opcionPersonalizadoSeleccionado,
-        setOpcionPersonalizadoSeleccionado,
-    ] = useState(true);
-    const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] =
-        useState(false);
+    const [opcionPersonalizadoSeleccionado, setOpcionPersonalizadoSeleccionado] = useState(true);
+    const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] = useState(false);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
     const [caracteresRestantesDesc, setCaracteresRestantesDesc] = useState(100);
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
+    const [procesandoSolicitud, setProcesandoSolicitud] = useState(false); // Variable de estado para indicar si se está procesando la solicitud o no
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
@@ -88,11 +84,10 @@ function FormularioCreacionAnuncio(props) {
             }
     
             console.log("Datos enviados correctamente al servidor.");
-
-            console.log("Datos enviados correctamente al servidor.");
             // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
             setTitulo("");
             setDescripcion("");
+            setFileSeleccionado(null);
             setCaracteresRestantesTit(30);
             setCaracteresRestantesDesc(100);
             setEnviado(true);
@@ -104,6 +99,8 @@ function FormularioCreacionAnuncio(props) {
 
         } catch (error) {
             console.error("Error al enviar datos:", error);
+        } finally {
+            setProcesandoSolicitud(false); // Cambiar el estado de procesando solicitud a falso
         }
     };
 
@@ -119,7 +116,8 @@ function FormularioCreacionAnuncio(props) {
     
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-    
+        setProcesandoSolicitud(true); // Cambiar el estado de procesando solicitud a verdadero
+
         // Recolectar los datos del formulario
         const fechaActual = new Date();
         const fechaYHoraInicio = new Date(
@@ -231,6 +229,7 @@ function FormularioCreacionAnuncio(props) {
                     <div className="contenedor-mitad-2-formulario-personalizado">
                         <div className="subir-imagen-div-formulario-personalizado">
                             <SubirImagenBox
+                                key={enviado ? "selected" : "not-selected"} // Agregar una clave que cambie cuando se seleccione o no un archivo
                                 imagen={AgregarImagen}
                                 titulo="Sube una imagen"
                                 advertencia="Resolución recomendada: 2880 x 2160"
@@ -250,9 +249,8 @@ function FormularioCreacionAnuncio(props) {
                     </div>
 
                     <div className="boton-agregar-div-out-personalizado">
-                        <button type="submit">
-                            <BotonAgregar 
-                             texto="Agregar"/>
+                        <button type="submit" disabled={procesandoSolicitud}>
+                            {procesandoSolicitud ? 'Procesando solicitud...' : <BotonAgregar texto="Agregar" />}
                         </button>
                     </div>
                 </form>

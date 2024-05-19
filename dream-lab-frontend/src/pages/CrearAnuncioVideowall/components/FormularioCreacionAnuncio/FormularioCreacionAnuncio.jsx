@@ -26,6 +26,7 @@ function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
+    const [procesandoSolicitud, setProcesandoSolicitud] = useState(false);
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
@@ -56,8 +57,9 @@ function FormularioCreacionAnuncio(props) {
 
     const postData = async (anuncio) => {
         try {
+            
             const response = await fetch(
-                "https://createanuncio-j5zt2ysdwq-uc.a.run.app",
+                "https://createanuncio2-j5zt2ysdwq-uc.a.run.app",
                 {
                     method: "POST",
                     headers: {
@@ -80,6 +82,7 @@ function FormularioCreacionAnuncio(props) {
             setHoraFin("");
             setEnviado(true);
             setCaracteresRestantesTit(30);
+            setFileSeleccionado(null);
 
             // Reiniciar el mensaje de enviado después de unos segundos
             setTimeout(() => {
@@ -87,11 +90,14 @@ function FormularioCreacionAnuncio(props) {
             }, 3000);
         } catch (error) {
             console.error("Error al enviar datos:", error);
+        } finally {
+            setProcesandoSolicitud(false); // Cambiar el estado de procesando solicitud a falso
         }
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setProcesandoSolicitud(true); // Cambiar el estado de procesando solicitud a verdadero
 
         const urlFoto = await uploadFile(fileSeleccionado); // Subir el archivo seleccionado
 
@@ -286,6 +292,7 @@ function FormularioCreacionAnuncio(props) {
 
                         <div className="subir-imagen-div-formulario">
                             <SubirImagenBox
+                                key={enviado ? "selected" : "not-selected"} // Agregar una clave que cambie cuando se seleccione o no un archivo
                                 imagen={AgregarImagen}
                                 titulo="Sube una imagen"
                                 advertencia="Resolución recomendada: 2880 x 2160"
@@ -306,7 +313,7 @@ function FormularioCreacionAnuncio(props) {
 
                     <div className="boton-agregar-div-out">
                         <button type="submit">
-                            <BotonAgregar texto="Agregar" />
+                        {procesandoSolicitud ? 'Procesando solicitud...' : <BotonAgregar texto="Agregar" />}
                         </button>
                     </div>
                     {enviado && (
