@@ -57,6 +57,7 @@ function SelectorColores({ colorSeleccionado, setColorSeleccionado }) {
                     onPress={() => {
                         setIsOpen(true);
                     }}
+                    data-cy="boton-selector-color"
                 >
                     <span className="sc-color-button-text">Cambiar color</span>
                 </Button>
@@ -64,7 +65,7 @@ function SelectorColores({ colorSeleccionado, setColorSeleccionado }) {
             <PopoverContent>
                 {() => (
                     <div className="sc-cologrid-container">
-                        <div className="sc-colorgrid">
+                        <div className="sc-colorgrid" data-cy="selector-color-grid">
                             {colors.map((color, index) => (
                                 <Button
                                     key={index}

@@ -12,7 +12,7 @@ import {
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import { get, put } from "src/utils/ApiRequests.js";
-import LogoRobot from "../../assets/Profile/Star.gif";
+import LogoRobot from "../../assets/Profile/Star.webp";
 import { getFromLocalStorage } from "../../utils/Storage";
 
 function Profile() {

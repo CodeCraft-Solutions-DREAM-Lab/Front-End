@@ -36,8 +36,8 @@
 @media only screen and (max-width: 480px) {
     .searchContainer-navbar {
         width: 180%; /* Adjust width for phone screens */
-        padding-right: 2rem;
-        margin-right: 1rem;
+        padding-right: 1rem;
+        margin-left: 1.5rem;
     }
     .searchBar {
         width: 100%; /* Set full width on phone screens */

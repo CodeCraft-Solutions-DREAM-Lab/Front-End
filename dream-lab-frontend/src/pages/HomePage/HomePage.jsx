@@ -16,27 +16,27 @@ const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
 const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
-    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80";
 
 // Imagenes
-import blobLeft from "src/assets/HomePage/blob-left.png";
-import smallBlob from "src/assets/HomePage/small-blob.png";
-import blobRight from "src/assets/HomePage/blob-right.png";
+import blobLeft from "src/assets/HomePage/blob-left.webp";
+import smallBlob from "src/assets/HomePage/small-blob.webp";
+import blobRight from "src/assets/HomePage/blob-right.webp";
 
 const IMAGES = [
     {
         id: "1",
-        url: "/HomePage/ImagenSalaVR.png",
+        url: "/HomePage/ImagenSalaVR.webp",
         title: "Sala VR",
     },
     {
         id: "2",
-        url: "/HomePage/ImagenUsoRouters.png",
+        url: "/HomePage/ImagenUsoRouters.webp",
         title: "Deep Net",
     },
     {
         id: "3",
-        url: "/HomePage/ImagenExpGoogle.png",
+        url: "/HomePage/ImagenExpGoogle.webp",
         title: "Testing Land",
     },
     {
@@ -61,22 +61,22 @@ const IMAGES = [
     },
     {
         id: "8",
-        url: "/HomePage/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.webp",
         title: "Curso de Swift",
     },
     {
         id: "9",
-        url: "/HomePage/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.webp",
         title: "Deep Net",
     },
     {
         id: "10",
-        url: "/HomePage/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.webp",
         title: "Curso de Swift",
     },
     {
         id: "11",
-        url: "/HomePage/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.webp",
         title: "Deep Net",
     },
 ];
@@ -357,10 +357,10 @@ function HomePage() {
                             imagenExp={
                                 isSalaClicked
                                     ? salasBD[imageID]?.detallesURL ||
-                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
                                     : salasBD[detallesBD[imageID].idSala - 1]
                                           ?.detallesURL ||
-                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
                             }
                             handleClose={handleCloseDetalles}
                             imageID={imageID}
