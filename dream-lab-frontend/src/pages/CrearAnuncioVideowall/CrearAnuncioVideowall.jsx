@@ -19,6 +19,11 @@ function CrearAnuncioVideowall() {
     const [opcionPersonalizadoSeleccionado, setOpcionPersonalizadoSeleccionado] = useState(false);
     const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] = useState(true);
     const [numElementos, setNumElementos] = useState(0);
+    const [actualizarAdminAnuncios, setActualizarAdminAnuncios] = useState(0);
+
+    const handleActualizarAdminAnuncios = () => {
+        setActualizarAdminAnuncios(prevState => prevState + 1); // Incrementar el estado en 1 para indicar un cambio
+    };
 
     // Define una función de callback para recibir el número de elementos desde el AdministradorAnuncios
     const handleNumElementos = (num) => {
@@ -49,6 +54,7 @@ function CrearAnuncioVideowall() {
                                 handleTipoAnuncioSeleccionado
                             }
                             numeroAnuncios={numElementos}
+                            actualizarAdminAnuncios={handleActualizarAdminAnuncios}
                         />
                     ) : (
                         <FormularioPersonalizado 
@@ -62,6 +68,7 @@ function CrearAnuncioVideowall() {
                                 handleTipoAnuncioSeleccionado
                             }
                             numeroAnuncios={numElementos}
+                            actualizarAdminAnuncios={handleActualizarAdminAnuncios}
                         />
                     )}
                 </div>
@@ -79,6 +86,7 @@ function CrearAnuncioVideowall() {
                     <div className="componente-admin-anuncios-div">
                         <AdministradorAnuncios 
                             onNumElementosChange={handleNumElementos}
+                            actualizar={actualizarAdminAnuncios} // Pasar el estado para actualizar el componente
                         />
                     </div>
                 </div>

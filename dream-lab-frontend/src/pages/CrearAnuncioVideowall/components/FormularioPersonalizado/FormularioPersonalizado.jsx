@@ -12,8 +12,12 @@ import { uploadFile } from "../../../../firebase/config"; // Importar la funció
 
 function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
-    const [opcionPersonalizadoSeleccionado, setOpcionPersonalizadoSeleccionado] = useState(true);
-    const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] = useState(false);
+    const [
+        opcionPersonalizadoSeleccionado,
+        setOpcionPersonalizadoSeleccionado,
+    ] = useState(true);
+    const [opcionExperienciaSeleccionado, setOpcionExperienciaSeleccionado] =
+        useState(false);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [caracteresRestantesTit, setCaracteresRestantesTit] = useState(50);
@@ -21,6 +25,7 @@ function FormularioCreacionAnuncio(props) {
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
     const [procesandoSolicitud, setProcesandoSolicitud] = useState(false); // Variable de estado para indicar si se está procesando la solicitud o no
+    const [mensajeAdvertencia, setMensajeAdvertencia] = useState(""); // Estado para el mensaje de advertencia
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
@@ -78,11 +83,11 @@ function FormularioCreacionAnuncio(props) {
                     body: JSON.stringify(anuncio), // Aquí pasamos directamente el objeto 'anuncio'
                 }
             );
-    
+
             if (!response.ok) {
                 throw new Error("Error al enviar datos al servidor.");
             }
-    
+
             console.log("Datos enviados correctamente al servidor.");
             // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
             setTitulo("");
@@ -91,12 +96,12 @@ function FormularioCreacionAnuncio(props) {
             setCaracteresRestantesTit(30);
             setCaracteresRestantesDesc(100);
             setEnviado(true);
+            props.actualizarAdminAnuncios();
 
             // Reiniciar el mensaje de enviado después de unos segundos
             setTimeout(() => {
                 setEnviado(false);
             }, 3000);
-
         } catch (error) {
             console.error("Error al enviar datos:", error);
         } finally {
@@ -105,18 +110,38 @@ function FormularioCreacionAnuncio(props) {
     };
 
     const formatDate = (date) => {
-        const options = { day: 'numeric', month: 'long', year: 'numeric' };
-        return new Intl.DateTimeFormat('es-ES', options).format(date);
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        return new Intl.DateTimeFormat("es-ES", options).format(date);
     };
-    
+
     const formatTime = (date) => {
-        const options = { hour: 'numeric', minute: 'numeric' };
-        return new Intl.DateTimeFormat('es-ES', options).format(date);
+        const options = { hour: "numeric", minute: "numeric" };
+        return new Intl.DateTimeFormat("es-ES", options).format(date);
     };
-    
+
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
         setProcesandoSolicitud(true); // Cambiar el estado de procesando solicitud a verdadero
+
+        // Validar campos obligatorios
+        if (
+            (!isCheckedSoloImage &&
+                (!titulo || !descripcion || !fileSeleccionado)) ||
+            (isCheckedSoloImage && !fileSeleccionado)
+        ) {
+            const errorMessage = isCheckedSoloImage
+                ? "Por favor adjunte una imagen."
+                : "Existen campos vacíos. Por favor complete todos los campos.";
+            setMensajeAdvertencia(errorMessage);
+
+            // Restablecer el mensaje de advertencia después de unos segundos
+            setTimeout(() => {
+                setMensajeAdvertencia("");
+            }, 3000);
+
+            setProcesandoSolicitud(false); // Cambiar el estado de procesando solicitud a falso
+            return; // Detener el envío del formulario
+        }
 
         // Recolectar los datos del formulario
         const fechaActual = new Date();
@@ -138,7 +163,7 @@ function FormularioCreacionAnuncio(props) {
         ); // 16:40:00
 
         const urlFoto = await uploadFile(fileSeleccionado); // Subir el archivo seleccionado
-    
+
         const formData = {
             descripcion: descripcion,
             encendido: true,
@@ -148,11 +173,11 @@ function FormularioCreacionAnuncio(props) {
             nombreEvento: "",
             nombreSala: titulo,
             personalizado: opcionPersonalizadoSeleccionado,
-            posicion: props.numeroAnuncios + 1,
+            posicion: props.numeroAnuncios,
             soloImagen: isCheckedSoloImage,
             urlImagen: urlFoto,
         };
-    
+
         // Enviar los datos al servidor
         await postData(formData);
     };
@@ -233,7 +258,7 @@ function FormularioCreacionAnuncio(props) {
                                 titulo="Sube una imagen"
                                 advertencia="Resolución recomendada: 2880 x 2160"
                                 onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
-                                />
+                            />
                         </div>
                     </div>
 
@@ -243,17 +268,30 @@ function FormularioCreacionAnuncio(props) {
                             isChecked={isCheckedSoloImage}
                             handleCheckboxChange={() =>
                                 handleCheckboxChange("soloImagen")
-                            }                            
+                            }
                         />
                     </div>
 
                     <div className="boton-agregar-div-out-personalizado">
                         <button type="submit" disabled={procesandoSolicitud}>
-                            {procesandoSolicitud ? 'Procesando solicitud...' : <BotonAgregar texto="Agregar" />}
+                            {procesandoSolicitud ? (
+                                "Procesando solicitud..."
+                            ) : (
+                                <BotonAgregar texto="Agregar" />
+                            )}
                         </button>
                     </div>
                 </form>
-                {enviado && <p className="mensaje-enviado-anuncio">¡Datos enviados correctamente!</p>} 
+                {mensajeAdvertencia && (
+                    <p className="mensaje-enviado-anuncio">
+                        {mensajeAdvertencia}
+                    </p>
+                )}
+                {enviado && (
+                    <p className="mensaje-enviado-anuncio">
+                        ¡Datos enviados correctamente!
+                    </p>
+                )}
             </div>
         </div>
     );

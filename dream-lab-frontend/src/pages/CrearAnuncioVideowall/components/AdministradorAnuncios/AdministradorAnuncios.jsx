@@ -13,8 +13,7 @@ function AdministradorAnuncios(props) {
   const [tiempoRestante, setTiempoRestante] = useState(10);
   const [mostrarCambiosAplicados, setMostrarCambiosAplicados] = useState(false);
   const timerRef = useRef(null);
-
-
+  const bottomRef = useRef(null); // Ref para el elemento al final del contenedor
 
   const fetchData = async () => {
     try {
@@ -26,11 +25,20 @@ function AdministradorAnuncios(props) {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }
 
   useEffect(() => {
     fetchData();
-  }, []);
+}, [props.actualizar]);
+
+  // Llamada a la función de scroll cuando se actualiza la prop actualizar
+   useEffect(() => {
+
+    setTimeout(() => {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 1000);
+
+  }, [props.actualizar]);
 
   const toggleTarjeta = async (index) => {
     const newData = [...data];
@@ -64,22 +72,6 @@ function AdministradorAnuncios(props) {
     setMostrarModal(false);
   };
 
-  function ajustarHoras(hora) {
-    const [horaStr, minutoStr] = hora.split(":");
-    let horaNum = parseInt(horaStr, 10);
-    let minutoNum = parseInt(minutoStr, 10);
-
-    horaNum -= 6;
-
-    if (horaNum < 0) {
-      horaNum += 24;
-    }
-
-    const horaAjustada = `${horaNum.toString().padStart(2, "0")}:${minutoNum.toString().padStart(2, "0")}`;
-
-    return horaAjustada;
-  }
-
   const Anuncio = ({ anuncio, index }) => {
     const [{ isDragging }, drag] = useDrag({
       type: "anuncio",
@@ -99,9 +91,6 @@ function AdministradorAnuncios(props) {
       },
     });
 
-    const horaInicioAjustada = ajustarHoras(anuncio.horaInicio);
-    const horaFinAjustada = ajustarHoras(anuncio.horaFin);
-
     return (
       <div ref={(node) => drag(drop(node))}>
         <TarjetaAnuncio
@@ -109,7 +98,7 @@ function AdministradorAnuncios(props) {
             anuncio.soloImagen
               ? "Imagen en videowall"
               : anuncio.personalizado
-              ? anuncio.descripcionReducida
+              ? reducirDescripcion(anuncio.descripcion)
               : anuncio.nombreSala
           }
           sala={
@@ -201,6 +190,7 @@ function AdministradorAnuncios(props) {
             />
           ))}
           <div className="degradado-down-anuncios"></div>
+          <div ref={bottomRef} />
         </div>
 
         {mostrarModal && (

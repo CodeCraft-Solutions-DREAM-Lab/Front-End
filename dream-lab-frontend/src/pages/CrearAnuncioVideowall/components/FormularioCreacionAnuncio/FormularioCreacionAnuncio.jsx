@@ -27,6 +27,7 @@ function FormularioCreacionAnuncio(props) {
     const [enviado, setEnviado] = useState(false); // Nuevo estado para manejar el mensaje de enviado
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
     const [procesandoSolicitud, setProcesandoSolicitud] = useState(false);
+    const [mensajeAdvertencia, setMensajeAdvertencia] = useState(""); // Estado para el mensaje de advertencia
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
@@ -57,7 +58,6 @@ function FormularioCreacionAnuncio(props) {
 
     const postData = async (anuncio) => {
         try {
-            
             const response = await fetch(
                 "https://createanuncio2-j5zt2ysdwq-uc.a.run.app",
                 {
@@ -83,6 +83,7 @@ function FormularioCreacionAnuncio(props) {
             setEnviado(true);
             setCaracteresRestantesTit(30);
             setFileSeleccionado(null);
+            props.actualizarAdminAnuncios();
 
             // Reiniciar el mensaje de enviado después de unos segundos
             setTimeout(() => {
@@ -99,6 +100,31 @@ function FormularioCreacionAnuncio(props) {
         event.preventDefault();
         setProcesandoSolicitud(true); // Cambiar el estado de procesando solicitud a verdadero
 
+        // Validar campos obligatorios
+        if (
+            (!isCheckedSoloImage &&
+                (!titulo ||
+                    !ubicacion ||
+                    !fecha ||
+                    !fileSeleccionado ||
+                    !horaInicio ||
+                    !horaFin)) ||
+            (isCheckedSoloImage && !fileSeleccionado)
+        ) {
+            const errorMessage = isCheckedSoloImage
+                ? "Por favor adjunte una imagen."
+                : "Existen campos vacíos. Por favor complete todos los campos.";
+            setMensajeAdvertencia(errorMessage);
+
+            // Restablecer el mensaje de advertencia después de unos segundos
+            setTimeout(() => {
+                setMensajeAdvertencia("");
+            }, 3000);
+
+            setProcesandoSolicitud(false); // Cambiar el estado de procesando solicitud a falso
+            return; // Detener el envío del formulario
+        }
+
         const urlFoto = await uploadFile(fileSeleccionado); // Subir el archivo seleccionado
 
         const formData = {
@@ -111,7 +137,7 @@ function FormularioCreacionAnuncio(props) {
             nombreEvento: titulo,
             nombreSala: ubicacion,
             personalizado: opcionPersonalizadoSeleccionado,
-            posicion: props.numeroAnuncios + 1,
+            posicion: props.numeroAnuncios,
             soloImagen: isCheckedSoloImage,
             urlImagen: urlFoto,
         };
@@ -313,9 +339,18 @@ function FormularioCreacionAnuncio(props) {
 
                     <div className="boton-agregar-div-out">
                         <button type="submit">
-                        {procesandoSolicitud ? 'Procesando solicitud...' : <BotonAgregar texto="Agregar" />}
+                            {procesandoSolicitud ? (
+                                "Procesando solicitud..."
+                            ) : (
+                                <BotonAgregar texto="Agregar" />
+                            )}
                         </button>
                     </div>
+                    {mensajeAdvertencia && (
+                        <p className="mensaje-enviado-anuncio">
+                            {mensajeAdvertencia}
+                        </p>
+                    )}
                     {enviado && (
                         <p className="mensaje-enviado-anuncio">
                             ¡Datos enviados correctamente!
