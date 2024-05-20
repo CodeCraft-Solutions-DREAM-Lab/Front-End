@@ -175,10 +175,16 @@ const SliderContent = (props) => {
     function handleClick() {
         props.stopRotating();
         if (props.index === props.activeSlide) {
-            saveToSessionStorage("experiencia", props.id);
-            navigate(
-                `/reservacion/sala?idSala=${props.idSala}&nombreSala=${props.title}`
-            );
+
+            if (props.isExperiencia) {
+                saveToSessionStorage("idExperiencia", props.id);
+                saveToSessionStorage("reservType", "experiencia");
+            } else {
+                saveToSessionStorage("idSala", props.id);
+                saveToSessionStorage("reservType", "sala");
+            }
+
+            navigate(`/reservacion/sala`);
         } else {
             props.onClick(props.index);
         }
