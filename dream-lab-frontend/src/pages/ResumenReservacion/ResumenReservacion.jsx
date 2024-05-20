@@ -137,32 +137,19 @@ function ResumenReservacion(props) {
                                     </p>
                                 )}
                             {data.map((material) => {
-                                const selectedMaterial = selectedMaterials.find(
-                                    (m) => m.materialId === material.id
+                            const selectedMaterial = selectedMaterials.find((m) => m.materialId === material.id);
+                            if (selectedMaterial && selectedMaterial.quantity > 0) {
+                                return (
+                                    <MaterialCardDupe
+                                        name={material.name}
+                                        image={material.image}
+                                        initialQuantity={selectedMaterial.quantity}
+                                    />
                                 );
-                                if (
-                                    selectedMaterial &&
-                                    selectedMaterial.quantity > 0
-                                ) {
-                                    return (
-                                        <MaterialCardDupe
-                                            key={material.id}
-                                            materialId={material.id}
-                                            name={material.name}
-                                            image={material.image}
-                                            hideQuantity={true}
-                                            initialQuantity={
-                                                selectedMaterial.quantity
-                                            }
-                                            maxQuantity={
-                                                material.cantidadDisponible
-                                            }
-                                        />
-                                    );
-                                } else {
-                                    return null; // If quantity is not greater than 0, don't render anything
-                                }
-                            })}
+                            } else {
+                                return null; // If quantity is not greater than 0, don't render anything
+                            }
+                        })}
                         </div>
                     </div>
                 </div>
