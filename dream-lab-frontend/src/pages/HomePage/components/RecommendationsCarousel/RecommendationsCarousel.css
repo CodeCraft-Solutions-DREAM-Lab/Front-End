@@ -47,6 +47,7 @@
 
 .textContainer {
     width: 45%;
+    overflow-y: auto;
 }
 
 .textContainer p {
