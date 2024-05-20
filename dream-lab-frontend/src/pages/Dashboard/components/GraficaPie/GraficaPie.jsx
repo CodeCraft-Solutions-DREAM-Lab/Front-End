@@ -60,8 +60,8 @@ function GraficaPie({ chartData, index, category }) {
         <div className="flex justify-between space-x-6">
             <DonutChart
                 variant="donut"
-                className="absolute top-0 left-0 h-full grafica-pie-chart"
-                style={{ width: "50%", fontSize: "5vh" }}
+                className="absolute top-0 left-0 h-full grafica-pie-chart ml-4"
+                style={{ width: "40%", fontSize: "5vh" }}
                 data={newChartData}
                 index={index}
                 category={category}
