@@ -23,7 +23,7 @@ import {
 	ListItemText,
 } from "@mui/material";
 import { get } from "../../utils/ApiRequests";
-import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
+//import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 
 const monthTranslations = {
 	January: "Enero",
@@ -178,7 +178,7 @@ function CronogramaAdmin() {
 
 	const [selectedOptions1, setSelectedOptions1] = useState([]);
 	const [selectedOptions2, setSelectedOptions2] = useState([]);
-/*
+
 	useEffect(() => {
 		get("reservaciones/cronograma")
 			.then((result) => {
@@ -202,7 +202,7 @@ function CronogramaAdmin() {
 				console.error("An error occurred:", error);
 				setIsLoadingGroups(false);
 			});
-	}, []);*/
+	}, []);
 
 	const [visibleTimeStart, setVisibleTimeStart] = useState(
 		moment().add(-8, "hour").valueOf()
@@ -231,15 +231,15 @@ function CronogramaAdmin() {
 
 	return (
 		<>
-			<NavBarAdmin />
+			{/*<NavBarAdmin />*/}
 			<div className="timeline-container-cronograma-admin">
 				<Timeline
 					groups={groups}
 					items={items}
 					visibleTimeStart={visibleTimeStart}
 					visibleTimeEnd={visibleTimeEnd}
-					defaultTimeStart={moment().add(-12, "hour").valueOf()}
-					defaultTimeEnd={moment().add(12, "hour").valueOf()}
+					defaultTimeStart={moment().add(-12, "hour")}
+					defaultTimeEnd={moment().add(12, "hour")}
 					lineHeight={50}
 					sidebarWidth={230}
 					onTimeChange={handleTimeChange}
