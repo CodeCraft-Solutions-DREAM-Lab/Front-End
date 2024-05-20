@@ -55,42 +55,42 @@ function RecomendationsCarousel(props) {
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-240px) translateZ(-400px) rotateY(35deg)",
+                    "translateX(-30%) translateZ(-400px) rotateY(35deg)",
                 zIndex: 9,
             };
         else if (activeSlide + 1 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(240px) translateZ(-400px) rotateY(-35deg)",
+                    "translateX(30%) translateZ(-400px) rotateY(-35deg)",
                 zIndex: 9,
             };
         else if (activeSlide - 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 8,
             };
         else if (activeSlide + 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 8,
             };
         else if (index < activeSlide - 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 7,
             };
         else if (index > activeSlide + 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 7,
             };
     };
