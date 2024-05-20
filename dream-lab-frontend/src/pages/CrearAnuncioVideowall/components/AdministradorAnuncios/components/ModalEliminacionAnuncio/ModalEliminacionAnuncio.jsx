@@ -15,33 +15,45 @@ import propTypes from "prop-types";
 function ModalEliminacionAnuncio(props) {
     const [eliminacionSatisfactoria, setEliminacionSatisfactoria] =
         useState(false);
+    const [procesandoSolicitud, setProcesandoSolicitud] = useState(false);
 
     const handleOk = async () => {
         try {
             console.log("Eliminando anuncio con ID:", props.anuncioId);
+            setProcesandoSolicitud(true); // Marcar la solicitud como en proceso
+
 
             // Realizar una solicitud DELETE a la función de Firebase Functions
-            const response = await fetch(`https://deleteanuncio-j5zt2ysdwq-uc.a.run.app?id=${props.anuncioId}`, {
-                method: "DELETE"
-            });
-            
+            const response = await fetch(
+                `https://deleteanuncio-j5zt2ysdwq-uc.a.run.app?id=${props.anuncioId}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
             // Verificar si la solicitud fue exitosa
             if (response.ok) {
                 setEliminacionSatisfactoria(true);
             } else {
                 // Manejar el caso de error
-                console.error("Error al eliminar el anuncio:", response.statusText);
+                console.error(
+                    "Error al eliminar el anuncio:",
+                    response.statusText
+                );
                 // Puedes mostrar un mensaje de error al usuario si lo deseas
             }
         } catch (error) {
             console.error("Error al eliminar el anuncio:", error);
             // Puedes mostrar un mensaje de error al usuario si lo deseas
+        } finally {
+            setProcesandoSolicitud(false); // Marcar la solicitud como finalizada
         }
     };
 
     const handleOkSatisfactorio = () => {
         setEliminacionSatisfactoria(false);
         props.onClose();
+        props.eliminarAnuncio(props.anuncioId); // Llama a la función para eliminar el anuncio
     };
 
     return (
@@ -106,7 +118,7 @@ function ModalEliminacionAnuncio(props) {
                     </Grid>
                 </ModalBody>
                 <ModalFooter className="justify-center">
-                    {!eliminacionSatisfactoria && (
+                {!eliminacionSatisfactoria && !procesandoSolicitud && (
                         <>
                             <Button
                                 className={`rounded-full px-12 py-2 bg-[#ac1b1b] font-bold text-white 
@@ -129,6 +141,9 @@ function ModalEliminacionAnuncio(props) {
                                 No
                             </Button>
                         </>
+                    )}
+                    {!eliminacionSatisfactoria && procesandoSolicitud && (
+                        <p> <b>Procesando solicitud...</b></p>
                     )}
                     {eliminacionSatisfactoria && (
                         <Button

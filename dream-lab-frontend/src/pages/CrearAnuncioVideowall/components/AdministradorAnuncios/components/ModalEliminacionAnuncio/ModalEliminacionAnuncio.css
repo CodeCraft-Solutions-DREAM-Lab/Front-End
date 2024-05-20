@@ -230,6 +230,10 @@
     padding-right: 4vw;
 }
 
+.procesando-anuncio-eliminacion-text{
+    font-weight: bold;
+}
+
 
 @media (max-width: 900px) {
 
