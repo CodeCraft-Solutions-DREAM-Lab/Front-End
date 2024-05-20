@@ -17,6 +17,8 @@ import { useSearchParams } from "react-router-dom";
 // API Requests
 import { get } from "src/utils/ApiRequests";
 
+import HiddenInputLogger from "../../../HiddenInputLogger/HiddenInputLogger";
+
 function CarouselReservaciones() {
     const [reservaciones, setReservaciones] = useState([]);
 
@@ -46,6 +48,7 @@ function CarouselReservaciones() {
         const fetchReservations = () => {
             console.log("Fetching reservations");
             get("videowall/reservaciones").then((res) => {
+                console.log(res);
                 if (JSON.stringify(res) !== JSON.stringify(rawReservaciones)) {
                     setRawReservaciones(res);
                     const processedRes = res.map((item) => {
@@ -131,6 +134,7 @@ function CarouselReservaciones() {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <HiddenInputLogger reservaciones={reservaciones} />
         </div>
     );
 }

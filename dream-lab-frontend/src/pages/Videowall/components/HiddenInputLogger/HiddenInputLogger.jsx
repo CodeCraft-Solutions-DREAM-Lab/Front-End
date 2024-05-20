@@ -13,12 +13,11 @@ import QRCode from "react-qr-code";
 
 import { post } from "src/utils/ApiRequests";
 
-const HiddenInputLogger = () => {
-    // const [idUsuario, setIdUsuario] = useState("");
-    // const [isLogging, setIsLogging] = useState(false);
+import propTypes from "prop-types";
+
+const HiddenInputLogger = ({ reservaciones }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
-    // const timeoutId = useRef(null);
     const [idUsuario, setIdUsuario] = useState("");
     const idUsuarioRef = useRef(idUsuario);
     const [isLogging, setIsLogging] = useState(false);
@@ -87,7 +86,16 @@ const HiddenInputLogger = () => {
     }, []);
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            style={{
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                width: "20w",
+            }}
+        >
             <ModalContent>
                 {(onClose) => (
                     <>
@@ -96,7 +104,7 @@ const HiddenInputLogger = () => {
                         </ModalHeader>
                         <ModalBody>
                             <div className="flex centered-container">
-                                <QRCode value={qr} />
+                                <QRCode value={qr} style={{ width: "80%" }} />
                             </div>
                         </ModalBody>
                         <ModalFooter>
@@ -112,7 +120,11 @@ const HiddenInputLogger = () => {
                 )}
             </ModalContent>
         </Modal>
-    ); // No visible UI component
+    );
+};
+
+HiddenInputLogger.propTypes = {
+    reservaciones: propTypes.array,
 };
 
 export default HiddenInputLogger;
