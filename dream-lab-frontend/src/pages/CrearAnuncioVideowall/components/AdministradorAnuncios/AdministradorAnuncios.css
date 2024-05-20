@@ -55,3 +55,27 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
 }
+
+@media (max-width: 1200px) {
+    .contenedor-admin-anuncios{
+        height: 37.8vw;
+    }
+
+    .contenedor-admin-anuncios-in{
+        max-height: 31vw;
+    }
+    
+}
+
+@media (max-width: 1100px) {
+    .contenedor-admin-anuncios{
+        height: 39.8vw;
+    }
+
+    .contenedor-admin-anuncios-in{
+        max-height: 33vw;
+    }
+    
+    
+}
+

@@ -37,3 +37,14 @@
     height: 4vh;
 }
 
+@media (max-width: 1200px) {
+    .div-exterior-boton-visualizar-videowall{
+        margin-top: 2.4vw;
+    }
+}
+
+@media (max-width: 1100px) {
+    .div-exterior-boton-visualizar-videowall{
+        margin-top: 6vw;
+    }
+}

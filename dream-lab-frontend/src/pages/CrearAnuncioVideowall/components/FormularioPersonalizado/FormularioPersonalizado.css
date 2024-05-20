@@ -118,3 +118,18 @@
     font-weight: lighter;
     font-size: small;
 }
+
+@media (max-width: 1200px) {
+    .div-exterior-formulario-creacion-anuncio-personalizado{
+        height: 45.2vw;
+        margin-top: 2.4vw;
+    }
+}
+
+@media (max-width: 1100px) {
+    .div-exterior-formulario-creacion-anuncio-personalizado{
+        height: 47.2vw;
+        margin-top: 6vw;
+
+    }
+}
