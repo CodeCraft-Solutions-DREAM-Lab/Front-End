@@ -13,7 +13,14 @@ function CrearAnuncioVideowall() {
     let navigate = useNavigate();
 
     const handleClickVideowall = () => {
-        navigate(`/videowall`);
+        const nuevaPestana = window.open('/videowall', '_blank');
+        if (nuevaPestana) {
+            nuevaPestana.focus();
+        } else {
+            // Manejar el caso donde el navegador bloquea la apertura de la nueva pestaña
+            // Puedes redirigir al usuario a la página en la misma pestaña si es necesario
+            navigate('/videowall');
+        }
     };
 
     const [opcionPersonalizadoSeleccionado, setOpcionPersonalizadoSeleccionado] = useState(false);

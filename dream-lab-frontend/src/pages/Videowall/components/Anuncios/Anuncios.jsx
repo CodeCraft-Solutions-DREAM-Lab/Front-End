@@ -65,7 +65,7 @@ function Anuncios() {
     // Filtrar los anuncios que están encendidos
     const visibleData = useMemo(() => {
         return data
-            .filter(anuncio => anuncio.encendido)
+            .filter((anuncio) => anuncio.encendido)
             .sort((a, b) => a.posicion - b.posicion);
     }, [data]);
 
@@ -78,7 +78,7 @@ function Anuncios() {
 
     return (
         <div className="containerAnuncios">
-                {visibleData.map((item, i) => (
+            {visibleData.map((item, i) => (
                 <React.Fragment key={i}>
                     <div
                         className="slideAnuncio"
