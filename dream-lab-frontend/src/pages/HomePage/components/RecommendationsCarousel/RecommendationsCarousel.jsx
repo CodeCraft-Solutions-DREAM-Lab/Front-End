@@ -55,42 +55,42 @@ function RecomendationsCarousel(props) {
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-240px) translateZ(-400px) rotateY(35deg)",
+                    "translateX(-30%) translateZ(-400px) rotateY(35deg)",
                 zIndex: 9,
             };
         else if (activeSlide + 1 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(240px) translateZ(-400px) rotateY(-35deg)",
+                    "translateX(30%) translateZ(-400px) rotateY(-35deg)",
                 zIndex: 9,
             };
         else if (activeSlide - 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 8,
             };
         else if (activeSlide + 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 8,
             };
         else if (index < activeSlide - 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 7,
             };
         else if (index > activeSlide + 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 7,
             };
     };
@@ -175,10 +175,16 @@ const SliderContent = (props) => {
     function handleClick() {
         props.stopRotating();
         if (props.index === props.activeSlide) {
-            saveToSessionStorage("experiencia", props.id);
-            navigate(
-                `/reservacion/sala?idSala=${props.idSala}&nombreSala=${props.title}`
-            );
+
+            if (props.isExperiencia) {
+                saveToSessionStorage("idExperiencia", props.id);
+                saveToSessionStorage("reservType", "experiencia");
+            } else {
+                saveToSessionStorage("idSala", props.id);
+                saveToSessionStorage("reservType", "sala");
+            }
+
+            navigate(`/reservacion/sala`);
         } else {
             props.onClick(props.index);
         }
