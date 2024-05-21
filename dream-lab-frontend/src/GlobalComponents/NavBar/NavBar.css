@@ -70,13 +70,13 @@
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 100%;
+    width: 190px;
 }
 
 .logo {
-    width: 55px;
-    margin-right: 4%;
-    padding-left: 3%;
+    width: 40px;
+    margin-right: 8%;
+    padding-left: 6%;
     cursor: pointer;
 }
 
@@ -100,9 +100,6 @@
         display: none; /* Hide the Dream Lab text on phone screens */
     }
 
-    .logo-container {
-        width: 40%;
-    }
 }
 
 @media only screen and (max-width: 968px ) and (min-width: 481px) {
