@@ -16,6 +16,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
+import AgregarImagenError from "../../../../assets/CrearAnuncioVideowall/subirArchivoErroneo.png";
 
 function FormularioCreacionAnuncio(props) {
     const [titulo, setTitulo] = useState("");
@@ -28,6 +29,11 @@ function FormularioCreacionAnuncio(props) {
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
     const [procesandoSolicitud, setProcesandoSolicitud] = useState(false);
     const [mensajeAdvertencia, setMensajeAdvertencia] = useState(""); // Estado para el mensaje de advertencia
+    const [isInvalidFile, setIsInvalidFile] = useState(false);
+
+    const handleInvalidFileChange = (invalid) => {
+        setIsInvalidFile(invalid);
+    };
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
@@ -109,11 +115,15 @@ function FormularioCreacionAnuncio(props) {
                     !fileSeleccionado ||
                     !horaInicio ||
                     !horaFin)) ||
-            (isCheckedSoloImage && !fileSeleccionado)
+            (isCheckedSoloImage && !fileSeleccionado) ||
+            isInvalidFile === true
         ) {
-            const errorMessage = isCheckedSoloImage
+            const errorMessage = isInvalidFile
+                ? "Por favor adjunte un archivo de imagen válido."
+                : isCheckedSoloImage
                 ? "Por favor adjunte una imagen."
                 : "Existen campos vacíos. Por favor complete todos los campos.";
+
             setMensajeAdvertencia(errorMessage);
 
             // Restablecer el mensaje de advertencia después de unos segundos
@@ -319,10 +329,24 @@ function FormularioCreacionAnuncio(props) {
                         <div className="subir-imagen-div-formulario">
                             <SubirImagenBox
                                 key={enviado ? "selected" : "not-selected"} // Agregar una clave que cambie cuando se seleccione o no un archivo
-                                imagen={AgregarImagen}
-                                titulo="Sube una imagen"
-                                advertencia="Resolución recomendada: 2880 x 2160"
+                                imagen={
+                                    isInvalidFile
+                                        ? AgregarImagenError
+                                        : AgregarImagen
+                                }
+                                titulo={
+                                    isInvalidFile
+                                        ? "Archivo inválido"
+                                        : "Sube una imagen"
+                                }
+                                advertencia={
+                                    isInvalidFile
+                                        ? "Formatos aceptados = " +
+                                          "jpg / jpeg / png / webp / gif"
+                                        : "Resolución recomendada: 2880 x 2160"
+                                }
                                 onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
+                                onInvalidFileChange={handleInvalidFileChange}
                             />
                         </div>
                     </div>
@@ -342,7 +366,12 @@ function FormularioCreacionAnuncio(props) {
                             {procesandoSolicitud ? (
                                 "Procesando solicitud..."
                             ) : (
-                                <BotonAgregar texto="Agregar" />
+                                <BotonAgregar
+                                    texto={
+                                        mensajeAdvertencia ? "Error" : "Agregar"
+                                    }
+                                    error={mensajeAdvertencia ? true : false}
+                                />
                             )}
                         </button>
                     </div>

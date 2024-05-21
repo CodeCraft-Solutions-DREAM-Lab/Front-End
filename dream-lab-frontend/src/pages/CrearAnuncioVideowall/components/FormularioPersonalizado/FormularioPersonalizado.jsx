@@ -7,8 +7,8 @@ import BotonAgregar from "../FormularioCreacionAnuncio/components/BotonAgregar/B
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
 import { get } from "src/utils/ApiRequests.js";
 import { Input } from "@nextui-org/react";
-import { Timestamp } from "firebase/firestore";
 import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
+import AgregarImagenError from "../../../../assets/CrearAnuncioVideowall/subirArchivoErroneo.png";
 
 function FormularioCreacionAnuncio(props) {
     const [isCheckedSoloImage, setisCheckedSoloImage] = useState(false);
@@ -26,11 +26,16 @@ function FormularioCreacionAnuncio(props) {
     const [fileSeleccionado, setFileSeleccionado] = useState(null);
     const [procesandoSolicitud, setProcesandoSolicitud] = useState(false); // Variable de estado para indicar si se está procesando la solicitud o no
     const [mensajeAdvertencia, setMensajeAdvertencia] = useState(""); // Estado para el mensaje de advertencia
+    const [isInvalidFile, setIsInvalidFile] = useState(false);
 
     const handleFileSelected = (file) => {
         // Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
         setFileSeleccionado(file);
         console.log("Archivo seleccionado:", file);
+    };
+
+    const handleInvalidFileChange = (invalid) => {
+        setIsInvalidFile(invalid);
     };
 
     const handleInputChange = (event) => {
@@ -127,11 +132,16 @@ function FormularioCreacionAnuncio(props) {
         if (
             (!isCheckedSoloImage &&
                 (!titulo || !descripcion || !fileSeleccionado)) ||
-            (isCheckedSoloImage && !fileSeleccionado)
+            (isCheckedSoloImage && !fileSeleccionado) ||
+            isInvalidFile === true
         ) {
-            const errorMessage = isCheckedSoloImage
+            
+            const errorMessage = isInvalidFile 
+                ? "Por favor adjunte un archivo de imagen válido."
+                : isCheckedSoloImage
                 ? "Por favor adjunte una imagen."
                 : "Existen campos vacíos. Por favor complete todos los campos.";
+
             setMensajeAdvertencia(errorMessage);
 
             // Restablecer el mensaje de advertencia después de unos segundos
@@ -254,10 +264,11 @@ function FormularioCreacionAnuncio(props) {
                         <div className="subir-imagen-div-formulario-personalizado">
                             <SubirImagenBox
                                 key={enviado ? "selected" : "not-selected"} // Agregar una clave que cambie cuando se seleccione o no un archivo
-                                imagen={AgregarImagen}
-                                titulo="Sube una imagen"
-                                advertencia="Resolución recomendada: 2880 x 2160"
+                                imagen={isInvalidFile? AgregarImagenError : AgregarImagen}
+                                titulo= {isInvalidFile ? "Archivo inválido" : "Sube una imagen"}
+                                advertencia= {isInvalidFile ? "Formatos aceptados = " + "jpg / jpeg / png / webp / gif" : "Resolución recomendada: 2880 x 2160"}
                                 onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
+                                onInvalidFileChange={handleInvalidFileChange}
                             />
                         </div>
                     </div>
@@ -277,7 +288,10 @@ function FormularioCreacionAnuncio(props) {
                             {procesandoSolicitud ? (
                                 "Procesando solicitud..."
                             ) : (
-                                <BotonAgregar texto="Agregar" />
+                                <BotonAgregar 
+                                    texto= {mensajeAdvertencia? "Error" : "Agregar" }
+                                    error= {mensajeAdvertencia? true : false}
+                                />
                             )}
                         </button>
                     </div>

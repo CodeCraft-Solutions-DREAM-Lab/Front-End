@@ -24,12 +24,11 @@ function TarjetaReservacion(props) {
                     <div className="div-datos-anuncio">
                         <h1 className="sala-anuncio" title={props.sala}>{tituloTruncado}</h1> {/* Utilizar el título completo como atributo title */}
                         <p
-                            className="experiencia-anuncio"
-                            style={{
-                                fontSize: props.personalizado
-                                    ? "small"
-                                    : "inherit",
-                            }}
+                            className={
+                                props.personalizado
+                                ? "experiencia-anuncio-personalizado"
+                                : "experiencia-anuncio"
+                            }
                         >
                             {props.experiencia}
                         </p>

@@ -124,13 +124,37 @@
 @media (max-width: 1200px) {
     .div-exterior-formulario-creacion-anuncio {
         height: 45.2vw;
-        margin-top: 2.4vw;
+        margin-top: 3.5vh;
+    }
+}
+
+@media (max-height: 700px) {
+    .div-exterior-formulario-creacion-anuncio {
+        height: 44.2vw;
+        margin-top: 1.8vh;
+    }
+}
+
+@media (max-height: 680px) {
+    .div-exterior-formulario-creacion-anuncio {
+        height: 44.2vw;
+        margin-top: 0.6vh;
     }
 }
 
 @media (max-width: 1100px) {
-    .div-exterior-formulario-creacion-anuncio-personalizado{
+    .div-exterior-formulario-creacion-anuncio{
         height: 47.2vw;
-        margin-top: 6vw;
+        margin-top: 3vw;
     }
 }
+
+@media (max-width: 1000px) {
+    .div-exterior-formulario-creacion-anuncio{
+        height: 47.3vw;
+        margin-top: 4vw;
+        font-size: small;
+    }
+}
+
+

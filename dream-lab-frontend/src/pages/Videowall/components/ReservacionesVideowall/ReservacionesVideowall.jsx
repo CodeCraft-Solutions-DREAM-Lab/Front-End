@@ -2,6 +2,7 @@ import "./ReservacionesVideowall.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
 import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
+import MensajeBienvenida from "../MensajeBienvenida/MensajeBienvenida";
 
 function ReservacionesVideowall() {
     return (
@@ -13,6 +14,10 @@ function ReservacionesVideowall() {
             </div>
             <div className="cr-carousel-container">
                 <CarouselReservaciones />
+            </div>
+            <div className="container-mensaje-bienvenida">
+                <MensajeBienvenida 
+                error={true}/>
             </div>
         </div>
     );

@@ -20,12 +20,11 @@
 
 .div-imagen-anuncio-izq {
     width: 23%;
-    height: 115px;
+    height: 118px;
     margin-right: -10%;
     margin-left: -10%;
-    border-top-left-radius: 28px; /* Redondear la esquina superior izquierda */
-    border-bottom-left-radius: 28px; /* Redondear la esquina inferior izquierda */
-    background-image: url('../../../../../assets/CrearAnuncioVideowall/salonClases.jpg'); /* Ruta a tu imagen */
+    border-top-left-radius: 24px; /* Redondear la esquina superior izquierda */
+    border-bottom-left-radius: 24px; /* Redondear la esquina inferior izquierda */
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el div */
     background-position: center; /* Centra la imagen dentro del div */
     opacity: 1;
@@ -126,6 +125,10 @@
     border-bottom: 1.5px solid #d2d2d2;
 }
 
+.experiencia-anuncio-personalizado{
+    font-size: small;
+}
+
 
 @media (max-width: 1200px) {
     .sala-anuncio {
@@ -138,6 +141,9 @@
 
     .div-fecha-anuncio {
         font-size: x-small;
+    }
+    .experiencia-anuncio-personalizado{
+        font-size: 10px;
     }
 }
 
@@ -169,26 +175,27 @@
         height: 1.8vh;
         justify-content: flex-end; /* Alinea al final del contenedor */
     }
+
 }
 
 @media (max-width: 820px), (height: 1366px) {
     .div-externo-anuncio {
-        padding-top: 4%;
+        padding-top: 0%;
         padding-right: 4%;
-        padding-bottom: 4%;
+        padding-bottom: 0%;
         padding-left: 4%;
     }
 
     .sala-anuncio {
-        font-size: small;
+        font-size: x-small;
     }
 
     .experiencia-anuncio {
-        font-size: small;
+        font-size: x-small;
     }
 
     .div-fecha-anuncio {
-        font-size: small;
+        font-size: x-small;
     }
 
     .hora-reservaion {
@@ -205,7 +212,19 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
-   
+
+    .div-imagen-anuncio-izq {
+        width: 23%;
+        height: 100px;
+        margin-right: -10%;
+        margin-left: -10%;
+        border-top-left-radius: 34px; /* Redondear la esquina superior izquierda */
+        border-bottom-left-radius: 34px; /* Redondear la esquina inferior izquierda */
+        background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el div */
+        background-position: center; /* Centra la imagen dentro del div */
+        opacity: 1;
+        filter: grayscale(0%);
+    }
 }
 
 @media (max-width: 500px) {

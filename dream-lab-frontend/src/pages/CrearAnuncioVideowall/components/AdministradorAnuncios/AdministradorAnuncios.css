@@ -75,7 +75,29 @@
     .contenedor-admin-anuncios-in{
         max-height: 33vw;
     }
-    
-    
 }
+
+@media (max-width: 1000px) {
+    .contenedor-admin-anuncios{
+        height: 39.8vw;
+        font-size: small;
+    }
+
+    .contenedor-admin-anuncios-in{
+        max-height: 33vw;
+    }
+}
+
+@media (max-height: 700px) {
+    .contenedor-admin-anuncios{
+        height: 38.3vw;
+        font-size: small;
+        margin-top: 2vh;
+    }
+
+    .contenedor-admin-anuncios-in{
+        max-height: 31vw;
+    }
+}
+
 
