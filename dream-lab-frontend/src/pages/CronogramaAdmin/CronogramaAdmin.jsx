@@ -23,7 +23,8 @@ import {
 	ListItemText,
 } from "@mui/material";
 import { get } from "../../utils/ApiRequests";
-//import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
+import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
+import menuIcon from "../../assets/Admin/menu-admin.svg"
 
 const monthTranslations = {
 	January: "Enero",
@@ -232,7 +233,10 @@ function CronogramaAdmin() {
 
 	return (
 		<>
-			{/*<NavBarAdmin />*/}
+		<div className="menu-icon-admin">
+			<img src={menuIcon}/>
+		</div>
+			<NavBarAdmin />
 			<div className="timeline-container-cronograma-admin">
 				<Timeline
 					groups={groups}

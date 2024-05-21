@@ -2,58 +2,68 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./NavBarAdmin.css";
-import logoDreamLab from "src/assets/Logos/LogoDreamLab.png";
-import userAvatarIcon from "src/assets/icons/user-avatar-icon.png";
-import settingsIcon from "src/assets/icons/settings-icon.png";
+import logoDreamLab from "src/assets/Logos/LogoDreamLab.webp";
+import studentViewIcon from "src/assets/NavBar/vista-estudiante-icon.svg";
+import profileIcon from "src/assets/NavBar/Administrador-perfil-icon.svg";
+import GlassCard from "../GlassCard/GlassCard";
 
 function NavBarAdmin() {
-    const [activeTab, setActiveTab] = useState("dashboard");
+	const [activeTab, setActiveTab] = useState("reservaciones");
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
+	const handleTabClick = (tab) => {
+		setActiveTab(tab);
+	};
 
-    return (
-        <div data-cy="navbar-admin" className="navbar-admin glass-card">
+	return (
+		<GlassCard borderRadius="10px 10px 10px 10px" data-cy="navbar-admin" classes="navbar-admin">
             <div className="centered-container">
-                <div className="navigation-buttons">
-                    <Link
-                        to={"/admin"}
-                        className={`nav-button ${activeTab === "dashboard" ? "active" : ""}`}
-                        onClick={() => handleTabClick("dashboard")}
-                    >
-                        Dashboard
-                    </Link>
-                    <Link
-                        to={"/admin"}
-                        className={`nav-button ${activeTab === "projects" ? "active" : ""}`}
-                        onClick={() => handleTabClick("projects")}
-                    >
-                        Projects
-                    </Link>
-                    <Link
-                        to={"/admin"}
-                        className={`nav-button ${activeTab === "users" ? "active" : ""}`}
-                        onClick={() => handleTabClick("users")}
-                    >
-                        Users
-                    </Link>
+			<Link to={"/admin"} className="logo-container-admin">
+                <div className="logo-admin" >
+                <img src={logoDreamLab} alt="Logo"/>
                 </div>
-                <Link to={"/admin"} className="logo-container-admin">
-                    <img src={logoDreamLab} alt="Logo" className="logo-admin" />
-                    <h1 className="dreamlab-admin">DREAM LAB</h1>
-                </Link>
-                <div className="user-icons">
-                    <img src={userAvatarIcon} alt="User Avatar" className="user-avatar-icon" />
-                    <img src={settingsIcon} alt="Settings" className="settings-icon" />
-                </div>
-            </div>
-        </div>
-    );
+				<h1 className="dreamlab-admin">DREAM LAB</h1>
+			</Link>
+			
+				<div className="navigation-buttons">
+					<Link
+						to={"/admin"}
+						className={`nav-button ${
+							activeTab === "reservaciones" ? "active" : ""
+						}`}
+						onClick={() => handleTabClick("reservaciones")}
+					>
+						Reservaciones
+					</Link>
+					<Link
+						to={"/dashboard"}
+						className={`nav-button ${activeTab === "Dashboard" ? "active" : ""}`}
+						onClick={() => handleTabClick("Dashboard")}
+					>
+						Dashboard
+					</Link>
+					<Link
+						to={"/crearAnuncio"}
+						className={`nav-button ${activeTab === "Videowall" ? "active" : ""}`}
+						onClick={() => handleTabClick("Videowall")}
+					>
+						Videowall
+					</Link>
+				</div>
+				<div className="user-icons-admin">
+					<img
+						src={studentViewIcon}
+						alt="User Avatar"
+						className="user-avatar-icon-admin"
+					/>
+					<img src={profileIcon} alt="Settings" className="settings-icon" />
+				</div>
+			</div>
+		</GlassCard>
+	);
 }
 
 NavBarAdmin.propTypes = {
-    view: PropTypes.string,
+	view: PropTypes.string,
 };
 
 export default NavBarAdmin;

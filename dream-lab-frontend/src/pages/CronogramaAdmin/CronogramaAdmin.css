@@ -94,5 +94,18 @@
 }
 
 .timeline-container-cronograma-admin {
-padding-top: 0;
+padding-top: 11vh;
+}
+
+.menu-icon-admin {
+  position: fixed;
+  bottom: 8%; /* Adjust the value as needed */
+  right: 5%; /* Adjust the value as needed */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.menu-icon-admin img {
+  width: 45px; /* Adjust the size as needed */
+  height: auto;
+  cursor: pointer;
 }

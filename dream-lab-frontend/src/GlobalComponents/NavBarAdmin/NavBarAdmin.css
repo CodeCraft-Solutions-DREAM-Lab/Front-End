@@ -1,60 +1,81 @@
 .navbar-admin {
     display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
     z-index: 100;
     width: 100%;
     height: 11vh;
-    margin: 0 auto;
     padding: 1.25%;
     background: rgba(255, 255, 255, 0.06);
     font-family: "Karla", sans-serif;
 }
 
-
-.navbar-positioning-admin {
+.centered-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    position: fixed;
-    z-index: 100;
     width: 100%;
-    padding: 2rem;
-    animation-duration: 0.5s;
+
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 7%;
+}
+
+.nav-button {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
 }
 
 .logo-container-admin {
     display: flex;
-    justify-content: left;
     align-items: center;
-    width: 100%;
+    
 }
 
 .logo-admin {
-    width: 55px;
-    margin-right: 1.5%;
+    width: 20%;
+    height: auto;
+    margin-right: 7%;
     padding-left: 2%;
     cursor: pointer;
 }
 
 .dreamlab-admin {
-    padding-top: 0.5%;
-    font-size: 100%;
+    font-size: 1.1rem;
     font-weight: 800;
     color: white;
-    
-    
+    margin-top: 3px;
+}
+
+.user-icons-admin {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin:1.5rem;
+}
+
+.user-avatar-icon-admin,
+.settings-icon {
+    width: 30px;
+    margin-left: 25px;
+    cursor: pointer;
+
 }
 
 @media only screen and (max-width: 480px) {
     .logo-admin {
-        width: 35px; /* Adjust the width for smaller screens */
-
-    /* Adjust padding as needed */
-        margin-left: 20px;
+        width: 35px;
     }
+
     .dreamlab-admin {
-        display: none; /* Hide the Dream Lab text on phone screens */
+        display: none;
     }
 
     .logo-container-admin {
@@ -62,33 +83,18 @@
     }
 }
 
-@media only screen and (max-width: 968px ) and (min-width: 481px) {
-    .logo-admin {
-        width: 40px; /* Adjust the width for smaller screens */
-
-        margin-left: 10px;
-
-    }
-    .dreamlab-admin {
-        display: none; /* Hide the Dream Lab text on phone screens */
-    }
+.nav-button {
+    margin: 0 10px;
+    font-family: "Karla";
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    opacity: 0.5;
+    transition: opacity 0.3s, font-size 0.3s;
 }
 
-.user-avatar-container-admin {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.centered-container {
-    display: flex;
-    justify-content: center;
-}
-
-.bg-transparent {
-    background-color: transparent !important;
-}
-
-.text-white {
-    color: white !important;
+.nav-button.active {
+    font-size: 20px;
+    opacity: 1;
 }
