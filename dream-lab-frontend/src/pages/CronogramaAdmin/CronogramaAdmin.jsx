@@ -156,16 +156,17 @@ const areas = ["Sala VR", "Electric Garage", "New Horizons"];
 const estados = ["Preparado", "En proceso", "Sin preparar"];
 
 function convertToMomentObjects(jsonData) {
-	return jsonData.map((event) => {
-		return {
-			id: event.id,
-			group: event.group,
-			title: event.title,
-			start_time: moment(event.start_time),
-			end_time: moment(event.end_time),
-		};
-	});
+    return jsonData.map((event) => {
+        return {
+            id: event.id,
+            group: event.group,
+            title: event.title,
+            start_time: moment(event.start_time).add(6, 'hours'),
+            end_time: moment(event.end_time).add(6, 'hours'),
+        };
+    });
 }
+
 
 function CronogramaAdmin() {
 	// Set the locale to Spanish
