@@ -121,6 +121,7 @@ function HomePage() {
     const [isSalaClicked, setIsSalaClicked] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [isContentVisible, setIsContentVisible] = useState(true); // Visibilidad de página al hacer una búsqueda
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -305,7 +306,9 @@ function HomePage() {
         setSearchTerm(term);
         if (term === "") {
             setSearchResults([]);
+            setIsContentVisible(true);
         } else {
+            setIsContentVisible(false);
             const lowercasedTerm = term.toLowerCase();
             const filteredSalas = salasBD.filter((sala) =>
                 sala.nombre.toLowerCase().includes(lowercasedTerm)

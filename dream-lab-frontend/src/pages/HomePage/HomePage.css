@@ -112,3 +112,7 @@
     );
     border-image-slice: 1;
 }
+
+.hidden {
+    display: none;
+}

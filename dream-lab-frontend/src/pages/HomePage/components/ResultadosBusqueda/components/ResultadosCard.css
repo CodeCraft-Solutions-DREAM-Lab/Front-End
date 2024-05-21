@@ -1,5 +1,5 @@
 .cardResultados{
-    width: 13vw;
+    width: 15.5vw;
 	height: auto;
     display: flex;
     flex-direction: column;
@@ -9,12 +9,12 @@
 
 .imageResultados{
     width: 97%;
+    height: 22vh;
     border-radius: 20px;
 }
 
 .titleResultados {
     z-index: 2; /* Ensure it appears above the image */
-    /*overflow-x: hidden;*/
     padding-top: 4%;
     font-size: 1.1rem;
     color: white;
