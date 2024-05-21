@@ -21,7 +21,7 @@ function SendButton({
             setProcessing(true);
             // Simulate asynchronous processing by sending the data to the server
             console.log("processTranscript transcript var: ", transcript);
-            const response = await fetch(`${API_URL}chatbot`, {
+            const response = await fetch(`https://recomendaciones.azurewebsites.net/recomendar`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
