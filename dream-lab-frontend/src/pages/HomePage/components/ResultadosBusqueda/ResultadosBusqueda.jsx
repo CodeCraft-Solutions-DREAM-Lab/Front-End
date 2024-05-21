@@ -27,44 +27,19 @@ const IMAGES = [
     },
 ];
 
-function ResultadosBusqueda() {
+function ResultadosBusqueda({ results }) {
   return (
     <div className="search-results-container">
-      <ResultadosCard 
-        key={1}
-        title={"Sala VR"}
-        image={"/HomePage/ImagenSalaVR.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={2}
-        title={"Deep Net"}
-        image={"/HomePage/ImagenUsoRouters.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={3}
-        title={"Testing Land"}
-        image={"/HomePage/ImagenExpGoogle.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={4}
-        title={"Deep Net"}
-        image={"/HomePage/ImagenUsoRouters.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={5}
-        title={"Curso de Swift"}
-        image={"/HomePage/ImagenCursoSwift.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={6}
-        title={"Deep Net"}
-        image={"/HomePage/ImagenUsoRouters.webp"}/>
-      <Spacer x={6} />
-      <ResultadosCard 
-        key={7}
-        title={"Curso de Swift"}
-        image={"/HomePage/ImagenCursoSwift.webp"}/>
-      <Spacer x={6} />
+      {results.map((result, index) => (
+        <React.Fragment key={index}>
+          <ResultadosCard
+             title={result.nombre}
+             image={result.fotoURL || result.portadaURL}
+          />
+          <Spacer x={6} />
+        </React.Fragment>
+      ))}
+      
     </div>
   );
 }

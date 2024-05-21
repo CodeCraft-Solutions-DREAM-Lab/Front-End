@@ -119,7 +119,8 @@ function HomePage() {
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
-    const [isSearchActive, setIsSearchActive] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -279,6 +280,7 @@ function HomePage() {
         )
             .then((result) => {
                 setDetallesBD(result);
+                console.log("DetallesBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -291,14 +293,28 @@ function HomePage() {
         )
             .then((result) => {
                 setSalasBD(result);
+                console.log("SalasBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
             });
     }, []);
 
-    const handleSearchInputChange = (isActive) => {
-        setIsSearchActive(isActive);
+    const handleSearch = (term) => {
+        console.log("term: ", term);
+        setSearchTerm(term);
+        if (term === "") {
+            setSearchResults([]);
+        } else {
+            const lowercasedTerm = term.toLowerCase();
+            const filteredSalas = salasBD.filter((sala) =>
+                sala.nombre.toLowerCase().includes(lowercasedTerm)
+            );
+            const filteredExperiencias = detallesBD.filter((exp) =>
+                exp.nombre.toLowerCase().includes(lowercasedTerm)
+            );
+            setSearchResults([...filteredSalas, ...filteredExperiencias]);
+        }
     };
 
     if (isLoading) {
@@ -307,7 +323,7 @@ function HomePage() {
 
     return (
         <div className="homepage">
-            <Navbar view="homeAlumno" autoHide={!detallesVisible} onSearchInputChange={handleSearchInputChange}/>
+            <Navbar view="homeAlumno" autoHide={!detallesVisible} onSearchInputChange={handleSearch}/>
             {/* Use the Navbar component */}
             <div className="background-container">
                 <div className="home-background-image-container">
@@ -374,7 +390,7 @@ function HomePage() {
                         />
                     )}
                 </div>
-                {!isSearchActive && (
+                {!searchTerm && (
                     <>
                         <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
                         {showInvalidNotice ? ( <RecomendacionesInvalidas /> ) : (
@@ -451,8 +467,8 @@ function HomePage() {
                         </div>
                     </>
                 )}
-                {isSearchActive && (
-                    <ResultadosBusqueda />
+                {searchTerm && (
+                    <ResultadosBusqueda results={searchResults} />
                 )}
                 
                 

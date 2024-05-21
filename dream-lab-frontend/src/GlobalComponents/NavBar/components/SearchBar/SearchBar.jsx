@@ -9,7 +9,7 @@ const SearchBar = ({ onSearchInputChange }) => {
     const handleInputChange = (event) => {
         const text = event.target.value;
         setSearchText(text);
-        onSearchInputChange(text.length > 0);
+        onSearchInputChange(text);
     };
 
     return (
