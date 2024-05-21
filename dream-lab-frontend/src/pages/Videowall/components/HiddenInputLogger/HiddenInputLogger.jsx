@@ -18,21 +18,21 @@ import propTypes from "prop-types";
 const HiddenInputLogger = ({ reservaciones }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
-    const [idUsuario, setIdUsuario] = useState("");
-    const idUsuarioRef = useRef(idUsuario);
+    const [tagId, settagId] = useState("");
+    const tagIdRef = useRef(tagId);
     const [isLogging, setIsLogging] = useState(false);
     const isLoggingRef = useRef(isLogging);
     const timeoutId = useRef(null);
 
     useEffect(() => {
-        idUsuarioRef.current = idUsuario;
+        tagIdRef.current = tagId;
         isLoggingRef.current = isLogging;
-    }, [idUsuario, isLogging]);
+    }, [tagId, isLogging]);
 
-    const createQR = (e, idUsuario) => {
+    const createQR = (e, tagId) => {
         e.preventDefault();
-        console.log("idUsuario: ", idUsuario);
-        post("auth/usuario", { usuario: idUsuario, origen: "qr" })
+        console.log("tagId: ", tagId);
+        post("auth/usuario", { tagId: tagId, origen: "qr" })
             .then((response) => {
                 const jwt = response.jwt;
                 if (jwt) {
@@ -54,17 +54,17 @@ const HiddenInputLogger = ({ reservaciones }) => {
             // Check if logging should start
             if (!isLoggingRef.current) {
                 setIsLogging(true);
-                setIdUsuario(char);
+                settagId(char);
             } else if (isLoggingRef.current) {
                 // Log the input and stop logging if "Enter" is pressed
                 if (char === "enter") {
-                    console.log(idUsuarioRef.current);
-                    createQR(e, idUsuarioRef.current);
+                    console.log(tagIdRef.current);
+                    createQR(e, tagIdRef.current);
                     setIsLogging(false);
-                    setIdUsuario("");
+                    settagId("");
                 } else {
-                    const newInput = idUsuarioRef.current + char;
-                    setIdUsuario(newInput);
+                    const newInput = tagIdRef.current + char;
+                    settagId(newInput);
                 }
             }
 
@@ -72,7 +72,7 @@ const HiddenInputLogger = ({ reservaciones }) => {
             clearTimeout(timeoutId.current);
             timeoutId.current = setTimeout(() => {
                 setIsLogging(false);
-                setIdUsuario("");
+                settagId("");
             }, 5000);
         };
 
