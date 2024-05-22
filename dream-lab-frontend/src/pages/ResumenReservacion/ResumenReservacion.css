@@ -1,29 +1,15 @@
 .reservation-summary-view {
+    justify-content: space-evenly;
     display: flex;
     transform: translateY(8rem);
+    width: 100%;
 }
 
 @media screen and (max-width: 480px) {
     .reservation-summary-view {
-        transform: translateY(5.5rem);
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .reservation-summary-view {
-        transform: translateY(9rem);
-    }
-}
-
-@media screen and (max-width: 390px) {
-    .reservation-summary-view {
-        transform: translateY(7rem);
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .reservation-summary-view {
-        transform: translateY(5.7rem);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 }
 
@@ -39,6 +25,9 @@
 
 .material-summary-container {
     height: 40vh;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 @media screen and (max-width: 480px) {
@@ -49,17 +38,18 @@
 
 .material-summary-title-text {
     font-family: "Karla", sans-serif;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 668;
     color: white;
-    margin-top: 5rem;
+    margin-top: 1.7rem;
     margin-right: 9rem;
+    text-align: center;
 }
 
 .material-summary-wrapper {
     display: flex;
 	align-items: center; /* Center the card container horizontally */
-    margin-left: 2rem;
+
 }
 
 .material-summary-sm {
@@ -75,6 +65,27 @@
     column-gap: 2.5rem;
     row-gap: 1rem;
 }
+
+/* Define scrollbar styles */
+.material-summary-sm::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  /* Track */
+  .material-summary-sm::-webkit-scrollbar-track {
+	background: none; 
+  }
+  
+  /* Handle */
+  .material-summary-sm::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.525); 
+	border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  .material-summary-sm::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7); 
+  }
 
 .material-summary-empty {
     font-family: "Karla", sans-serif;
@@ -92,12 +103,15 @@
 .reservation-summary-container-inner {
     display: flex;
     flex-flow: column;
-    gap: 1.4rem;
+    gap: 0rem;
+    align-items: center
 }
 
 .reservation-summary-title-row {
     display: flex;
+    
     align-items: center;
+    padding-bottom: 30px;
 }
 
 .back-arrow-responsive {
@@ -105,6 +119,11 @@
 }
 
 @media screen and (max-width: 480px) {
+
+    .reservation-summary-title-row {
+        justify-content: space-around;
+    }
+
     .back-arrow-responsive {
         display: block;
         width: 10px;
@@ -142,71 +161,44 @@
 
 .reservation-summary-title {
     font-family: "Karla", sans-serif;
-    font-size: 48px;
+    font-size: 30px;
     font-weight: 662;
     color: white;
     text-align: center;
 }
 
 @media screen and (max-width: 480px) {
+    .reservation-summary-container {
+        align-items: center;
+        padding-top: 4vh;
+    }
     .reservation-summary-title {
+        font-size: 23px;
+        align-items: center;
+    }
+}
+
+
+
+.reservation-summary-name {
+    font-family: "Karla", sans-serif;
+    font-size: 30px;
+    font-weight: 662;
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .reservation-summary-name {
         font-size: 24px;
     }
 }
 
-@media screen and (max-width: 431px) {
-    .reservation-summary-title {
-        font-size: 30px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .reservation-summary-title {
-        font-size: 26px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .reservation-summary-title {
-        font-size: 20px;
-    }
-}
-
-.reservation-summary-name {
-    font-family: "Karla", sans-serif;
-    font-size: 48px;
-    font-weight: 662;
-    color: white;
-    text-align: center;
-}
-
-@media screen and (max-width: 480px) {
-    .reservation-summary-name {
-        font-size: 28px;
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .reservation-summary-name {
-        font-size: 34px;
-    }
-}
-
-@media screen and (max-width: 390px) {
-    .reservation-summary-name {
-        font-size: 28px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .reservation-summary-name {
-        font-size: 22px;
-    }
-}
 
 .reservation-summary-people {
     font-family: "Karla", sans-serif;
-    font-size: 36px;
+    padding-bottom: 30px;
+    font-size: 30px;
     font-weight: 662;
     color: #D1D1D1;
     text-align: center;
@@ -214,25 +206,13 @@
 
 @media screen and (max-width: 480px) {
     .reservation-summary-people {
-        font-size: 20px;
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .reservation-summary-people {
         font-size: 24px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .reservation-summary-people {
-        font-size: 18px;
     }
 }
 
 .reservation-summary-date {
     font-family: "Karla", sans-serif;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 662;
     color: #DADADA;
     text-align: center;
@@ -240,25 +220,14 @@
 
 @media screen and (max-width: 480px) {
     .reservation-summary-date {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 430px) {
-    .reservation-summary-date {
         font-size: 20px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .reservation-summary-date {
-        font-size: 14px;
     }
 }
 
 .reservation-summary-time {
     font-family: "Karla", sans-serif;
-    font-size: 36px;
+    padding-bottom: 25px;
+    font-size: 25px;
     font-weight: 662;
     color: white;
     text-align: center;
@@ -284,59 +253,29 @@
 
 .reservation-summary-button {
     font-family: "Karla", sans-serif;
-    font-size: 24px;
+    width: 70%;
+    margin: auto;
+    font-size: 20px;
     font-weight: 661;
     background-color: white;
-    border-radius: 18px;
+    border-radius: 40px;
     color: #042E55;
-    margin-inline: 6rem;
-    padding: 0.5rem;
+    padding: 0.4rem;
+    transition-duration: 0.5s;
 }
 .reservation-summary-button:hover {
-    font-family: "Karla", sans-serif;
-    font-size: 24px;
-    font-weight: 661;
-    background-color: #042E55;
-    border-radius: 18px;
-    color: white;
+    background-color: lightgray;
 }
 
 @media screen and (max-width: 480px) {
     .reservation-summary-button {
         font-size: 16px;
-        margin-inline: 1rem;
+        align-items: center;
+        width: 100%;
     }
-    .reservation-summary-button:hover {
-        font-size: 16px;
-    }
+
 }
-@media screen and (max-width: 430px) {
-    .reservation-summary-button {
-        font-size: 20px;
-        margin-inline: 0.1rem;
-    }
-    .reservation-summary-button:hover {
-        font-size: 20px;
-    }
-}
-@media screen and (max-width: 390px) {
-    .reservation-summary-button {
-        font-size: 18px;
-        margin-inline: 0.1rem;
-    }
-    .reservation-summary-button:hover {
-        font-size: 18px;
-    }
-}
-@media screen and (max-width: 376px) {
-    .reservation-summary-button {
-        font-size: 15px;
-        margin-inline: 0.1rem;
-    }
-    .reservation-summary-button:hover {
-        font-size: 15px;
-    }
-}
+
 
 .reservation-summary-warning {
     display: flex;
@@ -403,5 +342,21 @@
 @media screen and (max-width: 376px) {
     .reservation-summary-warning-message {
         font-size: 13px;
+    }
+}
+
+.reservation-summary-glasscard-classes{
+    padding: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+@media screen and (max-width: 480px) {
+    .reservation-summary-glasscard-classes{
+        width: 90%;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
