@@ -110,11 +110,11 @@
     }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 680px) {
     .contenedor-admin-anuncios{
         height: 38.3vw;
         font-size: small;
-        margin-top: 2vh;
+        margin-top: 2.6vh;
     }
 
     .contenedor-admin-anuncios-in{

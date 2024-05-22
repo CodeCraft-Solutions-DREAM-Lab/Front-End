@@ -1,6 +1,6 @@
 import React from 'react';
 import "./TarjetaAnuncio.css";
-import ClicImage from "../../../../../../assets/Profile/trash.png";
+import ClicImage from "../../../../../../assets/Profile/trash.webp";
 import OpenEye from "../../../../../../assets/CrearAnuncioVideowall/openEye.png";
 import ClosedEye from "../../../../../../assets/CrearAnuncioVideowall/closedEye.png";
 

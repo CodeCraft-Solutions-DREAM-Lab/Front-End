@@ -8,8 +8,8 @@ import {
     Button,
 } from "@nextui-org/react";
 import { Grid } from "@mui/material";
-import errorLogo from "../../../../../../assets/Profile/errorLogo.png";
-import correctoLogo from "../../../../../../assets/Profile/correctLogo.png";
+import errorLogo from "../../../../../../assets/Profile/errorLogo.webp";
+import correctoLogo from "../../../../../../assets/Profile/correctLogo.webp";
 import propTypes from "prop-types";
 
 function ModalEliminacionAnuncio(props) {

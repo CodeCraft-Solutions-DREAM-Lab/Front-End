@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./FormularioPersonalizado.css";
 import Checkbox from "../FormularioCreacionAnuncio/components/Checkbox/Checkbox";
 import SubirImagenBox from "../FormularioCreacionAnuncio/components/SubirImagenBox/SubirImagenBox";
-import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.png";
+import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.webp";
 import BotonAgregar from "../FormularioCreacionAnuncio/components/BotonAgregar/BotonAgregar";
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
 import { get } from "src/utils/ApiRequests.js";
