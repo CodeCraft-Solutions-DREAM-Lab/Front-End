@@ -1,27 +1,27 @@
 .sfd-contenedor {
-    padding-top: 11vh;
-    height: 22vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 22vh;
+    padding-top: 11vh;
 }
 
 .sfd-boton-calendario {
-    color: transparent;
-    height: 5vh !important;
     display: flex;
+    height: 5vh !important;
+    color: transparent;
 }
 
 .sfd-boton-calendario-label {
-    color: white;
-    text-transform: uppercase;
-    font-family: "Karla", sans-serif;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     margin-right: 1vw;
     font-size: max(1.5vh, 1.5vw);
+    font-family: "Karla", sans-serif;
+    color: white;
+    text-transform: uppercase;
 }
 
 .sfd-boton-calendario-icono {

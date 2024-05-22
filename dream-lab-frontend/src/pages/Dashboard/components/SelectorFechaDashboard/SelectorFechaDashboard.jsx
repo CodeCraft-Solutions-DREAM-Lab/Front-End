@@ -9,8 +9,6 @@ import {
     Button,
 } from "@nextui-org/react";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
 
 // Hooks
 import { useState } from "react";
@@ -18,9 +16,11 @@ import { useState } from "react";
 // Iconos
 import icono_calendario from "src/assets/Admin/Dashboard/icono_calendario.svg";
 
-function SelectorFechaDashboard() {
+// Tipo de datos de las props
+import propTypes from "prop-types";
+
+function SelectorFechaDashboard({ fechaSeleccionada, setFechaSeleccionada }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentDate, setCurrentDate] = useState(dayjs().locale("es"));
 
     return (
         <div className="sfd-contenedor">
@@ -34,7 +34,11 @@ function SelectorFechaDashboard() {
                 <PopoverTrigger>
                     <Button
                         endContent={
-                            <img src={icono_calendario} alt="Calendario" className="sfd-boton-calendario-icono" />
+                            <img
+                                src={icono_calendario}
+                                alt="Calendario"
+                                className="sfd-boton-calendario-icono"
+                            />
                         }
                         className="sfd-boton-calendario"
                         onPress={() => {
@@ -43,7 +47,7 @@ function SelectorFechaDashboard() {
                         color="white"
                     >
                         <span className="sfd-boton-calendario-label">
-                            {currentDate.format("MMMM YY")}
+                            {fechaSeleccionada.format("MMMM YY")}
                         </span>
                     </Button>
                 </PopoverTrigger>
@@ -56,9 +60,9 @@ function SelectorFechaDashboard() {
                             setIsOpen(false);
                         }}
                         sx={{ height: "100%" }}
-                        value={currentDate}
+                        value={fechaSeleccionada}
                         onChange={(date) => {
-                            setCurrentDate(date);
+                            setFechaSeleccionada(date);
                         }}
                     />
                 </PopoverContent>
@@ -66,5 +70,10 @@ function SelectorFechaDashboard() {
         </div>
     );
 }
+
+SelectorFechaDashboard.propTypes = {
+    fechaSeleccionada: propTypes.object.isRequired,
+    setFechaSeleccionada: propTypes.func.isRequired,
+};
 
 export default SelectorFechaDashboard;

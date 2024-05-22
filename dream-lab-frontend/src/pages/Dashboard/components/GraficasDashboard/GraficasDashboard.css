@@ -2,9 +2,9 @@
     display: grid;
     gap: max(2vw, 2vh);
     grid-template-rows: repeat(4, minmax(0, 1fr));
-    padding-left: 1vw;
-    padding-right: 1vw;
     height: 80vh;
+    padding-right: 1vw;
+    padding-left: 1vw;
 }
 
 .graficas-dashboard-statcards-container {
@@ -25,10 +25,10 @@
 }
 
 .graficas-dashboard-grafica-default {
+    overflow-y: auto;
+    padding: max(1vw, 2vh);
     background-color: white;
     border-radius: max(1vw, 2vh);
-    padding: max(1vw, 2vh);
-    overflow-y: auto;
 }
 
 .graficas-dashboard-grafica-materiales-container {
