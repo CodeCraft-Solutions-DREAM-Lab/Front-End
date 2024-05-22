@@ -98,3 +98,50 @@
     font-size: 20px;
     opacity: 1;
 }
+
+/* Container element */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    font-family: "Karla";
+    font-weight: 500;
+    font-size: medium;
+    visibility: hidden;
+    width: 200px;
+    background-color: whitesmoke;
+    color: #042E55;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 145%; /* Position the tooltip below the text */
+    left: 10%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 40px;
+}
+
+/* Arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* Show the tooltip text when you hover over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}

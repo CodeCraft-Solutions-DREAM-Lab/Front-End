@@ -6,9 +6,12 @@ import logoDreamLab from "src/assets/Logos/LogoDreamLab.webp";
 import studentViewIcon from "src/assets/NavBar/vista-estudiante-icon.svg";
 import profileIcon from "src/assets/NavBar/Administrador-perfil-icon.svg";
 import GlassCard from "../GlassCard/GlassCard";
+import { useLocation } from 'react-router-dom';
+
 
 function NavBarAdmin() {
-	const [activeTab, setActiveTab] = useState("reservaciones");
+	const location = useLocation();
+	const [activeTab, setActiveTab] = useState(location.pathname);
 
 	const handleTabClick = (tab) => {
 		setActiveTab(tab);
@@ -28,35 +31,38 @@ function NavBarAdmin() {
 					<Link
 						to={"/admin"}
 						className={`nav-button ${
-							activeTab === "reservaciones" ? "active" : ""
+							activeTab === "/admin" ? "active" : ""
 						}`}
-						onClick={() => handleTabClick("reservaciones")}
+						onClick={() => handleTabClick("/admin")}
 					>
 						Reservaciones
 					</Link>
 					<Link
 						to={"/dashboard"}
-						className={`nav-button ${activeTab === "Dashboard" ? "active" : ""}`}
-						onClick={() => handleTabClick("Dashboard")}
+						className={`nav-button ${activeTab === "/dashboard" ? "active" : ""}`}
+						onClick={() => handleTabClick("/dashboard")}
 					>
 						Dashboard
 					</Link>
 					<Link
 						to={"/crearAnuncio"}
-						className={`nav-button ${activeTab === "Videowall" ? "active" : ""}`}
-						onClick={() => handleTabClick("Videowall")}
+						className={`nav-button ${activeTab === "/crearAnuncio" ? "active" : ""}`}
+						onClick={() => handleTabClick("/crearAnuncio")}
 					>
 						Videowall
 					</Link>
 				</div>
 				<div className="user-icons-admin">
-					<img
-						src={studentViewIcon}
-						alt="User Avatar"
-						className="user-avatar-icon-admin"
-					/>
-					<img src={profileIcon} alt="Settings" className="settings-icon" />
-				</div>
+                    <div className="tooltip">
+                        <img
+                            src={studentViewIcon}
+                            alt="User Avatar"
+                            className="user-avatar-icon-admin"
+                        />
+                        <span className="tooltiptext">Vista de estudiante</span>
+                    </div>
+                    <img src={profileIcon} alt="Settings" className="settings-icon" />
+                </div>
 			</div>
 		</GlassCard>
 	);
