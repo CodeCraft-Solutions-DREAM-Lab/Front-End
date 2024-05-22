@@ -15,6 +15,9 @@ import "dayjs/locale/es";
 // Hooks
 import { useState } from "react";
 
+// Iconos
+import icono_calendario from "src/assets/Admin/Dashboard/icono_calendario.svg";
+
 function SelectorFechaDashboard() {
     const [isOpen, setIsOpen] = useState(false);
     const [currentDate, setCurrentDate] = useState(dayjs().locale("es"));
@@ -30,11 +33,18 @@ function SelectorFechaDashboard() {
             >
                 <PopoverTrigger>
                     <Button
+                        endContent={
+                            <img src={icono_calendario} alt="Calendario" className="sfd-boton-calendario-icono" />
+                        }
+                        className="sfd-boton-calendario"
                         onPress={() => {
                             setIsOpen(true);
                         }}
+                        color="white"
                     >
-                        {currentDate.format("MMMM YY")}
+                        <span className="sfd-boton-calendario-label">
+                            {currentDate.format("MMMM YY")}
+                        </span>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="h-full">
