@@ -22,7 +22,10 @@ function Dashboard() {
     return (
         <>
             <NavBarAdmin />
-            <SelectorFechaDashboard fechaSeleccionada={fechaSeleccionada}, setFechaSeleccionada={setFechaSeleccionada} />
+            <SelectorFechaDashboard
+                fechaSeleccionada={fechaSeleccionada}
+                setFechaSeleccionada={setFechaSeleccionada}
+            />
             <GraficasDashboard />
         </>
     );
