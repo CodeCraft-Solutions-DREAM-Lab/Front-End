@@ -1,7 +1,7 @@
 import "./BotonCelular.css";
-import ImagenEstrella from "src/assets/Profile/estrella.jpg";
-import ImagenFlecha from "src/assets/Profile/flecha.png";
-import ImagenCalendario from "src/assets/Profile/calendario2.png";
+import ImagenEstrella from "src/assets/Profile/estrella.webp";
+import ImagenFlecha from "src/assets/Profile/flecha.webp";
+import ImagenCalendario from "src/assets/Profile/calendario2.webp";
 import { useNavigate } from "react-router-dom";
 
 function BotonCelular(props) {

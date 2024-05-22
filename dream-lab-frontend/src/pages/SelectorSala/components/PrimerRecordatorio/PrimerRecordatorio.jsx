@@ -7,7 +7,7 @@ import {
     Button,
 } from "@nextui-org/react";
 import { Grid } from "@mui/material";
-import infoLogo from "src/assets/SelectorSala/infoicon.png";
+import infoLogo from "src/assets/SelectorSala/infoicon.webp";
 
 import propTypes from "prop-types";
 

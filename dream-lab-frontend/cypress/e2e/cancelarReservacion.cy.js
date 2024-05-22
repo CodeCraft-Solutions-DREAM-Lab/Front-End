@@ -11,7 +11,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             apellidoM: "test",
                             apodo: "Ancient Soul",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                         },
                     ],
                     [],
@@ -24,7 +24,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#AFB7FF",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
                             valorMax: 50,
                         },
                         {
@@ -35,7 +35,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#C0A2FF",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/IndependentLearner.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/IndependentLearner.webp",
                             valorMax: 20,
                         },
                         {
@@ -46,7 +46,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#78C2F8",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.webp",
                             valorMax: 5,
                         },
                         {
@@ -57,7 +57,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FF87E5",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/TestingChampion.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/TestingChampion.webp",
                             valorMax: 5,
                         },
                         {
@@ -68,7 +68,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#98A6B6",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                             valorMax: 3,
                         },
                         {
@@ -79,7 +79,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FF6073",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Visionary.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Visionary.webp",
                             valorMax: 2,
                         },
                         {
@@ -90,7 +90,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#F8E478",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/PriorityAchiever.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/PriorityAchiever.webp",
                             valorMax: 500,
                         },
                         {
@@ -101,7 +101,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#A0DE83",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.webp",
                             valorMax: 1,
                         },
                         {
@@ -112,7 +112,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FEA767",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Communicator.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Communicator.webp",
                             valorMax: 1,
                         },
                         {
@@ -123,7 +123,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FFCCCC",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/ArtisticAlchemist.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/ArtisticAlchemist.webp",
                             valorMax: 1,
                         },
                     ],
@@ -148,7 +148,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                         apellidoM: "test",
                         apodo: "Ancient Soul",
                         iconoURL:
-                            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                     },
                 ],
                 output: {},
@@ -167,7 +167,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             apellidoM: "test",
                             apodo: "Ancient Soul",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                         },
                     ],
                     [
@@ -363,7 +363,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#AFB7FF",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
                             valorMax: 50,
                         },
                         {
@@ -374,7 +374,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#C0A2FF",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/IndependentLearner.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/IndependentLearner.webp",
                             valorMax: 20,
                         },
                         {
@@ -385,7 +385,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#78C2F8",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.webp",
                             valorMax: 5,
                         },
                         {
@@ -396,7 +396,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FF87E5",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/TestingChampion.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/TestingChampion.webp",
                             valorMax: 5,
                         },
                         {
@@ -407,7 +407,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#98A6B6",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                             valorMax: 3,
                         },
                         {
@@ -418,7 +418,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FF6073",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Visionary.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Visionary.webp",
                             valorMax: 2,
                         },
                         {
@@ -429,7 +429,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#F8E478",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/PriorityAchiever.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/PriorityAchiever.webp",
                             valorMax: 500,
                         },
                         {
@@ -440,7 +440,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#A0DE83",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Trustworthy.webp",
                             valorMax: 1,
                         },
                         {
@@ -451,7 +451,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FEA767",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/Communicator.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/Communicator.webp",
                             valorMax: 1,
                         },
                         {
@@ -462,7 +462,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             prioridadOtorgada: 1,
                             color: "#FFCCCC",
                             iconoURL:
-                                "https://dreamlabstorage.blob.core.windows.net/logros/ArtisticAlchemist.png",
+                                "https://dreamlabstorage.blob.core.windows.net/logros/ArtisticAlchemist.webp",
                             valorMax: 1,
                         },
                     ],
@@ -487,7 +487,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                         apellidoM: "test",
                         apodo: "Ancient Soul",
                         iconoURL:
-                            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.png",
+                            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp",
                     },
                 ],
                 output: {},

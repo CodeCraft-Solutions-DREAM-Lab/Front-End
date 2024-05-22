@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./FormularioCreacionAnuncio.css";
 import Checkbox from "./components/Checkbox/Checkbox";
 import SubirImagenBox from "./components/SubirImagenBox/SubirImagenBox";
-import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.png";
+import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImagen.webp";
 import BotonAgregar from "./components/BotonAgregar/BotonAgregar";
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
 import { DatePicker } from "@nextui-org/react";

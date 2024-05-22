@@ -52,7 +52,6 @@
 @media (max-width: 800px) {
     .texto-num-personas {
         margin-bottom: 1.5%;
-        font-size: 14px;
     }
 
     .slider-out {
@@ -82,7 +81,6 @@
 @media (max-width: 400px) {
     .texto-num-personas {
         margin-bottom: 1.5%;
-        font-size: 12px;
     }
 
     .slider-out {

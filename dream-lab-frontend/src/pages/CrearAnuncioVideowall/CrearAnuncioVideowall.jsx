@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./CrearAnuncioVideowall.css";
 import BotonVisualizarVideowall from "./components/BotonVisualizarVideowall/BotonVisualizarVideowall/BotonVisualizarVideowall";
-import imagenExpandir from "../../assets/CrearAnuncioVideowall/expandir.png";
-import flechaSiguiente from "../../assets/CrearAnuncioVideowall/flechaSiguiente.png";
+import imagenExpandir from "../../assets/CrearAnuncioVideowall/expandir.webp";
+import flechaSiguiente from "../../assets/CrearAnuncioVideowall/flechaSiguiente.webp";
 import { useNavigate } from "react-router-dom";
 import FormularioCreacionAnuncio from "./components/FormularioCreacionAnuncio/FormularioCreacionAnuncio";
 import Navbar from "../../GlobalComponents/NavBar/NavBar";
 import AdministradorAnuncios from "../CrearAnuncioVideowall/components/AdministradorAnuncios/AdministradorAnuncios";
+import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import FormularioPersonalizado from "../CrearAnuncioVideowall/components/FormularioPersonalizado/FormularioPersonalizado";
+
 
 function CrearAnuncioVideowall() {
     let navigate = useNavigate();
@@ -45,7 +47,8 @@ function CrearAnuncioVideowall() {
 
     return (
         <div>
-            <Navbar />
+            
+            <NavBarAdmin/>
 
             <div className="elementos-creacion-anuncio">
                 <div className="creacion-anuncio-columna-izq">

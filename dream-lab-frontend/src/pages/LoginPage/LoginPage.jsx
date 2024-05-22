@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import LoginTextField from "./components/LoginTextField/LoginTextField";
 import LoginButton from "./components/LoginButton/LoginButton";
@@ -8,8 +10,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 import "./LoginPage.css";
-
-import { useState, useEffect } from "react";
 
 // Accion que maneja la logica de validar si el usuario y contraseña son válidos
 // y regresar la ruta a la que se debe redirigir y un token que se guardará en
@@ -25,11 +25,12 @@ import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import { useDispatch } from "react-redux";
 import { setAuth } from "src/redux/Slices/userSlice";
 
-import topBlob from "src/assets/Login/top-blob.png";
-import bottomBlob from "src/assets/Login/bottom-blob.png";
-import dreamLabLogo from "src/assets/Logos/LogoDreamLab.png";
+import topBlob from "src/assets/Login/top-blob.webp";
+import bottomBlob from "src/assets/Login/bottom-blob.webp";
+import dreamLabLogo from "src/assets/Logos/LogoDreamLab.webp";
 
 import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen";
+import { saveToLocalStorage } from "../../utils/Storage";
 
 export default function LoginPage() {
     const [user, setUser] = useState("");
@@ -40,9 +41,36 @@ export default function LoginPage() {
     const [message, setMessage] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const jwt = searchParams.get("jwt");
 
     useEffect(() => {
-        if (getFromLocalStorage("token")) {
+        // Validar si hay un token en los parametros del url
+        if (jwt) {
+            // Autenticar el token de los parametros
+            setAuthenticating(true);
+            post("auth/token", { token: jwt })
+                .then((data) => {
+                    if (data) {
+                        // Guardar los datos regresados en el local storage
+                        saveToLocalStorage("token", jwt);
+                        saveToLocalStorage("user", data.token_data.usuario);
+                        // Guardar en redux que ya se hizo login
+                        dispatch(setAuth(true));
+                        // Redirigir a la página de home
+                        navigate("/home");
+                    }
+                })
+                .catch(() => {
+                    setAuthenticating(false);
+                })
+                .finally(() => {
+                    setAuthenticating(false);
+                });
+        }
+        // Si no hay token en los parametros, validar si hay un token en el
+        // local storage
+        else if (getFromLocalStorage("token")) {
             setAuthenticating(true);
             post("auth/token", {
                 token: getFromLocalStorage("token") || "",
@@ -59,7 +87,10 @@ export default function LoginPage() {
                 .finally(() => {
                     setAuthenticating(false);
                 });
-        } else {
+        }
+        // Si no hay token en los parametros ni en el local storage, terminar de
+        // autenticar para permitir hacer login convencional
+        else {
             setAuthenticating(false);
         }
     }, [dispatch, navigate]);
