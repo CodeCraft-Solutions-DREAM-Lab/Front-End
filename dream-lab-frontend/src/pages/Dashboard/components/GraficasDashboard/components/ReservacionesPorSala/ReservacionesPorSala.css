@@ -46,10 +46,12 @@
 
 #rps-bar-list .tremor-BarList-barText {
     font-size: max(1.5vh, 0.95vw) !important;
+    line-height: max(1.5vh, 2vw) !important;
 }
 
 #rps-bar-list .tremor-BarList-labelText {
     font-size: max(1.5vh, 0.95vw) !important;
+    line-height: max(1.5vh, 2vw) !important;
 }
 
 #rps-bar-list .h-8 {

@@ -4,6 +4,9 @@ import { propTypes } from "react-bootstrap/esm/Image";
 // Hooks
 import { useState } from "react";
 
+// Estilos
+import "./GraficaPie.css";
+
 function GraficaPie({ chartData, index, category }) {
     const [selectedLabel, setSelectedLabel] = useState(null);
 
@@ -61,7 +64,7 @@ function GraficaPie({ chartData, index, category }) {
             <DonutChart
                 variant="donut"
                 className="absolute top-0 left-0 h-full grafica-pie-chart ml-4"
-                style={{ width: "40%", fontSize: "5vh" }}
+                style={{ width: "40%" }}
                 data={newChartData}
                 index={index}
                 category={category}
@@ -69,12 +72,14 @@ function GraficaPie({ chartData, index, category }) {
                 onValueChange={(v) => setSelectedLabel(v ? v.uso : null)}
                 showAnimation
                 label={selectedLabel}
+                id="gp-chart"
             />
             <Legend
                 categories={legendCategories}
                 colors={colorScale}
                 className="absolute top-0 right-0 h-full"
                 style={{ width: "50%" }}
+                id="gp-legend"
             />
         </div>
     );

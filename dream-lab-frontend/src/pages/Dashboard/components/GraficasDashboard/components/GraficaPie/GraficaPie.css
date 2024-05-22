@@ -1,0 +1,15 @@
+#gp-legend .text-tremor-default {
+    font-size: max(2vh, 1.3vw);
+    line-height: max(2.5vh, 2vw);
+}
+
+#gp-legend .h-2,
+.w-2 {
+    height: 1.3vh !important;
+    width: 1.3vh !important;
+}
+
+#gp-chart .fill-tremor-content-emphasis {
+    background-color: aqua;
+    font-size: 5vh;
+}
