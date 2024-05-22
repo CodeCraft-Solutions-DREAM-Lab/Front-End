@@ -4,6 +4,7 @@ import TarjetaAnuncio from "./components/TarjetaAnuncio/TarjetaAnuncio";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ModalEliminacionAnuncio from "./components/ModalEliminacionAnuncio/ModalEliminacionAnuncio";
+import AnimacionCarga from "../../../../assets/CrearAnuncioVideowall/cargaAnimacion.webp"
 
 function AdministradorAnuncios(props) {
     const [data, setData] = useState([]);
@@ -15,18 +16,23 @@ function AdministradorAnuncios(props) {
         useState(false);
     const timerRef = useRef(null);
     const bottomRef = useRef(null); // Ref para el elemento al final del contenedor
+    const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
 
     const fetchData = async () => {
         try {
+            setLoading(true); // Establecer estado de carga a true al inicio de la carga
+
             const response = await fetch(
                 "https://readanuncios-j5zt2ysdwq-uc.a.run.app/"
             );
             const jsonData = await response.json();
             jsonData.sort((a, b) => a.posicion - b.posicion);
             setData(jsonData);
+            setLoading(false); // Establecer estado de carga a false al finalizar la carga
             props.onNumElementosChange(jsonData.length);
         } catch (error) {
             console.error("Error fetching data:", error);
+            setLoading(false); // En caso de error, también establecer estado de carga a false
         }
     };
 
@@ -202,17 +208,22 @@ function AdministradorAnuncios(props) {
                         : "Administrador de anuncios"}
                 </h1>
 
-                <div className="contenedor-admin-anuncios-in">
-                    {data.map((anuncio, index) => (
-                        <Anuncio
-                            key={anuncio.id}
-                            anuncio={anuncio}
-                            index={index}
-                        />
-                    ))}
-                    <div className="degradado-down-anuncios"></div>
-                    <div ref={bottomRef} />
-                </div>
+                {!loading ? (
+                    <div className="contenedor-admin-anuncios-in">
+                        {data.map((anuncio, index) => (
+                            <Anuncio
+                                key={anuncio.id}
+                                anuncio={anuncio}
+                                index={index}
+                            />
+                        ))}
+                        <div className="degradado-down-anuncios"></div>
+                        <div ref={bottomRef} />
+                    </div>
+                ) : <div className="cargando-anuncios-aviso-admin">
+                    <div className="animacion-carga-anuncios"><img  src={AnimacionCarga} alt="Animación de carga" /></div>
+                    <div className="texto-cargando-anuncio"><p className="">Cargando anuncios</p></div>
+                    </div>}
 
                 {mostrarModal && (
                     <ModalEliminacionAnuncio

@@ -17,7 +17,7 @@ function ReservacionesVideowall() {
             </div>
             <div className="container-mensaje-bienvenida">
                 <MensajeBienvenida 
-                error={true}/>
+                error={false}/>
             </div>
         </div>
     );

@@ -56,6 +56,28 @@
     border-bottom-left-radius: 20px; /* Radio de borde en la esquina inferior izquierda */
 }
 
+.cargando-anuncios-aviso-admin {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    text-align: center;
+    font-size: medium;
+    height: 100%; /* Opcional: para asegurarte de que ocupe toda la altura disponible */
+}
+
+.animacion-carga-anuncios{
+    width: 15%;
+    filter: invert(1) brightness(7); 
+    margin-bottom: -30%;
+
+}
+
+.texto-cargando-anuncio{
+    width: 100%;
+    margin-top: -50%;
+}
+
 @media (max-width: 1200px) {
     .contenedor-admin-anuncios{
         height: 37.8vw;
