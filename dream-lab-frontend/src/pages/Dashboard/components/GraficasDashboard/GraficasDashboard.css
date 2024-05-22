@@ -2,9 +2,9 @@
     display: grid;
     gap: max(2vw, 2vh);
     grid-template-rows: repeat(4, minmax(0, 1fr));
-    height: 100vh;
-    padding: 2vw;
-    padding-top: 13.5vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    height: 80vh;
 }
 
 .graficas-dashboard-statcards-container {

@@ -1,0 +1,7 @@
+.sfd-contenedor {
+    padding-top: 11vh;
+    height: 22vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
