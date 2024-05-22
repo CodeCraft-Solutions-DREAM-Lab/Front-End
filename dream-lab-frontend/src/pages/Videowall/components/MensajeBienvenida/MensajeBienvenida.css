@@ -43,7 +43,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 .agenda-aqui-alerta-videowall {
@@ -60,6 +60,16 @@
 .imagen-qr-alerta-videowall {
     padding: 3%;
     width: 7vh;
+}
+
+.imagen-qr-alerta-videowall-2{
+    width: 7vh;
+    padding: 3%;
+}
+
+.qr-code-alerta-generado{
+    width: 100%;
+    height: 100%;
 }
 
 .alerta-videowall-primera-mitad{
@@ -168,7 +178,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin-top: 4%;
+        margin-top: 7%;
     }
 
     .agenda-aqui-alerta-videowall {
