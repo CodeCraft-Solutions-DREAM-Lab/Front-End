@@ -3,16 +3,7 @@ import "./ReservacionesPorSala.css";
 
 import propTypes from "prop-types";
 
-import {
-    Card,
-    CategoryBar,
-    DeltaBar,
-    MarkerBar,
-    ProgressBar,
-    BarList,
-} from "@tremor/react";
-
-
+import { BarList } from "@tremor/react";
 
 function ReservacionesPorSala({ titulo, data }) {
     return (
@@ -20,7 +11,11 @@ function ReservacionesPorSala({ titulo, data }) {
             <h1 className="rps-titulo-grafica">{titulo}</h1>
             <div className="rps-contenedor-barras-outer">
                 <div className="rps-contenedor-barras-inner">
-                    <BarList data={data} showAnimation={true} />
+                    <BarList
+                        data={data}
+                        showAnimation={true}
+                        id="rps-bar-list"
+                    />
                 </div>
             </div>
         </div>
