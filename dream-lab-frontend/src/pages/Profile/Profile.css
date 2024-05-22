@@ -167,9 +167,14 @@
 }
 
 .navbar-div-profile {
-    margin-bottom: 7vh;
+    margin-bottom: 0vh;
 }
 
+@media (max-width: 1300px), (min-width: 820px) {
+    .navbar-div-profile {
+        margin-bottom: 5vh;
+    }
+}
 
 @media (max-width: 800px) {
     .sub {
@@ -241,10 +246,7 @@
         ); /* Crea un degradado de transparente a morado */
     }
 
-    .navbar-div-profile {
- 
-        margin-bottom: 2vh;
-    }
+
 }
 
 @media (height: 1366px) {

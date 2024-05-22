@@ -135,6 +135,7 @@
     font-weight: bolder;
     color: #042E55;
     text-transform: uppercase;
+    transition-duration: 0.5s;
 }
 
 @media screen and (max-width: 431px) {
@@ -163,12 +164,11 @@
 .button-more:hover {
     padding-block: 5px;
     padding-inline: 30px;
-    background-color: #042E55;
-    border: 2px solid white;
+    background-color: lightgray;
+    border: 2px solid lightgray;
     border-radius: 18px;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
-    color: white;
     text-transform: uppercase;
 }
 

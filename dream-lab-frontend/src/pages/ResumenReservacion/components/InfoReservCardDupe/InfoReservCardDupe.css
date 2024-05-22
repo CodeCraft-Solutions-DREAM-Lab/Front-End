@@ -1,4 +1,4 @@
-.alerta {
+.alerta-resumen-reservacion {
     margin-top: 8%;
     margin-bottom: 8%;
     padding: 10%;
@@ -7,7 +7,7 @@
     font-size: small;
 }
 
-.IRC-warning {
+.IRC-warning-resumen-reservacion {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -17,11 +17,11 @@
     border-radius: 24px;
     margin: 7%;
     margin-left: -5.5rem;
-    width:150%;
+    width:130%;
 }
 
 @media screen and (max-width: 770px) {
-    .IRC-warning {
+    .IRC-warning-resumen-reservacion {
         gap: 1rem;
         margin-left: 7%;
         margin: 0%;
@@ -31,23 +31,16 @@
     }
 }
 
-.IRC-warning-icon {
+.IRC-warning-icon-resumen-reservacion {
     margin-left: 2rem;
 }
 
 @media screen and (max-width: 480px) {
-    .IRC-warning-icon {
+    .IRC-warning-resumen-reservacion {
+        margin-bottom: 1%;
+    }
+    .IRC-warning-icon-resumen-reservacion {
         width: 25px;
         margin-left: 1.5rem;
-    }
-}
-@media screen and (max-width: 430px) {
-    .IRC-warning-icon {
-        width: 25px;
-    }
-}
-@media screen and (max-width: 390px) {
-    .IRC-warning-icon {
-        width: 25px;
     }
 }

@@ -22,6 +22,8 @@ export async function loginAction(
                 saveToLocalStorage("user", user.toLowerCase());
                 // Llamar a la función de éxito
                 success();
+                // Checa el rol del usuario
+                
                 // Regresar la dirección a la que se debe redirigir
                 return "/home";
             } else {
