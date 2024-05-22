@@ -8,6 +8,7 @@ import FormularioCreacionAnuncio from "./components/FormularioCreacionAnuncio/Fo
 import Navbar from "../../GlobalComponents/NavBar/NavBar";
 import AdministradorAnuncios from "../CrearAnuncioVideowall/components/AdministradorAnuncios/AdministradorAnuncios";
 import TipoAnuncioSelector from "./components/TipoAnuncioSelector/TipoAnuncioSelector";
+import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 
 function CrearAnuncioVideowall() {
 
@@ -20,7 +21,7 @@ function CrearAnuncioVideowall() {
     return(
         <div>
             
-            <Navbar/>
+            <NavBarAdmin/>
 
             <div className="elementos-creacion-anuncio">
 

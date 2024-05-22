@@ -6,6 +6,7 @@ import GraficaBarras from "./components/GraficaBarras/GraficaBarras";
 import GraficaPie from "./components/GraficaPie/GraficaPie";
 import ReservacionesPorSala from "./components/ReservacionesPorSala/ReservacionesPorSala";
 import ContenedorDisponibilidadSalas from "./components/ContenedorDisponibilidadSalas/ContenedorDisponibilidadSalas";
+import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 
 // Estilos
 import "./Dashboard.css";
@@ -57,6 +58,8 @@ function Dashboard() {
     ];
 
     return (
+        <>
+        <NavBarAdmin/>
         <div className="dashboard-main-container">
             <div className="dashboard-statcards-container">
                 <StatCard
@@ -107,6 +110,7 @@ function Dashboard() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

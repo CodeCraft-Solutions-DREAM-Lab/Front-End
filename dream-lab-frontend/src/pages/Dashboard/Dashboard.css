@@ -4,6 +4,7 @@
     grid-template-rows: repeat(4, minmax(0, 1fr));
     height: 100vh;
     padding: 2vw;
+    padding-top: 13.5vh;
 }
 
 .dashboard-statcards-container {
