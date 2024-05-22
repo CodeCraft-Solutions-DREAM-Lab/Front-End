@@ -171,7 +171,7 @@ function ResumenReservacion(props) {
 								data-cy="summary-lab-name"
 								className="reservation-summary-name"
 							>
-								{reservationData.nombre.toUpperCase()}
+								{reservationData.nombre}
 							</p>
 							<p
 								data-cy="summary-lab-people"
