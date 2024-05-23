@@ -21,6 +21,7 @@ function AdministradorAnuncios(props) {
     const fetchData = async () => {
         try {
             setLoading(true); // Establecer estado de carga a true al inicio de la carga
+            
 
             const response = await fetch(
                 "https://readanuncios-j5zt2ysdwq-uc.a.run.app/"
@@ -30,6 +31,7 @@ function AdministradorAnuncios(props) {
             setData(jsonData);
             setLoading(false); // Establecer estado de carga a false al finalizar la carga
             props.onNumElementosChange(jsonData.length);
+            console.log("Data fetched (GET):", jsonData);
         } catch (error) {
             console.error("Error fetching data:", error);
             setLoading(false); // En caso de error, también establecer estado de carga a false
@@ -200,7 +202,7 @@ function AdministradorAnuncios(props) {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className="contenedor-admin-anuncios">
-                <h1 className="sub-admin-anuncios">
+                <h1 className="sub-admin-anuncios" data-cy="titulo-admin-anuncios-videowall">
                     {mostrarCambiosAplicados
                         ? "Cambios aplicados satisfactoriamente"
                         : cambiosPendientes

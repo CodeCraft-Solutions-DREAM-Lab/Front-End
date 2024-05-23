@@ -5,8 +5,8 @@ function TipoAnuncioSelector({ opcionPersonalizadoSeleccionado, opcionExperienci
     
     return (
         <div className="contenedor-tipo-anuncio-selector">
-            <div onClick={funcion} className={opcionExperienciaSeleccionado ? "opcion-experiencia-anuncio-selector-pressed" : "opcion-experiencia-anuncio-selector"}> Evento </div>
-            <div  onClick={funcion} className={opcionPersonalizadoSeleccionado ? "opcion-personalizado-anuncio-selector-pressed" : "opcion-personalizado-anuncio-selector"}> Personalizado </div>
+            <div onClick={funcion} className={opcionExperienciaSeleccionado ? "opcion-experiencia-anuncio-selector-pressed" : "opcion-experiencia-anuncio-selector" }  data-cy="tipo-formulario-evento-boton"> Evento </div>
+            <div  onClick={funcion} className={opcionPersonalizadoSeleccionado ? "opcion-personalizado-anuncio-selector-pressed" : "opcion-personalizado-anuncio-selector"} data-cy="tipo-formulario-personalizado-boton"> Personalizado </div>
         </div>
     );
 }

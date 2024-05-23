@@ -1,5 +1,6 @@
 import "./TarjetaReservacion.css";
 import ClicImage from "../../../../assets/Profile/trash.webp";
+//import WaitImage from "../../../../assets/Profile/waitIcon.png";
 
 function TarjetaReservacion(props) {
     return (
@@ -13,6 +14,19 @@ function TarjetaReservacion(props) {
                 </div>
 
                 <div className="clic-tarjeta-reservacion">
+                    {props.pendiente && (
+                        <div className="clic-tarjeta-reservacion-2 tooltip-perfil">
+                            <img
+                                data-cy="wait-icon"
+                                className="clic-image-2"
+                                src={ClicImage}
+                                alt="Imagen presionar"
+                            />
+                            <span className="tooltiptext-perfil">
+                                Pendiente de ap
+                            </span>
+                        </div>
+                    )}
                     <img
                         data-cy="trash-icon"
                         className="clic-image"

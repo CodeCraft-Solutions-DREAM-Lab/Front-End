@@ -11,6 +11,7 @@ function Checkbox(props) {
                     type="checkbox"
                     checked={props.isChecked}
                     onChange={props.handleCheckboxChange}
+                    data-cy="checkbox-solo-imagen-anuncio-personalizado"
                 />
 
                 <div className="titulo-checkbox">{props.label}</div>

@@ -5,7 +5,6 @@ import imagenExpandir from "../../assets/CrearAnuncioVideowall/expandir.webp";
 import flechaSiguiente from "../../assets/CrearAnuncioVideowall/flechaSiguiente.webp";
 import { useNavigate } from "react-router-dom";
 import FormularioCreacionAnuncio from "./components/FormularioCreacionAnuncio/FormularioCreacionAnuncio";
-import Navbar from "../../GlobalComponents/NavBar/NavBar";
 import AdministradorAnuncios from "../CrearAnuncioVideowall/components/AdministradorAnuncios/AdministradorAnuncios";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import FormularioPersonalizado from "../CrearAnuncioVideowall/components/FormularioPersonalizado/FormularioPersonalizado";
@@ -46,7 +45,7 @@ function CrearAnuncioVideowall() {
     };
 
     return (
-        <div>
+        <div className="out-crear-anuncios-div">
             
             <NavBarAdmin/>
 
