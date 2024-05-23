@@ -116,6 +116,122 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
             ],
         }).as("salasDisponibles");
 
+        cy.intercept("GET", "dashboard/usoMaterialByMes", {
+            body: [
+                {
+                    year: 2024,
+                    month: 5,
+                    materiales: [
+                        {
+                            material: "Laptop",
+                            uso: 5,
+                        },
+                        {
+                            material: "Cable VGA",
+                            uso: 13,
+                        },
+                        {
+                            material: "Cable HDMI",
+                            uso: 2,
+                        },
+                        {
+                            material: "Cable Ethernet",
+                            uso: 6,
+                        },
+                        {
+                            material: "Proyector",
+                            uso: 1,
+                        },
+                        {
+                            material: "Monitor",
+                            uso: 8,
+                        },
+                    ],
+                },
+                {
+                    year: 2024,
+                    month: 4,
+                    materiales: [
+                        {
+                            material: "Laptop",
+                            uso: 3,
+                        },
+                        {
+                            material: "Cable VGA",
+                            uso: 7,
+                        },
+                        {
+                            material: "Cable HDMI",
+                            uso: 5,
+                        },
+                        {
+                            material: "Cable Ethernet",
+                            uso: 2,
+                        },
+                        {
+                            material: "Proyector",
+                            uso: 5,
+                        },
+                        {
+                            material: "Monitor",
+                            uso: 4,
+                        },
+                    ],
+                },
+                {
+                    year: 2024,
+                    month: 3,
+                    materiales: [
+                        {
+                            material: "Laptop",
+                            uso: 5,
+                        },
+                        {
+                            material: "Cable VGA",
+                            uso: 13,
+                        },
+                        {
+                            material: "Cable HDMI",
+                            uso: 2,
+                        },
+                        {
+                            material: "Cable Ethernet",
+                            uso: 6,
+                        },
+                        {
+                            material: "Proyector",
+                            uso: 1,
+                        },
+                        {
+                            material: "Monitor",
+                            uso: 8,
+                        },
+                    ],
+                },
+            ],
+        }).as("usoMaterialByMes");
+
+        cy.intercept("GET", "dashboard/penalizacionesByMes", {
+            body: [
+                {
+                    year: 2024,
+                    month: 5,
+                    penalizaciones: 8,
+                },
+                {
+                    year: 2024,
+                    month: 4,
+                    penalizaciones: 13,
+                },
+                {
+                    year: 2024,
+                    month: 3,
+                    penalizaciones: 6,
+                },
+            ],
+        }).as("penalizacionesByMes");
+
+        // Asignar una fecha especifica para que las pruebas sean consistentes
         cy.setDate(2024, 3, 22);
 
         // Iniciar sesion con test
@@ -123,9 +239,12 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         // Visitar el perfil
         cy.visit("/dashboard");
 
+        // Esperar a que las solicitudes se completen
         cy.wait("@reservacionesByMes");
         cy.wait("@reservacionBySalaByMes");
         cy.wait("@salasDisponibles");
+        cy.wait("@usoMaterialByMes");
+        cy.wait("@penalizacionesByMes");
     });
 
     it("Despliega correctamente los datos de las reservaciones por mes", () => {});
