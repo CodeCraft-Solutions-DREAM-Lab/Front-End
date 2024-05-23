@@ -295,24 +295,6 @@ describe("Creación de anuncios para el video wall", () => {
         });
     });
 
-    // Subir archivo inválido
-    it("Subir archivo inválido", () => {
-
-        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado")
-        cy.attachFileDataCy("subir-imagen-anuncio-personalizado", "../assets/archivoPrueba.pdf");
-        
-        cy.containsDataCy("titulo-subir-foto-box-videowall","Archivo inválido");
-        cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy("mensaje-advertencia-anuncio-evento","Por favor adjunte un archivo de imagen válido.");
-        
-    });
-
-    // Presionar botón para visualizar video wall
-    it("Visualizar video wall", () => {
-        cy.clickDataCy("boton-visualizar-videowall");      
-        cy.url().should("include", "/videowall"); // Reemplaza "/videoWall" con la parte de la URL a la que esperas ser redirigido  
-    });
-
     // Eliminar anuncio
     it("Eliminar anuncio", () => {
 
@@ -330,5 +312,88 @@ describe("Creación de anuncios para el video wall", () => {
         cy.containsDataCy("anuncio-eliminado-satisfactoriamente-videowall", "Eliminación satisfactoria")
         cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio")
 
+    });
+
+    // Presionar botón para visualizar video wall
+    it("Visualizar video wall", () => {
+        cy.clickDataCy("boton-visualizar-videowall");      
+        cy.url().should("include", "/videowall"); // Reemplaza "/videoWall" con la parte de la URL a la que esperas ser redirigido  
+    });
+
+    // Subir archivo inválido
+    it("Subir archivo inválido", () => {
+
+        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado")
+        cy.attachFileDataCy("subir-imagen-anuncio-personalizado", "../assets/archivoPrueba.pdf");
+        
+        cy.containsDataCy("titulo-subir-foto-box-videowall","Archivo inválido");
+        cy.clickDataCy("boton-agregar-anuncio");
+        cy.containsDataCy("mensaje-advertencia-anuncio-evento","Por favor adjunte un archivo de imagen válido.");
+        
+    });
+
+    // Ocultar anuncio
+    it("Ocultar anuncio", () => {
+       cy.clickDataCy("boton-ocultar-anuncio-videowall")
+
+       // intercept put
+         cy.intercept("PUT", "https://updateanuncio2-j5zt2ysdwq-uc.a.run.app?id=9wrYH3oxJAda6ucXuan", {
+              statusCode: 200,
+              body: {
+                encendido: false,
+                posicion: 0,
+              },
+         }).as("putAnuncio");
+
+         cy.get('[data-cy="boton-ocultar-anuncio-videowall"]').should('have.attr', 'src', '/src/assets/CrearAnuncioVideowall/closedEye.png');
+    });
+
+
+    // Reordenar anuncio
+    it("Reordenar anuncio", () => {
+
+        // Intercepta la solicitud GET para obtener la lista de anuncios y devuelve datos hardcodeados
+        cy.intercept("GET", "https://readanuncios-j5zt2ysdwq-uc.a.run.app/", {
+            statusCode: 200,
+            body: [
+                {
+                    descripcion: "",
+                    encendido: true,
+                    fecha: "12 de junio, 2024",
+                    horaFin: "17:00",
+                    horaInicio: "15:30",
+                    nombreEvento: "Taller: Un vistazo al pasado",
+                    nombreSala: "Graveyard",
+                    personalizado: false,
+                    posicion: 0,
+                    soloImagen: false,
+                    urlImagen:
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                    firebaseId: "9wrYH3oxJAda6ucXuan",
+                },
+                {
+                    descripcion: "",
+                    encendido: true,
+                    fecha: "",
+                    horaFin: "",
+                    horaInicio: "",
+                    nombreEvento: "",
+                    nombreSala: "",
+                    personalizado: false,
+                    posicion: 1,
+                    soloImagen: true,
+                    urlImagen:
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                    firebaseId: "9wrYH3oxJefgda6ucXuan",
+                },
+            ],
+        }).as("getMuchosAnuncios");
+
+        cy.wait("@getMuchosAnuncios").then(() => {
+            cy.get('[data-cy="tarjeta-anuncio-videowall"]').first().as('tarjeta'); // Alias para el primer elemento
+            cy.get('@tarjeta').trigger('mousedown');
+            cy.get('@tarjeta').trigger('mousemove', { clientX: 0, clientY: 2000 });
+            cy.get('@tarjeta').trigger('mouseup', { force: true }); // Usa { force: true } para garantizar que el evento se dispare incluso si el elemento está oculto
+        })
     });
 });

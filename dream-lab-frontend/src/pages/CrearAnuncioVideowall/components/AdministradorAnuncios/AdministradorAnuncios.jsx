@@ -202,7 +202,7 @@ function AdministradorAnuncios(props) {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className="contenedor-admin-anuncios">
-                <h1 className="sub-admin-anuncios">
+                <h1 className="sub-admin-anuncios" data-cy="titulo-admin-anuncios-videowall">
                     {mostrarCambiosAplicados
                         ? "Cambios aplicados satisfactoriamente"
                         : cambiosPendientes
