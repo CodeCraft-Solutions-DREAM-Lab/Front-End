@@ -1,0 +1,11 @@
+#gl-chart .recharts-cartesian-axis-ticks {
+    font-size: max(1.2vh, 0.8vw) !important;
+}
+
+#gl-chart .text-tremor-content-emphasis {
+    font-size: max(1.2vh, 0.8vw) !important;
+}
+
+#gl-chart .text-tremor-content {
+    font-size: max(1.1vh, 0.8vw) !important;
+}
