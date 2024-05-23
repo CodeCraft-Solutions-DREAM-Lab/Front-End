@@ -117,6 +117,7 @@ Cypress.Commands.add("getLength", (name) => {
         });
 });
 
+// Inicia sesión con un usuario específico
 Cypress.Commands.add("loginWith", (user) => {
     cy.intercept("POST", "auth/token", {
         body: { isAuth: "true" },
@@ -129,17 +130,22 @@ Cypress.Commands.add("loginWith", (user) => {
     cy.setLocalStorage("user", user);
 });
 
+// Comprueba que el url actual contenga una cadena específica
 Cypress.Commands.add("urlContains", (url) => {
     cy.url().should("include", url);
 });
 
+// Checa si un elemento con el atributo data-cy tiene un valor específico
 Cypress.Commands.add("isTypeDataCy", (name, type) => {
     return cy.getDataCy(name).hasAttribute("type", type);
 });
 
+// Adjunta un archivo a un elemento con el atributo data-cy
 Cypress.Commands.add("attachFileDataCy", (name, file) => {
     return cy.getDataCy(name).attachFile(file);
 });
 
-
-
+// Asigna una fecha específica al reloj de Cypress
+Cypress.Commands.add("setDate", (year, month, day) => {
+    cy.clock(Date.UTC(year, month, day), ["Date"]);
+});
