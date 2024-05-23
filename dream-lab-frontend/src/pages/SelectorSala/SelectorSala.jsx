@@ -14,6 +14,7 @@ import { get, post } from "src/utils/ApiRequests.js";
 import RoundedButton from "./components/RoundedButton/RoundedButton";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 import { InfoReservCard } from "./components/InfoReservCard/InfoReservCard";
+import GLBModelViewer from "./components/GLBModelViewer/GLBModelViewer";
 
 function SelectorSala() {
     let navigate = useNavigate();
@@ -125,7 +126,8 @@ function SelectorSala() {
                             setFetchFreeHoursAgain={setFetchFreeHoursAgain}
                         />
                         <div className="model">
-                            <img src={imagePlaceholder}></img>{" "}
+                            <GLBModelViewer modelPath="/isometric_office.glb"/>
+                            {/*<img src={imagePlaceholder}></img>*/}
                             {/* Placeholder del modelo 3D */}
                         </div>
                     </div>
