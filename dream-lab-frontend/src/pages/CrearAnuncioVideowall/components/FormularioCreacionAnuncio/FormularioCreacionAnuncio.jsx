@@ -64,6 +64,7 @@ function FormularioCreacionAnuncio(props) {
 
     const postData = async (anuncio) => {
         try {
+            console.log("Objeto JSON enviado:", anuncio);
             const response = await fetch(
                 "https://createanuncio2-j5zt2ysdwq-uc.a.run.app",
                 {
@@ -78,7 +79,6 @@ function FormularioCreacionAnuncio(props) {
             if (!response.ok) {
                 throw new Error("Error al enviar datos al servidor.");
             }
-
             console.log("Datos enviados correctamente al servidor.");
             // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
             setTitulo("");
@@ -252,6 +252,7 @@ function FormularioCreacionAnuncio(props) {
                                 maxLength={30}
                                 isDisabled={isCheckedSoloImage ? true : false}
                                 value={titulo}
+                                data-cy="input-titulo-anuncio-evento"
                             />
                         </div>
                         <div className="footer-input-formulario-anuncio">
@@ -273,6 +274,7 @@ function FormularioCreacionAnuncio(props) {
                                         isCheckedSoloImage ? true : false
                                     }
                                     value={ubicacion}
+                                    data-cy="input-ubicacion-anuncio-evento"
                                 />
                             </div>
 
@@ -288,6 +290,7 @@ function FormularioCreacionAnuncio(props) {
                                     }
                                     value={fecha}
                                     onChange={handleFechaChange}
+                                    data-cy="input-fecha-anuncio-evento"
                                 />
                             </div>
                         </div>
@@ -308,6 +311,7 @@ function FormularioCreacionAnuncio(props) {
                                     }
                                     value={horaInicio}
                                     onChange={handleHoraInicioChange}
+                                    data-cy="input-hora-inicio-anuncio-evento"
                                 />
                                 <div className="espacio-forms"></div>
                                 <label className="label-formulario-anuncio">
@@ -322,6 +326,7 @@ function FormularioCreacionAnuncio(props) {
                                     }
                                     value={horaFin}
                                     onChange={handleHoraFinChange}
+                                    data-cy="input-hora-fin-anuncio-evento"
                                 />{" "}
                             </div>
                         </div>
@@ -376,12 +381,12 @@ function FormularioCreacionAnuncio(props) {
                         </button>
                     </div>
                     {mensajeAdvertencia && (
-                        <p className="mensaje-enviado-anuncio">
+                        <p className="mensaje-enviado-anuncio" data-cy="mensaje-advertencia-anuncio-evento">
                             {mensajeAdvertencia}
                         </p>
                     )}
                     {enviado && (
-                        <p className="mensaje-enviado-anuncio">
+                        <p className="mensaje-enviado-anuncio" data-cy="mensaje-enviado-anuncio-evento">
                             ¡Datos enviados correctamente!
                         </p>
                     )}

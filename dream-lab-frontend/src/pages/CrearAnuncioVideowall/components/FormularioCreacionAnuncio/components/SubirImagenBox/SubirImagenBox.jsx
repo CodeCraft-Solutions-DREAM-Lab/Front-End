@@ -72,6 +72,7 @@ function SubirImagenBox(props) {
                 ref={fileInputRef}
                 style={{ display: "none" }}
                 onChange={handleFileChange}
+                data-cy="subir-imagen-anuncio-personalizado"
             />
             <div className="image-container">
                 {selectedImage && !invalidFile && (

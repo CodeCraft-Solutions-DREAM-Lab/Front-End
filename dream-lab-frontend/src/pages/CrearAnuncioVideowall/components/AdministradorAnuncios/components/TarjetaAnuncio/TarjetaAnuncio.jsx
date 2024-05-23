@@ -12,7 +12,8 @@ function TarjetaReservacion(props) {
         <div
             className={`div-externo-anuncio ${
                 props.encendido ? "" : "apagado"
-            }`}
+            }`} 
+            data-cy="tarjeta-anuncio-videowall"    
         >
             <div
                 style={{ backgroundImage: `url(${props.imagen})` }}
@@ -36,14 +37,14 @@ function TarjetaReservacion(props) {
 
                     <div className="clic-tarjeta-anuncio">
                         <img
-                            data-cy="eye-icon"
+                            data-cy="boton-ocultar-anuncio-videowall"    
                             className="clic-image2"
                             src={props.encendido ? OpenEye : ClosedEye}
                             alt="Imagen presionar"
                             onClick={props.funcion}
                         />
                         <img
-                            data-cy="trash-icon"
+                            data-cy="boton-eliminar-anuncio-videowall"    
                             className="clic-image"
                             src={ClicImage}
                             alt="Imagen presionar"
