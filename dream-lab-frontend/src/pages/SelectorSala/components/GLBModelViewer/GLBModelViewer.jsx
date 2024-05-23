@@ -90,6 +90,8 @@ const GLBModelViewer = ({ modelPath }) => {
 				// Set up OrbitControls to rotate around the container's center
 				const controls = new OrbitControls(camera, renderer.domElement);
 				controls.target.set(0, 0, 0); // Set controls' target to the scene center
+				controls.minDistance = 17; // Minimum zoom distance
+				controls.maxDistance = 17; // Maximum zoom distan
 				controls.update();
 				setLoading(false); // Model has loaded
 				animate();
@@ -124,7 +126,7 @@ const GLBModelViewer = ({ modelPath }) => {
 			// Check if model is defined
 			if (container) {
 				// Rotate the model
-				container.rotation.y += 0.01;
+				container.rotation.y -= 0.01;
 			}
 
 			renderer.render(scene, camera);
