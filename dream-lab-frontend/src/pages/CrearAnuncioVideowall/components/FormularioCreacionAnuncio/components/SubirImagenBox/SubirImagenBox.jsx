@@ -93,7 +93,7 @@ function SubirImagenBox(props) {
                         </div>
                         <div className="textos-subir-imagen-contenedor">
                             <div className="titulo-sube-imagen">
-                                <h1>{props.titulo}</h1>
+                                <h1 data-cy="titulo-subir-foto-box-videowall">{props.titulo}</h1>
                             </div>
                             <div className="advertencia-sube-imagen">
                                 <h1>{props.advertencia}</h1>
