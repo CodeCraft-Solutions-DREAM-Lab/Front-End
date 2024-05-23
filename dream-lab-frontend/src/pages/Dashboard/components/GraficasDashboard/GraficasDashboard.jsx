@@ -85,6 +85,59 @@ function GraficasDashboard({ month, year }) {
     // Estados de la disponibilidad de las salas
     const [disponibilidadSalas, setDisponibilidadSalas] = useState([]);
 
+    const getDataFromCurrentMonth = (data, setData, defaultValues) => {
+        // Buscar los datos del mes y año actual
+        const resCurrent = data.find((item) => {
+            return item.month === month && item.year === year;
+        });
+
+        // Si se encontraron los datos del mes actual se asignan, si no se
+        // asignan los valores por defecto
+        if (resCurrent) {
+            setData(resCurrent);
+        } else {
+            setData(defaultValues);
+        }
+    };
+
+    const getDataFromPrevMonth = (data, setData, defaultValues) => {
+        // Si el mes actual es enero, se asigna diciembre del año anterior
+        // como mes anterior y se asigna el año anterior
+        let prevMonth = month - 1;
+        let prevYear = year;
+        if (prevMonth < 1) {
+            prevMonth = 12;
+            prevYear = year - 1;
+        }
+
+        // Buscar los datos del mes anterior
+        const resPrev = data.find((item) => {
+            return item.month === prevMonth && item.year === prevYear;
+        });
+
+        // Si se encontraron los datos del mes anterior se asignan, si no se
+        // asignan los valores por defecto
+        if (resPrev) {
+            setData(resPrev);
+        } else {
+            setData({
+                ...defaultValues,
+                month: prevMonth,
+                year: prevYear,
+            });
+        }
+    };
+
+    const getDataFromCurrentAndPrevMonth = (
+        data,
+        setDataCurrent,
+        setDataPrev,
+        defaultValues
+    ) => {
+        getDataFromCurrentMonth(data, setDataCurrent, defaultValues);
+        getDataFromPrevMonth(data, setDataPrev, defaultValues);
+    };
+
     // Obtener los datos de todos los meses de las reservaciones totales,
     // reservaciones activas y reservaciones canceladas
     useEffect(() => {
@@ -96,17 +149,11 @@ function GraficasDashboard({ month, year }) {
     // De todos los datos de reservaciones generales, obtener los datos del mes
     // actual y del mes anterior con base en la fecha seleccionada
     useEffect(() => {
-        // Buscar los datos del mes actual
-        const resCurrent = reservacionesGenerales.find((reservacion) => {
-            return reservacion.month === month && reservacion.year === year;
-        });
-
-        // Si se encontraron los datos del mes actual se asignan, si no se
-        // asignan los valores por defecto
-        if (resCurrent) {
-            _setReservacionesGeneralesCurrent(resCurrent);
-        } else {
-            _setReservacionesGeneralesCurrent({
+        getDataFromCurrentAndPrevMonth(
+            reservacionesGenerales,
+            _setReservacionesGeneralesCurrent,
+            _setReservacionesGeneralesPrev,
+            {
                 year: year,
                 month: month,
                 reservacionesTotales: 0,
@@ -114,41 +161,8 @@ function GraficasDashboard({ month, year }) {
                 reservacionesCanceladas: 0,
                 reservacionesEnEspera: 0,
                 reservacionesDenegadas: 0,
-            });
-        }
-
-        // Buscar los datos del mes anterior
-        // Si el mes actual es enero, se asigna diciembre del año anterior
-        // como mes anterior y se asigna el año anterior
-        let prevMonth = month - 1;
-        let prevYear = year;
-        if (prevMonth < 1) {
-            prevMonth = 12;
-            prevYear = year - 1;
-        }
-
-        // Buscar los datos del mes anterior
-        const resPrev = reservacionesGenerales.find((reservacion) => {
-            return (
-                reservacion.month === prevMonth && reservacion.year === prevYear
-            );
-        });
-
-        // Si se encontraron los datos del mes anterior se asignan, si no se
-        // asignan los valores por defecto
-        if (resPrev) {
-            _setReservacionesGeneralesPrev(resPrev);
-        } else {
-            _setReservacionesGeneralesPrev({
-                year: prevYear,
-                month: prevMonth,
-                reservacionesTotales: 0,
-                reservacionesConfirmadas: 0,
-                reservacionesCanceladas: 0,
-                reservacionesEnEspera: 0,
-                reservacionesDenegadas: 0,
-            });
-        }
+            }
+        );
     }, [reservacionesGenerales, month, year]);
 
     // Generar una lista con la cantidad de reservaciones por mes para la
@@ -186,52 +200,16 @@ function GraficasDashboard({ month, year }) {
     // De todos los datos de las penalizaciones generales, obtener los datos del
     // mes actual y del mes anterior con base en la fecha seleccionada
     useEffect(() => {
-        // Buscar los datos del mes actual
-        const resCurrent = penalizaciones.find((penalizacion) => {
-            return penalizacion.month === month && penalizacion.year === year;
-        });
-
-        // Si se encontraron los datos del mes actual se asignan, si no se
-        // asignan los valores por defecto
-        if (resCurrent) {
-            _setPenalizacionesCurrent(resCurrent);
-        } else {
-            _setPenalizacionesCurrent({
+        getDataFromCurrentAndPrevMonth(
+            penalizaciones,
+            _setPenalizacionesCurrent,
+            _setPenalizacionesPrev,
+            {
                 year: year,
                 month: month,
                 penalizaciones: 0,
-            });
-        }
-
-        // Buscar los datos del mes anterior
-        // Si el mes actual es enero, se asigna diciembre del año anterior
-        // como mes anterior y se asigna el año anterior
-        let prevMonth = month - 1;
-        let prevYear = year;
-        if (prevMonth < 1) {
-            prevMonth = 12;
-            prevYear = year - 1;
-        }
-
-        // Buscar los datos del mes anterior
-        const resPrev = penalizaciones.find((penalizacion) => {
-            return (
-                penalizacion.month === prevMonth &&
-                penalizacion.year === prevYear
-            );
-        });
-
-        // Si se encontraron los datos del mes anterior se asignan, si no se
-        // asignan los valores por defecto
-        if (resPrev) {
-            _setPenalizacionesPrev(resPrev);
-        } else {
-            _setPenalizacionesPrev({
-                year: prevYear,
-                month: prevMonth,
-                penalizaciones: 0,
-            });
-        }
+            }
+        );
     }, [penalizaciones, month, year]);
 
     // Obtener los datos del uso de los materiales a traves de los meses
@@ -244,23 +222,12 @@ function GraficasDashboard({ month, year }) {
     // De todos los datos de uso de materiales, obtener los datos del mes actual
     // y del mes anterior con base en la fecha seleccionada
     useEffect(() => {
-        // Buscar los datos del mes actual
-        const resCurrent = usoMateriales.find((usoMaterial) => {
-            return usoMaterial.month === month && usoMaterial.year === year;
+        getDataFromCurrentMonth(usoMateriales, _setUsoMaterialesCurrent, {
+            year: year,
+            month: month,
+            total: 0,
+            materiales: [],
         });
-
-        // Si se encontraron los datos del mes actual se asignan, si no se
-        // asignan los valores por defecto
-        if (resCurrent) {
-            _setUsoMaterialesCurrent(resCurrent);
-        } else {
-            _setUsoMaterialesCurrent({
-                year: year,
-                month: month,
-                total: 0,
-                materiales: [],
-            });
-        }
     }, [usoMateriales, month, year]);
 
     // Obtener las reservaciones por sala a traves de los meses
@@ -272,24 +239,15 @@ function GraficasDashboard({ month, year }) {
 
     // Obtener los datos de las reservaciones por sala del mes actual
     useEffect(() => {
-        // Buscar los datos del mes actual
-        const resCurrent = reservacionesPorSala.find((reservacion) => {
-            return reservacion.month === month && reservacion.year === year;
-        });
-
-        // Si se encontraron los datos del mes actual se asignan, si no se
-        // asignan los valores por defecto
-        if (resCurrent) {
-            _setReservacionesPorSalaCurrent(resCurrent);
-        } else {
-            _setReservacionesPorSalaCurrent([
-                {
-                    year: year,
-                    month: month,
-                    salas: [],
-                },
-            ]);
-        }
+        getDataFromCurrentMonth(
+            reservacionesPorSala,
+            _setReservacionesPorSalaCurrent,
+            {
+                year: year,
+                month: month,
+                salas: [],
+            }
+        );
     }, [reservacionesPorSala, month, year]);
 
     // Obtener el estatus de disponibilidad de las salas
@@ -313,6 +271,7 @@ function GraficasDashboard({ month, year }) {
             "_reservacionesPorSalaCurrent",
             _reservacionesPorSalaCurrent
         );
+        console.log("disponibilidadSalas", disponibilidadSalas);
     }, [
         _reservacionesGeneralesCurrent,
         _reservacionesGeneralesPrev,
@@ -321,6 +280,7 @@ function GraficasDashboard({ month, year }) {
         _penalizacionesPrev,
         _usoMaterialesCurrent,
         _reservacionesPorSalaCurrent,
+        disponibilidadSalas,
     ]);
 
     // const datosReservaciones = [
