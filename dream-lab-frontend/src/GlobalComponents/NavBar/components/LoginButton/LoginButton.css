@@ -35,6 +35,7 @@
     cursor: pointer;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
+    transition-duration: 0.5s;
 }
 
 @media screen and (max-width: 431px) {
@@ -47,10 +48,9 @@
     box-sizing: border-box; /* Ensure padding is included in width calculation */
     height: 2.3rem; /* Adjusted height */
     padding: 0 30px 0 30px; /* Adjust for icon width and padding */
-    background-color: #042E55;
-    border: 2px solid white;
+    background-color: lightgray;
+    border: 2px solid lightgray;
     border-radius: 18px;
-    color: white;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
 }

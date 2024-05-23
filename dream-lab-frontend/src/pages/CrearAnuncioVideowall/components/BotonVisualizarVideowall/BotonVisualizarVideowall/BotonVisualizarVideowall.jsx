@@ -4,7 +4,7 @@ import "./BotonVisualizarVideowall.css";
 function BotonVisualizarVideowall(props) {
 
     return (
-        <div className="div-exterior-boton-visualizar-videowall" onClick={props.ruta}>
+        <div className="div-exterior-boton-visualizar-videowall" onClick={props.ruta} target="_blank">
             <div className="contenedor-visualizar-videowall">
                 <img className="logo-expandir-pantalla" src={props.imagenIzq} alt="Abrir pantalla" />
                 <h1 className="texto-boton-visualizar-videowall">{props.frase}</h1>

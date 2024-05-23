@@ -18,8 +18,9 @@ import { useSearchParams } from "react-router-dom";
 import { get } from "src/utils/ApiRequests";
 
 import HiddenInputLogger from "../../../HiddenInputLogger/HiddenInputLogger";
+import MensajeBienvenida from "../../../MensajeBienvenida/MensajeBienvenida";
 
-function CarouselReservaciones() {
+function CarouselReservaciones({ enviarReservaciones }) {
     const [reservaciones, setReservaciones] = useState([]);
 
     // Detener el autoplay al hacer hover
@@ -70,6 +71,7 @@ function CarouselReservaciones() {
                         return { ...item, horaInicio, horaFin };
                     });
                     setReservaciones(processedRes);
+                    enviarReservaciones(processedRes);
                 }
             });
         };

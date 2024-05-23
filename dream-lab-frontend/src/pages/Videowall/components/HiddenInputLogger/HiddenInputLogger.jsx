@@ -8,77 +8,76 @@ import {
     Button,
     useDisclosure,
 } from "@nextui-org/react";
-
 import QRCode from "react-qr-code";
-
 import { post } from "src/utils/ApiRequests";
-
 import propTypes from "prop-types";
+import { set } from "date-fns";
 
-const HiddenInputLogger = ({ reservaciones }) => {
+const HiddenInputLogger = ({ setQrCode, setTagId, setQrCodeGenerated  }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
-    const [idUsuario, setIdUsuario] = useState("");
-    const idUsuarioRef = useRef(idUsuario);
+    const [tagId, settagId] = useState("");
+    const tagIdRef = useRef(tagId);
     const [isLogging, setIsLogging] = useState(false);
     const isLoggingRef = useRef(isLogging);
     const timeoutId = useRef(null);
-
+    
     useEffect(() => {
-        idUsuarioRef.current = idUsuario;
+        tagIdRef.current = tagId;
         isLoggingRef.current = isLogging;
-    }, [idUsuario, isLogging]);
+    }, [tagId, isLogging]);
 
-    const createQR = (e, idUsuario) => {
+    const createQR = (e, tagId) => {
         e.preventDefault();
-        console.log("idUsuario: ", idUsuario);
-        post("auth/usuario", { usuario: idUsuario, origen: "qr" })
+        console.log("tagId: ", tagId);
+        post("auth/usuario", { tagId: tagId, origen: "qr" })
             .then((response) => {
                 const jwt = response.jwt;
-                if (jwt) {
-                    setQR(`https://www.dreamlab.world/login/?jwt=${jwt}`);
-                } else {
-                    setQR(`https://www.dreamlab.world/login`);
-                }
-                onOpen();
+                console.log("jwt: ", jwt);
+
+                const qrCode = jwt
+                    ? `https://www.dreamlab.world/login/?jwt=${jwt}`
+                    : `https://www.dreamlab.world/login`;
+                setQR(qrCode);
+                setQrCode(qrCode); // Pass the QR code to the parent
+                setTagId(tagId);
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
+                //onOpen();
             })
             .catch(() => {
-                setQR(`https://www.dreamlab.world/login`);
+                const qrCode = `https://www.dreamlab.world/login`;
+                setQR(qrCode);
+                setTagId(tagId);
+                setQrCode(qrCode); // Pass the QR code to the parent
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
             });
     };
 
     useEffect(() => {
         const handleKeyDown = (e) => {
             const char = e.key.toLowerCase();
-
-            // Check if logging should start
             if (!isLoggingRef.current) {
                 setIsLogging(true);
-                setIdUsuario(char);
+                settagId(char);
             } else if (isLoggingRef.current) {
-                // Log the input and stop logging if "Enter" is pressed
                 if (char === "enter") {
-                    console.log(idUsuarioRef.current);
-                    createQR(e, idUsuarioRef.current);
+                    console.log(tagIdRef.current);
+                    createQR(e, tagIdRef.current);
                     setIsLogging(false);
-                    setIdUsuario("");
+                    settagId("");
                 } else {
-                    const newInput = idUsuarioRef.current + char;
-                    setIdUsuario(newInput);
+                    const newInput = tagIdRef.current + char;
+                    settagId(newInput);
                 }
             }
-
-            // Reset the logging if no key is pressed within 5 seconds
             clearTimeout(timeoutId.current);
             timeoutId.current = setTimeout(() => {
                 setIsLogging(false);
-                setIdUsuario("");
+                settagId("");
             }, 5000);
         };
 
         document.addEventListener("keydown", handleKeyDown);
-
-        // Cleanup the event listener on component unmount
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
             clearTimeout(timeoutId.current);
@@ -124,7 +123,9 @@ const HiddenInputLogger = ({ reservaciones }) => {
 };
 
 HiddenInputLogger.propTypes = {
-    reservaciones: propTypes.array,
+    setQrCode: propTypes.func.isRequired,
+    setTagId: propTypes.func.isRequired,
+    setQrCodeGenerated: propTypes.func.isRequired,
 };
 
 export default HiddenInputLogger;

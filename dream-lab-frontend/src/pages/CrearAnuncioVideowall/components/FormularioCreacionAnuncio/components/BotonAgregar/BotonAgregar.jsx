@@ -1,11 +1,15 @@
 import React from "react";
 import "./BotonAgregar.css";
 
-
 function BotonAgregar(props) {
     return (
         <div className="boton-agregar-div" onClick={props.funcion}>
-            <h1 className="boton-agregar-texto">{props.texto}Agregar</h1>
+            <h1
+                className="boton-agregar-texto"
+                style={{ color: props.error ? "#B30D0D" : "#042e55" }}
+            >
+                {props.texto}
+            </h1>
         </div>
     );
 }
