@@ -14,7 +14,7 @@ function ContenedorDisponibilidadSalas({ titulo }) {
                 <div className="cds-contenedor-disponibilidad-inner">
                     <EstatusDisponibilidadSala
                         estaDisponible={true}
-                        sala="Electric Garage"
+                        sala="Biometrics Flexible Hall"
                     />
                     <EstatusDisponibilidadSala
                         estaDisponible={false}

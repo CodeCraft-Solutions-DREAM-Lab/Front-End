@@ -23,7 +23,7 @@
 
 .cds-contenedor-disponibilidad-inner {
     display: grid;
-    gap: 1vw;
+    gap: 0.8vw;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     width: 100%;
 }

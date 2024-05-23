@@ -1,17 +1,22 @@
+// Imagenes
 import GrayDot from "src/assets/Admin/Dashboard/gray_dot.svg";
 import GreenDot from "src/assets/Admin/Dashboard/green_dot.svg";
 
+// Propiedades
 import propTypes from "prop-types";
+
+// Estilos
+import "./EstatusDisponibilidadSala.css";
 
 function EstatusDisponibilidadSala({ estaDisponible, sala }) {
     return (
-        <div className="flex flex-row w-full items-center">
+        <div className="eds-contenedor">
             <img
                 src={estaDisponible ? GreenDot : GrayDot}
                 alt="Estatus de disponibilidad"
-                className="w-4 h-4 mr-2"
+                className="eds-icono-estatus"
             />
-            <p className="text-sm">{sala}</p>
+            <p className="eds-nombre-sala">{sala}</p>
         </div>
     );
 }

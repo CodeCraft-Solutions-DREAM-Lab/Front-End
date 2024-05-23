@@ -13,8 +13,8 @@
 }
 
 .sc-card-header {
-    font-size: max(1.5vw, 2vh);
-    font-weight: 600;
+    font-size: max(2vh, 1.2vw);
+    font-weight: 700;
     color: #313131;
 }
 
