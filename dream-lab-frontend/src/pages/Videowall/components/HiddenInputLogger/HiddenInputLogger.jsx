@@ -13,7 +13,7 @@ import { post } from "src/utils/ApiRequests";
 import propTypes from "prop-types";
 import { set } from "date-fns";
 
-const HiddenInputLogger = ({ setQrCode, setTagId }) => {
+const HiddenInputLogger = ({ setQrCode, setTagId, setQrCodeGenerated  }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
     const [tagId, settagId] = useState("");
@@ -21,8 +21,7 @@ const HiddenInputLogger = ({ setQrCode, setTagId }) => {
     const [isLogging, setIsLogging] = useState(false);
     const isLoggingRef = useRef(isLogging);
     const timeoutId = useRef(null);
-    const numeroEjecuciones = 0;
-
+    
     useEffect(() => {
         tagIdRef.current = tagId;
         isLoggingRef.current = isLogging;
@@ -42,6 +41,7 @@ const HiddenInputLogger = ({ setQrCode, setTagId }) => {
                 setQR(qrCode);
                 setQrCode(qrCode); // Pass the QR code to the parent
                 setTagId(tagId);
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
                 //onOpen();
             })
             .catch(() => {
@@ -49,6 +49,7 @@ const HiddenInputLogger = ({ setQrCode, setTagId }) => {
                 setQR(qrCode);
                 setTagId(tagId);
                 setQrCode(qrCode); // Pass the QR code to the parent
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
             });
     };
 
@@ -124,6 +125,7 @@ const HiddenInputLogger = ({ setQrCode, setTagId }) => {
 HiddenInputLogger.propTypes = {
     setQrCode: propTypes.func.isRequired,
     setTagId: propTypes.func.isRequired,
+    setQrCodeGenerated: propTypes.func.isRequired,
 };
 
 export default HiddenInputLogger;

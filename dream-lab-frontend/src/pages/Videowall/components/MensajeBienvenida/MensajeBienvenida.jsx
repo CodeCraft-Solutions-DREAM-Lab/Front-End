@@ -75,8 +75,8 @@ function MensajeBienvenida(props) {
                 </h1>
 
                 {/* Botón de cerrar */}
-                <div className="btn-cerrar-alerta-videowall">
-                    <button onClick={handleCloseClick}>X</button>
+                <div className="btn-cerrar-alerta-videowall"  onClick={handleCloseClick}>
+                    <button>X</button>
                 </div>
             </div>
 

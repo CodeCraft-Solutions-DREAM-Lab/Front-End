@@ -10,6 +10,7 @@ function ReservacionesVideowall() {
     const [tagId, setTagId] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const [reservacionesPadre, setReservacionesPadre] = useState([]);
+    const [qrCodeGeneratedCount, setQrCodeGeneratedCount] = useState(0);
     
     const handleCerrarMensaje = () => {
         setShowMessage(false);
@@ -26,12 +27,16 @@ function ReservacionesVideowall() {
             // Cleanup the timer when the component unmounts or qrCode changes
             return () => clearTimeout(timer);
         }
-    }, [qrCode, tagId]);
+    }, [qrCode, tagId, qrCodeGeneratedCount]);
 
     // Función para recibir las reservaciones desde el componente hijo
     const recibirReservaciones = (reservaciones) => {
         console.log("Reservaciones recibidas en el padre:", reservaciones);
         setReservacionesPadre(reservaciones);
+    };
+
+    const handleQrCodeGeneration = () => {
+        setQrCodeGeneratedCount((prevCount) => prevCount + 1);
     };
 
     return (
@@ -50,7 +55,7 @@ function ReservacionesVideowall() {
                 <MensajeBienvenida error={false} qrCode={qrCode} tagId={tagId} listadoReservaciones={reservacionesPadre} onClose={handleCerrarMensaje}/>
             </div>}
 
-            <HiddenInputLogger setQrCode={setQrCode} setTagId={setTagId}/>
+            <HiddenInputLogger setQrCode={setQrCode} setTagId={setTagId} setQrCodeGenerated={handleQrCodeGeneration}/>
         </div>
     );
 }
