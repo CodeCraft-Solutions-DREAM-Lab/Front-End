@@ -71,6 +71,17 @@ function GraficasDashboard({ month, year }) {
         materiales: [],
     });
 
+    // Estados de las reservaciones por sala
+    const [reservacionesPorSala, setReservacionesPorSala] = useState([]);
+    const [_reservacionesPorSalaCurrent, _setReservacionesPorSalaCurrent] =
+        useState([
+            {
+                year: year,
+                month: month,
+                salas: [],
+            },
+        ]);
+
     // Obtener los datos de todos los meses de las reservaciones totales,
     // reservaciones activas y reservaciones canceladas
     useEffect(() => {
@@ -249,6 +260,35 @@ function GraficasDashboard({ month, year }) {
         }
     }, [usoMateriales, month, year]);
 
+    // Obtener las reservaciones por sala a traves de los meses
+    useEffect(() => {
+        get("dashboard/reservacionesBySalaByMes").then((res) => {
+            setReservacionesPorSala(res);
+        });
+    }, []);
+
+    // Obtener los datos de las reservaciones por sala del mes actual
+    useEffect(() => {
+        // Buscar los datos del mes actual
+        const resCurrent = reservacionesPorSala.find((reservacion) => {
+            return reservacion.month === month && reservacion.year === year;
+        });
+
+        // Si se encontraron los datos del mes actual se asignan, si no se
+        // asignan los valores por defecto
+        if (resCurrent) {
+            _setReservacionesPorSalaCurrent(resCurrent);
+        } else {
+            _setReservacionesPorSalaCurrent([
+                {
+                    year: year,
+                    month: month,
+                    salas: [],
+                },
+            ]);
+        }
+    }, [reservacionesPorSala, month, year]);
+
     useEffect(() => {
         console.log(
             "_reservacionesGeneralesCurrent",
@@ -265,7 +305,7 @@ function GraficasDashboard({ month, year }) {
         historialReservaciones,
         _penalizacionesCurrent,
         _penalizacionesPrev,
-        usoMateriales,
+        _usoMaterialesCurrent,
     ]);
 
     // const datosReservaciones = [
@@ -283,20 +323,20 @@ function GraficasDashboard({ month, year }) {
     //     { cantidadReservaciones: 111, fecha: "Dic" },
     // ];
 
-    const datosUsoMateriales = [
-        { uso: 100, material: "Laptop" },
-        { uso: 50, material: "Proyector" },
-        { uso: 75, material: "Cable HDMI" },
-        { uso: 120, material: "Visor VR para smartphone" },
-        { uso: 30, material: "Bocinas" },
-        { uso: 95, material: "Micrófono" },
-        { uso: 44, material: "Cámara" },
-        { uso: 28, material: "Pantalla" },
-        { uso: 113, material: "Control" },
-        { uso: 17, material: "Audífonos" },
-        { uso: 94, material: "Teclado" },
-        { uso: 111, material: "Mouse" },
-    ];
+    // const datosUsoMateriales = [
+    //     { uso: 100, material: "Laptop" },
+    //     { uso: 50, material: "Proyector" },
+    //     { uso: 75, material: "Cable HDMI" },
+    //     { uso: 120, material: "Visor VR para smartphone" },
+    //     { uso: 30, material: "Bocinas" },
+    //     { uso: 95, material: "Micrófono" },
+    //     { uso: 44, material: "Cámara" },
+    //     { uso: 28, material: "Pantalla" },
+    //     { uso: 113, material: "Control" },
+    //     { uso: 17, material: "Audífonos" },
+    //     { uso: 94, material: "Teclado" },
+    //     { uso: 111, material: "Mouse" },
+    // ];
 
     const datosReservacionesPorSala = [
         { name: "Electric Garage", value: 23 },
@@ -392,7 +432,7 @@ function GraficasDashboard({ month, year }) {
                     <div className="graficas-dashboard-grafica-default graficas-dashboard-grafica-reservaiones-sala-container">
                         <ReservacionesPorSala
                             titulo="Reservaciones por sala"
-                            data={datosReservacionesPorSala}
+                            data={_reservacionesPorSalaCurrent.salas}
                         />
                     </div>
                     <div className="graficas-dashboard-grafica-default graficas-dashboard-grafica-disponbilidad-container">
