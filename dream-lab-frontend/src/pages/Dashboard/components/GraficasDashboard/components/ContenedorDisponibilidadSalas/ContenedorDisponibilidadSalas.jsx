@@ -12,10 +12,11 @@ function ContenedorDisponibilidadSalas({ titulo, data }) {
             <h1 className="cds-titulo-contenedor">{titulo}</h1>
             <div className="cds-contenedor-disponibilidad-outer">
                 <div className="cds-contenedor-disponibilidad-inner">
-                    {data.map((sala) => (
+                    {data.map((sala, index) => (
                         <EstatusDisponibilidadSala
                             bloqueada={sala.bloqueada}
                             sala={sala.sala}
+                            key={index}
                         />
                     ))}
                 </div>
@@ -26,6 +27,7 @@ function ContenedorDisponibilidadSalas({ titulo, data }) {
 
 ContenedorDisponibilidadSalas.propTypes = {
     titulo: propTypes.string.isRequired,
+    data: propTypes.array.isRequired,
 };
 
 export default ContenedorDisponibilidadSalas;

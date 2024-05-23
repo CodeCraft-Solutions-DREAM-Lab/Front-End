@@ -22,7 +22,7 @@ function EstatusDisponibilidadSala({ bloqueada, sala }) {
 }
 
 EstatusDisponibilidadSala.propTypes = {
-    estaDisponible: propTypes.bool.isRequired,
+    bloqueada: propTypes.bool.isRequired,
     sala: propTypes.string.isRequired,
 };
 
