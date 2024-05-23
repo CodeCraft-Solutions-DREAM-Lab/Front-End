@@ -64,7 +64,7 @@ function MensajeBienvenida(props) {
             className="mensaje-bienvenida-videowall"
             style={
                 error
-                    ? { border: "7px solid #e84ea0" }
+                    ? { border: "13px solid #e84ea0" }
                     : { border: "5px solid #1BAC55" }
             }
         >

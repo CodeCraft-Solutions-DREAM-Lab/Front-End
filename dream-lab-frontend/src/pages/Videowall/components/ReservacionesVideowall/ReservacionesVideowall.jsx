@@ -22,7 +22,7 @@ function ReservacionesVideowall() {
 
             const timer = setTimeout(() => {
                 setShowMessage(false);
-            }, 20000); // 10 seconds
+            }, 200000); // 10 seconds
 
             // Cleanup the timer when the component unmounts or qrCode changes
             return () => clearTimeout(timer);
