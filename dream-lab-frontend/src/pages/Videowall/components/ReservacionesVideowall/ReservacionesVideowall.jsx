@@ -1,9 +1,44 @@
+import { useState, useEffect } from "react";
 import "./ReservacionesVideowall.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
-
 import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
+import MensajeBienvenida from "../MensajeBienvenida/MensajeBienvenida";
+import HiddenInputLogger from "../HiddenInputLogger/HiddenInputLogger";
 
 function ReservacionesVideowall() {
+    const [qrCode, setQrCode] = useState("");
+    const [tagId, setTagId] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
+    const [reservacionesPadre, setReservacionesPadre] = useState([]);
+    const [qrCodeGeneratedCount, setQrCodeGeneratedCount] = useState(0);
+    
+    const handleCerrarMensaje = () => {
+        setShowMessage(false);
+    };
+
+    useEffect(() => {
+        if (qrCode) {
+            setShowMessage(true);
+
+            const timer = setTimeout(() => {
+                setShowMessage(false);
+            }, 20000); // 10 seconds
+
+            // Cleanup the timer when the component unmounts or qrCode changes
+            return () => clearTimeout(timer);
+        }
+    }, [qrCode, tagId, qrCodeGeneratedCount]);
+
+    // Función para recibir las reservaciones desde el componente hijo
+    const recibirReservaciones = (reservaciones) => {
+        console.log("Reservaciones recibidas en el padre:", reservaciones);
+        setReservacionesPadre(reservaciones);
+    };
+
+    const handleQrCodeGeneration = () => {
+        setQrCodeGeneratedCount((prevCount) => prevCount + 1);
+    };
+
     return (
         <div className="cr-container">
             <div className="cr-title-container">
@@ -12,8 +47,15 @@ function ReservacionesVideowall() {
                 </GlassCard>
             </div>
             <div className="cr-carousel-container">
-                <CarouselReservaciones />
+                <CarouselReservaciones enviarReservaciones={recibirReservaciones}/>
             </div>
+
+            {showMessage && 
+            <div className="container-mensaje-bienvenida">
+                <MensajeBienvenida error={false} qrCode={qrCode} tagId={tagId} listadoReservaciones={reservacionesPadre} onClose={handleCerrarMensaje}/>
+            </div>}
+
+            <HiddenInputLogger setQrCode={setQrCode} setTagId={setTagId} setQrCodeGenerated={handleQrCodeGeneration}/>
         </div>
     );
 }

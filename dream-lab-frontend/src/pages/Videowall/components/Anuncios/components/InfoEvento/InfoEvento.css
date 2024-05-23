@@ -39,3 +39,10 @@
     font-family: "Karla", sans-serif;
     color: white;
 }
+
+.info-descripcion{
+    font-size: 2vh;
+    font-family: "Karla", sans-serif;
+    color: white;
+    margin-bottom: 3.5vh;
+}
