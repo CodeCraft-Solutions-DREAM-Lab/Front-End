@@ -77,7 +77,7 @@ function GraficaPie({ chartData, index, category }) {
             <Legend
                 categories={legendCategories}
                 colors={colorScale}
-                className="absolute top-0 right-0 h-full"
+                className="absolute top-0 right-0 h-full overflow-y-auto"
                 style={{ width: "50%" }}
                 id="gp-legend"
             />

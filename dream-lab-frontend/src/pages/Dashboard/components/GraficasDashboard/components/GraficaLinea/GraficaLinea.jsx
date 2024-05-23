@@ -1,6 +1,9 @@
 import { AreaChart } from "@tremor/react";
 import { propTypes } from "react-bootstrap/esm/Image";
 
+// Estilos
+import "./GraficaLinea.css";
+
 function GraficaLinea({ chartData, index, categories }) {
     return (
         <AreaChart
@@ -13,12 +16,12 @@ function GraficaLinea({ chartData, index, categories }) {
             showAnimation
             showLegend={false}
             curveType="monotone"
+            id="gl-chart"
         />
     );
 }
 
 GraficaLinea.propTypes = {
-    titulo: propTypes.string,
     chartData: propTypes.array,
     index: propTypes.string,
     categories: propTypes.array,

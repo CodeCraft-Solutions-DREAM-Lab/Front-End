@@ -1,12 +1,35 @@
 #gp-legend .text-tremor-default {
-    font-size: max(2vh, 1.3vw);
-    line-height: max(2.5vh, 2vw);
+    font-size: max(2vh, 1.1vw) !important;
+    line-height: max(2.5vh, 1vw) !important;
+    margin-right: 1.5vw !important;
+    text-wrap: wrap !important;
 }
 
 #gp-legend .h-2,
 .w-2 {
     height: 1.3vh !important;
     width: 1.3vh !important;
+}
+
+/* Define scrollbar styles */
+#gp-legend::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+#gp-legend::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+#gp-legend::-webkit-scrollbar-thumb {
+    background: rgba(57, 57, 57, 0.15);
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+#gp-legend::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 57, 57, 0.35);
 }
 
 #gp-chart .fill-tremor-content-emphasis {
