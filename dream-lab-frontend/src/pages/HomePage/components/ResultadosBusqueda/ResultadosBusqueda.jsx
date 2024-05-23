@@ -29,7 +29,8 @@ const IMAGES = [
 
 function ResultadosBusqueda({ results }) {
   return (
-    <div className="search-results-container">
+    <div className="centeredContainer">
+      <div className="search-results-container">
       {results.map((result, index) => (
         <React.Fragment key={index}>
           <ResultadosCard
@@ -38,9 +39,10 @@ function ResultadosBusqueda({ results }) {
           />
           <Spacer x={6} />
         </React.Fragment>
-      ))}
-      
+      ))}  
+      </div>
     </div>
+    
   );
 }
 
