@@ -1,7 +1,7 @@
 import "./ResultadosCard.css";
 import PropTypes from "prop-types";
 
-function ResultadosCard({title, image}) {
+function ResultadosCard({id, title, image, onClick}) {
 
     return (
         <div className="cardResultados">
@@ -10,6 +10,7 @@ function ResultadosCard({title, image}) {
             className="imageResultados"
             src={image}
             alt={title}
+            onClick={() => onClick(id)}
             />
             <p className="titleResultados">{title}</p>
         </div>
@@ -18,8 +19,10 @@ function ResultadosCard({title, image}) {
 }
 
 ResultadosCard.propTypes = {
+    id: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
-	image: PropTypes.string.isRequired
+	image: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default ResultadosCard;

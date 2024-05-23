@@ -471,7 +471,12 @@ function HomePage() {
                     </>
                 )}
                 {searchTerm && (
-                    <ResultadosBusqueda results={searchResults} />
+                    <ResultadosBusqueda 
+                        results={searchResults} 
+                        mostrarDetalles={mostrarDetalles} 
+                        onImageClick={handleImageClick} 
+                        setIsSalaClicked={setIsSalaClicked} 
+                    />
                 )}
                 
                 
