@@ -22,10 +22,28 @@ import { get } from "src/utils/ApiRequests";
 function GraficasDashboard({ month, year }) {
     const [reservacionesGenerales, setReservacionesGenerales] = useState([]);
     const [_reservacionesGeneralesCurrent, _setReservacionesGeneralesCurrent] =
-        useState({});
+        useState({
+            year: year,
+            month: month,
+            reservacionesTotales: 0,
+            reservacionesConfirmadas: 0,
+            reservacionesCanceladas: 0,
+            reservacionesEnEspera: 0,
+            reservacionesDenegadas: 0,
+        });
     const [_reservacionesGeneralesPrev, _setReservacionesGeneralesPrev] =
-        useState({});
+        useState({
+            year: year,
+            month: month,
+            reservacionesTotales: 0,
+            reservacionesConfirmadas: 0,
+            reservacionesCanceladas: 0,
+            reservacionesEnEspera: 0,
+            reservacionesDenegadas: 0,
+        });
 
+    // Obtener los datos de todos los meses de las reservaciones totales,
+    // reservaciones activas y reservaciones canceladas
     useEffect(() => {
         get("dashboard/reservacionesByMes").then((res) => {
             console.log(res);
@@ -33,12 +51,18 @@ function GraficasDashboard({ month, year }) {
         });
     }, []);
 
+    // De todos los datos de reservaciones generales, obtener los datos del mes
+    // actual y del mes anterior con base en la fecha seleccionada
     useEffect(() => {
+        // Si hay datos de reservaciones generales
         if (reservacionesGenerales.length > 0) {
+            // Buscar los datos del mes actual
             const resCurrent = reservacionesGenerales.find((reservacion) => {
                 return reservacion.month === month && reservacion.year === year;
             });
 
+            // Si se encontraron los datos del mes actual se asignan, si no se
+            // asignan los valores por defecto
             if (resCurrent) {
                 _setReservacionesGeneralesCurrent(resCurrent);
             } else {
@@ -53,14 +77,17 @@ function GraficasDashboard({ month, year }) {
                 });
             }
 
+            // Buscar los datos del mes anterior
+            // Si el mes actual es enero, se asigna diciembre del año anterior
+            // como mes anterior y se asigna el año anterior
             let prevMonth = month - 1;
             let prevYear = year;
-
             if (prevMonth < 1) {
                 prevMonth = 12;
                 prevYear = year - 1;
             }
 
+            // Buscar los datos del mes anterior
             const resPrev = reservacionesGenerales.find((reservacion) => {
                 return (
                     reservacion.month === prevMonth &&
@@ -68,6 +95,8 @@ function GraficasDashboard({ month, year }) {
                 );
             });
 
+            // Si se encontraron los datos del mes anterior se asignan, si no se
+            // asignan los valores por defecto
             if (resPrev) {
                 _setReservacionesGeneralesPrev(resPrev);
             } else {
@@ -83,11 +112,6 @@ function GraficasDashboard({ month, year }) {
             }
         }
     }, [reservacionesGenerales, month, year]);
-
-    useEffect(() => {
-        console.log("Current", _reservacionesGeneralesCurrent);
-        console.log("Prev", _reservacionesGeneralesPrev);
-    }, [_reservacionesGeneralesCurrent, _reservacionesGeneralesPrev]);
 
     const datosReservaciones = [
         { cantidadReservaciones: 100, fecha: "Ene" },
