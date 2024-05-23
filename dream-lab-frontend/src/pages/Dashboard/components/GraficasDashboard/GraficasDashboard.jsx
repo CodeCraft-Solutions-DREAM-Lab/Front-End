@@ -369,7 +369,7 @@ function GraficasDashboard({ month, year }) {
                     <div className="graficas-dashboard-grafica-default graficas-dashboard-grafica-materiales-container">
                         <ContenedorGrafica titulo="Materiales más utilizados">
                             <GraficaPie
-                                chartData={datosUsoMateriales}
+                                chartData={_usoMaterialesCurrent.materiales}
                                 index="material"
                                 category={"uso"}
                             />
