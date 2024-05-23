@@ -96,3 +96,12 @@
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+
+/* media query*/
+@media (max-width: 1200px) {
+    .contenedor-tipo-anuncio-selector{
+        font-size: small;
+
+    }
+
+}

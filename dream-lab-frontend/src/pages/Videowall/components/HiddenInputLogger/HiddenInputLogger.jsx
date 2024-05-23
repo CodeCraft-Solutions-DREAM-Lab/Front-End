@@ -8,14 +8,12 @@ import {
     Button,
     useDisclosure,
 } from "@nextui-org/react";
-
 import QRCode from "react-qr-code";
-
 import { post } from "src/utils/ApiRequests";
-
 import propTypes from "prop-types";
+import { set } from "date-fns";
 
-const HiddenInputLogger = ({ reservaciones }) => {
+const HiddenInputLogger = ({ setQrCode, setTagId, setQrCodeGenerated  }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [qr, setQR] = useState("");
     const [tagId, settagId] = useState("");
@@ -23,7 +21,7 @@ const HiddenInputLogger = ({ reservaciones }) => {
     const [isLogging, setIsLogging] = useState(false);
     const isLoggingRef = useRef(isLogging);
     const timeoutId = useRef(null);
-
+    
     useEffect(() => {
         tagIdRef.current = tagId;
         isLoggingRef.current = isLogging;
@@ -35,28 +33,33 @@ const HiddenInputLogger = ({ reservaciones }) => {
         post("auth/usuario", { tagId: tagId, origen: "qr" })
             .then((response) => {
                 const jwt = response.jwt;
-                if (jwt) {
-                    setQR(`https://www.dreamlab.world/login/?jwt=${jwt}`);
-                } else {
-                    setQR(`https://www.dreamlab.world/login`);
-                }
-                onOpen();
+                console.log("jwt: ", jwt);
+
+                const qrCode = jwt
+                    ? `https://www.dreamlab.world/login/?jwt=${jwt}`
+                    : `https://www.dreamlab.world/login`;
+                setQR(qrCode);
+                setQrCode(qrCode); // Pass the QR code to the parent
+                setTagId(tagId);
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
+                //onOpen();
             })
             .catch(() => {
-                setQR(`https://www.dreamlab.world/login`);
+                const qrCode = `https://www.dreamlab.world/login`;
+                setQR(qrCode);
+                setTagId(tagId);
+                setQrCode(qrCode); // Pass the QR code to the parent
+                setQrCodeGenerated((prevCount) => prevCount + 1); // Incrementar contador en 1
             });
     };
 
     useEffect(() => {
         const handleKeyDown = (e) => {
             const char = e.key.toLowerCase();
-
-            // Check if logging should start
             if (!isLoggingRef.current) {
                 setIsLogging(true);
                 settagId(char);
             } else if (isLoggingRef.current) {
-                // Log the input and stop logging if "Enter" is pressed
                 if (char === "enter") {
                     console.log(tagIdRef.current);
                     createQR(e, tagIdRef.current);
@@ -67,8 +70,6 @@ const HiddenInputLogger = ({ reservaciones }) => {
                     settagId(newInput);
                 }
             }
-
-            // Reset the logging if no key is pressed within 5 seconds
             clearTimeout(timeoutId.current);
             timeoutId.current = setTimeout(() => {
                 setIsLogging(false);
@@ -77,8 +78,6 @@ const HiddenInputLogger = ({ reservaciones }) => {
         };
 
         document.addEventListener("keydown", handleKeyDown);
-
-        // Cleanup the event listener on component unmount
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
             clearTimeout(timeoutId.current);
@@ -124,7 +123,9 @@ const HiddenInputLogger = ({ reservaciones }) => {
 };
 
 HiddenInputLogger.propTypes = {
-    reservaciones: propTypes.array,
+    setQrCode: propTypes.func.isRequired,
+    setTagId: propTypes.func.isRequired,
+    setQrCodeGenerated: propTypes.func.isRequired,
 };
 
 export default HiddenInputLogger;
