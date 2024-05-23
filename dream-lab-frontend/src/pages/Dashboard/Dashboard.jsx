@@ -26,7 +26,10 @@ function Dashboard() {
                 fechaSeleccionada={fechaSeleccionada}
                 setFechaSeleccionada={setFechaSeleccionada}
             />
-            <GraficasDashboard />
+            <GraficasDashboard
+                month={parseInt(fechaSeleccionada.format("MM"))}
+                year={parseInt(fechaSeleccionada.format("YYYY"))}
+            />
         </>
     );
 }
