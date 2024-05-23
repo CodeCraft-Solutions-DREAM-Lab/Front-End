@@ -6,52 +6,18 @@ import EstatusDisponibilidadSala from "./components/EstatusDisponibilidadSala/Es
 
 import propTypes from "prop-types";
 
-function ContenedorDisponibilidadSalas({ titulo }) {
+function ContenedorDisponibilidadSalas({ titulo, data }) {
     return (
         <div className="cds-contenedor">
             <h1 className="cds-titulo-contenedor">{titulo}</h1>
             <div className="cds-contenedor-disponibilidad-outer">
                 <div className="cds-contenedor-disponibilidad-inner">
-                    <EstatusDisponibilidadSala
-                        estaDisponible={true}
-                        sala="Biometrics Flexible Hall"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={false}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={true}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={false}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={true}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={false}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={true}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={false}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={true}
-                        sala="Electric Garage"
-                    />
-                    <EstatusDisponibilidadSala
-                        estaDisponible={false}
-                        sala="Electric Garage"
-                    />
+                    {data.map((sala) => (
+                        <EstatusDisponibilidadSala
+                            bloqueada={sala.bloqueada}
+                            sala={sala.sala}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

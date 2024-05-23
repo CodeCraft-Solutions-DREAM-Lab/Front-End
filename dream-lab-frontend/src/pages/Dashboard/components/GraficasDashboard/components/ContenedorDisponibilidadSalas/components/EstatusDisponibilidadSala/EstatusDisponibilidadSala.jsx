@@ -8,11 +8,11 @@ import propTypes from "prop-types";
 // Estilos
 import "./EstatusDisponibilidadSala.css";
 
-function EstatusDisponibilidadSala({ estaDisponible, sala }) {
+function EstatusDisponibilidadSala({ bloqueada, sala }) {
     return (
         <div className="eds-contenedor">
             <img
-                src={estaDisponible ? GreenDot : GrayDot}
+                src={bloqueada ? GrayDot : GreenDot}
                 alt="Estatus de disponibilidad"
                 className="eds-icono-estatus"
             />

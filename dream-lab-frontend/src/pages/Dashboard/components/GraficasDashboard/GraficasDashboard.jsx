@@ -82,6 +82,9 @@ function GraficasDashboard({ month, year }) {
             },
         ]);
 
+    // Estados de la disponibilidad de las salas
+    const [disponibilidadSalas, setDisponibilidadSalas] = useState([]);
+
     // Obtener los datos de todos los meses de las reservaciones totales,
     // reservaciones activas y reservaciones canceladas
     useEffect(() => {
@@ -289,6 +292,13 @@ function GraficasDashboard({ month, year }) {
         }
     }, [reservacionesPorSala, month, year]);
 
+    // Obtener el estatus de disponibilidad de las salas
+    useEffect(() => {
+        get("dashboard/salasDisponibles").then((res) => {
+            setDisponibilidadSalas(res);
+        });
+    }, []);
+
     useEffect(() => {
         console.log(
             "_reservacionesGeneralesCurrent",
@@ -299,6 +309,10 @@ function GraficasDashboard({ month, year }) {
         console.log("_penalizacionesCurrent", _penalizacionesCurrent);
         console.log("_penalizacionesPrev", _penalizacionesPrev);
         console.log("_usoMaterialesCurrent", _usoMaterialesCurrent);
+        console.log(
+            "_reservacionesPorSalaCurrent",
+            _reservacionesPorSalaCurrent
+        );
     }, [
         _reservacionesGeneralesCurrent,
         _reservacionesGeneralesPrev,
@@ -306,6 +320,7 @@ function GraficasDashboard({ month, year }) {
         _penalizacionesCurrent,
         _penalizacionesPrev,
         _usoMaterialesCurrent,
+        _reservacionesPorSalaCurrent,
     ]);
 
     // const datosReservaciones = [
@@ -338,20 +353,20 @@ function GraficasDashboard({ month, year }) {
     //     { uso: 111, material: "Mouse" },
     // ];
 
-    const datosReservacionesPorSala = [
-        { name: "Electric Garage", value: 23 },
-        { name: "Dimension Forge", value: 45 },
-        { name: "New Horizons", value: 12 },
-        { name: "Deep Net", value: 37 },
-        { name: "Graveyard", value: 29 },
-        { name: "PCB Factory", value: 41 },
-        { name: "Hack Battlefield", value: 33 },
-        { name: "Testing Land", value: 48 },
-        { name: "War Headquarters", value: 27 },
-        { name: "Biometrics Flexible Hall", value: 39 },
-        { name: "Beyond Digits", value: 16 },
-        { name: "Open Innovation Lab", value: 50 },
-    ];
+    // const datosReservacionesPorSala = [
+    //     { name: "Electric Garage", value: 23 },
+    //     { name: "Dimension Forge", value: 45 },
+    //     { name: "New Horizons", value: 12 },
+    //     { name: "Deep Net", value: 37 },
+    //     { name: "Graveyard", value: 29 },
+    //     { name: "PCB Factory", value: 41 },
+    //     { name: "Hack Battlefield", value: 33 },
+    //     { name: "Testing Land", value: 48 },
+    //     { name: "War Headquarters", value: 27 },
+    //     { name: "Biometrics Flexible Hall", value: 39 },
+    //     { name: "Beyond Digits", value: 16 },
+    //     { name: "Open Innovation Lab", value: 50 },
+    // ];
 
     // Funcion para calcular el porcentaje de cambio entre dos valores
     const calcularCambio = (current, prev) => {
@@ -436,7 +451,10 @@ function GraficasDashboard({ month, year }) {
                         />
                     </div>
                     <div className="graficas-dashboard-grafica-default graficas-dashboard-grafica-disponbilidad-container">
-                        <ContenedorDisponibilidadSalas titulo="Disponibilidad de salas" />
+                        <ContenedorDisponibilidadSalas
+                            titulo="Disponibilidad de salas"
+                            data={disponibilidadSalas}
+                        />
                     </div>
                 </div>
             </div>
