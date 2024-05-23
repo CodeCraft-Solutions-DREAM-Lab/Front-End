@@ -143,7 +143,6 @@ function FormularioCreacionAnuncio(props) {
             fecha: formatDate(fecha),
             horaInicio: formatTime(horaInicio),
             horaFin: formatTime(horaFin),
-            id: 5,
             nombreEvento: titulo,
             nombreSala: ubicacion,
             personalizado: opcionPersonalizadoSeleccionado,
