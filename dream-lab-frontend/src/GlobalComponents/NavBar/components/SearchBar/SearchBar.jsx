@@ -12,6 +12,11 @@ const SearchBar = ({ onSearchInputChange }) => {
         onSearchInputChange(text);
     };
 
+    const clearSearch = () => {
+        setSearchText("");
+        onSearchInputChange("");
+    };
+
     return (
         <div className="searchContainer-navbar">
             <Input
@@ -23,6 +28,11 @@ const SearchBar = ({ onSearchInputChange }) => {
                 radius="full"
                 placeholder=""
                 startContent={<img src={magnifyingGlass} className="w-6" />}
+                endContent={searchText && (
+                    <button onClick={clearSearch} className="clearButton">
+                        ✖
+                    </button>
+                )}
                 fullWidth={true}
                 value={searchText}
                 onChange={handleInputChange}
