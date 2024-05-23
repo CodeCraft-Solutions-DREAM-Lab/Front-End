@@ -136,3 +136,10 @@ Cypress.Commands.add("urlContains", (url) => {
 Cypress.Commands.add("isTypeDataCy", (name, type) => {
     return cy.getDataCy(name).hasAttribute("type", type);
 });
+
+Cypress.Commands.add("attachFileDataCy", (name, file) => {
+    return cy.getDataCy(name).attachFile(file);
+});
+
+
+

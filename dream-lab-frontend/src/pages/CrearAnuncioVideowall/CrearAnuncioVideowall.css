@@ -1,4 +1,7 @@
-
+.out-crear-anuncios-div{
+    width: 100vw;
+    height: 100vh;
+}
 
 .componente-visualizar-videowall-button{
     display: flex;
@@ -16,3 +19,4 @@
 .creacion-anuncio-columna-izq{
     margin-right: 3vw;
 }
+

@@ -38,13 +38,26 @@
     height: 2vh;
     justify-content: flex-end; /* Alinea al final del contenedor */
     cursor: pointer;
+    opacity: 0.3; /* 10% opacity */
+}
+
+.clic-image-2{
+    width: 2vh;
+    height: 2vh;
+    justify-content: flex-end; /* Alinea al final del contenedor */
+    opacity: 0.3; /* 10% opacity */
 }
 
 .clic-tarjeta-reservacion {
     width: 30%;
-    opacity: 0.3; /* 10% opacity */
     display: flex;
     justify-content: flex-end;
+}
+
+.clic-tarjeta-reservacion-2{
+    width: 30%;
+    opacity: 100; /* 10% opacity */
+    display: flex;
 }
 
 .linea {
@@ -71,6 +84,52 @@
     margin-left: auto; /* Alinea a la derecha */
     font-weight: bold;
     text-align: right;
+}
+
+.tooltip-perfil{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip-perfil .tooltiptext-perfil {
+    font-family: "Karla";
+    font-weight: 500;
+    font-size: medium;
+    visibility: hidden;
+    width: 200px;
+    background-color: whitesmoke;
+    color: #042E55;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 9;
+    top: 30%; /* Position the tooltip below the text */
+    left: 10%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 40px;
+}
+
+/* Arrow */
+.tooltip-perfil .tooltiptext-perfil ::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* Show the tooltip text when you hover over the tooltip container */
+.tooltip-perfil:hover .tooltiptext-perfil {
+    visibility: visible;
+    opacity: 1;
 }
 
 

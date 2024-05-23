@@ -1,3 +1,8 @@
+.profile-container-out{
+    width: 100vw;
+    height: 100vh;
+}
+
 .profile-container {
     /* align-items: center; */
     /* justify-content: center; */
