@@ -126,7 +126,7 @@ function SelectorSala() {
                             setFetchFreeHoursAgain={setFetchFreeHoursAgain}
                         />
                         <div className="model">
-                            <GLBModelViewer modelPath="/isometric_office.glb"/>
+                            <GLBModelViewer modelPath="/office.glb"/>
                             {/*<img src={imagePlaceholder}></img>*/}
                             {/* Placeholder del modelo 3D */}
                         </div>

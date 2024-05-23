@@ -2,12 +2,14 @@ import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const GLBModelViewer = ({ modelPath }) => {
 	const mountRef = useRef(null);
 	const rendererRef = useRef(null);
 	const modelRef = useRef(null); // Define modelRef here
 	const [centerPoint, setCenterPoint] = useState(null);
+    const [loading, setLoading] = useState(true); // Loading state
 
 	useEffect(() => {
 		let model; // Declare model variable
@@ -89,7 +91,7 @@ const GLBModelViewer = ({ modelPath }) => {
 				const controls = new OrbitControls(camera, renderer.domElement);
 				controls.target.set(0, 0, 0); // Set controls' target to the scene center
 				controls.update();
-
+                setLoading(false); // Model has loaded
 				animate();
 			},
 			undefined,
@@ -139,7 +141,22 @@ const GLBModelViewer = ({ modelPath }) => {
 		};
 	}, [modelPath]);
 
-	return <div ref={mountRef} style={{ width: "100%", height: "100%" }} />;
-};
-
-export default GLBModelViewer;
+    return (
+        <div ref={mountRef} style={{ width: "100%", height: "100%", position: "relative" }}>
+          {loading && (
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1,
+              color: "white"
+            }}>
+              <CircularProgress color="inherit" />
+            </div>
+          )}
+        </div>
+      );
+    };
+    
+    export default GLBModelViewer;
