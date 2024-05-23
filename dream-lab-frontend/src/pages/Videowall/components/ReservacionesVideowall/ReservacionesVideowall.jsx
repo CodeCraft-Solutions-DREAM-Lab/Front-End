@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import "./ReservacionesVideowall.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
-import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
 import MensajeBienvenida from "../MensajeBienvenida/MensajeBienvenida";
 import HiddenInputLogger from "../HiddenInputLogger/HiddenInputLogger";
+
+// Components
+import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
+import VideowallSinReservas from "./components/CarouselReservaciones/components/VideowallSinReservas/VideowallSinReservas";
 
 function ReservacionesVideowall() {
     const [qrCode, setQrCode] = useState("");
@@ -11,7 +14,7 @@ function ReservacionesVideowall() {
     const [showMessage, setShowMessage] = useState(false);
     const [reservacionesPadre, setReservacionesPadre] = useState([]);
     const [qrCodeGeneratedCount, setQrCodeGeneratedCount] = useState(0);
-    
+
     const handleCerrarMensaje = () => {
         setShowMessage(false);
     };
@@ -22,7 +25,7 @@ function ReservacionesVideowall() {
 
             const timer = setTimeout(() => {
                 setShowMessage(false);
-            }, 20000); // 10 seconds
+            }, 200000); // 10 seconds
 
             // Cleanup the timer when the component unmounts or qrCode changes
             return () => clearTimeout(timer);
@@ -47,15 +50,28 @@ function ReservacionesVideowall() {
                 </GlassCard>
             </div>
             <div className="cr-carousel-container">
-                <CarouselReservaciones enviarReservaciones={recibirReservaciones}/>
+                <CarouselReservaciones
+                    enviarReservaciones={recibirReservaciones}
+                />
             </div>
 
-            {showMessage && 
-            <div className="container-mensaje-bienvenida">
-                <MensajeBienvenida error={false} qrCode={qrCode} tagId={tagId} listadoReservaciones={reservacionesPadre} onClose={handleCerrarMensaje}/>
-            </div>}
+            {showMessage && (
+                <div className="container-mensaje-bienvenida">
+                    <MensajeBienvenida
+                        error={false}
+                        qrCode={qrCode}
+                        tagId={tagId}
+                        listadoReservaciones={reservacionesPadre}
+                        onClose={handleCerrarMensaje}
+                    />
+                </div>
+            )}
 
-            <HiddenInputLogger setQrCode={setQrCode} setTagId={setTagId} setQrCodeGenerated={handleQrCodeGeneration}/>
+            <HiddenInputLogger
+                setQrCode={setQrCode}
+                setTagId={setTagId}
+                setQrCodeGenerated={handleQrCodeGeneration}
+            />
         </div>
     );
 }

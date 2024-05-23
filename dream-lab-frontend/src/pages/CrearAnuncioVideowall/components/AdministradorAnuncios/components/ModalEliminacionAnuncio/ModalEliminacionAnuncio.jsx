@@ -73,7 +73,7 @@ function ModalEliminacionAnuncio(props) {
                 )}
 
                 {eliminacionSatisfactoria && (
-                    <ModalHeader className="text-[#14247b] px-4 pt-4 pb-2 justify-center text-xl">
+                    <ModalHeader className="text-[#14247b] px-4 pt-4 pb-2 justify-center text-xl" data-cy="anuncio-eliminado-satisfactoriamente-videowall">
                         Eliminación satisfactoria
                     </ModalHeader>
                 )}
@@ -126,7 +126,7 @@ function ModalEliminacionAnuncio(props) {
                                 hover:border-[#ac1b1b]`}
                                 color="primary"
                                 onClick={handleOk}
-                                data-cy="primer-recordatorio-ok"
+                                data-cy="primer-recordatorio-si-eliminar-anuncio"
                                 style={{ marginLeft: "10px", width: "150px" }}
                             >
                                 Sí
@@ -137,6 +137,7 @@ function ModalEliminacionAnuncio(props) {
                                 color="primary"
                                 onClick={props.onClose}
                                 style={{ marginLeft: "10px", width: "150px" }}
+                                data-cy="primer-recordatorio-no-eliminar-anuncio"
                             >
                                 No
                             </Button>
@@ -152,6 +153,7 @@ function ModalEliminacionAnuncio(props) {
                             color="primary"
                             onClick={handleOkSatisfactorio}
                             style={{ marginLeft: "10px", width: "300px" }}
+                            data-cy="segundo-recordatorio-aceptar-eliminar-anuncio"
                         >
                             Aceptar
                         </Button>
