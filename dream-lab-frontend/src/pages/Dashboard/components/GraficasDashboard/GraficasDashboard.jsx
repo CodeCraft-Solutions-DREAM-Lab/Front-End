@@ -10,7 +10,85 @@ import ContenedorDisponibilidadSalas from "./components/ContenedorDisponibilidad
 // Estilos
 import "./GraficasDashboard.css";
 
-function GraficasDashboard() {
+// Propiedades
+import propTypes from "prop-types";
+
+// hooks
+import { useEffect, useState } from "react";
+
+// ApiRequests
+import { get } from "src/utils/ApiRequests";
+
+function GraficasDashboard({ month, year }) {
+    const [reservacionesGenerales, setReservacionesGenerales] = useState([]);
+    const [_reservacionesGeneralesCurrent, _setReservacionesGeneralesCurrent] =
+        useState({});
+    const [_reservacionesGeneralesPrev, _setReservacionesGeneralesPrev] =
+        useState({});
+
+    useEffect(() => {
+        get("dashboard/reservacionesByMes").then((res) => {
+            console.log(res);
+            setReservacionesGenerales(res);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (reservacionesGenerales.length > 0) {
+            const resCurrent = reservacionesGenerales.find((reservacion) => {
+                return reservacion.month === month && reservacion.year === year;
+            });
+
+            if (resCurrent) {
+                _setReservacionesGeneralesCurrent(resCurrent);
+            } else {
+                _setReservacionesGeneralesCurrent({
+                    year: year,
+                    month: month,
+                    reservacionesTotales: 0,
+                    reservacionesConfirmadas: 0,
+                    reservacionesCanceladas: 0,
+                    reservacionesEnEspera: 0,
+                    reservacionesDenegadas: 0,
+                });
+            }
+
+            let prevMonth = month - 1;
+            let prevYear = year;
+
+            if (prevMonth < 1) {
+                prevMonth = 12;
+                prevYear = year - 1;
+            }
+
+            const resPrev = reservacionesGenerales.find((reservacion) => {
+                return (
+                    reservacion.month === prevMonth &&
+                    reservacion.year === prevYear
+                );
+            });
+
+            if (resPrev) {
+                _setReservacionesGeneralesPrev(resPrev);
+            } else {
+                _setReservacionesGeneralesPrev({
+                    year: prevYear,
+                    month: prevMonth,
+                    reservacionesTotales: 0,
+                    reservacionesConfirmadas: 0,
+                    reservacionesCanceladas: 0,
+                    reservacionesEnEspera: 0,
+                    reservacionesDenegadas: 0,
+                });
+            }
+        }
+    }, [reservacionesGenerales, month, year]);
+
+    useEffect(() => {
+        console.log("Current", _reservacionesGeneralesCurrent);
+        console.log("Prev", _reservacionesGeneralesPrev);
+    }, [_reservacionesGeneralesCurrent, _reservacionesGeneralesPrev]);
+
     const datosReservaciones = [
         { cantidadReservaciones: 100, fecha: "Ene" },
         { cantidadReservaciones: 50, fecha: "Feb" },
@@ -56,22 +134,49 @@ function GraficasDashboard() {
         { name: "Open Innovation Lab", value: 50 },
     ];
 
+    const calcularCambio = (current, prev) => {
+        if (prev === 0) {
+            return 0;
+        }
+
+        return ((current - prev) / prev) * 100;
+    };
+
     return (
         <>
             <div className="graficas-dashboard-main-container">
                 <div className="graficas-dashboard-statcards-container">
                     <StatCard
                         nombre="Reservaciones totales"
-                        valor={100}
-                        cambio={10}
+                        valor={
+                            _reservacionesGeneralesCurrent.reservacionesTotales
+                        }
+                        cambio={calcularCambio(
+                            _reservacionesGeneralesCurrent.reservacionesTotales,
+                            _reservacionesGeneralesPrev.reservacionesTotales
+                        )}
                     />
                     <StatCard
                         nombre="Reservaciones activas"
-                        valor={100}
-                        cambio={10}
+                        valor={
+                            _reservacionesGeneralesCurrent.reservacionesConfirmadas
+                        }
+                        cambio={calcularCambio(
+                            _reservacionesGeneralesCurrent.reservacionesConfirmadas,
+                            _reservacionesGeneralesPrev.reservacionesConfirmadas
+                        )}
                     />
                     <StatCard nombre="Penalizaciones" valor={100} cambio={0} />
-                    <StatCard nombre="Cancelaciones" valor={100} cambio={-10} />
+                    <StatCard
+                        nombre="Cancelaciones"
+                        valor={
+                            _reservacionesGeneralesCurrent.reservacionesCanceladas
+                        }
+                        cambio={calcularCambio(
+                            _reservacionesGeneralesCurrent.reservacionesCanceladas,
+                            _reservacionesGeneralesPrev.reservacionesCanceladas
+                        )}
+                    />
                 </div>
                 <div className="graficas-dashboard-graphs-container">
                     <div className="graficas-dashboard-grafica-default graficas-dashboard-grafica-materiales-container">
@@ -111,5 +216,10 @@ function GraficasDashboard() {
         </>
     );
 }
+
+GraficasDashboard.propTypes = {
+    month: propTypes.number.isRequired,
+    year: propTypes.number.isRequired,
+};
 
 export default GraficasDashboard;

@@ -9,7 +9,12 @@ import stat_no_change from "src/assets/Admin/Dashboard/stat_no_change.svg";
 import "./StatCard.css";
 
 function StatCard({ nombre, valor, cambio }) {
-    cambio = cambio < 0 ? cambio : `+${cambio}`;
+    cambio = cambio.toFixed(1);
+    if (cambio < 0) {
+        cambio = `${cambio}`;
+    } else if (cambio > 0) {
+        cambio = `+${cambio}`;
+    }
 
     let imagen = stat_no_change;
     if (cambio < 0) {
