@@ -408,15 +408,13 @@ function HomePage() {
                         <div className="carousel-container">
                             <h1>RECOMENDACIONES</h1>
                             <ImageSlider
-                                api_url={null}
-                                request_type={null}
+                                api_url={"reservaciones/ultimas"}
+                                request_type="POST"
                                 isExperiencia={null}
-                                images={IMAGES}
-                                titles={IMAGES.map((item) => item.title)}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
-                                setIsSalaClicked={() => {}}
+                                setIsSalaClicked={setIsSalaClicked}
                                 setImageType={null}
                             />
                         </div>
