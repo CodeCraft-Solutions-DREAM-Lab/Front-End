@@ -14,8 +14,8 @@
 }
 
 .model {
-    width: 70%;
-    height: auto;
+    width: 500px;
+    height: 370px;
 }
 
 .card-container {
@@ -51,6 +51,11 @@
 }
 
 @media (max-width: 768px) {
+
+    .model {
+        width: 100%;
+        padding: 10%;
+    }
     .container {
         flex-direction: column; /* Stack elements vertically */
         justify-content: center; /* Center content vertically */
