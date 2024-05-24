@@ -73,6 +73,7 @@ function GraficaPie({ chartData, index, category }) {
                 showAnimation
                 label={selectedLabel}
                 id="gp-chart"
+                data-cy="gp-chart"
             />
             <Legend
                 categories={legendCategories}
@@ -80,6 +81,7 @@ function GraficaPie({ chartData, index, category }) {
                 className="absolute top-0 right-0 h-full overflow-y-auto"
                 style={{ width: "50%" }}
                 id="gp-legend"
+                data-cy="gp-legend"
             />
         </div>
     );

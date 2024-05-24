@@ -10,13 +10,22 @@ import "./EstatusDisponibilidadSala.css";
 
 function EstatusDisponibilidadSala({ bloqueada, sala }) {
     return (
-        <div className="eds-contenedor">
+        <div
+            className="eds-contenedor"
+            data-cy="estatus-disponibilidad-sala-contenedor"
+        >
             <img
                 src={bloqueada ? GrayDot : GreenDot}
                 alt="Estatus de disponibilidad"
                 className="eds-icono-estatus"
+                data-cy="estatus-disponibilidad-sala-icono"
             />
-            <p className="eds-nombre-sala">{sala}</p>
+            <p
+                className="eds-nombre-sala"
+                data-cy="estatus-disponibilidad-sala-nombre"
+            >
+                {sala}
+            </p>
         </div>
     );
 }
