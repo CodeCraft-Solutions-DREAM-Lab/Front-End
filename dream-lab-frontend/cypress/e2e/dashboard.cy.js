@@ -332,8 +332,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         // Comprobar la gráfica de pie y el valor del contador de materiales
         cy.getDataCy("gp-chart").should("exist");
         cy.containsDataCy("gp-chart", "26");
-        cy.get(".recharts-pie-sector", { force: true }).eq(0).click();
-        cy.containsDataCy("gp-chart", "7");
+        cy.get(".recharts-pie-sector", { force: true }).eq(4).click();
+        cy.containsDataCy("gp-chart", "3");
     });
 
     it("Despliegue de la gráfica de línea de reservaciones por mes", () => {
@@ -364,7 +364,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.containsDataCy("rps-bar-list", "5");
     });
 
-    it.only("Despliegue de la disponibilidad de salas", () => {
+    it("Despliegue de la disponibilidad de salas", () => {
         cy.getDataCy("estatus-disponibilidad-sala-contenedor").should("exist");
 
         // Comprobar estatus valido
@@ -382,5 +382,25 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.getDataCyNth("estatus-disponibilidad-sala-contenedor", 1)
             .findDataCy("estatus-disponibilidad-sala-nombre")
             .contains("Dimension Forge");
+    });
+
+    it("Selector de fecha", () => {
+        // Comprobar que este seleccionada la fecha actual
+        cy.containsDataCy("sfd-boton-calendario-label", "abril 24");
+        // Abrir el selector de fecha
+        cy.clickDataCy("sfd-boton-calendario");
+        // Abrir selector de año
+        cy.get(".MuiButtonBase-root").eq(0).click();
+        // Seleccionar 2021
+        cy.get(".MuiPickersYear-yearButton").eq(121).click();
+        // Seleccionar mayo
+        cy.get(".MuiMonthCalendar-root")
+            .children()
+            .eq(4)
+            .children()
+            .eq(0)
+            .click();
+        // Comprobar que la fecha seleccionada sea mayo 21
+        cy.containsDataCy("sfd-boton-calendario-label", "mayo 21");
     });
 });

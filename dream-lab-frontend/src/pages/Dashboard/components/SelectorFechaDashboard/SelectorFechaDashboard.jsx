@@ -45,8 +45,9 @@ function SelectorFechaDashboard({ fechaSeleccionada, setFechaSeleccionada }) {
                             setIsOpen(true);
                         }}
                         color="white"
+                        data-cy="sfd-boton-calendario"
                     >
-                        <span className="sfd-boton-calendario-label">
+                        <span className="sfd-boton-calendario-label" data-cy="sfd-boton-calendario-label">
                             {fechaSeleccionada.format("MMMM YY")}
                         </span>
                     </Button>
@@ -64,6 +65,7 @@ function SelectorFechaDashboard({ fechaSeleccionada, setFechaSeleccionada }) {
                         onChange={(date) => {
                             setFechaSeleccionada(date);
                         }}
+                        data-cy="sfd-calendario"
                     />
                 </PopoverContent>
             </Popover>
