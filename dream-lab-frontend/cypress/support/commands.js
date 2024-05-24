@@ -137,9 +137,8 @@ Cypress.Commands.add("isTypeDataCy", (name, type) => {
     return cy.getDataCy(name).hasAttribute("type", type);
 });
 
-Cypress.Commands.add("attachFileDataCy", (name, file) => {
-    return cy.getDataCy(name).attachFile(file);
+Cypress.Commands.add("attachFileDataCy", (name, file, timeout = 4000) => {
+    return cy.getDataCy(name, timeout).attachFile(file);
 });
-
 
 

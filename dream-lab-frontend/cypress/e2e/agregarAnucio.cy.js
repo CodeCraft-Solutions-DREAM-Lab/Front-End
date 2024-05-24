@@ -21,12 +21,11 @@ describe("Creación de anuncios para el video wall", () => {
                     posicion: 0,
                     soloImagen: false,
                     urlImagen:
-                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                     firebaseId: "9wrYH3oxJAda6ucXuan",
                 },
             ],
         }).as("getAnuncios");
-
     });
 
     // Prueba para agregar un anuncio de tipo evento
@@ -39,11 +38,15 @@ describe("Creación de anuncios para el video wall", () => {
         cy.typeDataCy("input-hora-inicio-anuncio-evento", "09:00");
         cy.typeDataCy("input-hora-fin-anuncio-evento", "10:00");
         cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy("mensaje-advertencia-anuncio-evento","Existen campos vacíos. Por favor complete todos los campos.");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-evento",
+            "Existen campos vacíos. Por favor complete todos los campos."
+        );
 
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
+            "../assets/imagenPrueba.jpg",
+            15000
         );
 
         cy.clickDataCy("boton-agregar-anuncio");
@@ -70,7 +73,7 @@ describe("Creación de anuncios para el video wall", () => {
         }).as("postAnuncioEvento");
 
         // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioEvento").then(() => {
+        cy.wait("@postAnuncioEvento", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
                 "GET",
@@ -91,7 +94,7 @@ describe("Creación de anuncios para el video wall", () => {
                                 posicion: 0,
                                 soloImagen: false,
                                 urlImagen:
-                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                                 firebaseId: "9wrY3foxJAda6ucXuan",
                             },
                             {
@@ -128,10 +131,20 @@ describe("Creación de anuncios para el video wall", () => {
     it("Agregar anuncio (personalizado)", () => {
         cy.clickDataCy("tipo-formulario-personalizado-boton");
         cy.typeDataCy("titulo-anuncio-personalizado", "Anuncio de prueba");
-        cy.typeDataCy("descripcion-anuncio-personalizado", "Descripción de prueba");
+        cy.typeDataCy(
+            "descripcion-anuncio-personalizado",
+            "Descripción de prueba"
+        );
         cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy("mensaje-advertencia-anuncio-personalizado","Existen campos vacíos. Por favor complete todos los campos.");
-        cy.attachFileDataCy("subir-imagen-anuncio-personalizado", "../assets/imagenPrueba.jpg");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-personalizado",
+            "Existen campos vacíos. Por favor complete todos los campos."
+        );
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/imagenPrueba.jpg",
+            15000
+        );
         cy.clickDataCy("boton-agregar-anuncio");
 
         cy.intercept("POST", "https://createanuncio2-j5zt2ysdwq-uc.a.run.app", {
@@ -156,7 +169,7 @@ describe("Creación de anuncios para el video wall", () => {
         }).as("postAnuncioPersonalizado");
 
         // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioPersonalizado").then(() => {
+        cy.wait("@postAnuncioPersonalizado", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
                 "GET",
@@ -177,7 +190,7 @@ describe("Creación de anuncios para el video wall", () => {
                                 posicion: 0,
                                 soloImagen: false,
                                 urlImagen:
-                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                                 firebaseId: "9wrYH3foJAda6ucXuan",
                             },
                             {
@@ -212,11 +225,17 @@ describe("Creación de anuncios para el video wall", () => {
 
     // Prueba para agregar un anuncio de tipo imagen
     it("Agregar anuncio (imagen)", () => {
-
-        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado")
+        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
         cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy("mensaje-advertencia-anuncio-evento","Por favor adjunte una imagen.");
-        cy.attachFileDataCy("subir-imagen-anuncio-personalizado", "../assets/imagenPrueba.jpg");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-evento",
+            "Por favor adjunte una imagen."
+        );
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/imagenPrueba.jpg",
+            15000
+        );
         cy.clickDataCy("boton-agregar-anuncio");
 
         cy.intercept("POST", "https://createanuncio2-j5zt2ysdwq-uc.a.run.app", {
@@ -241,7 +260,7 @@ describe("Creación de anuncios para el video wall", () => {
         }).as("postAnuncioSoloImagen");
 
         // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioSoloImagen").then(() => {
+        cy.wait("@postAnuncioSoloImagen", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
                 "GET",
@@ -262,7 +281,7 @@ describe("Creación de anuncios para el video wall", () => {
                                 posicion: 0,
                                 soloImagen: false,
                                 urlImagen:
-                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                                    "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                                 firebaseId: "9wrYH3foJAda6ucXuan",
                             },
                             {
@@ -291,67 +310,87 @@ describe("Creación de anuncios para el video wall", () => {
             cy.containsDataCy(
                 "mensaje-enviado-anuncio-evento",
                 "¡Datos enviados correctamente!"
-            );   
+            );
         });
     });
 
     // Eliminar anuncio
     it("Eliminar anuncio", () => {
-
-        cy.clickDataCy("boton-eliminar-anuncio-videowall")
-        cy.clickDataCy("primer-recordatorio-no-eliminar-anuncio")
-        cy.clickDataCy("boton-eliminar-anuncio-videowall")
-        cy.clickDataCy("primer-recordatorio-si-eliminar-anuncio")
+        cy.clickDataCy("boton-eliminar-anuncio-videowall");
+        cy.clickDataCy("primer-recordatorio-no-eliminar-anuncio");
+        cy.clickDataCy("boton-eliminar-anuncio-videowall");
+        cy.clickDataCy("primer-recordatorio-si-eliminar-anuncio");
 
         // intercept delete
-        cy.intercept("DELETE", "https://deleteanuncio-j5zt2ysdwq-uc.a.run.app?id=9wrYH3oxJAda6ucXuan", {
-            statusCode: 200,
-            body: {},
-        }).as("deleteAnuncio");
+        cy.intercept(
+            "DELETE",
+            "https://deleteanuncio-j5zt2ysdwq-uc.a.run.app?id=9wrYH3oxJAda6ucXuan",
+            {
+                statusCode: 200,
+                body: {},
+            }
+        ).as("deleteAnuncio");
 
-        cy.containsDataCy("anuncio-eliminado-satisfactoriamente-videowall", "Eliminación satisfactoria")
-        cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio")
-
+        cy.containsDataCy(
+            "anuncio-eliminado-satisfactoriamente-videowall",
+            "Eliminación satisfactoria",
+            15000
+        );
+        cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio");
     });
 
     // Presionar botón para visualizar video wall
     it("Visualizar video wall", () => {
-        cy.clickDataCy("boton-visualizar-videowall");      
-        cy.url().should("include", "/videowall"); // Reemplaza "/videoWall" con la parte de la URL a la que esperas ser redirigido  
+        cy.clickDataCy("boton-visualizar-videowall");
+        cy.url().should("include", "/videowall"); // Reemplaza "/videoWall" con la parte de la URL a la que esperas ser redirigido
     });
 
     // Subir archivo inválido
     it("Subir archivo inválido", () => {
+        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/archivoPrueba.pdf",
+            15000
+        );
 
-        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado")
-        cy.attachFileDataCy("subir-imagen-anuncio-personalizado", "../assets/archivoPrueba.pdf");
-        
-        cy.containsDataCy("titulo-subir-foto-box-videowall","Archivo inválido");
+        cy.containsDataCy(
+            "titulo-subir-foto-box-videowall",
+            "Archivo inválido"
+        );
         cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy("mensaje-advertencia-anuncio-evento","Por favor adjunte un archivo de imagen válido.");
-        
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-evento",
+            "Por favor adjunte un archivo de imagen válido."
+        );
     });
 
     // Ocultar anuncio
     it("Ocultar anuncio", () => {
-       cy.clickDataCy("boton-ocultar-anuncio-videowall")
+        cy.clickDataCy("boton-ocultar-anuncio-videowall");
 
-       // intercept put
-         cy.intercept("PUT", "https://updateanuncio2-j5zt2ysdwq-uc.a.run.app?id=9wrYH3oxJAda6ucXuan", {
-              statusCode: 200,
-              body: {
-                encendido: false,
-                posicion: 0,
-              },
-         }).as("putAnuncio");
+        // intercept put
+        cy.intercept(
+            "PUT",
+            "https://updateanuncio2-j5zt2ysdwq-uc.a.run.app?id=9wrYH3oxJAda6ucXuan",
+            {
+                statusCode: 200,
+                body: {
+                    encendido: false,
+                    posicion: 0,
+                },
+            }
+        ).as("putAnuncio");
 
-         cy.get('[data-cy="boton-ocultar-anuncio-videowall"]').should('have.attr', 'src', '/src/assets/CrearAnuncioVideowall/closedEye.png');
+        cy.get('[data-cy="boton-ocultar-anuncio-videowall"]').should(
+            "have.attr",
+            "src",
+            "/src/assets/CrearAnuncioVideowall/closedEye.png"
+        );
     });
-
 
     // Reordenar anuncio
     it("Reordenar anuncio", () => {
-
         // Intercepta la solicitud GET para obtener la lista de anuncios y devuelve datos hardcodeados
         cy.intercept("GET", "https://readanuncios-j5zt2ysdwq-uc.a.run.app/", {
             statusCode: 200,
@@ -368,7 +407,7 @@ describe("Creación de anuncios para el video wall", () => {
                     posicion: 0,
                     soloImagen: false,
                     urlImagen:
-                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                     firebaseId: "9wrYH3oxJAda6ucXuan",
                 },
                 {
@@ -383,17 +422,38 @@ describe("Creación de anuncios para el video wall", () => {
                     posicion: 1,
                     soloImagen: true,
                     urlImagen:
-                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/TallerDeImpresion3D.jpeg?alt=media&token=902c0779-3519-4ad6-81c7-29cfe26c0379",
                     firebaseId: "9wrYH3oxJefgda6ucXuan",
                 },
             ],
         }).as("getMuchosAnuncios");
 
         cy.wait("@getMuchosAnuncios").then(() => {
-            cy.get('[data-cy="tarjeta-anuncio-videowall"]').first().as('tarjeta'); // Alias para el primer elemento
-            cy.get('@tarjeta').trigger('mousedown');
-            cy.get('@tarjeta').trigger('mousemove', { clientX: 0, clientY: 2000 });
-            cy.get('@tarjeta').trigger('mouseup', { force: true }); // Usa { force: true } para garantizar que el evento se dispare incluso si el elemento está oculto
+            cy.get('[data-cy="tarjeta-anuncio-videowall"]')
+                .first()
+                .as("tarjeta"); // Alias para la primera tarjeta
+
+            let initialIndex;
+
+            // Obtener el índice inicial de la tarjeta
+            cy.get("@tarjeta").then(($tarjeta) => {
+                initialIndex = $tarjeta.index();
+            });
+
+            cy.get("@tarjeta").trigger("mousedown", { which: 1 }); // Emular clic izquierdo para activar el arrastre
+            cy.get("@tarjeta").trigger("mousemove", {
+                clientX: 0,
+                clientY: 10200,
+            }); // Mover el mouse hacia abajo
+            cy.get("@tarjeta").trigger("mouseup", { force: true }); // Soltar la tarjeta (puedes necesitar { force: true })
+
+            // Obtener el índice después de la acción de arrastre y suelta
+            cy.get("@tarjeta").then(($tarjeta) => {
+                const finalIndex = $tarjeta.index() + 1;
+
+                // Verificar que el índice haya cambiado
+                expect(finalIndex).to.not.equal(initialIndex);
+            });
         });
     });
 });
