@@ -247,5 +247,12 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.wait("@penalizacionesByMes");
     });
 
-    it("Despliega correctamente los datos de las reservaciones por mes", () => {});
+    it("Validar despliegue correcto de reservaciones totales", () => {
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .find("[data-cy=statCard-valor]")
+            .contains("7");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .find("[data-cy=statCard-cambio]")
+            .contains("46.2%");
+    });
 });

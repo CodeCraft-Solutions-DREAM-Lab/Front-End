@@ -344,7 +344,7 @@ function GraficasDashboard({ month, year }) {
     return (
         <>
             <div className="graficas-dashboard-main-container">
-                <div className="graficas-dashboard-statcards-container">
+                <div className="graficas-dashboard-statcards-container" data-cy="graficasDashboard-statcards-container">
                     <StatCard
                         nombre="Reservaciones totales"
                         valor={

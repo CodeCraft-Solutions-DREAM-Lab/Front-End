@@ -34,9 +34,13 @@ Cypress.Commands.add("getDataCy", (name) => {
 });
 
 // Encuentra un elemento hijo de un elemento con el atributo data-cy
-Cypress.Commands.add("findDataCy", (name, child) => {
-    return cy.getDataCy(name).find(`[data-cy=${child}]`);
-});
+Cypress.Commands.add(
+    "findDataCy",
+    { prevSubject: "element" },
+    (subject, child) => {
+        return cy.wrap(subject).find(`[data-cy=${child}]`);
+    }
+);
 
 // Obtiene el nth hijo dentro del componente con el atributo data-cy
 Cypress.Commands.add("getDataCyNth", (name, n) => {
