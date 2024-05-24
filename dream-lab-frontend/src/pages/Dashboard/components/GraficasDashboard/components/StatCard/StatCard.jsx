@@ -40,6 +40,7 @@ function StatCard({ nombre, valor, cambio }) {
                         alt="arrow"
                         className="sc-card-image"
                         draggable="false"
+                        data-cy="statCard-imagen"
                     />
                 </div>
             </div>

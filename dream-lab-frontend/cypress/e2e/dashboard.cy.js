@@ -226,7 +226,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                 {
                     year: 2024,
                     month: 3,
-                    penalizaciones: 6,
+                    penalizaciones: 13,
                 },
             ],
         }).as("penalizacionesByMes");
@@ -249,10 +249,61 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
 
     it("Validar despliegue correcto de reservaciones totales", () => {
         cy.getDataCyNth("graficasDashboard-statcards-container", 0)
-            .find("[data-cy=statCard-valor]")
+            .findDataCy("statCard-valor")
             .contains("7");
         cy.getDataCyNth("graficasDashboard-statcards-container", 0)
-            .find("[data-cy=statCard-cambio]")
-            .contains("46.2%");
+            .findDataCy("statCard-cambio")
+            .contains("-46.2%");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
+            );
+    });
+
+    it("Validar despliegue correcto de reservaciones activas", () => {
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-valor")
+            .contains("2");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-cambio")
+            .contains("-75.0%");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
+            );
+    });
+
+    it("Validar despliegue correcto de penalizaciones", () => {
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-valor")
+            .contains("13");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-cambio")
+            .contains("0%");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_no_change.svg"
+            );
+    });
+
+    it.only("Validar despliegue correcto de cancelaciones", () => {
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-valor")
+            .contains("13");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-cambio")
+            .contains("+116.7%");
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_up.svg"
+            );
     });
 });
