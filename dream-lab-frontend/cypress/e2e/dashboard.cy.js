@@ -75,7 +75,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                 },
                 {
                     sala: "Dimension Forge",
-                    bloqueada: false,
+                    bloqueada: true,
                 },
                 {
                     sala: "New Horizons",
@@ -356,11 +356,31 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
             .contains("May");
     });
 
-    it.only("Despliegue de la gráfica de barras de reservaciones por sala", () => {
+    it("Despliegue de la gráfica de barras de reservaciones por sala", () => {
         cy.getDataCy("rps-bar-list").should("exist");
 
         // Validar que contenga los datos correctos
         cy.containsDataCy("rps-bar-list", "Electric Garage");
         cy.containsDataCy("rps-bar-list", "5");
+    });
+
+    it.only("Despliegue de la disponibilidad de salas", () => {
+        cy.getDataCy("estatus-disponibilidad-sala-contenedor").should("exist");
+
+        // Comprobar estatus valido
+        cy.getDataCyNth("estatus-disponibilidad-sala-contenedor", 0)
+            .findDataCy("estatus-disponibilidad-sala-icono")
+            .hasAttribute("src", "/src/assets/Admin/Dashboard/green_dot.svg");
+        cy.getDataCyNth("estatus-disponibilidad-sala-contenedor", 0)
+            .findDataCy("estatus-disponibilidad-sala-nombre")
+            .contains("Electric Garage");
+
+        // Comprobar estatus bloqueado
+        cy.getDataCyNth("estatus-disponibilidad-sala-contenedor", 1)
+            .findDataCy("estatus-disponibilidad-sala-icono")
+            .hasAttribute("src", "/src/assets/Admin/Dashboard/gray_dot.svg");
+        cy.getDataCyNth("estatus-disponibilidad-sala-contenedor", 1)
+            .findDataCy("estatus-disponibilidad-sala-nombre")
+            .contains("Dimension Forge");
     });
 });

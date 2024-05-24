@@ -11,7 +11,10 @@ function ContenedorDisponibilidadSalas({ titulo, data }) {
         <div className="cds-contenedor">
             <h1 className="cds-titulo-contenedor">{titulo}</h1>
             <div className="cds-contenedor-disponibilidad-outer">
-                <div className="cds-contenedor-disponibilidad-inner">
+                <div
+                    className="cds-contenedor-disponibilidad-inner"
+                    data-cy="estatus-disponibilidad-sala-contenedor"
+                >
                     {data.map((sala, index) => (
                         <EstatusDisponibilidadSala
                             bloqueada={sala.bloqueada}
