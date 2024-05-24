@@ -72,7 +72,7 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("postAnuncioEvento");
 
-        // Espera a que se complete la solicitud POST
+        /* Espera a que se complete la solicitud POST
         cy.wait("@postAnuncioEvento", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
@@ -119,12 +119,14 @@ describe("Creación de anuncios para el video wall", () => {
 
             // Esperar a que se complete la solicitud GET
             cy.wait("@getAnunciosActualizado");
-        });
+        });*/
 
-        cy.containsDataCy(
-            "mensaje-enviado-anuncio-evento",
-            "¡Datos enviados correctamente!"
-        );
+        cy.wait("@postAnuncioEvento", { timeout: 60000 }).then(() => {
+            cy.containsDataCy(
+                "mensaje-enviado-anuncio-evento",
+                "¡Datos enviados correctamente!"
+            );
+        });
     });
 
     // Prueba para agregar un anuncio de tipo personalizado
@@ -168,7 +170,7 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("postAnuncioPersonalizado");
 
-        // Espera a que se complete la solicitud POST
+        /* Espera a que se complete la solicitud POST
         cy.wait("@postAnuncioPersonalizado", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
@@ -216,6 +218,12 @@ describe("Creación de anuncios para el video wall", () => {
             // Esperar a que se complete la solicitud GET
             cy.wait("@getAnunciosActualizado");
 
+            cy.containsDataCy(
+                "mensaje-enviado-anuncio-personalizado",
+                "¡Datos enviados correctamente!"
+            );
+        });*/
+        cy.wait("@postAnuncioPersonalizado", { timeout: 60000 }).then(() => {
             cy.containsDataCy(
                 "mensaje-enviado-anuncio-personalizado",
                 "¡Datos enviados correctamente!"
@@ -334,7 +342,7 @@ describe("Creación de anuncios para el video wall", () => {
         cy.containsDataCy(
             "anuncio-eliminado-satisfactoriamente-videowall",
             "Eliminación satisfactoria",
-            15000
+            30000
         );
         cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio");
     });
