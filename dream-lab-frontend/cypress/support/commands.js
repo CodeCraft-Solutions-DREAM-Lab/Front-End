@@ -1,6 +1,4 @@
 import "cypress-localstorage-commands";
-import { warning } from "framer-motion";
-const API_URL = Cypress.env("API_URL");
 
 // ***********************************************
 // This example commands.js shows you how to
