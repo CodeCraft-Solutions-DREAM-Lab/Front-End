@@ -78,7 +78,7 @@ export function generateReservationCards(reservacionesData, handleClickModal) {
             reservation.duracion
         );
 
-        if (reservation.estatus !== 3) {
+        if (reservation.estatus !== 3 && reservation.estatus !== 5) {
             // Si el estatus no es igual a "Confirmada", no generamos la tarjeta de reservación
             return null;
         }
@@ -88,10 +88,13 @@ export function generateReservationCards(reservacionesData, handleClickModal) {
             <TarjetaReservacion
                 key={index}
                 sala={
-                    reservation.nombre_sala
-                        ? reservation.nombre_sala
-                        : "D.R.E.A.M. Lab"
+                    reservation.nombre_sala 
+                    ? reservation.nombre_sala  
+                    : "D.R.E.A.M. Lab (Pendiente)"
                 }
+
+                pendiente = {reservation.estatus === 5 ? true : false}
+
                 experiencia={
                     reservation.nombre_experiencia
                         ? reservation.nombre_experiencia

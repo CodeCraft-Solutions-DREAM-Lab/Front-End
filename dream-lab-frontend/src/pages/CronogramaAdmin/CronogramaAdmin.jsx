@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { get } from "../../utils/ApiRequests";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
-import menuIcon from "../../assets/Admin/menu-admin.svg"
+import menuIcon from "../../assets/Admin/menu-admin.svg";
 
 const monthTranslations = {
 	January: "Enero",
@@ -69,9 +69,7 @@ const CustomLabel = ({ interval }) => {
 	);
 };
 
-
 const handleToggleClick = (groupId) => {
-	
 	console.log(`Toggle button clicked for group ${groupId}`);
 
 	// Add your toggle logic here
@@ -79,7 +77,7 @@ const handleToggleClick = (groupId) => {
 const customGroupRenderer = ({ group }) => {
 	const groupClass = group.sala ? "sala" : "";
 	return (
-		<div className={`rct-sidebar-row ${groupClass}`}>
+		<div className={`rct-sidebar-row ${groupClass}`} data-cy="group-row">
 			{group.title}
 			{!group.sala && (
 				<Switch
@@ -157,17 +155,16 @@ const areas = ["Sala VR", "Electric Garage", "New Horizons"];
 const estados = ["Preparado", "En proceso", "Sin preparar"];
 
 function convertToMomentObjects(jsonData) {
-    return jsonData.map((event) => {
-        return {
-            id: event.id,
-            group: event.group,
-            title: event.title,
-            start_time: moment(event.start_time).add(6, 'hours'),
-            end_time: moment(event.end_time).add(6, 'hours'),
-        };
-    });
+	return jsonData.map((event) => {
+		return {
+			id: event.id,
+			group: event.group,
+			title: event.title,
+			start_time: moment(event.start_time).add(6, "hours"),
+			end_time: moment(event.end_time).add(6, "hours"),
+		};
+	});
 }
-
 
 function CronogramaAdmin() {
 	// Set the locale to Spanish
@@ -233,11 +230,14 @@ function CronogramaAdmin() {
 
 	return (
 		<>
-		<div className="menu-icon-admin">
-			<img src={menuIcon}/>
-		</div>
+			<div className="menu-icon-admin">
+				<img src={menuIcon} />
+			</div>
 			<NavBarAdmin />
-			<div className="timeline-container-cronograma-admin">
+			<div
+				className="timeline-container-cronograma-admin"
+				data-cy="timeline-container-cronograma-admin"
+			>
 				<Timeline
 					groups={groups}
 					items={items}
@@ -302,6 +302,7 @@ function CronogramaAdmin() {
 												Áreas
 											</InputLabel>
 											<Select
+												data-cy="Áreas"
 												multiple
 												value={selectedOptions1}
 												onChange={handleChange1}
@@ -357,6 +358,7 @@ function CronogramaAdmin() {
 												Estado
 											</InputLabel>
 											<Select
+												data-cy="Estado"
 												multiple
 												value={selectedOptions2}
 												onChange={handleChange2}

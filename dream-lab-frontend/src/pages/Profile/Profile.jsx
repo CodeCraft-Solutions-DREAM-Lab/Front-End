@@ -175,169 +175,174 @@ function Profile() {
         });
     };
     return (
-        <div className="profile-container">
-            <div className="navbar-div-profile">
-                <Navbar autoHide={false} view="perfil" />
-            </div>
+        <div className="profile-container-out">
+            <div className="profile-container">
+                <div className="navbar-div-profile">
+                    <Navbar autoHide={false} view="perfil" />
+                </div>
 
-            {tipoModal === 1 ? (
-                <CancelarReservacion
-                    modalClasificacion={1}
-                    type="tipo1"
-                    titulo1={salaReserva}
-                    tituloExperiencia={experienciaReserva}
-                    titulo2={diaReserva}
-                    titulo3={horaReserva}
-                    textoRojo="Cancelar reservación"
-                    funcionRojo={() =>
-                        handleClickModal(
-                            2,
-                            salaReserva,
-                            experienciaReserva,
-                            horaReserva,
-                            diaReserva,
-                            idResReserva
-                        )
-                    }
-                    funcionVerde={() =>
-                        handleClickModal(
-                            0,
-                            salaReserva,
-                            experienciaReserva,
-                            horaReserva,
-                            diaReserva,
-                            idResReserva
-                        )
-                    }
-                />
-            ) : tipoModal === 2 ? (
-                <CancelarReservacion
-                    modalClasificacion={2}
-                    type="tipo2"
-                    titulo1={"¿Quieres cancelar tu reserva?"}
-                    titulo2={salaReserva}
-                    titulo3={
-                        diaReserva.split(" - ")[1] + " (" + horaReserva + ")"
-                    }
-                    titulo4="¡Perderás puntos de prioridad!"
-                    textoRojo="Sí"
-                    textoVerde="No"
-                    funcionRojo={() => handleCancelarReserva(idResReserva)}
-                    /*funcionRojo={() =>handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)}*/
-                    funcionVerde={() =>
-                        handleClickModal(
-                            0,
-                            salaReserva,
-                            experienciaReserva,
-                            horaReserva,
-                            diaReserva,
-                            idResReserva
-                        )
-                    }
-                />
-            ) : tipoModal === 3 ? (
-                <CancelarReservacion
-                    modalClasificacion={3}
-                    type="tipo3"
-                    titulo1="Cancelación exitosa"
-                    titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
-                    titulo3={mensajeAyuda}
-                    textoVerde="Cerrar"
-                    funcionVerde={() =>
-                        handleClickModal(
-                            0,
-                            salaReserva,
-                            experienciaReserva,
-                            horaReserva,
-                            diaReserva,
-                            idResReserva
-                        )
-                    }
-                />
-            ) : null}
+                {tipoModal === 1 ? (
+                    <CancelarReservacion
+                        modalClasificacion={1}
+                        type="tipo1"
+                        titulo1={salaReserva}
+                        tituloExperiencia={experienciaReserva}
+                        titulo2={diaReserva}
+                        titulo3={horaReserva}
+                        textoRojo="Cancelar reservación"
+                        funcionRojo={() =>
+                            handleClickModal(
+                                2,
+                                salaReserva,
+                                experienciaReserva,
+                                horaReserva,
+                                diaReserva,
+                                idResReserva
+                            )
+                        }
+                        funcionVerde={() =>
+                            handleClickModal(
+                                0,
+                                salaReserva,
+                                experienciaReserva,
+                                horaReserva,
+                                diaReserva,
+                                idResReserva
+                            )
+                        }
+                    />
+                ) : tipoModal === 2 ? (
+                    <CancelarReservacion
+                        modalClasificacion={2}
+                        type="tipo2"
+                        titulo1={"¿Quieres cancelar tu reserva?"}
+                        titulo2={salaReserva}
+                        titulo3={
+                            diaReserva.split(" - ")[1] +
+                            " (" +
+                            horaReserva +
+                            ")"
+                        }
+                        titulo4="¡Perderás puntos de prioridad!"
+                        textoRojo="Sí"
+                        textoVerde="No"
+                        funcionRojo={() => handleCancelarReserva(idResReserva)}
+                        /*funcionRojo={() =>handleClickModal(3, salaReserva, experienciaReserva, horaReserva, diaReserva)}*/
+                        funcionVerde={() =>
+                            handleClickModal(
+                                0,
+                                salaReserva,
+                                experienciaReserva,
+                                horaReserva,
+                                diaReserva,
+                                idResReserva
+                            )
+                        }
+                    />
+                ) : tipoModal === 3 ? (
+                    <CancelarReservacion
+                        modalClasificacion={3}
+                        type="tipo3"
+                        titulo1="Cancelación exitosa"
+                        titulo2="¡Listo! Tu cancelación se ha procesado con éxito."
+                        titulo3={mensajeAyuda}
+                        textoVerde="Cerrar"
+                        funcionVerde={() =>
+                            handleClickModal(
+                                0,
+                                salaReserva,
+                                experienciaReserva,
+                                horaReserva,
+                                diaReserva,
+                                idResReserva
+                            )
+                        }
+                    />
+                ) : null}
 
-            {/* <div className="boton-atras">
+                {/* <div className="boton-atras">
     				<BotonBack className="imagen-boton" ruta="/home/"/>
 			</div> */}
 
-            <NameCard
-                nombre={
-                    datosUsuario.nombre
-                        ? datosUsuario.nombre.split(" ")[0] +
-                          " " +
-                          datosUsuario.apellidoP
-                        : "Mi perfil"
-                }
-                handleLogroArtista={handleLogroArtista}
-            />
+                <NameCard
+                    nombre={
+                        datosUsuario.nombre
+                            ? datosUsuario.nombre.split(" ")[0] +
+                              " " +
+                              datosUsuario.apellidoP
+                            : "Mi perfil"
+                    }
+                    handleLogroArtista={handleLogroArtista}
+                />
 
-            <div className="div-exterior-perfil">
-                <div className="esfera-div-celular">
-                    <EsferaPuntosPrioridad
-                        puntos={
-                            datosUsuario.prioridad
-                                ? datosUsuario.prioridad
-                                : "?"
-                        }
-                        subtitulo={
-                            datosUsuario.prioridad
-                                ? "Puntos de prioridad"
-                                : "Cargando"
-                        }
-                    />
-                </div>
-
-                <div className="logros-div">
-                    <h2 className="sub">Logros</h2>
-
-                    <div className="logros-div-in">
-                        {renderTarjetasLogro(datosLogros, estadoLogros)}
-                        <div className="degradado-down"></div>
+                <div className="div-exterior-perfil">
+                    <div className="esfera-div-celular">
+                        <EsferaPuntosPrioridad
+                            puntos={
+                                datosUsuario.prioridad
+                                    ? datosUsuario.prioridad
+                                    : "?"
+                            }
+                            subtitulo={
+                                datosUsuario.prioridad
+                                    ? "Puntos de prioridad"
+                                    : "Cargando"
+                            }
+                        />
                     </div>
-                </div>
 
-                <div className="esfera-div">
-                    <EsferaPuntosPrioridad
-                        puntos={
-                            datosUsuario.prioridad >= 0
-                                ? datosUsuario.prioridad
-                                : "..."
-                        }
-                        subtitulo={
-                            datosUsuario.prioridad >= 0
-                                ? "Puntos de prioridad"
-                                : "Cargando"
-                        }
-                    />
-                </div>
+                    <div className="logros-div">
+                        <h2 className="sub">Logros</h2>
 
-                <div className="reservaciones-div">
-                    <h2 className="sub">Reservaciones activas</h2>
-
-                    <div
-                        className="reservaciones-div-in"
-                        data-cy="reservationCard"
-                    >
-                        {generateReservationCards(
-                            datosReservas,
-                            handleClickModal
-                        )}
-                        <div className="degradado-down"></div>
+                        <div className="logros-div-in">
+                            {renderTarjetasLogro(datosLogros, estadoLogros)}
+                            <div className="degradado-down"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div className="botones-modo-celular">
-                    <BotonCelular
-                        texto="Logros"
-                        tipo="logros"
-                        datosLogros={datosLogros}
-                        estadoLogros={estadoLogros}
-                    />
-                    <BotonCelular
-                        texto="Reservaciones activas"
-                        tipo="calendario"
-                        datosReservas={datosReservas}
-                    />
+                    <div className="esfera-div">
+                        <EsferaPuntosPrioridad
+                            puntos={
+                                datosUsuario.prioridad >= 0
+                                    ? datosUsuario.prioridad
+                                    : "..."
+                            }
+                            subtitulo={
+                                datosUsuario.prioridad >= 0
+                                    ? "Puntos de prioridad"
+                                    : "Cargando"
+                            }
+                        />
+                    </div>
+
+                    <div className="reservaciones-div">
+                        <h2 className="sub">Reservaciones activas</h2>
+
+                        <div
+                            className="reservaciones-div-in"
+                            data-cy="reservationCard"
+                        >
+                            {generateReservationCards(
+                                datosReservas,
+                                handleClickModal
+                            )}
+                            <div className="degradado-down"></div>
+                        </div>
+                    </div>
+
+                    <div className="botones-modo-celular">
+                        <BotonCelular
+                            texto="Logros"
+                            tipo="logros"
+                            datosLogros={datosLogros}
+                            estadoLogros={estadoLogros}
+                        />
+                        <BotonCelular
+                            texto="Reservaciones activas"
+                            tipo="calendario"
+                            datosReservas={datosReservas}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -93,6 +93,8 @@ function FormularioCreacionAnuncio(props) {
                 throw new Error("Error al enviar datos al servidor.");
             }
 
+            console.log("POST:" + anuncio);
+
             console.log("Datos enviados correctamente al servidor.");
             // Después de enviar los datos satisfactoriamente, limpiar los campos y mostrar el mensaje de enviado
             setTitulo("");
@@ -230,6 +232,7 @@ function FormularioCreacionAnuncio(props) {
                                 onChange={handleInputChange}
                                 maxLength={50}
                                 isDisabled={isCheckedSoloImage ? true : false}
+                                data-cy="titulo-anuncio-personalizado"
                             />
                         </div>
                         <p className="footer-input-formulario-anuncio">
@@ -252,6 +255,7 @@ function FormularioCreacionAnuncio(props) {
                                     isDisabled={
                                         isCheckedSoloImage ? true : false
                                     }
+                                    data-cy="descripcion-anuncio-personalizado"
                                 />
                             </div>
                             <p className="footer-input-formulario-anuncio">
@@ -297,12 +301,12 @@ function FormularioCreacionAnuncio(props) {
                     </div>
                 </form>
                 {mensajeAdvertencia && (
-                    <p className="mensaje-enviado-anuncio">
+                    <p className="mensaje-enviado-anuncio" data-cy="mensaje-advertencia-anuncio-personalizado">
                         {mensajeAdvertencia}
                     </p>
                 )}
                 {enviado && (
-                    <p className="mensaje-enviado-anuncio">
+                    <p className="mensaje-enviado-anuncio" data-cy="mensaje-enviado-anuncio-personalizado">
                         ¡Datos enviados correctamente!
                     </p>
                 )}
