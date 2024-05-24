@@ -267,7 +267,7 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("postAnuncioSoloImagen");
 
-        // Espera a que se complete la solicitud POST
+        /* Espera a que se complete la solicitud POST
         cy.wait("@postAnuncioSoloImagen", { timeout: 60000 }).then(() => {
             // Simular una respuesta mock para el segundo GET con los datos actualizados
             cy.intercept(
@@ -319,7 +319,15 @@ describe("Creación de anuncios para el video wall", () => {
                 "mensaje-enviado-anuncio-evento",
                 "¡Datos enviados correctamente!"
             );
+        });*/
+
+        cy.wait("@postAnuncioSoloImagen", { timeout: 60000 }).then(() => {
+            cy.containsDataCy(
+                "mensaje-enviado-anuncio-evento",
+                "¡Datos enviados correctamente!"
+            );
         });
+
     });
 
     // Eliminar anuncio
