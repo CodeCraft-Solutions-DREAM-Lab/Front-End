@@ -15,6 +15,7 @@ function ReservacionesPorSala({ titulo, data }) {
                         data={data}
                         showAnimation={true}
                         id="rps-bar-list"
+                        data-cy="rps-bar-list"
                     />
                 </div>
             </div>

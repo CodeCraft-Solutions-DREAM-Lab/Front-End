@@ -336,7 +336,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.containsDataCy("gp-chart", "7");
     });
 
-    it.only("Despliegue de la gráfica de línea de reservaciones por mes", () => {
+    it("Despliegue de la gráfica de línea de reservaciones por mes", () => {
         cy.getDataCy("gl-chart").should("exist");
 
         // Checar que el y-axis llegue hasta 16
@@ -354,5 +354,13 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.getDataCy("gl-chart")
             .find(".recharts-cartesian-axis-ticks")
             .contains("May");
+    });
+
+    it.only("Despliegue de la gráfica de barras de reservaciones por sala", () => {
+        cy.getDataCy("rps-bar-list").should("exist");
+
+        // Validar que contenga los datos correctos
+        cy.containsDataCy("rps-bar-list", "Electric Garage");
+        cy.containsDataCy("rps-bar-list", "5");
     });
 });
