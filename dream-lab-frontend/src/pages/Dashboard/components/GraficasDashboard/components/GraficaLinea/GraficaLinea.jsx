@@ -17,6 +17,7 @@ function GraficaLinea({ chartData, index, categories }) {
             showLegend={false}
             curveType="monotone"
             id="gl-chart"
+            data-cy="gl-chart"
         />
     );
 }

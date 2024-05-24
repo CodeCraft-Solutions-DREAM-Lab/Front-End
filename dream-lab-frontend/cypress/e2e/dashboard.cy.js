@@ -336,5 +336,23 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         cy.containsDataCy("gp-chart", "7");
     });
 
-    it.only("Despliegue de la gráfica de línea de reservaciones por mes", () => {});
+    it.only("Despliegue de la gráfica de línea de reservaciones por mes", () => {
+        cy.getDataCy("gl-chart").should("exist");
+
+        // Checar que el y-axis llegue hasta 16
+        cy.getDataCy("gl-chart")
+            .find(".recharts-cartesian-axis-ticks")
+            .contains("16");
+
+        // Checar que el x-axis contenga los 3 meses
+        cy.getDataCy("gl-chart")
+            .find(".recharts-cartesian-axis-ticks")
+            .contains("Mar");
+        cy.getDataCy("gl-chart")
+            .find(".recharts-cartesian-axis-ticks")
+            .contains("Abr");
+        cy.getDataCy("gl-chart")
+            .find(".recharts-cartesian-axis-ticks")
+            .contains("May");
+    });
 });
