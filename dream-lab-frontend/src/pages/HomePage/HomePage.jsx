@@ -122,6 +122,7 @@ function HomePage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [isContentVisible, setIsContentVisible] = useState(true); // Visibilidad de página al hacer una búsqueda
+    const isMobile = window.innerWidth <= 480;
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -349,7 +350,7 @@ function HomePage() {
                     />
                 </div>
             </div>
-            <div className="page-content">
+            <div className={`page-content ${isMobile && searchTerm ? 'mobile-search-active' : ''}`}>
                 <div ref={detallesRef}>
                     {detallesVisible && (
                         <Detalles

@@ -62,7 +62,6 @@ function ResultadosBusqueda(props) {
               image={result.fotoURL || result.portadaURL}
               onClick={() => handleClick(id, tipo)}
             />
-            <Spacer x={6} />
           </React.Fragment>
         )
         
