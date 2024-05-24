@@ -62,7 +62,7 @@
     }
 
     .page-content.mobile-search-active {
-        padding: 9px;
+        padding: 1px;
     }
 }
 
@@ -85,9 +85,6 @@
     height: 100%;
     background: linear-gradient(180deg, #042e55 0%, #7b7afd 100%);
 }
-
-
-
 
 .carousel-container {
     overflow-x: auto; /* Enable horizontal scrolling by default */
