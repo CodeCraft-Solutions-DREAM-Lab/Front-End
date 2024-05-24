@@ -302,20 +302,20 @@ function GraficasDashboard({ month, year }) {
     //     { cantidadReservaciones: 111, fecha: "Dic" },
     // ];
 
-    // const datosUsoMateriales = [
-    //     { uso: 100, material: "Laptop" },
-    //     { uso: 50, material: "Proyector" },
-    //     { uso: 75, material: "Cable HDMI" },
-    //     { uso: 120, material: "Visor VR para smartphone" },
-    //     { uso: 30, material: "Bocinas" },
-    //     { uso: 95, material: "Micrófono" },
-    //     { uso: 44, material: "Cámara" },
-    //     { uso: 28, material: "Pantalla" },
-    //     { uso: 113, material: "Control" },
-    //     { uso: 17, material: "Audífonos" },
-    //     { uso: 94, material: "Teclado" },
-    //     { uso: 111, material: "Mouse" },
-    // ];
+    const datosUsoMateriales = [
+        { uso: 100, material: "Laptop" },
+        { uso: 50, material: "Proyector" },
+        { uso: 75, material: "Cable HDMI" },
+        { uso: 120, material: "Visor VR para smartphone" },
+        { uso: 30, material: "Bocinas" },
+        { uso: 95, material: "Micrófono" },
+        { uso: 44, material: "Cámara" },
+        { uso: 28, material: "Pantalla" },
+        { uso: 113, material: "Control" },
+        { uso: 17, material: "Audífonos" },
+        { uso: 94, material: "Teclado" },
+        { uso: 111, material: "Mouse" },
+    ];
 
     // const datosReservacionesPorSala = [
     //     { name: "Electric Garage", value: 23 },
@@ -344,7 +344,10 @@ function GraficasDashboard({ month, year }) {
     return (
         <>
             <div className="graficas-dashboard-main-container">
-                <div className="graficas-dashboard-statcards-container" data-cy="graficasDashboard-statcards-container">
+                <div
+                    className="graficas-dashboard-statcards-container"
+                    data-cy="graficasDashboard-statcards-container"
+                >
                     <StatCard
                         nombre="Reservaciones totales"
                         valor={
