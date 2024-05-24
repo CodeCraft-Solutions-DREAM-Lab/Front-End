@@ -126,7 +126,7 @@ function SeleccionMaterial() {
 					</div>
 					<div className="material-resumen-container">
 						{selectedMaterials.map((selectedMaterial) => (
-							<Badge content={selectedMaterial.quantity} color="default" placement="top-left">
+							<Badge content={selectedMaterial.quantity} color="default" placement="top-left" data-cy="badge">
 								<MiniMaterialCard
 									key={selectedMaterial.materialId}
 									image={selectedMaterial.image}
@@ -143,7 +143,7 @@ function SeleccionMaterial() {
 				<div className="bottom-section">
 					{/* Div to display all selectable materials */}
 					<div className="card-container-wrapper">
-						<div className="card-container-sm">
+						<div className="card-container-sm" data-cy="card-container-sm">
 							{filteredData.map(material => (
 								<MaterialCard
 									key={material.id}

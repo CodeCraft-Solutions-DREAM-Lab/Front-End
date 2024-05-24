@@ -13,10 +13,10 @@ export const InfoReservCardDupe = (props) => {
             
                     <p className="IRC-warning-message-resumen-reservacion">
                         La asignación del lugar se hará hoy a las{" "}
-                        <strong>{horaCorte}</strong>.
+                        <strong data-cy="summary-lab-cutoff">{horaCorte}</strong>.
                         <br />
-                        Compiten <strong>{competidores}</strong> reservacion(es)
-                        por <strong>{cupos}</strong> cupo(s).
+                        Compiten <strong data-cy="summary-lab-contestants">{competidores}</strong> reservacion(es)
+                        por <strong data-cy="summary-lab-spots">{cupos}</strong> cupo(s).
                     </p>
             </div>
         </>
