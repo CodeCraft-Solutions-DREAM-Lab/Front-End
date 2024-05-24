@@ -16,7 +16,7 @@
 
 .titulo-mensaje-bienvenida-videowall {
     font-weight: bold;
-    font-size: 0.7vw;
+    font-size: 0.63vw;
 }
 
 .descripcion-mensaje-bienvenida-videowall {
@@ -103,7 +103,7 @@
     align-items: center;
     width: 50%;
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 9%;
     margin-bottom: -4%;
     padding: 2%;
 }
@@ -112,9 +112,9 @@
     font-weight: bold;
     line-height: 100%;
     text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-    font-size: 0.65vw;
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size: 0.64vw;
     margin-top: 10%;
 }
 
@@ -152,7 +152,7 @@
 
     .titulo-mensaje-bienvenida-videowall {
         font-weight: bold;
-        font-size: small;
+        font-size: 1.5vh;
     }
 
     .descripcion-mensaje-bienvenida-videowall {
@@ -161,7 +161,7 @@
         text-align: center;
         padding-left: 9%;
         padding-right: 9%;
-        font-size: small;
+        font-size: 1.4vh;
     }
 
     .imagen-alerta-videowall-bienvenida {
@@ -182,7 +182,7 @@
     }
 
     .agenda-aqui-alerta-videowall {
-        font-size: small;
+        font-size: 1.4vh;
         text-align: center;
         line-height: 100%;
     }
@@ -191,9 +191,9 @@
         width: 5vh;
     }
 
-    .imagen-qr-alerta-videowall {
+    .imagen-qr-alerta-videowall-2 {
         padding: 3%;
-        width: 8vh;
+        width: 7.5vh;
     }
 
     .alerta-videowall-primera-mitad{
@@ -237,13 +237,13 @@
         text-align: center;
         padding-left: 5%;
         padding-right: 5%;
-        font-size: small;
+        font-size: 1.6vh;
         margin-top: 10%;
     }
 
     .div-informacion-reserva-alerta-videowall {
         text-align: center;
-        font-size: small;
+        font-size: 1.6vh;
         margin-top: 3%;
         width: 100%;
         margin-top: 5%;
@@ -251,6 +251,6 @@
     }
 
     .horario-reserva-videowall-alerta {
-        font-size: x-small;
+        font-size: 1.4vh;
     }
 }

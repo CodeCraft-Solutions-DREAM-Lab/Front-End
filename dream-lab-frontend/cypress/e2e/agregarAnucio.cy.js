@@ -394,6 +394,6 @@ describe("Creación de anuncios para el video wall", () => {
             cy.get('@tarjeta').trigger('mousedown');
             cy.get('@tarjeta').trigger('mousemove', { clientX: 0, clientY: 2000 });
             cy.get('@tarjeta').trigger('mouseup', { force: true }); // Usa { force: true } para garantizar que el evento se dispare incluso si el elemento está oculto
-        })
+        });
     });
 });

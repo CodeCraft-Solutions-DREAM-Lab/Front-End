@@ -52,7 +52,7 @@
     width: 70%;
 }
 
-.clic-image{
+.clic-image-anuncio{
     width: 2vh;
     height: 2vh;
     justify-content: flex-end; /* Alinea al final del contenedor */
@@ -170,7 +170,7 @@
         margin-left: none; /* Alinea a la derecha */
     }
 
-    .clic-image{
+    .clic-image-anuncio{
         width: 1.8vh;
         height: 1.8vh;
         justify-content: flex-end; /* Alinea al final del contenedor */
@@ -265,7 +265,7 @@
         width: 45%;
     }
 
-    .clic-image{
+    .clic-image-anuncio{
         width: 3.1vh;
         height: 3.1vh;
         justify-content: flex-end; /* Alinea al final del contenedor */
