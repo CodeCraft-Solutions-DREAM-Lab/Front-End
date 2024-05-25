@@ -2,7 +2,7 @@
     "durations": [
         {
             "spec": "cypress/e2e/agregarAnuncio.cy.js",
-            "duration": 22413
+            "duration": 36921
         },
         {
             "spec": "cypress/e2e/cancelarReservacion.cy.js",
@@ -15,7 +15,7 @@
         },
         {
             "spec": "cypress/e2e/detalles.cy.js",
-            "duration": 9542
+            "duration": 7602
         },
         {
             "spec": "cypress/e2e/landingPage.cy.js",
