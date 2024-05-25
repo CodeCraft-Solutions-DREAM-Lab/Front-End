@@ -6,7 +6,7 @@ export default defineConfig({
     e2e: {
         baseUrl: "http://localhost:5173",
         supportFile: false,
-        fixturesFolder: true,
+        fixturesFolder: false,
         setupNodeEvents(on, config) {
             cypressSplit(on, config);
             // IMPORTANT: return the config object
