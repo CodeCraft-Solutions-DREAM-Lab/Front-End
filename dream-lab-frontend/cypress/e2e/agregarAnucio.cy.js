@@ -71,9 +71,6 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("postAnuncioEvento");
 
-        // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioEvento");
-
         // Simular una respuesta mock para el segundo GET con los datos actualizados
         cy.intercept("GET", "https://readanuncios-j5zt2ysdwq-uc.a.run.app/", {
             statusCode: 200,
@@ -110,6 +107,9 @@ describe("Creación de anuncios para el video wall", () => {
                 },
             ],
         }).as("getAnunciosActualizado");
+
+        // Espera a que se complete la solicitud POST
+        cy.wait("@postAnuncioEvento");
 
         // Esperar a que se complete la solicitud GET
         cy.wait("@getAnunciosActualizado");
