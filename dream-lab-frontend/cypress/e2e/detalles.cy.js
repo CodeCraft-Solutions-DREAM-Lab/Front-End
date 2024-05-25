@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Despliegue correcto del componente 'Detalles'", () => {
     beforeEach(() => {
         cy.loginWith("test");

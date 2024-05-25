@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Cancelación exitosa de una reservación.", () => {
     beforeEach(() => {
         cy.intercept("GET", "perfil/empty", {

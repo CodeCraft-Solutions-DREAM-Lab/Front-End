@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Despliegue adecuado del componente 'Slider'.", () => {
     beforeEach(() => {
         // Iniciar sesión

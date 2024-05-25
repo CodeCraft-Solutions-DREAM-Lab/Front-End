@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Resumen de reservación", () => {
     beforeEach(() => {
         cy.loginWith("test");
