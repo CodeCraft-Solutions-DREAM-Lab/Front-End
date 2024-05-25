@@ -32,24 +32,6 @@ describe("Creación de anuncios para el video wall", () => {
     it("Agregar anuncio (evento)", () => {
         cy.wait("@getAnuncios");
 
-        cy.typeDataCy("input-titulo-anuncio-evento", "Anuncio de prueba");
-        cy.typeDataCy("input-ubicacion-anuncio-evento", "Ubicación de prueba");
-        cy.typeDataCy("input-fecha-anuncio-evento", "05052024");
-        cy.typeDataCy("input-hora-inicio-anuncio-evento", "09:00");
-        cy.typeDataCy("input-hora-fin-anuncio-evento", "10:00");
-        cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy(
-            "mensaje-advertencia-anuncio-evento",
-            "Existen campos vacíos. Por favor complete todos los campos."
-        );
-
-        cy.attachFileDataCy(
-            "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
-        );
-
-        cy.clickDataCy("boton-agregar-anuncio");
-
         cy.intercept("POST", "https://createanuncio2-j5zt2ysdwq-uc.a.run.app", {
             statusCode: 200,
             body: [
@@ -108,6 +90,24 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("getAnunciosActualizado");
 
+        cy.typeDataCy("input-titulo-anuncio-evento", "Anuncio de prueba");
+        cy.typeDataCy("input-ubicacion-anuncio-evento", "Ubicación de prueba");
+        cy.typeDataCy("input-fecha-anuncio-evento", "05052024");
+        cy.typeDataCy("input-hora-inicio-anuncio-evento", "09:00");
+        cy.typeDataCy("input-hora-fin-anuncio-evento", "10:00");
+        cy.clickDataCy("boton-agregar-anuncio");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-evento",
+            "Existen campos vacíos. Por favor complete todos los campos."
+        );
+
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/imagenPrueba.jpg"
+        );
+
+        cy.clickDataCy("boton-agregar-anuncio");
+
         // Espera a que se complete la solicitud POST
         cy.wait("@postAnuncioEvento");
 
@@ -122,23 +122,6 @@ describe("Creación de anuncios para el video wall", () => {
 
     // Prueba para agregar un anuncio de tipo personalizado
     it("Agregar anuncio (personalizado)", () => {
-        cy.clickDataCy("tipo-formulario-personalizado-boton");
-        cy.typeDataCy("titulo-anuncio-personalizado", "Anuncio de prueba");
-        cy.typeDataCy(
-            "descripcion-anuncio-personalizado",
-            "Descripción de prueba"
-        );
-        cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy(
-            "mensaje-advertencia-anuncio-personalizado",
-            "Existen campos vacíos. Por favor complete todos los campos."
-        );
-        cy.attachFileDataCy(
-            "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
-        );
-        cy.clickDataCy("boton-agregar-anuncio");
-
         cy.intercept("POST", "https://createanuncio2-j5zt2ysdwq-uc.a.run.app", {
             statusCode: 200,
             body: [
@@ -160,9 +143,6 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("postAnuncioPersonalizado");
 
-        // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioPersonalizado");
-
         // Simular una respuesta mock para el segundo GET con los datos actualizados
         cy.intercept("GET", "https://readanuncios-j5zt2ysdwq-uc.a.run.app/", {
             statusCode: 200,
@@ -200,6 +180,26 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("getAnunciosActualizado");
 
+        cy.clickDataCy("tipo-formulario-personalizado-boton");
+        cy.typeDataCy("titulo-anuncio-personalizado", "Anuncio de prueba");
+        cy.typeDataCy(
+            "descripcion-anuncio-personalizado",
+            "Descripción de prueba"
+        );
+        cy.clickDataCy("boton-agregar-anuncio");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-personalizado",
+            "Existen campos vacíos. Por favor complete todos los campos."
+        );
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/imagenPrueba.jpg"
+        );
+        cy.clickDataCy("boton-agregar-anuncio");
+
+        // Espera a que se complete la solicitud POST
+        cy.wait("@postAnuncioPersonalizado");
+
         // Esperar a que se complete la solicitud GET
         cy.wait("@getAnunciosActualizado");
 
@@ -211,18 +211,6 @@ describe("Creación de anuncios para el video wall", () => {
 
     // Prueba para agregar un anuncio de tipo imagen
     it("Agregar anuncio (imagen)", () => {
-        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
-        cy.clickDataCy("boton-agregar-anuncio");
-        cy.containsDataCy(
-            "mensaje-advertencia-anuncio-evento",
-            "Por favor adjunte una imagen."
-        );
-        cy.attachFileDataCy(
-            "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
-        );
-        cy.clickDataCy("boton-agregar-anuncio");
-
         cy.intercept("POST", "https://createanuncio2-j5zt2ysdwq-uc.a.run.app", {
             statusCode: 200,
             body: [
@@ -243,9 +231,6 @@ describe("Creación de anuncios para el video wall", () => {
                 },
             ],
         }).as("postAnuncioSoloImagen");
-
-        // Espera a que se complete la solicitud POST
-        cy.wait("@postAnuncioSoloImagen");
 
         // Simular una respuesta mock para el segundo GET con los datos actualizados
         cy.intercept("GET", "https://readanuncios-j5zt2ysdwq-uc.a.run.app/", {
@@ -284,6 +269,21 @@ describe("Creación de anuncios para el video wall", () => {
             ],
         }).as("getAnunciosActualizado");
 
+        cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
+        cy.clickDataCy("boton-agregar-anuncio");
+        cy.containsDataCy(
+            "mensaje-advertencia-anuncio-evento",
+            "Por favor adjunte una imagen."
+        );
+        cy.attachFileDataCy(
+            "subir-imagen-anuncio-personalizado",
+            "../assets/imagenPrueba.jpg"
+        );
+        cy.clickDataCy("boton-agregar-anuncio");
+
+        // Espera a que se complete la solicitud POST
+        cy.wait("@postAnuncioSoloImagen");
+
         // Esperar a que se complete la solicitud GET
         cy.wait("@getAnunciosActualizado");
 
@@ -295,11 +295,6 @@ describe("Creación de anuncios para el video wall", () => {
 
     // Eliminar anuncio
     it("Eliminar anuncio", () => {
-        cy.clickDataCy("boton-eliminar-anuncio-videowall");
-        cy.clickDataCy("primer-recordatorio-no-eliminar-anuncio");
-        cy.clickDataCy("boton-eliminar-anuncio-videowall");
-        cy.clickDataCy("primer-recordatorio-si-eliminar-anuncio");
-
         // intercept delete
         cy.intercept(
             "DELETE",
@@ -309,6 +304,11 @@ describe("Creación de anuncios para el video wall", () => {
                 body: {},
             }
         ).as("deleteAnuncio");
+
+        cy.clickDataCy("boton-eliminar-anuncio-videowall");
+        cy.clickDataCy("primer-recordatorio-no-eliminar-anuncio");
+        cy.clickDataCy("boton-eliminar-anuncio-videowall");
+        cy.clickDataCy("primer-recordatorio-si-eliminar-anuncio");
 
         cy.containsDataCy(
             "anuncio-eliminado-satisfactoriamente-videowall",
@@ -344,8 +344,6 @@ describe("Creación de anuncios para el video wall", () => {
 
     // Ocultar anuncio
     it("Ocultar anuncio", () => {
-        cy.clickDataCy("boton-ocultar-anuncio-videowall");
-
         // intercept put
         cy.intercept(
             "PUT",
@@ -358,6 +356,8 @@ describe("Creación de anuncios para el video wall", () => {
                 },
             }
         ).as("putAnuncio");
+
+        cy.clickDataCy("boton-ocultar-anuncio-videowall");
 
         cy.get('[data-cy="boton-ocultar-anuncio-videowall"]').should(
             "have.attr",
