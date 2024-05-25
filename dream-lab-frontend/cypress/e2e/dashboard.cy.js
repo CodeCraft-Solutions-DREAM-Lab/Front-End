@@ -3,15 +3,18 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         // Asignar una fecha especifica para que las pruebas sean consistentes
         cy.setDate(2024, 3, 22);
 
-        // Iniciar sesion con test
-        cy.loginWith("test");
-        // Visitar el perfil
-        cy.visit("/dashboard");
-    });
-
-    it("Despliegue de reservaciones totales", () => {
+        // Interceptar las llamadas a la API
         cy.intercept("GET", "dashboard/reservacionesByMes", {
             body: [
+                {
+                    year: 2024,
+                    month: 5,
+                    reservacionesTotales: 13,
+                    reservacionesConfirmadas: 8,
+                    reservacionesCanceladas: 6,
+                    reservacionesEnEspera: 2,
+                    reservacionesDenegadas: 15,
+                },
                 {
                     year: 2024,
                     month: 4,
@@ -32,68 +35,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                 },
             ],
         }).as("reservacionesByMes");
-        cy.wait("@reservacionesByMes");
 
-        // Checar el valor
-        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
-            .findDataCy("statCard-valor")
-            .contains("7");
-        // Checar el porcentaje de cambio
-        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
-            .findDataCy("statCard-cambio")
-            .contains("-46.2%");
-        // Checar el icono
-        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
-            .findDataCy("statCard-imagen")
-            .hasAttribute(
-                "src",
-                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
-            );
-    });
-
-    it("Despliegue de reservaciones activas", () => {
-        cy.intercept("GET", "dashboard/reservacionesByMes", {
-            body: [
-                {
-                    year: 2024,
-                    month: 4,
-                    reservacionesTotales: 7,
-                    reservacionesConfirmadas: 2,
-                    reservacionesCanceladas: 13,
-                    reservacionesEnEspera: 4,
-                    reservacionesDenegadas: 12,
-                },
-                {
-                    year: 2024,
-                    month: 3,
-                    reservacionesTotales: 13,
-                    reservacionesConfirmadas: 8,
-                    reservacionesCanceladas: 6,
-                    reservacionesEnEspera: 2,
-                    reservacionesDenegadas: 15,
-                },
-            ],
-        }).as("reservacionesByMes");
-        cy.wait("@reservacionesByMes");
-
-        // Checar el valor
-        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
-            .findDataCy("statCard-valor")
-            .contains("2");
-        // Checar el porcentaje de cambio
-        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
-            .findDataCy("statCard-cambio")
-            .contains("-75.0%");
-        // Checar el icono
-        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
-            .findDataCy("statCard-imagen")
-            .hasAttribute(
-                "src",
-                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
-            );
-    });
-
-    it("Despliegue de penalizaciones", () => {
         cy.intercept("GET", "dashboard/penalizacionesByMes", {
             body: [
                 {
@@ -108,68 +50,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                 },
             ],
         }).as("penalizacionesByMes");
-        cy.wait("@penalizacionesByMes");
 
-        // Checar el valor
-        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
-            .findDataCy("statCard-valor")
-            .contains("13");
-        // Checar el porcentaje de cambio
-        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
-            .findDataCy("statCard-cambio")
-            .contains("0%");
-        // Checar el icono
-        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
-            .findDataCy("statCard-imagen")
-            .hasAttribute(
-                "src",
-                "/src/assets/Admin/Dashboard/stat_no_change.svg"
-            );
-    });
-
-    it("Despliegue de cancelaciones", () => {
-        cy.intercept("GET", "dashboard/reservacionesByMes", {
-            body: [
-                {
-                    year: 2024,
-                    month: 4,
-                    reservacionesTotales: 7,
-                    reservacionesConfirmadas: 2,
-                    reservacionesCanceladas: 13,
-                    reservacionesEnEspera: 4,
-                    reservacionesDenegadas: 12,
-                },
-                {
-                    year: 2024,
-                    month: 3,
-                    reservacionesTotales: 13,
-                    reservacionesConfirmadas: 8,
-                    reservacionesCanceladas: 6,
-                    reservacionesEnEspera: 2,
-                    reservacionesDenegadas: 15,
-                },
-            ],
-        }).as("reservacionesByMes");
-        cy.wait("@reservacionesByMes");
-
-        // Checar el valor
-        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
-            .findDataCy("statCard-valor")
-            .contains("13");
-        // Checar el porcentaje de cambio
-        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
-            .findDataCy("statCard-cambio")
-            .contains("+116.7%");
-        // Checar el icono
-        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
-            .findDataCy("statCard-imagen")
-            .hasAttribute(
-                "src",
-                "/src/assets/Admin/Dashboard/stat_arrow_up.svg"
-            );
-    });
-
-    it("Despliegue de gráfica de pie de materiales más utilizados", () => {
         cy.intercept("GET", "dashboard/usoMaterialByMes", {
             body: [
                 {
@@ -202,38 +83,124 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                         },
                     ],
                 },
+            ],
+        }).as("usoMaterialByMes");
+
+        cy.intercept("GET", "dashboard/reservacionesBySalaByMes", {
+            body: [
                 {
                     year: 2024,
-                    month: 3,
-                    materiales: [
+                    month: 4,
+                    salas: [
                         {
-                            material: "Laptop",
-                            uso: 5,
-                        },
-                        {
-                            material: "Cable VGA",
-                            uso: 13,
-                        },
-                        {
-                            material: "Cable HDMI",
-                            uso: 2,
-                        },
-                        {
-                            material: "Cable Ethernet",
-                            uso: 6,
-                        },
-                        {
-                            material: "Proyector",
-                            uso: 1,
-                        },
-                        {
-                            material: "Monitor",
-                            uso: 8,
+                            name: "Electric Garage",
+                            value: 5,
                         },
                     ],
                 },
             ],
-        }).as("usoMaterialByMes");
+        }).as("reservacionBySalaByMes");
+
+        cy.intercept("GET", "dashboard/salasDisponibles", {
+            body: [
+                {
+                    sala: "Electric Garage",
+                    bloqueada: false,
+                },
+                {
+                    sala: "Dimension Forge",
+                    bloqueada: true,
+                },
+            ],
+        }).as("salasDisponibles");
+
+        // Iniciar sesion con test
+        cy.loginWith("test");
+        // Visitar el perfil
+        cy.visit("/dashboard");
+    });
+
+    it("Despliegue de reservaciones totales", () => {
+        cy.wait("@reservacionesByMes");
+
+        // Checar el valor
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .findDataCy("statCard-valor")
+            .contains("7");
+        // Checar el porcentaje de cambio
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .findDataCy("statCard-cambio")
+            .contains("-46.2%");
+        // Checar el icono
+        cy.getDataCyNth("graficasDashboard-statcards-container", 0)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
+            );
+    });
+
+    it("Despliegue de reservaciones activas", () => {
+        cy.wait("@reservacionesByMes");
+
+        // Checar el valor
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-valor")
+            .contains("2");
+        // Checar el porcentaje de cambio
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-cambio")
+            .contains("-75.0%");
+        // Checar el icono
+        cy.getDataCyNth("graficasDashboard-statcards-container", 1)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_down.svg"
+            );
+    });
+
+    it("Despliegue de penalizaciones", () => {
+        cy.wait("@penalizacionesByMes");
+
+        // Checar el valor
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-valor")
+            .contains("13");
+        // Checar el porcentaje de cambio
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-cambio")
+            .contains("0%");
+        // Checar el icono
+        cy.getDataCyNth("graficasDashboard-statcards-container", 2)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_no_change.svg"
+            );
+    });
+
+    it("Despliegue de cancelaciones", () => {
+        cy.wait("@reservacionesByMes");
+
+        // Checar el valor
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-valor")
+            .contains("13");
+        // Checar el porcentaje de cambio
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-cambio")
+            .contains("+116.7%");
+        // Checar el icono
+        cy.getDataCyNth("graficasDashboard-statcards-container", 3)
+            .findDataCy("statCard-imagen")
+            .hasAttribute(
+                "src",
+                "/src/assets/Admin/Dashboard/stat_arrow_up.svg"
+            );
+    });
+
+    it("Despliegue de gráfica de pie de materiales más utilizados", () => {
         cy.wait("@usoMaterialByMes");
 
         // Comprobar las leyendas de la gráfica
@@ -253,37 +220,6 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la gráfica de línea de reservaciones por mes", () => {
-        cy.intercept("GET", "dashboard/reservacionesByMes", {
-            body: [
-                {
-                    year: 2024,
-                    month: 5,
-                    reservacionesTotales: 13,
-                    reservacionesConfirmadas: 8,
-                    reservacionesCanceladas: 6,
-                    reservacionesEnEspera: 2,
-                    reservacionesDenegadas: 15,
-                },
-                {
-                    year: 2024,
-                    month: 4,
-                    reservacionesTotales: 7,
-                    reservacionesConfirmadas: 2,
-                    reservacionesCanceladas: 13,
-                    reservacionesEnEspera: 4,
-                    reservacionesDenegadas: 12,
-                },
-                {
-                    year: 2024,
-                    month: 3,
-                    reservacionesTotales: 13,
-                    reservacionesConfirmadas: 8,
-                    reservacionesCanceladas: 6,
-                    reservacionesEnEspera: 2,
-                    reservacionesDenegadas: 15,
-                },
-            ],
-        }).as("reservacionesByMes");
         cy.wait("@reservacionesByMes");
 
         cy.getDataCy("gl-chart").should("exist");
@@ -306,30 +242,6 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la gráfica de barras de reservaciones por sala", () => {
-        cy.intercept("GET", "dashboard/reservacionesBySalaByMes", {
-            body: [
-                {
-                    year: 2024,
-                    month: 4,
-                    salas: [
-                        {
-                            name: "Electric Garage",
-                            value: 5,
-                        },
-                    ],
-                },
-                {
-                    year: 2024,
-                    month: 3,
-                    salas: [
-                        {
-                            name: "Graveyard",
-                            value: 2,
-                        },
-                    ],
-                },
-            ],
-        }).as("reservacionBySalaByMes");
         cy.wait("@reservacionBySalaByMes");
 
         cy.getDataCy("rps-bar-list").should("exist");
@@ -340,18 +252,6 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la disponibilidad de salas", () => {
-        cy.intercept("GET", "dashboard/salasDisponibles", {
-            body: [
-                {
-                    sala: "Electric Garage",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Dimension Forge",
-                    bloqueada: true,
-                },
-            ],
-        }).as("salasDisponibles");
         cy.wait("@salasDisponibles");
 
         cy.getDataCy("estatus-disponibilidad-sala-contenedor").should("exist");
