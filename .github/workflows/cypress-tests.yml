@@ -56,3 +56,9 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                   CYPRESS_API_URL: ${{secrets.API_URL}}
                   VITE_API_URL: ${{ secrets.API_URL }}
+    check-tests:
+        needs: test-split
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check tests
+              run: echo "All tests passed!"
