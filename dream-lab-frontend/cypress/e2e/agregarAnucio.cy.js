@@ -222,7 +222,7 @@ describe("Creación de anuncios para el video wall", () => {
     });
 
     // Prueba para agregar un anuncio de tipo imagen
-    it.only("Agregar anuncio (imagen)", () => {
+    it("Agregar anuncio (imagen)", () => {
         cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
         cy.clickDataCy("boton-agregar-anuncio");
         cy.containsDataCy(
