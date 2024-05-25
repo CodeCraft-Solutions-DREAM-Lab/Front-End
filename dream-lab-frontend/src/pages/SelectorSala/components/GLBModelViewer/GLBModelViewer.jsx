@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import CircularProgress from "@mui/material/CircularProgress";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 const GLBModelViewer = ({ modelPath }) => {
 	const mountRef = useRef(null);
@@ -37,7 +38,15 @@ const GLBModelViewer = ({ modelPath }) => {
 		pointLight.position.set(0, 5, 0);
 		scene.add(pointLight);
 
+		//const loader = new GLTFLoader();
+		const draco = new DRACOLoader();
+		draco.setDecoderConfig({ type: "js" });
+		draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+		draco.preload();
+
+		// Pass the DRACOLoader to the GLTFLoader
 		const loader = new GLTFLoader();
+		loader.setDRACOLoader(draco);
 		loader.load(
 			modelPath,
 			(gltf) => {
