@@ -1,3 +1,5 @@
+import "../support/commands";
+
 describe("Probando pantalla de selector de sala", () => {
     beforeEach(() => {
         cy.loginWith("test");

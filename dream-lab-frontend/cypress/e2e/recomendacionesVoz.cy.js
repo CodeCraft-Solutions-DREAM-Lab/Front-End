@@ -1,3 +1,5 @@
+import "../support/commands";
+
 describe("Pruebas de recomendaciones por voz", () => {
     beforeEach(() => {
         // Hacer login antes de cada test

@@ -1,3 +1,5 @@
+import "../support/commands";
+
 describe("Interacción correcta en landing page", () => {
     beforeEach(() => {
         cy.loginWith("test");
