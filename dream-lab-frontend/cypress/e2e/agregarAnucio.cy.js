@@ -1,3 +1,5 @@
+import "../support/commands";
+
 import "cypress-file-upload";
 
 describe("Creación de anuncios para el video wall", () => {

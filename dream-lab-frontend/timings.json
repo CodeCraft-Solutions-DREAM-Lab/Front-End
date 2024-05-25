@@ -1,0 +1,53 @@
+{
+    "durations": [
+        {
+            "spec": "cypress/e2e/agregarAnuncio.cy.js",
+            "duration": 22881
+        },
+        {
+            "spec": "cypress/e2e/cancelarReservacion.cy.js",
+            "duration": 6608
+        },
+        { "spec": "cypress/e2e/cronogramaAdmin.cy.js", "duration": 175 },
+        {
+            "spec": "cypress/e2e/dashboard.cy.js",
+            "duration": 17895
+        },
+        {
+            "spec": "cypress/e2e/detalles.cy.js",
+            "duration": 8554
+        },
+        {
+            "spec": "cypress/e2e/landingPage.cy.js",
+            "duration": 18682
+        },
+        {
+            "spec": "cypress/e2e/login.cy.js",
+            "duration": 11979
+        },
+        {
+            "spec": "cypress/e2e/personalizacionLogros.cy.js",
+            "duration": 8562
+        },
+        {
+            "spec": "cypress/e2e/recomendacionesVoz.cy.js",
+            "duration": 33
+        },
+        {
+            "spec": "cypress/e2e/resumenReserva.cy.js",
+            "duration": 8612
+        },
+        {
+            "spec": "cypress/e2e/selectorMaterial.cy.js",
+            "duration": 9205
+        },
+        {
+            "spec": "cypress/e2e/selectorSala.cy.js",
+            "duration": 18638
+        },
+        {
+            "spec": "cypress/e2e/slider.cy.js",
+            "duration": 3684
+        }
+    ]
+}

@@ -1,3 +1,5 @@
+import "../support/commands";
+
 describe("Pruebas de login", () => {
     beforeEach(() => {
         cy.visit("/login");

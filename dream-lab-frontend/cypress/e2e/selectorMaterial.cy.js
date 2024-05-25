@@ -1,3 +1,5 @@
+import "../support/commands";
+
 describe("Pruebas de selección de material", () => {
 	beforeEach(() => {
 		cy.loginWith("test");
