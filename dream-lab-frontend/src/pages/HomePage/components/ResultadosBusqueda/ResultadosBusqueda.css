@@ -1,0 +1,26 @@
+.centeredContainer{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.search-results-container {
+    width: 98%;
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 14vh;
+    row-gap: 3vh;
+}
+
+@media (max-width: 480px) {
+    .search-results-container {
+        width: 100%;
+        margin-top: 17vh;
+        margin-left: 0%;
+        justify-content: space-evenly;
+    }
+
+}

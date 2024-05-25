@@ -1,6 +1,6 @@
 import "../support/commands";
 
-describe("Interacción correcta en landing page", () => {
+describe("Resumen de reservación", () => {
     beforeEach(() => {
         cy.loginWith("test");
     });
