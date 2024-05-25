@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Pruebas de despliegue de datos en el dashboard", () => {
     beforeEach(() => {
         cy.intercept("GET", "dashboard/reservacionesByMes", {

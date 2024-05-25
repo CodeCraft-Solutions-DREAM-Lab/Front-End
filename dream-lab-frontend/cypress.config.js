@@ -5,8 +5,8 @@ export default defineConfig({
     projectId: "vyayrg",
     e2e: {
         baseUrl: "http://localhost:5173",
-        supportFile: false,
-        fixturesFolder: false,
+        supportFile: "cypress/support/e2e.js",
+        fixturesFolder: "cypress/fixtures",
         setupNodeEvents(on, config) {
             cypressSplit(on, config);
             // IMPORTANT: return the config object

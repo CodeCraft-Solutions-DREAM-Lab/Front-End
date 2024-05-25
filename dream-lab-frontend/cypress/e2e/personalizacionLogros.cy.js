@@ -1,5 +1,3 @@
-import "../support/commands";
-
 describe("Pruebas de personalización de los logros", () => {
     beforeEach(() => {
         cy.intercept("GET", "perfil/test", {
