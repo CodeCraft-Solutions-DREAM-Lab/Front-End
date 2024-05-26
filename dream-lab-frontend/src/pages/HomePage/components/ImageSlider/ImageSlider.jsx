@@ -49,14 +49,19 @@ const ImageSlider = (props) => {
         // saveToSessionStorage("experiencia", idExperiencia);
         props.onImageClick(id - 1); // pasa el ID de la imagen al componente padre
 
-        // // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
-        // const isSalaImage = props.setImageType === "salas";
-        const isSalaImage = tipo === "sala";
+        // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
         // Llamar a setIsSalaClicked con el valor correspondiente
-        props.setIsSalaClicked(isSalaImage);
+        if(tipo === "sala"){
+            props.setIsSalaClicked(true);
+        }
+        else{
+            props.setIsSalaClicked(false);
+        }
+        
+        
     }
 
-    const { options, api_url, isExperiencia, images, request_type } = props;
+    const { options, api_url, images, request_type } = props;
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const tweenFactor = useRef(0);
     const tweenNodes = useRef([]);
@@ -136,8 +141,8 @@ const ImageSlider = (props) => {
                 }
 
                 res = res.map((item) => ({
-                    id: (props.setImageType==="ambas"? item.idExperiencia ? item.idExperiencia : item.idSala : props.setImageType==="salas"? item.idSala : item.idExperiencia),
-                    isExperiencia: { isExperiencia },
+                    id: item.idExperiencia ? item.idExperiencia : item.idSala,
+                    // Revisa si tiene campo de url (caso de recomendaciones), en caso contrario revisa si tiene el campo de url de experiencia, si no entonces toma el que es de sala
                     url: item.URL ? item.URL : item.fotoURL ? item.fotoURL : item.portadaURL,
                     title: item.nombre,
                     tipo: item.idExperiencia? "experiencia": "sala",
@@ -166,7 +171,7 @@ const ImageSlider = (props) => {
         } else {
             setBdImages(images);
         }
-    }, [api_url, request_type, images, isExperiencia]);
+    }, [api_url, request_type, images]);
 
     return (
         <div className="embla">

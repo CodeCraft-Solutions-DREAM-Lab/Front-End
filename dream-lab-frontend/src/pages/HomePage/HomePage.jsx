@@ -410,7 +410,6 @@ function HomePage() {
                             <ImageSlider
                                 api_url={"reservaciones/ultimas"}
                                 request_type="POST"
-                                isExperiencia={null}
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
@@ -424,7 +423,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="salas"
                                     request_type="GET"
-                                    isExperiencia={false}
                                     images={null}
                                     titles={null}
                                     options={OPTIONS}
@@ -441,7 +439,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="experiencias/autodirigidas"
                                     request_type="GET"
-                                    isExperiencia={true}
                                     images={null}
                                     titles={null}
                                     options={OPTIONS}
@@ -458,7 +455,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="experiencias/UFs"
                                     request_type="POST"
-                                    isExperiencia={true}
                                     options={OPTIONS}
                                     mostrarDetalles={mostrarDetalles}
                                     onImageClick={handleImageClick}
