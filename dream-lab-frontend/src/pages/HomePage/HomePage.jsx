@@ -415,7 +415,7 @@ function HomePage() {
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
                                 setIsSalaClicked={setIsSalaClicked}
-                                setImageType={null}
+                                setImageType="ambas"
                             />
                         </div>
                         <div className="carousel-container">
