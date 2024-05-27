@@ -282,7 +282,6 @@ function HomePage() {
         )
             .then((result) => {
                 setDetallesBD(result);
-                console.log("DetallesBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -295,7 +294,6 @@ function HomePage() {
         )
             .then((result) => {
                 setSalasBD(result);
-                console.log("SalasBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -303,7 +301,6 @@ function HomePage() {
     }, []);
 
     const handleSearch = (term) => {
-        console.log("term: ", term);
         setSearchTerm(term);
         if (term === "") {
             setSearchResults([]);
