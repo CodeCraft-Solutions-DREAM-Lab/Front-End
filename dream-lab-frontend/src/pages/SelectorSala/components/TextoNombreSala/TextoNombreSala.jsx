@@ -9,7 +9,7 @@ const TextoNombreSala = () => {
     const [nombreExperiencia, setNombreExperiencia] = useState("");
 
     const bigTextFormat =
-        "text-white text-3xl font-medium uppercase font-['Karla']";
+        "text-white text-3xl font-medium uppercase font-['Karla'] text-center p-2";
     const smallTextFormat = "text-xl text-[#D1D1D1]";
 
     if (type == "sala") {

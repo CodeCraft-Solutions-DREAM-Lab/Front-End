@@ -61,18 +61,18 @@ class Navbar extends React.Component {
         window.removeEventListener("scroll", this.debouncedHideBar);
     }
     render() {
-        const { view, autoHide } = this.props;
+        const { view, autoHide, onSearchInputChange } = this.props;
         let viewLandingPage = false;
 
         // Definimos las vistas
         let searchBar, userAction;
         switch (view) {
             case "homeAlumno":
-                searchBar = <SearchBar />; // barra de busqueda
+                searchBar = <SearchBar onSearchInputChange={onSearchInputChange} />; // barra de busqueda
                 userAction = <UserAvatar />; // Icono de perfil
                 break;
             case "homeProfesor":
-                searchBar = <SearchBar />; // barra de busqueda
+                searchBar = <SearchBar onSearchInputChange={onSearchInputChange} />; // barra de busqueda
                 userAction = (
                     <>
                         {" "}
@@ -142,6 +142,7 @@ class Navbar extends React.Component {
 Navbar.propTypes = {
     view: PropTypes.string.isRequired,
     autoHide: PropTypes.bool,
+    onSearchInputChange: PropTypes.func,
 };
 
 Navbar.defaultProps = {

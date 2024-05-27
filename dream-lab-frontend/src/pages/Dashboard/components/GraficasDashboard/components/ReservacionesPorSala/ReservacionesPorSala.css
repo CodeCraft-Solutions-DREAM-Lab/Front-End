@@ -1,0 +1,59 @@
+.rps-titulo-grafica {
+    margin-bottom: 1vh;
+    font-size: max(2vh, 1.2vw);
+    font-weight: 700;
+    color: #313131;
+    text-align: center;
+}
+
+.rps-contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.rps-contenedor-barras-outer {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.rps-contenedor-barras-inner {
+    width: 90%;
+}
+
+/* Define scrollbar styles */
+.rps-contenedor-barras-outer::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.rps-contenedor-barras-outer::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+.rps-contenedor-barras-outer::-webkit-scrollbar-thumb {
+    background: rgba(57, 57, 57, 0.15);
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+.rps-contenedor-barras-outer::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 57, 57, 0.35);
+}
+
+#rps-bar-list .tremor-BarList-barText {
+    font-size: max(1.5vh, 0.95vw) !important;
+    line-height: max(1.5vh, 2vw) !important;
+}
+
+#rps-bar-list .tremor-BarList-labelText {
+    font-size: max(1.5vh, 0.95vw) !important;
+    line-height: max(1.5vh, 2vw) !important;
+}
+
+#rps-bar-list .h-8 {
+    height: 4vh;
+}

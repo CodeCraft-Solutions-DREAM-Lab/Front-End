@@ -397,15 +397,16 @@ describe("Pruebas de personalización de los logros", () => {
         // Checa que exista el boton para modificar y desplegar el logro del usuario
         cy.getDataCy("boton-logro-perfil").should("exist");
         // Checa que el logro del usuario tenga el icono correcto
-        cy.findDataCy("boton-logro-perfil", "icono-logro").hasAttribute(
-            "src",
-            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp"
-        );
+        cy.getDataCy("boton-logro-perfil")
+            .findDataCy("icono-logro")
+            .hasAttribute(
+                "src",
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp"
+            );
         // Checa que el logro del usuario tenga el color correcto
-        cy.findDataCy("boton-logro-perfil", "contenedor-icono-logro").hasStyle(
-            "background-color",
-            "rgb(255, 96, 115)"
-        );
+        cy.getDataCy("boton-logro-perfil")
+            .findDataCy("contenedor-icono-logro")
+            .should("have.css", "background-color", "rgb(255, 96, 115)");
         // Checa que la tarjeta con el nombre del usuario tenga el titulo correcto
         cy.containsDataCy("namecard-titulo-logro", "Ancient Soul");
     });
@@ -416,37 +417,39 @@ describe("Pruebas de personalización de los logros", () => {
         // Checa el titulo del logro seleccionado en el modal
         cy.containsDataCy("selector-logro-titulo", "Ancient Soul");
         // Checa el icono del logro seleccionado en el modal
-        cy.findDataCy("selector-logro-modal-icon", "icono-logro").hasAttribute(
-            "src",
-            "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp"
-        );
+        cy.getDataCy("selector-logro-modal-icon")
+            .findDataCy("icono-logro")
+            .hasAttribute(
+                "src",
+                "https://dreamlabstorage.blob.core.windows.net/logros/AncientSoul.webp"
+            );
         // Selecciona otro logro de la lista de los logros disponibles
         cy.clickDataCyNth("selector-logro-container", 1);
         // Checa el titulo del logro seleccionado en el modal
         cy.containsDataCy("selector-logro-titulo", "Robot Expert");
         // Checa el icono del logro seleccionado en el modal
-        cy.findDataCy("selector-logro-modal-icon", "icono-logro").hasAttribute(
-            "src",
-            "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.webp"
-        );
+        cy.getDataCy("selector-logro-modal-icon")
+            .findDataCy("icono-logro")
+            .hasAttribute(
+                "src",
+                "https://dreamlabstorage.blob.core.windows.net/logros/RobotExpert.webp"
+            );
     });
 
     it("Modificar color de logro", () => {
         // Boton para modificar el logro
         cy.clickDataCy("boton-logro-perfil");
         // Checa el color del logro seleccionado en el modal
-        cy.findDataCy(
-            "selector-logro-modal-icon",
-            "contenedor-icono-logro"
-        ).hasStyle("background-color", "rgb(255, 96, 115)");
+        cy.getDataCy("selector-logro-modal-icon")
+            .findDataCy("contenedor-icono-logro")
+            .hasStyle("background-color", "rgb(255, 96, 115)");
         // Presiona el boton para desplegar los colores disponibles
         cy.clickDataCy("boton-selector-color");
         // Selecciona un color de la lista de colores disponibles
         cy.clickDataCyNth("selector-color-grid", 1);
         // Checa el color del logro seleccionado en el modal
-        cy.findDataCy(
-            "selector-logro-modal-icon",
-            "contenedor-icono-logro"
-        ).hasStyle("background-color", "rgb(120, 194, 248)");
+        cy.getDataCy("selector-logro-modal-icon")
+            .findDataCy("contenedor-icono-logro")
+            .hasStyle("background-color", "rgb(120, 194, 248)");
     });
 });

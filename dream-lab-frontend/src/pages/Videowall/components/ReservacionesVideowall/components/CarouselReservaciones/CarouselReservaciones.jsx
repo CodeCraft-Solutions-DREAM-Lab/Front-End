@@ -8,6 +8,7 @@ import "./CarouselReservaciones.css";
 
 // Componentes
 import ReservationCard from "./components/ReservationCard";
+import VideowallSinReservas from "./components/VideowallSinReservas/VideowallSinReservas";
 
 // Hooks
 // Hooks
@@ -103,42 +104,46 @@ function CarouselReservaciones({ enviarReservaciones }) {
         }
     }, [reservaciones, swiper]);
 
-    return (
-        <div className="cr-swiper-container">
-            <div className="top-blur"></div>
-            <div className="bottom-blur"></div>
-            <Swiper
-                modules={[FreeMode, Mousewheel, Autoplay]}
-                slidesPerView={5}
-                spaceBetween={0}
-                // mousewheel={true}
-                direction="vertical"
-                loop={true}
-                freeMode={true}
-                speed={5000}
-                autoplay={{
-                    delay: 1,
-                    disableOnInteraction: false,
-                }}
-                className="mySwiper"
-                onSwiper={(swiper) => setSwiper(swiper)}
-            >
-                {reservaciones.map((reservacion, index) => (
-                    <SwiperSlide key={index}>
-                        <ReservationCard
-                            nombre={reservacion.nombre_usuario}
-                            horaInicio={reservacion.horaInicio}
-                            horaFin={reservacion.horaFin}
-                            sala={reservacion.nombre_sala}
-                            icono={reservacion.iconoURL}
-                            colorPreferido={reservacion.colorPreferido}
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-            <HiddenInputLogger reservaciones={reservaciones} />
-        </div>
-    );
+    if (reservaciones.length > 0) {
+        return (
+            <div className="cr-swiper-container">
+                <div className="top-blur"></div>
+                <div className="bottom-blur"></div>
+                <Swiper
+                    modules={[FreeMode, Mousewheel, Autoplay]}
+                    slidesPerView={5}
+                    spaceBetween={0}
+                    // mousewheel={true}
+                    direction="vertical"
+                    loop={true}
+                    freeMode={true}
+                    speed={5000}
+                    autoplay={{
+                        delay: 1,
+                        disableOnInteraction: false,
+                    }}
+                    className="mySwiper"
+                    onSwiper={(swiper) => setSwiper(swiper)}
+                >
+                    {reservaciones.map((reservacion, index) => (
+                        <SwiperSlide key={index}>
+                            <ReservationCard
+                                nombre={reservacion.nombre_usuario}
+                                horaInicio={reservacion.horaInicio}
+                                horaFin={reservacion.horaFin}
+                                sala={reservacion.nombre_sala}
+                                icono={reservacion.iconoURL}
+                                colorPreferido={reservacion.colorPreferido}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+                <HiddenInputLogger reservaciones={reservaciones} />
+            </div>
+        );
+    } else {
+        return <VideowallSinReservas />;
+    }
 }
 
 export default CarouselReservaciones;
