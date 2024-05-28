@@ -43,7 +43,8 @@ function ResumenReservacion(props) {
 			duracion: getFromSessionStorage("duration"),
 			fecha: getFromSessionStorage("fechaIsoString"),
 			idMesa: null,
-			estatus: 3,
+			estatus: 5,
+			numPersonas: reservationData.personas,
 		};
 
 		console.log("Data: ", data);
