@@ -1,4 +1,5 @@
 import "cypress-localstorage-commands";
+
 const API_URL = Cypress.env("API_URL");
 
 describe('Admin Page Tests', () => {

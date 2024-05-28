@@ -1,5 +1,9 @@
 describe("Pruebas de despliegue de datos en el dashboard", () => {
     beforeEach(() => {
+        // Asignar una fecha especifica para que las pruebas sean consistentes
+        cy.setDate(2024, 3, 22);
+
+        // Interceptar las llamadas a la API
         cy.intercept("GET", "dashboard/reservacionesByMes", {
             body: [
                 {
@@ -32,122 +36,23 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
             ],
         }).as("reservacionesByMes");
 
-        cy.intercept("GET", "dashboard/reservacionesBySalaByMes", {
+        cy.intercept("GET", "dashboard/penalizacionesByMes", {
             body: [
                 {
                     year: 2024,
-                    month: 5,
-                    salas: [
-                        {
-                            name: "Dimension Forge",
-                            value: 3,
-                        },
-                    ],
-                },
-                {
-                    year: 2024,
                     month: 4,
-                    salas: [
-                        {
-                            name: "Electric Garage",
-                            value: 5,
-                        },
-                    ],
+                    penalizaciones: 13,
                 },
                 {
                     year: 2024,
                     month: 3,
-                    salas: [
-                        {
-                            name: "Graveyard",
-                            value: 2,
-                        },
-                    ],
+                    penalizaciones: 13,
                 },
             ],
-        }).as("reservacionBySalaByMes");
-
-        cy.intercept("GET", "dashboard/salasDisponibles", {
-            body: [
-                {
-                    sala: "Electric Garage",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Dimension Forge",
-                    bloqueada: true,
-                },
-                {
-                    sala: "New Horizons",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Deep Net",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Graveyard",
-                    bloqueada: false,
-                },
-                {
-                    sala: "PCB Factory",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Hack-Battlefield",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Testing Land",
-                    bloqueada: false,
-                },
-                {
-                    sala: "War Headquarters",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Biometrics Flexible Hall",
-                    bloqueada: false,
-                },
-                {
-                    sala: "Beyond-Digits",
-                    bloqueada: false,
-                },
-            ],
-        }).as("salasDisponibles");
+        }).as("penalizacionesByMes");
 
         cy.intercept("GET", "dashboard/usoMaterialByMes", {
             body: [
-                {
-                    year: 2024,
-                    month: 5,
-                    materiales: [
-                        {
-                            material: "Laptop",
-                            uso: 5,
-                        },
-                        {
-                            material: "Cable VGA",
-                            uso: 13,
-                        },
-                        {
-                            material: "Cable HDMI",
-                            uso: 2,
-                        },
-                        {
-                            material: "Cable Ethernet",
-                            uso: 6,
-                        },
-                        {
-                            material: "Proyector",
-                            uso: 1,
-                        },
-                        {
-                            material: "Monitor",
-                            uso: 8,
-                        },
-                    ],
-                },
                 {
                     year: 2024,
                     month: 4,
@@ -178,76 +83,46 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
                         },
                     ],
                 },
+            ],
+        }).as("usoMaterialByMes");
+
+        cy.intercept("GET", "dashboard/reservacionesBySalaByMes", {
+            body: [
                 {
                     year: 2024,
-                    month: 3,
-                    materiales: [
+                    month: 4,
+                    salas: [
                         {
-                            material: "Laptop",
-                            uso: 5,
-                        },
-                        {
-                            material: "Cable VGA",
-                            uso: 13,
-                        },
-                        {
-                            material: "Cable HDMI",
-                            uso: 2,
-                        },
-                        {
-                            material: "Cable Ethernet",
-                            uso: 6,
-                        },
-                        {
-                            material: "Proyector",
-                            uso: 1,
-                        },
-                        {
-                            material: "Monitor",
-                            uso: 8,
+                            name: "Electric Garage",
+                            value: 5,
                         },
                     ],
                 },
             ],
-        }).as("usoMaterialByMes");
+        }).as("reservacionBySalaByMes");
 
-        cy.intercept("GET", "dashboard/penalizacionesByMes", {
+        cy.intercept("GET", "dashboard/salasDisponibles", {
             body: [
                 {
-                    year: 2024,
-                    month: 5,
-                    penalizaciones: 8,
+                    sala: "Electric Garage",
+                    bloqueada: false,
                 },
                 {
-                    year: 2024,
-                    month: 4,
-                    penalizaciones: 13,
-                },
-                {
-                    year: 2024,
-                    month: 3,
-                    penalizaciones: 13,
+                    sala: "Dimension Forge",
+                    bloqueada: true,
                 },
             ],
-        }).as("penalizacionesByMes");
-
-        // Asignar una fecha especifica para que las pruebas sean consistentes
-        cy.setDate(2024, 3, 22);
+        }).as("salasDisponibles");
 
         // Iniciar sesion con test
         cy.loginWith("test");
         // Visitar el perfil
         cy.visit("/dashboard");
-
-        // Esperar a que las solicitudes se completen
-        cy.wait("@reservacionesByMes");
-        cy.wait("@reservacionBySalaByMes");
-        cy.wait("@salasDisponibles");
-        cy.wait("@usoMaterialByMes");
-        cy.wait("@penalizacionesByMes");
     });
 
     it("Despliegue de reservaciones totales", () => {
+        cy.wait("@reservacionesByMes");
+
         // Checar el valor
         cy.getDataCyNth("graficasDashboard-statcards-container", 0)
             .findDataCy("statCard-valor")
@@ -266,6 +141,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de reservaciones activas", () => {
+        cy.wait("@reservacionesByMes");
+
         // Checar el valor
         cy.getDataCyNth("graficasDashboard-statcards-container", 1)
             .findDataCy("statCard-valor")
@@ -284,6 +161,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de penalizaciones", () => {
+        cy.wait("@penalizacionesByMes");
+
         // Checar el valor
         cy.getDataCyNth("graficasDashboard-statcards-container", 2)
             .findDataCy("statCard-valor")
@@ -302,6 +181,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de cancelaciones", () => {
+        cy.wait("@reservacionesByMes");
+
         // Checar el valor
         cy.getDataCyNth("graficasDashboard-statcards-container", 3)
             .findDataCy("statCard-valor")
@@ -320,6 +201,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de gráfica de pie de materiales más utilizados", () => {
+        cy.wait("@usoMaterialByMes");
+
         // Comprobar las leyendas de la gráfica
         cy.getDataCy("gp-legend").should("exist");
         cy.containsDataCy("gp-legend", "Laptop");
@@ -337,6 +220,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la gráfica de línea de reservaciones por mes", () => {
+        cy.wait("@reservacionesByMes");
+
         cy.getDataCy("gl-chart").should("exist");
 
         // Checar que el y-axis llegue hasta 16
@@ -357,6 +242,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la gráfica de barras de reservaciones por sala", () => {
+        cy.wait("@reservacionBySalaByMes");
+
         cy.getDataCy("rps-bar-list").should("exist");
 
         // Validar que contenga los datos correctos
@@ -365,6 +252,8 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
     });
 
     it("Despliegue de la disponibilidad de salas", () => {
+        cy.wait("@salasDisponibles");
+
         cy.getDataCy("estatus-disponibilidad-sala-contenedor").should("exist");
 
         // Comprobar estatus valido
