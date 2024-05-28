@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import CircularProgress from "@mui/material/CircularProgress";
+import modeloPlaceholder from "/public/placeholder-modelo2.png"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 const GLBModelViewer = ({ modelPath }) => {
@@ -70,8 +70,8 @@ const GLBModelViewer = ({ modelPath }) => {
 
 				const controls = new OrbitControls(camera, renderer.domElement);
 				controls.target.set(0, 0, 0);
-				controls.minDistance = 17;
-				controls.maxDistance = 17;
+				controls.minDistance = 19;
+				controls.maxDistance = 19;
 
 				setLoading(false);
 				animate();
@@ -82,7 +82,7 @@ const GLBModelViewer = ({ modelPath }) => {
 			}
 		);
 
-		camera.position.z = 13;
+		camera.position.z = 12;
 
 		const handleResize = () => {
 			const width = mountRef.current.clientWidth;
@@ -111,27 +111,29 @@ const GLBModelViewer = ({ modelPath }) => {
 		};
 	}, [modelPath]);
 
-	return (
-		<div
-			ref={mountRef}
-			style={{ width: "100%", height: "100%", position: "relative" }}
-		>
-			{loading && (
-				<div
-					style={{
-						position: "absolute",
-						top: "50%",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-						zIndex: 1,
-						color: "white",
-					}}
-				>
-					<CircularProgress color="inherit" />
-				</div>
-			)}
-		</div>
-	);
+    return (
+        <div
+            ref={mountRef}
+            style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden" }}
+        >
+            {loading && (
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "absolute",
+                        top: 0,
+                        left: 0
+                    }}
+                >
+                    <img src={modeloPlaceholder} style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default GLBModelViewer;
