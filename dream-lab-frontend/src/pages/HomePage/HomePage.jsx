@@ -282,7 +282,6 @@ function HomePage() {
         )
             .then((result) => {
                 setDetallesBD(result);
-                console.log("DetallesBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -295,7 +294,6 @@ function HomePage() {
         )
             .then((result) => {
                 setSalasBD(result);
-                console.log("SalasBD: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -303,7 +301,6 @@ function HomePage() {
     }, []);
 
     const handleSearch = (term) => {
-        console.log("term: ", term);
         setSearchTerm(term);
         if (term === "") {
             setSearchResults([]);
@@ -408,16 +405,13 @@ function HomePage() {
                         <div className="carousel-container">
                             <h1>RECOMENDACIONES</h1>
                             <ImageSlider
-                                api_url={null}
-                                request_type={null}
-                                isExperiencia={null}
-                                images={IMAGES}
-                                titles={IMAGES.map((item) => item.title)}
+                                api_url={"reservaciones/ultimas"}
+                                request_type="POST"
                                 options={OPTIONS}
                                 mostrarDetalles={mostrarDetalles}
                                 onImageClick={handleImageClick}
-                                setIsSalaClicked={() => {}}
-                                setImageType={null}
+                                setIsSalaClicked={setIsSalaClicked}
+                                setImageType="ambas"
                             />
                         </div>
                         <div className="carousel-container">
@@ -426,7 +420,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="salas"
                                     request_type="GET"
-                                    isExperiencia={false}
                                     images={null}
                                     titles={null}
                                     options={OPTIONS}
@@ -443,7 +436,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="experiencias/autodirigidas"
                                     request_type="GET"
-                                    isExperiencia={true}
                                     images={null}
                                     titles={null}
                                     options={OPTIONS}
@@ -460,7 +452,6 @@ function HomePage() {
                                 <ImageSlider
                                     api_url="experiencias/UFs"
                                     request_type="POST"
-                                    isExperiencia={true}
                                     options={OPTIONS}
                                     mostrarDetalles={mostrarDetalles}
                                     onImageClick={handleImageClick}
