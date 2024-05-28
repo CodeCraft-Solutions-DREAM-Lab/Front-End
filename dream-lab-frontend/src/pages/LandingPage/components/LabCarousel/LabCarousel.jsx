@@ -86,7 +86,7 @@ function LabCarousel() {
           "--swiper-pagination-bullet-horizontal-gap": "0.5vw",
           "--swiper-navigation-color": "#FFFFFF",
           "--swiper-navigation-sides-offset": "4vw",
-          "--swiper-pagination-bottom": "7%"
+          "--swiper-pagination-bottom": "2%"
         }}
       >
         {swiperCards.map((card, index) => (

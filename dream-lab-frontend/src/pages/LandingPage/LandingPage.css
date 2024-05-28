@@ -12,6 +12,7 @@
     url("src/assets/LandingPage/oval-blob-bottom-right.svg"), /* Oval blob bottom right */
     url("src/assets/LandingPage/WavesLandingPage.svg"), /* Waves Landing Page */
     url("src/assets/LandingPage/LandingWavesFadeout.svg"), /* Landing Waves Fadout */
+    url("src/assets/LandingPage/black.png"), /* black background */
     url("src/assets/LandingPage/black.png"); /* black background */
     background-repeat: 
     no-repeat, /* Glass circle top left */
@@ -24,6 +25,7 @@
     no-repeat, /* Oval blob bottom right */
     no-repeat, /* Waves Landing Page */
     no-repeat, /* Landing Waves Fadout */
+    no-repeat, /* black background */
     no-repeat; /* black background */
     background-position-y: 
     120rem, /* Glass circle top left */
@@ -35,8 +37,9 @@
     160rem, /* Oval blob bottom left */
     160rem, /* Oval blob bottom right */
     65rem, /* Waves Landing Page */
-    182rem, /* Landing Waves Fadout */
-    132rem; /* black background */
+    205rem, /* Landing Waves Fadout */
+    122rem, /* black background */
+    152rem; /* black background */
     background-position-x: 
     4rem, /* Glass circle top left */
     7rem, /* Glass circle bottom left */
@@ -48,7 +51,9 @@
     right, /* Oval blob bottom right */
     center, /* Waves Landing Page */
     center, /* Landing Waves Fadout */
+    center, /* black background */
     center; /* black background */
+    
 }
 
 @media screen and (max-width: 431px) {
@@ -109,20 +114,70 @@
     }
 }
 
-.pcb {
-    position: absolute;
-    margin-left: 30%;
-    top: 24rem;
-    width: 24%;
-    max-width: 350px;
-}
-
 .blob {
     position: absolute;
     right: 0rem;
     top: 0rem;
     width: 41%;
     max-width: 600px; 
+}
+
+@media screen and (max-width: 431px) {
+    .blob {
+        width: 170px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .blob {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .blob {
+        width: 150px;
+    }
+}
+
+.pcb {
+    position: absolute;
+    left: 30%;
+    top: 24rem;
+    width: 24%;
+    max-width: 350px;
+}
+
+@media screen and (max-width: 431px) {
+    .pcb {
+        left: 15rem;
+        bottom: 30rem;
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .pcb {
+        left: 16rem;
+        bottom: 31rem;
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .pcb {
+        left: 15.5rem;
+        bottom: 27rem;
+        width: 110px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .pcb {
+        left: 15.5rem;
+        bottom: 19rem;
+        width: 90px;
+    }
 }
 
 .vr {
@@ -134,11 +189,69 @@
     z-index: 0;
 }
 
+@media screen and (max-width: 431px) {
+    .vr {
+        top: 22rem;
+        width: 280px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .vr {
+        top: 23rem;
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .vr {
+        width: 220px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .vr {
+        top: 21rem;
+        width: 200px;
+    }
+}
+
 .moon {
     position: absolute;
     margin-left: 55%;
     width: 27%;
     max-width: 400px;
+}
+
+@media screen and (max-width: 431px) {
+    .moon {
+        bottom: 18rem;
+        right: 1rem;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .moon {
+        bottom: 16rem;
+        right: 1rem;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .moon {
+        bottom: 14rem;
+        right: 3rem;
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .moon {
+        bottom: 8rem;
+        right: 2rem;
+    }
 }
 
 .astronaut {
@@ -149,12 +262,44 @@
     max-width: 500px;
 }
 
+@media screen and (max-width: 431px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 230px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .astronaut {
+        top: 42rem;
+        right: 1rem;
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .astronaut {
+        top: 37rem;
+        right: 2rem;
+        width: 190px;
+    }
+}
+
 .info-cards {
     display: flex;
     flex-flow: row wrap;
     margin-top: 60rem;
-    margin-inline: 20rem;
-    gap: 15rem;
+    margin-inline: 15%;
+    gap: 8rem;
 }
 
 @media screen and (max-width: 431px) {
