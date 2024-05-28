@@ -10,8 +10,10 @@
     background-color: transparent;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: start;
     margin-top: 14vh;
+    margin-left: 3vw;
+    column-gap: 1.7vw;
     row-gap: 3vh;
 }
 
