@@ -132,8 +132,8 @@
 }
 
 
-
-@media (max-width: 1500px) {
+/*Panta regular (computadora)*/
+@media (max-width: 2000px) {
     .mensaje-bienvenida-videowall {
         position: fixed; /* Posición fija para que se mantenga en la ventana */
         bottom: 0; /* Alinear en la parte inferior */
