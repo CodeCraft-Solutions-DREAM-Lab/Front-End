@@ -5,11 +5,26 @@ import qr from "../../../../assets/Videowall/qrTemporal.png";
 import imagenError from "../../../../assets/Videowall/errorVideowall.png";
 import imagenCorrecto from "../../../../assets/Videowall/correctoVideowall.png";
 import QRCode from "react-qr-code";
+import { get } from "src/utils/ApiRequests"
 
 function MensajeBienvenida(props) {
     const [cerrado, setCerrado] = useState(false);
     const [reservaFiltrada, setReservaFiltrada] = useState(null);
     const [error, setError] = useState(props.error);
+    const [nombreUsuario, setNombreUsuario] = useState(null);
+
+    //  get de base de datos
+    useEffect(() => {
+        get(`usuarios/nombreUsuario/${props.tagId}`)
+            .then((result) => {
+                const nombreUsuario = result;
+                console.log("Nombre de usuario:", nombreUsuario[0].NombreUsuario);
+                setNombreUsuario(nombreUsuario[0].NombreUsuario);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, [props.tagId]);
 
     const filtrarReservaciones = (listadoReservaciones, tagId) => {
         if (!listadoReservaciones || listadoReservaciones.length === 0) {
@@ -55,9 +70,9 @@ function MensajeBienvenida(props) {
     }
 
     // Obtener la primera palabra del nombre del usuario
-    const primerNombre = reservaFiltrada
-        ? (", " + reservaFiltrada.nombre_usuario.split(" ")[0])
-        : ", explorador";
+    const primerNombre = nombreUsuario
+        ? (nombreUsuario.split(" ")[0])
+        : "explorador";
 
     return (
         <div
@@ -65,13 +80,13 @@ function MensajeBienvenida(props) {
             style={
                 error
                     ? { border: "13px solid #e84ea0" }
-                    : { border: "5px solid #1BAC55" }
+                    : { border: "13px solid #1BAC55" }
             }
         >
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
                 <h1 className="titulo-mensaje-bienvenida-videowall">
-                    ¡Hola{primerNombre}!
+                    ¡Hola {primerNombre}!
                 </h1>
 
                 {/* Botón de cerrar */}

@@ -142,9 +142,8 @@ Cypress.Commands.add("isTypeDataCy", (name, type) => {
     return cy.getDataCy(name).hasAttribute("type", type);
 });
 
-// Adjunta un archivo a un elemento con el atributo data-cy
-Cypress.Commands.add("attachFileDataCy", (name, file) => {
-    return cy.getDataCy(name).attachFile(file);
+Cypress.Commands.add("attachFileDataCy", (name, file, timeout = 4000) => {
+    return cy.getDataCy(name, timeout).attachFile(file);
 });
 
 // Asigna una fecha específica al reloj de Cypress

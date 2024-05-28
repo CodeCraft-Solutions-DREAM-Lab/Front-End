@@ -42,8 +42,9 @@ export function calculateEndTime(startTime, duration) {
 
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
 export function generateReservationCards(reservacionesData, handleClickModal) {
+    
     const reservacionesConfirmadas = reservacionesData.filter(
-        (reservation) => reservation.estatus === 3
+        (reservation) => reservation.estatus === 3 || reservation.estatus === 5
     );
 
     // Despleigue de mensaje: "No hay reservaciones activas"
