@@ -69,76 +69,64 @@ function LabCarousel() {
         // Add more swiper card objects as needed
     ];
 
-    return (
-        <div
-            data-cy="landing-lab-carousel"
-            className="landing-lab-carousel-component"
-        >
-            <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                spaceBetween={50}
-                slidesPerView={1}
-                loop={true}
-                autoplay={true}
-                longSwipes={false}
-                grabCursor={true}
-                navigation
-                pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
-                style={{
-                    "--swiper-pagination-color": "#FFFFFF",
-                    "--swiper-pagination-bullet-inactive-color": "#D9D9D9",
-                    "--swiper-pagination-bullet-inactive-opacity": "0.5",
-                    "--swiper-pagination-bullet-size": "12px",
-                    "--swiper-pagination-bullet-horizontal-gap": "6px",
-                    "--swiper-navigation-color": "#FFFFFF",
-                    "--swiper-navigation-sides-offset": "4.7rem",
-                    "--swiper-pagination-bottom": "55px",
-                }}
-            >
-                {swiperCards.map((card, index) => (
-                    <SwiperSlide key={index}>
-                        <div
-                            data-cy="landing-carousel-card"
-                            className="carousel-card-glass-card"
-                        >
-                            <GlassCard>
-                                <div className="landing-carousel-card">
-                                    <img
-                                        className="landing-carousel-logo"
-                                        src={Logo}
-                                        alt="Logo"
-                                    />
-                                    <h3
-                                        data-cy="landing-carousel-lab-name"
-                                        className="landing-carousel-title"
-                                    >
-                                        {card.title}
-                                    </h3>
-                                    <img
-                                        data-cy="landing-carousel-image"
-                                        className="landing-carousel-img"
-                                        src={card.image}
-                                        alt={card.title}
-                                    />
-                                    <ul className="landing-carousel-desc">
-                                        {card.description.map((item, idx) => (
-                                            <li
-                                                key={idx}
-                                                className="landing-list-element"
-                                            >
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </GlassCard>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </div>
-    );
+  return (
+    <div data-cy="landing-lab-carousel" className="landing-lab-carousel-component">
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        spaceBetween={50}
+        slidesPerView={1}
+        loop={true}
+        autoplay={true}
+        longSwipes={false}
+        grabCursor={true}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        style={{
+          "--swiper-pagination-color": "#FFFFFF",
+          "--swiper-pagination-bullet-inactive-color": "#D9D9D9",
+          "--swiper-pagination-bullet-inactive-opacity": "0.5",
+          "--swiper-pagination-bullet-size": "1vw",
+          "--swiper-pagination-bullet-horizontal-gap": "0.5vw",
+          "--swiper-navigation-color": "#FFFFFF",
+          "--swiper-navigation-sides-offset": "4vw",
+          "--swiper-pagination-bottom": "2%"
+        }}
+      >
+        {swiperCards.map((card, index) => (
+          <SwiperSlide key={index}>
+            <div data-cy="landing-carousel-card" className="carousel-card-glass-card">
+              <GlassCard>
+              <div className="landing-carousel-card">
+                  <div className="landing-carousel-info-container">
+                    <img
+                      className="landing-carousel-logo"
+                      src={Logo}
+                      alt="Logo"
+                    />
+                    <h3 data-cy="landing-carousel-lab-name" className="landing-carousel-title">{card.title}</h3>
+                    <ul className="landing-carousel-desc">
+                      {card.description.map((item, idx) => (
+                        <li key={idx} className="landing-list-element">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="landing-carousel-image-container">
+                    <img
+                      data-cy="landing-carousel-image"
+                      className="landing-carousel-img"
+                      src={card.image}
+                      alt={card.title}
+                    />
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
 }
 
 export default LabCarousel;
