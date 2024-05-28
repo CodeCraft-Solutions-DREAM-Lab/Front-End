@@ -115,7 +115,7 @@ function ResumenReservacion(props) {
 	}, []);
 
 	return (
-		<div>
+		<div className="contenedor-resumen-de-reservacion">
 			<Navbar view="soloPerfil" autohide={true} />
 			<div className="reservation-summary-view">
 				<div className="material-summary-container">
