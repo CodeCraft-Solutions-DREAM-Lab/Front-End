@@ -1,47 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .landing-page-container {
-    background-image: url("src/assets/LandingPage/glass-circle-top-left.svg"),
-        /* Glass circle top left */
-            url("src/assets/LandingPage/glass-circle-bottom-left.svg"),
-        /* Glass circle bottom left */
-            url("src/assets/LandingPage/glass-circle-right.svg"),
-        /* Glass circle top right */
-            url("src/assets/LandingPage/glass-circle-right.svg"),
-        /* Glass circle bottom right */
-            url("src/assets/LandingPage/oval-blob-top-left.svg"),
-        /* Oval blob top left */
-            url("src/assets/LandingPage/oval-blob-top-right.svg"),
-        /* Oval blob top right */
-            url("src/assets/LandingPage/oval-blob-bottom-left.svg"),
-        /* Oval blob bottom left */
-            url("src/assets/LandingPage/oval-blob-bottom-right.svg"),
-        /* Oval blob bottom right */
-            url("src/assets/LandingPage/WavesLandingPage.svg"),
-        /* Waves Landing Page */
-            url("src/assets/LandingPage/LandingWavesFadeout.svg"),
-        /* Landing Waves Fadout */ url("src/assets/LandingPage/black.webp"); /* black background */
-    background-repeat: no-repeat, /* Glass circle top left */ no-repeat,
-        /* Glass circle bottom left */ no-repeat,
-        /* Glass circle top right */ no-repeat,
-        /* Glass circle bottom right */ no-repeat,
-        /* Oval blob top left */ no-repeat, /* Oval blob top right */ no-repeat,
-        /* Oval blob bottom left */ no-repeat,
-        /* Oval blob bottom right */ no-repeat,
-        /* Waves Landing Page */ no-repeat, /* Landing Waves Fadout */ no-repeat; /* black background */
-    background-position-y: 120rem, /* Glass circle top left */ 175rem,
-        /* Glass circle bottom left */ 94rem,
-        /* Glass circle top right */ 178rem,
-        /* Glass circle bottom right */ 100rem, /* Oval blob top left */ 100rem,
-        /* Oval blob top right */ 160rem, /* Oval blob bottom left */ 160rem,
-        /* Oval blob bottom right */ 65rem, /* Waves Landing Page */ 182rem,
-        /* Landing Waves Fadout */ 132rem; /* black background */
-    background-position-x: 4rem, /* Glass circle top left */ 7rem,
-        /* Glass circle bottom left */ right, /* Glass circle top right */ right,
-        /* Glass circle bottom right */ left, /* Oval blob top left */ right,
-        /* Oval blob top right */ left, /* Oval blob bottom left */ right,
-        /* Oval blob bottom right */ center, /* Waves Landing Page */ center,
-        /* Landing Waves Fadout */ center; /* black background */
+    background-image: 
+    url("src/assets/LandingPage/glass-circle-top-left.svg"), /* Glass circle top left */
+    url("src/assets/LandingPage/glass-circle-bottom-left.svg"), /* Glass circle bottom left */
+    url("src/assets/LandingPage/glass-circle-right.svg"), /* Glass circle top right */
+    url("src/assets/LandingPage/glass-circle-right.svg"), /* Glass circle bottom right */
+    url("src/assets/LandingPage/oval-blob-top-left.svg"), /* Oval blob top left */
+    url("src/assets/LandingPage/oval-blob-top-right.svg"), /* Oval blob top right */
+    url("src/assets/LandingPage/oval-blob-bottom-left.svg"), /* Oval blob bottom left */
+    url("src/assets/LandingPage/oval-blob-bottom-right.svg"), /* Oval blob bottom right */
+    url("src/assets/LandingPage/WavesLandingPage.svg"), /* Waves Landing Page */
+    url("src/assets/LandingPage/LandingWavesFadeout.svg"), /* Landing Waves Fadout */
+    url("src/assets/LandingPage/black.webp"), /* black background */
+    url("src/assets/LandingPage/black.webp"); /* black background */
+    background-repeat: 
+    no-repeat, /* Glass circle top left */
+    no-repeat, /* Glass circle bottom left */
+    no-repeat, /* Glass circle top right */
+    no-repeat, /* Glass circle bottom right */
+    no-repeat, /* Oval blob top left */
+    no-repeat, /* Oval blob top right */
+    no-repeat, /* Oval blob bottom left */
+    no-repeat, /* Oval blob bottom right */
+    no-repeat, /* Waves Landing Page */
+    no-repeat, /* Landing Waves Fadout */
+    no-repeat, /* black background */
+    no-repeat; /* black background */
+    background-position-y: 
+    120rem, /* Glass circle top left */
+    175rem, /* Glass circle bottom left */
+    94rem, /* Glass circle top right */
+    178rem, /* Glass circle bottom right */
+    100rem, /* Oval blob top left */
+    100rem, /* Oval blob top right */
+    160rem, /* Oval blob bottom left */
+    160rem, /* Oval blob bottom right */
+    65rem, /* Waves Landing Page */
+    205rem, /* Landing Waves Fadout */
+    122rem, /* black background */
+    152rem; /* black background */
+    background-position-x: 
+    4rem, /* Glass circle top left */
+    7rem, /* Glass circle bottom left */
+    right, /* Glass circle top right */
+    right, /* Glass circle bottom right */
+    left, /* Oval blob top left */
+    right, /* Oval blob top right */
+    left, /* Oval blob bottom left */
+    right, /* Oval blob bottom right */
+    center, /* Waves Landing Page */
+    center, /* Landing Waves Fadout */
+    center, /* black background */
+    center; /* black background */
+    
 }
 
 @media screen and (max-width: 431px) {
@@ -67,30 +79,65 @@
 
 @media screen and (max-width: 376px) {
     .landing-page-container {
-        background-position-y: 54rem, /* Glass circle top left */ 94rem,
-            /* Glass circle bottom left */ 73rem,
-            /* Glass circle top right */ 119rem,
-            /* Glass circle bottom right */ 42rem,
-            /* Oval blob top left */ 76rem, /* Oval blob top right */ 89rem,
-            /* Oval blob bottom left */ 109rem,
-            /* Oval blob bottom right */ 30rem, /* Waves Landing Page */ 106rem,
-            /* Landing Waves Fadout */ 96rem; /* black background */
-        background-position-x: 12rem, /* Glass circle top left */ 8rem,
-            /* Glass circle bottom left */ -5rem,
-            /* Glass circle top right */ 2rem,
-            /* Glass circle bottom right */ -10rem,
-            /* Oval blob top left */ 10rem, /* Oval blob top right */ -16rem,
-            /* Oval blob bottom left */ 20rem,
-            /* Oval blob bottom right */ center, /* Waves Landing Page */ center,
-            /* Landing Waves Fadout */ center; /* black background */
+        background-position-y: 
+        54rem, /* Glass circle top left */
+        94rem, /* Glass circle bottom left */
+        73rem, /* Glass circle top right */
+        119rem, /* Glass circle bottom right */
+        42rem, /* Oval blob top left */
+        76rem, /* Oval blob top right */
+        89rem, /* Oval blob bottom left */
+        109rem, /* Oval blob bottom right */
+        30rem, /* Waves Landing Page */
+        106rem, /* Landing Waves Fadout */
+        96rem; /* black background */
+        background-position-x: 
+        12rem, /* Glass circle top left */
+        8rem, /* Glass circle bottom left */
+        -5rem, /* Glass circle top right */
+        2rem, /* Glass circle bottom right */
+        -10rem, /* Oval blob top left */
+        10rem, /* Oval blob top right */
+        -16rem, /* Oval blob bottom left */
+        20rem, /* Oval blob bottom right */
+        center, /* Waves Landing Page */
+        center, /* Landing Waves Fadout */
+        center; /* black background */
+    }
+}
+
+.blob {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    width: 41%;
+    max-width: 600px; 
+}
+
+@media screen and (max-width: 431px) {
+    .blob {
+        width: 170px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .blob {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .blob {
+        width: 150px;
     }
 }
 
 .pcb {
     position: absolute;
-    left: 30rem;
-    bottom: 6rem;
-    width: 350px;
+    left: 30%;
+    top: 24rem;
+    width: 24%;
+    max-width: 350px;
 }
 
 @media screen and (max-width: 431px) {
@@ -125,36 +172,12 @@
     }
 }
 
-.blob {
-    position: absolute;
-    right: 0rem;
-    top: 0rem;
-    width: 600px;
-}
-
-@media screen and (max-width: 431px) {
-    .blob {
-        width: 170px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .blob {
-        width: 160px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .blob {
-        width: 150px;
-    }
-}
-
 .vr {
     position: absolute;
     left: 0rem;
     top: 25rem;
-    width: 800px;
+    width: 54%;
+    max-width: 800px;
     z-index: 0;
 }
 
@@ -187,8 +210,9 @@
 
 .moon {
     position: absolute;
-    right: 14rem;
-    width: 400px;
+    margin-left: 55%;
+    width: 27%;
+    max-width: 400px;
 }
 
 @media screen and (max-width: 431px) {
@@ -226,7 +250,8 @@
     position: absolute;
     right: 5rem;
     top: 63rem;
-    width: 500px;
+    width: 34%;
+    max-width: 500px;
 }
 
 @media screen and (max-width: 431px) {
@@ -265,8 +290,8 @@
     display: flex;
     flex-flow: row wrap;
     margin-top: 60rem;
-    margin-inline: 20rem;
-    gap: 15rem;
+    margin-inline: 15%;
+    gap: 8rem;
 }
 
 @media screen and (max-width: 431px) {
@@ -293,7 +318,7 @@
 .carousel-header {
     margin-top: 9rem;
     margin-inline: 11rem;
-    font-size: 64px;
+    font-size: 4.3vw;
     font-family: "Kanit", sans-serif;
     font-style: normal;
     font-weight: 700;

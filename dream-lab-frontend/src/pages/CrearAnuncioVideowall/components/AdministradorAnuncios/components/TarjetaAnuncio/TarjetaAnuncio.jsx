@@ -45,7 +45,7 @@ function TarjetaReservacion(props) {
                         />
                         <img
                             data-cy="boton-eliminar-anuncio-videowall"    
-                            className="clic-image"
+                            className="clic-image-anuncio"
                             src={ClicImage}
                             alt="Imagen presionar"
                             onClick={props.funcionTrash}

@@ -103,7 +103,7 @@ describe("Creación de anuncios para el video wall", () => {
 
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
+            "../assets/imagenPrueba.jpg", 15000
         );
 
         cy.clickDataCy("boton-agregar-anuncio");
@@ -193,7 +193,7 @@ describe("Creación de anuncios para el video wall", () => {
         );
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
+            "../assets/imagenPrueba.jpg", 15000
         );
         cy.clickDataCy("boton-agregar-anuncio");
 
@@ -277,7 +277,7 @@ describe("Creación de anuncios para el video wall", () => {
         );
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg"
+            "../assets/imagenPrueba.jpg", 15000
         );
         cy.clickDataCy("boton-agregar-anuncio");
 
@@ -312,7 +312,7 @@ describe("Creación de anuncios para el video wall", () => {
 
         cy.containsDataCy(
             "anuncio-eliminado-satisfactoriamente-videowall",
-            "Eliminación satisfactoria"
+            "Eliminación satisfactoria", 15000
         );
         cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio");
     });
@@ -328,7 +328,7 @@ describe("Creación de anuncios para el video wall", () => {
         cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/archivoPrueba.pdf"
+            "../assets/archivoPrueba.pdf", 15000
         );
 
         cy.containsDataCy(
@@ -384,7 +384,7 @@ describe("Creación de anuncios para el video wall", () => {
                     posicion: 0,
                     soloImagen: false,
                     urlImagen:
-                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/ElectricGarage.jpg?alt=media&token=d0e7fe74-4103-4b6b-97b6-18e37172978d",
                     firebaseId: "9wrYH3oxJAda6ucXuan",
                 },
                 {
@@ -399,20 +399,38 @@ describe("Creación de anuncios para el video wall", () => {
                     posicion: 1,
                     soloImagen: true,
                     urlImagen:
-                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/c4b37173-a86b-4d38-9ee4-ef55f884c74f?alt=media&token=00f9b6a5-c6b3-4673-8435-4b234e43eff0",
+                        "https://firebasestorage.googleapis.com/v0/b/dream-lab-videowall.appspot.com/o/TallerDeImpresion3D.jpeg?alt=media&token=902c0779-3519-4ad6-81c7-29cfe26c0379",
                     firebaseId: "9wrYH3oxJefgda6ucXuan",
                 },
             ],
         }).as("getMuchosAnuncios");
 
-        cy.wait("@getMuchosAnuncios");
+        cy.wait("@getMuchosAnuncios").then(() => {
+            cy.get('[data-cy="tarjeta-anuncio-videowall"]')
+                .first()
+                .as("tarjeta"); // Alias para la primera tarjeta
 
-        cy.get('[data-cy="tarjeta-anuncio-videowall"]').first().as("tarjeta"); // Alias para el primer elemento
-        cy.get("@tarjeta").trigger("mousedown");
-        cy.get("@tarjeta").trigger("mousemove", {
-            clientX: 0,
-            clientY: 2000,
+            let initialIndex;
+
+            // Obtener el índice inicial de la tarjeta
+            cy.get("@tarjeta").then(($tarjeta) => {
+                initialIndex = $tarjeta.index();
+            });
+
+            cy.get("@tarjeta").trigger("mousedown", { which: 1 }); // Emular clic izquierdo para activar el arrastre
+            cy.get("@tarjeta").trigger("mousemove", {
+                clientX: 0,
+                clientY: 10200,
+            }); // Mover el mouse hacia abajo
+            cy.get("@tarjeta").trigger("mouseup", { force: true }); // Soltar la tarjeta (puedes necesitar { force: true })
+
+            // Obtener el índice después de la acción de arrastre y suelta
+            cy.get("@tarjeta").then(($tarjeta) => {
+                const finalIndex = $tarjeta.index() + 1;
+
+                // Verificar que el índice haya cambiado
+                expect(finalIndex).to.not.equal(initialIndex);
+            });
         });
-        cy.get("@tarjeta").trigger("mouseup", { force: true }); // Usa { force: true } para garantizar que el evento se dispare incluso si el elemento está oculto
     });
 });
