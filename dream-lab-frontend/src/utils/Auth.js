@@ -16,13 +16,22 @@ export async function loginAction(
         .then((response) => {
             // De la API se recibe un jwt (JSON Web Token)
             const jwt = response.jwt;
-            // Guardar el token y el usuario en el local storage
-            saveToLocalStorage("token", jwt);
-            saveToLocalStorage("user", user);
-            // Llamar a la función de éxito
-            success();
-            // Regresar la dirección a la que se debe redirigir
-            return "/home";
+            if (jwt) {
+                // Guardar el token y el usuario en el local storage
+                saveToLocalStorage("token", jwt);
+                saveToLocalStorage("user", user.toLowerCase());
+                // Llamar a la función de éxito
+                success();
+                // Checa el rol del usuario
+                
+                // Regresar la dirección a la que se debe redirigir
+                return "/home";
+            } else {
+                // Llamar a la función de error
+                error();
+                // Si las credenciales no son válidas, regresar a la página de login
+                return "/login";
+            }
         })
         .catch(() => {
             // Llamar a la función de error

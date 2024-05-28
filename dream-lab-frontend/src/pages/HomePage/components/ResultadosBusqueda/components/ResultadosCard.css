@@ -1,0 +1,44 @@
+.cardResultados{
+    width: 15.5vw;
+    min-width: 190px;
+	height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.imageResultados{
+    width: 97%;
+    height: 155px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.titleResultados {
+    z-index: 2; /* Ensure it appears above the image */
+    padding-top: 4%;
+    font-size: 1.1rem;
+    color: white;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .imageResultados{
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardResultados{
+        width: 150px;
+        min-width: 0;
+        height: 30vh;
+    }
+
+    .imageResultados{
+        height: 28vh;
+        object-fit: cover;
+    }
+
+}

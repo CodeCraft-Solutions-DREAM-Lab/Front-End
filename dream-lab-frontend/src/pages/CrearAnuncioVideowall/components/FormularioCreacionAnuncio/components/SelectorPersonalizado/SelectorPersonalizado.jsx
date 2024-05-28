@@ -1,30 +1,21 @@
 import React from "react";
-import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
-import TextField from "@mui/material/TextField";
+import { Select, SelectItem } from "@nextui-org/react";
 
-function SelectorPersonalizado() {
+export default function SelectorPersonalizado(props) {
+    const staticOptions = props.elementos ? props.elementos.map(sala => ({
+        label: sala.nombre,
+        value: sala.idSala.toString()
+    })) : [];
+
     return (
-        <Autocomplete
-            className="mb-3"
-            aria-label="Hora de inicio"
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    className="input-formulario-anuncio"
-                    placeholder="Fecha del evento"
-                />
-            )}
-            sx={{
-                "& .MuiAutocomplete-input": {
-                    // Target specific MUI class for background
-                    height: "2vh",
-                    backgroundColor: "white",
-                    borderRadius: "16px",
-                    
-                },
-            }}
-        />
-    )    
+        <Select
+            items={staticOptions}
+            placeholder={props.placeholder}
+            className="max-w-xs"
+            aria-label={props.ariaLabel} // Agrega el atributo aria-label
+            aria-labelledby={props.ariaLabel} // Agrega el atributo aria-labelledby
+        >
+            {(sala) => <SelectItem key={sala.value}>{sala.label}</SelectItem>}
+        </Select>
+    );
 }
-
-export default SelectorPersonalizado;

@@ -6,7 +6,7 @@ import "./SendButton.css";
 
 // Imagenes
 import loadingIcon from "src/assets/SpeechBotCard/loading.gif";
-import sendIcon from "src/assets/SpeechBotCard/simboloEnviar.png";
+import sendIcon from "src/assets/SpeechBotCard/simboloEnviar.webp";
 
 function SendButton({
     transcript,
@@ -21,7 +21,7 @@ function SendButton({
             setProcessing(true);
             // Simulate asynchronous processing by sending the data to the server
             console.log("processTranscript transcript var: ", transcript);
-            const response = await fetch(`${API_URL}chatbot`, {
+            const response = await fetch(`https://recomendaciones.azurewebsites.net/recomendar`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -64,6 +64,7 @@ function SendButton({
 
     return (
         <button
+            data-cy="button-enviar-recomendaciones"
             className="send-button"
             onClick={handleClick}
             disabled={processing}

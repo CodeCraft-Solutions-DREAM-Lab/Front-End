@@ -1,6 +1,6 @@
 import "./Title.css";
-import Logo from "src/assets/Logos/LogoDreamLab.png";
-import DownArrow from "src/assets/LandingPage/Vector.png";
+import Logo from "src/assets/Logos/LogoDreamLab.webp";
+import DownArrow from "src/assets/LandingPage/Vector.webp";
 
 function Title({ scroll }) {
   return (

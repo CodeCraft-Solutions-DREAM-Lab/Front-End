@@ -1,5 +1,4 @@
 import "cypress-localstorage-commands";
-const API_URL = Cypress.env("API_URL");
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -32,19 +31,33 @@ Cypress.Commands.add("getDataCy", (name) => {
     return cy.get(`[data-cy=${name}]`);
 });
 
+// Encuentra un elemento hijo de un elemento con el atributo data-cy
+Cypress.Commands.add(
+    "findDataCy",
+    { prevSubject: "element" },
+    (subject, child) => {
+        return cy.wrap(subject).find(`[data-cy=${child}]`);
+    }
+);
+
+// Obtiene el nth hijo dentro del componente con el atributo data-cy
+Cypress.Commands.add("getDataCyNth", (name, n) => {
+    return cy.getDataCy(name).children().eq(n);
+});
+
 // Hace click en un elemento por el atributo data-cy
 Cypress.Commands.add("clickDataCy", (name) => {
     return cy.getDataCy(name).click();
 });
 
+// Hace click en el hijo nth de un elemento con el atributo data-cy
+Cypress.Commands.add("clickDataCyNth", (name, n) => {
+    return cy.getDataCyNth(name, n).click();
+});
+
 // Escribe en un elemento por el atributo data-cy
 Cypress.Commands.add("typeDataCy", (name, text) => {
     return cy.getDataCy(name).type(text);
-});
-
-// Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy", (name, text) => {
-    return cy.getDataCy(name).contains(text);
 });
 
 // Verifica si un elemento tiene un atributo con un valor específico
@@ -56,12 +69,21 @@ Cypress.Commands.add(
     }
 );
 
+// Verifica si un elemento tiene un estilo de css con un valor específico
+Cypress.Commands.add(
+    "hasStyle",
+    { prevSubject: "element" },
+    (subject, style, value) => {
+        return cy.wrap(subject).should("have.css", style, value);
+    }
+);
+
 // Checa si un elemento con el atributo data-cy contiene un texto específico
-Cypress.Commands.add("containsDataCy_Alt", (name, text) => {
-    return cy.getDataCy(name).then(($elemento) => {
-        const texto = $elemento.text();
-        expect(texto).to.equal(text);
-    });
+Cypress.Commands.add("containsDataCy", (name, text, timeout) => {
+    if (timeout === undefined) {
+        timeout = 4000;
+    }
+    return cy.getDataCy(name).contains(text, { timeout: timeout });
 });
 
 // Iniciar sesión con usuario y contraseña
@@ -97,22 +119,34 @@ Cypress.Commands.add("getLength", (name) => {
         });
 });
 
-Cypress.Commands.add("loginWithTest", () => {
-    cy.intercept("POST", API_URL + "auth/token", {
-        data: "token",
-    });
+// Inicia sesión con un usuario específico
+Cypress.Commands.add("loginWith", (user) => {
+    cy.intercept("POST", "auth/token", {
+        body: { isAuth: "true" },
+    }).as("login");
 
     cy.setLocalStorage(
         "token",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
     );
-    cy.setLocalStorage("user", "test");
+    cy.setLocalStorage("user", user);
 });
 
+// Comprueba que el url actual contenga una cadena específica
 Cypress.Commands.add("urlContains", (url) => {
     cy.url().should("include", url);
 });
 
+// Checa si un elemento con el atributo data-cy tiene un valor específico
 Cypress.Commands.add("isTypeDataCy", (name, type) => {
     return cy.getDataCy(name).hasAttribute("type", type);
+});
+
+Cypress.Commands.add("attachFileDataCy", (name, file, timeout = 4000) => {
+    return cy.getDataCy(name, timeout).attachFile(file);
+});
+
+// Asigna una fecha específica al reloj de Cypress
+Cypress.Commands.add("setDate", (year, month, day) => {
+    cy.clock(Date.UTC(year, month, day), ["Date"]);
 });

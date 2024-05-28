@@ -6,7 +6,7 @@
 
 @media screen and (orientation: portrait) {
     .rounded-button {
-        width: 50%;
+        width: 90%;
     }
 }
 
@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 768px) {
     .button-label {
-        font-size: max(2.0vh, 2vw);
+        font-size: 1rem;
     }
     .rounded-button {
         height: 7.5vh !important;

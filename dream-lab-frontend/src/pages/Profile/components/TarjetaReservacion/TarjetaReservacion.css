@@ -38,11 +38,18 @@
     height: 2vh;
     justify-content: flex-end; /* Alinea al final del contenedor */
     cursor: pointer;
+    opacity: 0.3; /* 10% opacity */
+}
+
+.clic-image-2{
+    width: 2vh;
+    height: 2vh;
+    justify-content: flex-end; /* Alinea al final del contenedor */
+    opacity: 0.4; /* 10% opacity */
 }
 
 .clic-tarjeta-reservacion {
     width: 30%;
-    opacity: 0.3; /* 10% opacity */
     display: flex;
     justify-content: flex-end;
 }
@@ -71,6 +78,51 @@
     margin-left: auto; /* Alinea a la derecha */
     font-weight: bold;
     text-align: right;
+}
+
+.tooltip-perfil{
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip-perfil .tooltiptext-perfil {
+    font-family: "Karla";
+    font-weight: 700;
+    font-size: medium;
+    visibility: hidden;
+    width: 200px;
+    background-color: rgb(227, 142, 15);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 9;
+    top: 50%; /* Position the tooltip below the text */
+    left: -570%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 40px;
+    border: 4px solid rgb(227, 142, 15); /* Cambia #ff0000 por el color que desees para el borde */
+}
+
+/* Arrow */
+.tooltip-perfil .tooltiptext-perfil ::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* Show the tooltip text when you hover over the tooltip container */
+.tooltip-perfil:hover .tooltiptext-perfil {
+    visibility: visible;
+    opacity: 1;
 }
 
 
@@ -117,6 +169,13 @@
         height: 1.8vh;
         justify-content: flex-end; /* Alinea al final del contenedor */
     }
+
+    .clic-image-2{
+        width: 1.8vh;
+        height: 1.8vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
+        opacity: 0.4; /* 10% opacity */
+    }
 }
 
 @media (max-width: 820px), (height: 1366px) {
@@ -153,6 +212,7 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
+    
    
 }
 
@@ -197,7 +257,16 @@
     .clic-image{
         width: 3.1vh;
         height: 3.1vh;
+        margin-left: 15%;
         justify-content: flex-end; /* Alinea al final del contenedor */
+    }
+
+    .clic-image-2{
+        width: 3.5vh;
+        height: 2.7vh;
+        margin-top: 0.2vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
+        opacity: 0.4; /* 10% opacity */
     }
 }
 
@@ -215,5 +284,19 @@
         margin-right: none;
         margin-left: 0px;
         text-align: left;
+    }
+
+    .clic-image{
+        width: 3.1vh;
+        height: 3.1vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
+        margin-left: 15%;
+    }
+
+    .clic-image-2{
+        width: 3vh;
+        height: 3vh;
+        justify-content: flex-end; /* Alinea al final del contenedor */
+        opacity: 0.4; /* 10% opacity */
     }
 }

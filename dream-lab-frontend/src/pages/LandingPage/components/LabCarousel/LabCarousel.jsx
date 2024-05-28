@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+    Autoplay,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
@@ -15,55 +15,59 @@ import "swiper/css/autoplay";
 import "./LabCarousel.css";
 
 // Import your images
-import Logo from "src/assets/Logos/LogoDreamLab.png";
-import SocialNetworking from "src/assets/LandingPage/social-networking.jpg";
-import LegoRoom from "src/assets/LandingPage/lego-room.jpg";
-import ElectricGarage from "src/assets/LandingPage/electric-garage.jpg";
-import DimensionForge from "src/assets/LandingPage/dimension-forge.jpg";
-import NewHorizons from "src/assets/LandingPage/new-horizons.jpg";
-import DeepNet from "src/assets/LandingPage/deep-net.jpg";
-import Graveyard from "src/assets/LandingPage/graveyard.jpg";
+import Logo from "src/assets/Logos/LogoDreamLab.webp";
+import SocialNetworking from "src/assets/LandingPage/social-networking.webp";
+import LegoRoom from "src/assets/LandingPage/lego-room.webp";
+import ElectricGarage from "src/assets/LandingPage/electric-garage.webp";
+import DimensionForge from "src/assets/LandingPage/dimension-forge.webp";
+import NewHorizons from "src/assets/LandingPage/new-horizons.webp";
+import DeepNet from "src/assets/LandingPage/deep-net.webp";
+import Graveyard from "src/assets/LandingPage/graveyard.webp";
 
 function LabCarousel() {
-  // Array of swiper card information
-  const swiperCards = [
-    {
-      title: "Social Networking Room",
-      image: SocialNetworking,
-      description: ["Espacio abierto", "Conoce personas", "Video Wall"],
-    },
-    {
-      title: "Lego Room",
-      image: LegoRoom,
-      description: ["Experimentación", "Windows", "MacOS"],
-    },
-    {
-      title: "Electric Garage",
-      image: ElectricGarage,
-      description: ["Electrónicos", "Sensores", "Medidores"],
-    },
-    {
-      title: "Dimension Forge",
-      image: DimensionForge,
-      description: ["Tecnología para 3D", "Impresoras 3D", "Scanners"],
-    },
-    {
-      title: "New Horizons",
-      image: NewHorizons,
-      description: ["Realidad virtual", "Realidad aumentada", "Holodeck"],
-    },
-    {
-      title: "Deep Net",
-      image: DeepNet,
-      description: ["Redes", "Red Aislada", "Hacking"],
-    },
-    {
-      title: "Graveyard",
-      image: Graveyard,
-      description: ["Cómputo viejo", "Software antiguo", "Reverse engineering"],
-    },
-    // Add more swiper card objects as needed
-  ];
+    // Array of swiper card information
+    const swiperCards = [
+        {
+            title: "Social Networking Room",
+            image: SocialNetworking,
+            description: ["Espacio abierto", "Conoce personas", "Video Wall"],
+        },
+        {
+            title: "Lego Room",
+            image: LegoRoom,
+            description: ["Experimentación", "Windows", "MacOS"],
+        },
+        {
+            title: "Electric Garage",
+            image: ElectricGarage,
+            description: ["Electrónicos", "Sensores", "Medidores"],
+        },
+        {
+            title: "Dimension Forge",
+            image: DimensionForge,
+            description: ["Tecnología para 3D", "Impresoras 3D", "Scanners"],
+        },
+        {
+            title: "New Horizons",
+            image: NewHorizons,
+            description: ["Realidad virtual", "Realidad aumentada", "Holodeck"],
+        },
+        {
+            title: "Deep Net",
+            image: DeepNet,
+            description: ["Redes", "Red Aislada", "Hacking"],
+        },
+        {
+            title: "Graveyard",
+            image: Graveyard,
+            description: [
+                "Cómputo viejo",
+                "Software antiguo",
+                "Reverse engineering",
+            ],
+        },
+        // Add more swiper card objects as needed
+    ];
 
   return (
     <div data-cy="landing-lab-carousel" className="landing-lab-carousel-component">

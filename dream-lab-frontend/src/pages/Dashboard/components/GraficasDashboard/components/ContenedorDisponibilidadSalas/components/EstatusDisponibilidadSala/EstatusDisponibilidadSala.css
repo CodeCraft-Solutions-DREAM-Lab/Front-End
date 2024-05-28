@@ -1,0 +1,17 @@
+.eds-contenedor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.eds-icono-estatus {
+    width: max(0.9vw, 1.5vh);
+    height: max(0.9vw, 1.5vh);
+    margin-right: 1vw;
+}
+
+.eds-nombre-sala {
+    font-size: max(1vw, 1.5vh);
+    text-wrap: wrap;
+}

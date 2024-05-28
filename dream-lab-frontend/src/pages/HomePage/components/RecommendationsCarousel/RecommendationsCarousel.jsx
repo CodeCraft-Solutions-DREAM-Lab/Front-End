@@ -55,42 +55,42 @@ function RecomendationsCarousel(props) {
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-240px) translateZ(-400px) rotateY(35deg)",
+                    "translateX(-30%) translateZ(-400px) rotateY(35deg)",
                 zIndex: 9,
             };
         else if (activeSlide + 1 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(240px) translateZ(-400px) rotateY(-35deg)",
+                    "translateX(30%) translateZ(-400px) rotateY(-35deg)",
                 zIndex: 9,
             };
         else if (activeSlide - 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 8,
             };
         else if (activeSlide + 2 === index)
             return {
                 opacity: 1,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 8,
             };
         else if (index < activeSlide - 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(-480px) translateZ(-500px) rotateY(35deg)",
+                    "translateX(-35%) translateZ(-500px) rotateY(35deg)",
                 zIndex: 7,
             };
         else if (index > activeSlide + 2)
             return {
                 opacity: 0,
                 transform:
-                    "translateX(480px) translateZ(-500px) rotateY(-35deg)",
+                    "translateX(35%) translateZ(-500px) rotateY(-35deg)",
                 zIndex: 7,
             };
     };
@@ -105,7 +105,7 @@ function RecomendationsCarousel(props) {
     return (
         <>
             {/* carousel */}
-            <div className="slideC">
+            <div className="slideC" data-cy="container-recomendaciones">
                 {props.data.map((item, i) => (
                     <React.Fragment key={i}>
                         <div
@@ -131,6 +131,7 @@ function RecomendationsCarousel(props) {
 
             <div className="btns">
                 <FontAwesomeIcon
+                    data-cy="flecha-izquierda-recomendaciones"
                     className="btn"
                     onClick={() => {
                         prev();
@@ -153,6 +154,7 @@ function RecomendationsCarousel(props) {
                 </div>
 
                 <FontAwesomeIcon
+                    data-cy="flecha-derecha-recomendaciones"
                     className="btn"
                     onClick={() => {
                         next();
@@ -173,10 +175,16 @@ const SliderContent = (props) => {
     function handleClick() {
         props.stopRotating();
         if (props.index === props.activeSlide) {
-            saveToSessionStorage("experiencia", props.id);
-            navigate(
-                `/reservacion/sala?idSala=${props.idSala}&nombreSala=${props.title}`
-            );
+
+            if (props.isExperiencia) {
+                saveToSessionStorage("idExperiencia", props.id);
+                saveToSessionStorage("reservType", "experiencia");
+            } else {
+                saveToSessionStorage("idSala", props.id);
+                saveToSessionStorage("reservType", "sala");
+            }
+
+            navigate(`/reservacion/sala`);
         } else {
             props.onClick(props.index);
         }
@@ -185,9 +193,9 @@ const SliderContent = (props) => {
     return (
         <div className="sliderContent" onClick={handleClick}>
             {props.icon}
-            <h2>{props.title}</h2>
+            <h2 data-cy="titulo-recomendaciones">{props.title}</h2>
             <div className="textContainer">
-                <p>{props.desc}</p>
+                <p data-cy="descripcion-recomendaciones">{props.desc}</p>
             </div>
         </div>
     );

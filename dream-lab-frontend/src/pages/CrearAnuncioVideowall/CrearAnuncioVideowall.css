@@ -1,3 +1,8 @@
+.out-crear-anuncios-div{
+    width: 100vw;
+    height: 100%;
+}
+
 .componente-visualizar-videowall-button{
     display: flex;
     flex-wrap: wrap;
@@ -8,9 +13,10 @@
 .elementos-creacion-anuncio{
     display: flex;
     flex-wrap: wrap;
-    padding-top: 11vw;
+    padding-top: 13.5vh;
 }
 
 .creacion-anuncio-columna-izq{
     margin-right: 3vw;
 }
+
