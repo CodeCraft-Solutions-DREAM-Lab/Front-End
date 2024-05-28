@@ -20,12 +20,12 @@
     margin-right: 3vw;
 }
 
-/*Panta regular (computadora)*/
+/*Pantalla regular (computadora)*/
 @media (max-height: 700px) {
     .elementos-creacion-anuncio{
         display: flex;
         flex-wrap: wrap;
-        padding-top: 10.8vh;
+        padding-top: 10.6vh;
     }
 }
 
