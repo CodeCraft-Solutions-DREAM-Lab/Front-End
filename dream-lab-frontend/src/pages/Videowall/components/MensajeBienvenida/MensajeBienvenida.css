@@ -132,7 +132,7 @@
 }
 
 
-/*Panta regular (computadora)*/
+/*Pantalla regular (computadora)*/
 @media (max-width: 2000px) {
     .mensaje-bienvenida-videowall {
         position: fixed; /* Posición fija para que se mantenga en la ventana */
@@ -252,5 +252,25 @@
 
     .horario-reserva-videowall-alerta {
         font-size: 1.4vh;
+    }
+}
+
+
+/*Pantalla regular (computadora)*/
+@media (max-height: 700px) {
+    .mensaje-bienvenida-videowall {
+        position: fixed; /* Posición fija para que se mantenga en la ventana */
+        bottom: 0; /* Alinear en la parte inferior */
+        left: 0; /* Alinear a la izquierda */
+        width: 15%;
+        height: 32%;
+        font-size: 15px;
+        margin-left: 1vw;
+        margin-bottom: 1vw;
+        padding: 1.5%;
+        background-color: white;
+        border-radius: 35px;
+        font-family: "Karla", sans-serif;
+        color: black;
     }
 }
