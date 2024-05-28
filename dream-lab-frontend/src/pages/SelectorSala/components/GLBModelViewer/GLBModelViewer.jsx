@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import modeloPlaceholder from "/public/placeholder-modelo2.png";
+import modeloPlaceholder from "/placeholder-modelo2.png";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 const GLBModelViewer = ({ modelPath }) => {
