@@ -1,10 +1,15 @@
-.div-exterior-formulario-creacion-anuncio{
+.div-exterior-formulario-creacion-anuncio {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(17.5px);
     -webkit-backdrop-filter: blur(17.5px);
     width: 52vw;
     height: 41vw;
-    background: rgba(255,231,231,0.06); /* Background color with transparency */
+    background: rgba(
+        255,
+        231,
+        231,
+        0.06
+    ); /* Background color with transparency */
     border: 1.5px solid rgba(255, 255, 255, 0.1); /* Border color with transparency */
     border-radius: 25px;
     font-family: "Karla", sans-serif;
@@ -12,29 +17,32 @@
     margin-left: 5vw;
     padding: 4%;
     padding-top: 5%;
+    margin-top: 5vh;
 }
 
-.formulario-creacion-anuncio{
+.formulario-creacion-anuncio {
     height: 20vw;
 }
 
-.sala-fecha-anuncio-formulario{
+.sala-fecha-anuncio-formulario {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 1%;
+    margin-top: -0.5%;
 }
 
-.formulario-sala-pregunta{
+.formulario-sala-pregunta {
     width: 48%;
     margin-right: 3%;
+    margin-top: 1.5%;
 }
 
-.formulario-fecha-pregunta{
+.formulario-fecha-pregunta {
     width: 48%;
+    margin-top: 1.5%;
 }
 
-.formulario-horario-pregunta{
+.formulario-horario-pregunta {
     width: 100%;
 }
 
@@ -45,11 +53,11 @@
     color: white;
 }
 
-.label-formulario-anuncio{
+.label-formulario-anuncio {
     font-weight: bold;
 }
 
-.input-formulario-anuncio{
+.input-formulario-anuncio {
     padding-left: 1vw;
     border-radius: 12px;
     width: 100%;
@@ -59,49 +67,88 @@
     font-size: medium;
 }
 
-.contenedor-mitad-2-formulario{
+.contenedor-mitad-2-formulario {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 3%;
+    margin-top: 5%;
 }
 
-.espacio-forms{
+.espacio-forms {
     height: 1vh;
 }
 
-.horario-div-anuncio-formulario{
+.horario-div-anuncio-formulario {
     width: 48%;
     margin-right: 3%;
 }
 
-.subir-imagen-div-formulario{
+.subir-imagen-div-formulario {
     width: 48%;
     height: 11vw;
 }
 
-.boton-agregar-div-out{
+.boton-agregar-div-out {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 1vw;
+    margin-top: 0.1vw;
 }
 
-.checkbox-formulario-anuncio{
+.checkbox-formulario-anuncio {
     text-align: right; /* Alinea el contenido a la derecha */
 }
 
-.formulario-primera-mitad{
+.formulario-primera-mitad {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 4%;
 }
 
-.formulario-primera-mitad-pt1{
+.formulario-primera-mitad-pt1 {
     width: 25vw;
 }
 
-.formulario-primera-mitad-pt2{
-    width: 10vw;    
+.formulario-primera-mitad-pt2 {
+    width: 10vw;
 }
+
+.mensaje-enviado-anuncio {
+    color: white;
+    font-weight: lighter;
+    font-size: small;
+    text-align: center;
+    margin-top: 0.5%;
+}
+
+@media (max-width: 1200px) {
+    .div-exterior-formulario-creacion-anuncio {
+        height: 45.2vw;
+        margin-top: 5.5vh;
+    }
+}
+
+@media (max-height: 680px) {
+    .div-exterior-formulario-creacion-anuncio {
+        height: 41vw;
+        margin-top: 5vh;
+    }
+}
+
+@media (max-width: 1100px) {
+    .div-exterior-formulario-creacion-anuncio{
+        height: 47.2vw;
+        margin-top: 3.5vw;
+    }
+}
+
+@media (max-width: 1000px) {
+    .div-exterior-formulario-creacion-anuncio{
+        height: 47.3vw;
+        margin-top: 6vw;
+        font-size: small;
+    }
+}
+
+

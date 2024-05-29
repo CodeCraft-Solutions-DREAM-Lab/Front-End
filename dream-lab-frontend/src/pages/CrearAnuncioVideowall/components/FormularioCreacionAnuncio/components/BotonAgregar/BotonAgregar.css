@@ -18,4 +18,12 @@
     background-color: rgba(255, 255, 255, 0.562);
 }
 
+@media (max-height: 680px) {
+    .boton-agregar-div{
+        margin-top: -8%;
+        font-size: small;
+        width: 13vw;
+    }
+}
+
 

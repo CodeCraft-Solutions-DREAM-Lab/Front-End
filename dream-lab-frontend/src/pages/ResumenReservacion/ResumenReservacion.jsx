@@ -1,11 +1,11 @@
 import { post } from "src/utils/ApiRequests";
 import { useState, useEffect } from "react";
 import {
-    getFromLocalStorage,
-    getFromSessionStorage,
-    existsInSessionStorage,
-    removeFromLocalStorage,
-    removeFromSessionStorage,
+	getFromLocalStorage,
+	getFromSessionStorage,
+	existsInSessionStorage,
+	removeFromLocalStorage,
+	removeFromSessionStorage,
 } from "src/utils/Storage";
 import { useNavigate } from "react-router-dom";
 import AvisoFinal from "./components/AvisoFinal";
@@ -13,70 +13,73 @@ import "./ResumenReservacion.css";
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import MaterialCardDupe from "./components/MaterialCardDupe/MaterialCardDupe";
-import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.png";
-import WarningIcon from "src/assets/ResumenReservaciones/warning.png";
+import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
+import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
+import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
+import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCardDupe";
 
 function ResumenReservacion(props) {
-    let navigate = useNavigate();
+	let navigate = useNavigate();
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const reservationData = {
-        nombre: getFromSessionStorage("nameSalaExperiencia"),
-        personas: getFromSessionStorage("personas"),
-        fecha: getFromSessionStorage("formattedDate"),
-        hora: getFromSessionStorage("formattedTime"),
-        horaCorte: getFromSessionStorage("horaCorte"),
-        competidores: getFromSessionStorage("competidores"),
-        cupos: getFromSessionStorage("cupos")
-    }
+	const reservationData = {
+		nombre: getFromSessionStorage("nameSalaExperiencia"),
+		personas: getFromSessionStorage("personas"),
+		fecha: getFromSessionStorage("formattedDate"),
+		hora: getFromSessionStorage("formattedTime"),
+		horaCorte: getFromSessionStorage("horaCorte"),
+		competidores: getFromSessionStorage("competidores"),
+		cupos: getFromSessionStorage("cupos"),
+	};
 
-    const handleSubmit = async () => {
-        const data = {
-            idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
-            idSala: getFromSessionStorage("idSala") || null,
-            idExperiencia: getFromSessionStorage("idExperiencia") || null,
-            horaInicio: getFromSessionStorage("horaInicioIsoString"),
-            duracion: getFromSessionStorage("duration"),
-            fecha: getFromSessionStorage("fechaIsoString"),
-            idMesa: null,
-            estatus: 3,
-        };
+	const handleSubmit = async () => {
+		const data = {
+			idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
+			idSala: getFromSessionStorage("idSala") || null,
+			idExperiencia: getFromSessionStorage("idExperiencia") || null,
+			horaInicio: getFromSessionStorage("horaInicioIsoString"),
+			duracion: getFromSessionStorage("duration"),
+			fecha: getFromSessionStorage("fechaIsoString"),
+			idMesa: null,
+			estatus: 5,
+			numPersonas: reservationData.personas,
+		};
 
-        console.log("Data: ", data);
+		console.log("Data: ", data);
 
-        setIsLoading(true);
-        await post(
-            "reservaciones",
-            data,
-            () => {},
-            () => {
-                setIsLoading(false);
-            }
-        ).then((response) => {
-            removeFromSessionStorage("horaInicio");
-            removeFromSessionStorage("horaInicioIsoString");
-            removeFromSessionStorage("duration");
-            removeFromSessionStorage("fecha");
-            removeFromSessionStorage("fechaIsoString");
-            removeFromSessionStorage("nameSalaExperiencia");
-            removeFromSessionStorage("personas"),
-            removeFromSessionStorage("formattedDate"),
-            removeFromSessionStorage("formattedTime"),
-            removeFromSessionStorage("horaCorte"),
-            removeFromSessionStorage("competidores"),
-            removeFromSessionStorage("cupos")
-            setIsLoading(false);
-            setIsModalOpen(true);
-        });
-    };
+		setIsLoading(true);
+		await post(
+			"reservaciones",
+			data,
+			() => {},
+			() => {
+				setIsLoading(false);
+			}
+		).then((response) => {
+			removeFromSessionStorage("horaInicio");
+			removeFromSessionStorage("horaInicioIsoString");
+			removeFromSessionStorage("duration");
+			removeFromSessionStorage("fecha");
+			removeFromSessionStorage("fechaIsoString");
+			removeFromSessionStorage("nameSalaExperiencia");
+			removeFromSessionStorage("personas"),
+				removeFromSessionStorage("formattedDate"),
+				removeFromSessionStorage("formattedTime"),
+				removeFromSessionStorage("horaCorte"),
+				removeFromSessionStorage("competidores"),
+				removeFromSessionStorage("cupos");
+			setIsLoading(false);
+			setIsModalOpen(true);
+		});
+	};
 
-    const handleClick = () => {
-        navigate(`/reservacion/material/`); // Navigate back to the previous page
-    };
+	const handleClick = () => {
+		navigate(`/reservacion/material/`); // Navigate back to the previous page
+	};
 
-    const [selectedMaterials, setSelectedMaterials] = useState(() => {
+	const [selectedMaterials, setSelectedMaterials] = useState(() => {
 		if (
 			existsInSessionStorage("materials") &&
 			getFromSessionStorage("materials")
@@ -89,15 +92,15 @@ function ResumenReservacion(props) {
 	});
 	const [data, setData] = useState([]);
 
-    useEffect(() => {
+	useEffect(() => {
 		const date = new Date(getFromSessionStorage("fecha"));
 
 		// Parametros Stored Procedure
 		const params = {
-			idSala: getFromSessionStorage("idSala"), 
-			fecha: date.toISOString(), 
-			horaInicio: getFromSessionStorage("horaInicioIsoString"), 
-			duracion: parseInt(getFromSessionStorage("duration")), 
+			idSala: getFromSessionStorage("idSala"),
+			fecha: date.toISOString(),
+			horaInicio: getFromSessionStorage("horaInicioIsoString"),
+			duracion: parseInt(getFromSessionStorage("duration")),
 		};
 
 		post("materiales", params)
@@ -112,77 +115,114 @@ function ResumenReservacion(props) {
 			});
 	}, []);
 
-    return (
-        <div>
-            <Navbar view="soloPerfil" autohide={true}/>
-            <div className="reservation-summary-view">
-                <div className="material-summary-container">
-                    <div className="material-summary-title">
-                        <img data-cy="summmary-back-button" className="back-arrow" src={BackArrow} onClick={handleClick}/>
-                        <h1 className="material-summary-title-text">Resumen de pedido</h1>
-                    </div>
-                    <div className="material-summary-wrapper">
-                        <div className="material-summary-sm">
-                            {data.length > 0 && selectedMaterials.length === 0 && (
-                                <p className="material-summary-empty">No seleccionaste ningún material.</p>
-                            )}
-                            {data.map((material) => {
-                            const selectedMaterial = selectedMaterials.find((m) => m.materialId === material.id);
-                            if (selectedMaterial && selectedMaterial.quantity > 0) {
-                                return (
-                                    <MaterialCardDupe
-                                        key={material.id}
-                                        materialId={material.id}
-                                        name={material.name}
-                                        image={material.image}
-                                        hideQuantity={true}
-                                        initialQuantity={selectedMaterial.quantity}
-                                        maxQuantity={material.cantidadDisponible}
-                                    />
-                                );
-                            } else {
-                                return null; // If quantity is not greater than 0, don't render anything
-                            }
-                        })}
-                        </div>
-                    </div>
-                </div>
-                <div className="reservation-summary-container">
-                    <GlassCard margin="2rem" padding="3rem">
-                        <div className="reservation-summary-container-inner">
-                            <div className="reservation-summary-title-row">
-                                <img className="back-arrow-responsive" src={BackArrow} onClick={handleClick}/>
-                                <h1 className="reservation-summary-title">Confirma tu solicitud</h1>
-                            </div>
-                            <p data-cy="summary-lab-name" className="reservation-summary-name">{reservationData.nombre}</p>
-                            <p data-cy="summary-lab-people" className="reservation-summary-people">{reservationData.personas} Persona(s)</p>
-                            <p data-cy="summary-lab-date" className="reservation-summary-date">{reservationData.fecha}</p>
-                            <p data-cy="summary-lab-time" className="reservation-summary-time">{reservationData.hora}</p>
-                            <button data-cy="summary-submit-button" className="reservation-summary-button" isLoading={isLoading} onClick={handleSubmit}>
-                                CONFIRMAR
-                            </button>
-                        </div>
-                    </GlassCard>
-                    <div className="reservation-summary-warning">
-                        <img className="warning-icon" src={WarningIcon} />
-                        <p className="reservation-summary-warning-message">La asignación del lugar se hará hoy a las <strong data-cy="summary-lab-cutoff">{reservationData.horaCorte}</strong>. Compiten <strong data-cy="summary-lab-contestants">{reservationData.competidores}</strong> reservaciones por <strong data-cy="summary-lab-spots">{reservationData.cupos}</strong> cupos.</p>
-                    </div>
-                </div>
-                <AvisoFinal
-                    isOpen={isModalOpen}
-                    size="xl"
-                    onOk={() => {
-                        setIsModalOpen(false);
-                        navigate("/home");
-                    }}
-                    onClose={() => {
-                        setIsModalOpen(false);
-                        navigate("/home");
-                    }}
-                />
-            </div>
-        </div>
-    );
+	return (
+		<div className="contenedor-resumen-de-reservacion">
+			<Navbar view="soloPerfil" autohide={true} />
+			<div className="reservation-summary-view">
+				<div className="material-summary-container">
+					<div className="material-summary-title">
+						<img
+							data-cy="summmary-back-button"
+							className="back-arrow"
+							src={BackArrow}
+							onClick={handleClick}
+						/>
+						<h1 className="material-summary-title-text">Resumen de pedido</h1>
+					</div>
+					<div className="material-summary-wrapper">
+						<div className="material-summary-sm">
+							{data.length > 0 && selectedMaterials.length === 0 && (
+								<p className="material-summary-empty">
+									No seleccionaste ningún material.
+								</p>
+							)}
+							{data.map((material) => {
+								const selectedMaterial = selectedMaterials.find(
+									(m) => m.materialId === material.id
+								);
+								if (selectedMaterial && selectedMaterial.quantity > 0) {
+									return (
+										<MaterialCardDupe
+											name={material.name}
+											image={material.image}
+											initialQuantity={selectedMaterial.quantity}
+										/>
+									);
+								} else {
+									return null; // If quantity is not greater than 0, don't render anything
+								}
+							})}
+						</div>
+					</div>
+				</div>
+				<div className="reservation-summary-container">
+					<GlassCard classes="reservation-summary-glasscard-classes">
+						<div className="reservation-summary-container-inner">
+							<div className="reservation-summary-title-row">
+								<img
+									className="back-arrow-responsive"
+									src={BackArrow}
+									onClick={handleClick}
+								/>
+								<h1 className="reservation-summary-title">
+									Confirma tu solicitud
+								</h1>
+							</div>
+							<p
+								data-cy="summary-lab-name"
+								className="reservation-summary-name"
+							>
+								{reservationData.nombre}
+							</p>
+							<p
+								data-cy="summary-lab-people"
+								className="reservation-summary-people"
+							>
+								{reservationData.personas} Persona(s)
+							</p>
+							<p
+								data-cy="summary-lab-date"
+								className="reservation-summary-date"
+							>
+								{reservationData.fecha}
+							</p>
+							<p
+								data-cy="summary-lab-time"
+								className="reservation-summary-time"
+							>
+								{reservationData.hora}
+							</p>
+							<button
+								data-cy="summary-submit-button"
+								className="reservation-summary-button"
+								isLoading={isLoading}
+								onClick={handleSubmit}
+							>
+								CONFIRMAR
+							</button>
+						</div>
+					</GlassCard>
+					<InfoReservCardDupe
+						horaCorte={reservationData.horaCorte}
+						competidores={reservationData.competidores}
+						cupos={reservationData.cupos}
+					></InfoReservCardDupe>
+				</div>
+				<AvisoFinal
+					isOpen={isModalOpen}
+					size="xl"
+					onOk={() => {
+						setIsModalOpen(false);
+						navigate("/home");
+					}}
+					onClose={() => {
+						setIsModalOpen(false);
+						navigate("/home");
+					}}
+				/>
+			</div>
+		</div>
+	);
 }
 
 export default ResumenReservacion;

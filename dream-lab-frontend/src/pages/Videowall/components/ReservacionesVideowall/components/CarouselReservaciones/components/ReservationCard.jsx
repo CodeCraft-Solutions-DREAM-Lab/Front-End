@@ -4,7 +4,7 @@ import { Image } from "@nextui-org/react";
 
 import propTypes from "prop-types";
 
-import NuevoIconoLogro from "src/GlobalComponents/NuevoIconoLogro/NuevoIconoLogro";
+import IconoLogro from "src/GlobalComponents/IconoLogro/IconoLogro";
 
 function ReservationCard({
     nombre,
@@ -18,10 +18,7 @@ function ReservationCard({
         <div className="rc-container">
             <div className="rc-image-container">
                 <div className="rc-logro">
-                    <NuevoIconoLogro
-                        icono={icono}
-                        colorFondo={colorPreferido}
-                    />
+                    <IconoLogro icono={icono} colorFondo={colorPreferido} />
                     {/* <Image src={icono} alt="Logro del usuario" fullwidth={false} /> */}
                 </div>
             </div>
@@ -54,7 +51,7 @@ ReservationCard.defaultProps = {
     horaInicio: "00:00",
     horaFin: "00:00",
     sala: "Sala",
-    icono: "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.png",
+    icono: "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
 };
 
 export default ReservationCard;

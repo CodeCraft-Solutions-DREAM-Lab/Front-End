@@ -1,0 +1,51 @@
+.graficas-dashboard-main-container {
+    display: grid;
+    gap: max(2vw, 2vh);
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    height: 84vh;
+    padding: 1vw;
+}
+
+.graficas-dashboard-statcards-container {
+    display: grid;
+    gap: max(2vw, 2vh);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-row: span 1 / span 1;
+    height: 100%;
+}
+
+.graficas-dashboard-graphs-container {
+    display: grid;
+    gap: max(2vw, 2vh);
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-row: span 3 / span 3;
+    height: 100%;
+}
+
+.graficas-dashboard-grafica-default {
+    overflow-y: auto;
+    padding: max(1vw, 2vh);
+    background-color: white;
+    border-radius: max(1vw, 2vh);
+}
+
+.graficas-dashboard-grafica-materiales-container {
+    grid-row: span 2 / span 2;
+    grid-column: span 2 / span 2;
+}
+
+.graficas-dashboard-grafica-reservaciones-totales-container {
+    grid-row: span 2 / span 2;
+    grid-column: span 2 / span 2;
+}
+
+.graficas-dashboard-grafica-reservaiones-sala-container {
+    grid-row: span 3 / span 3;
+    grid-column: span 1 / span 1;
+}
+
+.graficas-dashboard-grafica-disponbilidad-container {
+    grid-row: span 1 / span 1;
+    grid-column: span 4 / span 4;
+}

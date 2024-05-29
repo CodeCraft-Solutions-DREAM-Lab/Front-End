@@ -1,3 +1,8 @@
+.out-crear-anuncios-div{
+    width: 100%;
+    height: 100%;
+}
+
 .componente-visualizar-videowall-button{
     display: flex;
     flex-wrap: wrap;
@@ -8,9 +13,19 @@
 .elementos-creacion-anuncio{
     display: flex;
     flex-wrap: wrap;
-    padding-top: 11vw;
+    padding-top: 13.5vh;
 }
 
 .creacion-anuncio-columna-izq{
     margin-right: 3vw;
 }
+
+/*Pantalla regular (computadora)*/
+@media (max-height: 700px) {
+    .elementos-creacion-anuncio{
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 10.6vh;
+    }
+}
+

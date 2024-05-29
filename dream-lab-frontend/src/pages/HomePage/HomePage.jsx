@@ -3,7 +3,8 @@ import ImageSlider from "./components/ImageSlider/ImageSlider.jsx";
 import SpeechBotCard from "./components/SpeechBotCard/SpeechBotCard.jsx";
 import RecommendationsCarousel from "./components/RecommendationsCarousel/RecommendationsCarousel.jsx";
 import RecomendacionesInvalidas from "./components/RecomendacionesInvalidas/RecomendacionesInvalidas.jsx";
-import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx"; // Import the Navbar component
+import ResultadosBusqueda from "./components/ResultadosBusqueda/ResultadosBusqueda.jsx";
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import "./HomePage.css";
 import { multiClearSessionStorage } from "src/utils/Storage.js";
 
@@ -16,27 +17,27 @@ const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
 const unsplash_prefix = "https://images.unsplash.com/photo-";
 const unsplash_suffix =
-    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80";
 
 // Imagenes
-import blobLeft from "src/assets/HomePage/blob-left.png";
-import smallBlob from "src/assets/HomePage/small-blob.png";
-import blobRight from "src/assets/HomePage/blob-right.png";
+import blobLeft from "src/assets/HomePage/blob-left.webp";
+import smallBlob from "src/assets/HomePage/small-blob.webp";
+import blobRight from "src/assets/HomePage/blob-right.webp";
 
 const IMAGES = [
     {
         id: "1",
-        url: "/HomePage/ImagenSalaVR.png",
+        url: "/HomePage/ImagenSalaVR.webp",
         title: "Sala VR",
     },
     {
         id: "2",
-        url: "/HomePage/ImagenUsoRouters.png",
+        url: "/HomePage/ImagenUsoRouters.webp",
         title: "Deep Net",
     },
     {
         id: "3",
-        url: "/HomePage/ImagenExpGoogle.png",
+        url: "/HomePage/ImagenExpGoogle.webp",
         title: "Testing Land",
     },
     {
@@ -61,22 +62,22 @@ const IMAGES = [
     },
     {
         id: "8",
-        url: "/HomePage/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.webp",
         title: "Curso de Swift",
     },
     {
         id: "9",
-        url: "/HomePage/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.webp",
         title: "Deep Net",
     },
     {
         id: "10",
-        url: "/HomePage/ImagenCursoSwift.png",
+        url: "/HomePage/ImagenCursoSwift.webp",
         title: "Curso de Swift",
     },
     {
         id: "11",
-        url: "/HomePage/ImagenConnections.png",
+        url: "/HomePage/ImagenConnections.webp",
         title: "Deep Net",
     },
 ];
@@ -118,6 +119,10 @@ function HomePage() {
     const [salasBD, setSalasBD] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [isContentVisible, setIsContentVisible] = useState(true); // Visibilidad de página al hacer una búsqueda
+    const isMobile = window.innerWidth <= 480;
 
     // Función para mostrar Detalles
     const mostrarDetalles = () => {
@@ -220,14 +225,14 @@ function HomePage() {
                                 console.error(
                                     "Error fetching ${type} with id ${id}"
                                 );
-                                return item; // Conservar el item original en caso de error
+                                return item;
                             }
                         } catch (error) {
                             console.error(
                                 "Error fetching ${type} with id ${id}:",
                                 error
                             );
-                            return item; // Conservar el item original en caso de error
+                            return item;
                         }
                     })
                 );
@@ -295,13 +300,31 @@ function HomePage() {
             });
     }, []);
 
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+        if (term === "") {
+            setSearchResults([]);
+            setIsContentVisible(true);
+        } else {
+            setIsContentVisible(false);
+            const lowercasedTerm = term.toLowerCase();
+            const filteredSalas = salasBD.filter((sala) =>
+                sala.nombre.toLowerCase().includes(lowercasedTerm)
+            );
+            const filteredExperiencias = detallesBD.filter((exp) =>
+                exp.nombre.toLowerCase().includes(lowercasedTerm)
+            );
+            setSearchResults([...filteredSalas, ...filteredExperiencias]);
+        }
+    };
+
     if (isLoading) {
         return <LoadingScreen isLoading={isLoading} />;
     }
 
     return (
         <div className="homepage">
-            <Navbar view="homeAlumno" autoHide={!detallesVisible} />
+            <Navbar view="homeAlumno" autoHide={!detallesVisible} onSearchInputChange={handleSearch}/>
             {/* Use the Navbar component */}
             <div className="background-container">
                 <div className="home-background-image-container">
@@ -324,7 +347,7 @@ function HomePage() {
                     />
                 </div>
             </div>
-            <div className="page-content">
+            <div className={`page-content ${isMobile && searchTerm ? 'mobile-search-active' : ''}`}>
                 <div ref={detallesRef}>
                     {detallesVisible && (
                         <Detalles
@@ -357,10 +380,10 @@ function HomePage() {
                             imagenExp={
                                 isSalaClicked
                                     ? salasBD[imageID]?.detallesURL ||
-                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
                                     : salasBD[detallesBD[imageID].idSala - 1]
                                           ?.detallesURL ||
-                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.jpg"
+                                      "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
                             }
                             handleClose={handleCloseDetalles}
                             imageID={imageID}
@@ -368,84 +391,87 @@ function HomePage() {
                         />
                     )}
                 </div>
-                <SpeechBotCard
-                    height="25rem"
-                    onProcessedText={handleProcessedText}
-                />
-                {showInvalidNotice ? (
-                    <RecomendacionesInvalidas />
-                ) : (
-                    showRecommendations && (
-                        <RecommendationsCarousel
-                            data={data}
-                            activeSlide={parseInt(Math.floor(data.length / 2))}
-                        />
-                    )
+                {!searchTerm && (
+                    <>
+                        <SpeechBotCard height="25rem" onProcessedText={handleProcessedText} />
+                        {showInvalidNotice ? ( <RecomendacionesInvalidas /> ) : (
+                        showRecommendations && (
+                            <RecommendationsCarousel
+                                data={data}
+                                activeSlide={parseInt(Math.floor(data.length / 2))}
+                            />
+                        )
+                        )}
+                        <div className="carousel-container">
+                            <h1>RECOMENDACIONES</h1>
+                            <ImageSlider
+                                api_url={"reservaciones/ultimas"}
+                                request_type="POST"
+                                options={OPTIONS}
+                                mostrarDetalles={mostrarDetalles}
+                                onImageClick={handleImageClick}
+                                setIsSalaClicked={setIsSalaClicked}
+                                setImageType="ambas"
+                            />
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>SALAS</h1>
+                                <ImageSlider
+                                    api_url="salas"
+                                    request_type="GET"
+                                    images={null}
+                                    titles={null}
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="salas"
+                                />
+                            </>
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
+                                <ImageSlider
+                                    api_url="experiencias/autodirigidas"
+                                    request_type="GET"
+                                    images={null}
+                                    titles={null}
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="experiencias"
+                                />
+                            </>
+                        </div>
+                        <div className="carousel-container">
+                            <>
+                                <h1>UNIDADES DE FORMACIÓN</h1>
+                                <ImageSlider
+                                    api_url="experiencias/UFs"
+                                    request_type="POST"
+                                    options={OPTIONS}
+                                    mostrarDetalles={mostrarDetalles}
+                                    onImageClick={handleImageClick}
+                                    setIsSalaClicked={setIsSalaClicked}
+                                    setImageType="experiencias"
+                                />
+                            </>
+                        </div>
+                    </>
                 )}
-                <div className="carousel-container">
-                    <h1>RECOMENDACIONES</h1>
-                    <ImageSlider
-                        api_url={null}
-                        request_type={null}
-                        isExperiencia={null}
-                        images={IMAGES}
-                        titles={IMAGES.map((item) => item.title)}
-                        options={OPTIONS}
-                        mostrarDetalles={mostrarDetalles}
-                        onImageClick={handleImageClick}
-                        setIsSalaClicked={() => {}}
-                        setImageType={null}
+                {searchTerm && (
+                    <ResultadosBusqueda 
+                        results={searchResults} 
+                        mostrarDetalles={mostrarDetalles} 
+                        onImageClick={handleImageClick} 
+                        setIsSalaClicked={setIsSalaClicked} 
                     />
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>SALAS</h1>
-                        <ImageSlider
-                            api_url="salas"
-                            request_type="GET"
-                            isExperiencia={false}
-                            images={null}
-                            titles={null}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="salas"
-                        />
-                    </>
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>PRÁCTICAS AUTODIRIGIDAS</h1>
-                        <ImageSlider
-                            api_url="experiencias/autodirigidas"
-                            request_type="GET"
-                            isExperiencia={true}
-                            images={null}
-                            titles={null}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="experiencias"
-                        />
-                    </>
-                </div>
-                <div className="carousel-container">
-                    <>
-                        <h1>UNIDADES DE FORMACIÓN</h1>
-                        <ImageSlider
-                            api_url="experiencias/UFs"
-                            request_type="POST"
-                            isExperiencia={true}
-                            options={OPTIONS}
-                            mostrarDetalles={mostrarDetalles}
-                            onImageClick={handleImageClick}
-                            setIsSalaClicked={setIsSalaClicked}
-                            setImageType="experiencias"
-                        />
-                    </>
-                </div>
+                )}
+                
+                
             </div>
         </div>
     );

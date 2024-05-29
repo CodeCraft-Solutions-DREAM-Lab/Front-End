@@ -52,7 +52,6 @@
 @media (max-width: 800px) {
     .texto-num-personas {
         margin-bottom: 1.5%;
-        font-size: 14px;
     }
 
     .slider-out {
@@ -73,7 +72,7 @@
     .slider-out {
         width: 100%;
         margin: 0%;
-        margin-bottom: 10vh;
+        margin-bottom: 3vh;
         padding-right: 4%;
         padding-left: 4%;
     }
@@ -82,15 +81,17 @@
 @media (max-width: 400px) {
     .texto-num-personas {
         margin-bottom: 1.5%;
-        font-size: 12px;
     }
 
     .slider-out {
         width: 100%;
         margin: 0%;
-        margin-bottom: 10vh;
+        margin-bottom: 3vh;
         padding: 5%;
         padding-right: 4%;
         padding-left: 4%;
     }
 }
+
+/* Common styles for all browsers */
+

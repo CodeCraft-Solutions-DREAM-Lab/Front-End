@@ -8,7 +8,6 @@ import Anuncios from "./components/Anuncios/Anuncios.jsx";
 import ReservacionesVideowall from "./components/ReservacionesVideowall/ReservacionesVideowall";
 
 function Videowall() {
-
     return (
         <div className="container-videowall">
             <div className="container-reservaciones">

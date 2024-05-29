@@ -1,5 +1,5 @@
 import "./TarjetaLogro.css";
-import IconoLogro from "./components/IconoLogro/IconoLogro";
+import IconoLogro from "src/GlobalComponents/IconoLogro/IconoLogro";
 import BarraProgreso from "./components/BarraProgreso/BarraProgreso";
 
 function TarjetaLogro(props) {
@@ -11,8 +11,10 @@ function TarjetaLogro(props) {
                 <div className="icono-logro">
                     <IconoLogro
                         icono={props.iconoUtilizado}
-                        logroDesbloqueado={logroObtenido}
-                        colorFondo={props.colorFondo}
+                        colorFondo={
+                            logroObtenido ? props.colorFondo : "#d9d9d9"
+                        }
+                        opacidad={logroObtenido ? "50%" : "25%"}
                     />
                 </div>
 

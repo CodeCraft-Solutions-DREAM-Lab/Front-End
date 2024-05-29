@@ -16,24 +16,30 @@ const ImageSlider = (props) => {
     const [response, setResponse] = useState([]);
     const [bdImages, setBdImages] = useState([]);
 
-    function handleClick(idExperiencia) {
-
-        // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
-        const isSalaImage = props.setImageType === "salas";
+    function handleClick(id, tipo) {
         
-        if (isSalaImage) {
+        if (tipo === "sala") {
             dispatch(
                 setSelectedItem({
-                    id: idExperiencia,
-                    type: "sala",
+                    id: id,
+                    type: tipo,
                 })
             );
 
-        } else {
+        }
+        else if(tipo === "experiencia"){
             dispatch(
                 setSelectedItem({
-                    id: idExperiencia,
-                    type: "experiencia",
+                    id: id,
+                    type: tipo,
+                })
+            );
+        }        
+         else {
+            dispatch(
+                setSelectedItem({
+                    id: id,
+                    type: tipo,
                 })
             );
         }
@@ -41,16 +47,21 @@ const ImageSlider = (props) => {
         mostrarDetalles();
         // dispatch(setExperiencia(idExperiencia));
         // saveToSessionStorage("experiencia", idExperiencia);
-        props.onImageClick(idExperiencia - 1); // pasa el ID de la imagen al componente padre
+        props.onImageClick(id - 1); // pasa el ID de la imagen al componente padre
 
-        // // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
-        // const isSalaImage = props.setImageType === "salas";
-
+        // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
         // Llamar a setIsSalaClicked con el valor correspondiente
-        props.setIsSalaClicked(isSalaImage);
+        if(tipo === "sala"){
+            props.setIsSalaClicked(true);
+        }
+        else{
+            props.setIsSalaClicked(false);
+        }
+        
+        
     }
 
-    const { options, api_url, isExperiencia, images, request_type } = props;
+    const { options, api_url, images, request_type } = props;
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const tweenFactor = useRef(0);
     const tweenNodes = useRef([]);
@@ -130,10 +141,11 @@ const ImageSlider = (props) => {
                 }
 
                 res = res.map((item) => ({
-                    id: (props.setImageType==="salas"? item.idSala : item.idExperiencia),
-                    isExperiencia: { isExperiencia },
-                    url: item.fotoURL ? item.fotoURL : item.portadaURL,
+                    id: item.idExperiencia ? item.idExperiencia : item.idSala,
+                    // Revisa si tiene campo de url (caso de recomendaciones), en caso contrario revisa si tiene el campo de url de experiencia, si no entonces toma el que es de sala
+                    url: item.URL ? item.URL : item.fotoURL ? item.fotoURL : item.portadaURL,
                     title: item.nombre,
+                    tipo: item.idExperiencia? "experiencia": "sala",
                 }));
                 console.log(res);
                 setBdImages(res);
@@ -159,7 +171,7 @@ const ImageSlider = (props) => {
         } else {
             setBdImages(images);
         }
-    }, [api_url, request_type, images, isExperiencia]);
+    }, [api_url, request_type, images]);
 
     return (
         <div className="embla">
@@ -174,7 +186,7 @@ const ImageSlider = (props) => {
                                         className="embla__slide__img embla__parallax__img"
                                         src={image.url}
                                         alt="Your alt text"
-                                        onClick={() => handleClick(image.id)}
+                                        onClick={() => handleClick(image.id, image.tipo)}
                                         draggable="false"
                                         onContextMenu={(e) =>
                                             e.preventDefault()
