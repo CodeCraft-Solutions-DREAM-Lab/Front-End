@@ -64,7 +64,7 @@ Para configurar el proyecto localmente puedes seguir los siguientes pasos:
 
 ## Desarrollo
 
-Para iniciar el servidor de desarrollo, ejecuta:
+Para iniciar el servidor de desarrollo, abre una terminal en la carpeta `dream-lab-frontend` y ejecuta:
 
 ```
 npm run dev
@@ -72,7 +72,7 @@ npm run dev
 
 ## Construcción
 
-Para construir la aplicación para producción, ejecuta:
+Para construir la aplicación para producción, abre una terminal en la carpeta `dream-lab-frontend` y ejecuta:
 
 ```
 npm run build
@@ -80,7 +80,7 @@ npm run build
 
 ## Vista previa
 
-Para servir la aplicación construida como si se sirviera en producción, ejecuta:
+Para servir la aplicación construida como si se sirviera en producción, abre una terminal en la carpeta `dream-lab-frontend` y ejecuta:
 
 ```
 npm run preview
@@ -88,10 +88,16 @@ npm run preview
 
 ## Lint
 
-Para ejecutar ESLint en el código, ejecuta:
+Para ejecutar ESLint en el código, abre una terminal en la carpeta `dream-lab-frontend` y ejecuta:
 
 ```
 npm run lint
 ```
 
+## Pruebas de Cypress
 
+Para ejecutar las pruebas de Cypres, abre una terminal en la carpeta `dream-lab-frontend` y ejecuta:
+
+```
+npx cypress open
+```
