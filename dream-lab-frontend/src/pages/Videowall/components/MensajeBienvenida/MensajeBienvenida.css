@@ -112,15 +112,15 @@
     font-weight: bold;
     line-height: 100%;
     text-align: center;
-    padding-left: 4%;
-    padding-right: 4%;
-    font-size: 0.64vw;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 0.63vw;
     margin-top: 10%;
 }
 
 .div-informacion-reserva-alerta-videowall {
     text-align: center;
-    font-size: 0.7vw;
+    font-size: 0.68vw;
     margin-top: 3%;
     width: 100%;
     margin-top: 5%;
@@ -128,7 +128,7 @@
 }
 
 .horario-reserva-videowall-alerta {
-    font-size: 0.7vw;
+    font-size: 0.68vw;
 }
 
 
