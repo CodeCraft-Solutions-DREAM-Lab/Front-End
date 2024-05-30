@@ -92,6 +92,7 @@ const router = createBrowserRouter(
             <Route path="admin" element={<CronogramaAdmin />} />
             <Route path="qr" element={<QRLogin />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
         </Route>
     )
