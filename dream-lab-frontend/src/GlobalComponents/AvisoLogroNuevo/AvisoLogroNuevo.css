@@ -1,0 +1,14 @@
+.nombre-logro-desbloqueado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    font-family: "Karla", sans-serif;
+    text-align: center;
+    height: 100%; /* Opcional: ajusta la altura según sea necesario */
+}
+
+.nombre-logro-obtenido-anuncio{
+    margin-top: 50vh;
+    background-color: aqua;
+}

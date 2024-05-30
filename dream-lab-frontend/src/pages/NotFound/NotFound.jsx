@@ -1,10 +1,17 @@
 
 import lostImage from "src/assets/NotFound/lost.png"
 import "./NotFound.css"
+import LogroObtenido from "src/GlobalComponents/AvisoLogroNuevo/AvisoLogroNuevo.jsx";
 
 function LandingPage() {
     return (
+
         <div className="div-exterior-not-found-error">
+
+        <LogroObtenido
+            isOpen={true}
+        ></LogroObtenido>
+
 
             <div className="background-image-container-not-found">
             </div>
