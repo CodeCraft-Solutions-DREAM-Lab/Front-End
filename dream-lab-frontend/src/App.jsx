@@ -16,6 +16,9 @@ import ProtectedRoutes from "./GlobalComponents/ProtectedRoutes/ProtectedRoutes.
 // Pagina no encontrada
 import NotFound from "./pages/NotFound/NotFound.jsx";
 
+// Pagina de error
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+
 // Login
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
@@ -56,7 +59,7 @@ function secured(Component) {
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Root />}>
+        <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
             <Route index element={<LandingPageDev />} />
             <Route path="landingpage" element={<LandingPage />} />
             {/* ruta provisional para desarrollo de la landing */}

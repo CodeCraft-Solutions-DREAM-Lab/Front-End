@@ -1,9 +1,9 @@
 function LandingPage() {
-  return (
-    <>
-      <h1>404 Not Found</h1>
-    </>
-  );
+    return (
+        <div className="h-screen w-screen centered-container">
+            <h1 className="text-9xl text-white text-center">¿Estás perdido?</h1>
+        </div>
+    );
 }
 
 export default LandingPage;
