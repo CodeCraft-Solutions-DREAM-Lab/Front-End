@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Modal,
     ModalContent,
@@ -11,72 +11,138 @@ import { Grid } from "@mui/material";
 import propTypes from "prop-types";
 import Confetti from "react-confetti";
 import Musica from "src/assets/NotFound/logroNuevo.mp3";
+import "./AvisoLogroNuevo.css";
+import { Link } from "react-router-dom"; // Importa el componente Link de React Router
+
 function AvisoLogroNuevo(props) {
+    const [animationActive, setAnimationActive] = useState(true);
+    const [isOpen, setIsOpen] = useState(props.isOpen);
+    const defaultColor = "#7EA3E1"; // Color por defecto
+
     const reproducirTimbre = () => {
         const audio = new Audio(Musica);
         audio.play();
     };
 
+    useEffect(() => {
+
+        if(props.isOpen){
+            reproducirTimbre();
+        }
+  
+        // Iniciar la animación una vez cuando se monte el componente
+        setAnimationActive(true);
+
+        // Desactivar la animación después de 2 segundos
+        const timeoutId = setTimeout(() => {
+            setAnimationActive(false);
+        }, 2000);
+
+        // Limpiar el timeout cuando el componente se desmonte
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (props.isOpen) {
+            //reproducirTimbre(); 
+        }
+    }, [props.isOpen]);
+
+    const handleClose = () => {
+        setIsOpen(false);
+        if (props.onClose) {
+            props.onClose();
+        }
+    };
+
+    function darkenColor(color, percent) {
+        // Convertir el color hexadecimal a RGB
+        let num = parseInt(color.replace("#", ""), 16);
+        let amt = Math.round(2.55 * percent);
+        let R = (num >> 16) - amt;
+        let G = (num >> 8 & 0x00FF) - amt;
+        let B = (num & 0x0000FF) - amt;
+    
+        // Asegurarse de que los valores RGB estén en el rango válido (0-255)
+        R = Math.max(0, Math.min(255, R));
+        G = Math.max(0, Math.min(255, G));
+        B = Math.max(0, Math.min(255, B));
+    
+        // Convertir los valores RGB de vuelta a hexadecimal
+        return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
+    }
+    
+    // Color del logro y elementos oscurecidos
+    const color = props.color ? props.color : defaultColor;
+    const darkenedColor = darkenColor(color, 15); // Oscurecer el color un 20%
+    const darkenedColor2 = darkenColor(color, 20); // Oscurecer el color un 20%
+
     return (
         <Modal
             size="md"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
-            hideCloseButton={true}
-            backdrop="blur"
+            isOpen={isOpen}
+            onClose={handleClose}
+            hideCloseButton={false}
+            closeOnOverlayClick={true}
             data-cy="primer-recordatorio-sala"
         >
             <Confetti width={window.innerWidth} height={window.innerHeight} />
-            <ModalContent className="p-16">
-                <ModalHeader className="text-[#14247b] px-4 pt-4 pb-2 justify-center text-xl">
-                   
-                        Logro obtenido
-                </ModalHeader>
-                <ModalBody>
-                    <Grid container justify="center">
-                        <Grid item xs={12} className="text-center mb-4">
-                            <h2 className="nombre-logro-desbloqueado">
-                                Nombre del logro
-                            </h2>
-                        </Grid>
-                        <Grid item xs={12} className="flex justify-center">
-                            <div className="circulo-foto-perfil-aviso-logro-nuevo">
-                                <img
-                                    src="https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp"
-                                    className="object-contain w-14"
-                                    alt="Correcto logo"
-                                />
-                            </div>
-                        </Grid>
+            <ModalContent className="p-8">
+            <div className="nombre-logro-obtenido-anuncio-generico" style={{ color: darkenedColor}}>
+                    {props.nombreLogro}Big Dreamer
+                </div>
+                <div className="nombre-logro-obtenido-anuncio">
+                    <p>Logro obtenido</p>
+                </div>
 
-                        <div className="nombre-logro-obtenido-anuncio">
-                            <p>
-                                Reserva 50 veces algún espacio del D.R.E.A.M.
-                                Lab.
-                            </p>
-                        </div>
+                <Grid item xs={12} className="flex justify-center">
+                    <div className={`circulo-foto-perfil-aviso-logro-nuevo ${
+                                animationActive ? "rotate-animation" : ""
+                            }`} 
+                            style={{ backgroundColor: props.color }} 
+                           >
+                        <img
+                            src="https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp"
+                            className="imagen-foto-perfil-circulo-aviso-logro-nuevo"
+                            alt="Correcto logo"
+                        />
+                    </div>
+                </Grid>
 
-                        
-                    </Grid>
-                </ModalBody>
+                <div className="descripcion-logro-obtenido-anuncio">
+                    <p>{props.descripcionLogro}Reserva 50 veces algún espacio del D.R.E.A.M. Lab.</p>
+                </div>
+
+                <div className="linea-logro-obtenido-anuncio"></div>
+
+                <div className="recompensa-logro-obtenido-anuncio" style={{ color: darkenedColor2}}>
+                    <p>+{props.puntosObtenidos}50 puntos de prioridad</p>
+                </div>
+                <div className="total-nuevo-logro-obtenido-anuncio">
+                    <p>
+                        Tu nuevo total es de <b>{props.puntosTotal} 300 pts.</b>
+                    </p>
+                </div>
+
                 <ModalFooter className="justify-center">
+                <Link to="/profile"> {/* Enlace al componente de logros */}
                     <Button
                         className="rounded-full px-12 py-2 bg-[#40ad52] font-bold text-white hover:bg-[#31793e] hover:text-[#40ad52] border-2 border-[#40ad52]"
                         color="primary"
                         onClick={() => {
-                            //props.verLogro();
-                            reproducirTimbre();
                         }}
                         style={{ width: "200px" }}
                     >
                         Ver logro
                     </Button>
+                </Link>
                 </ModalFooter>
             </ModalContent>
         </Modal>
     );
 }
-
 
 AvisoLogroNuevo.propTypes = {
     size: propTypes.string,

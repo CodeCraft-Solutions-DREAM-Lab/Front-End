@@ -1,0 +1,117 @@
+.progress-textos-anuncio{
+    color: black;
+    margin-left: -10vw;
+}
+
+.progress-nombre-logro-obtenido-anuncio-generico {
+    font-size: large;
+    font-weight: bold;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 0.5vh;
+}
+
+.progress-descripcion-logro-obtenido-anuncio-generico{
+    font-size: small;
+    margin-top: -0.5vh;
+}
+
+.progress-progreso-logro {
+    font-size: small;
+    background-color: #7EA3E1;
+    width: 5vw;
+    text-align: center;
+    border-radius: 2vw;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+    animation: slideFromLeft 1s ease-in-out;
+}
+
+.progress-circulo-foto-perfil-aviso-logro-nuevo {
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(197, 200, 205);
+    border-radius: 100%;
+    padding: 1vw;
+    margin-left: 0.2vw;
+    
+}
+
+.progress-circulo-foto-perfil-aviso-logro-nuevo img {
+    width: 100%;
+    height: 100%; /* Agregado */
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.progress-modal-content {
+    padding: 0;
+}
+
+.progress-modal-footer {
+    justify-content: center;
+}
+
+.progress-btn-ver-logro {
+    width: 200px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background-color: #40ad52;
+    color: #fff;
+    border: 2px solid #40ad52;
+}
+
+.progress-btn-ver-logro:hover {
+    background-color: #31793e;
+    color: #40ad52;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px); /* Desplazar hacia la izquierda */
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(20px); /* Regresar hacia la derecha */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* Volver a la posición original */
+    }
+}
+
+@media (max-width: 550px) {
+
+    .progress-textos-anuncio{
+        color: black;
+        margin-left: 50vw
+    }
+
+    .progress-progreso-logro {
+        width: 15vw;
+    }
+    
+    .progress-circulo-foto-perfil-aviso-logro-nuevo {
+        width: 15vw;
+        height: 15vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(197, 200, 205);
+        border-radius: 100%;
+        padding: 2vw;
+        margin-left: 2vw;        
+    }
+
+  
+}
