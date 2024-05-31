@@ -22,6 +22,7 @@
         "@headlessui/react": "^2.0.3",
         "@headlessui/tailwindcss": "^0.2.0",
         "@internationalized/date": "^3.5.2",
+        "@mui/icons-material": "^5.15.19",
         "@mui/material": "^5.15.13",
         "@mui/x-date-pickers": "^6.19.6",
         "@nextui-org/date-picker": "^2.0.7",

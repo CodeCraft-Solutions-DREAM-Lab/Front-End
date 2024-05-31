@@ -22,9 +22,18 @@ import {
 	Checkbox,
 	ListItemText,
 } from "@mui/material";
+import SpeedDial from '@mui/material/SpeedDial';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { get } from "../../utils/ApiRequests";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "../../assets/Admin/menu-admin.svg";
+
+const actions = [
+	{ icon: <AddCircleIcon />, name: 'Agregar reservación' },
+	{ icon: <SettingsIcon />, name: 'Configurar Salas' },
+  ];
 
 const monthTranslations = {
 	January: "Enero",
@@ -230,9 +239,22 @@ function CronogramaAdmin() {
 
 	return (
 		<>
-			<div className="menu-icon-admin">
-				<img src={menuIcon} />
-			</div>
+			
+			<SpeedDial
+				ariaLabel="SpeedDial Menu"
+				sx={{ position: 'fixed', bottom: 30, right: 50 }}
+				icon={
+					<img className="iconoMenu" src={menuIcon} />
+				}
+			>
+				{actions.map((action) => (
+				<SpeedDialAction
+					key={action.name}
+					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
+					tooltipTitle={action.name}
+				/>
+				))}
+			</SpeedDial>
 			<NavBarAdmin />
 			<div
 				className="timeline-container-cronograma-admin"
