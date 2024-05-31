@@ -1,0 +1,62 @@
+.contenedor-principal-crear-experiencia .page {
+    display: none;
+}
+
+.contenedor-principal-crear-experiencia .page.active {
+    display: block;
+}
+
+.contenedor-principal-crear-experiencia .page.inactive {
+    display: none;
+}
+
+.button-container-crear-experiencia {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.contenido-crear-experiencia {
+height: 100vh;
+}
+
+.contenedor-principal-crear-experiencia {
+    padding-top: 18vh;
+}
+
+/* Estilos del componente Stepper MUI*/
+.custom-stepper {
+    
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.custom-step .MuiStepIcon-root {
+    color: whitesmoke; /* Default color */
+}
+
+.custom-step-label .MuiStepLabel-label {
+    color: whitesmoke !important; /* Label color */
+}
+
+.custom-step-label .MuiStepLabel-label.Mui-active {
+    font-size: medium;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+
+/* Increasing specificity with higher level selectors if needed */
+.custom-step .MuiStepIcon-root,
+.custom-step .MuiStepIcon-root.Mui-active,
+.custom-step .MuiStepIcon-root.Mui-completed {
+    color: whitesmoke !important;
+}
+
+.custom-step .MuiStepIcon-root.Mui-active {
+    color: whitesmoke !important;
+}
+
+.custom-step .MuiStepIcon-root.Mui-completed {
+    color: #4caf50 !important;
+}

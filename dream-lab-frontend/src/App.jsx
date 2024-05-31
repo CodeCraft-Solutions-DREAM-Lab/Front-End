@@ -46,6 +46,7 @@ import Videowall from "./pages/Videowall/Videowall.jsx";
 import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
 import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import CrearExperiencia from "./pages/CrearExperiencia/CrearExperiencia";
 
 function secured(Component) {
     return function WrappedComponent(props) {
@@ -93,6 +94,7 @@ const router = createBrowserRouter(
             <Route path="qr" element={<QRLogin />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="crearExperiencia" element={<CrearExperiencia/>}/>
         </Route>
     )
 );
