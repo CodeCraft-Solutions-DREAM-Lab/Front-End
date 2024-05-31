@@ -64,7 +64,9 @@ function LoginTextField({
                 radius="full"
                 endContent={
                     <div className="flex items-center">
-                        <div className="w-6 h-6 flex items-center justify-center">
+                        <div
+                            className={`flex items-center justify-center login-caps-lock-placeholder`}
+                        >
                             {isCapsLockActive && (
                                 <img
                                     src={CapsLockIcon}
