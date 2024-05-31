@@ -1,0 +1,11 @@
+.footer-input-crear-experiencia{
+    text-align: right;
+    font-weight: lighter;
+    font-size: small;
+    color: whitesmoke;
+}
+
+.dropdowns-container-crear-experiencia {
+    width: 55vw;
+    padding: 4%;
+}

@@ -36,10 +36,6 @@
     }
 }
 
-.dropdowns-container-crear-experiencia {
-    width: 55vw;
-    padding: 6%;
-}
 
 .subir-portada-container-crear-experiencia {
     width: 30vw;
@@ -50,6 +46,8 @@
     color: whitesmoke;
     text-align: center;
 }
+
+
 
 /* Estilos del componente Stepper MUI*/
 .custom-stepper {
