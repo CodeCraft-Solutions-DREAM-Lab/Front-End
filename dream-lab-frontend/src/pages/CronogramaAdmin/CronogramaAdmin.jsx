@@ -26,14 +26,15 @@ import SpeedDial from '@mui/material/SpeedDial';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
+import GestionSalas from "./components/GestionSalas/GestionSalas";
 import { get } from "../../utils/ApiRequests";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "../../assets/Admin/menu-admin.svg";
 
 const actions = [
-	{ icon: <AddCircleIcon />, name: 'Agregar reservación' },
-	{ icon: <SettingsIcon />, name: 'Configurar Salas' },
-  ];
+	{ icon: <AddCircleIcon />, name: 'Agregar reservación'},
+	{ icon: <SettingsIcon />, name: 'Configurar Salas'},
+];
 
 const monthTranslations = {
 	January: "Enero",
@@ -183,6 +184,7 @@ function CronogramaAdmin() {
 	const [isLoadingItems, setIsLoadingItems] = useState(true);
 	const [groups, setGroups] = useState([]);
 	const [isLoadingGroups, setIsLoadingGroups] = useState(true);
+	const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
 
 	const [selectedOptions1, setSelectedOptions1] = useState([]);
 	const [selectedOptions2, setSelectedOptions2] = useState([]);
@@ -237,9 +239,19 @@ function CronogramaAdmin() {
 		setSelectedOptions2(event.target.value);
 	};
 
+	const handleOpenGestionSalas = () => {
+        setIsGestionSalasOpen(true);
+    };
+
 	return (
 		<>
-			
+			<GestionSalas
+				data-cy="gestion-salas"
+				isOpen={isGestionSalasOpen}
+				onClose={() => {
+					setIsGestionSalasOpen(false);
+				}}
+			/>
 			<SpeedDial
 				ariaLabel="SpeedDial Menu"
 				sx={{ position: 'fixed', bottom: 30, right: 50 }}
@@ -252,6 +264,7 @@ function CronogramaAdmin() {
 					key={action.name}
 					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
 					tooltipTitle={action.name}
+					onClick={action.name === 'Configurar Salas' ? handleOpenGestionSalas : undefined}
 				/>
 				))}
 			</SpeedDial>
