@@ -6,6 +6,7 @@ import Musica from "src/assets/NotFound/progresoSound.mp3";
 import "./ProgresoLogro.css";
 
 function ProgresoLogro(props) {
+
     const [isOpen, setIsOpen] = useState(props.isOpen);
     const [progresoActual, setProgresoActual] = useState(props.progresoActual - 1);
     const [animationActive, setAnimationActive] = useState(false);
@@ -18,11 +19,13 @@ function ProgresoLogro(props) {
     useEffect(() => {
         // Update position style based on window size
         const updatePositionStyle = () => {
+
             const bottomPosition = window.innerWidth <= 550 ? 0 : - 35; // Adjust bottom offset as needed
+
             setPositionStyle({
                 position: "fixed",
                 bottom: `${bottomPosition}px`,
-                right: "0px",
+                right: `0px`,
             });
         };
 
@@ -69,12 +72,6 @@ function ProgresoLogro(props) {
         audio.play();
     };
 
-    useEffect(() => {
-        if (props.isOpen) {
-            reproducirTimbreNotificacion();
-        }
-    }, [props.isOpen]);
-
     const handleClose = () => {
         setIsOpen(false);
         if (props.onClose) {
@@ -84,6 +81,20 @@ function ProgresoLogro(props) {
 
     const porcentajeProgreso = (progresoActual / props.progresoTotal) * 100;
     console.log("Porcentaje de progreso:", porcentajeProgreso);
+
+    useEffect(() => {
+        if (props.isOpen) {
+            reproducirTimbreNotificacion();
+            // Cerrar automáticamente después de 20 segundos
+            const closeTimeout = setTimeout(() => {
+                handleClose();
+            }, 3500); // 20 segundos en milisegundos
+
+            return () => {
+                clearTimeout(closeTimeout);
+            };
+        }
+    }, [props.isOpen]);
 
     return (
         <Modal

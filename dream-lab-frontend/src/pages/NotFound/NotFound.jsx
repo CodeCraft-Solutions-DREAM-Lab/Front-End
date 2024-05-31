@@ -10,11 +10,11 @@ function LandingPage() {
         <div className="div-exterior-not-found-error">
 
         <LogroObtenido
-            isOpen={false}
+            isOpen={true}
         ></LogroObtenido>
 
         <ProgresoLogro
-            isOpen={true}
+            isOpen={false}
             progresoActual={40}
             progresoTotal={50}
         ></ProgresoLogro>
