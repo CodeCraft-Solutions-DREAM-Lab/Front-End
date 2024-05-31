@@ -25,6 +25,8 @@ function LoginTextField({
 
     const [isCapsLockActive, setIsCapsLockActive] = useState(false);
 
+    // Checar si la tecla de Caps Lock está activa para desplegar el ícono de
+    // Caps Lock
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.getModifierState("CapsLock")) {
