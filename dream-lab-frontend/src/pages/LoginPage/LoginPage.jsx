@@ -93,7 +93,7 @@ export default function LoginPage() {
         else {
             setAuthenticating(false);
         }
-    }, [dispatch, navigate]);
+    }, [dispatch, navigate, jwt, searchParams]);
 
     // Funcion que se llama cuando se cierra el snackbar para resetear el estado
     const handleClose = (event, reason) => {
