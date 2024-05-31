@@ -17,7 +17,7 @@
 }
 
 .contenido-crear-experiencia {
-height: 100vh;
+    height: 82vh;
 }
 
 .contenedor-principal-crear-experiencia {
@@ -26,17 +26,17 @@ height: 100vh;
 
 /* Estilos del componente Stepper MUI*/
 .custom-stepper {
-    
     padding: 10px;
     border-radius: 8px;
 }
 
-.custom-step .MuiStepIcon-root {
-    color: whitesmoke; /* Default color */
+.custom-step.completed .MuiStepIcon-text {
+    fill: black; /* Text color when completed */
+    font-size: 1rem;
 }
-
 .custom-step-label .MuiStepLabel-label {
     color: whitesmoke !important; /* Label color */
+
 }
 
 .custom-step-label .MuiStepLabel-label.Mui-active {
@@ -46,17 +46,12 @@ height: 100vh;
 }
 
 
-/* Increasing specificity with higher level selectors if needed */
-.custom-step .MuiStepIcon-root,
 .custom-step .MuiStepIcon-root.Mui-active,
-.custom-step .MuiStepIcon-root.Mui-completed {
-    color: whitesmoke !important;
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+    color: whitesmoke !important; /* Ensure active step color is applied */
 }
 
-.custom-step .MuiStepIcon-root.Mui-active {
-    color: whitesmoke !important;
-}
-
-.custom-step .MuiStepIcon-root.Mui-completed {
-    color: #4caf50 !important;
+.custom-step .MuiStepIcon-root.Mui-completed,
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+    color: whitesmoke !important; /* Ensure completed step color is applied */
 }

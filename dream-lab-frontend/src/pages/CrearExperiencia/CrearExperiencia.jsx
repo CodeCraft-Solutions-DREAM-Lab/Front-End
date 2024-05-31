@@ -34,7 +34,7 @@ function CrearExperiencia() {
 				<div className="contenido-crear-experiencia">
 					<Stepper activeStep={page} alternativeLabel className="custom-stepper">
 						{steps.map((label, index) => (
-							<Step key={index} onClick={() => handleStepClick(index)}>
+							<Step key={index} onClick={() => handleStepClick(index)} className={`custom-step ${page == index ? 'completed' : ''}`}>
 								<StepLabel className="custom-step-label">{label}</StepLabel>
 							</Step>
 						))}
