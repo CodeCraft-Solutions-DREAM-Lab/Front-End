@@ -11,7 +11,6 @@
 }
 
 .button-container-crear-experiencia {
-    margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
@@ -22,6 +21,34 @@
 
 .contenedor-principal-crear-experiencia {
     padding-top: 18vh;
+}
+
+.portada-tipo-selector-crear-experiencia {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2%;
+}
+
+@media (orientation: portrait) {
+    .portada-tipo-selector-crear-experiencia {
+        flex-direction: column;
+    }
+}
+
+.dropdowns-container-crear-experiencia {
+    width: 55vw;
+    padding: 6%;
+}
+
+.subir-portada-container-crear-experiencia {
+    width: 30vw;
+    padding: 6%;
+}
+
+.titulo-portada-crear-exp {
+    color: whitesmoke;
+    text-align: center;
 }
 
 /* Estilos del componente Stepper MUI*/
