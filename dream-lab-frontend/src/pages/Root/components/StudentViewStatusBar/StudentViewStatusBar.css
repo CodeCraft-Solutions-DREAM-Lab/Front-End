@@ -1,0 +1,53 @@
+.svsb-main-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5vh;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.3s ease-in-out;
+}
+
+.svsb-main-container.expanded {
+    height: 5vh; /* Adjust this value for the expanded height */
+}
+
+.svsb-content-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 1vw;
+}
+
+.svsb-toggle-button {
+    height: 100% !important;
+    width: 5vw !important;
+    background-color: transparent !important;
+}
+
+.svsb-col {
+    column-span: 1;
+    height: 100%;
+    align-items: center;
+}
+
+.svsb-col-toggle-button {
+    display: flex;
+    justify-content: center;
+}
+
+.svsb-col-title {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.svsb-col-exit-button {
+    display: flex;
+    justify-content: flex-end;
+}

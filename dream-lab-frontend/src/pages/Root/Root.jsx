@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import "./Root.css";
 
 // Componentes
-import StudentViewStatusBar from "./components/StudentViewStatusBar";
+import StudentViewStatusBar from "./components/StudentViewStatusBar/StudentViewStatusBar";
 
 function Root() {
     return (
