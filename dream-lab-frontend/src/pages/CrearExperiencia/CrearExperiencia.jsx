@@ -23,6 +23,19 @@ function CrearExperiencia() {
 	const [fileSeleccionado, setFileSeleccionado] = useState(null);
 	const [isInvalidFile, setIsInvalidFile] = useState(false);
 
+	const [formValues, setFormValues] = useState({
+		idUF: null,
+		idSala: null,
+		nombre: "",
+		descripcion: "",
+		esAutoDirigida: null,
+		esExclusivaUF: null,
+		portadaURL: "",
+		fechaInicio: null,
+		fechaFin: null,
+		instruccionesURL: ""
+	});
+
 	function handleSiguiente() {
 		if (page < steps.length - 1) {
 			setPage((prevPage) => prevPage + 1); // Move to the next page
@@ -74,20 +87,7 @@ function CrearExperiencia() {
 							<InfoExperiencia/>
 							<GlassCard classes="subir-portada-container-crear-experiencia">
 								<p className="titulo-portada-crear-exp">Portada</p>
-								<SubirImagenBox
-									imagen={isInvalidFile ? AgregarImagenError : AgregarImagen}
-									titulo={
-										isInvalidFile ? "Archivo inválido" : "Sube una imagen"
-									}
-									advertencia={
-										isInvalidFile
-											? "Formatos aceptados = " +
-											  "jpg / jpeg / png / webp / gif"
-											: "Resolución recomendada: 2880 x 2160"
-									}
-									onFileSelected={handleFileSelected} // Asegúrate de que handleFileSelected sea una función definida en el componente padre
-									onInvalidFileChange={handleInvalidFileChange}
-								/>
+								Subir imagen
 							</GlassCard>
 						</div>
 					</div>
