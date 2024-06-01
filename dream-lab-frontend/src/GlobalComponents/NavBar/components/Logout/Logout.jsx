@@ -16,7 +16,8 @@ function Logout() {
         if (!getFromSessionStorage("vistaEstudiante")) {
             navigate("/login"); // Navega a la landing page
             clearStorages();
-            // Llamámos a la función de logoutUser de la userSlice para borrar los datos del usuario
+            // Llamámos a la función de logoutUser de la userSlice para borrar
+            // los datos del usuario
             dispatch(logoutUser());
         }
     };
