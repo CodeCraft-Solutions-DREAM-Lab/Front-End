@@ -1,0 +1,28 @@
+.ReservItemModal-grid-container {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 0.7vw;
+}
+
+.ReservItemModal-grid-item-1 {
+    margin-left: -1.8vh;
+    padding: 10px;
+    background-color: gainsboro;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.ReservItemModal-grid-item-2 {
+    padding: 10px;
+    background-color: gainsboro;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.ReservItemModal-student-name-mat, .ReservItemModal-sala-mesa, .ReservItemModal-date, .ReservItemModal-hora {
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

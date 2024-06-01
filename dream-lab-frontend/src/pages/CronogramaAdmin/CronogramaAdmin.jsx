@@ -25,6 +25,8 @@ import {
 import { get } from "../../utils/ApiRequests";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "../../assets/Admin/menu-admin.svg";
+import ReservItemModal from "./components/ReservItemModal";
+
 
 const monthTranslations = {
 	January: "Enero",
@@ -140,16 +142,16 @@ const customGroupRenderer = ({ group }) => {
 	);
 };
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-	PaperProps: {
-		style: {
-			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-			width: 250,
-		},
-	},
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+// 	PaperProps: {
+// 		style: {
+// 			maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+// 			width: 250,
+// 		},
+// 	},
+// };
 
 const areas = ["Sala VR", "Electric Garage", "New Horizons"];
 const estados = ["Preparado", "En proceso", "Sin preparar"];
@@ -160,6 +162,7 @@ function convertToMomentObjects(jsonData) {
 			id: event.id,
 			group: event.group,
 			title: event.title,
+			canMove: false,
 			start_time: moment(event.start_time).add(6, "hours"),
 			end_time: moment(event.end_time).add(6, "hours"),
 		};
@@ -174,6 +177,8 @@ function CronogramaAdmin() {
 	const [isLoadingItems, setIsLoadingItems] = useState(true);
 	const [groups, setGroups] = useState([]);
 	const [isLoadingGroups, setIsLoadingGroups] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [reservIdInModal, setReservIdInModal] = useState("");
 
 	const [selectedOptions1, setSelectedOptions1] = useState([]);
 	const [selectedOptions2, setSelectedOptions2] = useState([]);
@@ -233,6 +238,7 @@ function CronogramaAdmin() {
 			<div className="menu-icon-admin">
 				<img src={menuIcon} />
 			</div>
+			<ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal}/>
 			<NavBarAdmin />
 			<div
 				className="timeline-container-cronograma-admin"
@@ -248,9 +254,17 @@ function CronogramaAdmin() {
 					lineHeight={50}
 					sidebarWidth={230}
 					onTimeChange={handleTimeChange}
-					minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
-					maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
+					minZoom={14 * 60 * 60 * 1000} // 14 horas en milisegundos
+					maxZoom={14 * 60 * 60 * 1000} // 14 horas en milisegundos
 					groupRenderer={customGroupRenderer}
+					onItemClick={(itemId) => {
+						setReservIdInModal(itemId);
+						setIsModalOpen(true);
+					}}
+					onItemSelect={(itemId) => {
+						setReservIdInModal(itemId);
+						setIsModalOpen(true);
+					}}
 				>
 					<TimelineMarkers>
 						<CustomMarker date={moment().valueOf()}>
