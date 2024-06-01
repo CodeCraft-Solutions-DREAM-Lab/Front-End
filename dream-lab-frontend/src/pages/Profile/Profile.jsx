@@ -13,7 +13,7 @@ import CancelarReservacion from "./components/CancelarReservacion/CancelarReserv
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import { get, put } from "src/utils/ApiRequests.js";
 import LogoRobot from "../../assets/Profile/Star.webp";
-import { getFromLocalStorage } from "../../utils/Storage";
+import { existsInSessionStorage, getFromLocalStorage } from "src/utils/Storage";
 
 function Profile() {
     const [reservaciones, setReservaciones] = useState([]);
@@ -56,8 +56,12 @@ function Profile() {
         setIdResReserva(idReserv);
     };
 
-    /*console.log(getFromSessionStorage("idUsuario"))*/
-    const idUsuario = getFromLocalStorage("user");
+    let idUsuario;
+    if (existsInSessionStorage("vistaEstudiante")) {
+        idUsuario = "A00000000";
+    } else {
+        idUsuario = getFromLocalStorage("user");
+    }
 
     useEffect(() => {
         get(`perfil/${idUsuario}`)
@@ -67,6 +71,41 @@ function Profile() {
                 setDatosReservas(perfilInfo.recordsets[1]);
                 setDatosLogros(perfilInfo.recordsets[2]);
                 setEstadoLogros(perfilInfo.recordsets[3]);
+
+                // Si se encuentra en la vista de estudiante, se simulan los
+                // datos de reservaciones
+                if (idUsuario === "A00000000") {
+                    setDatosReservas([
+                        {
+                            idReservacion: 1,
+                            idSala: 2,
+                            idExperiencia: 2,
+                            idMesa: 2,
+                            estatus: 3,
+                            horaInicio: "1970-01-01T00:00:00.000Z",
+                            duracion: 24,
+                            fecha: new Date().toISOString(),
+                            numPersonas: 3,
+                            nombre_experiencia: "Cisco Experience",
+                            nombre_sala: "Dimension Forge",
+                        },
+                        {
+                            idReservacion: 2,
+                            idSala: 2,
+                            idExperiencia: 2,
+                            idMesa: 2,
+                            estatus: 3,
+                            horaInicio: "1970-01-01T00:00:00.000Z",
+                            duracion: 24,
+                            fecha: new Date(
+                                new Date().getTime() + 24 * 60 * 60 * 1000
+                            ).toISOString(),
+                            numPersonas: 3,
+                            nombre_experiencia: "Cisco Experience",
+                            nombre_sala: "Dimension Forge",
+                        },
+                    ]);
+                }
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -81,51 +120,76 @@ function Profile() {
             estatus: 4,
         }); // Aquí podrías enviar datos adicionales si es necesario
 
-        put(
-            url,
-            data,
-            () => {
-                console.log("La reserva se canceló satisfactoriamente.");
+        // Checar si nos encontramos en la vista de estudiante, en caso de ser
+        // así, se elimina una de las reservaciones de prueba sin hacer una
+        // llamada a la base de datos
+        if (idUsuario !== "A00000000") {
+            put(
+                url,
+                data,
+                () => {
+                    console.log("La reserva se canceló satisfactoriamente.");
 
-                const url2 = `usuarios/${idUsuario}`;
-                let prioridadPenalizada;
-                let prioridadActual = datosUsuario.prioridad;
+                    const url2 = `usuarios/${idUsuario}`;
+                    let prioridadPenalizada;
+                    let prioridadActual = datosUsuario.prioridad;
 
-                if (prioridadActual - 5 >= 0) {
-                    prioridadPenalizada = prioridadActual - 5;
-                } else if (prioridadActual - 5 < 0) {
-                    prioridadPenalizada = 0;
-                }
-
-                const data2 = JSON.stringify({
-                    prioridad: prioridadPenalizada,
-                });
-
-                put(
-                    url2,
-                    data2,
-                    () => {
-                        console.log("Penalización aplicada.");
-                    },
-                    (error) => {
-                        console.error("Error al aplicar penalización:", error);
+                    if (prioridadActual - 5 >= 0) {
+                        prioridadPenalizada = prioridadActual - 5;
+                    } else if (prioridadActual - 5 < 0) {
+                        prioridadPenalizada = 0;
                     }
-                );
 
-                // Pasar al siguiente modal
-                handleClickModal(
-                    3,
-                    salaReserva,
-                    experienciaReserva,
-                    horaReserva,
-                    diaReserva
-                );
-                setRefreshValue(refreshValue + 1);
-            },
-            (error) => {
-                console.error("Error al cancelar la reserva:", error);
-            }
-        );
+                    const data2 = JSON.stringify({
+                        prioridad: prioridadPenalizada,
+                    });
+
+                    put(
+                        url2,
+                        data2,
+                        () => {
+                            console.log("Penalización aplicada.");
+                        },
+                        (error) => {
+                            console.error(
+                                "Error al aplicar penalización:",
+                                error
+                            );
+                        }
+                    );
+
+                    // Pasar al siguiente modal
+                    handleClickModal(
+                        3,
+                        salaReserva,
+                        experienciaReserva,
+                        horaReserva,
+                        diaReserva
+                    );
+                    setRefreshValue(refreshValue + 1);
+                },
+                (error) => {
+                    console.error("Error al cancelar la reserva:", error);
+                }
+            );
+        } else {
+            console.log("Reserva de muestra cancelada.");
+
+            // Eliminar del arreglo de reservaciones
+            const reservacionesActualizadas = datosReservas.filter(
+                (reservacion) => reservacion.idReservacion !== idReserva
+            );
+            setDatosReservas(reservacionesActualizadas);
+
+            // Pasar al siguiente modal
+            handleClickModal(
+                3,
+                salaReserva,
+                experienciaReserva,
+                horaReserva,
+                diaReserva
+            );
+        }
     };
 
     const handleLogroArtista = (logroId) => {
