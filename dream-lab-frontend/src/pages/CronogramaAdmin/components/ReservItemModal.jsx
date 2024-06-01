@@ -100,8 +100,8 @@ function ReservItemModal(props) {
 										{horaInicioString} a {horaFinString}
 									</p>
 
-									{/* <CancelarReservaModalButton size="md" /> */}
-									{/* <PenalizarModalButton size="md" /> */}
+									<CancelarReservaModalButton size="md" />
+									<PenalizarModalButton size="md"/>
 								</div>
 							</div>
 
