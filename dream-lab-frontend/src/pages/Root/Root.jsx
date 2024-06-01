@@ -1,12 +1,18 @@
 import { Outlet } from "react-router-dom";
 
+// Estilos
+import "./Root.css";
+
+// Componentes
+import StudentViewStatusBar from "./components/StudentViewStatusBar";
+
 function Root() {
-  return (
-    <>
-      {/*Agregar aqui elementos que se necesiten repetir en todas las pantallas (por ejemplo, el navbar)*/}
-      <Outlet />
-    </>
-  );
+    return (
+        <div className="root-main-container">
+            <StudentViewStatusBar />
+            <Outlet />
+        </div>
+    );
 }
 
 export default Root;
