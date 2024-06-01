@@ -1,40 +1,40 @@
 .svsb-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
+    z-index: 1000;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 2.5vh;
-    background-color: rgb(255, 255, 255);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: height 0.3s ease-in-out;
+    background-color: rgb(255, 255, 255);
 }
 
 .svsb-main-container.expanded {
-    height: 5vh; /* Adjust this value for the expanded height */
+    height: 5vh;
 }
 
 .svsb-content-container {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
     height: 100%;
     padding: 0 1vw;
 }
 
 .svsb-toggle-button {
-    height: 100% !important;
     width: 5vw !important;
+    height: 100% !important;
     background-color: transparent !important;
 }
 
 .svsb-col {
     column-span: 1;
-    height: 100%;
     align-items: center;
+    height: 100%;
 }
 
 .svsb-col-toggle-button {
@@ -50,4 +50,17 @@
 .svsb-col-exit-button {
     display: flex;
     justify-content: flex-end;
+}
+
+.svsb-title {
+    font-size: 1.5vh;
+    font-family: "Karla", sans-serif;
+    font-weight: bold;
+    color: rgb(43, 43, 43);
+}
+
+.svsb-exit-button {
+    background-color: rgb(203, 200, 241) !important;
+    font-size: 1.5vh !important;
+    font-family: "Karla", sans-serif !important;
 }

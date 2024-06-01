@@ -26,9 +26,7 @@ function StudentViewStatusBar() {
             <div className="svsb-content-container">
                 <div className="svsb-col svsb-col-title">
                     {isExpanded ? (
-                        <span className="text-lg text-black">
-                            Vista de estudiante
-                        </span>
+                        <span className="svsb-title">Vista de estudiante</span>
                     ) : null}
                 </div>
                 <div className="svsb-col svsb-col-toggle-button">
@@ -45,7 +43,7 @@ function StudentViewStatusBar() {
                 </div>
                 <div className="svsb-col svsb-col-exit-button">
                     {isExpanded ? (
-                        <Button className="exit-button">
+                        <Button className="svsb-exit-button">
                             Salir de la vista de estudiante
                         </Button>
                     ) : null}
