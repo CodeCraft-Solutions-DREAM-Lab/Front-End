@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Modal, ModalContent, ModalFooter, Button } from "@nextui-org/react";
+import { Modal, ModalContent } from "@nextui-org/react";
 import { Grid } from "@mui/material";
 import propTypes from "prop-types";
 import Musica from "src/assets/NotFound/progresoSound.mp3";
 import "./ProgresoLogro.css";
 
 function ProgresoLogro(props) {
-
     const [isOpen, setIsOpen] = useState(props.isOpen);
-    const [progresoActual, setProgresoActual] = useState(props.progresoActual - 1);
     const [animationActive, setAnimationActive] = useState(false);
     const [positionStyle, setPositionStyle] = useState({
         position: "fixed",
         bottom: -35,
-        right: "0"
+        right: "0",
     });
+    const datosLogroObtenido = props.datosLogro;
 
     useEffect(() => {
         // Update position style based on window size
         const updatePositionStyle = () => {
-
-            const bottomPosition = window.innerWidth <= 550 ? 0 : - 35; // Adjust bottom offset as needed
+            const bottomPosition = window.innerWidth <= 550 ? 0 : -35; // Adjust bottom offset as needed
 
             setPositionStyle({
                 position: "fixed",
@@ -41,31 +39,16 @@ function ProgresoLogro(props) {
         };
     }, []);
 
-
     useEffect(() => {
-        // Simula la actualización de progresoActual después de 2 segundos
+        setAnimationActive(true);
         const timeoutId = setTimeout(() => {
-            setProgresoActual(props.progresoActual); // Cambia esto por la lógica real de actualización
-            setAnimationActive(true);
-        }, 0);
+            setAnimationActive(false);
+        }, 1000); // Duración de la animación
 
         return () => {
             clearTimeout(timeoutId);
         };
-    }, [props.progresoActual]);
-
-    useEffect(() => {
-        if (progresoActual == props.progresoActual) {
-            setAnimationActive(true);
-            const timeoutId = setTimeout(() => {
-                setAnimationActive(false);
-            }, 1000); // Duración de la animación
-
-            return () => {
-                clearTimeout(timeoutId);
-            };
-        }
-    }, [progresoActual, props.progresoActual]);
+    }, [props.isOpen]);
 
     const reproducirTimbreNotificacion = () => {
         const audio = new Audio(Musica);
@@ -79,7 +62,7 @@ function ProgresoLogro(props) {
         }
     };
 
-    const porcentajeProgreso = (progresoActual / props.progresoTotal) * 100;
+    const porcentajeProgreso = (datosLogroObtenido.valorActual / datosLogroObtenido.valorMax) * 100;
     console.log("Porcentaje de progreso:", porcentajeProgreso);
 
     useEffect(() => {
@@ -88,13 +71,14 @@ function ProgresoLogro(props) {
             // Cerrar automáticamente después de 20 segundos
             const closeTimeout = setTimeout(() => {
                 handleClose();
-            }, 3500); // 20 segundos en milisegundos
+            }, 1800); // 20 segundos en milisegundos
 
             return () => {
                 clearTimeout(closeTimeout);
             };
         }
     }, [props.isOpen]);
+
 
     return (
         <Modal
@@ -106,23 +90,21 @@ function ProgresoLogro(props) {
             data-cy="primer-recordatorio-sala"
             className="modal-progreso-logro-personalizado"
             style={positionStyle}
+            backdrop="opaque"
         >
             <ModalContent className="p-0">
                 <Grid container alignItems="center" className="p-4">
                     <Grid item xs={2.6}>
-                        
                         <div
                             className={
                                 "progress-circulo-foto-perfil-aviso-logro-nuevo"
-                                
                             }
                             style={{
-                                background: `conic-gradient( #7EA3E1 0% ${porcentajeProgreso}%, rgb(197, 200, 205) ${0}% 50%)`
-
+                                background: `conic-gradient( #7EA3E1 0% ${porcentajeProgreso}%, rgb(197, 200, 205) ${0}% 50%)`,
                             }}
                         >
                             <img
-                                src="https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp"
+                                src={datosLogroObtenido.iconoLogro}
                                 className="progress-imagen-foto-perfil-circulo-aviso-logro-nuevo"
                                 alt="Correcto logo"
                             />
@@ -130,17 +112,24 @@ function ProgresoLogro(props) {
                     </Grid>
                     <Grid item xs={9}>
                         <div className="progress-textos-anuncio"></div>
-                        <div className="progress-progreso-logro" style={{ animation: animationActive ? 'slideFromLeft 1s ease-in-out' : 'none' }}>
-                                <p>
-                                    {progresoActual} / {props.progresoTotal}
-                                </p>
-                            </div>
+                        <div
+                            className="progress-progreso-logro"
+                            style={{
+                                animation: animationActive
+                                    ? "slideFromLeft 1s ease-in-out"
+                                    : "none",
+                            }}
+                        >
+                            <p>
+                                {datosLogroObtenido.valorActual} /{" "}
+                                {datosLogroObtenido.valorMax}
+                            </p>
+                        </div>
                         <div className="progress-nombre-logro-obtenido-anuncio-generico">
-                            Five Star Player{props.nombreLogro}
+                            {datosLogroObtenido.nombreLogro}
                         </div>
                         <div className="progress-descripcion-logro-obtenido-anuncio-generico">
-                            Reserva 50 veces algún espacio del D.R.E.A.M. Lab.
-                            {props.nombreLogro}
+                            {datosLogroObtenido.descripcionLogro}
                         </div>
                     </Grid>
                 </Grid>
@@ -153,6 +142,7 @@ ProgresoLogro.propTypes = {
     size: propTypes.string,
     isOpen: propTypes.bool,
     onClose: propTypes.func,
+    datosLogro: propTypes.string,
     nombreLogro: propTypes.string,
     progresoActual: propTypes.number,
     progresoTotal: propTypes.number,

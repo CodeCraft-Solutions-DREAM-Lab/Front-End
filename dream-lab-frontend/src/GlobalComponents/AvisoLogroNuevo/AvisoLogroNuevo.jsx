@@ -44,12 +44,6 @@ function AvisoLogroNuevo(props) {
         };
     }, []);
 
-    useEffect(() => {
-        if (props.isOpen) {
-            //reproducirTimbre(); 
-        }
-    }, [props.isOpen]);
-
     const handleClose = () => {
         setIsOpen(false);
         if (props.onClose) {
@@ -74,8 +68,11 @@ function AvisoLogroNuevo(props) {
         return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
     }
     
+    // Datos del logro obtenido
+    const datosLogroObtenido = props.datosLogro;
+
     // Color del logro y elementos oscurecidos
-    const color = props.color ? props.color : defaultColor;
+    const color = datosLogroObtenido.colorLogro ? datosLogroObtenido.colorLogro : defaultColor;
     const darkenedColor = darkenColor(color, 15); // Oscurecer el color un 20%
     const darkenedColor2 = darkenColor(color, 20); // Oscurecer el color un 20%
 
@@ -91,7 +88,7 @@ function AvisoLogroNuevo(props) {
             <Confetti width={window.innerWidth} height={window.innerHeight} />
             <ModalContent className="p-8">
             <div className="nombre-logro-obtenido-anuncio-generico" style={{ color: darkenedColor}}>
-                    {props.nombreLogro}Big Dreamer
+                    {datosLogroObtenido.nombreLogro}
                 </div>
                 <div className="nombre-logro-obtenido-anuncio">
                     <p>Logro obtenido</p>
@@ -101,10 +98,10 @@ function AvisoLogroNuevo(props) {
                     <div className={`circulo-foto-perfil-aviso-logro-nuevo ${
                                 animationActive ? "rotate-animation" : ""
                             }`} 
-                            style={{ backgroundColor: props.color }} 
+                            style={{ backgroundColor: datosLogroObtenido.colorLogro }} 
                            >
                         <img
-                            src="https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp"
+                            src={datosLogroObtenido.iconoLogro}
                             className="imagen-foto-perfil-circulo-aviso-logro-nuevo"
                             alt="Correcto logo"
                         />
@@ -112,17 +109,17 @@ function AvisoLogroNuevo(props) {
                 </Grid>
 
                 <div className="descripcion-logro-obtenido-anuncio">
-                    <p>{props.descripcionLogro}Reserva 50 veces algún espacio del D.R.E.A.M. Lab.</p>
+                    <p>{datosLogroObtenido.descripcionLogro}</p>
                 </div>
 
                 <div className="linea-logro-obtenido-anuncio"></div>
 
                 <div className="recompensa-logro-obtenido-anuncio" style={{ color: darkenedColor2}}>
-                    <p>+{props.puntosObtenidos}50 puntos de prioridad</p>
+                    <p>+{datosLogroObtenido.prioridadOtorgada} punto(s) de prioridad</p>
                 </div>
                 <div className="total-nuevo-logro-obtenido-anuncio">
                     <p>
-                        Tu nuevo total es de <b>{props.puntosTotal} 300 pts.</b>
+                        Tu nuevo total es de <b>{datosLogroObtenido.nuevaPrioridad} pts.</b>
                     </p>
                 </div>
 
