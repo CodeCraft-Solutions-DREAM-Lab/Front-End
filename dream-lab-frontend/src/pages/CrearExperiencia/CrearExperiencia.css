@@ -39,6 +39,7 @@
 
 .subir-portada-container-crear-experiencia {
     width: 30vw;
+    min-height: 50vh;
     padding: 6%;
 }
 

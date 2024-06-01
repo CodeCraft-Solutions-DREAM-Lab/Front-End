@@ -5,28 +5,80 @@ import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon and file icon
 import { FiFile, FiUpload } from "react-icons/fi";
+import PropTypes from "prop-types";
+
 import "./InfoExperiencia.css";
 
-function InfoExperiencia() {
+const mockUFs = {
+	data: [
+		{
+			idUF: 1,
+			nombreUF: "Unidad de Fomento 1",
+		},
+		{
+			idUF: 2,
+			nombreUF: "Unidad de Fomento 2",
+		},
+		{
+			idUF: 3,
+			nombreUF: "Unidad de Fomento 3",
+		},
+		{
+			idUF: 4,
+			nombreUF: "Unidad de Fomento 4",
+		},
+		{
+			idUF: 5,
+			nombreUF: "Unidad de Fomento 5",
+		},
+	],
+};
+
+function InfoExperiencia({ onInfoChange }) {
 	const [caracteresRestantesNom, setCaracteresRestantesNom] = useState(30);
 	const [nombre, setNombre] = useState("");
 	const [tipoExperiencia, setTipoExperiencia] = useState("");
-	const [file, setFile] = useState(null);
+	const [instrucciones, setInstrucciones] = useState(null);
+	const [UF, setUF] = useState({
+		idUF: null,
+		nombreUF: null,
+	});
 
+	// Function to handle changes in nombre
 	function handleNombreChange(event) {
 		setNombre(event.target.value);
 		setCaracteresRestantesNom(30 - event.target.value.length);
+		// Call the callback function with updated nombre
+		onInfoChange({ nombre: event.target.value });
 	}
 
+	function handleUFChange(event) {
+		const selectedUF = event.target.value;
+		setUF(selectedUF);
+		onInfoChange({
+			idUF: selectedUF,
+		});
+	}
+
+	// Function to handle changes in tipoExperiencia
 	function handleTipoExperienciaChange(event) {
 		setTipoExperiencia(event.target.value);
+		// Call the callback function with updated tipoExperiencia
+		onInfoChange({ tipoExperiencia: event.target.value, idUF: null });
 	}
 
-	const onDrop = useCallback((acceptedFiles) => {
-		if (acceptedFiles.length > 0) {
-			setFile(acceptedFiles[0]);
-		}
-	}, []);
+	// Function to handle file drop
+	const onDrop = useCallback(
+		(acceptedFiles) => {
+			if (acceptedFiles.length > 0) {
+				const file = acceptedFiles[0];
+				// Call the callback function with the file
+				setInstrucciones(file);
+				onInfoChange({ instruccionesFile: file });
+			}
+		},
+		[onInfoChange]
+	);
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
@@ -35,7 +87,8 @@ function InfoExperiencia() {
 	});
 
 	const removeFile = () => {
-		setFile(null);
+		setInstrucciones(null);
+		onInfoChange({ instruccionesFile: null });
 	};
 
 	return (
@@ -80,9 +133,13 @@ function InfoExperiencia() {
 						aria-label="Unidad de Formación"
 						placeholder="Selecciona una UF"
 						data-cy="selector-uf-exp"
+						onChange={handleUFChange}
 					>
-						<SelectItem value="UF1">UF1</SelectItem>
-						<SelectItem value="UF2">UF2</SelectItem>
+						{mockUFs.data.map((uf) => (
+							<SelectItem key={uf.idUF} value={uf.idUF}>
+								{uf.nombreUF}
+							</SelectItem>
+						))}
 					</Select>
 				</>
 			)}
@@ -90,12 +147,12 @@ function InfoExperiencia() {
 			{tipoExperiencia === "Autodirigida" && (
 				<>
 					<p className="text-white">Adjuntar instrucciones</p>
-					{file ? (
+					{instrucciones ? (
 						<div className="file-preview">
 							<div className="file-details">
 								<FiFile className="file-icon" />
 								<div className="file-name-instrucciones">
-									<p>{file.name}</p>
+									<p>{instrucciones.name}</p>
 								</div>
 							</div>
 							<AiOutlineClose className="remove-icon" onClick={removeFile} />
@@ -114,7 +171,7 @@ function InfoExperiencia() {
 								alignItems: "center",
 								justifyContent: "center",
 								gap: "10px",
-								height: "25%"
+								height: "25%",
 							}}
 						>
 							<input {...getInputProps()} />
@@ -136,5 +193,9 @@ function InfoExperiencia() {
 		</GlassCard>
 	);
 }
+
+InfoExperiencia.propTypes = {
+	onInfoChange: PropTypes.func.isRequired,
+};
 
 export default InfoExperiencia;

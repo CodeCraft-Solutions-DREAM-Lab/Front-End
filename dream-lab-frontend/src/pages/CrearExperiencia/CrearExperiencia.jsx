@@ -1,13 +1,13 @@
 import { useState } from "react";
-import Navbar from "../../GlobalComponents/NavBar/NavBar";
-import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
-import RoundedButton from "../SeleccionMaterial/components/Button/Button";
+import Navbar from "src/GlobalComponents/NavBar/NavBar";
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+import RoundedButton from "src/pages/SeleccionMaterial/components/Button/Button";
 import "./CrearExperiencia.css";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import GlassCard from "../../GlobalComponents/GlassCard/GlassCard";
-import SubirImagenBox from "../CrearAnuncioVideowall/components/FormularioCreacionAnuncio/components/SubirImagenBox/SubirImagenBox";
+import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
+import SubirImagenBox from "src/pages/CrearAnuncioVideowall/components/FormularioCreacionAnuncio/components/SubirImagenBox/SubirImagenBox";
 import AgregarImagen from "src/assets/CrearAnuncioVideowall/agregarImagen.webp";
 import AgregarImagenError from "src/assets/CrearAnuncioVideowall/subirArchivoErroneo.png";
 import InfoExperiencia from "./components/InfoExperiencia";
@@ -20,8 +20,6 @@ const steps = [
 
 function CrearExperiencia() {
 	const [page, setPage] = useState(0); // Manage the current page state
-	const [fileSeleccionado, setFileSeleccionado] = useState(null);
-	const [isInvalidFile, setIsInvalidFile] = useState(false);
 
 	const [formValues, setFormValues] = useState({
 		idUF: null,
@@ -33,15 +31,27 @@ function CrearExperiencia() {
 		portadaURL: "",
 		fechaInicio: null,
 		fechaFin: null,
-		instruccionesURL: ""
+		instruccionesURL: "",
+		tipoExperiencia: null,
+		instruccionesFile: null,
+		portadaFile: null,
 	});
+
+	// Callback function to update formValues state
+	const handleInfoExperienciaChange = (updatedValues) => {
+		setFormValues((prevFormValues) => ({
+			...prevFormValues,
+			...updatedValues,
+		}));
+		console.log(formValues);
+	};
 
 	function handleSiguiente() {
 		if (page < steps.length - 1) {
 			setPage((prevPage) => prevPage + 1); // Move to the next page
 		} else {
 			// Final action on the last page
-			console.log("Final action");
+			console.log("Submit");
 		}
 	}
 
@@ -49,20 +59,10 @@ function CrearExperiencia() {
 		setPage(index); // Move to the clicked step
 	}
 
-	const handleInvalidFileChange = (invalid) => {
-		setIsInvalidFile(invalid);
-	};
-
-	const handleFileSelected = (file) => {
-		// Manejar el archivo seleccionado aquí, por ejemplo, almacenarlo en el estado del formulario
-		setFileSeleccionado(file);
-		console.log("Archivo seleccionado:", file);
-	};
-
 	return (
 		<>
 			<NavBarAdmin />
-			<Navbar />
+			<Navbar view="soloPerfil"/>
 			<div className="contenedor-principal-crear-experiencia">
 				<div className="contenido-crear-experiencia">
 					<Stepper
@@ -84,7 +84,7 @@ function CrearExperiencia() {
 						{" "}
 						{/* Página 1 */}
 						<div className="portada-tipo-selector-crear-experiencia">
-							<InfoExperiencia/>
+							<InfoExperiencia onInfoChange={handleInfoExperienciaChange}/>
 							<GlassCard classes="subir-portada-container-crear-experiencia">
 								<p className="titulo-portada-crear-exp">Portada</p>
 								Subir imagen
