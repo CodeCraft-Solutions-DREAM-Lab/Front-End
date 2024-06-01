@@ -39,10 +39,7 @@ function InfoExperiencia({ onInfoChange }) {
 	const [nombre, setNombre] = useState("");
 	const [tipoExperiencia, setTipoExperiencia] = useState("");
 	const [instrucciones, setInstrucciones] = useState(null);
-	const [UF, setUF] = useState({
-		idUF: null,
-		nombreUF: null,
-	});
+	const [UF, setUF] = useState(null);
 
 	// Function to handle changes in nombre
 	function handleNombreChange(event) {
@@ -51,12 +48,11 @@ function InfoExperiencia({ onInfoChange }) {
 		// Call the callback function with updated nombre
 		onInfoChange({ nombre: event.target.value });
 	}
-
+	// Function to handle changes in UF
 	function handleUFChange(event) {
-		const selectedUF = event.target.value;
-		setUF(selectedUF);
+		setUF(event.target.value)
 		onInfoChange({
-			idUF: selectedUF,
+			idUF: event.target.value,
 		});
 	}
 
@@ -134,6 +130,7 @@ function InfoExperiencia({ onInfoChange }) {
 						placeholder="Selecciona una UF"
 						data-cy="selector-uf-exp"
 						onChange={handleUFChange}
+						value={UF}
 					>
 						{mockUFs.data.map((uf) => (
 							<SelectItem key={uf.idUF} value={uf.idUF}>

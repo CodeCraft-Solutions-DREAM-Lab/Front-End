@@ -2,15 +2,12 @@ import { useState } from "react";
 import Navbar from "src/GlobalComponents/NavBar/NavBar";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
 import RoundedButton from "src/pages/SeleccionMaterial/components/Button/Button";
-import "./CrearExperiencia.css";
+import "src/pages/CrearExperiencia/CrearExperiencia.css";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
-import SubirImagenBox from "src/pages/CrearAnuncioVideowall/components/FormularioCreacionAnuncio/components/SubirImagenBox/SubirImagenBox";
-import AgregarImagen from "src/assets/CrearAnuncioVideowall/agregarImagen.webp";
-import AgregarImagenError from "src/assets/CrearAnuncioVideowall/subirArchivoErroneo.png";
-import InfoExperiencia from "./components/InfoExperiencia";
+import InfoExperiencia from "src/pages/CrearExperiencia/components/InfoExperiencia";
+import AgregarPortada from "./components/AgregarPortada";
 
 const steps = [
 	"Crea tu experiencia",
@@ -22,19 +19,19 @@ function CrearExperiencia() {
 	const [page, setPage] = useState(0); // Manage the current page state
 
 	const [formValues, setFormValues] = useState({
-		idUF: null,
+		idUF: null, // Se trae de InfoExperiencia
 		idSala: null,
-		nombre: "",
+		nombre: "", // Se trae de InfoExperiencia
 		descripcion: "",
-		esAutoDirigida: null,
-		esExclusivaUF: null,
+		esAutoDirigida: null, // Se debe calcular en base a tipoExperiencia
+		esExclusivaUF: null, // Se debe calcular en base a tipoExperiencia
 		portadaURL: "",
 		fechaInicio: null,
 		fechaFin: null,
 		instruccionesURL: "",
-		tipoExperiencia: null,
-		instruccionesFile: null,
-		portadaFile: null,
+		tipoExperiencia: null, // Se trae de InfoExperiencia
+		instruccionesFile: null, // Se trae de InfoExperiencia
+		portadaFile: null, 
 	});
 
 	// Callback function to update formValues state
@@ -85,10 +82,7 @@ function CrearExperiencia() {
 						{/* Página 1 */}
 						<div className="portada-tipo-selector-crear-experiencia">
 							<InfoExperiencia onInfoChange={handleInfoExperienciaChange}/>
-							<GlassCard classes="subir-portada-container-crear-experiencia">
-								<p className="titulo-portada-crear-exp">Portada</p>
-								Subir imagen
-							</GlassCard>
+							<AgregarPortada onInfoChange={handleInfoExperienciaChange}/>
 						</div>
 					</div>
 					<div className={`page page-2 ${page === 1 ? "active" : "inactive"}`}>
