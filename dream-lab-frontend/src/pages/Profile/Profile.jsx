@@ -13,7 +13,10 @@ import CancelarReservacion from "./components/CancelarReservacion/CancelarReserv
 import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import { get, put } from "src/utils/ApiRequests.js";
 import LogoRobot from "../../assets/Profile/Star.webp";
-import { getFromLocalStorage } from "../../utils/Storage";
+import {
+    existsInSessionStorage,
+    getFromLocalStorage,
+} from "src/utils/Storage";
 
 function Profile() {
     const [reservaciones, setReservaciones] = useState([]);
@@ -56,8 +59,12 @@ function Profile() {
         setIdResReserva(idReserv);
     };
 
-    /*console.log(getFromSessionStorage("idUsuario"))*/
-    const idUsuario = getFromLocalStorage("user");
+    let idUsuario;
+    if (existsInSessionStorage("vistaEstudiante")) {
+        idUsuario = "A00000000";
+    } else {
+        idUsuario = getFromLocalStorage("user");
+    }
 
     useEffect(() => {
         get(`perfil/${idUsuario}`)

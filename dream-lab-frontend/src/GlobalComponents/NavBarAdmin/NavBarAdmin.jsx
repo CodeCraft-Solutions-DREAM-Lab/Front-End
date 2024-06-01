@@ -12,6 +12,9 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
 
+// Storage
+import { saveToSessionStorage } from "src/utils/Storage";
+
 function NavBarAdmin() {
     const location = useLocation();
     const [activeTab, setActiveTab] = useState(location.pathname);
@@ -24,6 +27,7 @@ function NavBarAdmin() {
 
     const handleStudentViewClick = () => {
         dispatch(setActive(true));
+        saveToSessionStorage("vistaEstudiante", true);
         navigate("/home");
     };
 

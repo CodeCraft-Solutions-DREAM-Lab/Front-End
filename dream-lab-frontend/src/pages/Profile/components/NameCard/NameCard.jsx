@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { get } from "src/utils/ApiRequests";
 
 // Storage
-import { getFromLocalStorage } from "src/utils/Storage";
+import { getFromLocalStorage, existsInSessionStorage } from "src/utils/Storage";
 
 function NameCard({ nombre, handleLogroArtista }) {
     const [logrosObtenidos, setLogrosObtenidos] = useState([]);
@@ -23,7 +23,13 @@ function NameCard({ nombre, handleLogroArtista }) {
     // Obtener los logros del usuario, el logro seleccionado y el color
     // seleccionado de su preferencia cada que se carga la página
     useEffect(() => {
-        get(`perfil/logros/${getFromLocalStorage("user")}`).then((response) => {
+        let idUsuario;
+        if (existsInSessionStorage("vistaEstudiante")) {
+            idUsuario = "A00000000";
+        } else {
+            idUsuario = getFromLocalStorage("user");
+        }
+        get(`perfil/logros/${idUsuario}`).then((response) => {
             setLogrosObtenidos(response.logros);
             setLogroSeleccionado({
                 idLogro: response.configuracionLogro[0].idLogro,
