@@ -4,8 +4,6 @@ import {
     getFromLocalStorage,
     getFromSessionStorage,
     existsInSessionStorage,
-    removeFromLocalStorage,
-    removeFromSessionStorage,
     multiClearSessionStorage,
 } from "src/utils/Storage";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +13,11 @@ import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import MaterialCardDupe from "./components/MaterialCardDupe/MaterialCardDupe";
 import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
-import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
-import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
+// import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
+// import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
 import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCardDupe";
 
-function ResumenReservacion(props) {
+function ResumenReservacion() {
     let navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);

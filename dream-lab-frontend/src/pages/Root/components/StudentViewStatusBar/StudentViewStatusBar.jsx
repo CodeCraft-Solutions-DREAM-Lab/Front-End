@@ -14,11 +14,30 @@ import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 // Down Arrow Icon
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+// React router dom hooks
+import { useNavigate } from "react-router-dom";
+
+// Storage
+import { removeFromSessionStorage } from "src/utils/Storage";
+
+// Redux
+import { useDispatch } from "react-redux";
+import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
+
 function StudentViewStatusBar() {
     const [isExpanded, setIsExpanded] = useState(true);
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
+    };
+
+    const handleExit = () => {
+        dispatch(setActive(false));
+        removeFromSessionStorage("vistaEstudiante");
+        navigate("/admin");
     };
 
     return (
@@ -43,7 +62,10 @@ function StudentViewStatusBar() {
                 </div>
                 <div className="svsb-col svsb-col-exit-button">
                     {isExpanded ? (
-                        <Button className="svsb-exit-button">
+                        <Button
+                            className="svsb-exit-button"
+                            onPress={handleExit}
+                        >
                             Salir de la vista de estudiante
                         </Button>
                     ) : null}
