@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBarAdmin.css";
@@ -9,8 +9,8 @@ import GlassCard from "../GlassCard/GlassCard";
 import { useLocation } from "react-router-dom";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
-import { selectActive, setActive } from "src/redux/Slices/vistaEstudianteSlice";
+import { useDispatch } from "react-redux";
+import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
 
 function NavBarAdmin() {
     const location = useLocation();
