@@ -14,8 +14,8 @@ import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import MaterialCardDupe from "./components/MaterialCardDupe/MaterialCardDupe";
 import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
-import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
-import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
+// import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
+// import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
 import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCardDupe";
 import AvisoLogroNuevo from "src/GlobalComponents/AvisoLogroNuevo/AvisoLogroNuevo";
 import ProgresoLogro from "src/GlobalComponents/ProgresoLogro/ProgresoLogro";
@@ -51,7 +51,28 @@ function ResumenReservacion(props) {
         competidores: getFromSessionStorage("competidores"),
         cupos: getFromSessionStorage("cupos"),
     };
+    const reservationData = {
+        nombre: getFromSessionStorage("nameSalaExperiencia"),
+        personas: getFromSessionStorage("personas"),
+        fecha: getFromSessionStorage("formattedDate"),
+        hora: getFromSessionStorage("formattedTime"),
+        horaCorte: getFromSessionStorage("horaCorte"),
+        competidores: getFromSessionStorage("competidores"),
+        cupos: getFromSessionStorage("cupos"),
+    };
 
+    const handleSubmit = async () => {
+        const data = {
+            idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
+            idSala: getFromSessionStorage("idSala") || null,
+            idExperiencia: getFromSessionStorage("idExperiencia") || null,
+            horaInicio: getFromSessionStorage("horaInicioIsoString"),
+            duracion: getFromSessionStorage("duration"),
+            fecha: getFromSessionStorage("fechaIsoString"),
+            idMesa: null,
+            estatus: 5,
+            numPersonas: reservationData.personas,
+        };
     const handleSubmit = async () => {
         const data = {
             idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
@@ -67,33 +88,50 @@ function ResumenReservacion(props) {
 
         console.log("Data: ", data);
 
-        setIsLoading(true);
-        await post(
-            "reservaciones",
-            data,
-            () => {},
-            () => {
-                setIsLoading(false);
-            }
-        ).then((response) => {
-            removeFromSessionStorage("horaInicio");
-            removeFromSessionStorage("horaInicioIsoString");
-            removeFromSessionStorage("duration");
-            removeFromSessionStorage("fecha");
-            removeFromSessionStorage("fechaIsoString");
-            removeFromSessionStorage("nameSalaExperiencia");
-            removeFromSessionStorage("personas"),
-                removeFromSessionStorage("formattedDate"),
-                removeFromSessionStorage("formattedTime"),
-                removeFromSessionStorage("horaCorte"),
-                removeFromSessionStorage("competidores"),
-                removeFromSessionStorage("cupos");
+        const doAfterResponse = () => {
+            const keysToRemove = [
+                "horaInicio",
+                "horaInicioIsoString",
+                "duration",
+                "fecha",
+                "fechaIsoString",
+                "nameSalaExperiencia",
+                "personas",
+                "formattedDate",
+                "formattedTime",
+                "horaCorte",
+                "competidores",
+                "cupos",
+            ];
+            multiClearSessionStorage(keysToRemove);
             setIsLoading(false);
             setIsModalOpen(true);
-            handleInfoAvisoLogroChange();
-        });
+        };
+
+        setIsLoading(true);
+
+        // En caso de encontrarse en la vista de estudiante, saltarse la
+        // petición
+        if (!existsInSessionStorage("vistaEstudiante")) {
+            console.log("Enviando solicitud de reservación");
+            await post(
+                "reservaciones",
+                data,
+                () => {},
+                () => {
+                    setIsLoading(false);
+                }
+            ).then((response) => {
+                doAfterResponse();
+            });
+        } else {
+            doAfterResponse();
+        }
     };
 
+    const handleClick = () => {
+        navigate(`/reservacion/material/`); // Navigate back to the previous page
+    };
     const handleClick = () => {
         navigate(`/reservacion/material/`); // Navigate back to the previous page
     };
@@ -110,7 +148,21 @@ function ResumenReservacion(props) {
         }
     });
     const [data, setData] = useState([]);
+    const [selectedMaterials, setSelectedMaterials] = useState(() => {
+        if (
+            existsInSessionStorage("materials") &&
+            getFromSessionStorage("materials")
+        ) {
+            console.log(JSON.parse(getFromSessionStorage("materials")));
+            return JSON.parse(getFromSessionStorage("materials"));
+        } else {
+            return [];
+        }
+    });
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        const date = new Date(getFromSessionStorage("fecha"));
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
 
@@ -121,7 +173,25 @@ function ResumenReservacion(props) {
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: parseInt(getFromSessionStorage("duration")),
         };
+        // Parametros Stored Procedure
+        const params = {
+            idSala: getFromSessionStorage("idSala"),
+            fecha: date.toISOString(),
+            horaInicio: getFromSessionStorage("horaInicioIsoString"),
+            duracion: parseInt(getFromSessionStorage("duration")),
+        };
 
+        post("materiales", params)
+            .then((result) => {
+                setData(result);
+                setIsLoading(false);
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+                setIsLoading(false);
+            });
+    }, []);
         post("materiales", params)
             .then((result) => {
                 setData(result);

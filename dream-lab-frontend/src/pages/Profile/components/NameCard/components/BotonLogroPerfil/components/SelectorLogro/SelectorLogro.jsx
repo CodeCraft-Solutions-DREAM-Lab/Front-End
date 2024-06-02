@@ -18,7 +18,7 @@ import SelectorLogroItem from "./components/SelectorLogroItem/SelectorLogroItem"
 import { post } from "src/utils/ApiRequests";
 
 // Local Storage
-import { getFromLocalStorage } from "src/utils/Storage";
+import { getFromLocalStorage, existsInSessionStorage } from "src/utils/Storage";
 import SelectorColores from "./components/SelectorLogroItem/SelectorColores/SelectorColores";
 
 function SelectorLogro({
@@ -50,13 +50,16 @@ function SelectorLogro({
         setColorSeleccionado(colorPreSeleccionado);
         onInfoAvisoLogroChange(true);
         try {
-            const response = await post(
-                `perfil/logros/${getFromLocalStorage("user")}`,
-                {
-                    idLogro: logroPreSeleccionado.idLogro,
-                    colorPreferido: colorPreSeleccionado,
-                }
-            );
+            let idUsuario;
+            if (existsInSessionStorage("vistaEstudiante")) {
+                idUsuario = "A00000000";
+            } else {
+                idUsuario = getFromLocalStorage("user");
+            }
+            const response = await post(`perfil/logros/${idUsuario}`, {
+                idLogro: logroPreSeleccionado.idLogro,
+                colorPreferido: colorPreSeleccionado,
+            });
             // Otorga un logro por customizar el perfil
             await handleLogroArtista(10);
             // Cierra el modal

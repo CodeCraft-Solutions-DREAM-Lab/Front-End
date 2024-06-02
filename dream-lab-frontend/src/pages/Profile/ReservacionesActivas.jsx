@@ -4,7 +4,7 @@ import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import { generateReservationCards } from "./utils/Funciones.jsx";
 import { get, put } from "src/utils/ApiRequests.js";
 import React, { useEffect, useState } from "react";
-import { getFromLocalStorage } from "../../utils/Storage";
+import { existsInSessionStorage, getFromLocalStorage } from "src/utils/Storage";
 import CancelarReservacion from "./components/CancelarReservacion/CancelarReservacion.jsx";
 
 function ReservacionesActivas() {
@@ -29,7 +29,12 @@ function ReservacionesActivas() {
         setIdResReserva(idReserv);
     };
 
-    const idUsuario = getFromLocalStorage("user");
+    let idUsuario;
+    if (existsInSessionStorage("vistaEstudiante")) {
+        idUsuario = "A00000000";
+    } else {
+        idUsuario = getFromLocalStorage("user");
+    }
 
     useEffect(() => {
         get(`perfil/${idUsuario}`)
