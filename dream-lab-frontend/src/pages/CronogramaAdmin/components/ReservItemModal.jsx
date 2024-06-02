@@ -6,11 +6,14 @@ import {
 	CheckboxGroup,
 	Checkbox,
 	Progress,
+	Button,
 } from "@nextui-org/react";
 import propTypes from "prop-types";
+import SolicitedMatsListModal from "./SolicitedMatsListModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import "./ReservItemModal.css";
+import copyIcon from "src/assets/Icons/copy-icon.svg";
 
 function ReservItemModal(props) {
 
@@ -57,39 +60,32 @@ function ReservItemModal(props) {
 							<div className="ReservItemModal-grid-container">
 
 								<div className="ReservItemModal-grid-item-1">
-									<p className="ReservItemModal-student-name-mat">
-										<span className="ReservItemModal-student-name">{studentName}</span> -
-										<span className="ReservItemModal-student-mat">{stundentMat}</span>
-									</p>
 
-									<p>
-										Material solicitado
-									</p>
+									<div className="ReservItemModal-student-name-mat">
+										<span className="ReservItemModal-student-name">{studentName}</span>
+										<br />
+										<div
+											className="ReservItemModal-student-mat"
+											onClick={() => navigator.clipboard.writeText(stundentMat).then(() => alert("Matrícula copiada"))}
+										>
+											<span className="ReservItemModal-student-mat-text">{stundentMat}</span>
+											<img src={copyIcon} alt="copy-icon" className="ReservItemModal-copy-icon-img" />
+										</div>
 
-									<Progress
-										aria-label="ItemsPreparedProgress"
-										size="md"
-										color="success"
-										value={(selectedItems.length / reservItems.length) * 100}
+									</div>
+
+									<SolicitedMatsListModal 
+										reservItems={reservItems} 
+										setReservItems={setReservItems} 
+										selectedItems={selectedItems} 
+										setSelectedItems={setSelectedItems}
 									/>
-
-									<CheckboxGroup
-										color="success"
-										value={selectedItems}
-										onValueChange={setSelectedItems}
-									>
-										{reservItems.map((item, index) => {
-											return (
-												<Checkbox key={index} value={item.name}>{item.quantity} - {item.name}</Checkbox>
-											);
-										})}
-									</CheckboxGroup>
-								</div>
+								</div> 
 
 								<div className="ReservItemModal-grid-item-2">
 									<p className="ReservItemModal-sala-mesa">
-										<span className="ReservItemModal-sala-name">{salaName}</span> -
-										<span className="ReservItemModal-mesa-name">{mesaName}</span>
+										<span className="ReservItemModal-sala-name">{salaName} </span>
+										<span className="ReservItemModal-mesa-name">- {mesaName}</span>
 									</p>
 
 									<p className="ReservItemModal-date">
@@ -100,14 +96,10 @@ function ReservItemModal(props) {
 										{horaInicioString} a {horaFinString}
 									</p>
 
-									<CancelarReservaModalButton size="md" />
-									<PenalizarModalButton size="md"/>
+									<CancelarReservaModalButton className="mt-10"/>
+									<PenalizarModalButton className="mt-4"/>
 								</div>
 							</div>
-
-							{/* <p className="text-[#14247b] px-4 pt-0 pb-2 justify-center text-2xl text-center font-semibold">
-								{props.reservId}
-							</p> */}
 						</ModalBody>
 					</>
 				)}
