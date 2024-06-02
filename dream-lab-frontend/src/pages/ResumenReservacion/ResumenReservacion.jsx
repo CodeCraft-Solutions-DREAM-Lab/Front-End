@@ -4,7 +4,7 @@ import {
     getFromLocalStorage,
     getFromSessionStorage,
     existsInSessionStorage,
-    multiClearSessionStorage,
+	multiClearSessionStorage,
 } from "src/utils/Storage";
 import { useNavigate } from "react-router-dom";
 import AvisoFinal from "./components/AvisoFinal";
@@ -16,12 +16,30 @@ import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
 // import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
 // import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
 import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCardDupe";
+import AvisoLogroNuevo from "src/GlobalComponents/AvisoLogroNuevo/AvisoLogroNuevo";
+import ProgresoLogro from "src/GlobalComponents/ProgresoLogro/ProgresoLogro";
 
 function ResumenReservacion() {
     let navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [infoAvisoLogro, setInfoAvisoLogro] = useState("");
+
+    // Función para manejar el cambio de información del aviso de logro
+    const handleInfoAvisoLogroChange = async () => {
+        try {
+            const response2 = await post(
+                `logros/progresoLogro/${getFromLocalStorage("user")}/1` // Ruta modificada según tu especificación
+            );
+            // Almacenar la respuesta en infoLogroAviso
+            setInfoAvisoLogro(response2);
+            console.log(response2);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const reservationData = {
         nombre: getFromSessionStorage("nameSalaExperiencia"),
@@ -49,6 +67,7 @@ function ResumenReservacion() {
         console.log("Data: ", data);
 
         const doAfterResponse = () => {
+			handleInfoAvisoLogroChange();
             const keysToRemove = [
                 "horaInicio",
                 "horaInicioIsoString",
@@ -106,6 +125,7 @@ function ResumenReservacion() {
     });
     const [data, setData] = useState([]);
 
+    
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
 
@@ -224,12 +244,29 @@ function ResumenReservacion() {
                             </button>
                         </div>
                     </GlassCard>
+
+                    {infoAvisoLogro.nuevaPrioridad != null && (
+                        <AvisoLogroNuevo
+                            isOpen={true}
+                            datosLogro={infoAvisoLogro}
+                        />
+                    )}
+
+                    {infoAvisoLogro.obtenido == false &&
+                        infoAvisoLogro.obtenidoPreviamente == false && (
+                            <ProgresoLogro
+                                isOpen={true}
+                                datosLogro={infoAvisoLogro}
+                            />
+                        )}
+
                     <InfoReservCardDupe
                         horaCorte={reservationData.horaCorte}
                         competidores={reservationData.competidores}
                         cupos={reservationData.cupos}
                     ></InfoReservCardDupe>
                 </div>
+
                 <AvisoFinal
                     isOpen={isModalOpen}
                     size="xl"
