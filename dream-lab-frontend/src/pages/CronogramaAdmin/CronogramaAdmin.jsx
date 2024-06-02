@@ -21,6 +21,7 @@ import {
     InputLabel,
     Checkbox,
     ListItemText,
+    Divider,
 } from "@mui/material";
 import { get } from "src/utils/ApiRequests";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
@@ -340,10 +341,20 @@ function CronogramaAdmin() {
     };
 
     const handleChangeSelectSalas = (event) => {
-        setSelectedSalasTitles(event.target.value);
-        const newSelectedSalasIds = event.target.value.map(
-            (title) => salas.find((sala) => sala.nombre === title).idSala
-        );
+        const { value } = event.target;
+        let newSelectedSalasIds, newSelectedSalasTitles;
+
+        if (value.includes("all")) {
+            newSelectedSalasTitles = salas.map((sala) => sala.nombre);
+            newSelectedSalasIds = salas.map((sala) => sala.idSala);
+        } else {
+            newSelectedSalasTitles = value;
+            newSelectedSalasIds = value.map(
+                (title) => salas.find((sala) => sala.nombre === title).idSala
+            );
+        }
+
+        setSelectedSalasTitles(newSelectedSalasTitles);
         setSelectedSalasIds(newSelectedSalasIds);
         saveToLocalStorage(
             "selectedSalasIds",
@@ -505,6 +516,16 @@ function CronogramaAdmin() {
                                                     selected.join(", ")
                                                 }
                                             >
+                                                <MenuItem value="all">
+                                                    <Checkbox
+                                                        checked={
+                                                            selectedSalasTitles.length ===
+                                                            salas.length
+                                                        }
+                                                    />
+                                                    <ListItemText primary="Seleccionar todas" />
+                                                </MenuItem>
+                                                <Divider />
                                                 {salas.map((area, index) => (
                                                     <MenuItem
                                                         key={index}
