@@ -281,19 +281,24 @@ function CronogramaAdmin() {
     }, [salas]);
 
     useEffect(() => {
-        if (
-            existsInLocalStorage("selectedMesasIds") &&
-            mesas &&
-            mesas.length > 0
-        ) {
-            const selectedMesasIdsSessionStorage = JSON.parse(
-                getFromLocalStorage("selectedMesasIds")
-            );
-            console.log("selectedMesasIds: ", selectedMesasIdsSessionStorage);
-            setSelectedMesasIds(selectedMesasIdsSessionStorage);
-            console.log("mesas: ", mesas);
-        } else if (mesas && mesas.length > 0) {
-            console.log("UPDATING");
+        // if (
+        //     existsInLocalStorage("selectedMesasIds") &&
+        //     mesas &&
+        //     mesas.length > 0
+        // ) {
+        //     const selectedMesasIdsSessionStorage = JSON.parse(
+        //         getFromLocalStorage("selectedMesasIds")
+        //     );
+        //     console.log("selectedMesasIds: ", selectedMesasIdsSessionStorage);
+        //     setSelectedMesasIds(selectedMesasIdsSessionStorage);
+        //     console.log("mesas: ", mesas);
+        // } else if (mesas && mesas.length > 0) {
+        //     console.log("UPDATING");
+        //     setSelectedMesasIds(mesas.map((mesa) => mesa.idMesa));
+        // } else {
+        //     setSelectedMesasIds([]);
+        // }
+        if (mesas && mesas.length > 0) {
             setSelectedMesasIds(mesas.map((mesa) => mesa.idMesa));
         } else {
             setSelectedMesasIds([]);
@@ -346,10 +351,10 @@ function CronogramaAdmin() {
                 );
             }
             console.log("newSelectedSalasIds: ", newSelectedSalasIds);
-            saveToLocalStorage(
-                "selectedMesasIds",
-                JSON.stringify(newSelectedSalasIds)
-            );
+            // saveToLocalStorage(
+            //     "selectedMesasIds",
+            //     JSON.stringify(newSelectedSalasIds)
+            // );
             return newSelectedSalasIds;
         });
     };
