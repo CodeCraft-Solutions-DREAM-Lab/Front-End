@@ -15,7 +15,7 @@ function Logros() {
 
     let idUsuario;
     if (existsInSessionStorage("vistaEstudiante")) {
-        idUsuario = "A00000000";
+        idUsuario = "a00000000";
     } else {
         idUsuario = getFromLocalStorage("user");
     }
