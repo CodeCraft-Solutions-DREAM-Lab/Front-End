@@ -33,10 +33,13 @@ import ConfirmacionReserva from "./pages/ConfirmacionReserva/ConfirmacionReserva
 import ResumenReservacion from "./pages/ResumenReservacion/ResumenReservacion.jsx";
 import SeleccionMaterial from "./pages/SeleccionMaterial/SeleccionMaterial";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
-import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
+
+// Perfil
 import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
+
+// TEMPORAL
 import QRLogin from "./pages/QRLogin/QRLogin.jsx";
 
 // Videowall
@@ -71,15 +74,13 @@ function secured(Component) {
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-            <Route index element={<LandingPageDev />} />
-            <Route path="landingpage" element={<LandingPage />} />
-            {/* ruta provisional para desarrollo de la landing */}
+            <Route index element={<LandingPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="home" element={secured(HomePage)()} />
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route
                 path="reservacion/material"
-                element={<SeleccionMaterial />} // Agregar protected cuando se ocupe
+                element={secured(SeleccionMaterial)()}
             />
             <Route
                 path="reservacion/confirmacion"
