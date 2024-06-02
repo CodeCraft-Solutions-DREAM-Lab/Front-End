@@ -58,7 +58,7 @@ function Profile() {
 
     let idUsuario;
     if (existsInSessionStorage("vistaEstudiante")) {
-        idUsuario = "A00000000";
+        idUsuario = "a00000000";
     } else {
         idUsuario = getFromLocalStorage("user");
     }
@@ -74,7 +74,7 @@ function Profile() {
 
                 // Si se encuentra en la vista de estudiante, se simulan los
                 // datos de reservaciones
-                if (idUsuario === "A00000000") {
+                if (idUsuario === "a00000000") {
                     setDatosReservas([
                         {
                             idReservacion: 1,
@@ -123,7 +123,7 @@ function Profile() {
         // Checar si nos encontramos en la vista de estudiante, en caso de ser
         // así, se elimina una de las reservaciones de prueba sin hacer una
         // llamada a la base de datos
-        if (idUsuario !== "A00000000") {
+        if (idUsuario !== "a00000000") {
             put(
                 url,
                 data,
