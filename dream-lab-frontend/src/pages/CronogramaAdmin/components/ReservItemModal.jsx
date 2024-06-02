@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import {
 	Modal,
 	ModalContent,
-	ModalBody,
-	CheckboxGroup,
-	Checkbox,
-	Progress,
-	Button,
+	ModalBody
 } from "@nextui-org/react";
 import propTypes from "prop-types";
 import StudentNameMatModal from "./StudentNameMatModal";
 import SolicitedMatsListModal from "./SolicitedMatsListModal";
+import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import "./ReservItemModal.css";
@@ -57,7 +54,7 @@ function ReservItemModal(props) {
 					quantity: 1,
 				},
 			]);
-			// setIsLoading(false);
+			setIsLoading(false);
 			
 		}, 1000);
 	}, [props.isOpen])
@@ -95,18 +92,15 @@ function ReservItemModal(props) {
 								</div>
 
 								<div className="ReservItemModal-grid-item-2">
-									<p className="ReservItemModal-sala-mesa">
-										<span className="ReservItemModal-sala-name">{salaName} </span>
-										<span className="ReservItemModal-mesa-name">- {mesaName}</span>
-									</p>
 
-									<p className="ReservItemModal-date">
-										{dateString}
-									</p>
-
-									<p className="ReservItemModal-hora">
-										{horaInicioString} a {horaFinString}
-									</p>
+									<InfoSalaFechaModal
+										salaName={salaName}
+										mesaName={mesaName}
+										dateString={dateString}
+										horaInicioString={horaInicioString}
+										horaFinString={horaFinString}
+										isLoading={isLoading}
+									/> 
 
 									<CancelarReservaModalButton className="mt-10" />
 									<PenalizarModalButton className="mt-4" />

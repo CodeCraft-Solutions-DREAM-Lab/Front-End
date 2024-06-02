@@ -13,32 +13,6 @@
     overflow: hidden;
 }
 
-/* .ReservItemModal-student-name {
-    font-size: 2.8vh;
-    font-weight: 600; 
-    color: #14247b;
-}
-
-.ReservItemModal-student-mat {
-    display: flex;
-    cursor: pointer;
-}
-
-.ReservItemModal-student-mat-text {
-    display: inline-block;
-    font-size: 1.9vh;
-    font-weight: 600; 
-    color: #646464;
-}
-
-.ReservItemModal-copy-icon-img {
-    align-self: center;
-    width: 1.8vw;
-    height: 1.8vh;
-} */
-
-
-
 .ReservItemModal-grid-item-2 {
     /* background-color: gainsboro; */
     padding: 1vh;
@@ -47,7 +21,7 @@
     flex-direction: column;
 }
 
-.ReservItemModal-sala-mesa {
+/* .ReservItemModal-sala-mesa {
     margin-top: 2.5vh;
     align-self: center;
 }
@@ -72,7 +46,7 @@
     font-size: 1.8vh;
     font-weight: 500; 
     color: #747474;
-}
+} */
 
 
 

@@ -1,0 +1,51 @@
+.ISFM-sala-mesa-skeleton {
+    margin-top: 1.8vh;
+    height: 4vh;
+    width: 90%;
+    border-radius: 0.5vh;
+    align-self: center;
+}
+
+.ISFM-fecha-skeleton {
+    margin-top: 2vh;
+    height: 3vh;
+    width: 80%;
+    border-radius: 0.5vh;
+    align-self: center;
+}
+
+.ISFM-hora-skeleton {
+    margin-top: 1.4vh;
+    height: 2.5vh;
+    width: 50%;
+    border-radius: 0.5vh;
+    align-self: center;
+}
+
+
+.ReservItemModal-sala-mesa {
+    margin-top: 2.5vh;
+    align-self: center;
+}
+
+.ReservItemModal-sala-mesa > span {
+    font-size: 2.4vh;
+    font-weight: 600; 
+    color: #646464;
+}
+
+.ReservItemModal-date {
+    margin-top: 1.6vh;
+    align-self: center;
+    font-size: 2.1vh;
+    font-weight: 500; 
+    color: #646464;
+}
+
+.ReservItemModal-hora {
+    margin-top: 0.3vh;
+    align-self: center;
+    font-size: 1.8vh;
+    font-weight: 500; 
+    color: #747474;
+}

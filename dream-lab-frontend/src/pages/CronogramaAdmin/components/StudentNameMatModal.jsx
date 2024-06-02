@@ -2,6 +2,7 @@ import { Skeleton } from "@nextui-org/react";
 import { 
     Snippet 
 } from "@nextui-org/snippet";
+import propTypes from "prop-types";
 import "./StudentNameMatModal.css";
 // import copyIcon from "src/assets/Icons/copy-icon.svg";
 
@@ -13,7 +14,6 @@ const StudentNameMatModal = ({ studentName, studentMat, isLoading }) => {
             <>
                 <Skeleton className="SNMM-Name-Skeleton" />
                 <Skeleton className="SNMM-Mat-Skeleton" />
-
             </>
         )
     }
@@ -33,6 +33,12 @@ const StudentNameMatModal = ({ studentName, studentMat, isLoading }) => {
 
         </div>
     )
+}
+
+StudentNameMatModal.propTypes = {
+    studentName: propTypes.string,
+    studentMat: propTypes.string,
+    isLoading: propTypes.bool
 }
 
 export default StudentNameMatModal
