@@ -87,7 +87,8 @@ function AvisoLogroNuevo(props) {
         >
             <Confetti width={window.innerWidth} height={window.innerHeight} />
             <ModalContent className="p-8">
-            <div className="nombre-logro-obtenido-anuncio-generico" style={{ color: darkenedColor}}>
+            <div className="nombre-logro-obtenido-anuncio-generico" style={{ color: darkenedColor}}
+            data-cy="nombre-logro-obtenido">
                     {datosLogroObtenido.nombreLogro}
                 </div>
                 <div className="nombre-logro-obtenido-anuncio">
@@ -108,16 +109,16 @@ function AvisoLogroNuevo(props) {
                     </div>
                 </Grid>
 
-                <div className="descripcion-logro-obtenido-anuncio">
+                <div className="descripcion-logro-obtenido-anuncio" data-cy="descripcion-logro-obtenido">
                     <p>{datosLogroObtenido.descripcionLogro}</p>
                 </div>
 
                 <div className="linea-logro-obtenido-anuncio"></div>
 
-                <div className="recompensa-logro-obtenido-anuncio" style={{ color: darkenedColor2}}>
+                <div className="recompensa-logro-obtenido-anuncio" style={{ color: darkenedColor2}} data-cy="puntos-ganados-logro-obtenido">
                     <p>+{datosLogroObtenido.prioridadOtorgada} punto(s) de prioridad</p>
                 </div>
-                <div className="total-nuevo-logro-obtenido-anuncio">
+                <div className="total-nuevo-logro-obtenido-anuncio" data-cy="nuevo-total-logro-obtenido">
                     <p>
                         Tu nuevo total es de <b>{datosLogroObtenido.nuevaPrioridad} pts.</b>
                     </p>
@@ -127,6 +128,7 @@ function AvisoLogroNuevo(props) {
                 <Link to="/profile"> {/* Enlace al componente de logros */}
                     <Button
                         className="rounded-full px-12 py-2 bg-[#40ad52] font-bold text-white hover:bg-[#31793e] hover:text-[#40ad52] border-2 border-[#40ad52]"
+                        data-cy="ver-logro-boton-anuncio-generico"
                         color="primary"
                         onClick={() => {
                         }}
