@@ -30,6 +30,7 @@ import {
     getFromLocalStorage,
     existsInLocalStorage,
 } from "src/utils/Storage";
+import propTypes from "prop-types";
 
 const monthTranslations = {
     January: "Enero",
@@ -74,20 +75,41 @@ const CustomLabel = ({ interval }) => {
     );
 };
 
-const handleToggleClick = (groupId) => {
-    console.log(`Toggle button clicked for group ${groupId}`);
+// const handleToggleClick = (groupId) => {
+//     setSelectedMesasIds((selectedMesasIds) => {
+//         if (selectedMesasIds.includes(groupId)) {
+//             return selectedMesasIds.filter((id) => id !== groupId);
+//         } else {
+//             return [...selectedMesasIds, groupId];
+//         }
+//     });
+//     saveToLocalStorage("selectedMesasIds", JSON.stringify(selectedMesasIds));
+// };
 
-    // Add your toggle logic here
-};
-const customGroupRenderer = ({ group }) => {
+const CustomGroupRenderer = ({
+    group,
+    handleToggleClick,
+    selectedMesasIds,
+}) => {
+    group = group.group;
     const groupClass = group.sala ? "sala" : "";
+    const [selected, setSelected] = useState(false);
+
+    useEffect(() => {
+        setSelected(selectedMesasIds.includes(group.id));
+    }, [selectedMesasIds, group.id]);
+
     return (
-        <div className={`rct-sidebar-row ${groupClass}`} data-cy="group-row">
+        <div
+            className={`rct-sidebar-row ${groupClass}`}
+            data-cy="group-row"
+            key={group.id}
+        >
             {group.title}
             {!group.sala && (
                 <Switch
-                    onChange={() => handleToggleClick(group.id)}
-                    defaultChecked
+                    onChange={(event) => handleToggleClick(event, group.id)}
+                    checked={selected}
                     color="white" // Customize the color of the switch
                     sx={{
                         width: 42,
@@ -145,6 +167,12 @@ const customGroupRenderer = ({ group }) => {
     );
 };
 
+CustomLabel.propTypes = {
+    group: propTypes.object,
+    handleToggleClick: propTypes.func,
+    selectedMesasIds: propTypes.array,
+};
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -182,10 +210,13 @@ function CronogramaAdmin() {
 
     const [selectedSalasIds, setSelectedSalasIds] = useState([]);
     const [selectedSalasTitles, setSelectedSalasTitles] = useState([]);
+    const [selectedMesasIds, setSelectedMesasIds] = useState([]);
     const [selectedOptions2, setSelectedOptions2] = useState([]);
 
     const [filteredGroups, setFilteredGroups] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
     const [salas, setSalas] = useState([]);
+    const [mesas, setMesas] = useState([]);
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -216,7 +247,6 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("salas")
             .then((result) => {
-                console.log("salas: ", result);
                 setSalas(result);
             })
             .catch((error) => {
@@ -225,14 +255,26 @@ function CronogramaAdmin() {
     }, []);
 
     useEffect(() => {
-        // if (selectedSalasIds.length === 0) {
-        //     setFilteredGroups(groups);
-        // } else {
+        get("mesas")
+            .then((result) => {
+                setMesas(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
+    useEffect(() => {
         setFilteredGroups(
             groups.filter((group) => selectedSalasIds.includes(group.idSala))
         );
-        // }
     }, [selectedSalasIds, groups]);
+
+    useEffect(() => {
+        setFilteredItems(
+            items.filter((item) => selectedMesasIds.includes(item.group))
+        );
+    }, [selectedMesasIds, items]);
 
     useEffect(() => {
         if (
@@ -243,9 +285,9 @@ function CronogramaAdmin() {
             const selectedSalasIdsSessionStorage = JSON.parse(
                 getFromLocalStorage("selectedSalasIds")
             );
-            console.log("selectedSalasIds: ", selectedSalasIdsSessionStorage);
+
             setSelectedSalasIds(selectedSalasIdsSessionStorage);
-            console.log("salas: ", salas);
+
             setSelectedSalasTitles(
                 selectedSalasIdsSessionStorage.map(
                     (id) => salas.find((sala) => sala.idSala === id).nombre
@@ -259,6 +301,24 @@ function CronogramaAdmin() {
             setSelectedSalasTitles([]);
         }
     }, [salas]);
+
+    useEffect(() => {
+        if (
+            existsInLocalStorage("selectedMesasIds") &&
+            mesas &&
+            mesas.length > 0
+        ) {
+            const selectedMesasIdsSessionStorage = JSON.parse(
+                getFromLocalStorage("selectedMesasIds")
+            );
+
+            setSelectedMesasIds(selectedMesasIdsSessionStorage);
+        } else if (mesas && mesas.length > 0) {
+            setSelectedMesasIds(mesas.map((mesa) => mesa.idMesa));
+        } else {
+            setSelectedMesasIds([]);
+        }
+    }, [mesas]);
 
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
@@ -293,6 +353,28 @@ function CronogramaAdmin() {
         setSelectedOptions2(event.target.value);
     };
 
+    const handleToggleClick = (event, groupId) => {
+        setSelectedMesasIds((prevSelectedMesasIds) => {
+            let newSelectedSalasIds = [...prevSelectedMesasIds];
+            if (event.target.checked) {
+                if (!newSelectedSalasIds.includes(groupId)) {
+                    newSelectedSalasIds.push(groupId);
+                }
+            } else {
+                newSelectedSalasIds = newSelectedSalasIds.filter(
+                    (id) => id !== groupId
+                );
+            }
+            console.log("newSelectedSalasIds: ", newSelectedSalasIds);
+            saveToLocalStorage(
+                "selectedMesasIds",
+                JSON.stringify(newSelectedSalasIds)
+            );
+
+            return newSelectedSalasIds;
+        });
+    };
+
     return (
         <>
             <div className="menu-icon-admin">
@@ -305,7 +387,7 @@ function CronogramaAdmin() {
             >
                 <Timeline
                     groups={filteredGroups}
-                    items={items}
+                    items={filteredItems}
                     visibleTimeStart={visibleTimeStart}
                     visibleTimeEnd={visibleTimeEnd}
                     defaultTimeStart={moment().add(-12, "hour")}
@@ -315,7 +397,13 @@ function CronogramaAdmin() {
                     onTimeChange={handleTimeChange}
                     minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
                     maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
-                    groupRenderer={customGroupRenderer}
+                    groupRenderer={(group) => (
+                        <CustomGroupRenderer
+                            group={group}
+                            handleToggleClick={handleToggleClick}
+                            selectedMesasIds={selectedMesasIds}
+                        />
+                    )}
                 >
                     <TimelineMarkers>
                         <CustomMarker date={moment().valueOf()}>
