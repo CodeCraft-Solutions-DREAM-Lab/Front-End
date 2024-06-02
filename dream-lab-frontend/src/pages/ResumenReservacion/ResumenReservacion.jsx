@@ -4,8 +4,7 @@ import {
     getFromLocalStorage,
     getFromSessionStorage,
     existsInSessionStorage,
-    removeFromLocalStorage,
-    removeFromSessionStorage,
+	multiClearSessionStorage,
 } from "src/utils/Storage";
 import { useNavigate } from "react-router-dom";
 import AvisoFinal from "./components/AvisoFinal";
@@ -20,7 +19,7 @@ import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCa
 import AvisoLogroNuevo from "src/GlobalComponents/AvisoLogroNuevo/AvisoLogroNuevo";
 import ProgresoLogro from "src/GlobalComponents/ProgresoLogro/ProgresoLogro";
 
-function ResumenReservacion(props) {
+function ResumenReservacion() {
     let navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -51,28 +50,7 @@ function ResumenReservacion(props) {
         competidores: getFromSessionStorage("competidores"),
         cupos: getFromSessionStorage("cupos"),
     };
-    const reservationData = {
-        nombre: getFromSessionStorage("nameSalaExperiencia"),
-        personas: getFromSessionStorage("personas"),
-        fecha: getFromSessionStorage("formattedDate"),
-        hora: getFromSessionStorage("formattedTime"),
-        horaCorte: getFromSessionStorage("horaCorte"),
-        competidores: getFromSessionStorage("competidores"),
-        cupos: getFromSessionStorage("cupos"),
-    };
 
-    const handleSubmit = async () => {
-        const data = {
-            idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
-            idSala: getFromSessionStorage("idSala") || null,
-            idExperiencia: getFromSessionStorage("idExperiencia") || null,
-            horaInicio: getFromSessionStorage("horaInicioIsoString"),
-            duracion: getFromSessionStorage("duration"),
-            fecha: getFromSessionStorage("fechaIsoString"),
-            idMesa: null,
-            estatus: 5,
-            numPersonas: reservationData.personas,
-        };
     const handleSubmit = async () => {
         const data = {
             idUsuario: getFromLocalStorage("user") || "A0XXXXXX1",
@@ -89,6 +67,7 @@ function ResumenReservacion(props) {
         console.log("Data: ", data);
 
         const doAfterResponse = () => {
+			handleInfoAvisoLogroChange();
             const keysToRemove = [
                 "horaInicio",
                 "horaInicioIsoString",
@@ -132,9 +111,6 @@ function ResumenReservacion(props) {
     const handleClick = () => {
         navigate(`/reservacion/material/`); // Navigate back to the previous page
     };
-    const handleClick = () => {
-        navigate(`/reservacion/material/`); // Navigate back to the previous page
-    };
 
     const [selectedMaterials, setSelectedMaterials] = useState(() => {
         if (
@@ -148,21 +124,8 @@ function ResumenReservacion(props) {
         }
     });
     const [data, setData] = useState([]);
-    const [selectedMaterials, setSelectedMaterials] = useState(() => {
-        if (
-            existsInSessionStorage("materials") &&
-            getFromSessionStorage("materials")
-        ) {
-            console.log(JSON.parse(getFromSessionStorage("materials")));
-            return JSON.parse(getFromSessionStorage("materials"));
-        } else {
-            return [];
-        }
-    });
-    const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const date = new Date(getFromSessionStorage("fecha"));
+    
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
 
@@ -173,25 +136,7 @@ function ResumenReservacion(props) {
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: parseInt(getFromSessionStorage("duration")),
         };
-        // Parametros Stored Procedure
-        const params = {
-            idSala: getFromSessionStorage("idSala"),
-            fecha: date.toISOString(),
-            horaInicio: getFromSessionStorage("horaInicioIsoString"),
-            duracion: parseInt(getFromSessionStorage("duration")),
-        };
 
-        post("materiales", params)
-            .then((result) => {
-                setData(result);
-                setIsLoading(false);
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error("An error occurred:", error);
-                setIsLoading(false);
-            });
-    }, []);
         post("materiales", params)
             .then((result) => {
                 setData(result);
