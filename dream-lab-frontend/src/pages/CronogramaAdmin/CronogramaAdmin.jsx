@@ -25,7 +25,11 @@ import {
 import { get } from "src/utils/ApiRequests";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "src/assets/Admin/menu-admin.svg";
-import { saveToSessionStorage } from "src/utils/Storage";
+import {
+    saveToLocalStorage,
+    getFromLocalStorage,
+    existsInLocalStorage,
+} from "src/utils/Storage";
 
 const monthTranslations = {
     January: "Enero",
@@ -181,11 +185,7 @@ function CronogramaAdmin() {
     const [selectedOptions2, setSelectedOptions2] = useState([]);
 
     const [filteredGroups, setFilteredGroups] = useState([]);
-    const [salas, setSalas] = useState([
-        { id: 1, title: "Sala VR" },
-        { id: 2, title: "Electric Garage" },
-        { id: 3, title: "New Horizons" },
-    ]);
+    const [salas, setSalas] = useState([]);
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -225,16 +225,40 @@ function CronogramaAdmin() {
     }, []);
 
     useEffect(() => {
-        if (selectedSalasIds.length === 0) {
-            setFilteredGroups(groups);
-        } else {
-            setFilteredGroups(
-                groups.filter((group) =>
-                    selectedSalasIds.includes(group.idSala)
+        // if (selectedSalasIds.length === 0) {
+        //     setFilteredGroups(groups);
+        // } else {
+        setFilteredGroups(
+            groups.filter((group) => selectedSalasIds.includes(group.idSala))
+        );
+        // }
+    }, [selectedSalasIds, groups]);
+
+    useEffect(() => {
+        if (
+            existsInLocalStorage("selectedSalasIds") &&
+            salas &&
+            salas.length > 0
+        ) {
+            const selectedSalasIdsSessionStorage = JSON.parse(
+                getFromLocalStorage("selectedSalasIds")
+            );
+            console.log("selectedSalasIds: ", selectedSalasIdsSessionStorage);
+            setSelectedSalasIds(selectedSalasIdsSessionStorage);
+            console.log("salas: ", salas);
+            setSelectedSalasTitles(
+                selectedSalasIdsSessionStorage.map(
+                    (id) => salas.find((sala) => sala.idSala === id).nombre
                 )
             );
+        } else if (salas && salas.length > 0) {
+            setSelectedSalasIds(salas.map((sala) => sala.idSala));
+            setSelectedSalasTitles(salas.map((sala) => sala.nombre));
+        } else {
+            setSelectedSalasIds([]);
+            setSelectedSalasTitles([]);
         }
-    }, [selectedSalasIds, groups]);
+    }, [salas]);
 
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
@@ -254,12 +278,14 @@ function CronogramaAdmin() {
     };
 
     const handleChangeSelectSalas = (event) => {
-        console.log("event.target.value: ", event.target.value);
         setSelectedSalasTitles(event.target.value);
-        setSelectedSalasIds(
-            event.target.value.map(
-                (title) => salas.find((sala) => sala.nombre === title).idSala
-            )
+        const newSelectedSalasIds = event.target.value.map(
+            (title) => salas.find((sala) => sala.nombre === title).idSala
+        );
+        setSelectedSalasIds(newSelectedSalasIds);
+        saveToLocalStorage(
+            "selectedSalasIds",
+            JSON.stringify(newSelectedSalasIds)
         );
     };
 
