@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import "moment/locale/es"; // Import Spanish locale
 import Timeline, {
@@ -22,9 +22,10 @@ import {
     Checkbox,
     ListItemText,
 } from "@mui/material";
-import { get } from "../../utils/ApiRequests";
-import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
-import menuIcon from "../../assets/Admin/menu-admin.svg";
+import { get } from "src/utils/ApiRequests";
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+import menuIcon from "src/assets/Admin/menu-admin.svg";
+import { saveToSessionStorage } from "src/utils/Storage";
 
 const monthTranslations = {
     January: "Enero",
@@ -175,8 +176,16 @@ function CronogramaAdmin() {
     const [groups, setGroups] = useState([]);
     const [isLoadingGroups, setIsLoadingGroups] = useState(true);
 
-    const [selectedOptions1, setSelectedOptions1] = useState([]);
+    const [selectedSalasIds, setSelectedSalasIds] = useState([]);
+    const [selectedSalasTitles, setSelectedSalasTitles] = useState([]);
     const [selectedOptions2, setSelectedOptions2] = useState([]);
+
+    const [filteredGroups, setFilteredGroups] = useState([]);
+    const [salas, setSalas] = useState([
+        { id: 1, title: "Sala VR" },
+        { id: 2, title: "Electric Garage" },
+        { id: 3, title: "New Horizons" },
+    ]);
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -204,6 +213,29 @@ function CronogramaAdmin() {
             });
     }, []);
 
+    useEffect(() => {
+        get("salas")
+            .then((result) => {
+                console.log("salas: ", result);
+                setSalas(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (selectedSalasIds.length === 0) {
+            setFilteredGroups(groups);
+        } else {
+            setFilteredGroups(
+                groups.filter((group) =>
+                    selectedSalasIds.includes(group.idSala)
+                )
+            );
+        }
+    }, [selectedSalasIds, groups]);
+
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
     );
@@ -221,8 +253,14 @@ function CronogramaAdmin() {
         updateScrollCanvas(visibleTimeStart, visibleTimeEnd);
     };
 
-    const handleChange1 = (event) => {
-        setSelectedOptions1(event.target.value);
+    const handleChangeSelectSalas = (event) => {
+        console.log("event.target.value: ", event.target.value);
+        setSelectedSalasTitles(event.target.value);
+        setSelectedSalasIds(
+            event.target.value.map(
+                (title) => salas.find((sala) => sala.nombre === title).idSala
+            )
+        );
     };
 
     const handleChange2 = (event) => {
@@ -240,7 +278,7 @@ function CronogramaAdmin() {
                 data-cy="timeline-container-cronograma-admin"
             >
                 <Timeline
-                    groups={groups}
+                    groups={filteredGroups}
                     items={items}
                     visibleTimeStart={visibleTimeStart}
                     visibleTimeEnd={visibleTimeEnd}
@@ -310,8 +348,10 @@ function CronogramaAdmin() {
                                             <Select
                                                 data-cy="Áreas"
                                                 multiple
-                                                value={selectedOptions1}
-                                                onChange={handleChange1}
+                                                value={selectedSalasTitles}
+                                                onChange={
+                                                    handleChangeSelectSalas
+                                                }
                                                 label="Dropdown 1"
                                                 variant="outlined"
                                                 sx={{
@@ -348,46 +388,25 @@ function CronogramaAdmin() {
                                                     selected.join(", ")
                                                 }
                                             >
-                                                {/* {areas.map((area) => (
+                                                {salas.map((area, index) => (
                                                     <MenuItem
-                                                        key={area}
-                                                        value={area}
+                                                        key={index}
+                                                        value={area.nombre}
                                                     >
                                                         <Checkbox
                                                             checked={
-                                                                selectedOptions1.indexOf(
-                                                                    area
+                                                                selectedSalasIds.indexOf(
+                                                                    area.idSala
                                                                 ) > -1
                                                             }
                                                         />
                                                         <ListItemText
-                                                            primary={area}
+                                                            primary={
+                                                                area.nombre
+                                                            }
                                                         />
                                                     </MenuItem>
-                                                ))} */}
-                                                {groups
-                                                    .filter(
-                                                        (group) => group.sala
-                                                    )
-                                                    .map((area) => (
-                                                        <MenuItem
-                                                            key={area.id}
-                                                            value={area.title}
-                                                        >
-                                                            <Checkbox
-                                                                checked={
-                                                                    selectedOptions1.indexOf(
-                                                                        area.title
-                                                                    ) > -1
-                                                                }
-                                                            />
-                                                            <ListItemText
-                                                                primary={
-                                                                    area.title
-                                                                }
-                                                            />
-                                                        </MenuItem>
-                                                    ))}
+                                                ))}
                                             </Select>
                                         </FormControl>
 
