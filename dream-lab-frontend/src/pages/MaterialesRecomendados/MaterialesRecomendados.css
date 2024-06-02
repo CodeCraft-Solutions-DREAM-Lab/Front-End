@@ -1,45 +1,50 @@
-.main-container {
+.matrec-main-container {
 	position: relative;
 	width: 100%;
 	height: fit-content;
 	padding-top: 18vh;
 }
 
-.top-section {
+.matrec-top-section {
 	padding-bottom: 1%;
-	margin-inline: 9%;
+	margin-inline: 7%;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
+	gap: 5vw;
+}
+
+.sala-dropdown {
+	width: 30vw;
+	transform: translateX(-10vw);
 }
 
 @media only screen and (max-width: 490px) {
-	.top-section {
+	.matrec-top-section {
 		justify-content: start;
 		column-gap: 15%;
 		margin-bottom: 3%;
 	}
 }
 
-.seleccion-material-boton-back {
-	width: 4vw;
+.matrec-seleccion-material-boton-back {
+	width: 1vw;
 	height: auto;
-	transform: translateX(-30px);
 	cursor: pointer;
 }
 
 @media only screen and (max-width: 490px) {
-	.seleccion-material-boton-back {
+	.matrec-seleccion-material-boton-back {
 		transform: translateX(0px);
 	}
 }
 
-.material-resumen-container {
+.matrec-material-resumen-container {
 	display: flex;
 	align-items: center;
 	width: 200%;
-	height: 10vh;
+	height: auto;
 	padding-left: 1%;
 	margin-right: 4%;
 	column-gap: 2vw;
@@ -48,33 +53,33 @@
 }
 
 @media only screen and (max-width: 490px) {
-	.material-resumen-container {
+	.matrec-material-resumen-container {
 		display: none;
 	}
 }
 
 /* Define scrollbar styles */
-.material-resumen-container::-webkit-scrollbar {
+.matrec-material-resumen-container::-webkit-scrollbar {
 	height: 8px;
   }
   
   /* Track */
-.material-resumen-container::-webkit-scrollbar-track {
+.matrec-material-resumen-container::-webkit-scrollbar-track {
 	background: none; 
   }
   
   /* Handle */
-.material-resumen-container::-webkit-scrollbar-thumb {
+.matrec-material-resumen-container::-webkit-scrollbar-thumb {
 	background: rgba(255, 255, 255, 0.525); 
 	border-radius: 20px;
   }
   
   /* Handle on hover */
-.material-resumen-container::-webkit-scrollbar-thumb:hover {
+.matrec-material-resumen-container::-webkit-scrollbar-thumb:hover {
 	background: rgba(255, 255, 255, 0.7); 
   }
 
-.bottom-section {
+.matrec-bottom-section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -82,12 +87,12 @@
 	margin: auto;
 }
 
-.card-container-wrapper {
+.matrec-card-container-wrapper {
 	display: flex;
 	align-items: center; /* Center the card container horizontally */
 }
 
-.card-container-sm {
+.matrec-card-container-sm {
 	justify-self: center;
 	display: flex;
 	flex-direction: row !important;
@@ -105,11 +110,11 @@
 	}
 }
 
-.search-bar-container {
-	width: 60%;
+.matrec-search-bar-container {
+	width: 20vw;
 }
 
-.button-container-sm {
+.matrec-button-container-sm {
 	width: 100%;
 	padding: 3%;
 	text-align: center;
@@ -117,33 +122,33 @@
 
 /* 
 @media only screen and (max-width: 480px) {
-	.button-container-sm {
+	.matrec-button-container-sm {
 		margin-top: 6%;
 	}
-	.search-bar-container {
+	.matrec-search-bar-container {
 		margin-bottom: 4%;
 	}
 }
 
 
 /* Define scrollbar styles */
-.card-container-sm::-webkit-scrollbar {
+.matrec-card-container-sm::-webkit-scrollbar {
 	width: 8px;
   }
   
   /* Track */
-.card-container-sm::-webkit-scrollbar-track {
+.matrec-card-container-sm::-webkit-scrollbar-track {
 	background: none; 
   }
   
   /* Handle */
-.card-container-sm::-webkit-scrollbar-thumb {
+.matrec-card-container-sm::-webkit-scrollbar-thumb {
 	background: rgba(255, 255, 255, 0.525); 
 	border-radius: 20px;
   }
   
   /* Handle on hover */
-.card-container-sm::-webkit-scrollbar-thumb:hover {
+.matrec-card-container-sm::-webkit-scrollbar-thumb:hover {
 	background: rgba(255, 255, 255, 0.7); 
   }
   

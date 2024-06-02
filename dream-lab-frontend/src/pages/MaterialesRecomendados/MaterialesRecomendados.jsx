@@ -1,11 +1,10 @@
-import "./SeleccionMaterial.css";
+import "./MaterialesRecomendados.css";
 import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import RoundedButton from "./components/Button/Button";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
-import MiniMaterialCard from "./components/MiniMaterialCard/MiniMaterialCard";
 import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
-import {Badge} from "@nextui-org/react";
+import { Select, SelectItem} from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import CircularProgress from "@mui/material/CircularProgress";
@@ -15,9 +14,9 @@ import {
 	getFromSessionStorage,
 	existsInSessionStorage,
 } from "../../utils/Storage";
-import { post } from "../../utils/ApiRequests";
+import { get, post } from "../../utils/ApiRequests";
 
-function SeleccionMaterial() {
+function MaterialesRecomendados() {
 	const navigate = useNavigate();
 	const [selectedMaterials, setSelectedMaterials] = useState(() => {
 		if (
@@ -30,32 +29,42 @@ function SeleccionMaterial() {
 			return [];
 		}
 	});
+
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [salasBD, setSalasBD] = useState([]);
+	const [selectedRoom, setSelectedRoom] = useState(null);
 
 	useEffect(() => {
-		const date = new Date(getFromSessionStorage("fecha"));
-
-		// Parametros Stored Procedure
-		const params = {
-			idSala: getFromSessionStorage("idSala"), 
-			fecha: date.toISOString(), 
-			horaInicio: getFromSessionStorage("horaInicioIsoString"), 
-			duracion: parseInt(getFromSessionStorage("duration")), 
-		};
-
-		post("materiales", params)
-			.then((result) => {
-				setData(result);
-				setIsLoading(false);
-				console.log(data);
-			})
-			.catch((error) => {
-				console.error("An error occurred:", error);
-				setIsLoading(false);
-			});
+		get(
+            "salas",
+            () => setIsLoading(false),
+            () => setIsLoading(false)
+        )
+            .then((result) => {
+                setSalasBD(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
 	}, []);
+
+
+	useEffect(() => {
+		if (salasBD.length > 0 && salasBD[selectedRoom]) {
+			post("materiales/bySala", { idSala: salasBD[selectedRoom].idSala })
+				.then((result) => {
+					setData(result);
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					console.error("An error occurred:", error);
+					setIsLoading(false);
+				});
+		}
+	}, [salasBD, selectedRoom]);
+
 
 	useEffect(() => {
 		// Save selected materials to session storage whenever it changes
@@ -104,7 +113,12 @@ function SeleccionMaterial() {
 		}, 100); // Adjust the delay time as needed
 
 	};
-	
+
+	const handleSelectedRoomUpdate = (event) => {
+		const selectedRoomId = event.target.value;
+		setSelectedRoom(selectedRoomId);
+		saveToSessionStorage("idSala", selectedRoomId);
+	};
 
 	const handleSubmit = async () => {
 		navigate("/reservacion/resumen");
@@ -118,32 +132,36 @@ function SeleccionMaterial() {
 		<>
 			<NavBar view="soloPerfil" autoHide={false} />
 
-			<div className="main-container">
-				<div className="top-section">
+			<div className="matrec-main-container">
+				<div className="matrec-top-section">
 					{/* Div to display selected materials */}
-					<div className="seleccion-material-boton-back">
+					<div className="matrec-seleccion-material-boton-back">
 						<BotonBack ruta="/reservacion/sala/"/>
 					</div>
-					<div className="material-resumen-container">
-						{selectedMaterials.map((selectedMaterial) => (
-							<Badge content={selectedMaterial.quantity} color="default" placement="top-left" data-cy="badge">
-								<MiniMaterialCard
-									key={selectedMaterial.materialId}
-									image={selectedMaterial.image}
-								/>
-							</Badge>
-						))}
+					<div className="sala-dropdown">
+						<div className="flex w-full flex-wrap md:flex-nowrap">
+							<Select
+								placeholder="Elige una sala"
+								onChange={handleSelectedRoomUpdate}
+							>
+								{salasBD.map((sala) => (
+									<SelectItem key={sala.idSala} value={sala.idSala}>
+										{sala.nombre}
+									</SelectItem>
+								))}
+							</Select>
+						</div>
 					</div>
 
 					{/* Search bar for filtering materials */}
-					<div className="search-bar-container">
+					<div className="matrec-search-bar-container">
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 					</div>
 				</div>
-				<div className="bottom-section">
+				<div className="matrec-bottom-section">
 					{/* Div to display all selectable materials */}
-					<div className="card-container-wrapper">
-						<div className="card-container-sm" data-cy="card-container-sm">
+					<div className="matrec-card-container-wrapper">
+						<div className="matrec-card-container-sm" data-cy="card-container-sm">
 							{filteredData.map(material => (
 								<MaterialCard
 									key={material.id}
@@ -162,7 +180,7 @@ function SeleccionMaterial() {
 							))}
 						</div>
 					</div>
-					<div className="button-container-sm">
+					<div className="matrec-button-container-sm">
 						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>
 				</div>
@@ -171,4 +189,4 @@ function SeleccionMaterial() {
 	);
 }
 
-export default SeleccionMaterial;
+export default MaterialesRecomendados;

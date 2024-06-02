@@ -1,0 +1,46 @@
+/* mini-card component*/
+.mini-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 5.5vw;
+	height: 7vh;
+	margin: 1.5%;
+	background-color: #f3f3f3;
+	border-radius: 20px;
+}
+
+@media only screen and (max-width: 968px) and (min-width: 481px) {
+	.mini-card {
+		width: 8vw;
+		height: 7vh;
+	}
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 801px)  {
+	
+}
+
+@media only screen and (max-width: 800px) and (min-width: 601px)  {
+	
+}
+
+@media only screen and (max-width: 600px) {
+	
+}
+
+.mini-material-image-container {
+	height: 100%;
+	padding: 10%;
+}
+
+.mini-material-image {
+	height: 100%;
+	width: auto;
+	object-fit: contain;
+	padding: 6%;
+}
+
+@media only screen and (max-width: 480px) {
+    
+}
