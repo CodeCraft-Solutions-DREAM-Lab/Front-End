@@ -9,26 +9,6 @@ import "./SolicitedMatsListModal.css";
 
 const SolicitedMatsListModal = ( {reservItems, setReservItems, selectedItems, setSelectedItems} ) => {
 
-    // const [reservItems, setReservItems] = useState([]);
-	// const [selectedItems, setSelectedItems] = useState([]);
-
-	// useEffect(() => {
-	// 	setReservItems([
-	// 		{
-	// 			name: "Lentes Oculus Quest",
-	// 			quantity: 2,
-	// 		},
-	// 		{
-	// 			name: "Computadora Windows",
-	// 			quantity: 1,
-	// 		},
-	// 		{
-	// 			name: "Extensión 2 metros",
-	// 			quantity: 1,
-	// 		},
-	// 	]);
-	// }, [])
-
     return (
 
         <>

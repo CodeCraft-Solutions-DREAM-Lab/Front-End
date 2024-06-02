@@ -9,40 +9,57 @@ import {
 	Button,
 } from "@nextui-org/react";
 import propTypes from "prop-types";
+import StudentNameMatModal from "./StudentNameMatModal";
 import SolicitedMatsListModal from "./SolicitedMatsListModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import "./ReservItemModal.css";
-import copyIcon from "src/assets/Icons/copy-icon.svg";
 
 function ReservItemModal(props) {
 
-	const [studentName, setStudentName] = useState("Jaime Eduardo López Castro");
-	const [stundentMat, setStudentMat] = useState("A00833173");
-	const [salaName, setSalaName] = useState("Electric Garage");
-	const [mesaName, setMesaName] = useState("Mesa 2");
-	const [dateString, setDateString] = useState("Martes - 15 de Diciembre");
-	const [horaInicioString, setHoraInicioString] = useState("3:00 pm");
-	const [horaFinString, setHoraFinString] = useState("5:00 pm");
+	const [studentName, setStudentName] = useState("");
+	const [studentMat, setStudentMat] = useState("");
+	const [salaName, setSalaName] = useState("");
+	const [mesaName, setMesaName] = useState("");
+	const [dateString, setDateString] = useState("");
+	const [horaInicioString, setHoraInicioString] = useState("");
+	const [horaFinString, setHoraFinString] = useState("");
 	const [reservItems, setReservItems] = useState([]);
 	const [selectedItems, setSelectedItems] = useState([]);
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	useEffect(() => {
-		setReservItems([
-			{
-				name: "Lentes Oculus Quest",
-				quantity: 2,
-			},
-			{
-				name: "Computadora Windows",
-				quantity: 1,
-			},
-			{
-				name: "Extensión 2 metros",
-				quantity: 1,
-			},
-		]);
-	}, [])
+
+		if (!props.isOpen) return;
+
+		setIsLoading(true);
+		// console.log("ReservItemModal useEffect");
+		setTimeout(() => {
+			setStudentName("Jaime Eduardo López Castro");
+			setStudentMat("A00833173");
+			setSalaName("Electric Garage");
+			setMesaName("Mesa 2");
+			setDateString("Martes - 15 de Diciembre");
+			setHoraInicioString("3:00 pm");
+			setHoraFinString("5:00 pm");
+			setReservItems([
+				{
+					name: "Lentes Oculus Quest",
+					quantity: 2,
+				},
+				{
+					name: "Computadora Windows",
+					quantity: 1,
+				},
+				{
+					name: "Extensión 2 metros",
+					quantity: 1,
+				},
+			]);
+			setIsLoading(false);
+		}, 1000);
+	}, [props.isOpen])
 
 	return (
 		<Modal
@@ -61,26 +78,19 @@ function ReservItemModal(props) {
 
 								<div className="ReservItemModal-grid-item-1">
 
-									<div className="ReservItemModal-student-name-mat">
-										<span className="ReservItemModal-student-name">{studentName}</span>
-										<br />
-										<div
-											className="ReservItemModal-student-mat"
-											onClick={() => navigator.clipboard.writeText(stundentMat).then(() => alert("Matrícula copiada"))}
-										>
-											<span className="ReservItemModal-student-mat-text">{stundentMat}</span>
-											<img src={copyIcon} alt="copy-icon" className="ReservItemModal-copy-icon-img" />
-										</div>
+									<StudentNameMatModal
+										studentName={studentName}
+										studentMat={studentMat}
+										isLoading={isLoading}
+									/>
 
-									</div>
-
-									<SolicitedMatsListModal 
-										reservItems={reservItems} 
-										setReservItems={setReservItems} 
-										selectedItems={selectedItems} 
+									<SolicitedMatsListModal
+										reservItems={reservItems}
+										setReservItems={setReservItems}
+										selectedItems={selectedItems}
 										setSelectedItems={setSelectedItems}
 									/>
-								</div> 
+								</div>
 
 								<div className="ReservItemModal-grid-item-2">
 									<p className="ReservItemModal-sala-mesa">
@@ -96,8 +106,8 @@ function ReservItemModal(props) {
 										{horaInicioString} a {horaFinString}
 									</p>
 
-									<CancelarReservaModalButton className="mt-10"/>
-									<PenalizarModalButton className="mt-4"/>
+									<CancelarReservaModalButton className="mt-10" />
+									<PenalizarModalButton className="mt-4" />
 								</div>
 							</div>
 						</ModalBody>
