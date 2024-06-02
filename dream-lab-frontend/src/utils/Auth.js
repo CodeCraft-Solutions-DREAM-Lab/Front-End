@@ -20,10 +20,11 @@ export async function loginAction(
                 // Guardar el token y el usuario en el local storage
                 saveToLocalStorage("token", jwt);
                 saveToLocalStorage("user", user.toLowerCase());
+
                 // Llamar a la función de éxito
                 success();
                 // Checa el rol del usuario
-                
+
                 // Regresar la dirección a la que se debe redirigir
                 return "/home";
             } else {

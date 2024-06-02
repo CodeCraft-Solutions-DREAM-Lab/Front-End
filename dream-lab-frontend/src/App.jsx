@@ -48,9 +48,20 @@ import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 function secured(Component) {
+    const restrictedRoutes = {
+        Regular: {
+            routes: ["/admin", "/dashboard", "/crearAnuncio"],
+            fallback: "/home",
+        },
+        Admin: {
+            routes: [],
+            fallback: "/admin",
+        },
+    };
+
     return function WrappedComponent(props) {
         return (
-            <ProtectedRoutes>
+            <ProtectedRoutes restrictedRoutes={restrictedRoutes}>
                 <Component {...props} />
             </ProtectedRoutes>
         );
@@ -91,7 +102,7 @@ const router = createBrowserRouter(
             />
             <Route path="admin" element={<CronogramaAdmin />} />
             <Route path="qr" element={<QRLogin />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard" element={secured(Dashboard)()} />
             <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
         </Route>

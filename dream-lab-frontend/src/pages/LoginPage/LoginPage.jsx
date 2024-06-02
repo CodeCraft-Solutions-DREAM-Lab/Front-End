@@ -23,7 +23,7 @@ import "src/GlobalComponents/GlassCard/GlassCard.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
 import { useDispatch } from "react-redux";
-import { setAuth } from "src/redux/Slices/userSlice";
+import { setAuth, setRol } from "src/redux/Slices/userSlice";
 
 import topBlob from "src/assets/Login/top-blob.webp";
 import bottomBlob from "src/assets/Login/bottom-blob.webp";
@@ -54,9 +54,12 @@ export default function LoginPage() {
                     if (data) {
                         // Guardar los datos regresados en el local storage
                         saveToLocalStorage("token", jwt);
-                        saveToLocalStorage("user", data.token_data.usuario);
+                        const datosUsuario = JSON.parse(data.token_data.datosUsuario);
+                        saveToLocalStorage("user", datosUsuario.idUsuario.toLowerCase());
                         // Guardar en redux que ya se hizo login
                         dispatch(setAuth(true));
+                        // Guardar en redux el rol del usuario
+                        dispatch(setRol(datosUsuario.tipo));
                         // Redirigir a la página de home
                         navigate("/home");
                     }
