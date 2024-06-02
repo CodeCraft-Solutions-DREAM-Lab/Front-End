@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import {
-    Button
+    Button,
+    Skeleton
 } from "@nextui-org/react";
 import propTypes from "prop-types";
 import WargningIcon from "./WarningIcon";
@@ -18,6 +19,12 @@ function PenalizarModalButton(props) {
             setIconColor("#ac3e1b");
         }
     }, [isHovered])
+
+    if (props.isLoading) {
+        return (
+            <Skeleton className="RIM-btn-skeleton" />
+        )
+    }
 
 	return (
         <>
@@ -37,6 +44,7 @@ function PenalizarModalButton(props) {
 
 PenalizarModalButton.propTypes = {
 	className: propTypes.string,
+    isLoading: propTypes.bool,
 };
 
 export default PenalizarModalButton;

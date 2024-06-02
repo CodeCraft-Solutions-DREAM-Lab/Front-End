@@ -56,7 +56,7 @@ function ReservItemModal(props) {
 			]);
 			setIsLoading(false);
 			
-		}, 1000);
+		}, 2000);
 	}, [props.isOpen])
 
 	return (
@@ -102,8 +102,15 @@ function ReservItemModal(props) {
 										isLoading={isLoading}
 									/> 
 
-									<CancelarReservaModalButton className="mt-10" />
-									<PenalizarModalButton className="mt-4" />
+									<CancelarReservaModalButton 
+										className="mt-10" 
+										isLoading={isLoading} 
+									/>
+
+									<PenalizarModalButton 
+										className="mt-4" 
+										isLoading={isLoading} 
+									/>
 								</div>
 							</div>
 						</ModalBody>
