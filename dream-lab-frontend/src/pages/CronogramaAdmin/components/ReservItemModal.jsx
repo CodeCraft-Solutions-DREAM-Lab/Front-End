@@ -57,7 +57,8 @@ function ReservItemModal(props) {
 					quantity: 1,
 				},
 			]);
-			setIsLoading(false);
+			// setIsLoading(false);
+			
 		}, 1000);
 	}, [props.isOpen])
 
@@ -89,6 +90,7 @@ function ReservItemModal(props) {
 										setReservItems={setReservItems}
 										selectedItems={selectedItems}
 										setSelectedItems={setSelectedItems}
+										isLoading={isLoading}
 									/>
 								</div>
 

@@ -30,3 +30,21 @@
 .SMLM-progress-bar {
     align-self: center;
 }
+
+.SMLM-bar-skeleton {
+    width: 100%;
+    margin-top: 4vh;
+    height: 8vh;
+    border-radius: 0.5vh;
+}
+
+.SMLM-list-skeleton {
+    width: 60%;
+    margin-top: 1vh;
+    height: 2vh;
+    border-radius: 0.5vh;
+}
+
+.SMLM-list-skeleton.first {
+    margin-top: 2vh;
+}
