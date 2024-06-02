@@ -39,9 +39,6 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
 
-// TEMPORAL
-import QRLogin from "./pages/QRLogin/QRLogin.jsx";
-
 // Videowall
 import Videowall from "./pages/Videowall/Videowall.jsx";
 
@@ -102,7 +99,6 @@ const router = createBrowserRouter(
                 element={secured(CrearAnuncioVideowall)()}
             />
             <Route path="admin" element={<CronogramaAdmin />} />
-            <Route path="qr" element={<QRLogin />} />
             <Route path="dashboard" element={secured(Dashboard)()} />
             <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
