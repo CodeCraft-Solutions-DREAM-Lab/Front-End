@@ -247,6 +247,8 @@ function CronogramaAdmin() {
             });
     }, []);
 
+    // Obtener los datos de las salas para poder agregar los nombres al filtro
+    // de salas
     useEffect(() => {
         get("salas")
             .then((result) => {
@@ -257,6 +259,8 @@ function CronogramaAdmin() {
             });
     }, []);
 
+    // Obtener los datos de las mesas para poder agregar los nombres al filtro
+    // de mesas
     useEffect(() => {
         get("mesas")
             .then((result) => {
@@ -267,18 +271,25 @@ function CronogramaAdmin() {
             });
     }, []);
 
+    // Filtrar las salas que se muestran en el cronograma según las salas que se
+    // hayan seleccionado en el filtro de salas
     useEffect(() => {
         setFilteredGroups(
             groups.filter((group) => selectedSalasIds.includes(group.idSala))
         );
     }, [selectedSalasIds, groups]);
 
+    // Filtrar las reservaciones que se muestran en el cronograma según las
+    // mesas que se hayan seleccionado en el filtro de mesas (switches)
     useEffect(() => {
         setFilteredItems(
             items.filter((item) => selectedMesasIds.includes(item.group))
         );
     }, [selectedMesasIds, items]);
 
+    // En caso de que se haya guardado en el localStorage la selección de salas
+    // previamente se cargan los datos guardados, en caso contrario se cargan
+    // todas las salas
     useEffect(() => {
         if (
             existsInLocalStorage("selectedSalasIds") &&
@@ -305,6 +316,9 @@ function CronogramaAdmin() {
         }
     }, [salas]);
 
+    // En caso de que se haya guardado en el localStorage la selección de mesas
+    // previamente se cargan los datos guardados, en caso contrario se cargan
+    // todas las mesas
     useEffect(() => {
         if (
             existsInLocalStorage("selectedMesasIds") &&
@@ -340,20 +354,27 @@ function CronogramaAdmin() {
         updateScrollCanvas(visibleTimeStart, visibleTimeEnd);
     };
 
+    // Función que se ejecuta cuando se selecciona una sala en el filtro de
+    // salas para actualizar las salas seleccionadas y guardarlas en el
+    // localStorage para que persistan entre sesiones del usuario
     const handleChangeSelectSalas = (event) => {
         const { value } = event.target;
         let newSelectedSalasIds, newSelectedSalasTitles;
 
-        if (value.includes("all")) {
+        // Si se selecciona "Todas" se seleccionan todas las salas
+        if (value.includes("Todas")) {
             newSelectedSalasTitles = salas.map((sala) => sala.nombre);
             newSelectedSalasIds = salas.map((sala) => sala.idSala);
-        } else {
+        }
+        // Si se selecciona alguna sala en específico se seleccionan solo esas salas
+        else {
             newSelectedSalasTitles = value;
             newSelectedSalasIds = value.map(
                 (title) => salas.find((sala) => sala.nombre === title).idSala
             );
         }
 
+        // Guardamos en el estado y en el localStorage las salas seleccionadas
         setSelectedSalasTitles(newSelectedSalasTitles);
         setSelectedSalasIds(newSelectedSalasIds);
         saveToLocalStorage(
@@ -366,15 +387,22 @@ function CronogramaAdmin() {
         setSelectedOptions2(event.target.value);
     };
 
+    // Función que se ejecuta cuando se selecciona un switch de una mesa para
+    // esconder o mostrar las reservaciones de esa mesa
     const handleToggleClick = (event, groupId, setSelected) => {
         setSelected(event.target.checked);
         setSelectedMesasIds((prevSelectedMesasIds) => {
             let newSelectedSalasIds = [...prevSelectedMesasIds];
+            // Si el switch se activa se agrega la mesa a las mesas
+            // seleccionadas
             if (event.target.checked) {
                 if (!newSelectedSalasIds.includes(groupId)) {
                     newSelectedSalasIds.push(groupId);
                 }
-            } else {
+            }
+            // Si el switch se desactiva se quita la mesa de las mesas
+            // seleccionadas
+            else {
                 newSelectedSalasIds = newSelectedSalasIds.filter(
                     (id) => id !== groupId
                 );
@@ -516,7 +544,7 @@ function CronogramaAdmin() {
                                                     selected.join(", ")
                                                 }
                                             >
-                                                <MenuItem value="all">
+                                                <MenuItem value="Todas">
                                                     <Checkbox
                                                         checked={
                                                             selectedSalasTitles.length ===
