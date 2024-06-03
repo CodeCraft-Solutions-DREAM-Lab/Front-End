@@ -1,9 +1,7 @@
 import "./MaterialesRecomendados.css";
 import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
-import RoundedButton from "./components/Button/Button";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
-import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import { Select, SelectItem} from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +66,7 @@ function MaterialesRecomendados() {
 
 	useEffect(() => {
 		// Save selected materials to session storage whenever it changes
-		saveToSessionStorage("materials", JSON.stringify(selectedMaterials));
+		saveToSessionStorage("materialesExperiencia", JSON.stringify(selectedMaterials));
 	}, [selectedMaterials]);
 
 	const handleQuantityUpdate = (materialId, newQuantity) => {
@@ -120,10 +118,6 @@ function MaterialesRecomendados() {
 		saveToSessionStorage("idSala", selectedRoomId);
 	};
 
-	const handleSubmit = async () => {
-		navigate("/reservacion/resumen");
-	};
-
 	const filteredData = data.filter(material =>
         material.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -135,21 +129,24 @@ function MaterialesRecomendados() {
 			<div className="matrec-main-container">
 				<div className="matrec-top-section">
 					{/* Div to display selected materials */}
-					<div className="matrec-seleccion-material-boton-back">
-						<BotonBack ruta="/reservacion/sala/"/>
-					</div>
-					<div className="sala-dropdown">
-						<div className="flex w-full flex-wrap md:flex-nowrap">
-							<Select
-								placeholder="Elige una sala"
-								onChange={handleSelectedRoomUpdate}
-							>
-								{salasBD.map((sala) => (
-									<SelectItem key={sala.idSala} value={sala.idSala}>
-										{sala.nombre}
-									</SelectItem>
-								))}
-							</Select>
+					<div className="sala-dropdown-container">
+						<p className="sala-dropdown-title">Seleccionar sala*</p>
+						<div className="sala-dropdown">
+							<div className="flex w-full flex-wrap md:flex-nowrap">
+								<Select
+									placeholder="Elige una sala"
+									onChange={handleSelectedRoomUpdate}
+									className="mb-3"
+									aria-label="selector-sala"
+									data-cy="selector-sala"
+								>
+									{salasBD.map((sala) => (
+										<SelectItem key={sala.idSala} value={sala.idSala}>
+											{sala.nombre}
+										</SelectItem>
+									))}
+								</Select>
+							</div>
 						</div>
 					</div>
 
@@ -179,9 +176,6 @@ function MaterialesRecomendados() {
 								/>
 							))}
 						</div>
-					</div>
-					<div className="matrec-button-container-sm">
-						<RoundedButton text="ACEPTAR" onClick={handleSubmit} />
 					</div>
 				</div>
 			</div>
