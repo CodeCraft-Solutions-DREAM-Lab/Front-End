@@ -42,7 +42,7 @@ describe("Pruebas de login", () => {
         cy.containsDataCy("login-error", "Usuario o contraseña incorrectos");
     });
 
-    it.only("Usuario y contraseña correctos", () => {
+    it("Usuario y contraseña correctos", () => {
         cy.typeDataCy("login-user", "test");
         cy.typeDataCy("login-password", "test");
         cy.intercept("POST", "auth/usuario", {
