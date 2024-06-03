@@ -42,7 +42,7 @@ describe("Pruebas de login", () => {
         cy.containsDataCy("login-error", "Usuario o contraseña incorrectos");
     });
 
-    it.only("Usuario y contraseña correctos", () => {
+    it("Usuario y contraseña correctos", () => {
         cy.intercept("POST", "auth/usuario", {
             body: {
                 jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0",
