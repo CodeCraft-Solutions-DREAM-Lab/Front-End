@@ -11,6 +11,19 @@ import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import "./ReservItemModal.css";
+// import { get } from "../../../utils/ApiRequests";
+
+// const horaFormatter = new Intl.DateTimeFormat("es-MX", {
+// 	hour: "numeric",
+// 	minute: "numeric",
+// 	hour12: false,
+// });
+
+// const dateFormatter = new Intl.DateTimeFormat("es-MX", {
+// 	weekday: "long",
+// 	month: "long",
+// 	day: "numeric",
+// });
 
 function ReservItemModal(props) {
 
@@ -32,14 +45,53 @@ function ReservItemModal(props) {
 
 		setIsLoading(true);
 		// console.log("ReservItemModal useEffect");
+
+		// get("reservaciones/cronograma/" + props.reservId)
+		// 	.then((response) => {
+		// 		const horaInicio = new Date(response.horaInicio);
+		// 		horaInicio.setHours(horaInicio.getHours() + 6);
+		// 		const horaFin = new Date(horaInicio);
+		// 		horaFin.setHours(horaFin.getHours() + response.duracion);
+		// 		horaFin.setMinutes(horaFin.getMinutes() + (response.duracion % 1) * 60);
+
+		// 		const formattedInicio = horaFormatter.format(horaInicio);
+		// 		const formattedFin = horaFormatter.format(horaFin);
+
+		// 		let reservDate = new Date(response.reservDate);
+		// 		let formattedDate = dateFormatter.format(reservDate);
+		// 		// Convert the first letter of each word to uppercase except for words with 2 or less characters
+		// 		formattedDate = formattedDate.replace(
+		// 			/\b\w{3,}/g, 
+		// 			char => char.charAt(0).toUpperCase() + char.slice(1)
+		// 		);
+
+		// 		setStudentName(response.studentName);
+		// 		setStudentMat(response.studentMat);
+		// 		setSalaName(response.salaName);
+		// 		setMesaName("Mesa 2");
+		// 		setDateString(formattedDate);
+		// 		setHoraInicioString(formattedInicio);
+		// 		setHoraFinString(formattedFin);
+		// 		setReservItems(response.reservItems);
+
+		// 		const selectedItems = response.reservItems.map((item) => { return item.name });
+		// 		setSelectedItems(selectedItems);
+
+		// 		setIsLoading(false);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error("Error fetching reservacion data: ", error);
+		// 		setIsLoading(false);
+		// 	});
+
 		setTimeout(() => {
 			setStudentName("Jaime Eduardo López Castro");
 			setStudentMat("A00833173");
 			setSalaName("Electric Garage");
 			setMesaName("Mesa 2");
-			setDateString("Martes - 15 de Diciembre");
-			setHoraInicioString("3:00 pm");
-			setHoraFinString("5:00 pm");
+			setDateString("Martes, 15 de Diciembre");
+			setHoraInicioString("15:00");
+			setHoraFinString("17:00");
 			setReservItems([
 				{
 					name: "Lentes Oculus Quest",
@@ -55,8 +107,8 @@ function ReservItemModal(props) {
 				},
 			]);
 			setIsLoading(false);
-			
-		}, 2000);
+
+		}, 1000);
 	}, [props.isOpen])
 
 	return (
@@ -100,16 +152,16 @@ function ReservItemModal(props) {
 										horaInicioString={horaInicioString}
 										horaFinString={horaFinString}
 										isLoading={isLoading}
-									/> 
-
-									<CancelarReservaModalButton 
-										className="mt-10" 
-										isLoading={isLoading} 
 									/>
 
-									<PenalizarModalButton 
-										className="mt-4" 
-										isLoading={isLoading} 
+									<CancelarReservaModalButton
+										className="mt-10"
+										isLoading={isLoading}
+									/>
+
+									<PenalizarModalButton
+										className="mt-4"
+										isLoading={isLoading}
 									/>
 								</div>
 							</div>

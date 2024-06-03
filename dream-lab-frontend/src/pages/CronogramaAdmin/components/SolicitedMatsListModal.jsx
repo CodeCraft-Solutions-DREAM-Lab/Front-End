@@ -22,6 +22,14 @@ const SolicitedMatsListModal = ({ reservItems, setReservItems, selectedItems, se
         )
     }
 
+    if (reservItems.length === 0) {
+        return (
+            <span className="ReservItemModal-no-materials">
+                No se han solicitado materiales
+            </span>
+        )
+    }
+
     return (
         <>
 
