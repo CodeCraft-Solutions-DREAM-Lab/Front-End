@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/react";
 import propTypes from "prop-types";
 
 
-function SalaCard({ text, bloqueada}) {
+function SalaCard({ text, bloqueada, id, updateSalaState}) {
     const [clicked, setClicked] = useState(false);
     const [resultante, setResultante] = useState();
 
@@ -17,7 +17,9 @@ function SalaCard({ text, bloqueada}) {
 	}, [bloqueada]);
 
     const handleClick = () => {
-        setClicked(!clicked);
+        const newClickedState = !clicked;
+        setClicked(newClickedState);
+        updateSalaState(id, newClickedState);
     };
 
     const getBackgroundColor = () => {
