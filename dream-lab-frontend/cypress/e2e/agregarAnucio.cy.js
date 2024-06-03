@@ -2,7 +2,7 @@ import "cypress-file-upload";
 
 describe("Creación de anuncios para el video wall", () => {
     beforeEach(() => {
-        cy.loginWith("test", "admin");
+        cy.loginWith("test", "Admin");
         cy.visit("/crearAnuncio");
 
         // Intercepta la solicitud GET para obtener la lista de anuncios y devuelve datos hardcodeados
@@ -103,7 +103,8 @@ describe("Creación de anuncios para el video wall", () => {
 
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg", 15000
+            "../assets/imagenPrueba.jpg",
+            15000
         );
 
         cy.clickDataCy("boton-agregar-anuncio");
@@ -193,7 +194,8 @@ describe("Creación de anuncios para el video wall", () => {
         );
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg", 15000
+            "../assets/imagenPrueba.jpg",
+            15000
         );
         cy.clickDataCy("boton-agregar-anuncio");
 
@@ -277,7 +279,8 @@ describe("Creación de anuncios para el video wall", () => {
         );
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/imagenPrueba.jpg", 15000
+            "../assets/imagenPrueba.jpg",
+            15000
         );
         cy.clickDataCy("boton-agregar-anuncio");
 
@@ -312,7 +315,8 @@ describe("Creación de anuncios para el video wall", () => {
 
         cy.containsDataCy(
             "anuncio-eliminado-satisfactoriamente-videowall",
-            "Eliminación satisfactoria", 15000
+            "Eliminación satisfactoria",
+            15000
         );
         cy.clickDataCy("segundo-recordatorio-aceptar-eliminar-anuncio");
     });
@@ -328,7 +332,8 @@ describe("Creación de anuncios para el video wall", () => {
         cy.clickDataCy("checkbox-solo-imagen-anuncio-personalizado");
         cy.attachFileDataCy(
             "subir-imagen-anuncio-personalizado",
-            "../assets/archivoPrueba.pdf", 15000
+            "../assets/archivoPrueba.pdf",
+            15000
         );
 
         cy.containsDataCy(

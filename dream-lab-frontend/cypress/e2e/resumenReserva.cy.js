@@ -1,6 +1,6 @@
 describe("Resumen de reservación", () => {
     beforeEach(() => {
-        cy.loginWith("test", "regular");
+        cy.loginWith("test", "Regular");
     });
 
     it("Botón de regreso", () => {

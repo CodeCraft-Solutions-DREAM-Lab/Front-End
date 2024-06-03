@@ -1,6 +1,6 @@
 describe("Probando pantalla de selector de sala", () => {
     beforeEach(() => {
-        cy.loginWith("test", "regular");
+        cy.loginWith("test", "Regular");
 
         cy.intercept("GET", "salas/nameFromExperienceId/**", {
             body: {

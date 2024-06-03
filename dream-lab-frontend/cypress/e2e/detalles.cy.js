@@ -1,6 +1,6 @@
 describe("Despliegue correcto del componente 'Detalles'", () => {
     beforeEach(() => {
-        cy.loginWith("test", "regular");
+        cy.loginWith("test", "Regular");
         cy.visit("/home");
 
         cy.intercept("GET", "/experiencias", {

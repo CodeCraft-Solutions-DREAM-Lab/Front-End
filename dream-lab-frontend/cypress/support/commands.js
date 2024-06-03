@@ -121,8 +121,24 @@ Cypress.Commands.add("getLength", (name) => {
 
 // Inicia sesión con un usuario específico
 Cypress.Commands.add("loginWith", (user, tipo) => {
+    const datosUsuario = {
+        idUsuario: user,
+        nombre: "Test",
+        apellidoP: "Test",
+        apellidoM: "Test",
+        tipo: tipo,
+        prioridad: 362,
+        logroPrincipal: 1,
+        colorPreferido: "#78C2F8",
+    };
+
+    console.log(datosUsuario);
+
     cy.intercept("POST", "auth/token", {
-        body: { isAuth: "true", datosUsuario: { tipo: tipo } },
+        body: {
+            isAuth: "true",
+            token_data: { datosUsuario: JSON.stringify(datosUsuario) },
+        },
     }).as("login");
 
     cy.setLocalStorage(

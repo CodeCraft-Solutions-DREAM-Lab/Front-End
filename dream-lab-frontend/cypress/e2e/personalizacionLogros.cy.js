@@ -384,7 +384,7 @@ describe("Pruebas de personalización de los logros", () => {
         }).as("getLogros");
 
         // Iniciar sesion con test
-        cy.loginWith("test", "regular");
+        cy.loginWith("test", "Regular");
         // Visitar el perfil
         cy.visit("/profile");
 

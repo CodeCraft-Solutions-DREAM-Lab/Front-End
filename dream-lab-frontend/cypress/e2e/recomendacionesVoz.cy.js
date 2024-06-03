@@ -2,7 +2,7 @@ describe("Pruebas de recomendaciones por voz", () => {
     beforeEach(() => {
         // Hacer login antes de cada test
         cy.visit("/login");
-        cy.loginWith("test", "regular");
+        cy.loginWith("test", "Regular");
     });
 
     it.skip("Despliegue de recomendaciones", () => {
