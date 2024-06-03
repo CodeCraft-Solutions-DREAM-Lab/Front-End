@@ -1,7 +1,7 @@
 describe("Despliegue adecuado del componente 'Slider'.", () => {
     beforeEach(() => {
         // Iniciar sesión
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
 
         cy.intercept("GET", "mesas/2", {
             body: {
