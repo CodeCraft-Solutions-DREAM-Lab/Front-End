@@ -21,7 +21,7 @@ import { post } from "src/utils/ApiRequests";
 import { existsInLocalStorage, getFromLocalStorage } from "src/utils/Storage";
 
 // Componente para redirigir a otra página
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 // Componentes de UI para mostrar mientras se carga la página
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
@@ -38,8 +38,6 @@ function ProtectedRoutes({ children, restrictedRoutes }) {
 
     // Obtener el rol del usuario
     const rol = useSelector(selectRol);
-
-    const navigate = useNavigate();
 
     // Verificar si hay un token en el almacenamiento local
     // Si hay un token, se pone la pantalla de carga para comenzar la
