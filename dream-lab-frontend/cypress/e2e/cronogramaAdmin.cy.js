@@ -38,7 +38,7 @@ describe('Admin Page Tests', () => {
         sala: false
       }
     ];
-    cy.loginWith("admin");
+    cy.loginWith("admin", "admin");
 
     cy.intercept('GET', `${API_URL}/reservaciones/cronograma`, { body: reservaciones }).as('getReservaciones');
     cy.intercept('GET', `${API_URL}/salas/cronograma`, { body: salas }).as('getSalas');

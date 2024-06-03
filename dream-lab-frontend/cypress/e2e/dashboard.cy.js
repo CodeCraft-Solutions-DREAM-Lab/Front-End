@@ -115,7 +115,7 @@ describe("Pruebas de despliegue de datos en el dashboard", () => {
         }).as("salasDisponibles");
 
         // Iniciar sesion con test
-        cy.loginWith("test");
+        cy.loginWith("test", "Admin");
         // Visitar el perfil
         cy.visit("/dashboard");
     });

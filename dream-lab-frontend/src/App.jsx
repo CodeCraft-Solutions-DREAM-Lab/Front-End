@@ -33,11 +33,11 @@ import ConfirmacionReserva from "./pages/ConfirmacionReserva/ConfirmacionReserva
 import ResumenReservacion from "./pages/ResumenReservacion/ResumenReservacion.jsx";
 import SeleccionMaterial from "./pages/SeleccionMaterial/SeleccionMaterial";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
-import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
+
+// Perfil
 import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
-import QRLogin from "./pages/QRLogin/QRLogin.jsx";
 
 // Videowall
 import Videowall from "./pages/Videowall/Videowall.jsx";
@@ -49,9 +49,20 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import MaterialesRecomendados from "./pages/MaterialesRecomendados/MaterialesRecomendados";
 
 function secured(Component) {
+    const restrictedRoutes = {
+        Regular: {
+            routes: ["/admin", "/dashboard", "/crearAnuncio"],
+            fallback: "/home",
+        },
+        Admin: {
+            routes: [],
+            fallback: "/admin",
+        },
+    };
+
     return function WrappedComponent(props) {
         return (
-            <ProtectedRoutes>
+            <ProtectedRoutes restrictedRoutes={restrictedRoutes}>
                 <Component {...props} />
             </ProtectedRoutes>
         );
@@ -61,15 +72,13 @@ function secured(Component) {
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-            <Route index element={<LandingPageDev />} />
-            <Route path="landingpage" element={<LandingPage />} />
-            {/* ruta provisional para desarrollo de la landing */}
+            <Route index element={<LandingPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="home" element={secured(HomePage)()} />
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route
                 path="reservacion/material"
-                element={<SeleccionMaterial />} // Agregar protected cuando se ocupe
+                element={secured(SeleccionMaterial)()}
             />
             <Route
                 path="reservacion/confirmacion"
@@ -92,8 +101,8 @@ const router = createBrowserRouter(
             />
             <Route path="admin" element={<CronogramaAdmin />} />
             <Route path="admin/material" element={<MaterialesRecomendados />} />
-            <Route path="qr" element={<QRLogin />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard" element={secured(Dashboard)()} />
+            <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
         </Route>
     )
