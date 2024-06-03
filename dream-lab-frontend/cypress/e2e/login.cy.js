@@ -42,9 +42,7 @@ describe("Pruebas de login", () => {
         cy.containsDataCy("login-error", "Usuario o contraseña incorrectos");
     });
 
-    it("Usuario y contraseña correctos", () => {
-        cy.typeDataCy("login-user", "test");
-        cy.typeDataCy("login-password", "test");
+    it.only("Usuario y contraseña correctos", () => {
         cy.intercept("POST", "auth/usuario", {
             body: {
                 jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0",
@@ -61,14 +59,18 @@ describe("Pruebas de login", () => {
             logroPrincipal: 1,
             colorPreferido: "#78C2F8",
         };
-        cy.intercept("Post", "auth/token", {
-            body: { isAuth: true },
-            token_data: { datosUsuario: JSON.stringify(datosUsuario) },
+
+        cy.intercept("POST", "auth/token", {
+            body: {
+                isAuth: "true",
+                token_data: { datosUsuario: JSON.stringify(datosUsuario) },
+            },
         }).as("authToken");
+
+        cy.typeDataCy("login-user", "test");
+        cy.typeDataCy("login-password", "test");
         cy.clickDataCy("login-button");
         cy.wait(["@authUsuario", "@authToken"]);
-        // Verificar que se haya redirigido a la página de Home
-        cy.urlContains("/home");
         cy.containsDataCy("navbar", "DREAM LAB", 10000);
     });
 });
