@@ -1,6 +1,6 @@
 describe("Pruebas de selección de material", () => {
 	beforeEach(() => {
-		cy.loginWith("test");
+		cy.loginWith("test", "regular");
 
 		cy.intercept("POST", "/materiales", {
 			body: [

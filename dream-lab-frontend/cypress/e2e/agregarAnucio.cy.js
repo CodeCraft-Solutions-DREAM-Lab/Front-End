@@ -2,7 +2,7 @@ import "cypress-file-upload";
 
 describe("Creación de anuncios para el video wall", () => {
     beforeEach(() => {
-        cy.loginWith("test");
+        cy.loginWith("test", "admin");
         cy.visit("/crearAnuncio");
 
         // Intercepta la solicitud GET para obtener la lista de anuncios y devuelve datos hardcodeados

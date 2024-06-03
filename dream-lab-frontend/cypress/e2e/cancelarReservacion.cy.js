@@ -504,7 +504,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Eliminar reservacion satiafactoriamente.", () => {
         // Inciar sesion con un perfil de pruebas
-        cy.loginWith("test");
+        cy.loginWith("test", "regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");
@@ -532,7 +532,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Arrepentimiento al eliminar reservacion.", () => {
         // Inciar sesion con un perfil de pruebas
-        cy.loginWith("test");
+        cy.loginWith("test", "regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");
@@ -554,7 +554,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Despliegue de mensaje al no existir reservaciones activas.", () => {
         // Iniciar sesion con un perfil vacio
-        cy.loginWith("empty");
+        cy.loginWith("empty", "regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");
