@@ -185,6 +185,7 @@ function CronogramaAdmin() {
 	const [groups, setGroups] = useState([]);
 	const [isLoadingGroups, setIsLoadingGroups] = useState(true);
 	const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
+	const [salasEstados, setSalasEstados] = useState([]);
 
 	const [selectedOptions1, setSelectedOptions1] = useState([]);
 	const [selectedOptions2, setSelectedOptions2] = useState([]);
@@ -211,6 +212,16 @@ function CronogramaAdmin() {
 			.catch((error) => {
 				console.error("An error occurred:", error);
 				setIsLoadingGroups(false);
+			});
+	}, []);
+
+	useEffect(() => {
+		get("salas")
+			.then((result) => {
+				setSalasEstados(result);
+			})
+			.catch((error) => {
+				console.error("An error occurred:", error);
 			});
 	}, []);
 
@@ -247,6 +258,7 @@ function CronogramaAdmin() {
 		<>
 			<GestionSalas
 				data-cy="gestion-salas"
+				salas={salasEstados}
 				isOpen={isGestionSalasOpen}
 				onClose={() => {
 					setIsGestionSalasOpen(false);
