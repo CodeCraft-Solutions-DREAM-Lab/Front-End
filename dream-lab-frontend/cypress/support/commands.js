@@ -132,8 +132,6 @@ Cypress.Commands.add("loginWith", (user, tipo) => {
         colorPreferido: "#78C2F8",
     };
 
-    console.log(datosUsuario);
-
     cy.intercept("POST", "auth/token", {
         body: {
             isAuth: "true",
