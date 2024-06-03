@@ -23,10 +23,18 @@ export async function loginAction(
 
                 // Llamar a la función de éxito
                 success();
-                // Checa el rol del usuario
 
-                // Regresar la dirección a la que se debe redirigir
-                return "/home";
+                // Redirigir a una página dependiendo del rol del usuario
+                if (response.rol.toLowerCase() === "admin") {
+                    return "/admin";
+                } else if (response.rol.toLowerCase() === "regular") {
+                    return "/home";
+                } else {
+                    // Llamar a la función de error
+                    error();
+                    // Si las credenciales no son válidas, regresar a la página de login
+                    return "/login";
+                }
             } else {
                 // Llamar a la función de error
                 error();
