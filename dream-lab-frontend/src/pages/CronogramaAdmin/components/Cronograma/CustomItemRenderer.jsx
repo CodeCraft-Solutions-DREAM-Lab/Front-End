@@ -1,18 +1,21 @@
 import propTypes from "prop-types"
+import { useEffect, useState } from "react";
 
 const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
 
-    let colorName;
+    const [colorName, setColorName] = useState("purple");
 
-    if (!item.estatusMateriales) {
-        colorName = "purple";
-    } else if (item.estatusMateriales == 1) {
-        colorName = "#17c964";
-    } else if (item.estatusMateriales == 2) {
-        colorName = "#60a1dc";
-    } else {
-        colorName = "#acacac";
-    }
+    useEffect(() => {
+        if (!item.estatusMateriales) {
+            setColorName("purple");
+        } else if (item.estatusMateriales == 1) {
+            setColorName("#17c964");
+        } else if (item.estatusMateriales == 2) {
+            setColorName("#60a1dc");
+        } else {
+            setColorName("#acacac");
+        }
+    }, []);
 
     const { style, ...otherProps } = getItemProps();
     const { width, top, position, lineHeight, left, cursor, ...otherStyles } = style;
@@ -57,10 +60,8 @@ const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
 
 CustomItemRenderer.propTypes = {
     item: propTypes.object.isRequired,
-    index: propTypes.number.isRequired,
     itemContext: propTypes.object.isRequired,
-    getResizeProps: propTypes.func.isRequired,
     getItemProps: propTypes.func.isRequired
 }
 
-export default CustomItemRenderer
+export default CustomItemRenderer;

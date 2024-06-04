@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setSelectedItem } from "src/redux/Slices/selectedItemSlice";
 
 import { get, post } from "src/utils/ApiRequests";
-import { getFromLocalStorage } from "src/utils/Storage";
+import { getFromLocalStorage, existsInSessionStorage } from "src/utils/Storage";
 
 const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax effect. Default is 0.2
 
@@ -17,7 +17,6 @@ const ImageSlider = (props) => {
     const [bdImages, setBdImages] = useState([]);
 
     function handleClick(id, tipo) {
-        
         if (tipo === "sala") {
             dispatch(
                 setSelectedItem({
@@ -25,17 +24,14 @@ const ImageSlider = (props) => {
                     type: tipo,
                 })
             );
-
-        }
-        else if(tipo === "experiencia"){
+        } else if (tipo === "experiencia") {
             dispatch(
                 setSelectedItem({
                     id: id,
                     type: tipo,
                 })
             );
-        }        
-         else {
+        } else {
             dispatch(
                 setSelectedItem({
                     id: id,
@@ -51,14 +47,11 @@ const ImageSlider = (props) => {
 
         // Determinar el tipo de imagen (sala o experiencia) según el valor de setImageType
         // Llamar a setIsSalaClicked con el valor correspondiente
-        if(tipo === "sala"){
+        if (tipo === "sala") {
             props.setIsSalaClicked(true);
-        }
-        else{
+        } else {
             props.setIsSalaClicked(false);
         }
-        
-        
     }
 
     const { options, api_url, images, request_type } = props;
@@ -143,9 +136,13 @@ const ImageSlider = (props) => {
                 res = res.map((item) => ({
                     id: item.idExperiencia ? item.idExperiencia : item.idSala,
                     // Revisa si tiene campo de url (caso de recomendaciones), en caso contrario revisa si tiene el campo de url de experiencia, si no entonces toma el que es de sala
-                    url: item.URL ? item.URL : item.fotoURL ? item.fotoURL : item.portadaURL,
+                    url: item.URL
+                        ? item.URL
+                        : item.fotoURL
+                        ? item.fotoURL
+                        : item.portadaURL,
                     title: item.nombre,
-                    tipo: item.idExperiencia? "experiencia": "sala",
+                    tipo: item.idExperiencia ? "experiencia" : "sala",
                 }));
                 console.log(res);
                 setBdImages(res);
@@ -164,7 +161,13 @@ const ImageSlider = (props) => {
                     .then(handleResponse(setResponse))
                     .catch(handleError());
             } else if (request_type === "POST") {
-                post(api_url, { user: getFromLocalStorage("user") })
+                let idUsuario;
+                if (existsInSessionStorage("vistaEstudiante")) {
+                    idUsuario = "a00000000";
+                } else {
+                    idUsuario = getFromLocalStorage("user");
+                }
+                post(api_url, { user: idUsuario })
                     .then(handleResponse(setResponse))
                     .catch(handleError());
             }
@@ -186,7 +189,9 @@ const ImageSlider = (props) => {
                                         className="embla__slide__img embla__parallax__img"
                                         src={image.url}
                                         alt="Your alt text"
-                                        onClick={() => handleClick(image.id, image.tipo)}
+                                        onClick={() =>
+                                            handleClick(image.id, image.tipo)
+                                        }
                                         draggable="false"
                                         onContextMenu={(e) =>
                                             e.preventDefault()

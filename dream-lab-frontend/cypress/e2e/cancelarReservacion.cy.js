@@ -179,7 +179,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T12:00:00.000Z",
                             duracion: 3,
-                            fecha: "2024-01-05T00:00:00.000Z",
+                            fecha: "2030-01-05T00:00:00.000Z",
                             numPersonas: 3,
                             nombre_experiencia: "Cisco Experience",
                             nombre_sala: "Electric Garage",
@@ -192,7 +192,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T09:00:00.000Z",
                             duracion: 2,
-                            fecha: "2024-02-10T00:00:00.000Z",
+                            fecha: "2030-02-10T00:00:00.000Z",
                             numPersonas: 4,
                             nombre_experiencia: "Game jam event",
                             nombre_sala: "Dimension Forge",
@@ -205,7 +205,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T15:00:00.000Z",
                             duracion: 1,
-                            fecha: "2024-03-15T00:00:00.000Z",
+                            fecha: "2030-03-15T00:00:00.000Z",
                             numPersonas: 5,
                             nombre_experiencia: "Hackers Event",
                             nombre_sala: "New Horizons",
@@ -218,7 +218,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T11:00:00.000Z",
                             duracion: 3,
-                            fecha: "2024-05-03T00:00:00.000Z",
+                            fecha: "2030-05-03T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Dimension Forge",
@@ -231,7 +231,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T12:00:00.000Z",
                             duracion: 2,
-                            fecha: "2024-05-14T00:00:00.000Z",
+                            fecha: "2030-05-14T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Beyond-Digits",
@@ -244,7 +244,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T11:00:00.000Z",
                             duracion: 2,
-                            fecha: "2024-05-14T00:00:00.000Z",
+                            fecha: "2030-05-14T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Beyond-Digits",
@@ -257,7 +257,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T12:00:00.000Z",
                             duracion: 3,
-                            fecha: "2024-05-19T00:00:00.000Z",
+                            fecha: "2030-05-19T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Biometrics Flexible Hall",
@@ -270,7 +270,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T12:00:00.000Z",
                             duracion: 1,
-                            fecha: "2024-05-29T00:00:00.000Z",
+                            fecha: "2030-05-29T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Deep Net",
@@ -283,7 +283,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 4,
                             horaInicio: "1970-01-01T10:00:00.000Z",
                             duracion: 1,
-                            fecha: "2024-05-23T00:00:00.000Z",
+                            fecha: "2030-05-23T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "War Headquarters",
@@ -296,7 +296,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 3,
                             horaInicio: "1970-01-01T13:00:00.000Z",
                             duracion: 3,
-                            fecha: "2024-05-16T00:00:00.000Z",
+                            fecha: "2030-05-16T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Electric Garage",
@@ -309,7 +309,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 3,
                             horaInicio: "1970-01-01T13:00:00.000Z",
                             duracion: 2,
-                            fecha: "2024-05-16T00:00:00.000Z",
+                            fecha: "2030-05-16T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Hack-Battlefield",
@@ -322,7 +322,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 3,
                             horaInicio: "1970-01-01T14:00:00.000Z",
                             duracion: 2,
-                            fecha: "2024-05-06T00:00:00.000Z",
+                            fecha: "2030-05-06T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Electric Garage",
@@ -335,7 +335,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 3,
                             horaInicio: "1970-01-01T10:00:00.000Z",
                             duracion: 2,
-                            fecha: "0002-05-03T00:00:00.000Z",
+                            fecha: "2030-05-03T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Deep Net",
@@ -348,7 +348,7 @@ describe("Cancelación exitosa de una reservación.", () => {
                             estatus: 3,
                             horaInicio: "1970-01-01T11:00:00.000Z",
                             duracion: 3,
-                            fecha: "2024-05-03T00:00:00.000Z",
+                            fecha: "2030-05-03T00:00:00.000Z",
                             numPersonas: null,
                             nombre_experiencia: null,
                             nombre_sala: "Hack-Battlefield",
@@ -504,7 +504,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Eliminar reservacion satiafactoriamente.", () => {
         // Inciar sesion con un perfil de pruebas
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");
@@ -532,7 +532,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Arrepentimiento al eliminar reservacion.", () => {
         // Inciar sesion con un perfil de pruebas
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");
@@ -554,7 +554,7 @@ describe("Cancelación exitosa de una reservación.", () => {
 
     it("Despliegue de mensaje al no existir reservaciones activas.", () => {
         // Iniciar sesion con un perfil vacio
-        cy.loginWith("empty");
+        cy.loginWith("empty", "Regular");
 
         // Redirigirse a la página de perfil
         cy.visit("/profile");

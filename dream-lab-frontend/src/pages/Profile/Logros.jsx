@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import { renderTarjetasLogro } from "./utils/Funciones.jsx";
-import { getFromLocalStorage } from "../../utils/Storage";
+import {
+    getFromLocalStorage,
+    existsInSessionStorage,
+    getFromSessionStorage,
+} from "src/utils/Storage";
 import { get } from "src/utils/ApiRequests.js";
 
 function Logros() {
@@ -9,7 +13,12 @@ function Logros() {
     const [estadoLogros, setEstadoLogros] = useState([]);
     const [refreshValue, setRefreshValue] = useState(0);
 
-    const idUsuario = getFromLocalStorage("user");
+    let idUsuario;
+    if (existsInSessionStorage("vistaEstudiante")) {
+        idUsuario = "a00000000";
+    } else {
+        idUsuario = getFromLocalStorage("user");
+    }
 
     useEffect(() => {
         get(`perfil/${idUsuario}`)
