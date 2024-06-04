@@ -1,0 +1,11 @@
+.descripcion-container-crear-experiencia {
+    width: 70%;
+    height: 30vh; 
+}
+
+.input-desc-exp {
+    width: 100%;
+    height: auto; /* Make height adjust based on content */
+    resize: vertical; /* Allow vertical resizing */
+    overflow: auto; 
+}

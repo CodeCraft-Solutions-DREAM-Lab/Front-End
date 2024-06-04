@@ -48,7 +48,7 @@ function ResumenReservacion(props) {
 		};
 
 		console.log("Data: ", data);
-
+   
 		setIsLoading(true);
 		await post(
 			"reservaciones",

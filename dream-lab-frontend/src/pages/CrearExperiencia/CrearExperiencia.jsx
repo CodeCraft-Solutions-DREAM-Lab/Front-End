@@ -8,6 +8,9 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import InfoExperiencia from "src/pages/CrearExperiencia/components/InfoExperiencia";
 import AgregarPortada from "./components/AgregarPortada";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import DetalleExperiencia from "src/pages/CrearExperiencia/components/DetalleExperiencia";
 
 const steps = [
 	"Crea tu experiencia",
@@ -31,8 +34,16 @@ function CrearExperiencia() {
 		instruccionesURL: "",
 		tipoExperiencia: null, // Se trae de InfoExperiencia
 		instruccionesFile: null, // Se trae de InfoExperiencia
-		portadaFile: null, 
+		portadaFile: null, // Se trae de AgregarPortada
 	});
+
+	const [alertOpen, setAlertOpen] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+
+	const handleOpenSnackbar = (message) => {
+		setAlertMessage(message);
+		setAlertOpen(true);
+	};
 
 	// Callback function to update formValues state
 	const handleInfoExperienciaChange = (updatedValues) => {
@@ -43,8 +54,14 @@ function CrearExperiencia() {
 		console.log(formValues);
 	};
 
+	// Callback function to move to the next page
 	function handleSiguiente() {
 		if (page < steps.length - 1) {
+			// Check if required fields are filled before moving to the next page
+			if (page === 0 && (!formValues.nombre || !formValues.tipoExperiencia || !formValues.portadaFile)) {
+				handleOpenSnackbar("Porfavor llena los campos requeridos.");
+				return;
+			}
 			setPage((prevPage) => prevPage + 1); // Move to the next page
 		} else {
 			// Final action on the last page
@@ -59,7 +76,7 @@ function CrearExperiencia() {
 	return (
 		<>
 			<NavBarAdmin />
-			<Navbar view="soloPerfil"/>
+			
 			<div className="contenedor-principal-crear-experiencia">
 				<div className="contenido-crear-experiencia">
 					<Stepper
@@ -81,12 +98,14 @@ function CrearExperiencia() {
 						{" "}
 						{/* Página 1 */}
 						<div className="portada-tipo-selector-crear-experiencia">
-							<InfoExperiencia onInfoChange={handleInfoExperienciaChange}/>
-							<AgregarPortada onInfoChange={handleInfoExperienciaChange}/>
+							<InfoExperiencia onInfoChange={handleInfoExperienciaChange} />
+							<AgregarPortada onInfoChange={handleInfoExperienciaChange} />
 						</div>
 					</div>
 					<div className={`page page-2 ${page === 1 ? "active" : "inactive"}`}>
-						<div>Page 2 Content</div>
+						<div>
+							<DetalleExperiencia onInfoChange={handleInfoExperienciaChange}/>
+						</div>
 					</div>
 					<div className={`page page-3 ${page === 2 ? "active" : "inactive"}`}>
 						<div>Page 3 Content</div>
@@ -97,6 +116,24 @@ function CrearExperiencia() {
 							onClick={handleSiguiente}
 						/>
 					</div>
+					<Snackbar
+						open={alertOpen}
+						autoHideDuration={6000}
+						onClose={() => setAlertOpen(false)}
+					>
+						<MuiAlert
+							onClose={() => setAlertOpen(false)}
+							severity="info"
+							sx={{
+								width: "100%",
+								backgroundColor: "#f8f8f8", 
+								color: "grey", 
+								borderRadius: "15px",
+							}}
+						>
+							{alertMessage}
+						</MuiAlert>
+					</Snackbar>
 				</div>
 			</div>
 		</>

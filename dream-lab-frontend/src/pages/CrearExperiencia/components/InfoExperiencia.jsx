@@ -89,7 +89,7 @@ function InfoExperiencia({ onInfoChange }) {
 
 	return (
 		<GlassCard classes="dropdowns-container-crear-experiencia">
-			<p className="text-white">Nombre de la experiencia</p>
+			<p className="text-white">Nombre de la experiencia*</p>
 			<div className="flex w-full flex-wrap md:flex-nowrap gap-4">
 				<Input
 					type="text"
@@ -104,7 +104,7 @@ function InfoExperiencia({ onInfoChange }) {
 			<div className="footer-input-crear-experiencia">
 				({caracteresRestantesNom} caracteres restantes)
 			</div>
-			<p className="text-white">Tipo de experiencia</p>
+			<p className="text-white">Tipo de experiencia*</p>
 			<Select
 				className="mb-3"
 				aria-label="Tipo de experiencia"

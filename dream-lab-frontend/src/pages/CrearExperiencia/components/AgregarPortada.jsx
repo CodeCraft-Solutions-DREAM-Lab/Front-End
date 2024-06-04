@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
@@ -26,7 +26,7 @@ function AgregarPortada({ onInfoChange }) {
 					setError("");
 					onInfoChange({ portadaFile: file });
 				} else {
-					setError("Solo se pueden subir imágenes");
+					setError("Archivo inválido");
 				}
 			}
 		},
@@ -47,7 +47,7 @@ function AgregarPortada({ onInfoChange }) {
 
 	return (
 		<GlassCard classes="subir-portada-container-crear-experiencia">
-			<p className="titulo-portada-crear-exp">Portada</p>
+			<p className="titulo-portada-crear-exp">Portada*</p>
 			{portada ? (
 				<div className="file-preview-portada">
 					<img

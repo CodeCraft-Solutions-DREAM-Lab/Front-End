@@ -17,29 +17,40 @@
 
 .file-preview-portada {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
+    justify-content: center;
+    overflow: hidden; /* Ensure the image gets cropped */
+    width: 80%; /* Match the dropzone width */
+    height: 80%; /* Match the dropzone height */
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 10px;
-    position: relative;
-    overflow: hidden;
+    
+}
+
+.file-preview-portada:hover .imagen-seleccionada-portada {
+    filter: brightness(70%); /* Darken the image on hover */
 }
 
 .imagen-seleccionada-portada {
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    border-radius: 5px;
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Crop the image */
+    transition: filter 0.5s ease;
 }
 
 .remove-icon-portada {
-    font-size: 24px;
+    position: absolute;
+    top: 30%;
+    right: 23%;
+    font-size: 30px;
     cursor: pointer;
-    color: red;
-    margin-top: 10px;
+    color: grey;
+    background-color: whitesmoke;
+    border-radius: 100%;
+    border: 2px solid grey;
+    padding: 1.5%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .upload-icon-portada {
@@ -55,7 +66,7 @@
     display: flex;
     align-items: center;
     margin-top: 10px;
-    color: red;
+    color: whitesmoke;
 }
 
 .error-icon-portada {
