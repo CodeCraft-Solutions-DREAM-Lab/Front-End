@@ -39,13 +39,14 @@ function SeleccionMaterial() {
 
 		// Parametros Stored Procedure
 		const params = {
-			idSala: getFromSessionStorage("idSala"), 
+			idSala: getFromSessionStorage("idSala"),
+			idExperiencia: getFromSessionStorage("idExperiencia"),
 			fecha: date.toISOString(), 
 			horaInicio: getFromSessionStorage("horaInicioIsoString"), 
 			duracion: parseInt(getFromSessionStorage("duration")), 
 		};
 
-		post("materiales", params)
+		post("materiales/recomendados", params)
 			.then((result) => {
 				setData(result);
 				setIsLoading(false);
