@@ -5,25 +5,40 @@ import qr from "../../../../assets/Videowall/qrTemporal.png";
 import imagenError from "../../../../assets/Videowall/errorVideowall.png";
 import imagenCorrecto from "../../../../assets/Videowall/correctoVideowall.png";
 import QRCode from "react-qr-code";
-import { get } from "src/utils/ApiRequests"
+import { get, put } from "src/utils/ApiRequests";
+import AlertaAsistencia from "../AlertaAsistencia/AlertaAsistencia";
+import { set } from "date-fns";
 
 function MensajeBienvenida(props) {
     const [cerrado, setCerrado] = useState(false);
     const [reservaFiltrada, setReservaFiltrada] = useState(null);
     const [error, setError] = useState(props.error);
     const [nombreUsuario, setNombreUsuario] = useState(null);
+    const [llegoTarde, setLlegoTarde] = useState(null);
 
     //  get de base de datos
-    useEffect(() => {
+    useEffect(() => {     
+
+        setCerrado(true);
+
         get(`usuarios/nombreUsuario/${props.tagId}`)
             .then((result) => {
                 const nombreUsuario = result;
-                console.log("Nombre de usuario:", nombreUsuario[0].NombreUsuario);
+                console.log(
+                    "Nombre de usuario:",
+                    nombreUsuario[0].NombreUsuario
+                );
                 setNombreUsuario(nombreUsuario[0].NombreUsuario);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
             });
+
+            // Esperar 5 segundos antes de cerrar el mensaje
+            setTimeout(() => {
+                setCerrado(false);
+            }, 300);
+
     }, [props.tagId]);
 
     const filtrarReservaciones = (listadoReservaciones, tagId) => {
@@ -50,16 +65,56 @@ function MensajeBienvenida(props) {
             props.listadoReservaciones,
             props.tagId
         );
-
+    
         if (!reservaFiltrada) {
             setError(true); // Establecer error en true si no se encuentra una reserva
         } else {
             setError(false); // Establecer error en false si se encuentra una reserva
-        }
 
-        setReservaFiltrada(reservaFiltrada);
-        console.log("Reserva filtrada:", reservaFiltrada);
+            setReservaFiltrada(reservaFiltrada);
+            console.log("Reserva filtrada:", reservaFiltrada);
+    
+            // Calcular la diferencia de tiempo en minutos
+            const horaInicioString = reservaFiltrada.horaInicio;
+            const horaInicioArray = horaInicioString.split(":");
+            const horaInicio = new Date();
+            horaInicio.setHours(parseInt(horaInicioArray[0]));
+            horaInicio.setMinutes(parseInt(horaInicioArray[1]));
+            const ahora = new Date();
+            const diferenciaMinutos = (ahora.getTime() - horaInicio.getTime()) / (1000 * 60);
+
+            // Establecer el estado de asistencia
+            let asistenciaState;
+            if (diferenciaMinutos > 15) {
+                asistenciaState = "Tarde";
+                setLlegoTarde(true);
+            } else {
+                asistenciaState = "A tiempo";
+                setLlegoTarde(false);
+            }
+    
+            // Actualizar la asistencia de la reserva filtrada
+            const url = `reservaciones/${reservaFiltrada.idReservacion}`;
+            const data = JSON.stringify({
+                asistencia: asistenciaState,
+            });
+    
+            // Si la reserva filtrada existe y no tiene asistencia registrada, se registra la asistencia
+            if (reservaFiltrada && reservaFiltrada.asistencia === null) {
+                put(
+                    url,
+                    data,
+                    () => {
+                        console.log("Asistencia registrada.");
+                    },
+                    (error) => {
+                        console.error("Error al registrar asistencia", error);
+                    }
+                );
+            }
+        }
     }, [props.listadoReservaciones, props.tagId]);
+    
 
     const handleCloseClick = () => {
         props.onClose();
@@ -71,8 +126,10 @@ function MensajeBienvenida(props) {
 
     // Obtener la primera palabra del nombre del usuario
     const primerNombre = nombreUsuario
-        ? (nombreUsuario.split(" ")[0])
+        ? nombreUsuario.split(" ")[0]
         : "explorador";
+
+    const bordeColor = llegoTarde ? "#E19F20" : "#1BAC55";
 
     return (
         <div
@@ -80,9 +137,12 @@ function MensajeBienvenida(props) {
             style={
                 error
                     ? { border: "13px solid #e84ea0" }
-                    : { border: "13px solid #1BAC55" }
+                    : { border: `13px solid ${bordeColor}` }
             }
         >
+            
+            <AlertaAsistencia tarde={llegoTarde} />
+
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
                 <h1 className="titulo-mensaje-bienvenida-videowall">
@@ -90,7 +150,10 @@ function MensajeBienvenida(props) {
                 </h1>
 
                 {/* Botón de cerrar */}
-                <div className="btn-cerrar-alerta-videowall"  onClick={handleCloseClick}>
+                <div
+                    className="btn-cerrar-alerta-videowall"
+                    onClick={handleCloseClick}
+                >
                     <button>X</button>
                 </div>
             </div>

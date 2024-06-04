@@ -1,0 +1,57 @@
+.mensaje-bienvenida-videowall-asistencia{
+    position: fixed; /* Posición fija para que se mantenga en la ventana */
+    bottom: 0; /* Alinear en la parte inferior */
+    left: 0; /* Alinear a la izquierda */
+    width: 7.3vw;
+    height: 3.7vh;
+    margin-bottom: 2.8vw;
+    margin-left: 1.2vw;
+    padding: 0%;
+    padding-bottom: 0%;
+    background-color: #1BAC55;
+    border: 13px solid white;
+    border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+    font-family: "Karla", sans-serif;
+    color: white;
+    text-align: center;
+    z-index: 20;
+}
+
+.white-box-alerta-asistencia{
+    position: fixed; /* Posición fija para que se mantenga en la ventana */
+    bottom: 0; /* Alinear en la parte inferior */
+    left: 0; /* Alinear a la izquierda */
+    width: 9.4vw;
+    height: 2.5vh;
+    margin-bottom: -0.87vw;
+    padding: 0.1%;
+    background-color: #ffffff00;
+    border-radius: 0px 0px 0px 0px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+    font-family: "Karla", sans-serif;
+    text-align: center;
+    z-index: 15;
+
+}
+
+.titulo-mensaje-bienvenida-videowall-asistencia {
+    font-weight: bold;
+    font-size: 0.5vw;
+    width: 10vw;
+}
+
+
+.alerta-videowall-primera-mitad-asistencia{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@keyframes appearFromCenter {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
