@@ -4,33 +4,61 @@ import {
     ModalHeader,
     ModalBody,
     ModalFooter,
-} from "@nextui-org/modal";
-
-import { Select, SelectSection, SelectItem } from "@nextui-org/select";
+    Select,
+    SelectSection,
+    SelectItem,
+    Button,
+} from "@nextui-org/react";
 
 import propTypes from "prop-types";
 
 function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
     return (
-        <Modal open={isOpen} onOpenChange={onOpenChange}>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="opaque">
             <ModalContent>
-                <ModalHeader>
-                    <h1>Agregar reservación</h1>
-                </ModalHeader>
-                <ModalBody>
-                    <Select
-                        labelPlacement="outside"
-                        label="Sala"
-                        className="max-w-xs"
-                    >
-                        {["Sala 1", "Sala 2"].map((sala, index) => (
-                            <SelectItem key={index}>{sala.label}</SelectItem>
-                        ))}
-                    </Select>
-                </ModalBody>
-                <ModalFooter>
-                    <button onClick={onOpenChange}>Cerrar</button>
-                </ModalFooter>
+                {(onClose) => (
+                    <>
+                        <ModalHeader className="flex flex-col gap-1">
+                            Modal Title
+                        </ModalHeader>
+                        <ModalBody>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Nullam pulvinar risus non risus
+                                hendrerit venenatis. Pellentesque sit amet
+                                hendrerit risus, sed porttitor quam.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Nullam pulvinar risus non risus
+                                hendrerit venenatis. Pellentesque sit amet
+                                hendrerit risus, sed porttitor quam.
+                            </p>
+                            <p>
+                                Magna exercitation reprehenderit magna aute
+                                tempor cupidatat consequat elit dolor
+                                adipisicing. Mollit dolor eiusmod sunt ex
+                                incididunt cillum quis. Velit duis sit officia
+                                eiusmod Lorem aliqua enim laboris do dolor
+                                eiusmod. Et mollit incididunt nisi consectetur
+                                esse laborum eiusmod pariatur proident Lorem
+                                eiusmod et. Culpa deserunt nostrud ad veniam.
+                            </p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button
+                                color="danger"
+                                variant="light"
+                                onPress={onClose}
+                            >
+                                Close
+                            </Button>
+                            <Button color="primary" onPress={onClose}>
+                                Action
+                            </Button>
+                        </ModalFooter>
+                    </>
+                )}
             </ModalContent>
         </Modal>
     );
