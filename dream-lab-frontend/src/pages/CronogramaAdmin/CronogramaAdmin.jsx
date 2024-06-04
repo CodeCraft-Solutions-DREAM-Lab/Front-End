@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "moment/locale/es"; // Import Spanish locale
 import Timeline, {
@@ -22,6 +22,11 @@ import {
     ListItemText,
     Divider,
 } from "@mui/material";
+import SpeedDial from '@mui/material/SpeedDial';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import GestionSalas from "./components/GestionSalas/GestionSalas";
 import { get } from "src/utils/ApiRequests";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "src/assets/Admin/menu-admin.svg";
@@ -38,6 +43,11 @@ import propTypes from "prop-types";
 
 import { Modal, useDisclosure } from "@nextui-org/react";
 import ModalCrearReservacionAdmin from "./components/ModalCrearReservacionAdmin/ModalCrearReservacionAdmin";
+
+const actions = [
+	{ icon: <AddCircleIcon />, name: 'Agregar reservación'},
+	{ icon: <SettingsIcon />, name: 'Configurar Salas'},
+];
 
 const monthTranslations = {
     January: "Enero",
@@ -109,9 +119,11 @@ function CronogramaAdmin() {
     moment.locale("es");
 
     const [items, setItems] = useState([]);
-    const [isLoadingItems, setIsLoadingItems] = useState(true);
-    const [groups, setGroups] = useState([]);
+	const [isLoadingItems, setIsLoadingItems] = useState(true);
+	const [groups, setGroups] = useState([]);
     const [isLoadingGroups, setIsLoadingGroups] = useState(true);
+	const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
+	const [salasEstados, setSalasEstados] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reservIdInModal, setReservIdInModal] = useState(0);
 
@@ -140,6 +152,16 @@ function CronogramaAdmin() {
                 setIsLoadingItems(false);
             });
     }, []);
+
+    useEffect(() => {
+		get("salas")
+			.then((result) => {
+				setSalasEstados(result);
+			})
+			.catch((error) => {
+				console.error("An error occurred:", error);
+			});
+	}, []);
 
     useEffect(() => {
         get("salas/cronograma")
@@ -185,6 +207,10 @@ function CronogramaAdmin() {
             groups.filter((group) => selectedSalasIds.includes(group.idSala))
         );
     }, [selectedSalasIds, groups]);
+
+    const handleOpenGestionSalas = () => {
+        setIsGestionSalasOpen(true);
+    };
 
     // Filtrar las reservaciones que se muestran en el cronograma según las
     // mesas que se hayan seleccionado en el filtro de mesas (switches)
@@ -292,18 +318,35 @@ function CronogramaAdmin() {
 
     const handleChange2 = (event) => {
         setSelectedOptions2(event.target.value);
-    };
+    };  
 
     return (
         <>
-            <div className="menu-icon-admin">
-                <img src={menuIcon} />
-            </div>
-            <ReservItemModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                reservId={reservIdInModal}
-            />
+            <GestionSalas
+				data-cy="gestion-salas"
+				salas={salasEstados}
+				isOpen={isGestionSalasOpen}
+				onClose={() => {
+					setIsGestionSalasOpen(false);
+				}}
+			/>
+			<SpeedDial
+				ariaLabel="SpeedDial Menu"
+				sx={{ position: 'fixed', bottom: 30, right: 50 }}
+				icon={
+					<img className="iconoMenu" src={menuIcon} />
+				}
+			>
+				{actions.map((action) => (
+				<SpeedDialAction
+					key={action.name}
+					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
+					tooltipTitle={action.name}
+					onClick={action.name === 'Configurar Salas' ? handleOpenGestionSalas : undefined}
+				/>
+				))}
+			</SpeedDial>
+            <ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal} />
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"
