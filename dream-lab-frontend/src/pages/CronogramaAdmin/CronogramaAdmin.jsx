@@ -36,6 +36,9 @@ import {
 } from "src/utils/Storage";
 import propTypes from "prop-types";
 
+import { Modal, useDisclosure } from "@nextui-org/react";
+import ModalCrearReservacionAdmin from "./components/ModalCrearReservacionAdmin/ModalCrearReservacionAdmin";
+
 const monthTranslations = {
     January: "Enero",
     February: "Febrero",
@@ -121,6 +124,8 @@ function CronogramaAdmin() {
     const [filteredItems, setFilteredItems] = useState([]);
     const [salas, setSalas] = useState([]);
     const [mesas, setMesas] = useState([]);
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -294,7 +299,11 @@ function CronogramaAdmin() {
             <div className="menu-icon-admin">
                 <img src={menuIcon} />
             </div>
-            <ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal} />
+            <ReservItemModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                reservId={reservIdInModal}
+            />
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"
@@ -313,11 +322,13 @@ function CronogramaAdmin() {
                     minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
                     maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
                     itemRenderer={({ item, itemContext, getItemProps }) => {
-                        return (<CustomItemRenderer
-                            item={item}
-                            itemContext={itemContext}
-                            getItemProps={getItemProps}
-                        />)
+                        return (
+                            <CustomItemRenderer
+                                item={item}
+                                itemContext={itemContext}
+                                getItemProps={getItemProps}
+                            />
+                        );
                     }}
                     groupRenderer={(group) => (
                         <CustomGroupRenderer
@@ -403,24 +414,24 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        color: "white",
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            color: "white",
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
@@ -493,23 +504,23 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
@@ -552,6 +563,11 @@ function CronogramaAdmin() {
                     </TimelineHeaders>
                 </Timeline>
             </div>
+            <ModalCrearReservacionAdmin
+                isOpen={isOpen}
+                onOpen={onOpen}
+                onOpenChange={onOpenChange}
+            />
         </>
     );
 }

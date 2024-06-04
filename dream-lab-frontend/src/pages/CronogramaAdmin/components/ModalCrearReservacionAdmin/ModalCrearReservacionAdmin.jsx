@@ -12,12 +12,13 @@ import propTypes from "prop-types";
 
 function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
     return (
-        // <Modal open={true} onOpenChange={onOpenChange}>
-        <Modal open={true}>
+        <Modal open={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
-                <ModalHeader>Agregar reservación</ModalHeader>
+                <ModalHeader>
+                    <h1>Agregar reservación</h1>
+                </ModalHeader>
                 <ModalBody>
-                    {/* <Select
+                    <Select
                         labelPlacement="outside"
                         label="Sala"
                         className="max-w-xs"
@@ -25,11 +26,10 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
                         {["Sala 1", "Sala 2"].map((sala, index) => (
                             <SelectItem key={index}>{sala.label}</SelectItem>
                         ))}
-                    </Select> */}
-                    Hola
+                    </Select>
                 </ModalBody>
                 <ModalFooter>
-                    {/* <button onClick={onOpenChange}>Cerrar</button> */}
+                    <button onClick={onOpenChange}>Cerrar</button>
                 </ModalFooter>
             </ModalContent>
         </Modal>
@@ -37,9 +37,9 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
 }
 
 ModalCrearReservacionAdmin.propTypes = {
-    isOpen: propTypes.bool,
-    onOpen: propTypes.func,
-    onOpenChange: propTypes.func,
+    isOpen: propTypes.bool.isRequired,
+    onOpen: propTypes.func.isRequired,
+    onOpenChange: propTypes.func.isRequired,
 };
 
 export default ModalCrearReservacionAdmin;
