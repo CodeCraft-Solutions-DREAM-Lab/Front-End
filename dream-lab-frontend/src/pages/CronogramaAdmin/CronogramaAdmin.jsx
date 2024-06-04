@@ -13,7 +13,6 @@ import "react-calendar-timeline/lib/Timeline.css";
 import "./CronogramaAdmin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import Switch from "@mui/material/Switch";
 import {
 	Select,
 	MenuItem,
@@ -25,7 +24,9 @@ import {
 import { get } from "../../utils/ApiRequests";
 import NavBarAdmin from "../../GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "../../assets/Admin/menu-admin.svg";
-import ReservItemModal from "./components/ReservItemModal";
+import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
+import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
+import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
 
 
 const monthTranslations = {
@@ -71,77 +72,6 @@ const CustomLabel = ({ interval }) => {
 	);
 };
 
-const handleToggleClick = (groupId) => {
-	console.log(`Toggle button clicked for group ${groupId}`);
-
-	// Add your toggle logic here
-};
-const customGroupRenderer = ({ group }) => {
-	const groupClass = group.sala ? "sala" : "";
-	return (
-		<div className={`rct-sidebar-row ${groupClass}`} data-cy="group-row">
-			{group.title}
-			{!group.sala && (
-				<Switch
-					onChange={() => handleToggleClick(group.id)}
-					defaultChecked
-					color="white" // Customize the color of the switch
-					sx={{
-						width: 42,
-						height: 26,
-						padding: 0,
-						margin: 0,
-						marginLeft: 2,
-						"& .css-1mpet1h-MuiSwitch-root .MuiSwitch-switchBase": {
-							margin: "1px",
-						},
-						"& .MuiSwitch-switchBase": {
-							padding: 0,
-							margin: 0.3,
-							transitionDuration: "300ms",
-							"&.Mui-checked": {
-								transform: "translateX(16px)",
-								color: "#fff",
-								"& + .MuiSwitch-track": {
-									backgroundColor: "#fff", // Change to white
-									opacity: 1,
-									border: 0,
-								},
-								"&.Mui-disabled + .MuiSwitch-track": {
-									opacity: 0.5,
-								},
-							},
-							"&.Mui-focusVisible .MuiSwitch-thumb": {
-								backgroundColor: "#042E55",
-								border: "6px solid #fff",
-							},
-							"&.Mui-disabled .MuiSwitch-thumb": {
-								backgroundColor: "#042E55", // Thumb color
-								transform: "translateY(-50%)",
-							},
-							"&.Mui-disabled + .MuiSwitch-track": {
-								opacity: 0.7,
-							},
-						},
-						"& .MuiSwitch-thumb": {
-							boxSizing: "border-box",
-							width: 22,
-							height: 22,
-							backgroundColor: "#042E55", // Thumb color
-						},
-						"& .MuiSwitch-track": {
-							borderRadius: 13, // Adjust the borderRadius as needed
-							backgroundColor: "#fff", // Track color
-							opacity: 1,
-							transition: "background-color 500ms",
-						},
-					}}
-				/>
-			)}
-		</div>
-	);
-};
-
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
 // const MenuProps = {
@@ -162,6 +92,7 @@ function convertToMomentObjects(jsonData) {
 			id: event.id,
 			group: event.group,
 			title: event.title,
+			estatusMateriales: event.estatusMateriales,
 			canMove: false,
 			start_time: moment(event.start_time).add(6, "hours"),
 			end_time: moment(event.end_time).add(6, "hours"),
@@ -188,7 +119,7 @@ function CronogramaAdmin() {
 			.then((result) => {
 				setItems(convertToMomentObjects(result));
 				setIsLoadingItems(false);
-				console.log(items);
+				// console.log(items);
 			})
 			.catch((error) => {
 				console.error("An error occurred:", error);
@@ -238,7 +169,7 @@ function CronogramaAdmin() {
 			<div className="menu-icon-admin">
 				<img src={menuIcon} />
 			</div>
-			<ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal}/>
+			<ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal} />
 			<NavBarAdmin />
 			<div
 				className="timeline-container-cronograma-admin"
@@ -256,7 +187,10 @@ function CronogramaAdmin() {
 					onTimeChange={handleTimeChange}
 					minZoom={14 * 60 * 60 * 1000} // 14 horas en milisegundos
 					maxZoom={14 * 60 * 60 * 1000} // 14 horas en milisegundos
-					groupRenderer={customGroupRenderer}
+					itemRenderer={({ item, itemContext, getItemProps }) => {
+						return CustomItemRenderer({ item, itemContext, getItemProps })
+					}}
+					groupRenderer={CustomGroupRenderer}
 					onItemClick={(itemId) => {
 						setReservIdInModal(itemId);
 						setIsModalOpen(true);

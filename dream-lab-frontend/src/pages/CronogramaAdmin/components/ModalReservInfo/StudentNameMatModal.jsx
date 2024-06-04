@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { Skeleton } from "@nextui-org/react";
-import { 
-    Snippet 
-} from "@nextui-org/snippet";
 import propTypes from "prop-types";
 import "./StudentNameMatModal.css";
-// import copyIcon from "src/assets/Icons/copy-icon.svg";
-
+import CopyIcon from "../../../../assets/Icons/CopyIcon";
+import CheckIcon from "../../../../assets/Icons/CheckIcon";
 
 const StudentNameMatModal = ({ studentName, studentMat, isLoading }) => {
+
+    const [iconSVG, setIconSVG] = useState("CopyIcon");
+
+    const handleClick = () => {
+        navigator.clipboard.writeText(studentMat);
+        setIconSVG("CopyIconRed");
+        setTimeout(() => {
+            setIconSVG("CopyIcon");
+        }, 2000);
+    }
 
     if (isLoading) {
         return (
@@ -22,14 +30,17 @@ const StudentNameMatModal = ({ studentName, studentMat, isLoading }) => {
         <div className="ReservItemModal-student-name-mat">
             <span className="ReservItemModal-student-name">{studentName}</span>
             <br />
-            <Snippet className="py-1 px-3 mt-1" symbol="">{studentMat}</Snippet>
-            {/* <div
+            <div
                 className="ReservItemModal-student-mat"
-                onClick={() => navigator.clipboard.writeText(studentMat, isLoading).then(() => alert("Matrícula copiada"))}
+                onClick={handleClick}
             >
                 <span className="ReservItemModal-student-mat-text">{studentMat}</span>
-                <img src={copyIcon} alt="copy-icon" className="ReservItemModal-copy-icon-img" />
-            </div> */}
+                {iconSVG === "CopyIcon" ? (
+                    <CopyIcon className="ReservItemModal-icon" />
+                ) : (
+                    <CheckIcon className="ReservItemModal-icon" color="#17c964" />
+                )}
+            </div>
 
         </div>
     )

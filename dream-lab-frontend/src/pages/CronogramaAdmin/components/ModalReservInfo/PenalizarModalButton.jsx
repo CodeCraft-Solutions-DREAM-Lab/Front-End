@@ -4,7 +4,7 @@ import {
     Skeleton
 } from "@nextui-org/react";
 import propTypes from "prop-types";
-import WargningIcon from "./WarningIcon";
+import WargningIcon from "../../../../assets/Icons/WarningIcon";
 import "./ModalButtons.css";
 
 function PenalizarModalButton(props) {

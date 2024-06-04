@@ -11,19 +11,19 @@ import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import "./ReservItemModal.css";
-// import { get } from "../../../utils/ApiRequests";
+import { get } from "../../../../utils/ApiRequests";
 
-// const horaFormatter = new Intl.DateTimeFormat("es-MX", {
-// 	hour: "numeric",
-// 	minute: "numeric",
-// 	hour12: false,
-// });
+const horaFormatter = new Intl.DateTimeFormat("es-MX", {
+	hour: "numeric",
+	minute: "numeric",
+	hour12: false,
+});
 
-// const dateFormatter = new Intl.DateTimeFormat("es-MX", {
-// 	weekday: "long",
-// 	month: "long",
-// 	day: "numeric",
-// });
+const dateFormatter = new Intl.DateTimeFormat("es-MX", {
+	weekday: "long",
+	month: "long",
+	day: "numeric",
+});
 
 function ReservItemModal(props) {
 
@@ -46,69 +46,74 @@ function ReservItemModal(props) {
 		setIsLoading(true);
 		// console.log("ReservItemModal useEffect");
 
-		// get("reservaciones/cronograma/" + props.reservId)
-		// 	.then((response) => {
-		// 		const horaInicio = new Date(response.horaInicio);
-		// 		horaInicio.setHours(horaInicio.getHours() + 6);
-		// 		const horaFin = new Date(horaInicio);
-		// 		horaFin.setHours(horaFin.getHours() + response.duracion);
-		// 		horaFin.setMinutes(horaFin.getMinutes() + (response.duracion % 1) * 60);
+		get("reservaciones/cronograma/" + props.reservId)
+			.then((response) => {
 
-		// 		const formattedInicio = horaFormatter.format(horaInicio);
-		// 		const formattedFin = horaFormatter.format(horaFin);
+				console.log("Reservacion data: ", response);
 
-		// 		let reservDate = new Date(response.reservDate);
-		// 		let formattedDate = dateFormatter.format(reservDate);
-		// 		// Convert the first letter of each word to uppercase except for words with 2 or less characters
-		// 		formattedDate = formattedDate.replace(
-		// 			/\b\w{3,}/g, 
-		// 			char => char.charAt(0).toUpperCase() + char.slice(1)
-		// 		);
+				const horaInicio = new Date(response.horaInicio);
+				horaInicio.setHours(horaInicio.getHours() + 6);
+				const horaFin = new Date(horaInicio);
+				horaFin.setHours(horaFin.getHours() + response.duracion);
+				horaFin.setMinutes(horaFin.getMinutes() + (response.duracion % 1) * 60);
 
-		// 		setStudentName(response.studentName);
-		// 		setStudentMat(response.studentMat);
-		// 		setSalaName(response.salaName);
-		// 		setMesaName("Mesa 2");
-		// 		setDateString(formattedDate);
-		// 		setHoraInicioString(formattedInicio);
-		// 		setHoraFinString(formattedFin);
-		// 		setReservItems(response.reservItems);
+				const formattedInicio = horaFormatter.format(horaInicio);
+				const formattedFin = horaFormatter.format(horaFin);
 
-		// 		const selectedItems = response.reservItems.map((item) => { return item.name });
-		// 		setSelectedItems(selectedItems);
+				let reservDate = new Date(response.reservDate);
+				reservDate.setHours(reservDate.getHours() + 6);
+				let formattedDate = dateFormatter.format(reservDate);
+				// Convert the first letter of each word to uppercase except for words with 2 or less characters
+				formattedDate = formattedDate.replace(
+					/\b\w{3,}/g,
+					char => char.charAt(0).toUpperCase() + char.slice(1)
+				);
 
-		// 		setIsLoading(false);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error("Error fetching reservacion data: ", error);
-		// 		setIsLoading(false);
-		// 	});
+				setStudentName(response.studentName);
+				setStudentMat(response.studentMat);
+				setSalaName(response.salaName);
+				setMesaName("Mesa 2");
+				setDateString(formattedDate);
+				setHoraInicioString(formattedInicio);
+				setHoraFinString(formattedFin);
+				setReservItems(response.reservItems);
 
-		setTimeout(() => {
-			setStudentName("Jaime Eduardo López Castro");
-			setStudentMat("A00833173");
-			setSalaName("Electric Garage");
-			setMesaName("Mesa 2");
-			setDateString("Martes, 15 de Diciembre");
-			setHoraInicioString("15:00");
-			setHoraFinString("17:00");
-			setReservItems([
-				{
-					name: "Lentes Oculus Quest",
-					quantity: 2,
-				},
-				{
-					name: "Computadora Windows",
-					quantity: 1,
-				},
-				{
-					name: "Extensión 2 metros",
-					quantity: 1,
-				},
-			]);
-			setIsLoading(false);
+				const selectedItems = response.selectedItems.map((item) => { return item.name });
+				console.log("Selected items: ", selectedItems);
+				setSelectedItems(selectedItems);
 
-		}, 1000);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.error("Error fetching reservacion data: ", error);
+				setIsLoading(false);
+			});
+
+		// setTimeout(() => {
+		// 	setStudentName("Jaime Eduardo López Castro");
+		// 	setStudentMat("A00833173");
+		// 	setSalaName("Electric Garage");
+		// 	setMesaName("Mesa 2");
+		// 	setDateString("Martes, 15 de Diciembre");
+		// 	setHoraInicioString("15:00");
+		// 	setHoraFinString("17:00");
+		// 	setReservItems([
+		// 		{
+		// 			name: "Lentes Oculus Quest",
+		// 			quantity: 2,
+		// 		},
+		// 		{
+		// 			name: "Computadora Windows",
+		// 			quantity: 1,
+		// 		},
+		// 		{
+		// 			name: "Extensión 2 metros",
+		// 			quantity: 1,
+		// 		},
+		// 	]);
+		// 	setIsLoading(false);
+
+		// }, 1000);
 	}, [props.isOpen])
 
 	return (
