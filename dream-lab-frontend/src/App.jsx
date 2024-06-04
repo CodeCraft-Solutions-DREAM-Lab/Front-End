@@ -99,12 +99,11 @@ const router = createBrowserRouter(
                 path="crearAnuncio"
                 element={secured(CrearAnuncioVideowall)()}
             />
-            <Route path="admin" element={<CronogramaAdmin />} />
-            <Route path="admin/material" element={<MaterialesRecomendados />} />
+            <Route path="admin" element={secured(CronogramaAdmin)()} />
             <Route path="dashboard" element={secured(Dashboard)()} />
             <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="crearExperiencia" element={<CrearExperiencia/>}/>
+            <Route path="crearExperiencia" element={<CrearExperiencia/>}/> {/* <Route path="crearExperiencia" element={secured(CrearExperiencia)}/> */}
         </Route>
     )
 );

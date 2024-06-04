@@ -11,6 +11,7 @@ import AgregarPortada from "./components/AgregarPortada";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import DetalleExperiencia from "src/pages/CrearExperiencia/components/DetalleExperiencia";
+import MaterialesRecomendados from "src/pages/MaterialesRecomendados/MaterialesRecomendados";
 
 const steps = [
 	"Crea tu experiencia",
@@ -35,6 +36,7 @@ function CrearExperiencia() {
 		tipoExperiencia: null, // Se trae de InfoExperiencia
 		instruccionesFile: null, // Se trae de InfoExperiencia
 		portadaFile: null, // Se trae de AgregarPortada
+		materialesExperiencia: null
 	});
 
 	const [alertOpen, setAlertOpen] = useState(false);
@@ -108,7 +110,9 @@ function CrearExperiencia() {
 						</div>
 					</div>
 					<div className={`page page-3 ${page === 2 ? "active" : "inactive"}`}>
-						<div>Page 3 Content</div>
+						<div>
+							<MaterialesRecomendados/>
+						</div>
 					</div>
 					<div className="button-container-crear-experiencia">
 						<RoundedButton
