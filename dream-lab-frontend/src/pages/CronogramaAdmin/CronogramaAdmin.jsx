@@ -301,8 +301,8 @@ function CronogramaAdmin() {
                 data-cy="timeline-container-cronograma-admin"
             >
                 <Timeline
-                    groups={groups}
-                    items={items}
+                    groups={filteredGroups}
+                    items={filteredItems}
                     visibleTimeStart={visibleTimeStart}
                     visibleTimeEnd={visibleTimeEnd}
                     defaultTimeStart={moment().add(-12, "hour")}
