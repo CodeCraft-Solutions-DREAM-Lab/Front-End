@@ -2,11 +2,11 @@
 	position: relative;
 	width: 100%;
 	height: fit-content;
-	padding-top: 18vh;
+	padding-top: 17vh;
 }
 
 .top-section {
-	padding-bottom: 1%;
+	padding-bottom: 0.1%;
 	margin-inline: 9%;
 	display: flex;
 	flex-flow: row nowrap;
@@ -23,7 +23,7 @@
 }
 
 .seleccion-material-boton-back {
-	width: 4vw;
+	width: 3vw;
 	height: auto;
 	transform: translateX(-30px);
 	cursor: pointer;
@@ -39,7 +39,7 @@
 	display: flex;
 	align-items: center;
 	width: 200%;
-	height: 10vh;
+	height: 11vh;
 	padding-left: 1%;
 	margin-right: 4%;
 	column-gap: 2vw;
@@ -96,7 +96,7 @@
 	overflow-y: auto; /* Enable vertical scroll if needed */
 	min-width: 80vw;
 	height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
-	padding: 0 1%; /* Added padding to prevent cards from touching the edges */
+	padding: 1.5% 1%; /* Added padding to prevent cards from touching the edges */
 }
 
 @media only screen and (max-width: 480px) {
