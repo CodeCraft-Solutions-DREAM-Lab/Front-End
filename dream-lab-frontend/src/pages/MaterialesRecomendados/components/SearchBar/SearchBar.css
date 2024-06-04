@@ -1,0 +1,21 @@
+.searchBar {
+    outline: none;
+    align-self: flex-end;
+    background-color: transparent;
+    background-image: url("src/assets/NavBar/magnifyingGlassIcon.svg"); /* Path to your magnifying glass icon */
+    background-repeat: no-repeat;
+    background-position: 10% center; /* Adjust position as needed */
+    background-size: 20px; /* Adjust size as needed */
+    border: 1.5px solid white; /* Changed border width and added border style */
+    border-radius: 25px;
+    color: white;
+    text-align: left; /* Center text horizontally */
+}
+
+.searchBar:focus {
+    border-color: white; /* Change border color on focus */
+}
+
+.searchBar::placeholder {
+    color: whitesmoke; /* Change placeholder color */
+}

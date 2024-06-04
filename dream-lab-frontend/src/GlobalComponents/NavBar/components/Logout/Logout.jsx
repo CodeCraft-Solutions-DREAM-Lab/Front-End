@@ -5,15 +5,21 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "src/redux/Slices/userSlice";
 import { clearStorages } from "src/utils/Storage";
 
+// Storage
+import { getFromSessionStorage } from "src/utils/Storage";
+
 function Logout() {
     let navigate = useNavigate();
     const dispatch = useDispatch(); // Get the dispatch function
 
     const handleClick = () => {
-        navigate("/login"); // Navega a la landing page
-        clearStorages();
-        // Llamámos a la función de logoutUser de la userSlice para borrar los datos del usuario
-        dispatch(logoutUser());
+        if (!getFromSessionStorage("vistaEstudiante")) {
+            navigate("/login"); // Navega a la landing page
+            clearStorages();
+            // Llamámos a la función de logoutUser de la userSlice para borrar
+            // los datos del usuario
+            dispatch(logoutUser());
+        }
     };
 
     return (

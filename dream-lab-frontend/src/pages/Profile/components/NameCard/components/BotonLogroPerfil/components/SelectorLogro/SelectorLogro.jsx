@@ -18,13 +18,14 @@ import SelectorLogroItem from "./components/SelectorLogroItem/SelectorLogroItem"
 import { post } from "src/utils/ApiRequests";
 
 // Local Storage
-import { getFromLocalStorage } from "src/utils/Storage";
+import { getFromLocalStorage, existsInSessionStorage } from "src/utils/Storage";
 import SelectorColores from "./components/SelectorLogroItem/SelectorColores/SelectorColores";
 
 function SelectorLogro({
     isOpen,
     onOpen,
     onOpenChange,
+    onInfoAvisoLogroChange,
     colorSeleccionado,
     setColorSeleccionado,
     logrosObtenidos,
@@ -34,6 +35,7 @@ function SelectorLogro({
 }) {
     const [logroPreSeleccionado, setLogroPreSeleccionado] = useState({});
     const [colorPreSeleccionado, setColorPreSeleccionado] = useState("");
+    const [infoLogroAviso, setInfoLogroAviso] = useState("");
 
     // Obtenemos los valores originales del logro y color seleccionado como
     // valor incial de la preseleccion
@@ -46,19 +48,23 @@ function SelectorLogro({
     const handleSave = async () => {
         setLogroSeleccionado(logroPreSeleccionado);
         setColorSeleccionado(colorPreSeleccionado);
-
+        onInfoAvisoLogroChange(true);
         try {
-            const response = await post(
-                `perfil/logros/${getFromLocalStorage("user")}`,
-                {
-                    idLogro: logroPreSeleccionado.idLogro,
-                    colorPreferido: colorPreSeleccionado,
-                }
-            );
+            let idUsuario;
+            if (existsInSessionStorage("vistaEstudiante")) {
+                idUsuario = "a00000000";
+            } else {
+                idUsuario = getFromLocalStorage("user");
+            }
+            const response = await post(`perfil/logros/${idUsuario}`, {
+                idLogro: logroPreSeleccionado.idLogro,
+                colorPreferido: colorPreSeleccionado,
+            });
             // Otorga un logro por customizar el perfil
             await handleLogroArtista(10);
             // Cierra el modal
             onOpenChange();
+            
         } catch (error) {
             console.error(error);
         }
@@ -151,6 +157,7 @@ function SelectorLogro({
                             </div>
                         </div>
                     </div>
+                    
                 </ModalBody>
             </ModalContent>
         </Modal>
@@ -161,6 +168,7 @@ SelectorLogro.propTypes = {
     isOpen: PropTypes.bool,
     onOpen: PropTypes.func,
     onOpenChange: PropTypes.func,
+    onInfoAvisoLogroChange: PropTypes.func,
     colorSeleccionado: PropTypes.string,
     setColorSeleccionado: PropTypes.func,
     logrosObtenidos: PropTypes.array,
