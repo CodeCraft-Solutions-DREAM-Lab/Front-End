@@ -12,6 +12,9 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import DetalleExperiencia from "src/pages/CrearExperiencia/components/DetalleExperiencia";
 import MaterialesRecomendados from "src/pages/MaterialesRecomendados/MaterialesRecomendados";
+import { uploadFile } from "../../firebase/config";
+import { getFromSessionStorage } from "../../utils/Storage";
+import { post } from "src/utils/ApiRequests";
 
 const steps = [
 	"Crea tu experiencia",
@@ -36,7 +39,7 @@ function CrearExperiencia() {
 		tipoExperiencia: null, // Se trae de InfoExperiencia
 		instruccionesFile: null, // Se trae de InfoExperiencia
 		portadaFile: null, // Se trae de AgregarPortada
-		materialesExperiencia: null
+		materialesExperiencia: null,
 	});
 
 	const [alertOpen, setAlertOpen] = useState(false);
@@ -56,11 +59,55 @@ function CrearExperiencia() {
 		console.log(formValues);
 	};
 
+	// Submit form
+	async function handleSubmit() {
+		try {
+			const materialesExperiencia = JSON.parse(
+				sessionStorage.getItem("materialesExperiencia")
+			);
+			const idSala = sessionStorage.getItem("idSala");
+
+			// Upload portadaFile
+			const portadaURL = await uploadFile(formValues.portadaFile);
+			var instruccionesURL = null;
+
+			// Upload instruccionesFile
+			if (!formValues.instruccionesFile) {
+				instruccionesURL = await uploadFile(formValues.instruccionesFile);
+			}
+
+			// Update formValues with the URLs
+			handleInfoExperienciaChange({
+				portadaURL: portadaURL,
+				instruccionesURL: instruccionesURL,
+				idSala: idSala,
+				materialesExperiencia: materialesExperiencia,
+			});
+
+			// Post request to the Experiencias table
+			const response = await post('experiencia/crear', formValues);
+			// Handle the response
+			if (response.status === 200) {
+				handleOpenSnackbar("Experiencia creada exitosamente!");
+			} else {
+				handleOpenSnackbar("Hubo un problema al crear la experiencia.");
+			}
+		} catch (error) {
+			console.error("Error al subir archivos o crear experiencia:", error);
+			handleOpenSnackbar("Error al subir archivos o crear experiencia.");
+		}
+	}
+
 	// Callback function to move to the next page
 	function handleSiguiente() {
 		if (page < steps.length - 1) {
 			// Check if required fields are filled before moving to the next page
-			if (page === 0 && (!formValues.nombre || !formValues.tipoExperiencia || !formValues.portadaFile)) {
+			if (
+				page === 0 &&
+				(!formValues.nombre ||
+					!formValues.tipoExperiencia ||
+					!formValues.portadaFile)
+			) {
 				handleOpenSnackbar("Porfavor llena los campos requeridos.");
 				return;
 			}
@@ -68,6 +115,8 @@ function CrearExperiencia() {
 		} else {
 			// Final action on the last page
 			console.log("Submit");
+			// Upload files
+			handleSubmit();
 		}
 	}
 
@@ -78,7 +127,7 @@ function CrearExperiencia() {
 	return (
 		<>
 			<NavBarAdmin />
-			
+
 			<div className="contenedor-principal-crear-experiencia">
 				<div className="contenido-crear-experiencia">
 					<Stepper
@@ -106,12 +155,12 @@ function CrearExperiencia() {
 					</div>
 					<div className={`page page-2 ${page === 1 ? "active" : "inactive"}`}>
 						<div>
-							<DetalleExperiencia onInfoChange={handleInfoExperienciaChange}/>
+							<DetalleExperiencia onInfoChange={handleInfoExperienciaChange} />
 						</div>
 					</div>
 					<div className={`page page-3 ${page === 2 ? "active" : "inactive"}`}>
 						<div>
-							<MaterialesRecomendados/>
+							<MaterialesRecomendados />
 						</div>
 					</div>
 					<div className="button-container-crear-experiencia">
@@ -130,8 +179,8 @@ function CrearExperiencia() {
 							severity="info"
 							sx={{
 								width: "100%",
-								backgroundColor: "#f8f8f8", 
-								color: "grey", 
+								backgroundColor: "#f8f8f8",
+								color: "grey",
 								borderRadius: "15px",
 							}}
 						>

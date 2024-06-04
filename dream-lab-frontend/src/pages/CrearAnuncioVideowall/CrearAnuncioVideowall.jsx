@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./CrearAnuncioVideowall.css";
 import BotonVisualizarVideowall from "./components/BotonVisualizarVideowall/BotonVisualizarVideowall/BotonVisualizarVideowall";
 import imagenExpandir from "../../assets/CrearAnuncioVideowall/expandir.webp";

@@ -1,11 +1,12 @@
 import { Select, SelectItem } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon and file icon
 import { FiFile, FiUpload } from "react-icons/fi";
 import PropTypes from "prop-types";
+import { get } from "src/utils/ApiRequests";
 
 import "./InfoExperiencia.css";
 
@@ -40,6 +41,21 @@ function InfoExperiencia({ onInfoChange }) {
 	const [tipoExperiencia, setTipoExperiencia] = useState("");
 	const [instrucciones, setInstrucciones] = useState(null);
 	const [UF, setUF] = useState(null);
+	const [ufs, setUfs] = useState([]); // State to store fetched UFs
+
+	// useEffect to fetch UFs
+	useEffect(() => {
+		async function fetchUFs() {
+			try {
+				const response = await get("/UFs");
+				setUfs(response.data); // Assuming response.data contains the UFs
+			} catch (error) {
+				console.error("Error fetching UFs:", error);
+			}
+		}
+
+		fetchUFs();
+	}, []);
 
 	// Function to handle changes in nombre
 	function handleNombreChange(event) {
