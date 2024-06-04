@@ -1,50 +1,54 @@
 .mensaje-bienvenida-videowall-asistencia{
-    position: fixed; /* Posición fija para que se mantenga en la ventana */
-    bottom: 0; /* Alinear en la parte inferior */
-    left: 0; /* Alinear a la izquierda */
-    width: 7.3vw;
-    height: 3.7vh;
-    margin-bottom: 2.8vw;
-    margin-left: 1.2vw;
-    padding: 0%;
-    padding-bottom: 0%;
-    background-color: #1BAC55;
-    border: 13px solid white;
-    border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
-    font-family: "Karla", sans-serif;
-    color: white;
-    text-align: center;
-    z-index: 20;
+  position: fixed; /* Posición fija para que se mantenga en la ventana */
+  bottom: 0; /* Alinear en la parte inferior */
+  left: 0; /* Alinear a la izquierda */
+  width: 9vw;
+  height: 38vh;
+  margin-left: 0.35vw;
+  margin-bottom: 0.1vw;
+  padding: 0.9%;
+  background-color: white;
+  border: 1px solid #e84ea0;
+  border-radius: 55px;
+  font-family: "Karla", sans-serif;
+  color: black;
+  animation: appearFromCenter 0.5s ease forwards; /* Aplicar animación */
+  z-index: 20;
 }
 
-.white-box-alerta-asistencia{
-    position: fixed; /* Posición fija para que se mantenga en la ventana */
-    bottom: 0; /* Alinear en la parte inferior */
-    left: 0; /* Alinear a la izquierda */
-    width: 9.4vw;
-    height: 2.5vh;
-    margin-bottom: -0.87vw;
-    padding: 0.1%;
-    background-color: #ffffff00;
-    border-radius: 0px 0px 0px 0px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
-    font-family: "Karla", sans-serif;
-    text-align: center;
-    z-index: 15;
-
+.checkmark-asistencia{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -45vh;
+  width: 9vw;
+  height: 15vh;
+  margin-top: 10vh;
+  margin-left: -0.25vw;
 }
 
 .titulo-mensaje-bienvenida-videowall-asistencia {
     font-weight: bold;
-    font-size: 0.5vw;
+    font-size: 0.6vw;
     width: 10vw;
+    height: 38vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 11.5vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    line-height: 95%;
+    text-align: center;
 }
-
 
 .alerta-videowall-primera-mitad-asistencia{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
+
+
 
 @keyframes appearFromCenter {
     0% {
@@ -62,26 +66,33 @@
       position: fixed; /* Posición fija para que se mantenga en la ventana */
       bottom: 0; /* Alinear en la parte inferior */
       left: 0; /* Alinear a la izquierda */
-      width: 11vw;
-      height: 2.5vh;
-      margin-bottom: 3.6vw;
-      margin-left: 1.6vw;
-      padding: 0%;
-      padding-top: 0.2vw;
-      padding-left: 0.4vw;
-      background-color: #1BAC55;
-      border: 1px solid white;
-      border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+      width: 13vw;
+      height: 20vh;
+      margin-left: 0.35vw;
+      margin-bottom: 0.1vw;
+      padding: 0.9%;
+      background-color: white;
+      border: 1px solid #e84ea0;
+      border-radius: 55px;
       font-family: "Karla", sans-serif;
-      color: white;
-      text-align: center;
+      color: black;
+      animation: appearFromCenter 0.5s ease forwards; /* Aplicar animación */
       z-index: 20;
     }
 
     .titulo-mensaje-bienvenida-videowall-asistencia {
       font-weight: bold;
-      font-size: 0.7vw;
+      font-size: 0.6vw;
       width: 10vw;
+      height: 38vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 11.5vh;
+      padding-left: 2vw;
+      padding-right: 2vw;
+      line-height: 95%;
+      text-align: center;
   }
   }
 
@@ -92,19 +103,17 @@
     position: fixed; /* Posición fija para que se mantenga en la ventana */
     bottom: 0; /* Alinear en la parte inferior */
     left: 0; /* Alinear a la izquierda */
-    width: 11vw;
-    height: 2.5vh;
-    margin-bottom: 4vw;
-    margin-left: 1.1vw;
-    padding: 0%;
-    padding-top: 0.2vw;
-    padding-left: 0.4vw;
-    background-color: #1BAC55;
-    border: 1px solid white;
-    border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+    width: 9vw;
+    height: 38vh;
+    margin-left: 0.35vw;
+    margin-bottom: 0.1vw;
+    padding: 0.9%;
+    background-color: white;
+    border: 1px solid #e84ea0;
+    border-radius: 55px;
     font-family: "Karla", sans-serif;
-    color: white;
-    text-align: center;
+    color: black;
+    animation: appearFromCenter 0.5s ease forwards; /* Aplicar animación */
     z-index: 20;
   }
 }

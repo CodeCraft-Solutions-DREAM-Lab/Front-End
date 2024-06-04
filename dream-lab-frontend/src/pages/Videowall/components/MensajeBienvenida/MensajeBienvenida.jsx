@@ -67,7 +67,6 @@ function MensajeBienvenida(props) {
 
         if (!reservaFiltrada) {
             setError(true); // Establecer error en true si no se encuentra una reserva
-            
         } else {
             setError(false); // Establecer error en false si se encuentra una reserva
 
@@ -145,9 +144,7 @@ function MensajeBienvenida(props) {
                     : { border: `13px solid ${bordeColor}` }
             }
         >
-            {error ? null : mostrarAsistencia ? (
-                <AlertaAsistencia tarde={llegoTarde} />
-            ) : null}
+            {error ? null : <AlertaAsistencia tarde={llegoTarde} />}
 
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
