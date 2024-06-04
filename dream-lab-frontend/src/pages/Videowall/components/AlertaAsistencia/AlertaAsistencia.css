@@ -55,3 +55,56 @@
     }
   }
 
+
+  @media (max-width: 2000px) {
+
+    .mensaje-bienvenida-videowall-asistencia{
+      position: fixed; /* Posición fija para que se mantenga en la ventana */
+      bottom: 0; /* Alinear en la parte inferior */
+      left: 0; /* Alinear a la izquierda */
+      width: 11vw;
+      height: 2.5vh;
+      margin-bottom: 3.6vw;
+      margin-left: 1.6vw;
+      padding: 0%;
+      padding-top: 0.2vw;
+      padding-left: 0.4vw;
+      background-color: #1BAC55;
+      border: 1px solid white;
+      border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+      font-family: "Karla", sans-serif;
+      color: white;
+      text-align: center;
+      z-index: 20;
+    }
+
+    .titulo-mensaje-bienvenida-videowall-asistencia {
+      font-weight: bold;
+      font-size: 0.7vw;
+      width: 10vw;
+  }
+  }
+
+  
+/*Pantalla regular (computadora)*/
+@media (max-height: 700px) {
+  .mensaje-bienvenida-videowall-asistencia{
+    position: fixed; /* Posición fija para que se mantenga en la ventana */
+    bottom: 0; /* Alinear en la parte inferior */
+    left: 0; /* Alinear a la izquierda */
+    width: 11vw;
+    height: 2.5vh;
+    margin-bottom: 4vw;
+    margin-left: 1.1vw;
+    padding: 0%;
+    padding-top: 0.2vw;
+    padding-left: 0.4vw;
+    background-color: #1BAC55;
+    border: 1px solid white;
+    border-radius: 40px 40px 40px 40px; /* Radios de esquina: superior izquierda, superior derecha, inferior derecha, inferior izquierda */
+    font-family: "Karla", sans-serif;
+    color: white;
+    text-align: center;
+    z-index: 20;
+  }
+}

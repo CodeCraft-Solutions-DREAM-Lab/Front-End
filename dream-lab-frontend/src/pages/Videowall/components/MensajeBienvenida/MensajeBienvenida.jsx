@@ -15,10 +15,10 @@ function MensajeBienvenida(props) {
     const [error, setError] = useState(props.error);
     const [nombreUsuario, setNombreUsuario] = useState(null);
     const [llegoTarde, setLlegoTarde] = useState(null);
+    const [mostrarAsistencia, setMostrarAsistencia] = useState(false);
 
     //  get de base de datos
-    useEffect(() => {     
-
+    useEffect(() => {
         setCerrado(true);
 
         get(`usuarios/nombreUsuario/${props.tagId}`)
@@ -34,11 +34,10 @@ function MensajeBienvenida(props) {
                 console.error("An error occurred:", error);
             });
 
-            // Esperar 5 segundos antes de cerrar el mensaje
-            setTimeout(() => {
-                setCerrado(false);
-            }, 300);
-
+        // Esperar 5 segundos antes de cerrar el mensaje
+        setTimeout(() => {
+            setCerrado(false);
+        }, 300);
     }, [props.tagId]);
 
     const filtrarReservaciones = (listadoReservaciones, tagId) => {
@@ -65,15 +64,16 @@ function MensajeBienvenida(props) {
             props.listadoReservaciones,
             props.tagId
         );
-    
+
         if (!reservaFiltrada) {
             setError(true); // Establecer error en true si no se encuentra una reserva
+            
         } else {
             setError(false); // Establecer error en false si se encuentra una reserva
 
             setReservaFiltrada(reservaFiltrada);
             console.log("Reserva filtrada:", reservaFiltrada);
-    
+
             // Calcular la diferencia de tiempo en minutos
             const horaInicioString = reservaFiltrada.horaInicio;
             const horaInicioArray = horaInicioString.split(":");
@@ -81,7 +81,8 @@ function MensajeBienvenida(props) {
             horaInicio.setHours(parseInt(horaInicioArray[0]));
             horaInicio.setMinutes(parseInt(horaInicioArray[1]));
             const ahora = new Date();
-            const diferenciaMinutos = (ahora.getTime() - horaInicio.getTime()) / (1000 * 60);
+            const diferenciaMinutos =
+                (ahora.getTime() - horaInicio.getTime()) / (1000 * 60);
 
             // Establecer el estado de asistencia
             let asistenciaState;
@@ -92,20 +93,25 @@ function MensajeBienvenida(props) {
                 asistenciaState = "A tiempo";
                 setLlegoTarde(false);
             }
-    
+
             // Actualizar la asistencia de la reserva filtrada
             const url = `reservaciones/${reservaFiltrada.idReservacion}`;
             const data = JSON.stringify({
                 asistencia: asistenciaState,
             });
-    
+
+            // Inicializar el estado de mostrar asistencia en false
+            setMostrarAsistencia(false);
+            console.log("Reserva filtrada:", reservaFiltrada.asistencia);
+
             // Si la reserva filtrada existe y no tiene asistencia registrada, se registra la asistencia
-            if (reservaFiltrada && reservaFiltrada.asistencia === null) {
+            if (reservaFiltrada.asistencia === null) {
                 put(
                     url,
                     data,
                     () => {
                         console.log("Asistencia registrada.");
+                        setMostrarAsistencia(true);
                     },
                     (error) => {
                         console.error("Error al registrar asistencia", error);
@@ -114,7 +120,6 @@ function MensajeBienvenida(props) {
             }
         }
     }, [props.listadoReservaciones, props.tagId]);
-    
 
     const handleCloseClick = () => {
         props.onClose();
@@ -140,8 +145,9 @@ function MensajeBienvenida(props) {
                     : { border: `13px solid ${bordeColor}` }
             }
         >
-            
-            <AlertaAsistencia tarde={llegoTarde} />
+            {error ? null : mostrarAsistencia ? (
+                <AlertaAsistencia tarde={llegoTarde} />
+            ) : null}
 
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
