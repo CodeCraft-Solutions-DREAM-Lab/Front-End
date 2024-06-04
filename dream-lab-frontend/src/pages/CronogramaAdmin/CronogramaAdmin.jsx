@@ -13,7 +13,6 @@ import "react-calendar-timeline/lib/Timeline.css";
 import "./CronogramaAdmin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import Switch from "@mui/material/Switch";
 import {
     Select,
     MenuItem,
@@ -26,6 +25,10 @@ import {
 import { get } from "src/utils/ApiRequests";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
 import menuIcon from "src/assets/Admin/menu-admin.svg";
+import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
+import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
+import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
+
 import {
     saveToLocalStorage,
     getFromLocalStorage,
@@ -76,118 +79,12 @@ const CustomLabel = ({ interval }) => {
     );
 };
 
-// const handleToggleClick = (groupId) => {
-//     setSelectedMesasIds((selectedMesasIds) => {
-//         if (selectedMesasIds.includes(groupId)) {
-//             return selectedMesasIds.filter((id) => id !== groupId);
-//         } else {
-//             return [...selectedMesasIds, groupId];
-//         }
-//     });
-//     saveToLocalStorage("selectedMesasIds", JSON.stringify(selectedMesasIds));
-// };
-
-const CustomGroupRenderer = ({
-    group,
-    handleToggleClick,
-    selectedMesasIds,
-}) => {
-    group = group.group;
-    const groupClass = group.sala ? "sala" : "";
-    const [selected, setSelected] = useState(false);
-
-    useEffect(() => {
-        setSelected(selectedMesasIds.includes(group.id));
-    }, [selectedMesasIds, group.id]);
-
-    return (
-        <div
-            className={`rct-sidebar-row ${groupClass}`}
-            data-cy="group-row"
-            key={group.id}
-        >
-            {group.title}
-            {!group.sala && (
-                <Switch
-                    onChange={(event) =>
-                        handleToggleClick(event, group.id, setSelected)
-                    }
-                    checked={selected}
-                    color="white" // Customize the color of the switch
-                    sx={{
-                        width: 42,
-                        height: 26,
-                        padding: 0,
-                        margin: 0,
-                        marginLeft: 2,
-                        "& .css-1mpet1h-MuiSwitch-root .MuiSwitch-switchBase": {
-                            margin: "1px",
-                        },
-                        "& .MuiSwitch-switchBase": {
-                            padding: 0,
-                            margin: 0.3,
-                            transitionDuration: "300ms",
-                            "&.Mui-checked": {
-                                transform: "translateX(16px)",
-                                color: "#fff",
-                                "& + .MuiSwitch-track": {
-                                    backgroundColor: "#fff", // Change to white
-                                    opacity: 1,
-                                    border: 0,
-                                },
-                                "&.Mui-disabled + .MuiSwitch-track": {
-                                    opacity: 0.5,
-                                },
-                            },
-                            "&.Mui-focusVisible .MuiSwitch-thumb": {
-                                backgroundColor: "#042E55",
-                                border: "6px solid #fff",
-                            },
-                            "&.Mui-disabled .MuiSwitch-thumb": {
-                                backgroundColor: "#042E55", // Thumb color
-                                transform: "translateY(-50%)",
-                            },
-                            "&.Mui-disabled + .MuiSwitch-track": {
-                                opacity: 0.7,
-                            },
-                        },
-                        "& .MuiSwitch-thumb": {
-                            boxSizing: "border-box",
-                            width: 22,
-                            height: 22,
-                            backgroundColor: "#042E55", // Thumb color
-                        },
-                        "& .MuiSwitch-track": {
-                            borderRadius: 13, // Adjust the borderRadius as needed
-                            backgroundColor: "#fff", // Track color
-                            opacity: 1,
-                            transition: "background-color 500ms",
-                        },
-                    }}
-                />
-            )}
-        </div>
-    );
-};
-
 CustomLabel.propTypes = {
     group: propTypes.object,
     handleToggleClick: propTypes.func,
     selectedMesasIds: propTypes.array,
 };
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
-const areas = ["Sala VR", "Electric Garage", "New Horizons"];
 const estados = ["Preparado", "En proceso", "Sin preparar"];
 
 function convertToMomentObjects(jsonData) {
@@ -196,6 +93,8 @@ function convertToMomentObjects(jsonData) {
             id: event.id,
             group: event.group,
             title: event.title,
+            estatusMateriales: event.estatusMateriales,
+            canMove: false,
             start_time: moment(event.start_time).add(6, "hours"),
             end_time: moment(event.end_time).add(6, "hours"),
         };
@@ -210,6 +109,8 @@ function CronogramaAdmin() {
     const [isLoadingItems, setIsLoadingItems] = useState(true);
     const [groups, setGroups] = useState([]);
     const [isLoadingGroups, setIsLoadingGroups] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [reservIdInModal, setReservIdInModal] = useState(0);
 
     const [selectedSalasIds, setSelectedSalasIds] = useState([]);
     const [selectedSalasTitles, setSelectedSalasTitles] = useState([]);
@@ -224,9 +125,10 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("reservaciones/cronograma")
             .then((result) => {
+                console.log(result);
                 setItems(convertToMomentObjects(result));
                 setIsLoadingItems(false);
-                console.log("reservaciones/cronograma: ", result);
+                // console.log(items);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -239,7 +141,7 @@ function CronogramaAdmin() {
             .then((result) => {
                 setGroups(result);
                 setIsLoadingGroups(false);
-                console.log("salas/cronograma: ", result);
+                // console.log("salas/cronograma: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -387,41 +289,12 @@ function CronogramaAdmin() {
         setSelectedOptions2(event.target.value);
     };
 
-    // Función que se ejecuta cuando se selecciona un switch de una mesa para
-    // esconder o mostrar las reservaciones de esa mesa
-    const handleToggleClick = (event, groupId, setSelected) => {
-        setSelected(event.target.checked);
-        setSelectedMesasIds((prevSelectedMesasIds) => {
-            let newSelectedSalasIds = [...prevSelectedMesasIds];
-            // Si el switch se activa se agrega la mesa a las mesas
-            // seleccionadas
-            if (event.target.checked) {
-                if (!newSelectedSalasIds.includes(groupId)) {
-                    newSelectedSalasIds.push(groupId);
-                }
-            }
-            // Si el switch se desactiva se quita la mesa de las mesas
-            // seleccionadas
-            else {
-                newSelectedSalasIds = newSelectedSalasIds.filter(
-                    (id) => id !== groupId
-                );
-            }
-            console.log("newSelectedSalasIds: ", newSelectedSalasIds);
-            saveToLocalStorage(
-                "selectedMesasIds",
-                JSON.stringify(newSelectedSalasIds)
-            );
-
-            return newSelectedSalasIds;
-        });
-    };
-
     return (
         <>
             <div className="menu-icon-admin">
                 <img src={menuIcon} />
             </div>
+            <ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal} />
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"
@@ -439,13 +312,29 @@ function CronogramaAdmin() {
                     onTimeChange={handleTimeChange}
                     minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
                     maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
+                    itemRenderer={({ item, itemContext, getItemProps }) => {
+                        return (<CustomItemRenderer
+                            item={item}
+                            itemContext={itemContext}
+                            getItemProps={getItemProps}
+                        />)
+                    }}
                     groupRenderer={(group) => (
                         <CustomGroupRenderer
                             group={group}
-                            handleToggleClick={handleToggleClick}
+                            // handleToggleClick={handleToggleClick}
                             selectedMesasIds={selectedMesasIds}
+                            setSelectedMesasIds={setSelectedMesasIds}
                         />
                     )}
+                    onItemClick={(itemId) => {
+                        setReservIdInModal(itemId);
+                        setIsModalOpen(true);
+                    }}
+                    onItemSelect={(itemId) => {
+                        setReservIdInModal(itemId);
+                        setIsModalOpen(true);
+                    }}
                 >
                     <TimelineMarkers>
                         <CustomMarker date={moment().valueOf()}>
@@ -514,24 +403,24 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            color: "white",
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        color: "white",
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
@@ -604,23 +493,23 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                        {
-                                                            borderColor:
-                                                                "white",
-                                                            borderWidth: 2,
-                                                        },
+                                                    {
+                                                        borderColor:
+                                                            "white",
+                                                        borderWidth: 2,
+                                                    },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
