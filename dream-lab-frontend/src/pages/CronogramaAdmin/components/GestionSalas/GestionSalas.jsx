@@ -10,11 +10,13 @@ import {
 import { Grid } from "@mui/material";
 import "./GestionSalas.css";
 import SalaCard from "./components/SalaCard";
+import GuardarConfiguracion from "./components/GuardarConfiguracion";
 
 import propTypes from "prop-types";
 
 function GestionSalas(props) {
     const [salas, setSalas] = useState([]);
+    const [isModalGuardarOpen, setIsModalGuardarOpen] = useState(false);
 
     useEffect(() => {
         setSalas(
@@ -34,13 +36,24 @@ function GestionSalas(props) {
     };
 
     const handleSave = () => {
-        console.log('control log: ', salas);
-        salas.forEach(sala => {
-            console.log(`Nombre: ${sala.nombre}, Bloqueada: ${sala.bloqueada}, Clicked: ${sala.clicked}`);
-        });
+        console.log('click en guardar');
+
+        setIsModalGuardarOpen(true);
     };
     
     return (
+        <>
+        <GuardarConfiguracion
+                salas={salas}
+				isOpen={isModalGuardarOpen}
+                closeAll={() => {
+                    setIsModalGuardarOpen(false);
+                    props.onClose();
+                }}
+				onClose={() => {
+					setIsModalGuardarOpen(false);
+				}}
+			/>
         <Modal
             size='5xl'
             isOpen={props.isOpen}
@@ -85,6 +98,7 @@ function GestionSalas(props) {
                 )}
             </ModalContent>
         </Modal>
+        </>
     );
 }
 

@@ -1,20 +1,10 @@
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { Button } from "@nextui-org/react";
 import propTypes from "prop-types";
 
 
 function SalaCard({ text, bloqueada, id, updateSalaState}) {
     const [clicked, setClicked] = useState(false);
-    const [resultante, setResultante] = useState();
-
-    useEffect(() => {
-		if(bloqueada){
-            setResultante("bloqueada");
-        }
-        else{
-            setResultante("no bloqueada");
-        }
-	}, [bloqueada]);
 
     const handleClick = () => {
         const newClickedState = !clicked;
@@ -24,7 +14,7 @@ function SalaCard({ text, bloqueada, id, updateSalaState}) {
 
     const getBackgroundColor = () => {
         if (clicked) {
-            return bloqueada ? "#1bac55" : "#A9A9A9"; // Morado si está bloqueada, Blanco si no está bloqueada
+            return bloqueada ? "#1bac55" : "#A9A9A9";
         }
         return bloqueada ? "#A9A9A9" : "#1bac55"; // Gris si está bloqueada, Verde si no está bloqueada
     };
