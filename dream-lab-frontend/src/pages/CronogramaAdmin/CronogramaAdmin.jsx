@@ -239,6 +239,10 @@ function CronogramaAdmin() {
         }
     }, [mesas]);
 
+    useEffect(() => {
+        console.log("FilteredItems in Cronograma: ", filteredItems);
+    }, [filteredItems]);
+
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
     );
@@ -294,7 +298,17 @@ function CronogramaAdmin() {
             <div className="menu-icon-admin">
                 <img src={menuIcon} />
             </div>
-            <ReservItemModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} reservId={reservIdInModal} />
+            <ReservItemModal
+                isOpen={isModalOpen}
+                items={items}
+                setItems={setItems}
+                filteredItems={filteredItems}
+                setFilteredItems={setFilteredItems}
+                onClose={() => {
+                    setIsModalOpen(false);
+                }}
+                reservId={reservIdInModal}
+            />
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"

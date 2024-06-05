@@ -15,7 +15,7 @@ const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
         } else {
             setColorName("#acacac");
         }
-    }, []);
+    }, [item.estatusMateriales]);
 
     const { style, ...otherProps } = getItemProps();
     const { width, top, position, lineHeight, left, cursor, ...otherStyles } = style;
@@ -36,6 +36,7 @@ const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
                 background: colorName,
                 zIndex: 30
             }}
+            key={itemContext.id}
         >
             <p style={{
                 display: "flex",
