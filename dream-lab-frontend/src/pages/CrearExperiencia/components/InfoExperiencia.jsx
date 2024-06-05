@@ -45,17 +45,14 @@ function InfoExperiencia({ onInfoChange }) {
 
 	// useEffect to fetch UFs
 	useEffect(() => {
-		async function fetchUFs() {
-			try {
-				const response = await get("/UFs");
-				setUfs(response.data); // Assuming response.data contains the UFs
-			} catch (error) {
-				console.error("Error fetching UFs:", error);
-			}
-		}
-
-		fetchUFs();
-	}, []);
+        get("ufs")
+            .then((result) => {
+                setUfs(result);
+            })
+            .catch((error) => {
+                console.error("Error fetchign ufs:", error);
+            });
+    }, []);
 
 	// Function to handle changes in nombre
 	function handleNombreChange(event) {
@@ -148,9 +145,9 @@ function InfoExperiencia({ onInfoChange }) {
 						onChange={handleUFChange}
 						value={UF}
 					>
-						{mockUFs.data.map((uf) => (
+						{ufs.map((uf) => (
 							<SelectItem key={uf.idUF} value={uf.idUF}>
-								{uf.nombreUF}
+								{uf.nombre}
 							</SelectItem>
 						))}
 					</Select>
