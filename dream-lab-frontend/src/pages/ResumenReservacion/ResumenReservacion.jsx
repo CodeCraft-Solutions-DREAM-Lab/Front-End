@@ -1,28 +1,41 @@
+// ApiRequests
 import { post } from "src/utils/ApiRequests";
+
+// Hooks
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Storage
 import {
     getFromLocalStorage,
     getFromSessionStorage,
     existsInSessionStorage,
-	multiClearSessionStorage,
+    multiClearSessionStorage,
 } from "src/utils/Storage";
-import { useNavigate } from "react-router-dom";
+
+// Componentes
 import AvisoFinal from "./components/AvisoFinal";
-import "./ResumenReservacion.css";
-import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
-import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import MaterialCardDupe from "./components/MaterialCardDupe/MaterialCardDupe";
-import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
-// import WarningIcon from "src/assets/ResumenReservaciones/warning.webp";
-// import { InfoReservCard } from "../SelectorSala/components/InfoReservCard/InfoReservCard";
 import { InfoReservCardDupe } from "./components/InfoReservCardDupe/InfoReservCardDupe";
+
+// Estilos
+import "./ResumenReservacion.css";
+
+// Navbars
+import NavBar from "src/GlobalComponents/NavBar/NavBar.jsx";
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+
+// Global Components
+import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 import AvisoLogroNuevo from "src/GlobalComponents/AvisoLogroNuevo/AvisoLogroNuevo";
 import ProgresoLogro from "src/GlobalComponents/ProgresoLogro/ProgresoLogro";
+
+// Assets
+import BackArrow from "src/assets/ResumenReservaciones/ArrowLeft.webp";
 
 function ResumenReservacion() {
     let navigate = useNavigate();
 
-    const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [infoAvisoLogro, setInfoAvisoLogro] = useState("");
@@ -67,7 +80,7 @@ function ResumenReservacion() {
         console.log("Data: ", data);
 
         const doAfterResponse = () => {
-			handleInfoAvisoLogroChange();
+            handleInfoAvisoLogroChange();
             const keysToRemove = [
                 "horaInicio",
                 "horaInicioIsoString",
@@ -83,24 +96,14 @@ function ResumenReservacion() {
                 "cupos",
             ];
             multiClearSessionStorage(keysToRemove);
-            setIsLoading(false);
             setIsModalOpen(true);
         };
-
-        setIsLoading(true);
 
         // En caso de encontrarse en la vista de estudiante, saltarse la
         // petición
         if (!existsInSessionStorage("vistaEstudiante")) {
             console.log("Enviando solicitud de reservación");
-            await post(
-                "reservaciones",
-                data,
-                () => {},
-                () => {
-                    setIsLoading(false);
-                }
-            ).then((response) => {
+            await post("reservaciones", data).then((response) => {
                 doAfterResponse();
             });
         } else {
@@ -125,7 +128,6 @@ function ResumenReservacion() {
     });
     const [data, setData] = useState([]);
 
-    
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
 
@@ -140,18 +142,19 @@ function ResumenReservacion() {
         post("materiales", params)
             .then((result) => {
                 setData(result);
-                setIsLoading(false);
-                console.log(data);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
-                setIsLoading(false);
             });
     }, []);
 
     return (
         <div className="contenedor-resumen-de-reservacion">
-            <Navbar view="soloPerfil" autohide={true} />
+            {!existsInSessionStorage("nombreReservacionAdmin") ? (
+                <NavBar view="soloPerfil" autoHide={false} />
+            ) : (
+                <NavBarAdmin />
+            )}
             <div className="reservation-summary-view">
                 <div className="material-summary-container">
                     <div className="material-summary-title">
@@ -173,7 +176,7 @@ function ResumenReservacion() {
                                         No seleccionaste ningún material.
                                     </p>
                                 )}
-                            {data.map((material) => {
+                            {data.map((material, index) => {
                                 const selectedMaterial = selectedMaterials.find(
                                     (m) => m.materialId === material.id
                                 );
@@ -188,6 +191,7 @@ function ResumenReservacion() {
                                             initialQuantity={
                                                 selectedMaterial.quantity
                                             }
+                                            key={index}
                                         />
                                     );
                                 } else {
@@ -237,7 +241,6 @@ function ResumenReservacion() {
                             <button
                                 data-cy="summary-submit-button"
                                 className="reservation-summary-button"
-                                isLoading={isLoading}
                                 onClick={handleSubmit}
                             >
                                 CONFIRMAR
