@@ -353,7 +353,7 @@ function CronogramaAdmin() {
                         onClick={
                             action.name === "Configurar Salas"
                                 ? handleOpenGestionSalas
-                                : undefined
+                                : handleCrearReservacion
                         }
                     />
                 ))}
