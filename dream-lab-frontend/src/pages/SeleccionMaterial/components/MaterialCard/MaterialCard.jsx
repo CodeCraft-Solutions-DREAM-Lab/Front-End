@@ -4,14 +4,13 @@ import PropTypes from "prop-types";
 import plusIcon from "../../../../assets/SeleccionMaterial/plus-icon.svg";
 import minusIcon from "../../../../assets/SeleccionMaterial/minus-icon.svg";
 
-function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate, initialQuantity, maxQuantity, isRecommended }) {
+function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate, initialQuantity, maxQuantity, isRecommended, recommendedAmnt }) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
   const handlePlus = () => {
     if (quantity >= 0 && quantity < maxQuantity) {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
-      // Call onQuantityUpdate prop to update in parent component
       onQuantityUpdate(materialId, newQuantity);
     }
   };
@@ -24,11 +23,21 @@ function MaterialCard({ materialId, name, image, hideQuantity, onQuantityUpdate,
     }
   };
 
+  // Determine the class based on the availability and recommendation status
+  let cardClass = "card";
+  if (maxQuantity === 0) {
+    cardClass += " greyed-out";
+  } else if (isRecommended && maxQuantity > 0 && maxQuantity < recommendedAmnt) {
+    cardClass += " not-enough-availability";
+  } else if (isRecommended) {
+    cardClass += " recommended-material";
+  }
+
   return (
-    <div className={`card ${isRecommended ? "recommended-material" : ""}`}>
+    <div className={cardClass}>
       {isRecommended && (
         <div className="recommended-label">
-          RECOMENDADO
+          RECOMENDADO ({recommendedAmnt})
         </div>
       )}
       <div className="nombre-material" data-cy="material-name">
@@ -72,7 +81,8 @@ MaterialCard.propTypes = {
   onQuantityUpdate: PropTypes.func.isRequired,
   initialQuantity: PropTypes.number,
   maxQuantity: PropTypes.number.isRequired,
-  isRecommended: PropTypes.bool.isRequired
+  isRecommended: PropTypes.bool.isRequired,
+  recommendedAmnt: PropTypes.number
 };
 
 export default MaterialCard;

@@ -8,6 +8,7 @@ import {
 } from "@nextui-org/react";
 import { Grid } from "@mui/material";
 import infoLogo from "src/assets/SelectorSala/infoicon.webp";
+import "./WarningModal.css";
 
 import propTypes from "prop-types";
 
@@ -29,15 +30,8 @@ function WarningModal(props) {
                         </ModalHeader>
                         <ModalBody>
                             <Grid container justify="center">
-                                <Grid
-                                    item
-                                    xs={2}
-                                    className="flex justify-start"
-                                >
-                                    <img
-                                        src={infoLogo}
-                                        className="object-contain w-14"
-                                    />
+                                <Grid item xs={2} className="flex justify-start">
+                                    <img src={infoLogo} className="object-contain w-14" />
                                 </Grid>
                                 <Grid item xs={10}>
                                     <p>
@@ -47,19 +41,34 @@ function WarningModal(props) {
                                     </p>
                                 </Grid>
                             </Grid>
+                            <Grid container className="flex justify-center">
+                                <Grid item>
+                                    <div className="color-box blue"></div>
+                                </Grid>
+                                <Grid item>
+                                    <p>= Suficiente disponibilidad</p>
+                                </Grid>
+                            </Grid>
+                            <Grid container className="flex justify-center">
+                                <Grid item>
+                                    <div className="color-box orange"></div>
+                                </Grid>
+                                <Grid item>
+                                    <p>= Insuficiente disponibilidad</p>
+                                </Grid>
+                            </Grid>
+                            
                         </ModalBody>
                         <ModalFooter className="flex justify-center gap-10">
                             <Button
-                                className="rounded-full px-12 py-2 font-bold  
-                                            hover:bg-[#D4004A] hover:text-white border-2 "
+                                className="rounded-full px-12 py-2 font-bold hover:bg-[#D4004A] hover:text-white border-2"
                                 color="danger"
                                 onPress={props.onOk}
                             >
                                 Cancelar
                             </Button>
                             <Button
-                                className="rounded-full px-12 py-2 font-bold text-[#FFFFFF] 
-                                            hover:bg-[#15B158] hover:text-white border-2 "
+                                className="rounded-full px-12 py-2 font-bold text-[#FFFFFF] hover:bg-[#15B158] hover:text-white border-2"
                                 color="success"
                                 onPress={props.onOk}
                             >

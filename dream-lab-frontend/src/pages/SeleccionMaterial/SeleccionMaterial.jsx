@@ -8,7 +8,7 @@ import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
 import { Badge } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import WarningModal from "./components/WarningModal/WarningModal" // Warning modal if recommended items haven't been selected
+import WarningModal from "./components/WarningModal/WarningModal"; // Warning modal if recommended items haven't been selected 
 
 import {
     saveToSessionStorage,
@@ -32,7 +32,7 @@ function SeleccionMaterial() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
-	const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
+    const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
 
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
@@ -108,6 +108,25 @@ function SeleccionMaterial() {
         navigate("/reservacion/resumen");
     };
 
+    const handleNextButtonClick = () => {
+        const recommendedMaterials = data.filter(material => material.cantidadRecomendada > 0);
+        const recommendedMaterialsNotSelected = recommendedMaterials.some(recommended => {
+            const selectedMaterial = selectedMaterials.find(selected => selected.materialId === recommended.id);
+            return !selectedMaterial || selectedMaterial.quantity < recommended.cantidadRecomendada;
+        });
+
+        if (recommendedMaterialsNotSelected) {
+            setIsFirstReminderOpen(true);
+        } else {
+            handleSubmit();
+        }
+    };
+
+    const handleWarningModalConfirm = () => {
+        setIsFirstReminderOpen(false);
+        handleSubmit();
+    };
+
     const filteredData = data
         .filter(material =>
             material.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -141,23 +160,17 @@ function SeleccionMaterial() {
                     </div>
                 </div>
                 <div className="bottom-section">
-					{/* Below is the modal in case there are recommended items that should be selected but haven't been selected */}
+                    {/* Below is the modal in case there are recommended items that should be selected but haven't been selected */}
 
-					{/* <WarningModal
-						data-cy="primer-recordatorio-sala"
-						isOpen={isFirstReminderOpen}
-						size="2xl"
-						onClose={() => {
-							setIsFirstReminderOpen(false);
-						}}
-						onOk={() => {
-							setIsFirstReminderOpen(false);
-							handleSubmit;
-							navigate("/reservacion/material");
-						}}
-					/> */}
+                    <WarningModal
+                        data-cy="primer-recordatorio-sala"
+                        isOpen={isFirstReminderOpen}
+                        size="2xl"
+                        onClose={() => setIsFirstReminderOpen(false)}
+                        onOk={handleWarningModalConfirm} // For the "Sí, continuar" button
+                    />
 
-					{/* Div to display all selectable materials */}
+                    {/* Div to display all selectable materials */}
                     <div className="card-container-wrapper">
                         <div className="card-container-sm" data-cy="card-container-sm">
                             {filteredData.map(material => (
@@ -174,13 +187,14 @@ function SeleccionMaterial() {
                                     }
                                     maxQuantity={material.cantidadDisponible}
                                     isRecommended={material.cantidadRecomendada > 0} // Pass the flag
+                                    recommendedAmnt={material.cantidadRecomendada}
                                     data-cy={`material-card-${material.id}`}
                                 />
                             ))}
                         </div>
                     </div>
                     <div className="button-container-sm">
-                        <RoundedButton text="ACEPTAR" onClick={ handleSubmit /*() => { setIsFirstReminderOpen(true); }*/ } />
+                        <RoundedButton text="ACEPTAR" onClick={handleNextButtonClick} />
                     </div>
                 </div>
             </div>
