@@ -61,14 +61,14 @@ function WarningModal(props) {
                         </ModalBody>
                         <ModalFooter className="flex justify-center gap-10">
                             <Button
-                                className="rounded-full px-12 py-2 font-bold hover:bg-[#D4004A] hover:text-white border-2"
+                                className="rounded-full px-12 py-2 bg-[#1bac55] border-[#1bac55] font-bold hover:bg-[#11bd56] hover:text-white border-2"
                                 color="danger"
-                                onPress={props.onOk}
+                                onPress={props.onClose}
                             >
-                                Cancelar
+                                No, regresar
                             </Button>
                             <Button
-                                className="rounded-full px-12 py-2 font-bold text-[#FFFFFF] hover:bg-[#15B158] hover:text-white border-2"
+                                className="rounded-full px-12 py-2 bg-[#FFFFFF] border-[#8a8a8a] font-bold hover:bg-[#878787] hover:text-white border-2"
                                 color="success"
                                 onPress={props.onOk}
                             >
