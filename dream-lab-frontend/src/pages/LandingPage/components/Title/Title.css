@@ -132,7 +132,7 @@
     }
 }
 
-.button-more {
+.title-button-more {
     padding-block: 5%;
     padding-inline: 30%;
     background-color: white;
@@ -147,7 +147,7 @@
 }
 
 @media screen and (max-width: 431px) {
-    .button-more {
+    .title-button-more {
         padding-block: 8px;
         padding-inline: 2rem;
         border-radius: 28px;
@@ -156,20 +156,20 @@
 }
 
 @media screen and (max-width: 415px) {
-    .button-more {
+    .title-button-more {
         padding-block: 6px;
         padding-inline: 1.8rem;
     }
 }
 
 @media screen and (max-width: 376px) {
-    .button-more {
+    .title-button-more {
         padding-block: 3px;
         padding-inline: 1.4rem;
     }
 }
 
-.button-more:hover {
+.title-button-more:hover {
     padding-block: 5%;
     padding-inline: 30%;
     background-color: #042E55;
@@ -178,11 +178,12 @@
     font-size: 1vw;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
+    color: white;
     text-transform: uppercase;
 }
 
 @media screen and (max-width: 431px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 8px;
         padding-inline: 2rem;
         border-radius: 28px;
@@ -191,14 +192,14 @@
 }
 
 @media screen and (max-width: 415px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 6px;
         padding-inline: 1.8rem;
     }
 }
 
 @media screen and (max-width: 376px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 3px;
         padding-inline: 1.4rem;
     }
