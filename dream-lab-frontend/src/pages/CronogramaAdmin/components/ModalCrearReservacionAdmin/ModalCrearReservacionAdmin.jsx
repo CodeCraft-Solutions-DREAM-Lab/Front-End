@@ -1,3 +1,4 @@
+// Componentes de Nextui
 import {
     Modal,
     ModalContent,
@@ -5,45 +6,59 @@ import {
     ModalBody,
     ModalFooter,
     Select,
-    SelectSection,
     SelectItem,
     Button,
+    Input,
 } from "@nextui-org/react";
+
+// Estilos
+import "./ModalCrearReservacionAdmin.css";
 
 import propTypes from "prop-types";
 
-function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
+function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="opaque">
+        <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            backdrop="opaque"
+            size="2xl"
+        >
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <ModalHeader className="flex flex-col gap-1">
-                            Modal Title
+                        <ModalHeader className="mcra-header">
+                            <h1 className="mcra-title">Crear Reservación</h1>
                         </ModalHeader>
                         <ModalBody>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Nullam pulvinar risus non risus
-                                hendrerit venenatis. Pellentesque sit amet
-                                hendrerit risus, sed porttitor quam.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Nullam pulvinar risus non risus
-                                hendrerit venenatis. Pellentesque sit amet
-                                hendrerit risus, sed porttitor quam.
-                            </p>
-                            <p>
-                                Magna exercitation reprehenderit magna aute
-                                tempor cupidatat consequat elit dolor
-                                adipisicing. Mollit dolor eiusmod sunt ex
-                                incididunt cillum quis. Velit duis sit officia
-                                eiusmod Lorem aliqua enim laboris do dolor
-                                eiusmod. Et mollit incididunt nisi consectetur
-                                esse laborum eiusmod pariatur proident Lorem
-                                eiusmod et. Culpa deserunt nostrud ad veniam.
-                            </p>
+                            <Input
+                                label="Nombre"
+                                placeholder="Nombre"
+                                labelPlacement="outside"
+                                className="mcra-input"
+                                classNames={{
+                                    input: ["bg-transparent"],
+                                    inputWrapper: [
+                                        "bg-transparent border-2 h-12",
+                                    ],
+                                }}
+                            />
+                            <Select
+                                label="Sala"
+                                labelPlacement="outside"
+                                placeholder="Seleccione una sala"
+                                classNames={{
+                                    trigger: [
+                                        "bg-transparent border-2 radius-full h-12",
+                                    ],
+                                }}
+                            >
+                                {salas.map((sala) => (
+                                    <SelectItem key={sala.id} value={sala.id}>
+                                        {sala.nombre}
+                                    </SelectItem>
+                                ))}
+                            </Select>
                         </ModalBody>
                         <ModalFooter>
                             <Button
@@ -65,9 +80,10 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange }) {
 }
 
 ModalCrearReservacionAdmin.propTypes = {
-    isOpen: propTypes.bool.isRequired,
-    onOpen: propTypes.func.isRequired,
-    onOpenChange: propTypes.func.isRequired,
+    isOpen: propTypes.bool,
+    onOpen: propTypes.func,
+    onOpenChange: propTypes.func,
+    salas: propTypes.array,
 };
 
 export default ModalCrearReservacionAdmin;

@@ -137,7 +137,7 @@ function CronogramaAdmin() {
     const [salas, setSalas] = useState([]);
     const [mesas, setMesas] = useState([]);
 
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const disclosureModalCrearReservacionAdmin = useDisclosure();
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -213,7 +213,7 @@ function CronogramaAdmin() {
     };
 
     const handleCrearReservacion = () => {
-        onOpen();
+        disclosureModalCrearReservacionAdmin.onOpen();
     };
 
     // Filtrar las reservaciones que se muestran en el cronograma según las
@@ -619,9 +619,10 @@ function CronogramaAdmin() {
                 </Timeline>
             </div>
             <ModalCrearReservacionAdmin
-                isOpen={isOpen}
-                onOpen={onOpen}
-                onOpenChange={onOpenChange}
+                isOpen={disclosureModalCrearReservacionAdmin.isOpen}
+                onOpen={disclosureModalCrearReservacionAdmin.onOpen}
+                onOpenChange={disclosureModalCrearReservacionAdmin.onOpenChange}
+                salas={salas}
             />
         </>
     );

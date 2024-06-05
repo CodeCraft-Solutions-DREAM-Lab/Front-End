@@ -1,0 +1,15 @@
+.mcra-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+}
+
+.mcra-title {
+    color: #14247b;
+    font-size: max(1.3vw, 1.5vh);
+}
+
+.mcra-inner-wrapper {
+    background-color: transparent;
+}
