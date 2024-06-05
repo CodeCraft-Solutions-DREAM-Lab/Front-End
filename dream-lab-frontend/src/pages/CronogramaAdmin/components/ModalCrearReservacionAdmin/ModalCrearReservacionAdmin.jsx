@@ -37,6 +37,7 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
     const [message, setMessage] = useState("");
 
     const handleAceptar = () => {
+        // Validar que los campos no estén vacíos
         if (nombre === "") {
             setOpen(true);
             setMessage("Introduce un nombre");
@@ -49,9 +50,16 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
         }
         onOpenChange();
 
+        // Guardar el nombre al que se va a atribuir la reservación
+        saveToSessionStorage("nombreReservacionAdmin", nombre);
+
+        // Guardar la sala seleccionada para que la pagina de reservacion la
+        // pueda leer
         const salaSeleccionada = selectedSala.values().next().value;
         saveToSessionStorage("reservType", "sala");
         saveToSessionStorage("idSala", salaSeleccionada);
+
+        // Redirigir a la página de reservación
         navigate(`/reservacion/sala`);
     };
 
