@@ -78,6 +78,7 @@ function ReservItemModal(props) {
 				setHoraFinString(formattedFin);
 				setReservItems(response.reservItems);
 
+				console.log("Selected items: ", response.selectedItems);
 				const selectedItems = response.selectedItems.map((item) => { return item.name });
 				console.log("Selected items: ", selectedItems);
 				setSelectedItems(selectedItems);
@@ -122,7 +123,7 @@ function ReservItemModal(props) {
 			isOpen={props.isOpen}
 			onClose={props.onClose}
 			hideCloseButton={false}
-			backdrop="blur"
+			backdrop="opaque"
 		>
 			<ModalContent className="p-3">
 				{() => (
@@ -141,10 +142,13 @@ function ReservItemModal(props) {
 
 									<SolicitedMatsListModal
 										reservItems={reservItems}
-										setReservItems={setReservItems}
 										selectedItems={selectedItems}
 										setSelectedItems={setSelectedItems}
 										isLoading={isLoading}
+										items={props.items}
+										setItems={props.setItems}
+										filteredItems={props.filteredItems}
+										setFilteredItems={props.setFilteredItems}
 									/>
 								</div>
 
@@ -181,7 +185,11 @@ function ReservItemModal(props) {
 ReservItemModal.propTypes = {
 	isOpen: propTypes.bool,
 	onClose: propTypes.func,
-	reservId: propTypes.number.isRequired, // Se requiere el ID de la reservación
+	reservId: propTypes.number.isRequired,
+	items: propTypes.array,
+	setItems: propTypes.func,
+	filteredItems: propTypes.array,
+	setFilteredItems: propTypes.func,
 };
 
 export default ReservItemModal;

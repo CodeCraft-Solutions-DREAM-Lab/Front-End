@@ -274,6 +274,10 @@ function CronogramaAdmin() {
         }
     }, [mesas]);
 
+    useEffect(() => {
+        console.log("FilteredItems in Cronograma: ", filteredItems);
+    }, [filteredItems]);
+
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
     );
@@ -327,36 +331,38 @@ function CronogramaAdmin() {
     return (
         <>
             <GestionSalas
-                data-cy="gestion-salas"
-                salas={salasEstados}
-                isOpen={isGestionSalasOpen}
-                onClose={() => {
-                    setIsGestionSalasOpen(false);
-                }}
-            />
-            <SpeedDial
-                ariaLabel="SpeedDial Menu"
-                sx={{ position: "fixed", bottom: 30, right: 50 }}
-                icon={<img className="iconoMenu" src={menuIcon} />}
-            >
-                {actions.map((action) => (
-                    <SpeedDialAction
-                        key={action.name}
-                        icon={React.cloneElement(action.icon, {
-                            style: { fontSize: 45, color: "white" },
-                        })}
-                        tooltipTitle={action.name}
-                        onClick={
-                            action.name === "Configurar Salas"
-                                ? handleOpenGestionSalas
-                                : handleCrearReservacion
-                        }
-                    />
-                ))}
-            </SpeedDial>
+				data-cy="gestion-salas"
+				salas={salasEstados}
+				isOpen={isGestionSalasOpen}
+				onClose={() => {
+					setIsGestionSalasOpen(false);
+				}}
+			/>
+			<SpeedDial
+				ariaLabel="SpeedDial Menu"
+				sx={{ position: 'fixed', bottom: 30, right: 50 }}
+				icon={
+					<img className="iconoMenu" src={menuIcon} />
+				}
+			>
+				{actions.map((action) => (
+				<SpeedDialAction
+					key={action.name}
+					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
+					tooltipTitle={action.name}
+					onClick={action.name === 'Configurar Salas' ? handleOpenGestionSalas : undefined}
+				/>
+				))}
+			</SpeedDial>
             <ReservItemModal
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                items={items}
+                setItems={setItems}
+                filteredItems={filteredItems}
+                setFilteredItems={setFilteredItems}
+                onClose={() => {
+                    setIsModalOpen(false);
+                }}
                 reservId={reservIdInModal}
             />
             <NavBarAdmin />
