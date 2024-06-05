@@ -62,14 +62,22 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
 
                             <div className="mcra-contenedor-botones">
                                 <Button
-                                    color="danger"
-                                    variant="light"
-                                    onPress={onClose}
+                                    className="bg-white border-4 border-[#ac3e1b] text-[#ac3e1b] hover:bg-[#ac3e1b] hover:border-[#ac3e1b] hover:text-white mcra-button"
+                                    onClick={onClose}
+                                    radius="full"
                                 >
-                                    Close
+                                    <span className="mcra-button-text">
+                                        Cancelar
+                                    </span>
                                 </Button>
-                                <Button color="primary" onPress={onClose}>
-                                    Action
+                                <Button
+                                    className="bg-white border-4 border-[#1bac55] text-[#1bac55] hover:bg-[#1bac55] hover:border-[#1bac55]  hover:text-white mcra-button"
+                                    onClick={onClose}
+                                    radius="full"
+                                >
+                                    <span className="mcra-button-text">
+                                        Guardar
+                                    </span>
                                 </Button>
                             </div>
                         </ModalBody>
