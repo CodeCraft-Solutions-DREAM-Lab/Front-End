@@ -1,0 +1,19 @@
+.color-box {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  
+  .color-box.blue {
+    background-color: #C4C6FF;
+    border: 1px solid #C4C6FF;
+    border-radius: 20%;
+  }
+  
+  .color-box.orange {
+    background-color: rgb(255, 195, 127);
+    border: 1px solid rgb(255, 195, 127);
+    border-radius: 20%;
+  }
+  
