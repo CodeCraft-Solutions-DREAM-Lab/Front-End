@@ -1,6 +1,11 @@
+// Hooks
 import React, { useState, useEffect } from "react";
+
+// Modificación de idioma
 import moment from "moment";
 import "moment/locale/es"; // Import Spanish locale
+
+// React Calendar Timeline
 import Timeline, {
     TimelineMarkers,
     CursorMarker,
@@ -9,10 +14,12 @@ import Timeline, {
     DateHeader,
     CustomMarker,
 } from "react-calendar-timeline";
+
+// Estilos
 import "react-calendar-timeline/lib/Timeline.css";
 import "./CronogramaAdmin.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+// Material UI
 import {
     Select,
     MenuItem,
@@ -26,23 +33,42 @@ import SpeedDial from "@mui/material/SpeedDial";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import GestionSalas from "./components/GestionSalas/GestionSalas";
-import { get } from "src/utils/ApiRequests";
-import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
-import menuIcon from "src/assets/Admin/menu-admin.svg";
-import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
-import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
-import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
 
+// ApiRequests
+import { get } from "src/utils/ApiRequests";
+
+// Global Components
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+
+// Iconos
+import menuIcon from "src/assets/Admin/menu-admin.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+// Storage
 import {
     saveToLocalStorage,
     getFromLocalStorage,
     existsInLocalStorage,
+    multiClearSessionStorage,
 } from "src/utils/Storage";
+
+// PropTypes
 import propTypes from "prop-types";
 
-import { Modal, useDisclosure } from "@nextui-org/react";
+// NextUI
+import { useDisclosure } from "@nextui-org/react";
+
+// Componentes
 import ModalCrearReservacionAdmin from "./components/ModalCrearReservacionAdmin/ModalCrearReservacionAdmin";
+import GestionSalas from "./components/GestionSalas/GestionSalas";
+import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
+import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
+import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
+
+// Redux
+import { useDispatch } from "react-redux";
+import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
 
 const actions = [
     { icon: <AddCircleIcon />, name: "Agregar reservación" },
@@ -138,6 +164,8 @@ function CronogramaAdmin() {
     const [mesas, setMesas] = useState([]);
 
     const disclosureModalCrearReservacionAdmin = useDisclosure();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -277,6 +305,34 @@ function CronogramaAdmin() {
     useEffect(() => {
         console.log("FilteredItems in Cronograma: ", filteredItems);
     }, [filteredItems]);
+
+    // Limpiar estados de reservaciones, vista de estudiante y reservacion de
+    // admin
+    useEffect(() => {
+        dispatch(setActive(false));
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
+            "vistaEstudiante",
+            "nombreReservacionAdmin",
+        ]);
+    }, [dispatch]);
 
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()

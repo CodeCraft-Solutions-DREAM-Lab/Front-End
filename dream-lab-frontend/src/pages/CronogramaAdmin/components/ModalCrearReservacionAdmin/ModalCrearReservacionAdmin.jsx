@@ -4,7 +4,6 @@ import {
     ModalContent,
     ModalHeader,
     ModalBody,
-    ModalFooter,
     Select,
     SelectItem,
     Button,
