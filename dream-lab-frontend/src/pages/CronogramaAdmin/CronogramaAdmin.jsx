@@ -331,29 +331,33 @@ function CronogramaAdmin() {
     return (
         <>
             <GestionSalas
-				data-cy="gestion-salas"
-				salas={salasEstados}
-				isOpen={isGestionSalasOpen}
-				onClose={() => {
-					setIsGestionSalasOpen(false);
-				}}
-			/>
-			<SpeedDial
-				ariaLabel="SpeedDial Menu"
-				sx={{ position: 'fixed', bottom: 30, right: 50 }}
-				icon={
-					<img className="iconoMenu" src={menuIcon} />
-				}
-			>
-				{actions.map((action) => (
-				<SpeedDialAction
-					key={action.name}
-					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
-					tooltipTitle={action.name}
-					onClick={action.name === 'Configurar Salas' ? handleOpenGestionSalas : undefined}
-				/>
-				))}
-			</SpeedDial>
+                data-cy="gestion-salas"
+                salas={salasEstados}
+                isOpen={isGestionSalasOpen}
+                onClose={() => {
+                    setIsGestionSalasOpen(false);
+                }}
+            />
+            <SpeedDial
+                ariaLabel="SpeedDial Menu"
+                sx={{ position: "fixed", bottom: 30, right: 50 }}
+                icon={<img className="iconoMenu" src={menuIcon} />}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={React.cloneElement(action.icon, {
+                            style: { fontSize: 45, color: "white" },
+                        })}
+                        tooltipTitle={action.name}
+                        onClick={
+                            action.name === "Configurar Salas"
+                                ? handleOpenGestionSalas
+                                : undefined
+                        }
+                    />
+                ))}
+            </SpeedDial>
             <ReservItemModal
                 isOpen={isModalOpen}
                 items={items}
