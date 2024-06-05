@@ -150,10 +150,10 @@ function ResumenReservacion() {
 
     return (
         <div className="contenedor-resumen-de-reservacion">
-            {!existsInSessionStorage("nombreReservacionAdmin") ? (
-                <NavBar view="soloPerfil" autoHide={false} />
-            ) : (
+            {existsInSessionStorage("nombreReservacionAdmin") ? (
                 <NavBarAdmin />
+            ) : (
+                <NavBar view="soloPerfil" autoHide={false} />
             )}
             <div className="reservation-summary-view">
                 <div className="material-summary-container">

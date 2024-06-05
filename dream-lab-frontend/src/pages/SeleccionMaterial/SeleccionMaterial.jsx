@@ -127,10 +127,10 @@ function SeleccionMaterial() {
 
     return (
         <>
-            {!existsInSessionStorage("nombreReservacionAdmin") ? (
-                <NavBar view="soloPerfil" autoHide={false} />
-            ) : (
+            {existsInSessionStorage("nombreReservacionAdmin") ? (
                 <NavBarAdmin />
+            ) : (
+                <NavBar view="soloPerfil" autoHide={false} />
             )}
 
             <div className="main-container">

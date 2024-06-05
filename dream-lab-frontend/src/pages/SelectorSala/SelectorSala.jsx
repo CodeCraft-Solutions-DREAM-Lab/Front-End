@@ -119,10 +119,10 @@ function SelectorSala() {
 
     return (
         <div>
-            {!existsInSessionStorage("nombreReservacionAdmin") ? (
-                <NavBar view="soloPerfil" autoHide={false} />
-            ) : (
+            {existsInSessionStorage("nombreReservacionAdmin") ? (
                 <NavBarAdmin />
+            ) : (
+                <NavBar view="soloPerfil" autoHide={false} />
             )}
             <div className="outer-container">
                 {/* <GlassCard className="menu-lateral">
