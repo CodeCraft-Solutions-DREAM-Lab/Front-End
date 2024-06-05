@@ -32,25 +32,25 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                         </ModalHeader>
                         <ModalBody>
                             <Input
-                                label="Nombre"
+                                label="Persona asignada a la reservación"
                                 placeholder="Nombre"
                                 labelPlacement="outside"
                                 className="mcra-input"
                                 classNames={{
-                                    input: ["bg-transparent"],
                                     inputWrapper: [
                                         "bg-transparent border-2 h-12",
                                     ],
+                                    label: ["text-lg"],
                                 }}
                             />
                             <Select
                                 label="Sala"
                                 labelPlacement="outside"
                                 placeholder="Seleccione una sala"
+                                className="mcra-select"
                                 classNames={{
-                                    trigger: [
-                                        "bg-transparent border-2 radius-full h-12",
-                                    ],
+                                    trigger: ["bg-transparent border-2  h-12"],
+                                    label: ["text-lg"],
                                 }}
                             >
                                 {salas.map((sala) => (
@@ -59,19 +59,20 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                                     </SelectItem>
                                 ))}
                             </Select>
+
+                            <div className="mcra-contenedor-botones">
+                                <Button
+                                    color="danger"
+                                    variant="light"
+                                    onPress={onClose}
+                                >
+                                    Close
+                                </Button>
+                                <Button color="primary" onPress={onClose}>
+                                    Action
+                                </Button>
+                            </div>
                         </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                color="danger"
-                                variant="light"
-                                onPress={onClose}
-                            >
-                                Close
-                            </Button>
-                            <Button color="primary" onPress={onClose}>
-                                Action
-                            </Button>
-                        </ModalFooter>
                     </>
                 )}
             </ModalContent>

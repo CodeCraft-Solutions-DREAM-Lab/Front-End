@@ -3,13 +3,29 @@
     justify-content: center;
     align-items: center;
     margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .mcra-title {
     color: #14247b;
-    font-size: max(1.3vw, 1.5vh);
+    font-size: max(1.3vw, 3vh);
 }
 
 .mcra-inner-wrapper {
     background-color: transparent;
+}
+
+.mcra-input {
+    margin-bottom: 1vh;
+}
+
+.mcra-select {
+    margin-bottom: 1vh;
+}
+
+.mcra-contenedor-botones {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 25%;
+    padding-right: 25%;
 }
