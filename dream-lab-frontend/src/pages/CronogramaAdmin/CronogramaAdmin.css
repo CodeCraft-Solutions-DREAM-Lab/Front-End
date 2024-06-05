@@ -73,15 +73,18 @@
 padding-top: 11vh;
 }
 
-.menu-icon-admin {
-  position: fixed;
-  bottom: 8%; 
-  right: 5%; 
-  z-index: 1000; 
+.MuiSpeedDial-fab {
+  width: 50px !important;
+  height: 50px !important;
+  background-color: transparent !important;
 }
 
-.menu-icon-admin img {
-  width: 45px; 
-  height: auto;
-  cursor: pointer;
+.MuiSpeedDialAction-fab {
+  background-color: transparent !important;
 }
+
+.iconoMenu {
+  width: 100%;
+  height: auto;
+}
+
