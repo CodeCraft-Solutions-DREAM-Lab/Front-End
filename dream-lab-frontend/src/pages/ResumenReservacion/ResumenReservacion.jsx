@@ -77,6 +77,12 @@ function ResumenReservacion() {
             numPersonas: reservationData.personas,
         };
 
+        if (existsInSessionStorage("nombreReservacionAdmin")) {
+            data.nombreAlterno = getFromSessionStorage(
+                "nombreReservacionAdmin"
+            );
+        }
+
         console.log("Data: ", data);
 
         const doAfterResponse = () => {
@@ -275,11 +281,19 @@ function ResumenReservacion() {
                     size="xl"
                     onOk={() => {
                         setIsModalOpen(false);
-                        navigate("/home");
+                        if (existsInSessionStorage("nombreReservacionAdmin")) {
+                            navigate("/admin");
+                        } else {
+                            navigate("/home");
+                        }
                     }}
                     onClose={() => {
                         setIsModalOpen(false);
-                        navigate("/home");
+                        if (existsInSessionStorage("nombreReservacionAdmin")) {
+                            navigate("/admin");
+                        } else {
+                            navigate("/home");
+                        }
                     }}
                 />
             </div>
