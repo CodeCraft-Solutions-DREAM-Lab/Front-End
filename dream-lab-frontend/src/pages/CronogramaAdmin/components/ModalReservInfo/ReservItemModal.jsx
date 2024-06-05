@@ -10,8 +10,9 @@ import SolicitedMatsListModal from "./SolicitedMatsListModal";
 import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
+import ModalCancelarReserv from "./ModalCancelarReserv/ModalCancelarReserv";
 import "./ReservItemModal.css";
-import { get } from "../../../../utils/ApiRequests";
+import { get } from "src/utils/ApiRequests";
 
 const horaFormatter = new Intl.DateTimeFormat("es-MX", {
 	hour: "numeric",
@@ -36,6 +37,8 @@ function ReservItemModal(props) {
 	const [horaFinString, setHoraFinString] = useState("");
 	const [reservItems, setReservItems] = useState([]);
 	const [selectedItems, setSelectedItems] = useState([]);
+
+	const [isCancelarReservOpen, setIsCancelarReservOpen] = useState(false);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -89,35 +92,32 @@ function ReservItemModal(props) {
 				console.error("Error fetching reservacion data: ", error);
 				setIsLoading(false);
 			});
-
-		// setTimeout(() => {
-		// 	setStudentName("Jaime Eduardo López Castro");
-		// 	setStudentMat("A00833173");
-		// 	setSalaName("Electric Garage");
-		// 	setMesaName("Mesa 2");
-		// 	setDateString("Martes, 15 de Diciembre");
-		// 	setHoraInicioString("15:00");
-		// 	setHoraFinString("17:00");
-		// 	setReservItems([
-		// 		{
-		// 			name: "Lentes Oculus Quest",
-		// 			quantity: 2,
-		// 		},
-		// 		{
-		// 			name: "Computadora Windows",
-		// 			quantity: 1,
-		// 		},
-		// 		{
-		// 			name: "Extensión 2 metros",
-		// 			quantity: 1,
-		// 		},
-		// 	]);
-		// 	setIsLoading(false);
-
-		// }, 1000);
 	}, [props.isOpen])
 
+	const handleCancelReservButtonClick = () => {
+		setIsCancelarReservOpen(true);
+	};
+
 	return (
+		<>
+
+		<ModalCancelarReserv
+			isOpen={isCancelarReservOpen}
+			setIsOpen={setIsCancelarReservOpen}
+			setIsInfoModalOpen={props.setIsOpen}
+
+			reservId={props.reservId}
+			salaName={salaName}
+			fechaString={dateString}
+			horaInicioString={horaInicioString}
+			horaFinString={horaFinString}
+			
+			items={props.items}
+			setItems={props.setItems}
+			filteredItems={props.filteredItems}
+			setFilteredItems={props.setFilteredItems}
+		/>
+
 		<Modal
 			size="4xl"
 			isOpen={props.isOpen}
@@ -166,6 +166,7 @@ function ReservItemModal(props) {
 									<CancelarReservaModalButton
 										className="mt-10"
 										isLoading={isLoading}
+										onClick={handleCancelReservButtonClick}	
 									/>
 
 									<PenalizarModalButton
@@ -179,11 +180,13 @@ function ReservItemModal(props) {
 				)}
 			</ModalContent>
 		</Modal>
+		</>
 	);
 }
 
 ReservItemModal.propTypes = {
 	isOpen: propTypes.bool,
+	setIsOpen: propTypes.func,
 	onClose: propTypes.func,
 	reservId: propTypes.number.isRequired,
 	items: propTypes.array,

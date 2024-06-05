@@ -347,6 +347,7 @@ function CronogramaAdmin() {
 			</SpeedDial>
             <ReservItemModal
                 isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
                 items={items}
                 setItems={setItems}
                 filteredItems={filteredItems}

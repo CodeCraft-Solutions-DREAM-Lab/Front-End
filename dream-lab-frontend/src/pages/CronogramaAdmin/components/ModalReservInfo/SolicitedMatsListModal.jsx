@@ -8,7 +8,7 @@ import {
 import propTypes from "prop-types";
 import "./ReservItemModal.css";
 import "./SolicitedMatsListModal.css";
-import { post, get } from "../../../../utils/ApiRequests";
+import { post, get } from "src/utils/ApiRequests";
 
 const SolicitedMatsListModal = ({
     reservItems,
