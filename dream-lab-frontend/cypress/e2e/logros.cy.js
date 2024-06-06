@@ -1,6 +1,6 @@
 describe("Pruebas de las pantallas de error", () => {
     beforeEach(() => {
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
 
         cy.intercept("POST", "reservaciones", {
             body: {
