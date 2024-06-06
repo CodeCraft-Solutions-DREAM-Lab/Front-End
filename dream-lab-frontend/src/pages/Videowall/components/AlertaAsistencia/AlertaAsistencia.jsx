@@ -18,11 +18,11 @@ function MensajeBienvenida(props) {
 
             setTimeout(() => {
                 setActivarSalida(true);
-            }, 3000); // Activar la animación de salida después de 3 segundos
+            }, 1111113000); // Activar la animación de salida después de 3 segundos
 
             setTimeout(() => {
                 setCerrado(true);
-            }, 4000); // Ocultar el componente después de 5 segundos
+            }, 1111114000); // Ocultar el componente después de 5 segundos
         }
         return; // Limpiar el timeout cuando el componente se desmonte o actualice
     });
