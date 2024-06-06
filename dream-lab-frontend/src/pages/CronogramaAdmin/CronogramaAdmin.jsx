@@ -1,6 +1,11 @@
+// Hooks
 import React, { useState, useEffect } from "react";
+
+// Modificación de idioma
 import moment from "moment";
 import "moment/locale/es"; // Import Spanish locale
+
+// React Calendar Timeline
 import Timeline, {
     TimelineMarkers,
     CursorMarker,
@@ -9,10 +14,12 @@ import Timeline, {
     DateHeader,
     CustomMarker,
 } from "react-calendar-timeline";
+
+// Estilos
 import "react-calendar-timeline/lib/Timeline.css";
 import "./CronogramaAdmin.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+// Material UI
 import {
     Select,
     MenuItem,
@@ -22,28 +29,50 @@ import {
     ListItemText,
     Divider,
 } from "@mui/material";
-import SpeedDial from '@mui/material/SpeedDial';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import GestionSalas from "./components/GestionSalas/GestionSalas";
-import { get } from "src/utils/ApiRequests";
-import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
-import menuIcon from "src/assets/Admin/menu-admin.svg";
-import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
-import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
-import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
+import SpeedDial from "@mui/material/SpeedDial";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import SettingsIcon from "@mui/icons-material/Settings";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
 
+// ApiRequests
+import { get } from "src/utils/ApiRequests";
+
+// Global Components
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+
+// Iconos
+import menuIcon from "src/assets/Admin/menu-admin.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+// Storage
 import {
     saveToLocalStorage,
     getFromLocalStorage,
     existsInLocalStorage,
+    multiClearSessionStorage,
 } from "src/utils/Storage";
+
+// PropTypes
 import propTypes from "prop-types";
 
+// NextUI
+import { useDisclosure } from "@nextui-org/react";
+
+// Componentes
+import ModalCrearReservacionAdmin from "./components/ModalCrearReservacionAdmin/ModalCrearReservacionAdmin";
+import GestionSalas from "./components/GestionSalas/GestionSalas";
+import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
+import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
+import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
+
+// Redux
+import { useDispatch } from "react-redux";
+import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
+
 const actions = [
-	{ icon: <AddCircleIcon />, name: 'Agregar reservación'},
-	{ icon: <SettingsIcon />, name: 'Configurar Salas'},
+    { icon: <AddCircleIcon />, name: "Agregar reservación" },
+    { icon: <SettingsIcon />, name: "Configurar Salas" },
 ];
 
 const monthTranslations = {
@@ -116,11 +145,11 @@ function CronogramaAdmin() {
     moment.locale("es");
 
     const [items, setItems] = useState([]);
-	const [isLoadingItems, setIsLoadingItems] = useState(true);
-	const [groups, setGroups] = useState([]);
+    const [isLoadingItems, setIsLoadingItems] = useState(true);
+    const [groups, setGroups] = useState([]);
     const [isLoadingGroups, setIsLoadingGroups] = useState(true);
-	const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
-	const [salasEstados, setSalasEstados] = useState([]);
+    const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
+    const [salasEstados, setSalasEstados] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reservIdInModal, setReservIdInModal] = useState(0);
 
@@ -133,6 +162,10 @@ function CronogramaAdmin() {
     const [filteredItems, setFilteredItems] = useState([]);
     const [salas, setSalas] = useState([]);
     const [mesas, setMesas] = useState([]);
+
+    const disclosureModalCrearReservacionAdmin = useDisclosure();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         get("reservaciones/cronograma")
@@ -147,14 +180,14 @@ function CronogramaAdmin() {
     }, []);
 
     useEffect(() => {
-		get("salas")
-			.then((result) => {
-				setSalasEstados(result);
-			})
-			.catch((error) => {
-				console.error("An error occurred:", error);
-			});
-	}, []);
+        get("salas")
+            .then((result) => {
+                setSalasEstados(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
 
     useEffect(() => {
         get("salas/cronograma")
@@ -202,6 +235,10 @@ function CronogramaAdmin() {
 
     const handleOpenGestionSalas = () => {
         setIsGestionSalasOpen(true);
+    };
+
+    const handleCrearReservacion = () => {
+        disclosureModalCrearReservacionAdmin.onOpen();
     };
 
     // Filtrar las reservaciones que se muestran en el cronograma según las
@@ -262,6 +299,34 @@ function CronogramaAdmin() {
         }
     }, [mesas]);
 
+    // Limpiar estados de reservaciones, vista de estudiante y reservacion de
+    // admin
+    useEffect(() => {
+        dispatch(setActive(false));
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
+            "vistaEstudiante",
+            "nombreReservacionAdmin",
+        ]);
+    }, [dispatch]);
+
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
     );
@@ -310,34 +375,38 @@ function CronogramaAdmin() {
 
     const handleChange2 = (event) => {
         setSelectedOptions2(event.target.value);
-    };  
+    };
 
     return (
         <>
             <GestionSalas
-				data-cy="gestion-salas"
-				salas={salasEstados}
-				isOpen={isGestionSalasOpen}
-				onClose={() => {
-					setIsGestionSalasOpen(false);
-				}}
-			/>
-			<SpeedDial
-				ariaLabel="SpeedDial Menu"
-				sx={{ position: 'fixed', bottom: 30, right: 50 }}
-				icon={
-					<img className="iconoMenu" src={menuIcon} />
-				}
-			>
-				{actions.map((action) => (
-				<SpeedDialAction
-					key={action.name}
-					icon={React.cloneElement(action.icon, { style: { fontSize: 45, color: 'white' } })}
-					tooltipTitle={action.name}
-					onClick={action.name === 'Configurar Salas' ? handleOpenGestionSalas : undefined}
-				/>
-				))}
-			</SpeedDial>
+                data-cy="gestion-salas"
+                salas={salasEstados}
+                isOpen={isGestionSalasOpen}
+                onClose={() => {
+                    setIsGestionSalasOpen(false);
+                }}
+            />
+            <SpeedDial
+                ariaLabel="SpeedDial Menu"
+                sx={{ position: "fixed", bottom: 30, right: 50 }}
+                icon={<img className="iconoMenu" src={menuIcon} />}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={React.cloneElement(action.icon, {
+                            style: { fontSize: 45, color: "white" },
+                        })}
+                        tooltipTitle={action.name}
+                        onClick={
+                            action.name === "Configurar Salas"
+                                ? handleOpenGestionSalas
+                                : handleCrearReservacion
+                        }
+                    />
+                ))}
+            </SpeedDial>
             <ReservItemModal
                 isOpen={isModalOpen}
                 setIsOpen={setIsModalOpen}
@@ -368,11 +437,13 @@ function CronogramaAdmin() {
                     minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
                     maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
                     itemRenderer={({ item, itemContext, getItemProps }) => {
-                        return (<CustomItemRenderer
-                            item={item}
-                            itemContext={itemContext}
-                            getItemProps={getItemProps}
-                        />)
+                        return (
+                            <CustomItemRenderer
+                                item={item}
+                                itemContext={itemContext}
+                                getItemProps={getItemProps}
+                            />
+                        );
                     }}
                     groupRenderer={(group) => (
                         <CustomGroupRenderer
@@ -458,24 +529,24 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        color: "white",
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            color: "white",
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
@@ -548,23 +619,23 @@ function CronogramaAdmin() {
                                                     color: "white",
                                                     height: "50px",
                                                     "& .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&:hover .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                                    {
-                                                        borderColor:
-                                                            "white",
-                                                        borderWidth: 2,
-                                                    },
+                                                        {
+                                                            borderColor:
+                                                                "white",
+                                                            borderWidth: 2,
+                                                        },
                                                     "& .MuiSvgIcon-root": {
                                                         color: "white",
                                                     },
@@ -607,6 +678,12 @@ function CronogramaAdmin() {
                     </TimelineHeaders>
                 </Timeline>
             </div>
+            <ModalCrearReservacionAdmin
+                isOpen={disclosureModalCrearReservacionAdmin.isOpen}
+                onOpen={disclosureModalCrearReservacionAdmin.onOpen}
+                onOpenChange={disclosureModalCrearReservacionAdmin.onOpenChange}
+                salas={salas}
+            />
         </>
     );
 }
