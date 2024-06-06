@@ -1,0 +1,48 @@
+.boton-modal-salas-guardar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+    height: 3vw;
+    margin-right: 10%;
+    background-color: white;
+    cursor: pointer;
+    border: 4px solid #ac3e1b;
+    border-radius: 20px;
+    font-family: "Karla", sans-serif;
+    font-weight: 1000;
+    font-size: large;
+    color: #ac3e1b;
+    text-transform: uppercase;
+}
+
+.boton-modal-salas-guardar:hover {
+    background-color: #ac3e1b;
+    border: 4px solid #ac3e1b;
+    color: white;
+}
+
+.boton-modal-salas-cancelar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+    height: 3vw;
+    background-color: #1bac55;
+    cursor: pointer;
+    border: 4px solid #1bac55;
+    border-radius: 20px;
+    font-family: "Karla", sans-serif;
+    font-weight: 1000;
+    font-size: large;
+    color: white;
+    text-transform: uppercase;
+}
+
+.boton-modal-salas-cancelar:hover {
+    background-color: white;
+    border: 4px solid #1bac55;
+    color: #1bac55;
+}

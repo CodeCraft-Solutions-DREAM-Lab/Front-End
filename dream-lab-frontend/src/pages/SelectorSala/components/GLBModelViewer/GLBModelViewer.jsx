@@ -2,146 +2,150 @@ import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import modeloPlaceholder from "/placeholder-modelo2.png";
+import modeloPlaceholder from "src/assets/3DModel/placeholder-modelo2.png";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 
 const GLBModelViewer = ({ modelPath }) => {
-	const mountRef = useRef(null);
-	const rendererRef = useRef(null);
-	const modelRef = useRef(null);
-	const [loading, setLoading] = useState(true); // Loading state
+    const mountRef = useRef(null);
+    const rendererRef = useRef(null);
+    const modelRef = useRef(null);
+    const [loading, setLoading] = useState(true); // Loading state
 
-	useEffect(() => {
-		let container;
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-		camera.position.set(0, 15, 0);
-		camera.lookAt(0, 0, 0);
+    useEffect(() => {
+        let container;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+        camera.position.set(0, 15, 0);
+        camera.lookAt(0, 0, 0);
 
-		const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-		renderer.setClearColor(0x000000, 0);
-		mountRef.current.appendChild(renderer.domElement);
-		rendererRef.current = renderer;
+        const renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true,
+        });
+        renderer.setClearColor(0x000000, 0);
+        mountRef.current.appendChild(renderer.domElement);
+        rendererRef.current = renderer;
 
-		const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-		scene.add(ambientLight);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(ambientLight);
 
-		const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
-		directionalLight1.position.set(5, 5, 5).normalize();
-		scene.add(directionalLight1);
+        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight1.position.set(5, 5, 5).normalize();
+        scene.add(directionalLight1);
 
-		const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-		directionalLight2.position.set(-5, -5, -5).normalize();
-		scene.add(directionalLight2);
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight2.position.set(-5, -5, -5).normalize();
+        scene.add(directionalLight2);
 
-		const pointLight = new THREE.PointLight(0xffffff, 1);
-		pointLight.position.set(0, 5, 0);
-		scene.add(pointLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(0, 5, 0);
+        scene.add(pointLight);
 
-		//const loader = new GLTFLoader();
-		const draco = new DRACOLoader();
-		draco.setDecoderConfig({ type: "js" });
-		draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
-		draco.preload();
+        //const loader = new GLTFLoader();
+        const draco = new DRACOLoader();
+        draco.setDecoderConfig({ type: "js" });
+        draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+        draco.preload();
 
-		// Pass the DRACOLoader to the GLTFLoader
-		const loader = new GLTFLoader();
-		loader.setDRACOLoader(draco);
-		loader.load(
-			modelPath,
-			(gltf) => {
-				const model = gltf.scene;
-				modelRef.current = model;
-				model.position.y += -2;
+        // Pass the DRACOLoader to the GLTFLoader
+        const loader = new GLTFLoader();
+        loader.setDRACOLoader(draco);
+        loader.load(
+            modelPath,
+            (gltf) => {
+                const model = gltf.scene;
+                modelRef.current = model;
+                model.position.y += -2;
 
-				const boundingBox = new THREE.Box3().setFromObject(model);
-				const modelCenter = new THREE.Vector3();
-				boundingBox.getCenter(modelCenter);
+                const boundingBox = new THREE.Box3().setFromObject(model);
+                const modelCenter = new THREE.Vector3();
+                boundingBox.getCenter(modelCenter);
 
-				model.position.copy(modelCenter).multiplyScalar(-1);
+                model.position.copy(modelCenter).multiplyScalar(-1);
 
-				container = new THREE.Object3D();
-				container.add(model);
-				scene.add(container);
+                container = new THREE.Object3D();
+                container.add(model);
+                scene.add(container);
 
-				camera.aspect =
-					mountRef.current.clientWidth / mountRef.current.clientHeight;
-				camera.updateProjectionMatrix();
+                camera.aspect =
+                    mountRef.current.clientWidth /
+                    mountRef.current.clientHeight;
+                camera.updateProjectionMatrix();
 
-				const controls = new OrbitControls(camera, renderer.domElement);
-				controls.target.set(0, 0, 0);
-				controls.minDistance = 19;
-				controls.maxDistance = 19;
+                const controls = new OrbitControls(camera, renderer.domElement);
+                controls.target.set(0, 0, 0);
+                controls.minDistance = 19;
+                controls.maxDistance = 19;
 
-				setLoading(false);
-				animate();
-			},
-			undefined,
-			(error) => {
-				console.error("An error occurred", error);
-			}
-		);
+                setLoading(false);
+                animate();
+            },
+            undefined,
+            (error) => {
+                console.error("An error occurred", error);
+            }
+        );
 
-		camera.position.z = 12;
+        camera.position.z = 12;
 
-		const handleResize = () => {
-			const width = mountRef.current.clientWidth;
-			const height = mountRef.current.clientHeight;
-			renderer.setSize(width, height);
-			camera.aspect = width / height;
-			camera.updateProjectionMatrix();
-		};
+        const handleResize = () => {
+            const width = mountRef.current.clientWidth;
+            const height = mountRef.current.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        };
 
-		handleResize();
-		window.addEventListener("resize", handleResize);
+        handleResize();
+        window.addEventListener("resize", handleResize);
 
-		const animate = () => {
-			requestAnimationFrame(animate);
-			if (container) {
-				container.rotation.y -= 0.01;
-			}
-			renderer.render(scene, camera);
-		};
+        const animate = () => {
+            requestAnimationFrame(animate);
+            if (container) {
+                container.rotation.y -= 0.01;
+            }
+            renderer.render(scene, camera);
+        };
 
-		return () => {
-			if (rendererRef.current) {
-				rendererRef.current.domElement.remove();
-			}
-			window.removeEventListener("resize", handleResize);
-		};
-	}, [modelPath]);
+        return () => {
+            if (rendererRef.current) {
+                rendererRef.current.domElement.remove();
+            }
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [modelPath]);
 
-	return (
-		<div
-			ref={mountRef}
-			style={{
-				width: "100%",
-				height: "100%",
-				position: "relative",
-				overflow: "hidden",
-			}}
-		>
-			{loading && (
-				<div
-					style={{
-						width: "100%",
-						height: "100%",
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						position: "absolute",
-						top: 0,
-						left: 0,
-					}}
-				>
-					<img
-						src={modeloPlaceholder}
-						style={{ maxWidth: "100%", maxHeight: "100%" }}
-					/>
-				</div>
-			)}
-		</div>
-	);
+    return (
+        <div
+            ref={mountRef}
+            style={{
+                width: "100%",
+                height: "100%",
+                position: "relative",
+                overflow: "hidden",
+            }}
+        >
+            {loading && (
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                    }}
+                >
+                    <img
+                        src={modeloPlaceholder}
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
+                    />
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default GLBModelViewer;

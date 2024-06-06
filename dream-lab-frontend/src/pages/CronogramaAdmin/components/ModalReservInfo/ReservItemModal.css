@@ -1,0 +1,59 @@
+.ReservItemModal-grid-container {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0.7vw;
+}
+
+.ReservItemModal-grid-item-1 {
+    margin-left: -1.8vh;
+    padding: 1vh;
+    /* padding: 10px; */
+    /* background-color: gainsboro; */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.ReservItemModal-grid-item-2 {
+    /* background-color: gainsboro; */
+    padding: 1vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .ReservItemModal-sala-mesa {
+    margin-top: 2.5vh;
+    align-self: center;
+}
+
+.ReservItemModal-sala-mesa > span {
+    font-size: 2.4vh;
+    font-weight: 600; 
+    color: #646464;
+}
+
+.ReservItemModal-date {
+    margin-top: 1.6vh;
+    align-self: center;
+    font-size: 2.1vh;
+    font-weight: 500; 
+    color: #646464;
+}
+
+.ReservItemModal-hora {
+    margin-top: 0.3vh;
+    align-self: center;
+    font-size: 1.8vh;
+    font-weight: 500; 
+    color: #747474;
+} */
+
+
+
+.ReservItemModal-student-name-mat, .ReservItemModal-sala-mesa, .ReservItemModal-date, .ReservItemModal-hora {
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
