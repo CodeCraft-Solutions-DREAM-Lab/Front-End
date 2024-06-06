@@ -11,6 +11,7 @@ import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
 import ModalCancelarReserv from "./ModalCancelarReserv/ModalCancelarReserv";
+import ModalPenalizar from "./ModalPenalizar/ModalPenalizar";
 import "./ReservItemModal.css";
 import { get } from "src/utils/ApiRequests";
 
@@ -39,6 +40,7 @@ function ReservItemModal(props) {
 	const [selectedItems, setSelectedItems] = useState([]);
 
 	const [isCancelarReservOpen, setIsCancelarReservOpen] = useState(false);
+	const [isPenalizarOpen, setIsPenalizarOpen] = useState(false);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -68,7 +70,7 @@ function ReservItemModal(props) {
 				let formattedDate = dateFormatter.format(reservDate);
 				// Convert the first letter of each word to uppercase except for words with 2 or less characters
 				formattedDate = formattedDate.replace(
-					/\b\w{3,}/g,
+					/\b\p{L}{3,}/gu,
 					char => char.charAt(0).toUpperCase() + char.slice(1)
 				);
 
@@ -98,6 +100,10 @@ function ReservItemModal(props) {
 		setIsCancelarReservOpen(true);
 	};
 
+	const handlePenalizarButtonClick = () => {
+		setIsPenalizarOpen(true);
+	};
+
 	return (
 		<>
 
@@ -111,11 +117,17 @@ function ReservItemModal(props) {
 			fechaString={dateString}
 			horaInicioString={horaInicioString}
 			horaFinString={horaFinString}
-			
+
 			items={props.items}
 			setItems={props.setItems}
 			filteredItems={props.filteredItems}
 			setFilteredItems={props.setFilteredItems}
+		/>
+
+		<ModalPenalizar
+			isOpen={isPenalizarOpen}
+			setIsOpen={setIsPenalizarOpen}
+			idUsuario={studentMat}
 		/>
 
 		<Modal
@@ -172,6 +184,7 @@ function ReservItemModal(props) {
 									<PenalizarModalButton
 										className="mt-4"
 										isLoading={isLoading}
+										onClick={handlePenalizarButtonClick}
 									/>
 								</div>
 							</div>
