@@ -70,7 +70,7 @@ function MensajeBienvenida(props) {
             }
         >
             <div className="confetti-alerta-asistencia">
-                {tarde ? null : <Confetti width="700vw" height="760vh" />}
+                {tarde ? <Confetti width="330vw" height="330vh" /> : <Confetti width="700vw" height="760vh" />}
             </div>
 
             <div className="alerta-videowall-primera-mitad-asistencia">
