@@ -9,6 +9,7 @@ import { I18nProvider } from "@react-aria/i18n";
 function DetalleExperiencia({ onInfoChange }) {
     const [description, setDescription] = useState("");
     const [fechaInicio, setFechaInicio] = useState(null);
+
     const [fechaFin, setFechaFin] = useState(null);
     const [isFechaFinEnabled, setIsFechaFinEnabled] = useState(false);
     const locale = "es-MX";
@@ -18,14 +19,14 @@ function DetalleExperiencia({ onInfoChange }) {
     function handleFechaInicioChange(date) {
         setFechaInicio(date);
         if (date) {
-            onInfoChange({ fechaInicio: date.toISOString() });
+            onInfoChange({ fechaInicio: date.toDate().toISOString() });
         }
     }
 
     function handleFechaFinChange(date) {
         setFechaFin(date);
         if (date) {
-            onInfoChange({ fechaFin: date.toISOString() });
+            onInfoChange({ fechaFin: date.toDate().toISOString() });
         }
     }
 

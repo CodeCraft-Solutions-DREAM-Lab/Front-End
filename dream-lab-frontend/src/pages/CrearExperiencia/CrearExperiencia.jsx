@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Navbar from "src/GlobalComponents/NavBar/NavBar";
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
 import RoundedButton from "src/pages/SeleccionMaterial/components/Button/Button";
@@ -15,6 +16,8 @@ import MaterialesRecomendados from "src/pages/MaterialesRecomendados/MaterialesR
 import { uploadFile } from "../../firebase/config";
 import { getFromSessionStorage } from "../../utils/Storage";
 import { post } from "src/utils/ApiRequests";
+import { useNavigate } from "react-router-dom";
+import { selectRol } from "../../redux/Slices/userSlice";
 
 const steps = [
 	"Crea tu experiencia",
@@ -24,6 +27,8 @@ const steps = [
 
 function CrearExperiencia() {
 	const [page, setPage] = useState(0); // Manage the current page state
+	const navigate = useNavigate();
+	const rol = useSelector(selectRol);
 
 	const [formValues, setFormValues] = useState({
 		idUF: null, // Se trae de InfoExperiencia
@@ -52,6 +57,7 @@ function CrearExperiencia() {
 
 	// Callback function to update formValues state
 	const handleInfoExperienciaChange = (updatedValues) => {
+		console.log(rol);
 		setFormValues((prevFormValues) => ({
 			...prevFormValues,
 			...updatedValues,
@@ -62,8 +68,8 @@ function CrearExperiencia() {
 	// Submit form
 	async function handleSubmit() {
 		try {
-			const materialesExperiencia = JSON.parse(
-				sessionStorage.getItem("materialesExperiencia")
+			const materialesExperiencia = getFromSessionStorage(
+				"materialesExperiencia"
 			);
 			const idSala = sessionStorage.getItem("idSala");
 
@@ -72,11 +78,19 @@ function CrearExperiencia() {
 			var instruccionesURL = null;
 
 			// Upload instruccionesFile
-			if (!formValues.instruccionesFile) {
+			if (!(formValues.instruccionesFile === null)) {
 				instruccionesURL = await uploadFile(formValues.instruccionesFile);
 			}
 
-			// Update formValues with the URLs
+			if (formValues.tipoExperiencia === "Autodirigida") {
+				formValues.esAutoDirigida = 1;
+				formValues.esExclusivaUF = 0;
+			} else {
+				formValues.esAutoDirigida = 0;
+				formValues.esExclusivaUF = 1;
+			}
+
+			// Update formValues with calculates values
 			handleInfoExperienciaChange({
 				portadaURL: portadaURL,
 				instruccionesURL: instruccionesURL,
@@ -85,13 +99,11 @@ function CrearExperiencia() {
 			});
 
 			// Post request to the Experiencias table
-			const response = await post('experiencia/crear', formValues);
+			await post("experiencias/crear", formValues);
 			// Handle the response
-			if (response.status === 200) {
-				handleOpenSnackbar("Experiencia creada exitosamente!");
-			} else {
-				handleOpenSnackbar("Hubo un problema al crear la experiencia.");
-			}
+
+			handleOpenSnackbar("Experiencia creada exitosamente!");
+			navigate("/admin");
 		} catch (error) {
 			console.error("Error al subir archivos o crear experiencia:", error);
 			handleOpenSnackbar("Error al subir archivos o crear experiencia.");
@@ -126,7 +138,7 @@ function CrearExperiencia() {
 
 	return (
 		<>
-			<NavBarAdmin />
+			{rol === 'Admin' ? <NavBarAdmin /> : <Navbar view="profesor" autoHide={false}/>}
 
 			<div className="contenedor-principal-crear-experiencia">
 				<div className="contenido-crear-experiencia">
