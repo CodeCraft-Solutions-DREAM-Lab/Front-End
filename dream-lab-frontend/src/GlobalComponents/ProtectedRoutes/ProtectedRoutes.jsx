@@ -25,6 +25,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 // Componentes de UI para mostrar mientras se carga la página
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import { saveToLocalStorage } from "../../utils/Storage";
 
 function ProtectedRoutes({ children, restrictedRoutes }) {
     // Obtener el estado de autenticación del store de redux
@@ -75,6 +76,7 @@ function ProtectedRoutes({ children, restrictedRoutes }) {
                     JSON.parse(res.token_data.datosUsuario).tipo
                 );
                 dispatch(setRol(JSON.parse(res.token_data.datosUsuario).tipo));
+                console.log(selectRol);
             });
         }
     }, [isLoading, dispatch]);
@@ -96,6 +98,7 @@ function ProtectedRoutes({ children, restrictedRoutes }) {
             console.log(restrictedRoutes[rol]);
             console.log(restrictedRoutes[rol].routes);
             console.log(currentPath);
+            //saveToLocalStorage("rol", rol);
             // Si el usuario no tiene permiso para acceder a la ruta actual, se
             // redirige a la ruta de fallback
             if (

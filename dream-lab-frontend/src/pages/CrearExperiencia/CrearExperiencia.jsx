@@ -28,7 +28,8 @@ const steps = [
 function CrearExperiencia() {
 	const [page, setPage] = useState(0); // Manage the current page state
 	const navigate = useNavigate();
-	const rol = useSelector(selectRol);
+
+    const rol = useSelector(selectRol);
 
 	const [formValues, setFormValues] = useState({
 		idUF: null, // Se trae de InfoExperiencia
@@ -138,7 +139,7 @@ function CrearExperiencia() {
 
 	return (
 		<>
-			{rol === 'Admin' ? <NavBarAdmin /> : <Navbar view="profesor" autoHide={false}/>}
+			{rol === 'Admin' ? <NavBarAdmin /> : <Navbar view="soloPerfil" autoHide={false}/>}
 
 			<div className="contenedor-principal-crear-experiencia">
 				<div className="contenido-crear-experiencia">
