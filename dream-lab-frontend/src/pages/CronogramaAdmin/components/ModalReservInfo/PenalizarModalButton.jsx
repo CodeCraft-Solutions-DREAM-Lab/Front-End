@@ -32,6 +32,7 @@ function PenalizarModalButton(props) {
                 className={props.className  + " RIM-btn"}    
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                onClick={props.onClick}
             >
                 PENALIZAR
                 
@@ -45,6 +46,7 @@ function PenalizarModalButton(props) {
 PenalizarModalButton.propTypes = {
 	className: propTypes.string,
     isLoading: propTypes.bool,
+    onClick: propTypes.func,
 };
 
 export default PenalizarModalButton;

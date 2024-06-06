@@ -15,7 +15,7 @@ function CancelarReservaModalButton(props) {
     }
     
 	return (
-        <Button className={props.className + " RIM-btn"}>
+        <Button className={props.className + " RIM-btn"} onClick={props.onClick}>
             CANCELAR RESERVA
         </Button>
     );
@@ -24,6 +24,7 @@ function CancelarReservaModalButton(props) {
 CancelarReservaModalButton.propTypes = {
 	className: propTypes.string,
     isLoading: propTypes.bool,
+    onClick: propTypes.func
 };
 
 export default CancelarReservaModalButton;
