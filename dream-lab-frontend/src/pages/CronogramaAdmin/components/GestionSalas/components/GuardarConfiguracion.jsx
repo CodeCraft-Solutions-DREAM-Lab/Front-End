@@ -18,7 +18,6 @@ function GuardarConfiguracion(props) {
 
     const cambiarEstadoSala = (id) => {
         const url = `salas/cambiarEstadoSalas`;
-        console.log(id);
 
         const data = JSON.stringify({
             idSala: id,
@@ -37,15 +36,17 @@ function GuardarConfiguracion(props) {
     }
 
     const handleSave = () => {
-        console.log('control log: ', props.salas);
         props.salas.forEach(sala => {
-            console.log(`Nombre: ${sala.nombre}, Bloqueada: ${sala.bloqueada}, Clicked: ${sala.clicked}`);
             if(sala.clicked){
-                console.log(`Cambio disponibilidad de Sala:  ${sala.nombre}, con id:`);
+                sala.bloqueada = !sala.bloqueada;
                 cambiarEstadoSala(sala.idSala);
             }
         });
 
+        const newSalasArray = [...props.salas];
+        props.setSalas(newSalasArray);
+
+        // props.updateSalasAfterSave();
         setIsModalConfirmacionOpen(true);
     };
 
@@ -92,9 +93,12 @@ function GuardarConfiguracion(props) {
 }
 
 GuardarConfiguracion.propTypes = {
+    salas: propTypes.array,
+    setSalas: propTypes.func,
     isOpen: propTypes.bool,
     closeAll: propTypes.func,
     onClose: propTypes.func,
+    // updateSalasAfterSave: propTypes.func,
 };
 
 export default GuardarConfiguracion;

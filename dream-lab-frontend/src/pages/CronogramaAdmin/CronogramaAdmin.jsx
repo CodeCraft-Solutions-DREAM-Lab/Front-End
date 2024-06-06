@@ -151,7 +151,10 @@ function CronogramaAdmin() {
     useEffect(() => {
 		get("salas")
 			.then((result) => {
-				setSalasEstados(result);
+				setSalasEstados(result.map((sala) => ({
+                    ...sala,
+                    clicked: false,
+                })));
 			})
 			.catch((error) => {
 				console.error("An error occurred:", error);
@@ -315,15 +318,29 @@ function CronogramaAdmin() {
         setSelectedOptions2(event.target.value);
     };  
 
+    const updateSalasState = (newSalas) => {
+        setSalasEstados(newSalas);
+    };
+
+    const updateSalaState = (id, clicked) => {
+        setSalasEstados((prevSalas) =>
+            prevSalas.map((sala) =>
+                sala.idSala === id ? { ...sala, clicked } : sala
+            )
+        );
+    };
+
     return (
         <>
             <GestionSalas
 				data-cy="gestion-salas"
 				salas={salasEstados}
+                setSalas={setSalasEstados}
 				isOpen={isGestionSalasOpen}
 				onClose={() => {
 					setIsGestionSalasOpen(false);
 				}}
+                updateSalaState={updateSalaState}
 			/>
 			<SpeedDial
 				ariaLabel="SpeedDial Menu"
