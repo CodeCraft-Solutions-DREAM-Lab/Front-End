@@ -162,6 +162,7 @@ function CronogramaAdmin() {
     const [filteredItems, setFilteredItems] = useState([]);
     const [salas, setSalas] = useState([]);
     const [mesas, setMesas] = useState([]);
+    const [estatus, setEstatus] = useState([]);
 
     const disclosureModalCrearReservacionAdmin = useDisclosure();
 
@@ -222,6 +223,19 @@ function CronogramaAdmin() {
         get("mesas")
             .then((result) => {
                 setMesas(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
+    // Obtener los datos de los estatus para poder agregar los nombres al filtro
+    // de estatus
+    useEffect(() => {
+        get("estatus")
+            .then((result) => {
+                console.log("Estatus: ", result);
+                setEstatus(result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
