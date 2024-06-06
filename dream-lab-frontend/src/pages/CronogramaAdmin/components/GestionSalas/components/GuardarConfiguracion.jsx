@@ -9,16 +9,41 @@ import {
 } from "@nextui-org/react";
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import ConfirmacionGuardado from "./ConfirmacionGuardado";
+import { put } from "src/utils/ApiRequests.js";
 
 import propTypes from "prop-types";
 
 function GuardarConfiguracion(props) {
     const [isModalConfirmacionOpen, setIsModalConfirmacionOpen] = useState(false);
 
+    const cambiarEstadoSala = (id) => {
+        const url = `salas/cambiarEstadoSalas`;
+        console.log(id);
+
+        const data = JSON.stringify({
+            idSala: id,
+        });
+
+        put(
+            url,
+            data,
+            () => {
+                console.log("La disponibilidad se actualizó exitosamente.");
+            },
+            (error) => {
+                console.error("Error al cambiar la disponibilidad:", error);
+            }
+        );
+    }
+
     const handleSave = () => {
         console.log('control log: ', props.salas);
         props.salas.forEach(sala => {
             console.log(`Nombre: ${sala.nombre}, Bloqueada: ${sala.bloqueada}, Clicked: ${sala.clicked}`);
+            if(sala.clicked){
+                console.log(`Cambio disponibilidad de Sala:  ${sala.nombre}, con id:`);
+                cambiarEstadoSala(sala.idSala);
+            }
         });
 
         setIsModalConfirmacionOpen(true);
