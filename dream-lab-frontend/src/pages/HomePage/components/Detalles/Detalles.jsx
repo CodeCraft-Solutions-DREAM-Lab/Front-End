@@ -32,6 +32,7 @@ function ExperienceDetails(props) {
 
         if (selectedItem.type == "sala") {
             saveToSessionStorage("idSala", selectedItem.id);
+            saveToSessionStorage("idExperiencia", 0);
         } else {
             saveToSessionStorage("idExperiencia", selectedItem.id);
         }

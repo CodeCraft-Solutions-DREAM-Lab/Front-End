@@ -20,6 +20,7 @@ import { Badge } from "@nextui-org/react";
 // Hooks
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import WarningModal from "./components/WarningModal/WarningModal"; // Warning modal if recommended items haven't been selected 
 
 // Storage
 import {
@@ -38,14 +39,15 @@ function SeleccionMaterial() {
             existsInSessionStorage("materials") &&
             getFromSessionStorage("materials")
         ) {
-            console.log(JSON.parse(getFromSessionStorage("materials")));
             return JSON.parse(getFromSessionStorage("materials"));
         } else {
             return [];
         }
     });
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
 
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
@@ -53,17 +55,20 @@ function SeleccionMaterial() {
         // Parametros Stored Procedure
         const params = {
             idSala: getFromSessionStorage("idSala"),
+            idExperiencia: getFromSessionStorage("idExperiencia"),
             fecha: date.toISOString(),
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: parseInt(getFromSessionStorage("duration")),
         };
 
-        post("materiales", params)
+        post("materiales/recomendados", params)
             .then((result) => {
                 setData(result);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
+                setIsLoading(false);
             });
     }, []);
 
@@ -92,9 +97,7 @@ function SeleccionMaterial() {
                 updatedSelectedMaterials[materialIndex].quantity = newQuantity;
             } else {
                 // If the material doesn't exist in the array, add it with the new quantity
-                const materialToAdd = data.find(
-                    (item) => item.id === materialId
-                );
+                const materialToAdd = data.find((item) => item.id === materialId);
                 if (materialToAdd) {
                     updatedSelectedMaterials.push({
                         materialId: materialId,
@@ -109,11 +112,10 @@ function SeleccionMaterial() {
         setSelectedMaterials(updatedSelectedMaterials);
 
         // After adding the new item to the container
-        const container = document.querySelector(".material-resumen-container");
+        const container = document.querySelector('.material-resumen-container');
         // Add a small delay to ensure the container has updated its layout
         setTimeout(() => {
-            container.scrollLeft =
-                container.scrollWidth - container.clientWidth;
+            container.scrollLeft = container.scrollWidth - container.clientWidth;
         }, 100); // Adjust the delay time as needed
     };
 
@@ -121,9 +123,30 @@ function SeleccionMaterial() {
         navigate("/reservacion/resumen");
     };
 
-    const filteredData = data.filter((material) =>
-        material.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleNextButtonClick = () => {
+        const recommendedMaterials = data.filter(material => material.cantidadRecomendada > 0);
+        const recommendedMaterialsNotSelected = recommendedMaterials.some(recommended => {
+            const selectedMaterial = selectedMaterials.find(selected => selected.materialId === recommended.id);
+            return !selectedMaterial || selectedMaterial.quantity < recommended.cantidadRecomendada;
+        });
+
+        if (recommendedMaterialsNotSelected) {
+            setIsFirstReminderOpen(true);
+        } else {
+            handleSubmit();
+        }
+    };
+
+    const handleWarningModalConfirm = () => {
+        setIsFirstReminderOpen(false);
+        handleSubmit();
+    };
+
+    const filteredData = data
+        .filter(material =>
+            material.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .sort((a, b) => b.cantidadRecomendada - a.cantidadRecomendada); // Sort by cantidadRecomendada
 
     return (
         <>
@@ -140,14 +163,8 @@ function SeleccionMaterial() {
                         <BotonBack ruta="/reservacion/sala/" />
                     </div>
                     <div className="material-resumen-container">
-                        {selectedMaterials.map((selectedMaterial, index) => (
-                            <Badge
-                                content={selectedMaterial.quantity}
-                                color="default"
-                                placement="top-left"
-                                data-cy="badge"
-                                key={index}
-                            >
+                        {selectedMaterials.map((selectedMaterial) => (
+                            <Badge key={selectedMaterial.materialId} content={selectedMaterial.quantity} color="default" placement="top-left" data-cy="badge">
                                 <MiniMaterialCard
                                     key={selectedMaterial.materialId}
                                     image={selectedMaterial.image}
@@ -158,20 +175,24 @@ function SeleccionMaterial() {
 
                     {/* Search bar for filtering materials */}
                     <div className="search-bar-container">
-                        <SearchBar
-                            searchTerm={searchTerm}
-                            setSearchTerm={setSearchTerm}
-                        />
+                        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                     </div>
                 </div>
                 <div className="bottom-section">
+                    {/* Below is the modal in case there are recommended items that should be selected but haven't been selected */}
+
+                    <WarningModal
+                        data-cy="primer-recordatorio-sala"
+                        isOpen={isFirstReminderOpen}
+                        size="2xl"
+                        onClose={() => setIsFirstReminderOpen(false)}
+                        onOk={handleWarningModalConfirm} // For the "Sí, continuar" button
+                    />
+
                     {/* Div to display all selectable materials */}
                     <div className="card-container-wrapper">
-                        <div
-                            className="card-container-sm"
-                            data-cy="card-container-sm"
-                        >
-                            {filteredData.map((material) => (
+                        <div className="card-container-sm" data-cy="card-container-sm">
+                            {filteredData.map(material => (
                                 <MaterialCard
                                     key={material.id}
                                     materialId={material.id}
@@ -180,18 +201,19 @@ function SeleccionMaterial() {
                                     hideQuantity={false}
                                     onQuantityUpdate={handleQuantityUpdate}
                                     initialQuantity={
-                                        selectedMaterials.find(
-                                            (m) => m.materialId === material.id
-                                        )?.quantity || 0
+                                        selectedMaterials.find((m) => m.materialId === material.id)
+                                            ?.quantity || 0
                                     }
                                     maxQuantity={material.cantidadDisponible}
+                                    isRecommended={material.cantidadRecomendada > 0} // Pass the flag
+                                    recommendedAmnt={material.cantidadRecomendada}
                                     data-cy={`material-card-${material.id}`}
                                 />
                             ))}
                         </div>
                     </div>
                     <div className="button-container-sm">
-                        <RoundedButton text="ACEPTAR" onClick={handleSubmit} />
+                        <RoundedButton text="ACEPTAR" onClick={handleNextButtonClick} />
                     </div>
                 </div>
             </div>
