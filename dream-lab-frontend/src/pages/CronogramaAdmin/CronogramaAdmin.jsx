@@ -170,10 +170,8 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("reservaciones/cronograma")
             .then((result) => {
-                console.log(result);
                 setItems(convertToMomentObjects(result));
                 setIsLoadingItems(false);
-                // console.log(items);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -196,7 +194,6 @@ function CronogramaAdmin() {
             .then((result) => {
                 setGroups(result);
                 setIsLoadingGroups(false);
-                // console.log("salas/cronograma: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -301,10 +298,6 @@ function CronogramaAdmin() {
             setSelectedMesasIds([]);
         }
     }, [mesas]);
-
-    useEffect(() => {
-        console.log("FilteredItems in Cronograma: ", filteredItems);
-    }, [filteredItems]);
 
     // Limpiar estados de reservaciones, vista de estudiante y reservacion de
     // admin
@@ -416,6 +409,7 @@ function CronogramaAdmin() {
             </SpeedDial>
             <ReservItemModal
                 isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
                 items={items}
                 setItems={setItems}
                 filteredItems={filteredItems}
