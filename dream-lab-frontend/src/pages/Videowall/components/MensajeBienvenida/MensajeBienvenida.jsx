@@ -41,7 +41,7 @@ function MensajeBienvenida(props) {
         // Esperar 10 segundos antes de cerrar el mensaje
         const timeoutId = setTimeout(() => {
             setCerrado(true);
-        }, 15000);
+        }, 111115000);
 
         // Limpiar el timeout cuando el componente se desmonte o cuando el useEffect se ejecute nuevamente
         return () => clearTimeout(timeoutId);
