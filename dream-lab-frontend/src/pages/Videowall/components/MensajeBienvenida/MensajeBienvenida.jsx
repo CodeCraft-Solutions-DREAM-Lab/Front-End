@@ -38,10 +38,10 @@ function MensajeBienvenida(props) {
             setCerrado(false);
         }, 300);
 
-        // Esperar 10 segundos antes de cerrar el mensaje
+        // Esperar 15 segundos antes de cerrar el mensaje
         const timeoutId = setTimeout(() => {
             setCerrado(true);
-        }, 111115000);
+        }, 15000);
 
         // Limpiar el timeout cuando el componente se desmonte o cuando el useEffect se ejecute nuevamente
         return () => clearTimeout(timeoutId);
@@ -159,7 +159,7 @@ function MensajeBienvenida(props) {
                     : { border: `13px solid ${bordeColor}` }
             }
         >
-            {error ? null : mostrarAsistencia ? <AlertaAsistencia tarde={llegoTarde}/>: null }
+            {error ? null : <AlertaAsistencia tarde={llegoTarde}/> }
 
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
