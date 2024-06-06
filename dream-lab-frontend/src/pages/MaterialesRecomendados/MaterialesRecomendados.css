@@ -1,0 +1,146 @@
+.matrec-main-container {
+	position: relative;
+	width: 100%;
+	height: fit-content;
+	padding-top: 18vh;
+}
+
+.matrec-top-section {
+	padding-bottom: 1%;
+	margin-inline: 7%;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 5vw;
+}
+
+.sala-dropdown-container {
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+}
+
+.sala-dropdown {
+	width: 30vw;
+}
+
+.sala-dropdown-title {
+	color: white;
+}
+
+@media only screen and (max-width: 490px) {
+	.matrec-top-section {
+		justify-content: start;
+		column-gap: 15%;
+		margin-bottom: 3%;
+	}
+}
+
+.matrec-search-bar-container {
+	width: 20vw;
+}
+
+.matrec-material-resumen-container {
+	display: flex;
+	align-items: center;
+	width: 200%;
+	height: auto;
+	padding-left: 1%;
+	margin-right: 4%;
+	column-gap: 2vw;
+	overflow-x: auto; /* Enable horizontal scrolling */
+	scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 490px) {
+	.matrec-material-resumen-container {
+		display: none;
+	}
+}
+
+/* Define scrollbar styles */
+.matrec-material-resumen-container::-webkit-scrollbar {
+	height: 8px;
+  }
+  
+  /* Track */
+.matrec-material-resumen-container::-webkit-scrollbar-track {
+	background: none; 
+  }
+  
+  /* Handle */
+.matrec-material-resumen-container::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.525); 
+	border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+.matrec-material-resumen-container::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7); 
+  }
+
+.matrec-bottom-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 85%;
+	margin: auto;
+}
+
+.matrec-card-container-wrapper {
+	display: flex;
+	align-items: center; /* Center the card container horizontally */
+}
+
+.matrec-card-container-sm {
+	justify-self: center;
+	display: flex;
+	flex-direction: row !important;
+	flex-wrap: wrap; /* Cards will wrap to the next row */
+	justify-content: left !important; /* Align cards to the start of the container */
+	overflow-y: auto; /* Enable vertical scroll if needed */
+	min-width: 80vw;
+	height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
+	padding: 0 1%; /* Added padding to prevent cards from touching the edges */
+}
+
+@media only screen and (max-width: 480px) {
+	.card-container {
+		margin-top: 4%;
+	}
+}
+
+/* 
+@media only screen and (max-width: 480px) {
+	.matrec-button-container-sm {
+		margin-top: 6%;
+	}
+	.matrec-search-bar-container {
+		margin-bottom: 4%;
+	}
+}
+
+
+/* Define scrollbar styles */
+.matrec-card-container-sm::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  /* Track */
+.matrec-card-container-sm::-webkit-scrollbar-track {
+	background: none; 
+  }
+  
+  /* Handle */
+.matrec-card-container-sm::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.525); 
+	border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+.matrec-card-container-sm::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.7); 
+  }
+  
+

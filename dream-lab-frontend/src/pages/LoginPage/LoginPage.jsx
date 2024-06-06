@@ -23,14 +23,14 @@ import "src/GlobalComponents/GlassCard/GlassCard.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
 
 import { useDispatch } from "react-redux";
-import { setAuth } from "src/redux/Slices/userSlice";
+import { setAuth, setRol } from "src/redux/Slices/userSlice";
 
 import topBlob from "src/assets/Login/top-blob.webp";
 import bottomBlob from "src/assets/Login/bottom-blob.webp";
 import dreamLabLogo from "src/assets/Logos/LogoDreamLab.webp";
 
 import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen";
-import { saveToLocalStorage } from "../../utils/Storage";
+import { existsInLocalStorage, saveToLocalStorage } from "../../utils/Storage";
 
 export default function LoginPage() {
     const [user, setUser] = useState("");
@@ -54,11 +54,25 @@ export default function LoginPage() {
                     if (data) {
                         // Guardar los datos regresados en el local storage
                         saveToLocalStorage("token", jwt);
-                        saveToLocalStorage("user", data.token_data.usuario);
+                        const datosUsuario = JSON.parse(
+                            data.token_data.datosUsuario
+                        );
+                        saveToLocalStorage(
+                            "user",
+                            datosUsuario.idUsuario.toLowerCase()
+                        );
                         // Guardar en redux que ya se hizo login
                         dispatch(setAuth(true));
-                        // Redirigir a la página de home
-                        navigate("/home");
+                        // Guardar en redux el rol del usuario
+                        dispatch(setRol(datosUsuario.tipo));
+                        // Redirigir dependiendo del rol del usuario
+                        if (datosUsuario.tipo === "admin") {
+                            navigate("/admin");
+                        } else if (datosUsuario.tipo === "regular") {
+                            navigate("/home");
+                        } else {
+                            navigate("/login");
+                        }
                     }
                 })
                 .catch(() => {
@@ -70,7 +84,7 @@ export default function LoginPage() {
         }
         // Si no hay token en los parametros, validar si hay un token en el
         // local storage
-        else if (getFromLocalStorage("token")) {
+        else if (existsInLocalStorage("token")) {
             setAuthenticating(true);
             post("auth/token", {
                 token: getFromLocalStorage("token") || "",
@@ -78,7 +92,17 @@ export default function LoginPage() {
                 .then((data) => {
                     if (data) {
                         dispatch(setAuth(true));
-                        navigate("/home");
+                        // Redirigir dependiendo del rol del usuario
+                        const rol = JSON.parse(
+                            data.token_data.datosUsuario
+                        ).tipo.toLowerCase();
+                        if (rol === "admin") {
+                            navigate("/admin");
+                        } else if (rol === "regular") {
+                            navigate("/home");
+                        } else {
+                            navigate("/login");
+                        }
                     }
                 })
                 .catch(() => {

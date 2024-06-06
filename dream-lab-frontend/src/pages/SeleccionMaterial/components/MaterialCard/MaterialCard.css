@@ -1,5 +1,15 @@
-/* card component*/
-.card {
+/* Keyframes for the counterclockwise rotation */
+@keyframes borderDotAnimation {
+	0% {
+	  transform: rotate(0deg);
+	}
+	100% {
+	  transform: rotate(-360deg);
+	}
+  }
+  
+  /* Apply styles to the card */
+  .card {
 	width: 14%;
 	height: 50%;
 	margin: 1%;
@@ -7,83 +17,109 @@
 	background-color: #f3f3f3;
 	border-radius: 20px;
 	align-items: flex-end;
-}
+	position: relative; /* Necessary for pseudo-elements */
+  }
+  
+  .recommended-material {
+	border: 8px solid #C4C6FF; /* Actual border */
+  }
+  
+  .recommended-label {
+	position: absolute;
+	top: -32px; /* Adjust as necessary */
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-wrap: nowrap;
+  }
 
-@media only screen and (max-width: 1100px) and (min-width: 801px)  {
+  .greyed-out {
+	opacity: 0.5;
+	pointer-events: none;
+  }
+  
+  .not-enough-availability {
+	border: 8px solid rgb(255, 195, 127);
+  }
+  
+  @media only screen and (max-width: 1100px) and (min-width: 801px) {
 	.card {
-		width: 20%;
-		height: 170px;
-		margin: 2%;
+	  width: 20%;
+	  height: 170px;
+	  margin: 2%;
 	}
-}
-
-@media only screen and (max-width: 800px) and (min-width: 601px)  {
+  }
+  
+  @media only screen and (max-width: 800px) and (min-width: 601px) {
 	.card {
-		width: 26%;
-		height: 170px;
-		margin: 2%;
+	  width: 26%;
+	  height: 170px;
+	  margin: 2%;
 	}
-}
-
-@media only screen and (max-width: 600px) {
+  }
+  
+  @media only screen and (max-width: 600px) {
 	.card {
-		width: 45%;
-		height: 170px;
-		margin: 2%;
+	  width: 45%;
+	  height: 170px;
+	  margin: 2%;
 	}
-}
-
-.nombre-material {
+  }
+  
+  .nombre-material {
 	display: flex;
 	justify-content: center;
 	padding: 5%;
 	padding-top: 7%;
-	padding-bottom:0%;
+	padding-bottom: 0%;
 	font-size: small;
 	font-weight: 600;
 	text-align: center;
 	min-height: 30%;
-}
-
-.card .material-image {
+  }
+  
+  .card .material-image {
 	display: flex;
 	justify-content: center;
 	width: auto;
 	height: 40%;
 	margin: 0 auto;
 	margin-bottom: 10%;
-}
-
-.card .material-image img {
+  }
+  
+  .card .material-image img {
 	display: block;
 	width: auto;
 	text-align: center;
-}
-
-.card .icons {
+  }
+  
+  .card .icons {
 	display: flex; /* Enable flexbox for responsive layout */
 	justify-content: center; /* Center elements horizontally */
 	align-items: flex-end;
-	
-}
-
-.card .icons img {
+  }
+  
+  .card .icons img {
 	width: 23px;
 	height: auto;
 	margin: 0 7px; /* Add spacing between elements */
 	transition: transform 0.2s ease-in-out; /* Add transition for smooth animation */
 	cursor: pointer; /* Set cursor to pointer on hover */
-}
-
-.card .icons img:hover {
+  }
+  
+  .card .icons img:hover {
 	transform: scale(1.2); /* Scale up on hover */
-}
-
-.card .icons img:active {
+  }
+  
+  .card .icons img:active {
 	transform: scale(0.9); /* Scale down slightly on click */
-}
-
-.card .icons p {
+  }
+  
+  .card .icons p {
 	width: 25px;
 	height: 25px; /* Set height equal to width for a circle */
 	margin: 0 7px; /* Add spacing between elements */
@@ -93,24 +129,25 @@
 	font-weight: 400;
 	line-height: 25px; /* Match line-height with height for vertical centering */
 	text-align: center;
-}
-
-@media only screen and (max-width: 480px) {
+  }
+  
+  @media only screen and (max-width: 480px) {
 	.card .material-image {
-		margin-bottom: 7%;
+	  margin-bottom: 7%;
 	}
-
+  
 	.card .icons img {
-		width: 23px;
-		height: auto;
+	  width: 23px;
+	  height: auto;
 	}
-
+  
 	.card .icons p {
-		width: 23px;
-		height: 23px;
-		font-size: medium;
-		font-weight: 400;
-		line-height: 23px;
-		text-align: center;
+	  width: 23px;
+	  height: 23px;
+	  font-size: medium;
+	  font-weight: 400;
+	  line-height: 23px;
+	  text-align: center;
 	}
-}
+  }
+  

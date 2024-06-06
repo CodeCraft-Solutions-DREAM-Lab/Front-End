@@ -15,72 +15,10 @@ import LoadingScreen from "src/GlobalComponents/LoadingScreen/LoadingScreen.jsx"
 
 const OPTIONS = { dragFree: true, loop: true, startIndex: 0 };
 
-const unsplash_prefix = "https://images.unsplash.com/photo-";
-const unsplash_suffix =
-    "?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80";
-
 // Imagenes
 import blobLeft from "src/assets/HomePage/blob-left.webp";
 import smallBlob from "src/assets/HomePage/small-blob.webp";
 import blobRight from "src/assets/HomePage/blob-right.webp";
-
-const IMAGES = [
-    {
-        id: "1",
-        url: "/HomePage/ImagenSalaVR.webp",
-        title: "Sala VR",
-    },
-    {
-        id: "2",
-        url: "/HomePage/ImagenUsoRouters.webp",
-        title: "Deep Net",
-    },
-    {
-        id: "3",
-        url: "/HomePage/ImagenExpGoogle.webp",
-        title: "Testing Land",
-    },
-    {
-        id: "4",
-        url: `${unsplash_prefix}1496753480864-3e588e0269b3${unsplash_suffix}`,
-        title: "Electric Garage",
-    },
-    {
-        id: "5",
-        url: `${unsplash_prefix}1613346945084-35cccc812dd5${unsplash_suffix}`,
-        title: "Electric Garage",
-    },
-    {
-        id: "6",
-        url: `${unsplash_prefix}1516681100942-77d8e7f9dd97${unsplash_suffix}`,
-        title: "Electric Garage",
-    },
-    {
-        id: "7",
-        url: `${unsplash_prefix}1709777114364-f1d4da772786${unsplash_suffix}`,
-        title: "Electric Garage",
-    },
-    {
-        id: "8",
-        url: "/HomePage/ImagenCursoSwift.webp",
-        title: "Curso de Swift",
-    },
-    {
-        id: "9",
-        url: "/HomePage/ImagenConnections.webp",
-        title: "Deep Net",
-    },
-    {
-        id: "10",
-        url: "/HomePage/ImagenCursoSwift.webp",
-        title: "Curso de Swift",
-    },
-    {
-        id: "11",
-        url: "/HomePage/ImagenConnections.webp",
-        title: "Deep Net",
-    },
-];
 
 const initialData = [
     {
