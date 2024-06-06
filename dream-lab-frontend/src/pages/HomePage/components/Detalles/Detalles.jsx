@@ -30,9 +30,10 @@ function ExperienceDetails(props) {
         // Llama a la función de navegación pasada como prop
         saveToSessionStorage("reservType", selectedItem.type);
 
-        if (selectedItem.type == "sala") {
+        if (selectedItem.type === "sala") {
             saveToSessionStorage("idSala", selectedItem.id);
-            saveToSessionStorage("idExperiencia", 0);
+            // TODO: @Reynaldo revisar si es necesario guardar 0 en idExperiencia
+            // saveToSessionStorage("idExperiencia", 0);
         } else {
             saveToSessionStorage("idExperiencia", selectedItem.id);
         }
