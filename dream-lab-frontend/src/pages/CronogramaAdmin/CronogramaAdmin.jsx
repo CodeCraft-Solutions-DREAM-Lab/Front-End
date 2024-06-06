@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+// Hooks
+import React, { useState, useEffect } from "react";
+
+// Modificación de idioma
 import moment from "moment";
 import "moment/locale/es"; // Import Spanish locale
+
+// React Calendar Timeline
 import Timeline, {
     TimelineMarkers,
     CursorMarker,
@@ -9,11 +14,12 @@ import Timeline, {
     DateHeader,
     CustomMarker,
 } from "react-calendar-timeline";
+
+// Estilos
 import "react-calendar-timeline/lib/Timeline.css";
 import "./CronogramaAdmin.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import Switch from "@mui/material/Switch";
+
+// Material UI
 import {
     Select,
     MenuItem,
@@ -23,15 +29,51 @@ import {
     ListItemText,
     Divider,
 } from "@mui/material";
+import SpeedDial from "@mui/material/SpeedDial";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import SettingsIcon from "@mui/icons-material/Settings";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+
+// ApiRequests
 import { get } from "src/utils/ApiRequests";
+
+// Global Components
 import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+
+// Iconos
 import menuIcon from "src/assets/Admin/menu-admin.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
+// Storage
 import {
     saveToLocalStorage,
     getFromLocalStorage,
     existsInLocalStorage,
+    multiClearSessionStorage,
 } from "src/utils/Storage";
+
+// PropTypes
 import propTypes from "prop-types";
+
+// NextUI
+import { useDisclosure } from "@nextui-org/react";
+
+// Componentes
+import ModalCrearReservacionAdmin from "./components/ModalCrearReservacionAdmin/ModalCrearReservacionAdmin";
+import GestionSalas from "./components/GestionSalas/GestionSalas";
+import ReservItemModal from "./components/ModalReservInfo/ReservItemModal";
+import CustomGroupRenderer from "./components/Cronograma/CustomGroupRenderer";
+import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
+
+// Redux
+import { useDispatch } from "react-redux";
+import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
+
+const actions = [
+    { icon: <AddCircleIcon />, name: "Agregar reservación" },
+    { icon: <SettingsIcon />, name: "Configurar Salas" },
+];
 
 const monthTranslations = {
     January: "Enero",
@@ -76,118 +118,12 @@ const CustomLabel = ({ interval }) => {
     );
 };
 
-// const handleToggleClick = (groupId) => {
-//     setSelectedMesasIds((selectedMesasIds) => {
-//         if (selectedMesasIds.includes(groupId)) {
-//             return selectedMesasIds.filter((id) => id !== groupId);
-//         } else {
-//             return [...selectedMesasIds, groupId];
-//         }
-//     });
-//     saveToLocalStorage("selectedMesasIds", JSON.stringify(selectedMesasIds));
-// };
-
-const CustomGroupRenderer = ({
-    group,
-    handleToggleClick,
-    selectedMesasIds,
-}) => {
-    group = group.group;
-    const groupClass = group.sala ? "sala" : "";
-    const [selected, setSelected] = useState(false);
-
-    useEffect(() => {
-        setSelected(selectedMesasIds.includes(group.id));
-    }, [selectedMesasIds, group.id]);
-
-    return (
-        <div
-            className={`rct-sidebar-row ${groupClass}`}
-            data-cy="group-row"
-            key={group.id}
-        >
-            {group.title}
-            {!group.sala && (
-                <Switch
-                    onChange={(event) =>
-                        handleToggleClick(event, group.id, setSelected)
-                    }
-                    checked={selected}
-                    color="white" // Customize the color of the switch
-                    sx={{
-                        width: 42,
-                        height: 26,
-                        padding: 0,
-                        margin: 0,
-                        marginLeft: 2,
-                        "& .css-1mpet1h-MuiSwitch-root .MuiSwitch-switchBase": {
-                            margin: "1px",
-                        },
-                        "& .MuiSwitch-switchBase": {
-                            padding: 0,
-                            margin: 0.3,
-                            transitionDuration: "300ms",
-                            "&.Mui-checked": {
-                                transform: "translateX(16px)",
-                                color: "#fff",
-                                "& + .MuiSwitch-track": {
-                                    backgroundColor: "#fff", // Change to white
-                                    opacity: 1,
-                                    border: 0,
-                                },
-                                "&.Mui-disabled + .MuiSwitch-track": {
-                                    opacity: 0.5,
-                                },
-                            },
-                            "&.Mui-focusVisible .MuiSwitch-thumb": {
-                                backgroundColor: "#042E55",
-                                border: "6px solid #fff",
-                            },
-                            "&.Mui-disabled .MuiSwitch-thumb": {
-                                backgroundColor: "#042E55", // Thumb color
-                                transform: "translateY(-50%)",
-                            },
-                            "&.Mui-disabled + .MuiSwitch-track": {
-                                opacity: 0.7,
-                            },
-                        },
-                        "& .MuiSwitch-thumb": {
-                            boxSizing: "border-box",
-                            width: 22,
-                            height: 22,
-                            backgroundColor: "#042E55", // Thumb color
-                        },
-                        "& .MuiSwitch-track": {
-                            borderRadius: 13, // Adjust the borderRadius as needed
-                            backgroundColor: "#fff", // Track color
-                            opacity: 1,
-                            transition: "background-color 500ms",
-                        },
-                    }}
-                />
-            )}
-        </div>
-    );
-};
-
 CustomLabel.propTypes = {
     group: propTypes.object,
     handleToggleClick: propTypes.func,
     selectedMesasIds: propTypes.array,
 };
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
-const areas = ["Sala VR", "Electric Garage", "New Horizons"];
 const estados = ["Preparado", "En proceso", "Sin preparar"];
 
 function convertToMomentObjects(jsonData) {
@@ -196,6 +132,8 @@ function convertToMomentObjects(jsonData) {
             id: event.id,
             group: event.group,
             title: event.title,
+            estatusMateriales: event.estatusMateriales,
+            canMove: false,
             start_time: moment(event.start_time).add(6, "hours"),
             end_time: moment(event.end_time).add(6, "hours"),
         };
@@ -210,23 +148,32 @@ function CronogramaAdmin() {
     const [isLoadingItems, setIsLoadingItems] = useState(true);
     const [groups, setGroups] = useState([]);
     const [isLoadingGroups, setIsLoadingGroups] = useState(true);
+    const [isGestionSalasOpen, setIsGestionSalasOpen] = useState(false);
+    const [salasEstados, setSalasEstados] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [reservIdInModal, setReservIdInModal] = useState(0);
 
     const [selectedSalasIds, setSelectedSalasIds] = useState([]);
     const [selectedSalasTitles, setSelectedSalasTitles] = useState([]);
     const [selectedMesasIds, setSelectedMesasIds] = useState([]);
-    const [selectedOptions2, setSelectedOptions2] = useState([]);
+    const [selectedEstatusIds, setSelectedEstatusIds] = useState([]);
+    const [selectedEstatusTitles, setSelectedEstatusTitles] = useState([]);
 
     const [filteredGroups, setFilteredGroups] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [salas, setSalas] = useState([]);
     const [mesas, setMesas] = useState([]);
+    const [estatus, setEstatus] = useState([]);
+
+    const disclosureModalCrearReservacionAdmin = useDisclosure();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         get("reservaciones/cronograma")
             .then((result) => {
                 setItems(convertToMomentObjects(result));
                 setIsLoadingItems(false);
-                console.log("reservaciones/cronograma: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -235,11 +182,20 @@ function CronogramaAdmin() {
     }, []);
 
     useEffect(() => {
+        get("salas")
+            .then((result) => {
+                setSalasEstados(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
+    useEffect(() => {
         get("salas/cronograma")
             .then((result) => {
                 setGroups(result);
                 setIsLoadingGroups(false);
-                console.log("salas/cronograma: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -271,6 +227,25 @@ function CronogramaAdmin() {
             });
     }, []);
 
+    // Obtener los datos de los estatus para poder agregar los nombres al filtro
+    // de estatus
+    useEffect(() => {
+        get("estatus")
+            .then((result) => {
+                // Filtrar solamente los estatus con idEstatus de 1, 2 y 6
+                result = result.filter(
+                    (estatus) =>
+                        estatus.idEstatus === 1 ||
+                        estatus.idEstatus === 2 ||
+                        estatus.idEstatus === 7
+                );
+                setEstatus(result);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
+
     // Filtrar las salas que se muestran en el cronograma según las salas que se
     // hayan seleccionado en el filtro de salas
     useEffect(() => {
@@ -279,13 +254,26 @@ function CronogramaAdmin() {
         );
     }, [selectedSalasIds, groups]);
 
+    const handleOpenGestionSalas = () => {
+        setIsGestionSalasOpen(true);
+    };
+
+    const handleCrearReservacion = () => {
+        disclosureModalCrearReservacionAdmin.onOpen();
+    };
+
     // Filtrar las reservaciones que se muestran en el cronograma según las
-    // mesas que se hayan seleccionado en el filtro de mesas (switches)
+    // mesas que se hayan seleccionado en el filtro de mesas (switches) y el
+    // estatus que se haya seleccionado en el filtro de estatus
     useEffect(() => {
         setFilteredItems(
-            items.filter((item) => selectedMesasIds.includes(item.group))
+            items.filter(
+                (item) =>
+                    selectedMesasIds.includes(item.group) &&
+                    selectedEstatusIds.includes(item.estatusMateriales)
+            )
         );
-    }, [selectedMesasIds, items]);
+    }, [selectedMesasIds, selectedEstatusIds, items]);
 
     // En caso de que se haya guardado en el localStorage la selección de salas
     // previamente se cargan los datos guardados, en caso contrario se cargan
@@ -316,6 +304,35 @@ function CronogramaAdmin() {
         }
     }, [salas]);
 
+    // En caso de que se haya guardado en el localStorage la selección de
+    // estatus previamente se cargan los datos guardados, en caso contrario se
+    // cargan todos los estatus
+    useEffect(() => {
+        if (
+            existsInLocalStorage("selectedEstatusIds") &&
+            estatus &&
+            estatus.length > 0
+        ) {
+            const selectedEstatusIdsSessionStorage = JSON.parse(
+                getFromLocalStorage("selectedEstatusIds")
+            );
+
+            setSelectedEstatusIds(selectedEstatusIdsSessionStorage);
+
+            setSelectedEstatusTitles(
+                selectedEstatusIdsSessionStorage.map(
+                    (id) => estatus.find((est) => est.idEstatus === id).nombre
+                )
+            );
+        } else if (estatus && estatus.length > 0) {
+            setSelectedEstatusIds(estatus.map((est) => est.idEstatus));
+            setSelectedEstatusTitles(estatus.map((est) => est.nombre));
+        } else {
+            setSelectedEstatusIds([]);
+            setSelectedEstatusTitles([]);
+        }
+    }, [estatus]);
+
     // En caso de que se haya guardado en el localStorage la selección de mesas
     // previamente se cargan los datos guardados, en caso contrario se cargan
     // todas las mesas
@@ -336,6 +353,34 @@ function CronogramaAdmin() {
             setSelectedMesasIds([]);
         }
     }, [mesas]);
+
+    // Limpiar estados de reservaciones, vista de estudiante y reservacion de
+    // admin
+    useEffect(() => {
+        dispatch(setActive(false));
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
+            "vistaEstudiante",
+            "nombreReservacionAdmin",
+        ]);
+    }, [dispatch]);
 
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
@@ -383,45 +428,64 @@ function CronogramaAdmin() {
         );
     };
 
-    const handleChange2 = (event) => {
-        setSelectedOptions2(event.target.value);
-    };
-
-    // Función que se ejecuta cuando se selecciona un switch de una mesa para
-    // esconder o mostrar las reservaciones de esa mesa
-    const handleToggleClick = (event, groupId, setSelected) => {
-        setSelected(event.target.checked);
-        setSelectedMesasIds((prevSelectedMesasIds) => {
-            let newSelectedSalasIds = [...prevSelectedMesasIds];
-            // Si el switch se activa se agrega la mesa a las mesas
-            // seleccionadas
-            if (event.target.checked) {
-                if (!newSelectedSalasIds.includes(groupId)) {
-                    newSelectedSalasIds.push(groupId);
-                }
-            }
-            // Si el switch se desactiva se quita la mesa de las mesas
-            // seleccionadas
-            else {
-                newSelectedSalasIds = newSelectedSalasIds.filter(
-                    (id) => id !== groupId
-                );
-            }
-            console.log("newSelectedSalasIds: ", newSelectedSalasIds);
-            saveToLocalStorage(
-                "selectedMesasIds",
-                JSON.stringify(newSelectedSalasIds)
-            );
-
-            return newSelectedSalasIds;
-        });
+    // Función que se ejecuta cuando se selecciona un estatus en el filtro de
+    // estatus para actualizar los estatus seleccionados y guardarlos en el
+    // localStorage para que persistan entre sesiones del usuario
+    const handleChangeSelectEstatus = (event) => {
+        const { value } = event.target;
+        const newSelectedEstatusIds = value.map(
+            (title) => estatus.find((est) => est.nombre === title).idEstatus
+        );
+        setSelectedEstatusIds(newSelectedEstatusIds);
+        setSelectedEstatusTitles(value);
+        saveToLocalStorage(
+            "selectedEstatusIds",
+            JSON.stringify(newSelectedEstatusIds)
+        );
     };
 
     return (
         <>
-            <div className="menu-icon-admin">
-                <img src={menuIcon} />
-            </div>
+            <GestionSalas
+                data-cy="gestion-salas"
+                salas={salasEstados}
+                isOpen={isGestionSalasOpen}
+                onClose={() => {
+                    setIsGestionSalasOpen(false);
+                }}
+            />
+            <SpeedDial
+                ariaLabel="SpeedDial Menu"
+                sx={{ position: "fixed", bottom: 30, right: 50 }}
+                icon={<img className="iconoMenu" src={menuIcon} />}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={React.cloneElement(action.icon, {
+                            style: { fontSize: 45, color: "white" },
+                        })}
+                        tooltipTitle={action.name}
+                        onClick={
+                            action.name === "Configurar Salas"
+                                ? handleOpenGestionSalas
+                                : handleCrearReservacion
+                        }
+                    />
+                ))}
+            </SpeedDial>
+            <ReservItemModal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
+                items={items}
+                setItems={setItems}
+                filteredItems={filteredItems}
+                setFilteredItems={setFilteredItems}
+                onClose={() => {
+                    setIsModalOpen(false);
+                }}
+                reservId={reservIdInModal}
+            />
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"
@@ -439,13 +503,31 @@ function CronogramaAdmin() {
                     onTimeChange={handleTimeChange}
                     minZoom={12 * 60 * 60 * 1000} // half a day in milliseconds
                     maxZoom={24 * 60 * 60 * 1000} // 1 day in milliseconds
+                    itemRenderer={({ item, itemContext, getItemProps }) => {
+                        return (
+                            <CustomItemRenderer
+                                item={item}
+                                itemContext={itemContext}
+                                getItemProps={getItemProps}
+                            />
+                        );
+                    }}
                     groupRenderer={(group) => (
                         <CustomGroupRenderer
                             group={group}
-                            handleToggleClick={handleToggleClick}
+                            // handleToggleClick={handleToggleClick}
                             selectedMesasIds={selectedMesasIds}
+                            setSelectedMesasIds={setSelectedMesasIds}
                         />
                     )}
+                    onItemClick={(itemId) => {
+                        setReservIdInModal(itemId);
+                        setIsModalOpen(true);
+                    }}
+                    onItemSelect={(itemId) => {
+                        setReservIdInModal(itemId);
+                        setIsModalOpen(true);
+                    }}
                 >
                     <TimelineMarkers>
                         <CustomMarker date={moment().valueOf()}>
@@ -596,8 +678,10 @@ function CronogramaAdmin() {
                                             <Select
                                                 data-cy="Estado"
                                                 multiple
-                                                value={selectedOptions2}
-                                                onChange={handleChange2}
+                                                value={selectedEstatusTitles}
+                                                onChange={
+                                                    handleChangeSelectEstatus
+                                                }
                                                 label="Dropdown 2"
                                                 variant="outlined"
                                                 sx={{
@@ -630,20 +714,22 @@ function CronogramaAdmin() {
                                                     selected.join(", ")
                                                 }
                                             >
-                                                {estados.map((estado) => (
+                                                {estatus.map((estatus) => (
                                                     <MenuItem
-                                                        key={estado}
-                                                        value={estado}
+                                                        key={estatus.idEstatus}
+                                                        value={estatus.nombre}
                                                     >
                                                         <Checkbox
                                                             checked={
-                                                                selectedOptions2.indexOf(
-                                                                    estado
+                                                                selectedEstatusIds.indexOf(
+                                                                    estatus.idEstatus
                                                                 ) > -1
                                                             }
                                                         />
                                                         <ListItemText
-                                                            primary={estado}
+                                                            primary={
+                                                                estatus.nombre
+                                                            }
                                                         />
                                                     </MenuItem>
                                                 ))}
@@ -663,6 +749,12 @@ function CronogramaAdmin() {
                     </TimelineHeaders>
                 </Timeline>
             </div>
+            <ModalCrearReservacionAdmin
+                isOpen={disclosureModalCrearReservacionAdmin.isOpen}
+                onOpen={disclosureModalCrearReservacionAdmin.onOpen}
+                onOpenChange={disclosureModalCrearReservacionAdmin.onOpenChange}
+                salas={salas}
+            />
         </>
     );
 }

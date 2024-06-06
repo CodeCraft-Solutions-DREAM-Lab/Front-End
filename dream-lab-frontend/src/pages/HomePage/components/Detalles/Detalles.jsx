@@ -30,8 +30,10 @@ function ExperienceDetails(props) {
         // Llama a la función de navegación pasada como prop
         saveToSessionStorage("reservType", selectedItem.type);
 
-        if (selectedItem.type == "sala") {
+        if (selectedItem.type === "sala") {
             saveToSessionStorage("idSala", selectedItem.id);
+            // TODO: @Reynaldo revisar si es necesario guardar 0 en idExperiencia
+            // saveToSessionStorage("idExperiencia", 0);
         } else {
             saveToSessionStorage("idExperiencia", selectedItem.id);
         }
@@ -54,8 +56,16 @@ function ExperienceDetails(props) {
 
             <div className="details">
                 <div className="experience-details">
-                    <h1 data-cy="nombre-experiencia-detalles" className="experience-name">{props.nombre}</h1>
-                    <p data-cy="descripcion-experiencia-detalles" className="experience-description">
+                    <h1
+                        data-cy="nombre-experiencia-detalles"
+                        className="experience-name"
+                    >
+                        {props.nombre}
+                    </h1>
+                    <p
+                        data-cy="descripcion-experiencia-detalles"
+                        className="experience-description"
+                    >
                         {props.descripcion}
                     </p>
                     <div className="tags-details">

@@ -14,6 +14,8 @@ import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
 import { get, put } from "src/utils/ApiRequests.js";
 import LogoRobot from "../../assets/Profile/Star.webp";
 import { existsInSessionStorage, getFromLocalStorage } from "src/utils/Storage";
+import InfoLogo from "src/assets/Profile/infoLogo.png";
+import InformacionModal from "./components/InformacionModal/InformacionModal.jsx";
 
 function Profile() {
     const [reservaciones, setReservaciones] = useState([]);
@@ -32,6 +34,16 @@ function Profile() {
     const [diaReserva, setDiaReserva] = useState(null);
     const [idResReserva, setIdResReserva] = useState(null);
     const [refreshValue, setRefreshValue] = useState(0);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    // Variables para el modal
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
 
     // Enlace de ayuda para el modal
     const mensajeAyuda = (
@@ -337,6 +349,22 @@ function Profile() {
                             : "Mi perfil"
                     }
                     handleLogroArtista={handleLogroArtista}
+                />
+
+                <div
+                    className="boton-informacion-puntos-prioridad"
+                    onClick={openModal}
+                >
+                    <img
+                        className="foto-boton-info-puntos-prioridad"
+                        src={InfoLogo}
+                        alt="Información"
+                    />
+                </div>
+                
+                <InformacionModal
+                    isOpen={modalIsOpen}
+                    closeModal={closeModal}
                 />
 
                 <div className="div-exterior-perfil">

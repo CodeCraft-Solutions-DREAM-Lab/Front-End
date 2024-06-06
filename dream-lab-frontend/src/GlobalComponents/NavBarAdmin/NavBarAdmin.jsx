@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
 
 // Storage
-import { saveToSessionStorage } from "src/utils/Storage";
+import {
+    saveToSessionStorage,
+    multiClearSessionStorage,
+} from "src/utils/Storage";
 
 function NavBarAdmin() {
     const location = useLocation();
@@ -21,11 +24,39 @@ function NavBarAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const clearAdminStates = () => {
+        dispatch(setActive(false));
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
+            "vistaEstudiante",
+            "nombreReservacionAdmin",
+        ]);
+    };
+
     const handleTabClick = (tab) => {
+        clearAdminStates();
         setActiveTab(tab);
     };
 
     const handleStudentViewClick = () => {
+        clearAdminStates();
         dispatch(setActive(true));
         saveToSessionStorage("vistaEstudiante", true);
         navigate("/home");
@@ -38,7 +69,11 @@ function NavBarAdmin() {
             classes="navbar-admin"
         >
             <div className="centered-container">
-                <Link to={"/admin"} className="logo-container-admin">
+                <Link
+                    to={"/admin"}
+                    className="logo-container-admin"
+                    onClick={clearAdminStates}
+                >
                     <div className="logo-admin">
                         <img src={logoDreamLab} alt="Logo" />
                     </div>
