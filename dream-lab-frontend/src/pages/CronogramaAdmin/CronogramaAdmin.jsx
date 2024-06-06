@@ -156,7 +156,8 @@ function CronogramaAdmin() {
     const [selectedSalasIds, setSelectedSalasIds] = useState([]);
     const [selectedSalasTitles, setSelectedSalasTitles] = useState([]);
     const [selectedMesasIds, setSelectedMesasIds] = useState([]);
-    const [selectedOptions2, setSelectedOptions2] = useState([]);
+    const [selectedEstatusIds, setSelectedEstatusIds] = useState([]);
+    const [selectedEstatusTitles, setSelectedEstatusTitles] = useState([]);
 
     const [filteredGroups, setFilteredGroups] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
@@ -234,7 +235,13 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("estatus")
             .then((result) => {
-                console.log("Estatus: ", result);
+                // Filtrar solamente los estatus con idEstatus de 1, 2 y 6
+                result = result.filter(
+                    (estatus) =>
+                        estatus.idEstatus === 1 ||
+                        estatus.idEstatus === 2 ||
+                        estatus.idEstatus === 7
+                );
                 setEstatus(result);
             })
             .catch((error) => {
@@ -259,12 +266,17 @@ function CronogramaAdmin() {
     };
 
     // Filtrar las reservaciones que se muestran en el cronograma según las
-    // mesas que se hayan seleccionado en el filtro de mesas (switches)
+    // mesas que se hayan seleccionado en el filtro de mesas (switches) y el
+    // estatus que se haya seleccionado en el filtro de estatus
     useEffect(() => {
         setFilteredItems(
-            items.filter((item) => selectedMesasIds.includes(item.group))
+            items.filter(
+                (item) =>
+                    selectedMesasIds.includes(item.group) &&
+                    selectedEstatusIds.includes(item.estatusMateriales)
+            )
         );
-    }, [selectedMesasIds, items]);
+    }, [selectedMesasIds, selectedEstatusIds, items]);
 
     // En caso de que se haya guardado en el localStorage la selección de salas
     // previamente se cargan los datos guardados, en caso contrario se cargan
@@ -394,8 +406,13 @@ function CronogramaAdmin() {
         );
     };
 
-    const handleChange2 = (event) => {
-        setSelectedOptions2(event.target.value);
+    const handleChangeSelectEstatus = (event) => {
+        const { value } = event.target;
+        const newSelectedEstatusIds = value.map(
+            (title) => estatus.find((est) => est.nombre === title).idEstatus
+        );
+        setSelectedEstatusIds(newSelectedEstatusIds);
+        setSelectedEstatusTitles(value);
     };
 
     return (
@@ -631,8 +648,10 @@ function CronogramaAdmin() {
                                             <Select
                                                 data-cy="Estado"
                                                 multiple
-                                                value={selectedOptions2}
-                                                onChange={handleChange2}
+                                                value={selectedEstatusTitles}
+                                                onChange={
+                                                    handleChangeSelectEstatus
+                                                }
                                                 label="Dropdown 2"
                                                 variant="outlined"
                                                 sx={{
@@ -665,20 +684,22 @@ function CronogramaAdmin() {
                                                     selected.join(", ")
                                                 }
                                             >
-                                                {estados.map((estado) => (
+                                                {estatus.map((estatus) => (
                                                     <MenuItem
-                                                        key={estado}
-                                                        value={estado}
+                                                        key={estatus.idEstatus}
+                                                        value={estatus.nombre}
                                                     >
                                                         <Checkbox
                                                             checked={
-                                                                selectedOptions2.indexOf(
-                                                                    estado
+                                                                selectedEstatusIds.indexOf(
+                                                                    estatus.idEstatus
                                                                 ) > -1
                                                             }
                                                         />
                                                         <ListItemText
-                                                            primary={estado}
+                                                            primary={
+                                                                estatus.nombre
+                                                            }
                                                         />
                                                     </MenuItem>
                                                 ))}
