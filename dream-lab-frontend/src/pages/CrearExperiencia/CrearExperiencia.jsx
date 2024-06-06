@@ -17,7 +17,7 @@ import { uploadFile } from "../../firebase/config";
 import { getFromSessionStorage } from "../../utils/Storage";
 import { post } from "src/utils/ApiRequests";
 import { useNavigate } from "react-router-dom";
-import { selectRol } from "../../redux/Slices/userSlice";
+import { selectRol } from "src/redux/Slices/userSlice";
 
 const steps = [
 	"Crea tu experiencia",
