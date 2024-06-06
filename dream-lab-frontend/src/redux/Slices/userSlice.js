@@ -4,6 +4,7 @@ const initialState = {
     token: "",
     isAuth: false,
     rol: "",
+    nombre: "",
 };
 
 export const userSlice = createSlice({
@@ -22,19 +23,25 @@ export const userSlice = createSlice({
         setRol: (state, action) => {
             state.rol = action.payload;
         },
+        setNombre: (state, action) => {
+            state.nombre = action.payload;
+        },
         // Acción para cerrar sesión
         logoutUser: (state) => {
             state.token = "";
             state.isAuth = false;
             state.rol = "";
+            state.nombre = "";
         },
     },
 });
 
 // Los creadores de acciones se generan para cada función reductora
-export const { setToken, setAuth, setRol, logoutUser } = userSlice.actions;
+export const { setToken, setAuth, setRol, setNombre, logoutUser } =
+    userSlice.actions;
 
 export const selectAuth = (state) => state.user.isAuth;
 export const selectRol = (state) => state.user.rol;
+export const selectNombre = (state) => state.user.nombre;
 
 export default userSlice.reducer;

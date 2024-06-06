@@ -8,14 +8,24 @@ import profileIcon from "src/assets/NavBar/Administrador-perfil-icon.svg";
 import GlassCard from "../GlassCard/GlassCard";
 import { useLocation } from "react-router-dom";
 
+// Nextui
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    Button,
+} from "@nextui-org/react";
+
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
+import { selectNombre, logoutUser } from "src/redux/Slices/userSlice";
 
 // Storage
 import {
     saveToSessionStorage,
     multiClearSessionStorage,
+    clearStorages,
 } from "src/utils/Storage";
 
 function NavBarAdmin() {
@@ -60,6 +70,14 @@ function NavBarAdmin() {
         dispatch(setActive(true));
         saveToSessionStorage("vistaEstudiante", true);
         navigate("/home");
+    };
+
+    const handleLogout = () => {
+        clearStorages();
+        // Llamámos a la función de logoutUser de la userSlice para borrar
+        // los datos del usuario
+        dispatch(logoutUser());
+        navigate("/login", { replace: true }); // Navega al login
     };
 
     return (
@@ -119,11 +137,34 @@ function NavBarAdmin() {
                         />
                         <span className="tooltiptext">Vista de estudiante</span>
                     </div>
-                    <img
-                        src={profileIcon}
-                        alt="Settings"
-                        className="settings-icon"
-                    />
+                    <Popover showArrow placement="bottom-end">
+                        <PopoverTrigger>
+                            <img
+                                src={profileIcon}
+                                alt="Settings"
+                                className="settings-icon"
+                            />
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <div className="px-1 py-2">
+                                <div className="mb-2 text-center">
+                                    <span className="text-lg font-bold">
+                                        {useSelector(selectNombre)}
+                                    </span>
+                                </div>
+                                <div>
+                                    <Button
+                                        variant="flat"
+                                        color="danger"
+                                        fullWidth
+                                        onPress={handleLogout}
+                                    >
+                                        Cerrar sesión
+                                    </Button>
+                                </div>
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                 </div>
             </div>
         </GlassCard>
