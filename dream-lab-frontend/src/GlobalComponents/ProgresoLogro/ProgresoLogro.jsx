@@ -120,15 +120,15 @@ function ProgresoLogro(props) {
                                     : "none",
                             }}
                         >
-                            <p>
+                            <p data-cy="fraccion-avance-progreso-logro">
                                 {datosLogroObtenido.valorActual} /{" "}
                                 {datosLogroObtenido.valorMax}
                             </p>
                         </div>
-                        <div className="progress-nombre-logro-obtenido-anuncio-generico">
+                        <div className="progress-nombre-logro-obtenido-anuncio-generico" data-cy="nombre-logro-avance-progreso">
                             {datosLogroObtenido.nombreLogro}
                         </div>
-                        <div className="progress-descripcion-logro-obtenido-anuncio-generico">
+                        <div className="progress-descripcion-logro-obtenido-anuncio-generico" data-cy="descripcion-logro-avance-progreso">
                             {datosLogroObtenido.descripcionLogro}
                         </div>
                     </Grid>
