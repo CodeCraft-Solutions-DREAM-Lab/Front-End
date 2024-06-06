@@ -45,8 +45,6 @@ const ModalCancelarReserv = ({
                 }
             );
 
-            console.log("Reservación cancelada");
-
             const newItemsArray = [...items];
             const deleteIndx1 = newItemsArray.findIndex((it) => it.id == reservId);
             newItemsArray.splice(deleteIndx1, 1);

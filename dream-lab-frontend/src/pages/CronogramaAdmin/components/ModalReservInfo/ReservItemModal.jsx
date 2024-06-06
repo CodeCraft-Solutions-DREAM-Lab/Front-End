@@ -49,12 +49,9 @@ function ReservItemModal(props) {
 		if (!props.isOpen) return;
 
 		setIsLoading(true);
-		// console.log("ReservItemModal useEffect");
 
 		get("reservaciones/cronograma/" + props.reservId)
 			.then((response) => {
-
-				console.log("Reservacion data: ", response);
 
 				const horaInicio = new Date(response.horaInicio);
 				horaInicio.setHours(horaInicio.getHours() + 6);
@@ -83,9 +80,7 @@ function ReservItemModal(props) {
 				setHoraFinString(formattedFin);
 				setReservItems(response.reservItems);
 
-				console.log("Selected items: ", response.selectedItems);
 				const selectedItems = response.selectedItems.map((item) => { return item.name });
-				console.log("Selected items: ", selectedItems);
 				setSelectedItems(selectedItems);
 
 				setIsLoading(false);

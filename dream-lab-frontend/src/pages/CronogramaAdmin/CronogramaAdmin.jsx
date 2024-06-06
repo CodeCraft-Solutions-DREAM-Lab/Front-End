@@ -137,10 +137,8 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("reservaciones/cronograma")
             .then((result) => {
-                console.log(result);
                 setItems(convertToMomentObjects(result));
                 setIsLoadingItems(false);
-                // console.log(items);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -163,7 +161,6 @@ function CronogramaAdmin() {
             .then((result) => {
                 setGroups(result);
                 setIsLoadingGroups(false);
-                // console.log("salas/cronograma: ", result);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -264,10 +261,6 @@ function CronogramaAdmin() {
             setSelectedMesasIds([]);
         }
     }, [mesas]);
-
-    useEffect(() => {
-        console.log("FilteredItems in Cronograma: ", filteredItems);
-    }, [filteredItems]);
 
     const [visibleTimeStart, setVisibleTimeStart] = useState(
         moment().add(-8, "hour").valueOf()
