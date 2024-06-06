@@ -307,6 +307,35 @@ function CronogramaAdmin() {
         }
     }, [salas]);
 
+    // En caso de que se haya guardado en el localStorage la selección de
+    // estatus previamente se cargan los datos guardados, en caso contrario se
+    // cargan todos los estatus
+    useEffect(() => {
+        if (
+            existsInLocalStorage("selectedEstatusIds") &&
+            estatus &&
+            estatus.length > 0
+        ) {
+            const selectedEstatusIdsSessionStorage = JSON.parse(
+                getFromLocalStorage("selectedEstatusIds")
+            );
+
+            setSelectedEstatusIds(selectedEstatusIdsSessionStorage);
+
+            setSelectedEstatusTitles(
+                selectedEstatusIdsSessionStorage.map(
+                    (id) => estatus.find((est) => est.idEstatus === id).nombre
+                )
+            );
+        } else if (estatus && estatus.length > 0) {
+            setSelectedEstatusIds(estatus.map((est) => est.idEstatus));
+            setSelectedEstatusTitles(estatus.map((est) => est.nombre));
+        } else {
+            setSelectedEstatusIds([]);
+            setSelectedEstatusTitles([]);
+        }
+    }, [estatus]);
+
     // En caso de que se haya guardado en el localStorage la selección de mesas
     // previamente se cargan los datos guardados, en caso contrario se cargan
     // todas las mesas
@@ -406,6 +435,9 @@ function CronogramaAdmin() {
         );
     };
 
+    // Función que se ejecuta cuando se selecciona un estatus en el filtro de
+    // estatus para actualizar los estatus seleccionados y guardarlos en el
+    // localStorage para que persistan entre sesiones del usuario
     const handleChangeSelectEstatus = (event) => {
         const { value } = event.target;
         const newSelectedEstatusIds = value.map(
@@ -413,6 +445,10 @@ function CronogramaAdmin() {
         );
         setSelectedEstatusIds(newSelectedEstatusIds);
         setSelectedEstatusTitles(value);
+        saveToLocalStorage(
+            "selectedEstatusIds",
+            JSON.stringify(newSelectedEstatusIds)
+        );
     };
 
     return (
