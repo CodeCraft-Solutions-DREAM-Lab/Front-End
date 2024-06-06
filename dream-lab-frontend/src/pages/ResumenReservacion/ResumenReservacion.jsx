@@ -109,7 +109,7 @@ function ResumenReservacion() {
         // petición
         if (!existsInSessionStorage("vistaEstudiante")) {
             console.log("Enviando solicitud de reservación");
-            await post("reservaciones", data).then((response) => {
+            await post("reservaciones", data).then(() => {
                 doAfterResponse();
             });
         } else {
