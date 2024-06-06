@@ -32,8 +32,6 @@ function ExperienceDetails(props) {
 
         if (selectedItem.type === "sala") {
             saveToSessionStorage("idSala", selectedItem.id);
-            // TODO: @Reynaldo revisar si es necesario guardar 0 en idExperiencia
-            // saveToSessionStorage("idExperiencia", 0);
         } else {
             saveToSessionStorage("idExperiencia", selectedItem.id);
         }

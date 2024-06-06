@@ -49,13 +49,22 @@ function SeleccionMaterial() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
 
+    let idExperiencia = 0;
+    if (existsInSessionStorage("idExperiencia")) {
+        idExperiencia = getFromSessionStorage("idExperiencia");
+    }
+    else {
+        idExperiencia = 0;
+    }
+
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
+        console.log("idExperiencia: ",idExperiencia);
 
         // Parametros Stored Procedure
         const params = {
             idSala: getFromSessionStorage("idSala"),
-            idExperiencia: getFromSessionStorage("idExperiencia"),
+            idExperiencia: idExperiencia,
             fecha: date.toISOString(),
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: parseInt(getFromSessionStorage("duration")),
