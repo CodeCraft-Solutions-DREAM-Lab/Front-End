@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./AlertaAsistencia.css";
-import flecha from "../../../../assets/Videowall/flechasToQr.png";
-import qr from "../../../../assets/Videowall/qrTemporal.png";
-import imagenError from "../../../../assets/Videowall/errorVideowall.png";
-import imagenCorrecto from "../../../../assets/Videowall/correctoVideowall.png";
-import QRCode from "react-qr-code";
-import { get } from "src/utils/ApiRequests";
-import checkAnimation from "src/assets/Videowall/checkAnimation.gif";
 import Check from "./Check/Check";
+import Confetti from "react-confetti";
 
 function MensajeBienvenida(props) {
     const [cerrado, setCerrado] = useState(false);
     const [tarde, setTarde] = useState(props.tarde);
     const [ejecutado, setEjecutado] = useState(false);
+    const [activarSalida, setActivarSalida] = useState(false);
 
     useEffect(() => {
         if (!ejecutado) {
@@ -22,8 +17,12 @@ function MensajeBienvenida(props) {
             }, 0); // Ocultar el componente después de 5 segundos
 
             setTimeout(() => {
+                setActivarSalida(true);
+            }, 3000); // Activar la animación de salida después de 3 segundos
+
+            setTimeout(() => {
                 setCerrado(true);
-            }, 2900); // Ocultar el componente después de 5 segundos
+            }, 4000); // Ocultar el componente después de 5 segundos
         }
         return; // Limpiar el timeout cuando el componente se desmonte o actualice
     });
@@ -32,18 +31,49 @@ function MensajeBienvenida(props) {
         return null; // Si el mensaje está cerrado o no hay reserva filtrada, no se renderiza nada
     }
 
+    // Inicializa el índice de la última frase seleccionada como -1 para indicar que aún no se ha seleccionado ninguna frase
+    let ultimoIndiceSeleccionado = -1;
+
+    const obtenerFraseAleatoria = () => {
+        // Lista de frases
+        const frases = [
+            "¡Justo a tiempo!",
+            "¡Bienvenido!",
+            "¡Aprende mucho!",
+            "¡Bien hecho!",
+        ];
+
+        // Obtener un índice aleatorio dentro del rango de la lista de frases
+        let indiceAleatorio;
+        do {
+            indiceAleatorio = Math.floor(Math.random() * frases.length);
+        } while (indiceAleatorio === ultimoIndiceSeleccionado); // Repetir el proceso si el índice seleccionado es igual al último índice
+
+        // Actualizar el índice de la última frase seleccionada
+        ultimoIndiceSeleccionado = indiceAleatorio;
+
+        // Devolver la frase aleatoria seleccionada
+        return frases[indiceAleatorio];
+    };
+
+    const segundaFrase = obtenerFraseAleatoria(); // Obtener la segunda frase aleatoria
+
     return (
         <div
-            className="mensaje-bienvenida-videowall-asistencia"
+            className={`mensaje-bienvenida-videowall-asistencia ${
+                activarSalida ? "salida-animada" : ""
+            }`}
             style={
                 tarde
                     ? { border: "13px solid white" }
                     : { border: `13px solid white` }
             }
         >
+            <div className="confetti-alerta-asistencia">
+                {tarde ? null : <Confetti width="700vw" height="760vh" />}
+            </div>
+
             <div className="alerta-videowall-primera-mitad-asistencia">
-                {/* Bienvenida al usuario*/}
-                {/*<img className="imagen-confirmacion-asistencia" src={checkAnimation} alt="Icono de confirmación" />*/}
                 <div className="checkmark-asistencia">
                     {tarde ? (
                         <Check
@@ -61,8 +91,11 @@ function MensajeBienvenida(props) {
                         />
                     )}
                 </div>
+
                 <h1 className="titulo-mensaje-bienvenida-videowall-asistencia">
-                    {tarde ? "Asistencia tardía" : "Asistencia confirmada"}
+                    {tarde
+                        ? "Asistencia tardía registrada"
+                        : "Asistencia registrada " + segundaFrase}
                 </h1>
             </div>
         </div>

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./MensajeBienvenida.css";
 import flecha from "../../../../assets/Videowall/flechasToQr.png";
-import qr from "../../../../assets/Videowall/qrTemporal.png";
 import imagenError from "../../../../assets/Videowall/errorVideowall.png";
 import imagenCorrecto from "../../../../assets/Videowall/correctoVideowall.png";
 import QRCode from "react-qr-code";
 import { get, put } from "src/utils/ApiRequests";
 import AlertaAsistencia from "../AlertaAsistencia/AlertaAsistencia";
-import { set } from "date-fns";
 
 function MensajeBienvenida(props) {
     const [cerrado, setCerrado] = useState(false);
@@ -19,6 +17,7 @@ function MensajeBienvenida(props) {
 
     //  get de base de datos
     useEffect(() => {
+        // Animacion de entrada (Parte 1)
         setCerrado(true);
 
         get(`usuarios/nombreUsuario/${props.tagId}`)
@@ -34,10 +33,18 @@ function MensajeBienvenida(props) {
                 console.error("An error occurred:", error);
             });
 
-        // Esperar 5 segundos antes de cerrar el mensaje
+        // Animacion de entrada (Parte 2)
         setTimeout(() => {
             setCerrado(false);
         }, 300);
+
+        // Esperar 10 segundos antes de cerrar el mensaje
+        const timeoutId = setTimeout(() => {
+            setCerrado(true);
+        }, 15000);
+
+        // Limpiar el timeout cuando el componente se desmonte o cuando el useEffect se ejecute nuevamente
+        return () => clearTimeout(timeoutId);
     }, [props.tagId]);
 
     const filtrarReservaciones = (listadoReservaciones, tagId) => {
@@ -83,7 +90,7 @@ function MensajeBienvenida(props) {
             const diferenciaMinutos =
                 (ahora.getTime() - horaInicio.getTime()) / (1000 * 60);
 
-            // Establecer el estado de asistencia
+            // Establecer el estado de asistencia según la hora
             let asistenciaState;
             if (diferenciaMinutos > 15) {
                 asistenciaState = "Tarde";
@@ -91,6 +98,13 @@ function MensajeBienvenida(props) {
             } else {
                 asistenciaState = "A tiempo";
                 setLlegoTarde(false);
+            }
+
+            // Extra para que los colores no varíen en el mensaje de bienvenida
+            if (reservaFiltrada.asistencia === "A tiempo") {
+                setLlegoTarde(false);
+            } else if (reservaFiltrada.asistencia === "Tarde") {
+                setLlegoTarde(true);
             }
 
             // Actualizar la asistencia de la reserva filtrada
@@ -102,9 +116,10 @@ function MensajeBienvenida(props) {
             // Inicializar el estado de mostrar asistencia en false
             setMostrarAsistencia(false);
             console.log("Reserva filtrada:", reservaFiltrada.asistencia);
+            console.log("Asistencia a registrar:", reservaFiltrada.asistencia)
 
             // Si la reserva filtrada existe y no tiene asistencia registrada, se registra la asistencia
-            if (reservaFiltrada.asistencia === null) {
+            if (reservaFiltrada.asistencia === undefined || reservaFiltrada.asistencia === null) {
                 put(
                     url,
                     data,
@@ -144,7 +159,7 @@ function MensajeBienvenida(props) {
                     : { border: `13px solid ${bordeColor}` }
             }
         >
-            {error ? null : <AlertaAsistencia tarde={llegoTarde} />}
+            {error ? null : mostrarAsistencia ? <AlertaAsistencia tarde={llegoTarde}/>: null }
 
             <div className="alerta-videowall-primera-mitad">
                 {/* Bienvenida al usuario*/}
