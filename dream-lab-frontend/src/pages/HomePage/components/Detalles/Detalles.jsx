@@ -55,8 +55,16 @@ function ExperienceDetails(props) {
 
             <div className="details">
                 <div className="experience-details">
-                    <h1 data-cy="nombre-experiencia-detalles" className="experience-name">{props.nombre}</h1>
-                    <p data-cy="descripcion-experiencia-detalles" className="experience-description">
+                    <h1
+                        data-cy="nombre-experiencia-detalles"
+                        className="experience-name"
+                    >
+                        {props.nombre}
+                    </h1>
+                    <p
+                        data-cy="descripcion-experiencia-detalles"
+                        className="experience-description"
+                    >
                         {props.descripcion}
                     </p>
                     <div className="tags-details">

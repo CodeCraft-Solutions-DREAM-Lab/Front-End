@@ -1,21 +1,36 @@
+// Estilos
 import "./SeleccionMaterial.css";
-import NavBar from "../../GlobalComponents/NavBar/NavBar";
+
+// Navbars
+import NavBar from "src/GlobalComponents/NavBar/NavBar";
+import NavBarAdmin from "src/GlobalComponents/NavBarAdmin/NavBarAdmin";
+
+// Componentes
 import SearchBar from "./components/SearchBar/SearchBar";
 import RoundedButton from "./components/Button/Button";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
 import MiniMaterialCard from "./components/MiniMaterialCard/MiniMaterialCard";
+
+// Global Components
 import BotonBack from "src/GlobalComponents/BotonBack/BotonBack";
+
+// NextUI
 import { Badge } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+
+// Hooks
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WarningModal from "./components/WarningModal/WarningModal"; // Warning modal if recommended items haven't been selected 
 
+// Storage
 import {
     saveToSessionStorage,
     getFromSessionStorage,
     existsInSessionStorage,
-} from "../../utils/Storage";
-import { post } from "../../utils/ApiRequests";
+} from "src/utils/Storage";
+
+// ApiRequests
+import { post } from "src/utils/ApiRequests";
 
 function SeleccionMaterial() {
     const navigate = useNavigate();
@@ -135,7 +150,11 @@ function SeleccionMaterial() {
 
     return (
         <>
-            <NavBar view="soloPerfil" autoHide={false} />
+            {existsInSessionStorage("nombreReservacionAdmin") ? (
+                <NavBarAdmin />
+            ) : (
+                <NavBar view="soloPerfil" autoHide={false} />
+            )}
 
             <div className="main-container">
                 <div className="top-section">

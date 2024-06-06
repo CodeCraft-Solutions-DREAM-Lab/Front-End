@@ -1,0 +1,43 @@
+.mcra-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.mcra-title {
+    font-size: max(1.5vw, 3vh);
+    color: #14247b;
+}
+
+.mcra-inner-wrapper {
+    background-color: transparent;
+}
+
+.mcra-input {
+    margin-bottom: 1vh;
+}
+
+.mcra-select {
+    margin-bottom: 1vh;
+}
+
+.mcra-contenedor-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
+.mcra-button {
+    width: 40%;
+}
+
+.mcra-button-text {
+    font-size: max(1vw, 1.3vh);
+    font-weight: bold;
+    text-transform: uppercase;
+}
