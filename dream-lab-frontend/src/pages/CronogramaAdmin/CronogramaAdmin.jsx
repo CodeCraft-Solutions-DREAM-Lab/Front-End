@@ -33,8 +33,7 @@ import SpeedDial from "@mui/material/SpeedDial";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
-
+import EditCalendarRoundedIcon from "@mui/icons-material/EditCalendarRounded";
 
 // ApiRequests
 import { get } from "src/utils/ApiRequests";
@@ -77,7 +76,7 @@ import { useNavigate } from "react-router-dom";
 
 const actions = [
     { icon: <AddCircleIcon />, name: "Crear experiencia" },
-    { icon: <EditCalendarRoundedIcon/>, name: "Agregar reservación" },
+    { icon: <EditCalendarRoundedIcon />, name: "Agregar reservación" },
     { icon: <SettingsIcon />, name: "Configurar Salas" },
 ];
 
@@ -150,7 +149,6 @@ function CronogramaAdmin() {
     // Set the locale to Spanish
     moment.locale("es");
     let navigate = useNavigate();
-
 
     const [items, setItems] = useState([]);
     const [isLoadingItems, setIsLoadingItems] = useState(true);
@@ -483,6 +481,7 @@ function CronogramaAdmin() {
                 ariaLabel="SpeedDial Menu"
                 sx={{ position: "fixed", bottom: 30, right: 50 }}
                 icon={<img className="iconoMenu" src={menuIcon} />}
+                data-cy="speed-dial-menu"
             >
                 {actions.map((action) => (
                     <SpeedDialAction
@@ -491,8 +490,8 @@ function CronogramaAdmin() {
                             style: { fontSize: 45, color: "white" },
                         })}
                         tooltipTitle={action.name}
-                        
                         onClick={getClickHandler(action.name)}
+                        data-cy={action.name.replace(/\s/g, '')}
                     />
                 ))}
             </SpeedDial>
