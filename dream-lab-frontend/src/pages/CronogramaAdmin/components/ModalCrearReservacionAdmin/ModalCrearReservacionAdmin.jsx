@@ -76,6 +76,7 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                 onOpenChange={onOpenChange}
                 backdrop="opaque"
                 size="2xl"
+                data-cy="mcra-modal"
             >
                 <ModalContent>
                     {(onClose) => (
@@ -99,6 +100,7 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                                     }}
                                     value={nombre}
                                     onValueChange={setNombre}
+                                    data-cy="mcra-input-nombre"
                                 />
                                 <Select
                                     label="Sala"
@@ -107,15 +109,19 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                                     className="mcra-select"
                                     classNames={{
                                         trigger: [
-                                            "bg-transparent border-2  h-12",
+                                            "bg-transparent border-2 h-12",
                                         ],
                                         label: ["text-lg"],
                                     }}
                                     selectedKeys={selectedSala}
                                     onSelectionChange={setSelectedSala}
+                                    data-cy="mcra-select-sala"
                                 >
                                     {salas.map((sala) => (
-                                        <SelectItem key={sala.idSala}>
+                                        <SelectItem
+                                            key={sala.idSala}
+                                            data-cy={`mcra-selectitem-${sala.idSala}`}
+                                        >
                                             {sala.nombre}
                                         </SelectItem>
                                     ))}
@@ -126,6 +132,7 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                                         className="bg-white border-4 border-[#ac3e1b] text-[#ac3e1b] hover:bg-[#ac3e1b] hover:border-[#ac3e1b] hover:text-white mcra-button"
                                         onPress={onClose}
                                         radius="full"
+                                        data-cy="mcra-button-cancelar"
                                     >
                                         <span className="mcra-button-text">
                                             Cancelar
@@ -135,6 +142,7 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
                                         className="bg-white border-4 border-[#1bac55] text-[#1bac55] hover:bg-[#1bac55] hover:border-[#1bac55]  hover:text-white mcra-button"
                                         onPress={handleAceptar}
                                         radius="full"
+                                        data-cy="mcra-button-aceptar"
                                     >
                                         <span className="mcra-button-text">
                                             Aceptar
