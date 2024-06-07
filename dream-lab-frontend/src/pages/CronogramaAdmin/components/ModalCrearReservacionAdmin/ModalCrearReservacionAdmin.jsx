@@ -76,7 +76,12 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
         <>
             <Modal
                 isOpen={isOpen}
-                onOpenChange={onOpenChange}
+                onOpenChange={() => {
+                    onOpenChange();
+                    // Borrar campos
+                    setNombre("");
+                    setSelectedSala([]);
+                }}
                 backdrop="opaque"
                 size="2xl"
                 data-cy="mcra-modal"
