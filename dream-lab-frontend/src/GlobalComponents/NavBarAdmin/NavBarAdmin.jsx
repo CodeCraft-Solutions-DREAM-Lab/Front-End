@@ -134,6 +134,7 @@ function NavBarAdmin() {
                             alt="User Avatar"
                             className="user-avatar-icon-admin"
                             onClick={handleStudentViewClick}
+                            data-cy="student-view-button"
                         />
                         <span className="tooltiptext">Vista de estudiante</span>
                     </div>

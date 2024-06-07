@@ -33,8 +33,7 @@ import SpeedDial from "@mui/material/SpeedDial";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
-
+import EditCalendarRoundedIcon from "@mui/icons-material/EditCalendarRounded";
 
 // ApiRequests
 import { get } from "src/utils/ApiRequests";
@@ -77,7 +76,7 @@ import { useNavigate } from "react-router-dom";
 
 const actions = [
     { icon: <AddCircleIcon />, name: "Crear experiencia" },
-    { icon: <EditCalendarRoundedIcon/>, name: "Agregar reservación" },
+    { icon: <EditCalendarRoundedIcon />, name: "Agregar reservación" },
     { icon: <SettingsIcon />, name: "Configurar Salas" },
 ];
 
@@ -151,7 +150,6 @@ function CronogramaAdmin() {
     moment.locale("es");
     let navigate = useNavigate();
 
-
     const [items, setItems] = useState([]);
     const [isLoadingItems, setIsLoadingItems] = useState(true);
     const [groups, setGroups] = useState([]);
@@ -192,6 +190,7 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("salas")
             .then((result) => {
+                setSalas(result);
                 setSalasEstados(result);
             })
             .catch((error) => {
@@ -208,18 +207,6 @@ function CronogramaAdmin() {
             .catch((error) => {
                 console.error("An error occurred:", error);
                 setIsLoadingGroups(false);
-            });
-    }, []);
-
-    // Obtener los datos de las salas para poder agregar los nombres al filtro
-    // de salas
-    useEffect(() => {
-        get("salas")
-            .then((result) => {
-                setSalas(result);
-            })
-            .catch((error) => {
-                console.error("An error occurred:", error);
             });
     }, []);
 
@@ -240,7 +227,7 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("estatus")
             .then((result) => {
-                // Filtrar solamente los estatus con idEstatus de 1, 2 y 6
+                // Filtrar solamente los estatus con idEstatus de 1, 2 y 7
                 result = result.filter(
                     (estatus) =>
                         estatus.idEstatus === 1 ||
@@ -483,6 +470,7 @@ function CronogramaAdmin() {
                 ariaLabel="SpeedDial Menu"
                 sx={{ position: "fixed", bottom: 30, right: 50 }}
                 icon={<img className="iconoMenu" src={menuIcon} />}
+                data-cy="speed-dial-menu"
             >
                 {actions.map((action) => (
                     <SpeedDialAction
@@ -491,8 +479,8 @@ function CronogramaAdmin() {
                             style: { fontSize: 45, color: "white" },
                         })}
                         tooltipTitle={action.name}
-                        
                         onClick={getClickHandler(action.name)}
+                        data-cy={action.name.replace(/\s/g, '')}
                     />
                 ))}
             </SpeedDial>
@@ -507,6 +495,7 @@ function CronogramaAdmin() {
                     setIsModalOpen(false);
                 }}
                 reservId={reservIdInModal}
+                groups={groups}
             />
             <NavBarAdmin />
             <div

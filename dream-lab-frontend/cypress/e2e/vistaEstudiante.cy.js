@@ -1,91 +1,56 @@
-// describe("Pruebas de las pantallas de error", () => {
-//     beforeEach(() => {
-//         cy.loginWith("admin", "Admin");
+describe("Pruebas de la vista de estudiante", () => {
+    beforeEach(() => {
+        cy.loginWith("admin", "Admin");
 
-//         cy.visit("/admin");
-//     });
+        cy.intercept("GET", "/reservaciones/cronograma").as(
+            "getReservacionesCronograma"
+        );
+        cy.intercept("GET", "/estatus").as("getEstatus");
+        cy.intercept("GET", "/salas").as("getSalas");
+        cy.intercept("GET", "/salas/cronograma").as("getSalasCronograma");
+        cy.intercept("GET", "/experiencias").as("getExperiencias");
+        cy.intercept("GET", "/experiencias/autodirigidas").as(
+            "getExperienciasAutodirigidas"
+        );
+        cy.intercept("POST", "/reservaciones/ultimas").as(
+            "postReservacionesUltimas"
+        );
+        cy.intercept("POST", "/experiencias/UFs").as("postExperienciasUFs");
 
-//     it("Pruebas de aviso: Logro obtenido", () => {
+        cy.visit("/admin");
+    });
 
-//         cy.intercept("POST", "logros/progresoLogro/test/1", {
-//             body: {
-//                 valorActual: 50,
-//                 valorMax: 50,
-//                 obtenido: true,
-//                 nuevaPrioridad: 350,
-//                 prioridadOtorgada: 50,
-//                 obtenidoPreviamente: false,
-//                 nombreLogro: "Big Dreamer",
-//                 descripcionLogro:
-//                     "Reserva 50 veces algún espacio del D.R.E.A.M. Lab.",
-//                 iconoLogro:
-//                     "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
-//                 colorLogro: "#AFB7FF",
-//             },
-//         }).as("postLogro");
+    it("Activar vista de estudiante", () => {
+        // Entrar a vista de estudiante
+        cy.clickDataCy("student-view-button");
+        // Comprobar que exista el titulo y botones de la vista
+        cy.containsDataCy("vista-estudiante-title", "Vista de estudiante");
+        cy.getDataCy("vista-estudiante-toggle-button").should("exist");
+        cy.getDataCy("vista-estudiante-exit-button").should("exist");
+    });
 
-//         // Acceso a la pantalla de error
-//         cy.visit("/reservacion/resumen");
+    it("Esconder y mostrar status bar", () => {
+        // Entrar a vista de estudiante
+        cy.clickDataCy("student-view-button");
+        // Esconder la barra de vista de estudiante
+        cy.clickDataCy("vista-estudiante-toggle-button");
+        // Comprobar que los elementos se escondieron
+        cy.getDataCy("vista-estudiante-title").should("not.exist");
+        cy.getDataCy("vista-estudiante-exit-button").should("not.exist");
+        // Mostrar la barra de vista de estudiante nuevamente
+        cy.clickDataCy("vista-estudiante-toggle-button");
+        // Comprobar que exista el titulo y botones de la vista
+        cy.containsDataCy("vista-estudiante-title", "Vista de estudiante");
+        cy.getDataCy("vista-estudiante-toggle-button").should("exist");
+        cy.getDataCy("vista-estudiante-exit-button").should("exist");
+    });
 
-//         // Envío de la reservación
-//         cy.clickDataCy("summary-submit-button");
-//         cy.wait("@postLogro");
-
-//         // Verificación de elementos en la pantalla
-//         cy.getDataCy("nombre-logro-obtenido").should("exist");
-//         cy.getDataCy("descripcion-logro-obtenido").should("exist");
-//         cy.getDataCy("puntos-ganados-logro-obtenido").should("exist");
-//         cy.getDataCy("nuevo-total-logro-obtenido").should("exist");
-//         cy.getDataCy("ver-logro-boton-anuncio-generico").should("exist");
-
-//         // Verificación de contenido en la pantalla
-//         cy.containsDataCy("nombre-logro-obtenido", "Big Dreamer");
-//         cy.containsDataCy("descripcion-logro-obtenido", "Reserva 50 veces algún espacio del D.R.E.A.M. Lab.");
-//         cy.containsDataCy("puntos-ganados-logro-obtenido", "+50 punto(s) de prioridad");
-//         cy.containsDataCy("nuevo-total-logro-obtenido", "Tu nuevo total es de 350 pts.");
-
-//         // Botón "Ver logro"
-//         cy.clickDataCy("ver-logro-boton-anuncio-generico");
-
-//         // Verificación de redirección
-//         cy.urlContains("/profile");
-
-//     });
-
-//     it("Pruebas de aviso: Avance en logro", () => {
-//         cy.intercept("POST", "logros/progresoLogro/test/1", {
-//             body: {
-//                 valorActual: 25,
-//                 valorMax: 50,
-//                 obtenido: false,
-//                 nuevaPrioridad: null,
-//                 prioridadOtorgada: 50,
-//                 obtenidoPreviamente: false,
-//                 nombreLogro: "Big Dreamer",
-//                 descripcionLogro:
-//                     "Reserva 50 veces algún espacio del D.R.E.A.M. Lab.",
-//                 iconoLogro:
-//                     "https://dreamlabstorage.blob.core.windows.net/logros/BigDreamer.webp",
-//                 colorLogro: "#AFB7FF",
-//             },
-//         }).as("postLogro");
-
-//         // Acceso a la pantalla de error
-//         cy.visit("/reservacion/resumen");
-
-//         // Envío de la reservación
-//         cy.clickDataCy("summary-submit-button");
-//         cy.wait("@postLogro");
-
-//         // Verificación de elementos en la pantalla
-//         cy.getDataCy("nombre-logro-avance-progreso").should("exist");
-//         cy.getDataCy("descripcion-logro-avance-progreso").should("exist");
-//         cy.getDataCy("fraccion-avance-progreso-logro").should("exist");
-
-//         // Verificación de contenido en la pantalla
-//         cy.containsDataCy("nombre-logro-avance-progreso", "Big Dreamer");
-//         cy.containsDataCy("descripcion-logro-avance-progreso", "Reserva 50 veces algún espacio del D.R.E.A.M. Lab.");
-//         cy.containsDataCy("fraccion-avance-progreso-logro", "25 / 50");
-
-//     });
-// });
+    it("Salir de vista de estudiante", () => {
+        // Entrar a vista de estudiante
+        cy.clickDataCy("student-view-button");
+        // Salir de la vista de estudiante
+        cy.clickDataCy("vista-estudiante-exit-button");
+        // Comprobar que se salio de la vista de estudiante
+        cy.getDataCy("student-view-button").should("exist");
+    });
+});
