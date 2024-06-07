@@ -1,0 +1,332 @@
+[
+        {
+            "id": 45,
+            "title": "Electric Garage",
+            "sala": true,
+            "idSala": 1
+        },
+        {
+            "id": 1,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 1
+        },
+        {
+            "id": 2,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 1
+        },
+        {
+            "id": 3,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 1
+        },
+        {
+            "id": 4,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 1
+        },
+        {
+            "id": 46,
+            "title": "Dimension Forge",
+            "sala": true,
+            "idSala": 2
+        },
+        {
+            "id": 5,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 2
+        },
+        {
+            "id": 6,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 2
+        },
+        {
+            "id": 7,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 2
+        },
+        {
+            "id": 8,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 2
+        },
+        {
+            "id": 47,
+            "title": "New Horizons",
+            "sala": true,
+            "idSala": 3
+        },
+        {
+            "id": 9,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 3
+        },
+        {
+            "id": 10,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 3
+        },
+        {
+            "id": 11,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 3
+        },
+        {
+            "id": 12,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 3
+        },
+        {
+            "id": 48,
+            "title": "Deep Net",
+            "sala": true,
+            "idSala": 4
+        },
+        {
+            "id": 13,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 4
+        },
+        {
+            "id": 14,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 4
+        },
+        {
+            "id": 15,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 4
+        },
+        {
+            "id": 16,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 4
+        },
+        {
+            "id": 49,
+            "title": "Graveyard",
+            "sala": true,
+            "idSala": 5
+        },
+        {
+            "id": 17,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 5
+        },
+        {
+            "id": 18,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 5
+        },
+        {
+            "id": 19,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 5
+        },
+        {
+            "id": 20,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 5
+        },
+        {
+            "id": 50,
+            "title": "PCB Factory",
+            "sala": true,
+            "idSala": 6
+        },
+        {
+            "id": 21,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 6
+        },
+        {
+            "id": 22,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 6
+        },
+        {
+            "id": 23,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 6
+        },
+        {
+            "id": 24,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 6
+        },
+        {
+            "id": 51,
+            "title": "Hack-Battlefield",
+            "sala": true,
+            "idSala": 7
+        },
+        {
+            "id": 25,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 7
+        },
+        {
+            "id": 26,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 7
+        },
+        {
+            "id": 27,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 7
+        },
+        {
+            "id": 28,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 7
+        },
+        {
+            "id": 52,
+            "title": "Testing Land",
+            "sala": true,
+            "idSala": 8
+        },
+        {
+            "id": 29,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 8
+        },
+        {
+            "id": 30,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 8
+        },
+        {
+            "id": 31,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 8
+        },
+        {
+            "id": 32,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 8
+        },
+        {
+            "id": 53,
+            "title": "War Headquarters",
+            "sala": true,
+            "idSala": 9
+        },
+        {
+            "id": 33,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 9
+        },
+        {
+            "id": 34,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 9
+        },
+        {
+            "id": 35,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 9
+        },
+        {
+            "id": 36,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 9
+        },
+        {
+            "id": 54,
+            "title": "Biometrics Flexible Hall",
+            "sala": true,
+            "idSala": 10
+        },
+        {
+            "id": 37,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 10
+        },
+        {
+            "id": 38,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 10
+        },
+        {
+            "id": 39,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 10
+        },
+        {
+            "id": 40,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 10
+        },
+        {
+            "id": 55,
+            "title": "Beyond-Digits",
+            "sala": true,
+            "idSala": 11
+        },
+        {
+            "id": 41,
+            "title": "Mesa 1",
+            "sala": false,
+            "idSala": 11
+        },
+        {
+            "id": 42,
+            "title": "Mesa 2",
+            "sala": false,
+            "idSala": 11
+        },
+        {
+            "id": 43,
+            "title": "Mesa 3",
+            "sala": false,
+            "idSala": 11
+        },
+        {
+            "id": 44,
+            "title": "Mesa 4",
+            "sala": false,
+            "idSala": 11
+        }
+    ]

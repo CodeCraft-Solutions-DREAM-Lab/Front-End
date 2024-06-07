@@ -190,6 +190,7 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("salas")
             .then((result) => {
+                setSalas(result);
                 setSalasEstados(result);
             })
             .catch((error) => {
@@ -206,18 +207,6 @@ function CronogramaAdmin() {
             .catch((error) => {
                 console.error("An error occurred:", error);
                 setIsLoadingGroups(false);
-            });
-    }, []);
-
-    // Obtener los datos de las salas para poder agregar los nombres al filtro
-    // de salas
-    useEffect(() => {
-        get("salas")
-            .then((result) => {
-                setSalas(result);
-            })
-            .catch((error) => {
-                console.error("An error occurred:", error);
             });
     }, []);
 
@@ -238,7 +227,7 @@ function CronogramaAdmin() {
     useEffect(() => {
         get("estatus")
             .then((result) => {
-                // Filtrar solamente los estatus con idEstatus de 1, 2 y 6
+                // Filtrar solamente los estatus con idEstatus de 1, 2 y 7
                 result = result.filter(
                     (estatus) =>
                         estatus.idEstatus === 1 ||
@@ -506,6 +495,7 @@ function CronogramaAdmin() {
                     setIsModalOpen(false);
                 }}
                 reservId={reservIdInModal}
+                groups={groups}
             />
             <NavBarAdmin />
             <div
