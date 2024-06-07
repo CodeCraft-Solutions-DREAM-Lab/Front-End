@@ -191,7 +191,6 @@ function SeleccionMaterial() {
                     {/* Below is the modal in case there are recommended items that should be selected but haven't been selected */}
 
                     <WarningModal
-                        data-cy="primer-recordatorio-sala"
                         isOpen={isFirstReminderOpen}
                         size="2xl"
                         onClose={() => setIsFirstReminderOpen(false)}
@@ -221,7 +220,7 @@ function SeleccionMaterial() {
                             ))}
                         </div>
                     </div>
-                    <div className="button-container-sm">
+                    <div className="button-container-sm" data-cy="select-material-accept-btn">
                         <RoundedButton text="ACEPTAR" onClick={handleNextButtonClick} />
                     </div>
                 </div>
