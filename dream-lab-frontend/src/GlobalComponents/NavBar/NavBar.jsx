@@ -84,6 +84,15 @@ class Navbar extends React.Component {
                     </>
                 ); // Icono de perfil y boton de creacion de experiencia
                 break;
+                case "profesor":
+                    searchBar = null; // barra de busqueda
+                    userAction = (
+                        <>
+                            {" "}
+                            <BotonCrearExperiencia /> <UserAvatar />{" "}
+                        </>
+                    ); // Icono de perfil y boton de creacion de experiencia
+                    break;
             case "perfil":
                 userAction = <Logout />; // Cerrar sesión
                 break;

@@ -26,6 +26,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 // Componentes de UI para mostrar mientras se carga la página
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import { saveToLocalStorage } from "../../utils/Storage";
 
 function ProtectedRoutes({ children, restrictedRoutes }) {
     // Obtener el estado de autenticación del store de redux
