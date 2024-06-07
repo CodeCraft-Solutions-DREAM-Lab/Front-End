@@ -27,6 +27,11 @@ describe("Pruebas de la vista de estudiante", () => {
         cy.containsDataCy("vista-estudiante-title", "Vista de estudiante");
         cy.getDataCy("vista-estudiante-toggle-button").should("exist");
         cy.getDataCy("vista-estudiante-exit-button").should("exist");
+    });
+
+    it("Esconder y mostrar status bar", () => {
+        // Entrar a vista de estudiante
+        cy.clickDataCy("student-view-button");
         // Esconder la barra de vista de estudiante
         cy.clickDataCy("vista-estudiante-toggle-button");
         // Comprobar que los elementos se escondieron
@@ -34,6 +39,15 @@ describe("Pruebas de la vista de estudiante", () => {
         cy.getDataCy("vista-estudiante-exit-button").should("not.exist");
         // Mostrar la barra de vista de estudiante nuevamente
         cy.clickDataCy("vista-estudiante-toggle-button");
+        // Comprobar que exista el titulo y botones de la vista
+        cy.containsDataCy("vista-estudiante-title", "Vista de estudiante");
+        cy.getDataCy("vista-estudiante-toggle-button").should("exist");
+        cy.getDataCy("vista-estudiante-exit-button").should("exist");
+    });
+
+    it("Salir de vista de estudiante", () => {
+        // Entrar a vista de estudiante
+        cy.clickDataCy("student-view-button");
         // Salir de la vista de estudiante
         cy.clickDataCy("vista-estudiante-exit-button");
         // Comprobar que se salio de la vista de estudiante
