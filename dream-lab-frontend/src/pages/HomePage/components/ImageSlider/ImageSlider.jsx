@@ -185,13 +185,14 @@ const ImageSlider = (props) => {
                                             e.preventDefault()
                                         }
                                     />
-                                    {salasBloqueadas.includes(image.idSala) && (
+                                </div>
+                                {salasBloqueadas.includes(image.idSala) && (
                                         <div className="overlay">
-                                            <span>No Disponible</span>
+                                            <span>No <br></br> Disponible</span>
                                         </div>
                                     )}
-                                </div>
                             </div>
+
                             <p className="slide-title">{image.title}</p>
                         </div>
                     ))}
