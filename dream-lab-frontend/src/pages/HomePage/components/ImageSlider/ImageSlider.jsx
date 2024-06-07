@@ -12,7 +12,7 @@ const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax e
 
 const ImageSlider = (props) => {
     const dispatch = useDispatch();
-    const { mostrarDetalles } = props;
+    const { mostrarDetalles, salasBloqueadas } = props;
     const [response, setResponse] = useState([]);
     const [bdImages, setBdImages] = useState([]);
 
@@ -172,7 +172,9 @@ const ImageSlider = (props) => {
                                 <div className="embla__parallax__layer">
                                     <img
                                         data-cy="imagen-experiencia"
-                                        className="embla__slide__img embla__parallax__img"
+                                        className={`embla__slide__img embla__parallax__img ${
+                                            salasBloqueadas.includes(image.idSala) ? "blocked" : ""
+                                        }`}
                                         src={image.url}
                                         alt="Your alt text"
                                         onClick={() =>
@@ -183,6 +185,11 @@ const ImageSlider = (props) => {
                                             e.preventDefault()
                                         }
                                     />
+                                    {salasBloqueadas.includes(image.idSala) && (
+                                        <div className="overlay">
+                                            <span>No Disponible</span>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <p className="slide-title">{image.title}</p>

@@ -434,6 +434,7 @@ function HomePage() {
                                     onImageClick={handleImageClick}
                                     setIsSalaClicked={setIsSalaClicked}
                                     setImageType="salas"
+                                    salasBloqueadas={idSalasBloqueadas}
                                 />
                             </>
                         </div>
@@ -450,6 +451,7 @@ function HomePage() {
                                     onImageClick={handleImageClick}
                                     setIsSalaClicked={setIsSalaClicked}
                                     setImageType="experiencias"
+                                    salasBloqueadas={idSalasBloqueadas}
                                 />
                             </>
                         </div>
@@ -464,6 +466,7 @@ function HomePage() {
                                     onImageClick={handleImageClick}
                                     setIsSalaClicked={setIsSalaClicked}
                                     setImageType="experiencias"
+                                    salasBloqueadas={idSalasBloqueadas}
                                 />
                             </>
                         </div>
