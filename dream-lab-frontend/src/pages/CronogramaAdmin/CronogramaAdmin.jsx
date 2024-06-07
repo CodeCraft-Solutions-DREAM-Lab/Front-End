@@ -506,6 +506,7 @@ function CronogramaAdmin() {
                     setIsModalOpen(false);
                 }}
                 reservId={reservIdInModal}
+                groups={groups}
             />
             <NavBarAdmin />
             <div
