@@ -164,3 +164,13 @@ Cypress.Commands.add("attachFileDataCy", (name, file, timeout = 4000) => {
 Cypress.Commands.add("setDate", (year, month, day) => {
     cy.clock(Date.UTC(year, month, day), ["Date"]);
 });
+
+// Presionar un botón del speed dial del cronograma
+Cypress.Commands.add("clickSpeedDial", (dataCy) => {
+    cy.clickHiddenButton(dataCy.replace(/\s/g, ""));
+});
+
+// Presionar un botón escondido
+Cypress.Commands.add("clickHiddenButton", (dataCy) => {
+    cy.getDataCy(dataCy).click({ force: true });
+});
