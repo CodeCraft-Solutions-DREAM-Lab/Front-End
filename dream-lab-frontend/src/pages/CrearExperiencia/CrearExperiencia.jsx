@@ -132,8 +132,24 @@ function CrearExperiencia() {
 				handleOpenSnackbar("Porfavor llena los campos requeridos.");
 				return;
 			}
+			if (
+				page === 1 &&
+				(!formValues.fechaInicio)
+			) {
+				handleOpenSnackbar("Porfavor selecciona una fecha de inicio.");
+				return;
+			}
 			setPage((prevPage) => prevPage + 1); // Move to the next page
 		} else {
+
+			if (
+				page === 2 &&
+				((sessionStorage.getItem("idSala") === null) || (sessionStorage.getItem("idSala") === ''))
+			) {
+				handleOpenSnackbar("Porfavor selecciona una sala.");
+				return;
+			}
+
 			// Final action on the last page
 			console.log("Submit");
 			// Upload files
