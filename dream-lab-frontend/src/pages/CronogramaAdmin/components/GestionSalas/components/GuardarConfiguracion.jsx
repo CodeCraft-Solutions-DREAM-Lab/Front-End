@@ -16,11 +16,12 @@ import propTypes from "prop-types";
 function GuardarConfiguracion(props) {
     const [isModalConfirmacionOpen, setIsModalConfirmacionOpen] = useState(false);
 
-    const cambiarEstadoSala = (id) => {
+    const cambiarEstadoSala = (id, estado) => {
         const url = `salas/cambiarEstadoSalas`;
 
         const data = JSON.stringify({
             idSala: id,
+            bloqueada: estado
         });
 
         put(
@@ -39,7 +40,7 @@ function GuardarConfiguracion(props) {
         props.salas.forEach(sala => {
             if(sala.clicked){
                 sala.bloqueada = !sala.bloqueada;
-                cambiarEstadoSala(sala.idSala);
+                cambiarEstadoSala(sala.idSala, sala.bloqueada);
             }
         });
 
