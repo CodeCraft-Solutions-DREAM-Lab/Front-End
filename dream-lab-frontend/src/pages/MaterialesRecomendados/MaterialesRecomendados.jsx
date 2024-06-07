@@ -3,9 +3,7 @@ import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
 import { Select, SelectItem} from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-//import CircularProgress from "@mui/material/CircularProgress";
+import { useEffect, useState } from "react";
 
 import {
 	saveToSessionStorage,
@@ -15,7 +13,6 @@ import {
 import { get, post } from "../../utils/ApiRequests";
 
 function MaterialesRecomendados() {
-	const navigate = useNavigate();
 	const [selectedMaterials, setSelectedMaterials] = useState(() => {
 		if (
 			existsInSessionStorage("materials") &&
@@ -124,8 +121,6 @@ function MaterialesRecomendados() {
 
 	return (
 		<>
-			<NavBar view="soloPerfil" autoHide={false} />
-
 			<div className="matrec-main-container">
 				<div className="matrec-top-section">
 					{/* Div to display selected materials */}

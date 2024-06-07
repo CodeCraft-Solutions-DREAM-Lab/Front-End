@@ -41,7 +41,7 @@ function StudentViewStatusBar() {
     };
 
     return (
-        <div className={`svsb-main-container ${isExpanded ? "expanded" : ""}`}>
+        <div className={`svsb-main-container ${isExpanded ? "expanded" : ""}`} >
             <div className="svsb-content-container">
                 <div className="svsb-col svsb-col-title">
                     {isExpanded ? (

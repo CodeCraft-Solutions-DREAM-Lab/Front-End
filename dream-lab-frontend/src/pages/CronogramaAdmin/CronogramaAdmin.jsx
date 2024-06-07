@@ -33,6 +33,8 @@ import SpeedDial from "@mui/material/SpeedDial";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
+import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
+
 
 // ApiRequests
 import { get } from "src/utils/ApiRequests";
@@ -70,8 +72,12 @@ import CustomItemRenderer from "./components/Cronograma/CustomItemRenderer";
 import { useDispatch } from "react-redux";
 import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
 
+// Navegación
+import { useNavigate } from "react-router-dom";
+
 const actions = [
-    { icon: <AddCircleIcon />, name: "Agregar reservación" },
+    { icon: <AddCircleIcon />, name: "Crear experiencia" },
+    { icon: <EditCalendarRoundedIcon/>, name: "Agregar reservación" },
     { icon: <SettingsIcon />, name: "Configurar Salas" },
 ];
 
@@ -143,6 +149,8 @@ function convertToMomentObjects(jsonData) {
 function CronogramaAdmin() {
     // Set the locale to Spanish
     moment.locale("es");
+    let navigate = useNavigate();
+
 
     const [items, setItems] = useState([]);
     const [isLoadingItems, setIsLoadingItems] = useState(true);
@@ -260,6 +268,23 @@ function CronogramaAdmin() {
 
     const handleCrearReservacion = () => {
         disclosureModalCrearReservacionAdmin.onOpen();
+    };
+
+    const handleCrearExperiencia = () => {
+        navigate(`/crearExperiencia`);
+    };
+
+    const getClickHandler = (actionName) => {
+        switch (actionName) {
+            case "Crear experiencia":
+                return handleCrearExperiencia;
+            case "Agregar reservación":
+                return handleCrearReservacion;
+            case "Configurar Salas":
+                return handleOpenGestionSalas;
+            default:
+                return () => {};
+        }
     };
 
     // Filtrar las reservaciones que se muestran en el cronograma según las
@@ -466,11 +491,8 @@ function CronogramaAdmin() {
                             style: { fontSize: 45, color: "white" },
                         })}
                         tooltipTitle={action.name}
-                        onClick={
-                            action.name === "Configurar Salas"
-                                ? handleOpenGestionSalas
-                                : handleCrearReservacion
-                        }
+                        
+                        onClick={getClickHandler(action.name)}
                     />
                 ))}
             </SpeedDial>

@@ -6,7 +6,7 @@ function BotonCrearExperiencia() {
     let navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/`); // Navega a la landing page
+        navigate(`/crearExperiencia`); 
     };
 
     return (
