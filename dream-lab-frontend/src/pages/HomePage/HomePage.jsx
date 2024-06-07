@@ -117,6 +117,7 @@ function HomePage() {
     const detallesRef = useRef(null);
     const [detallesBD, setDetallesBD] = useState(null);
     const [salasBD, setSalasBD] = useState(null);
+    const [idSalasBloqueadas, setIdSalasBloqueadas] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSalaClicked, setIsSalaClicked] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -294,6 +295,11 @@ function HomePage() {
         )
             .then((result) => {
                 setSalasBD(result);
+
+                // Filtrar las salas bloqueadas y obtener sus idSala
+                const bloqueadas = result.filter(sala => sala.bloqueada === true).map(sala => sala.idSala);
+                setIdSalasBloqueadas(bloqueadas);
+                console.log("salas bloqueadas: ", bloqueadas);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -412,6 +418,7 @@ function HomePage() {
                                 onImageClick={handleImageClick}
                                 setIsSalaClicked={setIsSalaClicked}
                                 setImageType="ambas"
+                                salasBloqueadas={idSalasBloqueadas}
                             />
                         </div>
                         <div className="carousel-container">
