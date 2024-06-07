@@ -58,12 +58,12 @@ function CrearExperiencia() {
 
 	// Callback function to update formValues state
 	const handleInfoExperienciaChange = (updatedValues) => {
-		console.log(rol);
+		console.log(updatedValues);
 		setFormValues((prevFormValues) => ({
 			...prevFormValues,
 			...updatedValues,
 		}));
-		console.log(formValues);
+		//console.log(formValues);
 	};
 
 	// Submit form
@@ -77,10 +77,11 @@ function CrearExperiencia() {
 			// Upload portadaFile
 			const portadaURL = await uploadFile(formValues.portadaFile);
 			var instruccionesURL = null;
-
+			console.log(portadaURL);
 			// Upload instruccionesFile
 			if (!(formValues.instruccionesFile === null)) {
 				instruccionesURL = await uploadFile(formValues.instruccionesFile);
+				console.log(instruccionesURL);
 			}
 
 			if (formValues.tipoExperiencia === "Autodirigida") {
@@ -98,9 +99,16 @@ function CrearExperiencia() {
 				idSala: idSala,
 				materialesExperiencia: materialesExperiencia,
 			});
-
+			const formSend = {
+				...formValues,
+				portadaURL: portadaURL,
+				instruccionesURL: instruccionesURL,
+				idSala: idSala,
+				materialesExperiencia: materialesExperiencia
+			}
+			console.log(formSend)
 			// Post request to the Experiencias table
-			await post("experiencias/crear", formValues);
+			await post("experiencias/crear", formSend);
 			// Handle the response
 
 			handleOpenSnackbar("Experiencia creada exitosamente!");
