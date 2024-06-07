@@ -67,6 +67,9 @@ function ModalCrearReservacionAdmin({ isOpen, onOpen, onOpenChange, salas }) {
             return;
         }
         setOpen(false);
+        // Borrar campos
+        setNombre("");
+        setSelectedSala([]);
     };
 
     return (
