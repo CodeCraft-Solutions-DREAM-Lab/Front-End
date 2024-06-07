@@ -3,7 +3,7 @@
   bottom: 0; /* Alinear en la parte inferior */
   left: 0; /* Alinear a la izquierda */
   width: 9vw;
-  height: 38vh;
+  height: 37vh;
   margin-left: 0vw;
   margin-bottom: 0.1vw;
   padding: 0.9%;
@@ -39,8 +39,8 @@
     justify-content: center;
     align-items: center;
     margin-top: 11.5vh;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    padding-left: 0vw;
+    padding-right: 0vw;
     line-height: 97%;
     text-align: center;
     margin-left: 0.35vw;

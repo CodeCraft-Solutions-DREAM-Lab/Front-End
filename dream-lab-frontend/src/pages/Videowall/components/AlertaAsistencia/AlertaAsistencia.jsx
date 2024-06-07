@@ -37,10 +37,9 @@ function MensajeBienvenida(props) {
     const obtenerFraseAleatoria = () => {
         // Lista de frases
         const frases = [
-            "¡Justo a tiempo!",
-            "¡Bienvenido!",
-            "¡Aprende mucho!",
-            "¡Bien hecho!",
+            "\n¡Justo a tiempo!",
+            "\n¡Bienvenido!",
+            "\n¡Aprende mucho!",
         ];
 
         // Obtener un índice aleatorio dentro del rango de la lista de frases
@@ -70,7 +69,7 @@ function MensajeBienvenida(props) {
             }
         >
             <div className="confetti-alerta-asistencia">
-                {tarde ? null : <Confetti width="700vw" height="760vh" />}
+                {tarde ? null :<Confetti width="330vw" height="330vh" />}
             </div>
 
             <div className="alerta-videowall-primera-mitad-asistencia">
@@ -95,7 +94,7 @@ function MensajeBienvenida(props) {
                 <h1 className="titulo-mensaje-bienvenida-videowall-asistencia">
                     {tarde
                         ? "Asistencia tardía registrada"
-                        : "Asistencia registrada " + segundaFrase}
+                        : "Asistencia registrada" + segundaFrase}
                 </h1>
             </div>
         </div>

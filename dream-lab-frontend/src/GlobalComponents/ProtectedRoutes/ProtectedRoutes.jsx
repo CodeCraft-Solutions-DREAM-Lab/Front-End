@@ -12,6 +12,7 @@ import {
     selectAuth,
     selectRol,
     setRol,
+    setNombre,
 } from "src/redux/Slices/userSlice";
 
 // Funciones para manejar la base de datos
@@ -71,12 +72,10 @@ function ProtectedRoutes({ children, restrictedRoutes }) {
                 // Una vez que se cumpla la promesa, se actualiza el estado de
                 // autenticación con el valor recibido de la api
                 dispatch(setAuth(res.isAuth));
-                console.log(
-                    "ROL: ",
-                    JSON.parse(res.token_data.datosUsuario).tipo
-                );
                 dispatch(setRol(JSON.parse(res.token_data.datosUsuario).tipo));
-                console.log(selectRol);
+                dispatch(
+                    setNombre(JSON.parse(res.token_data.datosUsuario).nombre)
+                );
             });
         }
     }, [isLoading, dispatch]);
@@ -94,11 +93,6 @@ function ProtectedRoutes({ children, restrictedRoutes }) {
         //     return <Navigate to="/login" />;
         // }
         if (isAuth) {
-            console.log(rol);
-            console.log(restrictedRoutes[rol]);
-            console.log(restrictedRoutes[rol].routes);
-            console.log(currentPath);
-            //saveToLocalStorage("rol", rol);
             // Si el usuario no tiene permiso para acceder a la ruta actual, se
             // redirige a la ruta de fallback
             if (
