@@ -97,6 +97,7 @@ const ModalPenalizar = (
             hideCloseButton={true}
             isDismissable={false}
             backdrop="blur"
+            data-cy="modal-penalizar"
         >
             <ModalContent className="MP-modal-content-container">
                 {() => (

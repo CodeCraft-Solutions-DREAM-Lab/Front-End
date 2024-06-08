@@ -33,6 +33,7 @@ function PenalizarModalButton(props) {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={props.onClick}
+                data-cy="penalizar-btn"
             >
                 PENALIZAR
                 

@@ -72,6 +72,7 @@ const ModalCancelarReserv = ({
             hideCloseButton={true}
             isDismissable={false}
             backdrop="blur"
+            data-cy="modal-cancelar-reserv"
         >
             <ModalContent className="p-3">
                 {() => (

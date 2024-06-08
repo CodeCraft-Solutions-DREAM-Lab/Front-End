@@ -15,7 +15,11 @@ function CancelarReservaModalButton(props) {
     }
     
 	return (
-        <Button className={props.className + " RIM-btn"} onClick={props.onClick}>
+        <Button 
+            className={props.className + " RIM-btn"} 
+            onClick={props.onClick}
+            data-cy="cancelar-reserva-btn"
+        >
             CANCELAR RESERVA
         </Button>
     );
