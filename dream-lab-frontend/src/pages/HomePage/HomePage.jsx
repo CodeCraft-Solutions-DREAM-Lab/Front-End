@@ -52,18 +52,20 @@ function HomePage() {
 	const [showRecommendations, setShowRecommendations] = useState(false);
 	const [showInvalidNotice, setShowInvalidNotice] = useState(false);
 
-	const [detallesVisible, setDetallesVisible] = useState(false);
-	const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
-	const detallesRef = useRef(null);
-	const [detallesBD, setDetallesBD] = useState(null);
-	const [salasBD, setSalasBD] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isSalaClicked, setIsSalaClicked] = useState(false);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [searchResults, setSearchResults] = useState([]);
-	const [isContentVisible, setIsContentVisible] = useState(true); // Visibilidad de página al hacer una búsqueda
-	const isMobile = window.innerWidth <= 480;
-	const rol = useSelector(selectRol);
+    const [detallesVisible, setDetallesVisible] = useState(false);
+    const [imageID, setImageID] = useState(null); // Nuevo estado para imageID
+    const detallesRef = useRef(null);
+    const [detallesBD, setDetallesBD] = useState(null);
+    const [salasBD, setSalasBD] = useState(null);
+    const [idSalasBloqueadas, setIdSalasBloqueadas] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSalaClicked, setIsSalaClicked] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [isContentVisible, setIsContentVisible] = useState(true); // Visibilidad de página al hacer una búsqueda
+    const isMobile = window.innerWidth <= 480;
+    const rol = useSelector(selectRol);
+
 
 	// Función para mostrar Detalles
 	const mostrarDetalles = () => {
@@ -215,18 +217,23 @@ function HomePage() {
 				console.error("An error occurred:", error);
 			});
 
-		get(
-			"salas",
-			() => setIsLoading(false),
-			() => setIsLoading(false)
-		)
-			.then((result) => {
-				setSalasBD(result);
-			})
-			.catch((error) => {
-				console.error("An error occurred:", error);
-			});
-	}, []);
+        get(
+            "salas",
+            () => setIsLoading(false),
+            () => setIsLoading(false)
+        )
+            .then((result) => {
+                setSalasBD(result);
+
+                // Filtrar las salas bloqueadas y obtener sus idSala
+                const bloqueadas = result.filter(sala => sala.bloqueada === true).map(sala => sala.idSala);
+                setIdSalasBloqueadas(bloqueadas);
+                console.log("salas bloqueadas: ", bloqueadas);
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            });
+    }, []);
 
 	const handleSearch = (term) => {
 		setSearchTerm(term);
@@ -291,9 +298,9 @@ function HomePage() {
 							descripcion={
 								isSalaClicked
 									? salasBD[imageID]?.descripcion ||
-									  "Lamentamos la falta de detalles..."
+                                        "Lamentamos la falta de detalles..."
 									: detallesBD[imageID]?.descripcion ||
-									  "Lamentamos la falta de detalles..."
+                                        "Lamentamos la falta de detalles..."
 							}
 							autodirigido={
 								isSalaClicked
@@ -307,10 +314,10 @@ function HomePage() {
 							}
 							imagenExp={
 								isSalaClicked
-									? salasBD[imageID]?.detallesURL ||
-									  "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
+									? salasBD[imageID]?.detallesURL || 
+                                        "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
 									: salasBD[detallesBD[imageID].idSala - 1]?.detallesURL ||
-									  "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
+                                        "https://dreamlabstorage.blob.core.windows.net/archivos/error.webp"
 							}
 							handleClose={handleCloseDetalles}
 							imageID={imageID}
@@ -344,6 +351,7 @@ function HomePage() {
 								onImageClick={handleImageClick}
 								setIsSalaClicked={setIsSalaClicked}
 								setImageType="ambas"
+                                salasBloqueadas={idSalasBloqueadas}
 							/>
 						</div>
 						<div className="carousel-container">
@@ -359,6 +367,7 @@ function HomePage() {
 									onImageClick={handleImageClick}
 									setIsSalaClicked={setIsSalaClicked}
 									setImageType="salas"
+                                    salasBloqueadas={idSalasBloqueadas}
 								/>
 							</>
 						</div>
@@ -375,6 +384,7 @@ function HomePage() {
 									onImageClick={handleImageClick}
 									setIsSalaClicked={setIsSalaClicked}
 									setImageType="experiencias"
+                                    salasBloqueadas={idSalasBloqueadas}
 								/>
 							</>
 						</div>
@@ -389,6 +399,7 @@ function HomePage() {
 									onImageClick={handleImageClick}
 									setIsSalaClicked={setIsSalaClicked}
 									setImageType="experiencias"
+                                    salasBloqueadas={idSalasBloqueadas}
 								/>
 							</>
 						</div>
@@ -400,6 +411,7 @@ function HomePage() {
 						mostrarDetalles={mostrarDetalles}
 						onImageClick={handleImageClick}
 						setIsSalaClicked={setIsSalaClicked}
+                        salasBloqueadas={idSalasBloqueadas}
 					/>
 				)}
 			</div>

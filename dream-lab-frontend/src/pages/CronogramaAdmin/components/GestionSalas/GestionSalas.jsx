@@ -15,20 +15,20 @@ import GuardarConfiguracion from "./components/GuardarConfiguracion";
 import propTypes from "prop-types";
 
 function GestionSalas(props) {
-    const [salas, setSalas] = useState([]);
+    // const [salas, setSalas] = useState([]);
     const [isModalGuardarOpen, setIsModalGuardarOpen] = useState(false);
 
-    useEffect(() => {
-        setSalas(
-            props.salas.map((sala) => ({
-                ...sala,
-                clicked: false,
-            }))
-        );
-    }, [props.salas]);
+    // useEffect(() => {
+    //     setSalas(
+    //         props.salas.map((sala) => ({
+    //             ...sala,
+    //             clicked: false,
+    //         }))
+    //     );
+    // }, [props.salas]);
 
     const updateSalaState = (id, clicked) => {
-        setSalas((prevSalas) => {
+        props.setSalas((prevSalas) => {
             const newSalas = [...prevSalas];
             newSalas[id] = { ...newSalas[id], clicked };
             return newSalas;
@@ -36,15 +36,14 @@ function GestionSalas(props) {
     };
 
     const handleSave = () => {
-        console.log('click en guardar');
-
         setIsModalGuardarOpen(true);
     };
     
     return (
         <>
         <GuardarConfiguracion
-                salas={salas}
+                salas={props.salas}
+                setSalas={props.setSalas}
 				isOpen={isModalGuardarOpen}
                 closeAll={() => {
                     setIsModalGuardarOpen(false);
@@ -53,13 +52,14 @@ function GestionSalas(props) {
 				onClose={() => {
 					setIsModalGuardarOpen(false);
 				}}
+                // updateSalasAfterSave={updateSalasAfterSave}
 			/>
         <Modal
             size='5xl'
             isOpen={props.isOpen}
             onClose={props.onClose}
             hideCloseButton={true}
-            backdrop="blur"
+            backdrop="opaque"
             data-cy="undefined"
         >
             <ModalContent className="p-3">
@@ -106,6 +106,7 @@ GestionSalas.propTypes = {
     isOpen: propTypes.bool,
     onClose: propTypes.func,
     salas: propTypes.array,
+    setSalas: propTypes.func,
 };
 
 export default GestionSalas;
