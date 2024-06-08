@@ -46,7 +46,7 @@ import Videowall from "./pages/Videowall/Videowall.jsx";
 import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
 import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import MaterialesRecomendados from "./pages/MaterialesRecomendados/MaterialesRecomendados";
+import CrearExperiencia from "./pages/CrearExperiencia/CrearExperiencia";
 
 function secured(Component) {
     const restrictedRoutes = {
@@ -99,11 +99,11 @@ const router = createBrowserRouter(
                 path="crearAnuncio"
                 element={secured(CrearAnuncioVideowall)()}
             />
-            <Route path="admin" element={<CronogramaAdmin />} />
-            <Route path="admin/material" element={<MaterialesRecomendados />} />
+            <Route path="admin" element={secured(CronogramaAdmin)()} />
             <Route path="dashboard" element={secured(Dashboard)()} />
             <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="crearExperiencia" element={secured(CrearExperiencia)()}/> 
         </Route>
     )
 );

@@ -48,11 +48,13 @@ export function generateReservationCards(reservacionesData, handleClickModal) {
         (reservation) => reservation.estatus === 3 || reservation.estatus === 5
     );
 
-    // Filtrar solo las reservaciones del día actual o futuras
     const reservacionesFuturas = reservacionesConfirmadas.filter(reservation => {
-        const reservationDate = new Date(reservation.fecha);
         const today = new Date();
-        return reservationDate >= today;
+        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())).toISOString().slice(0, 10);
+        const reservationDateUTC = reservation.fecha.slice(0, 10); // Obtener la fecha de reserva en formato ISO UTC (YYYY-MM-DD)
+        console.log("Reservación: ", reservationDateUTC)
+        console.log("Hoy: ", todayUTC)
+        return reservationDateUTC >= todayUTC;
     });
 
     // Ordenar las reservaciones por fecha

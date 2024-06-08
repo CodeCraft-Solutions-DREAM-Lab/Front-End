@@ -8,12 +8,25 @@ import profileIcon from "src/assets/NavBar/Administrador-perfil-icon.svg";
 import GlassCard from "../GlassCard/GlassCard";
 import { useLocation } from "react-router-dom";
 
+// Nextui
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    Button,
+} from "@nextui-org/react";
+
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "src/redux/Slices/vistaEstudianteSlice";
+import { selectNombre, logoutUser } from "src/redux/Slices/userSlice";
 
 // Storage
-import { saveToSessionStorage } from "src/utils/Storage";
+import {
+    saveToSessionStorage,
+    multiClearSessionStorage,
+    clearStorages,
+} from "src/utils/Storage";
 
 function NavBarAdmin() {
     const location = useLocation();
@@ -21,14 +34,50 @@ function NavBarAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const clearAdminStates = () => {
+        dispatch(setActive(false));
+        multiClearSessionStorage([
+            "horaInicio",
+            "horaInicioIsoString",
+            "duration",
+            "fecha",
+            "fechaIsoString",
+            "personas",
+            "experiencia",
+            "sala",
+            "idExperiencia",
+            "idSala",
+            "reservType",
+            "materials",
+            "competidores",
+            "cupos",
+            "formattedDate",
+            "formattedTime",
+            "horaCorte",
+            "nameSalaExperiencia",
+            "vistaEstudiante",
+            "nombreReservacionAdmin",
+        ]);
+    };
+
     const handleTabClick = (tab) => {
+        clearAdminStates();
         setActiveTab(tab);
     };
 
     const handleStudentViewClick = () => {
+        clearAdminStates();
         dispatch(setActive(true));
         saveToSessionStorage("vistaEstudiante", true);
         navigate("/home");
+    };
+
+    const handleLogout = () => {
+        clearStorages();
+        // Llamámos a la función de logoutUser de la userSlice para borrar
+        // los datos del usuario
+        dispatch(logoutUser());
+        navigate("/login", { replace: true }); // Navega al login
     };
 
     return (
@@ -38,7 +87,11 @@ function NavBarAdmin() {
             classes="navbar-admin"
         >
             <div className="centered-container">
-                <Link to={"/admin"} className="logo-container-admin">
+                <Link
+                    to={"/admin"}
+                    className="logo-container-admin"
+                    onClick={clearAdminStates}
+                >
                     <div className="logo-admin">
                         <img src={logoDreamLab} alt="Logo" />
                     </div>
@@ -81,14 +134,38 @@ function NavBarAdmin() {
                             alt="User Avatar"
                             className="user-avatar-icon-admin"
                             onClick={handleStudentViewClick}
+                            data-cy="student-view-button"
                         />
                         <span className="tooltiptext">Vista de estudiante</span>
                     </div>
-                    <img
-                        src={profileIcon}
-                        alt="Settings"
-                        className="settings-icon"
-                    />
+                    <Popover showArrow placement="bottom-end">
+                        <PopoverTrigger>
+                            <img
+                                src={profileIcon}
+                                alt="Settings"
+                                className="settings-icon"
+                            />
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <div className="px-1 py-2">
+                                <div className="mb-2 text-center">
+                                    <span className="text-lg font-bold">
+                                        {useSelector(selectNombre)}
+                                    </span>
+                                </div>
+                                <div>
+                                    <Button
+                                        variant="flat"
+                                        color="danger"
+                                        fullWidth
+                                        onPress={handleLogout}
+                                    >
+                                        Cerrar sesión
+                                    </Button>
+                                </div>
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                 </div>
             </div>
         </GlassCard>

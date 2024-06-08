@@ -68,11 +68,15 @@ class Navbar extends React.Component {
         let searchBar, userAction;
         switch (view) {
             case "homeAlumno":
-                searchBar = <SearchBar onSearchInputChange={onSearchInputChange} />; // barra de busqueda
+                searchBar = (
+                    <SearchBar onSearchInputChange={onSearchInputChange} />
+                ); // barra de busqueda
                 userAction = <UserAvatar />; // Icono de perfil
                 break;
             case "homeProfesor":
-                searchBar = <SearchBar onSearchInputChange={onSearchInputChange} />; // barra de busqueda
+                searchBar = (
+                    <SearchBar onSearchInputChange={onSearchInputChange} />
+                ); // barra de busqueda
                 userAction = (
                     <>
                         {" "}
@@ -80,6 +84,15 @@ class Navbar extends React.Component {
                     </>
                 ); // Icono de perfil y boton de creacion de experiencia
                 break;
+                case "profesor":
+                    searchBar = null; // barra de busqueda
+                    userAction = (
+                        <>
+                            {" "}
+                            <BotonCrearExperiencia /> <UserAvatar />{" "}
+                        </>
+                    ); // Icono de perfil y boton de creacion de experiencia
+                    break;
             case "perfil":
                 userAction = <Logout />; // Cerrar sesión
                 break;

@@ -10,8 +10,10 @@ import SolicitedMatsListModal from "./SolicitedMatsListModal";
 import InfoSalaFechaModal from "./InfoSalaFechaModal";
 import CancelarReservaModalButton from "./CancelarReservaModalButton";
 import PenalizarModalButton from "./PenalizarModalButton";
+import ModalCancelarReserv from "./ModalCancelarReserv/ModalCancelarReserv";
+import ModalPenalizar from "./ModalPenalizar/ModalPenalizar";
 import "./ReservItemModal.css";
-import { get } from "../../../../utils/ApiRequests";
+import { get } from "src/utils/ApiRequests";
 
 const horaFormatter = new Intl.DateTimeFormat("es-MX", {
 	hour: "numeric",
@@ -37,6 +39,9 @@ function ReservItemModal(props) {
 	const [reservItems, setReservItems] = useState([]);
 	const [selectedItems, setSelectedItems] = useState([]);
 
+	const [isCancelarReservOpen, setIsCancelarReservOpen] = useState(false);
+	const [isPenalizarOpen, setIsPenalizarOpen] = useState(false);
+
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
@@ -44,13 +49,9 @@ function ReservItemModal(props) {
 		if (!props.isOpen) return;
 
 		setIsLoading(true);
-		// console.log("ReservItemModal useEffect");
 
 		get("reservaciones/cronograma/" + props.reservId)
 			.then((response) => {
-
-				console.log("Reservacion data: ", response);
-
 				const horaInicio = new Date(response.horaInicio);
 				horaInicio.setHours(horaInicio.getHours() + 6);
 				const horaFin = new Date(horaInicio);
@@ -65,21 +66,23 @@ function ReservItemModal(props) {
 				let formattedDate = dateFormatter.format(reservDate);
 				// Convert the first letter of each word to uppercase except for words with 2 or less characters
 				formattedDate = formattedDate.replace(
-					/\b\w{3,}/g,
+					/\b\p{L}{3,}/gu,
 					char => char.charAt(0).toUpperCase() + char.slice(1)
 				);
+
+				const mesaId = response.idMesa;
+				const nombreMesa = props.groups.find((group) => group.id === mesaId).title;
 
 				setStudentName(response.studentName);
 				setStudentMat(response.studentMat);
 				setSalaName(response.salaName);
-				setMesaName("Mesa 2");
+				setMesaName(nombreMesa || "Mesa 2");
 				setDateString(formattedDate);
 				setHoraInicioString(formattedInicio);
 				setHoraFinString(formattedFin);
 				setReservItems(response.reservItems);
 
 				const selectedItems = response.selectedItems.map((item) => { return item.name });
-				console.log("Selected items: ", selectedItems);
 				setSelectedItems(selectedItems);
 
 				setIsLoading(false);
@@ -88,100 +91,119 @@ function ReservItemModal(props) {
 				console.error("Error fetching reservacion data: ", error);
 				setIsLoading(false);
 			});
-
-		// setTimeout(() => {
-		// 	setStudentName("Jaime Eduardo López Castro");
-		// 	setStudentMat("A00833173");
-		// 	setSalaName("Electric Garage");
-		// 	setMesaName("Mesa 2");
-		// 	setDateString("Martes, 15 de Diciembre");
-		// 	setHoraInicioString("15:00");
-		// 	setHoraFinString("17:00");
-		// 	setReservItems([
-		// 		{
-		// 			name: "Lentes Oculus Quest",
-		// 			quantity: 2,
-		// 		},
-		// 		{
-		// 			name: "Computadora Windows",
-		// 			quantity: 1,
-		// 		},
-		// 		{
-		// 			name: "Extensión 2 metros",
-		// 			quantity: 1,
-		// 		},
-		// 	]);
-		// 	setIsLoading(false);
-
-		// }, 1000);
 	}, [props.isOpen])
 
+	const handleCancelReservButtonClick = () => {
+		setIsCancelarReservOpen(true);
+	};
+
+	const handlePenalizarButtonClick = () => {
+		setIsPenalizarOpen(true);
+	};
+
 	return (
-		<Modal
-			size="4xl"
-			isOpen={props.isOpen}
-			onClose={props.onClose}
-			hideCloseButton={false}
-			backdrop="blur"
-		>
-			<ModalContent className="p-3">
-				{() => (
-					<>
-						<ModalBody>
+		<>
 
-							<div className="ReservItemModal-grid-container">
+			<ModalCancelarReserv
+				isOpen={isCancelarReservOpen}
+				setIsOpen={setIsCancelarReservOpen}
+				setIsInfoModalOpen={props.setIsOpen}
 
-								<div className="ReservItemModal-grid-item-1">
+				reservId={props.reservId}
+				salaName={salaName}
+				fechaString={dateString}
+				horaInicioString={horaInicioString}
+				horaFinString={horaFinString}
 
-									<StudentNameMatModal
-										studentName={studentName}
-										studentMat={studentMat}
-										isLoading={isLoading}
-									/>
+				items={props.items}
+				setItems={props.setItems}
+				filteredItems={props.filteredItems}
+				setFilteredItems={props.setFilteredItems}
+			/>
 
-									<SolicitedMatsListModal
-										reservItems={reservItems}
-										setReservItems={setReservItems}
-										selectedItems={selectedItems}
-										setSelectedItems={setSelectedItems}
-										isLoading={isLoading}
-									/>
+			<ModalPenalizar
+				isOpen={isPenalizarOpen}
+				setIsOpen={setIsPenalizarOpen}
+				idUsuario={studentMat}
+			/>
+
+			<Modal
+				size="4xl"
+				isOpen={props.isOpen}
+				onClose={props.onClose}
+				hideCloseButton={false}
+				backdrop="opaque"
+			>
+				<ModalContent className="p-3">
+					{() => (
+						<>
+							<ModalBody>
+
+								<div className="ReservItemModal-grid-container">
+
+									<div className="ReservItemModal-grid-item-1">
+
+										<StudentNameMatModal
+											studentName={studentName}
+											studentMat={studentMat}
+											isLoading={isLoading}
+										/>
+
+										<SolicitedMatsListModal
+											reservItems={reservItems}
+											selectedItems={selectedItems}
+											setSelectedItems={setSelectedItems}
+											isLoading={isLoading}
+											items={props.items}
+											setItems={props.setItems}
+											filteredItems={props.filteredItems}
+											setFilteredItems={props.setFilteredItems}
+										/>
+									</div>
+
+									<div className="ReservItemModal-grid-item-2">
+
+										<InfoSalaFechaModal
+											salaName={salaName}
+											mesaName={mesaName}
+											dateString={dateString}
+											horaInicioString={horaInicioString}
+											horaFinString={horaFinString}
+											isLoading={isLoading}
+										/>
+
+										<CancelarReservaModalButton
+											className="mt-10"
+											isLoading={isLoading}
+											onClick={handleCancelReservButtonClick}
+										/>
+
+										<PenalizarModalButton
+											className="mt-4"
+											isLoading={isLoading}
+											onClick={handlePenalizarButtonClick}
+										/>
+									</div>
 								</div>
-
-								<div className="ReservItemModal-grid-item-2">
-
-									<InfoSalaFechaModal
-										salaName={salaName}
-										mesaName={mesaName}
-										dateString={dateString}
-										horaInicioString={horaInicioString}
-										horaFinString={horaFinString}
-										isLoading={isLoading}
-									/>
-
-									<CancelarReservaModalButton
-										className="mt-10"
-										isLoading={isLoading}
-									/>
-
-									<PenalizarModalButton
-										className="mt-4"
-										isLoading={isLoading}
-									/>
-								</div>
-							</div>
-						</ModalBody>
-					</>
-				)}
-			</ModalContent>
-		</Modal>
+							</ModalBody>
+						</>
+					)}
+				</ModalContent>
+			</Modal>
+		</>
 	);
 }
 
 ReservItemModal.propTypes = {
 	isOpen: propTypes.bool,
+	setIsOpen: propTypes.func,
 	onClose: propTypes.func,
-	reservId: propTypes.number.isRequired, // Se requiere el ID de la reservación
+	reservId: propTypes.number.isRequired,
+	items: propTypes.array,
+	setItems: propTypes.func,
+	filteredItems: propTypes.array,
+	setFilteredItems: propTypes.func,
+	groups: propTypes.array,
 };
 
 export default ReservItemModal;

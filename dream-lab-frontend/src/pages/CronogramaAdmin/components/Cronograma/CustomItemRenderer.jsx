@@ -15,7 +15,7 @@ const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
         } else {
             setColorName("#acacac");
         }
-    }, []);
+    }, [item.estatusMateriales]);
 
     const { style, ...otherProps } = getItemProps();
     const { width, top, position, lineHeight, left, cursor, ...otherStyles } = style;
@@ -31,16 +31,19 @@ const CustomItemRenderer = ({ item, itemContext, getItemProps }) => {
                 left: left,
                 cursor: cursor,
 
-                borderRadius: "1vh",
-                height: "33px",
+                borderRadius: "100vh",
+                height: "40px",
                 background: colorName,
                 zIndex: 30
             }}
+            key={itemContext.id}
         >
             <p style={{
-                display: "flex",
+                
                 justifySelf: "start",
-                paddingLeft: "0.8vh",
+                padding: "0.3vh",
+                paddingLeft: "2vh",
+                paddingRight: "2vh",
 
                 color: "white",
                 fontSize: "auto",

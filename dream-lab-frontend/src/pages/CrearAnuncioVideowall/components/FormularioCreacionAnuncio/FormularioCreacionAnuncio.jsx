@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./FormularioCreacionAnuncio.css";
 import Checkbox from "./components/Checkbox/Checkbox";
 import SubirImagenBox from "./components/SubirImagenBox/SubirImagenBox";
@@ -6,14 +6,7 @@ import AgregarImagen from "../../../../assets/CrearAnuncioVideowall/agregarImage
 import BotonAgregar from "./components/BotonAgregar/BotonAgregar";
 import TipoAnuncioSelector from "../../components/TipoAnuncioSelector/TipoAnuncioSelector";
 import { DatePicker } from "@nextui-org/react";
-import { get, API_URL } from "src/utils/ApiRequests.js";
 import { TimeInput } from "@nextui-org/react";
-import {
-    Autocomplete,
-    AutocompleteItem,
-    Select,
-    SelectItem,
-} from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { uploadFile } from "../../../../firebase/config"; // Importar la función uploadFile
 import AgregarImagenError from "../../../../assets/CrearAnuncioVideowall/subirArchivoErroneo.png";
