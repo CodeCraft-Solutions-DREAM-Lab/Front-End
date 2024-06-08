@@ -68,7 +68,10 @@ export default function LoginPage() {
                         // Redirigir dependiendo del rol del usuario
                         if (datosUsuario.tipo === "admin") {
                             navigate("/admin");
-                        } else if (datosUsuario.tipo === "regular") {
+                        } else if (
+                            datosUsuario.tipo === "regular" ||
+                            datosUsuario.tipo === "profesor"
+                        ) {
                             navigate("/home");
                         } else {
                             navigate("/login");
@@ -98,7 +101,7 @@ export default function LoginPage() {
                         ).tipo.toLowerCase();
                         if (rol === "admin") {
                             navigate("/admin");
-                        } else if (rol === "regular") {
+                        } else if (rol === "regular" || rol === "profesor") {
                             navigate("/home");
                         } else {
                             navigate("/login");

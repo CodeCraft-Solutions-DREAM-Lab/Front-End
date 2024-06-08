@@ -54,6 +54,10 @@ function secured(Component) {
             routes: ["/admin", "/dashboard", "/crearAnuncio"],
             fallback: "/home",
         },
+        Profesor: {
+            routes: ["/admin", "/dashboard", "/crearAnuncio"],
+            fallback: "/home",
+        },
         Admin: {
             routes: [],
             fallback: "/admin",
@@ -103,7 +107,10 @@ const router = createBrowserRouter(
             <Route path="dashboard" element={secured(Dashboard)()} />
             <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="crearExperiencia" element={secured(CrearExperiencia)()}/> 
+            <Route
+                path="crearExperiencia"
+                element={secured(CrearExperiencia)()}
+            />
         </Route>
     )
 );

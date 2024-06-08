@@ -27,7 +27,10 @@ export async function loginAction(
                 // Redirigir a una página dependiendo del rol del usuario
                 if (response.rol.toLowerCase() === "admin") {
                     return "/admin";
-                } else if (response.rol.toLowerCase() === "regular") {
+                } else if (
+                    response.rol.toLowerCase() === "regular" ||
+                    response.rol.toLowerCase() === "profesor"
+                ) {
                     return "/home";
                 } else {
                     // Llamar a la función de error
