@@ -480,7 +480,7 @@ function CronogramaAdmin() {
                         })}
                         tooltipTitle={action.name}
                         onClick={getClickHandler(action.name)}
-                        data-cy={action.name.replace(/\s/g, '')}
+                        data-cy={action.name.replace(/\s/g, "")}
                     />
                 ))}
             </SpeedDial>
@@ -663,6 +663,10 @@ function CronogramaAdmin() {
                                                             primary={
                                                                 area.nombre
                                                             }
+                                                            data-cy={`ca-${area.nombre.replace(
+                                                                /\s/g,
+                                                                ""
+                                                            )}`}
                                                         />
                                                     </MenuItem>
                                                 ))}
