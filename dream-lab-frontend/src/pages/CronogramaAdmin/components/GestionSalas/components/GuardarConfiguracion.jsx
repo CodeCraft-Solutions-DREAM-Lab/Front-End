@@ -9,18 +9,45 @@ import {
 } from "@nextui-org/react";
 import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
 import ConfirmacionGuardado from "./ConfirmacionGuardado";
+import { put } from "src/utils/ApiRequests.js";
 
 import propTypes from "prop-types";
 
 function GuardarConfiguracion(props) {
     const [isModalConfirmacionOpen, setIsModalConfirmacionOpen] = useState(false);
 
-    const handleSave = () => {
-        console.log('control log: ', props.salas);
-        props.salas.forEach(sala => {
-            console.log(`Nombre: ${sala.nombre}, Bloqueada: ${sala.bloqueada}, Clicked: ${sala.clicked}`);
+    const cambiarEstadoSala = (id, estado) => {
+        const url = `salas/cambiarEstadoSalas`;
+
+        const data = JSON.stringify({
+            idSala: id,
+            bloqueada: estado
         });
 
+        put(
+            url,
+            data,
+            () => {
+                console.log("La disponibilidad se actualizó exitosamente.");
+            },
+            (error) => {
+                console.error("Error al cambiar la disponibilidad:", error);
+            }
+        );
+    }
+
+    const handleSave = () => {
+        props.salas.forEach(sala => {
+            if(sala.clicked){
+                sala.bloqueada = !sala.bloqueada;
+                cambiarEstadoSala(sala.idSala, sala.bloqueada);
+            }
+        });
+
+        const newSalasArray = [...props.salas];
+        props.setSalas(newSalasArray);
+
+        // props.updateSalasAfterSave();
         setIsModalConfirmacionOpen(true);
     };
 
@@ -67,9 +94,12 @@ function GuardarConfiguracion(props) {
 }
 
 GuardarConfiguracion.propTypes = {
+    salas: propTypes.array,
+    setSalas: propTypes.func,
     isOpen: propTypes.bool,
     closeAll: propTypes.func,
     onClose: propTypes.func,
+    // updateSalasAfterSave: propTypes.func,
 };
 
 export default GuardarConfiguracion;

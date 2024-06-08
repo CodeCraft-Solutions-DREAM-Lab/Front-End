@@ -188,15 +188,18 @@ function CronogramaAdmin() {
     }, []);
 
     useEffect(() => {
-        get("salas")
-            .then((result) => {
+		get("salas")
+			.then((result) => {
                 setSalas(result);
-                setSalasEstados(result);
-            })
-            .catch((error) => {
-                console.error("An error occurred:", error);
-            });
-    }, []);
+				setSalasEstados(result.map((sala) => ({
+                    ...sala,
+                    clicked: false,
+                })));
+			})
+			.catch((error) => {
+				console.error("An error occurred:", error);
+			});
+	}, []);
 
     useEffect(() => {
         get("salas/cronograma")
@@ -456,15 +459,25 @@ function CronogramaAdmin() {
         );
     };
 
+    const updateSalaState = (id, clicked) => {
+        setSalasEstados((prevSalas) =>
+            prevSalas.map((sala) =>
+                sala.idSala === id ? { ...sala, clicked } : sala
+            )
+        );
+    };
+
     return (
         <>
             <GestionSalas
                 data-cy="gestion-salas"
                 salas={salasEstados}
+                setSalas={setSalasEstados}
                 isOpen={isGestionSalasOpen}
                 onClose={() => {
                     setIsGestionSalasOpen(false);
                 }}
+                updateSalaState={updateSalaState}
             />
             <SpeedDial
                 ariaLabel="SpeedDial Menu"
@@ -497,6 +510,7 @@ function CronogramaAdmin() {
                 reservId={reservIdInModal}
                 groups={groups}
             />
+
             <NavBarAdmin />
             <div
                 className="timeline-container-cronograma-admin"
