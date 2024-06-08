@@ -477,7 +477,8 @@ function HomePage() {
                         results={searchResults} 
                         mostrarDetalles={mostrarDetalles} 
                         onImageClick={handleImageClick} 
-                        setIsSalaClicked={setIsSalaClicked} 
+                        setIsSalaClicked={setIsSalaClicked}
+                        salasBloqueadas={idSalasBloqueadas}
                     />
                 )}
                 

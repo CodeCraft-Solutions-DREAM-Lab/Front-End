@@ -10,7 +10,7 @@ import { Result } from "postcss";
 
 function ResultadosBusqueda(props) {
   const dispatch = useDispatch();
-  const { mostrarDetalles } = props;
+  const { mostrarDetalles, salasBloqueadas } = props;
 
   function handleClick(idExperiencia, tipo) {
 
@@ -53,11 +53,15 @@ function ResultadosBusqueda(props) {
       <div className="search-results-container">
       {props.results.map((result, index) => {
         const id = result.idExperiencia || result.idSala;
+        const idSala = result.idSala;
         const tipo = result.idExperiencia ? "experiencias" : "salas";
         return(
           <React.Fragment key={index}>
+            
             <ResultadosCard
               id={id}
+              idSala={idSala}
+              salasBloqueadas={salasBloqueadas}
               title={result.nombre}
               image={result.fotoURL || result.portadaURL}
               onClick={() => handleClick(id, tipo)}
