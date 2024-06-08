@@ -126,7 +126,7 @@ function InfoExperiencia({ onInfoChange }) {
 				onChange={handleTipoExperienciaChange}
 				data-cy="selector-tipo-exp"
 			>
-				<SelectItem value="Autodirigida" key="Autodirigida">
+				<SelectItem value="Autodirigida" key="Autodirigida" data-cy="input-tipo-exp">
 					Autodirigida
 				</SelectItem>
 				<SelectItem value="Unidad de Formación" key="Unidad de Formación">
