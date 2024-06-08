@@ -415,7 +415,7 @@ describe("Crear Experiencia validaciones de datos", () => {
 		cy.contains("Porfavor llena los campos requeridos.").should("be.visible");
 
 		cy.getDataCy("subir-portada-exp").attachFile("../assets/imagenPrueba.jpg");
-        cy.wait(1000); // Esperar a que cierre el snackbar
+        cy.wait(3000); // Esperar a que cierre el snackbar
 		cy.contains("CONTINUAR").click();
 		cy.contains("Porfavor llena los campos requeridos.").should("not.exist");
 	});
