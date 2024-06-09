@@ -2,11 +2,6 @@ import "cypress-localstorage-commands";
 
 describe('Admin Page ModalInfo Tests', () => {
     beforeEach(() => {
-        cy.loginWith("admin", "admin");
-
-        const now = new Date(2024, 5, 7, 12, 0, 0);
-        cy.clock(now.getTime(), ['Date']);
-
         cy.intercept(
             'GET',
             "/salas",
@@ -70,6 +65,24 @@ describe('Admin Page ModalInfo Tests', () => {
         )
             .as('getReservacionSingle1');
 
+        cy.intercept(
+            'POST',
+            "/reservaciones/cancelar",
+            {}
+        )
+            .as('cancelarReservacion');
+
+        cy.intercept(
+            'POST',
+            "/usuarios/cambiarPrioridad",
+            {}
+        )
+            .as('cambiarPrioridad');
+
+        const now = new Date(2024, 5, 7, 12, 0, 0);
+        cy.clock(now.getTime(), ['Date']);
+
+        cy.loginWith("admin", "admin");
         cy.visit('/admin');
     });
 
@@ -96,9 +109,9 @@ describe('Admin Page ModalInfo Tests', () => {
         })
 
         it('Revisar información del primer modal', () => {
-            cy.get('[data-cy="item-cronograma-1"]').click();
+            cy.getDataCy("item-cronograma-1").click();
             cy.wait('@getReservacion1');
-            cy.get('[data-cy="modal-reserv-info"]').within(() => {
+            cy.getDataCy("modal-reserv-info").within(() => {
                 cy.contains('Christopher Gabriel Pedraza Pohlenz');
                 cy.contains('A01177767');
                 cy.contains('No se han solicitado materiales');
@@ -107,14 +120,14 @@ describe('Admin Page ModalInfo Tests', () => {
                 cy.contains('12:00 a 14:00');
             });
             cy.get('body').click({ force: true });
-            cy.get('[data-cy="modal-reserv-info"]').should('not.exist');
+            cy.getDataCy("modal-reserv-info").should('not.exist');
         })
 
         it('Revisar información del segundo modal', () => {
-            cy.get('[data-cy="item-cronograma-2"]').click();
+            cy.getDataCy("item-cronograma-2").click();
             cy.wait('@getReservacion2');
-            cy.get('[data-cy="modal-reserv-info"]').should('be.visible');
-            cy.get('[data-cy="modal-reserv-info"]').within(() => {
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+            cy.getDataCy("modal-reserv-info").within(() => {
                 cy.contains('Roberto González Reyes');
                 cy.contains('A00833852');
                 cy.contains('Electric Garage - Mesa 2');
@@ -133,46 +146,104 @@ describe('Admin Page ModalInfo Tests', () => {
         })
 
         it('Marcar algunos materiales como preparados', () => {
-            cy.get('[data-cy="item-cronograma-2"]').click();
+            cy.getDataCy("item-cronograma-2").click();
             cy.wait('@getReservacion2');
-            cy.get('[data-cy="modal-reserv-info"]').should('be.visible');
-            cy.get('[data-cy="modal-reserv-info"]').contains("2 - Laptop Gamer").click();
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+            cy.getDataCy("modal-reserv-info").contains("2 - Laptop Gamer").click();
             cy.wait('@changeEstatus');
-            cy.get('[data-cy="modal-reserv-info"]').contains("1/2");
+            cy.getDataCy("modal-reserv-info").contains("1/2");
             cy.wait('@getReservacionSingle1');
 
             const azul = 'rgb(96, 161, 220)';
-            cy.get('[data-cy="item-cronograma-2"]').should('have.css', 'background-color', azul);
+            cy.getDataCy("item-cronograma-2").should('have.css', 'background-color', azul);
         });
 
         it('Marcar todos los materiales como preparados', () => {
-            cy.get('[data-cy="item-cronograma-2"]').click();
+            cy.getDataCy("item-cronograma-2").click();
             cy.wait('@getReservacion2');
-            cy.get('[data-cy="modal-reserv-info"]').should('be.visible');
-            cy.get('[data-cy="modal-reserv-info"]').within(() => {
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+            cy.getDataCy("modal-reserv-info").within(() => {
                 cy.contains("2 - Laptop Gamer").click()
                 cy.contains("1 - Surface Pro").click()
             });
 
             cy.wait('@changeEstatus');
-            cy.pause();
-            cy.get('[data-cy="modal-reserv-info"]').contains("2/2");
+            cy.getDataCy("modal-reserv-info").contains("2/2");
             cy.wait('@getReservacionSingle1');
             // TODO poder revisar el color verde
         });
     });
 
-    describe.only("Cancelar reservación", () => {
+    describe("Cancelar reservación", () => {
         beforeEach(() => {
             cy.wait(['@getReservacionesCronograma', '@getSalasCronograma', '@getMesas', '@getEstatus', '@getSalas']);
         });
 
         it("Cancelar reservación pero siempre no", () => {
-            cy.get('[data-cy="item-cronograma-2"]').click();
+            cy.getDataCy("item-cronograma-2").click();
             cy.wait('@getReservacion2');
-            cy.get('[data-cy="modal-reserv-info"]').should('be.visible');
-            cy.get('[data-cy="cancelar-reserva"]').click();
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+            cy.getDataCy("cancelar-reserva-btn").click();
+            cy.getDataCy("modal-cancelar-reserv").should("be.visible");
+            cy.getDataCy("no-cancelar-reserva-btn").click();
+            cy.getDataCy("modal-cancelar-reserv").should("not.exist");
+            cy.getDataCy("modal-reserv-info").should("be.visible");
         });
+
+        it("Cancelar reservación", () => {
+            cy.getDataCy("item-cronograma-2").click();
+            cy.wait('@getReservacion2');
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+
+            cy.getDataCy("cancelar-reserva-btn").click();
+            cy.getDataCy("modal-cancelar-reserv").should("be.visible");
+
+            cy.getDataCy("confirmar-cancelar-reserva-btn").click();
+            cy.wait('@cancelarReservacion');
+
+            cy.getDataCy("modal-reserv-info").should('not.exist');
+            cy.getDataCy("modal-cancelar-reserv").should("not.exist");
+            cy.getDataCy("item-cronograma-2").should("not.exist");
+        });
+    });
+
+    describe("Penalizar reservación", () => {
+        beforeEach(() => {
+            cy.wait(['@getReservacionesCronograma', '@getSalasCronograma', '@getMesas', '@getEstatus', '@getSalas']);
+        });
+
+        it("Penalizar pero siempre no", () => {
+            cy.getDataCy("item-cronograma-2").click();
+            cy.wait('@getReservacion2');
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+
+            cy.getDataCy("penalizar-btn").click();
+            cy.getDataCy("modal-penalizar").should("be.visible");
+
+            cy.getDataCy("no-penalizar-btn").click();
+            cy.getDataCy("modal-penalizar").should("not.exist");
+            cy.getDataCy("modal-reserv-info").should("be.visible");
+        })
+
+        it("Penalizar con y sin motivo", () => {
+            cy.getDataCy("item-cronograma-2").click();
+            cy.wait('@getReservacion2');
+            cy.getDataCy("modal-reserv-info").should('be.visible');
+
+            cy.getDataCy("penalizar-btn").click();
+            cy.getDataCy("modal-penalizar").should("be.visible");
+
+            cy.getDataCy("confirmar-penalizar-btn").should("be.disabled");
+
+            cy.getDataCy("select-motivo").click();
+            cy.getDataCy("motivo-item-1").click();
+            cy.getDataCy("modal-penalizar").contains("Daño a equipo");
+
+            cy.getDataCy("confirmar-penalizar-btn").should("not.be.disabled");
+            cy.getDataCy("confirmar-penalizar-btn").click();
+            cy.wait('@cambiarPrioridad');
+            cy.getDataCy("modal-penalizar").should("not.exist");
+        })
     });
 
 });
