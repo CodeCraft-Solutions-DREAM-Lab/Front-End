@@ -72,6 +72,7 @@ const ModalCancelarReserv = ({
             hideCloseButton={true}
             isDismissable={false}
             backdrop="blur"
+            data-cy="modal-cancelar-reserv"
         >
             <ModalContent className="p-3">
                 {() => (
@@ -98,6 +99,7 @@ const ModalCancelarReserv = ({
                                 className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 mr-16 bg-white cursor-pointer border-4 border-[#1bac55] rounded-full font-karla font-bold text-lg text-[#1bac55] uppercase hover:bg-[#1bac55] hover:border-[#1bac55]  hover:text-white"
                                 onClick={handleOnClose}
                                 disabled={isLoading}
+                                data-cy="no-cancelar-reserva-btn"
                             >
                                 NO, VOLVER
                             </Button>
@@ -105,6 +107,7 @@ const ModalCancelarReserv = ({
                                 className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 bg-white cursor-pointer border-4 border-[#ac3e1b] rounded-full font-karla font-bold text-lg text-[#ac3e1b] uppercase hover:bg-[#ac3e1b] hover:border-[#ac3e1b] hover:text-white"
                                 onClick={handleCancelReserv}
                                 disabled={isLoading}
+                                data-cy="confirmar-cancelar-reserva-btn"
                             >
                                 SÍ, CANCELAR
                             </Button>

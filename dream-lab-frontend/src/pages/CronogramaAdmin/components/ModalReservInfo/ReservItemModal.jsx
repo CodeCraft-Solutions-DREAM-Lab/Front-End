@@ -52,6 +52,7 @@ function ReservItemModal(props) {
 
 		get("reservaciones/cronograma/" + props.reservId)
 			.then((response) => {
+
 				const horaInicio = new Date(response.horaInicio);
 				horaInicio.setHours(horaInicio.getHours() + 6);
 				const horaFin = new Date(horaInicio);
@@ -133,6 +134,7 @@ function ReservItemModal(props) {
 				onClose={props.onClose}
 				hideCloseButton={false}
 				backdrop="opaque"
+				data-cy="modal-reserv-info"
 			>
 				<ModalContent className="p-3">
 					{() => (

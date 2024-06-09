@@ -39,56 +39,20 @@ const SolicitedMatsListModal = ({
 
             const newItem = await get("reservaciones/cronogramaSingle/" + clickedItem.idReservacion);
 
-            console.log("newItem: ", newItem);
-
             const newItemsArray = [...items];
             const replaceIndx1 = newItemsArray.findIndex((it) => it.id == newItem.id);
             newItemsArray[replaceIndx1].estatusMateriales = newItem.estatusMateriales;
-            // newItemsArray[replaceIndx1].key = newItem.id+100;
-            console.log("newItemsArray: ", newItemsArray);
             setItems(newItemsArray);
 
             const newFilteredItemsArray = [...filteredItems];
             const replaceIndx2 = newFilteredItemsArray.findIndex((it) => it.id == newItem.id);
             newFilteredItemsArray[replaceIndx2].estatusMateriales = newItem.estatusMateriales;
-            // newItemsArray[replaceIndx2].key = newItem.id+100;
-            console.log("newFilteredItemsArray: ", newFilteredItemsArray);
             setFilteredItems(newFilteredItemsArray);
-
-            // const newFilteredItemsArray = filteredItems.map((it) => {
-            //     if (it.id == newItem.id) {
-            //         return {
-            //             ...it,
-            //             estatusMateriales: newItem.estatusMateriales
-            //         };
-            //     }
-            //     return it;
-            // });
-            // setFilteredItems(newFilteredItemsArray);
 
             setClickedItem(null);
         };
 
         makeCalls();
-
-        // if (!clickedItem) return;
-        // console.log("Selected items: ", selectedItems);
-        // console.log("Clicked: ", clickedItem);
-
-        // const isItemSelected = selectedItems.includes(clickedItem.name);
-        // console.log("Is item selected: ", isItemSelected);
-
-        // const res = post("reservaciones-materiales/changeEstatus",
-        //     {
-        //         idReservacion: clickedItem.idReservacion,
-        //         idMaterial: clickedItem.idMaterial,
-        //         estatus: isItemSelected ? 1 : 7
-        //     });
-
-        // console.log(res);
-
-        // const newItem = get("reservaciones/cronogramaSingle/" + clickedItem.idReservacion);
-        // console.log(newItem);
 
     }, [selectedItems]);
 
@@ -113,26 +77,6 @@ const SolicitedMatsListModal = ({
 
     const handleCheckboxClick = async (item) => {
         setClickedItem(item);
-        console.log(item);
-        console.log(selectedItems);
-        // console.log("item:");
-        // console.log(item);
-        // console.log("selectedItems:");
-        // console.log(selectedItems);
-
-        // const isItemSelected = selectedItems.includes(item.name);
-
-        // const res = await post("reservaciones-materiales/changeEstatus",
-        //     {
-        //         idReservacion: item.idReservacion,
-        //         idMaterial: item.idMaterial,
-        //         estatus: isItemSelected ? 1 : 7
-        //     });
-
-        // console.log(res);
-
-        // const newItem = await get("reservaciones/cronogramaSingle/" + item.idReservacion);
-        // console.log(newItem);
     };
 
     return (
