@@ -80,7 +80,7 @@ function AgregarPortada({ onInfoChange }) {
 						backgroundColor: "rgba(0, 0, 0, 0.228)",
 					}}
 				>
-					<input {...getInputProps()} />
+					<input {...getInputProps()} data-cy="subir-portada-exp"/>
 					{isDragActive ? (
 						<p>Suelta tu imagen aquí...</p>
 					) : (

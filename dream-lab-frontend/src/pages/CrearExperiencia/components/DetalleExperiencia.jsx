@@ -56,7 +56,7 @@ function DetalleExperiencia({ onInfoChange }) {
                         maxLength={300}
                         value={description}
                         className="input-desc-exp"
-                        data-cy="input-dexc-exp"
+                        data-cy="input-desc-exp"
                         minRows={5}
                         maxRows={5}
                     />
@@ -73,6 +73,7 @@ function DetalleExperiencia({ onInfoChange }) {
                             value={fechaInicio}
                             onChange={handleFechaInicioChange}
                             aria-label="Selector de fecha"
+                            data-cy="input-fecha-exp"
                         />
                     </I18nProvider>
                 </GlassCard>

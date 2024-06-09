@@ -245,5 +245,4 @@ describe('Admin Page ModalInfo Tests', () => {
             cy.getDataCy("modal-penalizar").should("not.exist");
         })
     });
-
 });
