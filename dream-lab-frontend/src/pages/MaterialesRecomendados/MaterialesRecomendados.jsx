@@ -1,5 +1,4 @@
 import "./MaterialesRecomendados.css";
-import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
 import { Select, SelectItem} from "@nextui-org/react";
@@ -48,7 +47,7 @@ function MaterialesRecomendados() {
 
 	useEffect(() => {
 		if (salasBD.length > 0 && salasBD[selectedRoom]) {
-			post("materiales/bySala", { idSala: salasBD[selectedRoom].idSala })
+			post("materiales/bySala", { idSala: salasBD[selectedRoom].idSala - 1 }) // Se pone un -1 porque el array empieza en 0 y no en 1
 				.then((result) => {
 					setData(result);
 					setIsLoading(false);
@@ -90,8 +89,7 @@ function MaterialesRecomendados() {
 				if (materialToAdd) {
 					updatedSelectedMaterials.push({
 						materialId: materialId,
-						quantity: newQuantity,
-						image: materialToAdd.image // Include the image property
+						quantity: newQuantity
 					});
 				}
 			}
