@@ -41,11 +41,11 @@ function StudentViewStatusBar() {
     };
 
     return (
-        <div className={`svsb-main-container ${isExpanded ? "expanded" : ""}`}>
+        <div className={`svsb-main-container ${isExpanded ? "expanded" : ""}`} >
             <div className="svsb-content-container">
                 <div className="svsb-col svsb-col-title">
                     {isExpanded ? (
-                        <span className="svsb-title">Vista de estudiante</span>
+                        <span className="svsb-title" data-cy="vista-estudiante-title">Vista de estudiante</span>
                     ) : null}
                 </div>
                 <div className="svsb-col svsb-col-toggle-button">
@@ -54,6 +54,7 @@ function StudentViewStatusBar() {
                         onPress={toggleExpand}
                         isIconOnly
                         disableRipple
+                        data-cy="vista-estudiante-toggle-button"
                     >
                         <FontAwesomeIcon
                             icon={isExpanded ? faChevronDown : faChevronUp}
@@ -65,6 +66,7 @@ function StudentViewStatusBar() {
                         <Button
                             className="svsb-exit-button"
                             onPress={handleExit}
+                            data-cy="vista-estudiante-exit-button"
                         >
                             Salir de la vista de estudiante
                         </Button>

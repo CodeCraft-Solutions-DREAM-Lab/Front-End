@@ -1,11 +1,8 @@
 import "./MaterialesRecomendados.css";
-import NavBar from "../../GlobalComponents/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import MaterialCard from "./components/MaterialCard/MaterialCard";
 import { Select, SelectItem} from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-//import CircularProgress from "@mui/material/CircularProgress";
+import { useEffect, useState } from "react";
 
 import {
 	saveToSessionStorage,
@@ -15,7 +12,6 @@ import {
 import { get, post } from "../../utils/ApiRequests";
 
 function MaterialesRecomendados() {
-	const navigate = useNavigate();
 	const [selectedMaterials, setSelectedMaterials] = useState(() => {
 		if (
 			existsInSessionStorage("materials") &&
@@ -51,7 +47,7 @@ function MaterialesRecomendados() {
 
 	useEffect(() => {
 		if (salasBD.length > 0 && salasBD[selectedRoom]) {
-			post("materiales/bySala", { idSala: salasBD[selectedRoom].idSala })
+			post("materiales/bySala", { idSala: salasBD[selectedRoom].idSala - 1 }) // Se pone un -1 porque el array empieza en 0 y no en 1
 				.then((result) => {
 					setData(result);
 					setIsLoading(false);
@@ -93,8 +89,7 @@ function MaterialesRecomendados() {
 				if (materialToAdd) {
 					updatedSelectedMaterials.push({
 						materialId: materialId,
-						quantity: newQuantity,
-						image: materialToAdd.image // Include the image property
+						quantity: newQuantity
 					});
 				}
 			}
@@ -124,8 +119,6 @@ function MaterialesRecomendados() {
 
 	return (
 		<>
-			<NavBar view="soloPerfil" autoHide={false} />
-
 			<div className="matrec-main-container">
 				<div className="matrec-top-section">
 					{/* Div to display selected materials */}

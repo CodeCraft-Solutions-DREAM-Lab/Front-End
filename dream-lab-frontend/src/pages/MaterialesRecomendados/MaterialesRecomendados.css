@@ -2,7 +2,6 @@
 	position: relative;
 	width: 100%;
 	height: fit-content;
-	padding-top: 18vh;
 }
 
 .matrec-top-section {
@@ -101,7 +100,7 @@
 	justify-content: left !important; /* Align cards to the start of the container */
 	overflow-y: auto; /* Enable vertical scroll if needed */
 	min-width: 80vw;
-	height: 55vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
+	height: 46vh; /* Set the height dynamically to half of the viewport height minus any additional padding */
 	padding: 0 1%; /* Added padding to prevent cards from touching the edges */
 }
 

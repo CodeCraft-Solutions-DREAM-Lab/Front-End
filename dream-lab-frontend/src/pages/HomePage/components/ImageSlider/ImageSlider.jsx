@@ -12,33 +12,18 @@ const TWEEN_FACTOR_BASE = 0.1; // The higher the number, the more the parallax e
 
 const ImageSlider = (props) => {
     const dispatch = useDispatch();
-    const { mostrarDetalles } = props;
+    const { mostrarDetalles, salasBloqueadas } = props;
     const [response, setResponse] = useState([]);
     const [bdImages, setBdImages] = useState([]);
 
     function handleClick(id, tipo) {
-        if (tipo === "sala") {
-            dispatch(
-                setSelectedItem({
-                    id: id,
-                    type: tipo,
-                })
-            );
-        } else if (tipo === "experiencia") {
-            dispatch(
-                setSelectedItem({
-                    id: id,
-                    type: tipo,
-                })
-            );
-        } else {
-            dispatch(
-                setSelectedItem({
-                    id: id,
-                    type: tipo,
-                })
-            );
-        }
+
+        dispatch(
+            setSelectedItem({
+                id: id,
+                type: tipo,
+            })
+        );
 
         mostrarDetalles();
         // dispatch(setExperiencia(idExperiencia));
@@ -135,6 +120,7 @@ const ImageSlider = (props) => {
 
                 res = res.map((item) => ({
                     id: item.idExperiencia ? item.idExperiencia : item.idSala,
+                    idSala: item.idSala,
                     // Revisa si tiene campo de url (caso de recomendaciones), en caso contrario revisa si tiene el campo de url de experiencia, si no entonces toma el que es de sala
                     url: item.URL
                         ? item.URL
@@ -186,7 +172,9 @@ const ImageSlider = (props) => {
                                 <div className="embla__parallax__layer">
                                     <img
                                         data-cy="imagen-experiencia"
-                                        className="embla__slide__img embla__parallax__img"
+                                        className={`embla__slide__img embla__parallax__img ${
+                                            salasBloqueadas.includes(image.idSala) ? "blocked" : ""
+                                        }`}
                                         src={image.url}
                                         alt="Your alt text"
                                         onClick={() =>
@@ -198,7 +186,13 @@ const ImageSlider = (props) => {
                                         }
                                     />
                                 </div>
+                                {salasBloqueadas.includes(image.idSala) && (
+                                        <div className="overlay">
+                                            <span>No <br></br> Disponible</span>
+                                        </div>
+                                    )}
                             </div>
+
                             <p className="slide-title">{image.title}</p>
                         </div>
                     ))}

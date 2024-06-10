@@ -1,0 +1,20 @@
+[
+        {
+            "id": 1,
+            "group": 2,
+            "estatus": 3,
+            "estatusMateriales": 1,
+            "title": "Christopher Gabriel Pedraza Pohlenz",
+            "start_time": "2024-06-07T12:00:00.000Z",
+            "end_time": "2024-06-07T15:00:00.000Z"
+        },
+        {
+            "id": 2,
+            "group": 3,
+            "estatus": 3,
+            "estatusMateriales": 7,
+            "title": "Roberto González Reyes",
+            "start_time": "2024-06-07T09:00:00.000Z",
+            "end_time": "2024-06-07T10:00:00.000Z"
+        }
+    ]

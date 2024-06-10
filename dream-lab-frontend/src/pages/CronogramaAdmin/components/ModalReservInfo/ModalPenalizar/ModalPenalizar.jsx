@@ -29,6 +29,8 @@ const ModalPenalizar = (
     const [clickedItemIndx, setClickedItemIndx] = useState(null);
 
     const handleOnClose = () => {
+        setIsMotivoSelected(false);
+        setClickedItemIndx(null);
         setIsOpen(false);
     };
 
@@ -38,7 +40,7 @@ const ModalPenalizar = (
             setIsLoading(true);
 
             await post(
-                "usuarios/cambiarPrioridad", 
+                "usuarios/cambiarPrioridad",
                 {
                     idUsuario: idUsuario,
                     puntos: -motivos[clickedItemIndx].penalizacion,
@@ -97,6 +99,7 @@ const ModalPenalizar = (
             hideCloseButton={true}
             isDismissable={false}
             backdrop="blur"
+            data-cy="modal-penalizar"
         >
             <ModalContent className="MP-modal-content-container">
                 {() => (
@@ -114,12 +117,14 @@ const ModalPenalizar = (
                                 variant="bordered"
                                 className="MP-select"
                                 placeholder="Selecciona un motivo"
+                                data-cy="select-motivo"
                             >
                                 {motivos.map((motivo, index) => (
                                     <SelectItem
                                         key={index}
                                         value={motivo.descr}
-                                        onClick={() => {handleSelectMotivo(index)}}
+                                        onClick={() => { handleSelectMotivo(index) }}
+                                        data-cy={`motivo-item-${index}`}
                                     >
                                         {motivo.label}
                                     </SelectItem>
@@ -136,6 +141,7 @@ const ModalPenalizar = (
                                     // className="MP-close-btn"
                                     onClick={handleOnClose}
                                     disabled={isLoading}
+                                    data-cy="no-penalizar-btn"
                                 >
                                     NO, VOLVER
                                 </Button>
@@ -144,6 +150,7 @@ const ModalPenalizar = (
                                     // className="MP-penalizar-btn"
                                     onClick={handlePenalizar}
                                     disabled={isLoading || !isMotivoSelected}
+                                    data-cy="confirmar-penalizar-btn"
                                 >
                                     SÍ, PENALIZAR
                                 </Button>

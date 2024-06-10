@@ -20,7 +20,7 @@ function WarningModal(props) {
             onClose={props.onClose}
             hideCloseButton={true}
             backdrop="blur"
-            data-cy="primer-recordatorio-sala"
+            data-cy="recommended-material-missing-warning"
         >
             <ModalContent className="p-3">
                 {() => (
@@ -64,6 +64,7 @@ function WarningModal(props) {
                                 className="rounded-full px-12 py-2 bg-[#1bac55] border-[#1bac55] font-bold hover:bg-[#11bd56] hover:text-white border-2"
                                 color="danger"
                                 onPress={props.onClose}
+                                data-cy="btn-no-regresar"
                             >
                                 No, regresar
                             </Button>
@@ -71,6 +72,7 @@ function WarningModal(props) {
                                 className="rounded-full px-12 py-2 bg-[#FFFFFF] border-[#8a8a8a] font-bold hover:bg-[#878787] hover:text-white border-2"
                                 color="success"
                                 onPress={props.onOk}
+                                data-cy="btn-si-continuar"
                             >
                                 Sí, continuar
                             </Button>

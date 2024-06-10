@@ -1,0 +1,27 @@
+
+{
+    "studentName": "Roberto González Reyes",
+    "studentMat": "A00833852",
+    "salaName": "Electric Garage",
+    "reservDate": "2024-06-07T09:00:00.000Z",
+    "horaInicio": "2024-06-07T09:00:00.000Z",
+    "duracion": 1,
+    "idMesa": 2,
+    "reservItems": [
+        {
+            "idReservacion": 2,
+            "idMaterial": 1,
+            "name": "Laptop Gamer",
+            "quantity": 2,
+            "estatus": 1
+        },
+        {
+            "idReservacion": 2,
+            "idMaterial": 2,
+            "name": "Surface Pro",
+            "quantity": 1,
+            "estatus": 7
+        }
+    ],
+    "selectedItems": []
+}

@@ -49,13 +49,22 @@ function SeleccionMaterial() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isFirstReminderOpen, setIsFirstReminderOpen] = useState(false);
 
+    let idExperiencia = 0;
+    if (existsInSessionStorage("idExperiencia")) {
+        idExperiencia = getFromSessionStorage("idExperiencia");
+    }
+    else {
+        idExperiencia = 0;
+    }
+
     useEffect(() => {
         const date = new Date(getFromSessionStorage("fecha"));
+        console.log("idExperiencia: ",idExperiencia);
 
         // Parametros Stored Procedure
         const params = {
             idSala: getFromSessionStorage("idSala"),
-            idExperiencia: getFromSessionStorage("idExperiencia"),
+            idExperiencia: idExperiencia,
             fecha: date.toISOString(),
             horaInicio: getFromSessionStorage("horaInicioIsoString"),
             duracion: parseInt(getFromSessionStorage("duration")),
@@ -182,7 +191,6 @@ function SeleccionMaterial() {
                     {/* Below is the modal in case there are recommended items that should be selected but haven't been selected */}
 
                     <WarningModal
-                        data-cy="primer-recordatorio-sala"
                         isOpen={isFirstReminderOpen}
                         size="2xl"
                         onClose={() => setIsFirstReminderOpen(false)}
@@ -212,7 +220,7 @@ function SeleccionMaterial() {
                             ))}
                         </div>
                     </div>
-                    <div className="button-container-sm">
+                    <div className="button-container-sm" data-cy="select-material-accept-btn">
                         <RoundedButton text="ACEPTAR" onClick={handleNextButtonClick} />
                     </div>
                 </div>

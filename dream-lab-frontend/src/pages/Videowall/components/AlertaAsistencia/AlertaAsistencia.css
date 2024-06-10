@@ -1,0 +1,130 @@
+.mensaje-bienvenida-videowall-asistencia{
+  position: fixed; /* Posición fija para que se mantenga en la ventana */
+  bottom: 0; /* Alinear en la parte inferior */
+  left: 0; /* Alinear a la izquierda */
+  width: 9vw;
+  height: 37vh;
+  margin-left: 0vw;
+  margin-bottom: 0.1vw;
+  padding: 0.9%;
+  background-color: white;
+  border: 1px solid #e84ea0;
+  border-radius: 55px;
+  font-family: "Karla", sans-serif;
+  color: black;
+  animation: appearFromCenter 0.5s ease forwards; /* Aplicar animación */
+  z-index: 20;
+}
+
+.confetti-alerta-asistencia{
+  margin-left: -15vw;
+}
+
+.checkmark-asistencia{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -45vh;
+  width: 9vw;
+  height: 15vh;
+  margin-top: 9vh;
+}
+
+.titulo-mensaje-bienvenida-videowall-asistencia {
+    font-weight: bold;
+    font-size: 0.6vw;
+    width: 10vw;
+    height: 38vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 11.5vh;
+    padding-left: 0vw;
+    padding-right: 0vw;
+    line-height: 97%;
+    text-align: center;
+    margin-left: 0.35vw;
+}
+
+.alerta-videowall-primera-mitad-asistencia{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Agrega este estilo en tu archivo CSS */
+.mensaje-bienvenida-videowall-asistencia {
+  /* Otros estilos aquí */
+  transition: opacity 0.5s ease; /* Agregar transición de opacidad */
+}
+
+.mensaje-bienvenida-videowall-asistencia.cerrado {
+  opacity: 0; /* Hacer que el componente sea transparente cuando esté cerrado */
+}
+
+.titulo-mensaje-videowall-asistencia-confirmada{
+  font-weight: bold;
+  font-size: 0.6vw;
+  width: 10vw;
+  height: 0vh;
+  margin-top: 3vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  line-height: 95%;
+  text-align: center;
+  margin-left: 0.35vw;
+}
+
+.salida-animada {
+  animation: salida 0.3s ease-out forwards;
+  border-radius: 50%; /* Hace que el componente tenga bordes redondeados */
+}
+
+@keyframes salida {
+  0% {
+      transform: scale(1);
+      border-radius: 0%; /* Comienza con bordes cuadrados */
+  }
+  100% {
+      transform: scale(0);
+      border-radius: 50%; /* Termina con bordes redondeados, creando un círculo */
+  }
+}
+
+@keyframes appearFromCenter {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+  @media (max-width: 2000px) {
+
+    .mensaje-bienvenida-videowall-asistencia{
+      position: fixed; /* Posición fija para que se mantenga en la ventana */
+      bottom: 0; /* Alinear en la parte inferior */
+      left: 0; /* Alinear a la izquierda */
+      width: 16%;
+      height: 30%;
+      font-size: 15px;
+      margin-left: 1vw;
+      margin-bottom: 1vw;
+      padding: 1.5%;
+      background-color: white;
+      border-radius: 35px;
+      font-family: "Karla", sans-serif;
+      color: black;
+      display: none;
+    }
+  }
+
+  
+/*Pantalla regular (computadora)*/
+@media (max-height: 700px) {
+  .mensaje-bienvenida-videowall-asistencia{
+    display: none;
+  }
+}
