@@ -60,7 +60,6 @@ function GestionSalas(props) {
             onClose={props.onClose}
             hideCloseButton={true}
             backdrop="opaque"
-            data-cy="undefined"
         >
             <ModalContent className="p-3">
                 {() => (
