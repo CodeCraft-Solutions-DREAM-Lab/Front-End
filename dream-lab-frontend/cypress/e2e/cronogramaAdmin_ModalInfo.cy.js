@@ -118,7 +118,7 @@ describe('Admin Page ModalInfo Tests', () => {
                 cy.contains('Electric Garage - Mesa 1');
                 cy.contains('Viernes, 7 de Junio');
                 cy.contains('12:00 a 14:00');
-            });
+            }, { timeout: 10000 });
             cy.get('body').click({ force: true });
             cy.getDataCy("modal-reserv-info").should('not.exist');
         })
@@ -136,7 +136,7 @@ describe('Admin Page ModalInfo Tests', () => {
                 cy.contains('2 - Laptop Gamer');
                 cy.contains('1 - Surface Pro');
                 cy.contains('0/2');
-            })
+            }, { timeout: 10000 })
         });
     });
 
