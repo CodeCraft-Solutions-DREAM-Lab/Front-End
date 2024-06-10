@@ -38,19 +38,19 @@ describe("Admin Page Tests", () => {
         cy.loginWith("admin", "admin");
 
         cy.intercept("GET", "/salas", {
-            fixture: "salas.json",
+            fixture: "cronogramaAdmin_ModalInfo/salas.json",
         }).as("getSalas");
         cy.intercept("GET", "/salas/cronograma", {
-            fixture: "salas_cronograma.json",
+            fixture: "cronogramaAdmin_ModalInfo/salas_cronograma.json",
         }).as("getSalasCronograma");
         cy.intercept("GET", "/reservaciones/cronograma", {
-            fixture: "reservaciones_cronograma.json",
+            fixture: "cronogramaAdmin_ModalInfo/reservaciones_cronograma.json",
         }).as("getReservacionesCronograma");
         cy.intercept("GET", "/mesas", {
-            fixture: "mesas.json",
+            fixture: "cronogramaAdmin_ModalInfo/mesas.json",
         }).as("getMesas");
         cy.intercept("GET", "/estatus", {
-            fixture: "estatus.json",
+            fixture: "cronogramaAdmin_ModalInfo/estatus.json",
         }).as("getEstatus");
 
         cy.visit("/admin");
