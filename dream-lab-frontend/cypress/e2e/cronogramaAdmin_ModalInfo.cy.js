@@ -5,49 +5,49 @@ describe('Admin Page ModalInfo Tests', () => {
         cy.intercept(
             'GET',
             "/salas",
-            { fixture: 'cronogramaAdmin_ModalInfo/salas.json' }
+            { fixture: '/salas.json' }
         )
             .as('getSalas');
 
         cy.intercept(
             'GET',
             "/salas/cronograma"
-            , { fixture: 'cronogramaAdmin_ModalInfo/salas_cronograma.json' }
+            , { fixture: '/salas_cronograma.json' }
         )
             .as('getSalasCronograma');
 
         cy.intercept(
             'GET',
             "/reservaciones/cronograma"
-            , { fixture: 'cronogramaAdmin_ModalInfo/reservaciones_cronograma.json' }
+            , { fixture: '/reservaciones_cronograma.json' }
         )
             .as('getReservacionesCronograma');
 
         cy.intercept(
             'GET',
             "/mesas",
-            { fixture: 'cronogramaAdmin_ModalInfo/mesas.json' }
+            { fixture: '/mesas.json' }
         )
             .as('getMesas');
 
         cy.intercept(
             'GET',
             "/estatus",
-            { fixture: 'cronogramaAdmin_ModalInfo/estatus.json' }
+            { fixture: '/estatus.json' }
         )
             .as('getEstatus');
 
         cy.intercept(
             'GET',
             "/reservaciones/cronograma/1",
-            { fixture: 'cronogramaAdmin_ModalInfo/reservaciones_cronograma_1.json' }
+            { fixture: '/reservaciones_cronograma_1.json' }
         )
             .as('getReservacion1');
 
         cy.intercept(
             'GET',
             "/reservaciones/cronograma/2",
-            { fixture: 'cronogramaAdmin_ModalInfo/reservaciones_cronograma_2.json' }
+            { fixture: '/reservaciones_cronograma_2.json' }
         )
             .as('getReservacion2');
 
@@ -61,7 +61,7 @@ describe('Admin Page ModalInfo Tests', () => {
         cy.intercept(
             'GET',
             "/reservaciones/cronogramaSingle/2",
-            { fixture: 'cronogramaAdmin_ModalInfo/reservaciones_cronograma_single_2.json' }
+            { fixture: '/reservaciones_cronograma_single_2.json' }
         )
             .as('getReservacionSingle1');
 
