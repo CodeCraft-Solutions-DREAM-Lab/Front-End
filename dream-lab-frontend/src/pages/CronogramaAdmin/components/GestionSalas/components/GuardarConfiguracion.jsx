@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import {
     Modal,
     ModalContent,
@@ -47,7 +47,6 @@ function GuardarConfiguracion(props) {
         const newSalasArray = [...props.salas];
         props.setSalas(newSalasArray);
 
-        // props.updateSalasAfterSave();
         setIsModalConfirmacionOpen(true);
     };
 
@@ -83,7 +82,7 @@ function GuardarConfiguracion(props) {
                             <Button className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 mr-16 bg-white cursor-pointer border-4 border-[#ac3e1b] rounded-full font-karla font-bold text-lg text-[#ac3e1b] uppercase hover:bg-[#ac3e1b] hover:border-[#ac3e1b] hover:text-white" 
                             onClick={props.onClose}> NO, VOLVER </Button>
                             <Button className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 bg-white cursor-pointer border-4 border-[#1bac55] rounded-full font-karla font-bold text-lg text-[#1bac55] uppercase hover:bg-[#1bac55] hover:border-[#1bac55]  hover:text-white"
-                            onClick={handleSave}> Sí, GUARDAR </Button>
+                            onClick={handleSave} data-cy="boton-guardar-disponibilidad"> Sí, GUARDAR </Button>
                         </ModalFooter>
                     </>
                 )}
@@ -99,7 +98,6 @@ GuardarConfiguracion.propTypes = {
     isOpen: propTypes.bool,
     closeAll: propTypes.func,
     onClose: propTypes.func,
-    // updateSalasAfterSave: propTypes.func,
 };
 
 export default GuardarConfiguracion;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import {
     Modal,
     ModalContent,
@@ -15,17 +15,8 @@ import GuardarConfiguracion from "./components/GuardarConfiguracion";
 import propTypes from "prop-types";
 
 function GestionSalas(props) {
-    // const [salas, setSalas] = useState([]);
     const [isModalGuardarOpen, setIsModalGuardarOpen] = useState(false);
 
-    // useEffect(() => {
-    //     setSalas(
-    //         props.salas.map((sala) => ({
-    //             ...sala,
-    //             clicked: false,
-    //         }))
-    //     );
-    // }, [props.salas]);
 
     const updateSalaState = (id, clicked) => {
         props.setSalas((prevSalas) => {
@@ -52,7 +43,6 @@ function GestionSalas(props) {
 				onClose={() => {
 					setIsModalGuardarOpen(false);
 				}}
-                // updateSalasAfterSave={updateSalasAfterSave}
 			/>
         <Modal
             size='5xl'
@@ -60,7 +50,6 @@ function GestionSalas(props) {
             onClose={props.onClose}
             hideCloseButton={true}
             backdrop="opaque"
-            data-cy="undefined"
         >
             <ModalContent className="p-3">
                 {() => (
