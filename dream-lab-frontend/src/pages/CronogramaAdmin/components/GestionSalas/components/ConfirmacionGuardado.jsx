@@ -31,7 +31,7 @@ function ConfirmacionGuardado(props) {
                         </ModalHeader>
                         <ModalFooter className="justify-center mt-4">
                             <Button className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 bg-white cursor-pointer border-4 border-[#1bac55] rounded-full font-karla font-bold text-lg text-[#1bac55] uppercase hover:bg-[#1bac55] hover:border-[#1bac55]  hover:text-white"
-                            onClick={props.onClose}> CERRAR </Button>
+                            onClick={props.onClose} data-cy="boton-cerrar-confirmacion-disponibilidad"> CERRAR </Button>
                         </ModalFooter>
                     </>
                 )}

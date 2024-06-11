@@ -47,6 +47,9 @@ describe("Pruebas de disponibilidad de salas", () => {
         cy.intercept("POST", "/experiencias/UFs", {
             body: [],
         }).as("postExperienciasUFs");
+        cy.intercept("PUT", "salas/cambiarEstadoSalas", {
+            body: [],
+        }).as("putCambiarEstadoSalas");
         cy.intercept("GET", "/salas/1", {
             body: [],
         }).as("getSala1");
@@ -76,6 +79,70 @@ describe("Pruebas de disponibilidad de salas", () => {
         cy.get(':nth-child(3) > .z-0')
         .should('have.css', 'background-color')
         .and('eq', 'rgb(169, 169, 169)');
-
     });
+
+    it("Desactivar sala", () => {
+        cy.wait("@getSalas");
+        // Presionar a boton para configurar salas
+        cy.clickSpeedDial("Configurar Salas");
+
+        // Cambiar estado de sala "Electric Garage"
+        cy.get(':nth-child(1) > .z-0').click();
+
+        // Revisar que la sala ahora se encuentre bloqueada
+        cy.get(':nth-child(1) > .z-0')
+        .should('have.css', 'background-color')
+        .and('eq', 'rgb(169, 169, 169)');
+
+        // Revisar que se muestre el borde para cambios
+        cy.get(':nth-child(1) > .z-0')
+        .should('have.css', 'border')
+        .and('eq', '4px solid rgb(128, 135, 242)');
+
+        // Guardar configuración y cerrar modales
+        cy.contains("GUARDAR").click();
+        cy.getDataCy("boton-guardar-disponibilidad").click(); 
+        cy.getDataCy("boton-cerrar-confirmacion-disponibilidad").click();
+
+        // Presionar a boton para configurar salas
+        cy.clickSpeedDial("Configurar Salas");
+
+        // Revisar que ahora se encuentre bloqueada
+        cy.get(':nth-child(1) > .z-0')
+        .should('have.css', 'background-color')
+        .and('eq', 'rgb(27, 172, 85)');
+    });
+
+    it("Activar sala", () => {
+        cy.wait("@getSalas");
+        // Presionar a boton para configurar salas
+        cy.clickSpeedDial("Configurar Salas");
+
+        // Cambiar estado de sala "Electric Garage"
+        cy.get(':nth-child(3) > .z-0').click();
+
+        // Revisar que la sala ahora se encuentre disponible
+        cy.get(':nth-child(3) > .z-0')
+        .should('have.css', 'background-color')
+        .and('eq', 'rgb(27, 172, 85)');
+
+        // Revisar que se muestre el borde para cambios
+        cy.get(':nth-child(3) > .z-0')
+        .should('have.css', 'border')
+        .and('eq', '4px solid rgb(128, 135, 242)');
+
+        // Guardar configuración y cerrar modales
+        cy.contains("GUARDAR").click();
+        cy.getDataCy("boton-guardar-disponibilidad").click(); 
+        cy.getDataCy("boton-cerrar-confirmacion-disponibilidad").click();
+
+        // Presionar a boton para configurar salas
+        cy.clickSpeedDial("Configurar Salas");
+
+        // Revisar que ahora se encuentre activada
+        cy.get(':nth-child(3) > .z-0')
+        .should('have.css', 'background-color')
+        .and('eq', 'rgb(169, 169, 169)');
+    });
+
 });
