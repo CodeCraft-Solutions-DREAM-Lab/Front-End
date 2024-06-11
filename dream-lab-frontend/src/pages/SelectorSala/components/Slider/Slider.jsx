@@ -4,7 +4,9 @@ import unaPersona from "src/assets/SelectorSala/onePerson.webp";
 import grupoPersonas from "src/assets/SelectorSala/group.webp";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
 
-function Slider({
+import {Slider, Button} from "@nextui-org/react";
+
+function CustomSlider({
     minimo,
     maximo,
     fetchFreeHoursAgain,
@@ -13,10 +15,6 @@ function Slider({
     const [value, setValue] = useState(
         parseInt(getFromSessionStorage("personas")) || minimo
     );
-
-    // useEffect(() => {
-
-    // }, [value]);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -35,7 +33,7 @@ function Slider({
     }, []);
 
     return (
-        <div className="slider-out" data-cy="slider-container-personas">
+        <div className="Custom-out" data-cy="slider-container-personas">
             <div className="texto-num-personas">
                 <output
                     htmlFor="slider"
@@ -58,8 +56,28 @@ function Slider({
                 />
                 <img className="foto-grupo" src={grupoPersonas} />
             </div>
+            <div className="slider-container-in">
+            {/* <Slider
+                aria-label="Volume"
+                size="lg"
+                color="success"
+                value={value}
+                onChange={setValue}
+                startContent={
+                
+                    <img className="foto-una-persona" src={unaPersona} />
+                
+                }
+                endContent={
+                
+                    <img className="foto-grupo" src={grupoPersonas} />
+                
+                }
+                className="max-w-md"
+            /> */}
+            </div>
         </div>
     );
 }
 
-export default Slider;
+export default CustomSlider;

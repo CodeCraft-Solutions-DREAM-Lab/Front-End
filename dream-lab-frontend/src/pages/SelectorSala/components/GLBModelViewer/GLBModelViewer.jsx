@@ -127,6 +127,7 @@ const GLBModelViewer = ({ modelPath }) => {
         >
             {loading && (
                 <div
+                    // className="SS-model"
                     style={{
                         width: "100%",
                         height: "100%",
@@ -140,7 +141,7 @@ const GLBModelViewer = ({ modelPath }) => {
                 >
                     <img
                         src={modeloPlaceholder}
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
+                        // style={{ maxWidth: "100%", maxHeight: "100%" }}
                     />
                 </div>
             )}
