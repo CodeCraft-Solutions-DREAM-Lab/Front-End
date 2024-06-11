@@ -50,7 +50,7 @@ describe("Probando pantalla de selector de sala", () => {
             ],
         }).as("getHorasLibres");
 
-        cy.intercept("POST", "**/materiales", {}).as("postMateriales");
+        cy.intercept("POST", "/materiales/recomendados", {}).as("postMateriales");
     });
 
     it("Probando nombre entrando con experiencia", () => {

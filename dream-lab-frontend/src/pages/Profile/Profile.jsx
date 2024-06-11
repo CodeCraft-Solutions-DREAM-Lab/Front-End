@@ -353,12 +353,12 @@ function Profile() {
 
                 <div
                     className="boton-informacion-puntos-prioridad"
-                    onClick={openModal}
                 >
                     <img
                         className="foto-boton-info-puntos-prioridad"
                         src={InfoLogo}
                         alt="Información"
+                        onClick={openModal}
                     />
                 </div>
                 
