@@ -344,7 +344,7 @@ function HomePage() {
 						<div className="carousel-container">
 							<h1>RECOMENDACIONES</h1>
 							<ImageSlider
-								api_url={"reservaciones/ultimas"}
+								api_url={"reservaciones/recomendaciones"}
 								request_type="POST"
 								options={OPTIONS}
 								mostrarDetalles={mostrarDetalles}
