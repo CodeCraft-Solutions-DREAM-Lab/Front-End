@@ -97,10 +97,22 @@
 
 @media screen and (max-width: 768px) {
     :root {
-        --swiper-pagination-bullet-size: 2vw;
-        --swiper-pagination-bullet-horizontal-gap: 1vw;
-        --swiper-pagination-bottom: 25%;
+        --swiper-pagination-bullet-size: 3vw;
+        --swiper-pagination-bullet-horizontal-gap: 2vw;
         --swiper-navigation-size: 2rem;
         --swiper-navigation-sides-offset: 2vw;
     }
+}
+
+.swiper-slide {
+    height: 40%;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 40%;
+}
+
+.swiper {
+    height: 0% !important;
 }
