@@ -76,7 +76,7 @@ function GuardarConfiguracion(props) {
                             ¿Estás seguro de que quieres guardar la configuración?
                         </ModalHeader>
                         <ModalBody className="text-[#646464] px-4 mx-24 justify-center text-2xl text-center font-karla font-medium">
-                            Todas las reservaciones activas del día de las salas que deshabilites serán canceladas. 
+                            Todas las reservaciones de las salas que deshabilites serán canceladas. 
                         </ModalBody>
                         <ModalFooter className="justify-center mt-4">
                             <Button className="flex flex-wrap justify-center items-center min-w-48 w-35% h-12 mr-16 bg-white cursor-pointer border-4 border-[#ac3e1b] rounded-full font-karla font-bold text-lg text-[#ac3e1b] uppercase hover:bg-[#ac3e1b] hover:border-[#ac3e1b] hover:text-white" 
