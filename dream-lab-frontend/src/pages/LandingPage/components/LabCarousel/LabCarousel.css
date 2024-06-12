@@ -31,6 +31,12 @@
     height: 5%;
 }
 
+@media screen and (max-width: 768px) {
+    .landing-carousel-logo {
+        max-width: 30px;
+    }
+}
+
 .landing-carousel-title {
     font-size: 3vw;
     font-family: "Kanit", sans-serif;
@@ -39,6 +45,7 @@
     color: white;
 }
 
+
 .landing-carousel-desc {
     font-size: 1.5vw;
     font-family: "Lato", sans-serif;
@@ -46,6 +53,12 @@
     font-weight: 300;
     color: white;
     list-style-type: disc;
+}
+
+@media screen and (max-width: 768px) {
+    .landing-carousel-desc {
+        font-size: 3vw;
+    }
 }
 
 .landing-list-element {
@@ -61,4 +74,33 @@
     height: 40vh !important;
     max-width: 1000px;
     border-radius: 10%;
+}
+
+@media screen and (max-width: 768px) {
+    .landing-carousel-img {
+        width: 20vw;
+        height: 20vh !important;
+    }
+}
+
+:root {
+    --swiper-pagination-color: #FFFFFF;
+    --swiper-pagination-bullet-inactive-color: #D9D9D9;
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    --swiper-pagination-bullet-size: 1vw;
+    --swiper-pagination-bullet-horizontal-gap: 0.5vw;
+    --swiper-pagination-bottom: 2%;
+    --swiper-navigation-size: 3rem;
+    --swiper-navigation-sides-offset: 4vw;
+    --swiper-navigation-color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --swiper-pagination-bullet-size: 2vw;
+        --swiper-pagination-bullet-horizontal-gap: 1vw;
+        --swiper-pagination-bottom: 25%;
+        --swiper-navigation-size: 2rem;
+        --swiper-navigation-sides-offset: 2vw;
+    }
 }
