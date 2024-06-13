@@ -3,8 +3,9 @@ import "./Slider.css";
 import unaPersona from "src/assets/SelectorSala/onePerson.webp";
 import grupoPersonas from "src/assets/SelectorSala/group.webp";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
-
 import {Slider, Button} from "@nextui-org/react";
+import GroupIcon from "src/assets/Icons/GroupIcon";
+import UserIcon from "src/assets/Icons/UserIcon";
 
 function CustomSlider({
     minimo,
@@ -15,11 +16,22 @@ function CustomSlider({
     const [value, setValue] = useState(
         parseInt(getFromSessionStorage("personas")) || minimo
     );
+    const [timeoutId, setTimeoutId] = useState(null);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-        saveToSessionStorage("personas", event.target.value);
-        setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+    const handleChange = (val) => {
+
+        setValue(val);
+        saveToSessionStorage("personas", val);
+
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+
+        const newTimeoutId = setTimeout(() => {
+            setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+        }, 1000); 
+
+        setTimeoutId(newTimeoutId);
     };
 
     const setOnePerson = () => {
@@ -45,36 +57,37 @@ function CustomSlider({
                 </output>
             </div>
             <div className="slider-container-in">
-                <img className="foto-una-persona" src={unaPersona} />
-                <input
-                    type="range"
-                    min={minimo}
-                    max={maximo}
-                    value={value}
-                    onChange={handleChange}
-                    className="range-slider"
-                />
-                <img className="foto-grupo" src={grupoPersonas} />
-            </div>
-            <div className="slider-container-in">
-            {/* <Slider
+            <Slider
                 aria-label="Volume"
-                size="lg"
-                color="success"
+                size="md"
+                // color="white"
+                minValue={minimo}
+                maxValue={maximo}
                 value={value}
-                onChange={setValue}
+                onChange={handleChange}
+                classNames={{
+                    filler: "bg-white",
+                    thumb: "bg-white",
+                    track: "border-l-white",
+
+                    
+                    // thumb: "bg-gradient-to-r from-pink-300 to-cyan-300 dark:from-pink-600 dark:to-cyan-800",
+                    // filler: "bg-gradient-to-r from-pink-300 to-cyan-300 dark:from-pink-600 dark:to-cyan-800",
+                  }}
                 startContent={
-                
-                    <img className="foto-una-persona" src={unaPersona} />
-                
+                    <UserIcon
+                        className="w-6 h-6"
+                        color="#FFFFFF"
+                    />
                 }
                 endContent={
-                
-                    <img className="foto-grupo" src={grupoPersonas} />
-                
+                    <GroupIcon
+                        className="w-6 h-6"
+                        color="#FFFFFF"
+                    />
                 }
                 className="max-w-md"
-            /> */}
+            />
             </div>
         </div>
     );
