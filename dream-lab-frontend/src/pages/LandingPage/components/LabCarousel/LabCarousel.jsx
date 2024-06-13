@@ -78,11 +78,20 @@ function LabCarousel() {
         loop={true}
         autoplay={true}
         longSwipes={false}
-        centeredSlides={true}
         grabCursor={true}
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
+        style={{
+          "--swiper-pagination-color": "#FFFFFF",
+          "--swiper-pagination-bullet-inactive-color": "#D9D9D9",
+          "--swiper-pagination-bullet-inactive-opacity": "0.5",
+          "--swiper-pagination-bullet-size": "1vw",
+          "--swiper-pagination-bullet-horizontal-gap": "0.5vw",
+          "--swiper-navigation-color": "#FFFFFF",
+          "--swiper-navigation-sides-offset": "4vw",
+          "--swiper-pagination-bottom": "2%"
+        }}
       >
         {swiperCards.map((card, index) => (
           <SwiperSlide key={index}>
