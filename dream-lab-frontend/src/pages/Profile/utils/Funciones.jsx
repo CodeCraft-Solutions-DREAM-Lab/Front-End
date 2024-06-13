@@ -42,17 +42,30 @@ export function calculateEndTime(startTime, duration) {
 
 // Función para generar las tarjetas de reservación utilizando el componente TarjetaReservacion
 export function generateReservationCards(reservacionesData, handleClickModal) {
-    
+
+    // Filtrar solo las reservaciones confirmadas y pendientes
     const reservacionesConfirmadas = reservacionesData.filter(
         (reservation) => reservation.estatus === 3 || reservation.estatus === 5
     );
 
+    const reservacionesFuturas = reservacionesConfirmadas.filter(reservation => {
+        const today = new Date();
+        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())).toISOString().slice(0, 10);
+        const reservationDateUTC = reservation.fecha.slice(0, 10); // Obtener la fecha de reserva en formato ISO UTC (YYYY-MM-DD)
+        console.log("Reservación: ", reservationDateUTC)
+        console.log("Hoy: ", todayUTC)
+        return reservationDateUTC >= todayUTC;
+    });
+
+    // Ordenar las reservaciones por fecha
+    reservacionesFuturas.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+
     // Despleigue de mensaje: "No hay reservaciones activas"
-    if (reservacionesConfirmadas.length === 0) {
+    if (reservacionesFuturas.length === 0) {
         return <AnuncioSinReservas />;
     }
 
-    const reservationCards = reservacionesData.map((reservation, index) => {
+    const reservationCards = reservacionesFuturas.map((reservation, index) => {
         // Formateo de día de la semana
         const now = new Date(reservation.fecha);
         now.setDate(now.getDate() + 1);

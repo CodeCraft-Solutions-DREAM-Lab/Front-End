@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import "./ReservacionesVideowall.css";
 import GlassCard from "src/GlobalComponents/GlassCard/GlassCard";
-import MensajeBienvenida from "../MensajeBienvenida/MensajeBienvenida";
 import HiddenInputLogger from "../HiddenInputLogger/HiddenInputLogger";
 
 // Components
 import CarouselReservaciones from "./components/CarouselReservaciones/CarouselReservaciones";
 import VideowallSinReservas from "./components/CarouselReservaciones/components/VideowallSinReservas/VideowallSinReservas";
+import MensajeBienvenida from "../MensajeBienvenida/MensajeBienvenida";
 
 function ReservacionesVideowall() {
     const [qrCode, setQrCode] = useState("");

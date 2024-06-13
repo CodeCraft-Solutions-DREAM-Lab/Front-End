@@ -2,6 +2,10 @@
 DIMENSIONES VIDEOWALL
 7680
 2160
+
+3840
+1080
+
 */
 import "./Videowall.css";
 import Anuncios from "./components/Anuncios/Anuncios.jsx";

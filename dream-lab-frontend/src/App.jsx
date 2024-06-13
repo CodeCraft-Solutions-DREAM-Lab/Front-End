@@ -16,6 +16,9 @@ import ProtectedRoutes from "./GlobalComponents/ProtectedRoutes/ProtectedRoutes.
 // Pagina no encontrada
 import NotFound from "./pages/NotFound/NotFound.jsx";
 
+// Pagina de error
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+
 // Login
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 
@@ -30,11 +33,11 @@ import ConfirmacionReserva from "./pages/ConfirmacionReserva/ConfirmacionReserva
 import ResumenReservacion from "./pages/ResumenReservacion/ResumenReservacion.jsx";
 import SeleccionMaterial from "./pages/SeleccionMaterial/SeleccionMaterial";
 import SelectorSala from "./pages/SelectorSala/SelectorSala.jsx";
-import LandingPageDev from "./pages/LandingPage/LandingPageDev.jsx";
+
+// Perfil
 import Profile from "./pages/Profile/Profile.jsx";
 import Logros from "./pages/Profile/Logros.jsx";
 import ReservacionesActivas from "./pages/Profile/ReservacionesActivas.jsx";
-import QRLogin from "./pages/QRLogin/QRLogin.jsx";
 
 // Videowall
 import Videowall from "./pages/Videowall/Videowall.jsx";
@@ -43,11 +46,27 @@ import Videowall from "./pages/Videowall/Videowall.jsx";
 import CrearAnuncioVideowall from "./pages/CrearAnuncioVideowall/CrearAnuncioVideowall";
 import CronogramaAdmin from "./pages/CronogramaAdmin/CronogramaAdmin";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import CrearExperiencia from "./pages/CrearExperiencia/CrearExperiencia";
 
 function secured(Component) {
+    const restrictedRoutes = {
+        Regular: {
+            routes: ["/admin", "/dashboard", "/crearAnuncio"],
+            fallback: "/home",
+        },
+        Profesor: {
+            routes: ["/admin", "/dashboard", "/crearAnuncio"],
+            fallback: "/home",
+        },
+        Admin: {
+            routes: [],
+            fallback: "/admin",
+        },
+    };
+
     return function WrappedComponent(props) {
         return (
-            <ProtectedRoutes>
+            <ProtectedRoutes restrictedRoutes={restrictedRoutes}>
                 <Component {...props} />
             </ProtectedRoutes>
         );
@@ -56,16 +75,14 @@ function secured(Component) {
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Root />}>
-            <Route index element={<LandingPageDev />} />
-            <Route path="landingpage" element={<LandingPage />} />
-            {/* ruta provisional para desarrollo de la landing */}
+        <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+            <Route index element={<LandingPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="home" element={secured(HomePage)()} />
             <Route path="reservacion/sala" element={secured(SelectorSala)()} />
             <Route
                 path="reservacion/material"
-                element={<SeleccionMaterial />} // Agregar protected cuando se ocupe
+                element={secured(SeleccionMaterial)()}
             />
             <Route
                 path="reservacion/confirmacion"
@@ -86,10 +103,14 @@ const router = createBrowserRouter(
                 path="crearAnuncio"
                 element={secured(CrearAnuncioVideowall)()}
             />
-            <Route path="admin" element={<CronogramaAdmin />} />
-            <Route path="qr" element={<QRLogin />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="admin" element={secured(CronogramaAdmin)()} />
+            <Route path="dashboard" element={secured(Dashboard)()} />
+            <Route path="error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
+            <Route
+                path="crearExperiencia"
+                element={secured(CrearExperiencia)()}
+            />
         </Route>
     )
 );

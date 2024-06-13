@@ -1,6 +1,6 @@
 describe("Probando pantalla de selector de sala", () => {
     beforeEach(() => {
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
 
         cy.intercept("GET", "salas/nameFromExperienceId/**", {
             body: {
@@ -50,7 +50,7 @@ describe("Probando pantalla de selector de sala", () => {
             ],
         }).as("getHorasLibres");
 
-        cy.intercept("POST", "**/materiales", {}).as("postMateriales");
+        cy.intercept("POST", "/materiales/recomendados", {}).as("postMateriales");
     });
 
     it("Probando nombre entrando con experiencia", () => {

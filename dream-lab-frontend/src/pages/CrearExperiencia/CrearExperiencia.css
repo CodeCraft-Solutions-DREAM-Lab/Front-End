@@ -1,0 +1,73 @@
+.contenedor-principal-crear-experiencia .page {
+    display: none;
+}
+
+.contenedor-principal-crear-experiencia .page.active {
+    display: block;
+}
+
+.contenedor-principal-crear-experiencia .page.inactive {
+    display: none;
+}
+
+.button-container-crear-experiencia {
+    display: flex;
+    justify-content: space-around;
+}
+
+.contenido-crear-experiencia {
+    height: 82vh;
+}
+
+.contenedor-principal-crear-experiencia {
+    padding-top: 18vh;
+}
+
+.portada-tipo-selector-crear-experiencia {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2vh;
+}
+
+@media (orientation: portrait) {
+    .portada-tipo-selector-crear-experiencia {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+/* Estilos del componente Stepper MUI*/
+.custom-stepper {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.custom-step.completed .MuiStepIcon-text {
+    fill: black; /* Text color when completed */
+    font-size: 1rem;
+}
+.custom-step-label .MuiStepLabel-label {
+    color: whitesmoke !important; /* Label color */
+
+}
+
+.custom-step-label .MuiStepLabel-label.Mui-active {
+    font-size: medium;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+
+.custom-step .MuiStepIcon-root.Mui-active,
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+    color: whitesmoke !important; /* Ensure active step color is applied */
+}
+
+.custom-step .MuiStepIcon-root.Mui-completed,
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+    color: whitesmoke !important; /* Ensure completed step color is applied */
+}

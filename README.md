@@ -8,6 +8,7 @@
 
 -   Se puede consultar el backend en el repositorio de [Backend](https://github.com/CodeCraft-Solutions-DREAM-Lab/Back-End).
 -   Asimismo, la aplicación que permite la conexión con el chat de voz se puede encontrar en el repositorio de [RecomendacionesDreamLab](https://github.com/CodeCraft-Solutions-DREAM-Lab/RecomendacionesDreamLab).
+-   El resto de los repositorios del proyecto se pueden encontrar en [CodeCraft Solutions: D.R.E.A.M. Lab](https://github.com/CodeCraft-Solutions-DREAM-Lab).
 
 ## Despliegue
 

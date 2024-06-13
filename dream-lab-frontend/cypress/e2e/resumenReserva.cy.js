@@ -1,6 +1,6 @@
 describe("Resumen de reservación", () => {
     beforeEach(() => {
-        cy.loginWith("test");
+        cy.loginWith("test", "Regular");
     });
 
     it("Botón de regreso", () => {
@@ -10,20 +10,115 @@ describe("Resumen de reservación", () => {
     });
 
     it("Botón de confirmar", () => {
-        cy.intercept("POST", "reservaciones", {
-            body: {
-                idUsuario: "A00123456",
-                idSala: 1,
-                idExperiencia: 1,
-                horaInicio: 9,
-                duracion: 1,
-                fecha: "2024-05-23",
-                idMesa: null,
-                estatus: 3,
+        cy.visit("/reservacion/resumen", {
+            onBeforeLoad(win) {
+                win.sessionStorage.setItem(
+                    "materials",
+                    '[{"materialId":11,"quantity":1},{"materialId":12,"quantity":1},{"materialId":13,"quantity":1}]'
+                );
+                win.sessionStorage.setItem(
+                    "nameSalaExperiencia",
+                    "Dimension Forge"
+                );
+                win.sessionStorage.setItem("personas", 1);
+                win.sessionStorage.setItem(
+                    "formattedDate",
+                    "Jueves - 23 de Mayo"
+                );
+                win.sessionStorage.setItem("formattedTime", "10 AM - 12 PM");
+                win.sessionStorage.setItem("horaCorte", "6 pm");
+                win.sessionStorage.setItem("competidores", 1);
+                win.sessionStorage.setItem("cupos", 1);
             },
-        }).as("postReservacion");
+        });
+
+        cy.intercept("POST", "/materiales", {
+            body: [
+                {
+                    id: 11,
+                    name: "Tablet Windows",
+                    cantidadDisponible: 1,
+                    cantidadRecomendada: 1,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/tablet-windows.webp",
+                },
+                {
+                    id: 12,
+                    name: "Cámara Digital (DSLR)",
+                    cantidadDisponible: 1,
+                    cantidadRecomendada: 2,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/camara.webp",
+                },
+                {
+                    id: 13,
+                    name: "Audífonos Over-Ear",
+                    cantidadDisponible: 0,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/audifonos.webp",
+                },
+                {
+                    id: 14,
+                    name: "Altavoces Bluetooth",
+                    cantidadDisponible: 1,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/altavoz.webp",
+                },
+                {
+                    id: 15,
+                    name: "Micrófono",
+                    cantidadDisponible: 1,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/microfono.webp",
+                },
+                {
+                    id: 16,
+                    name: "Router Wi-Fi",
+                    cantidadDisponible: 1,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/router.webp",
+                },
+                {
+                    id: 3,
+                    name: "Chromebook",
+                    cantidadDisponible: 2,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/chromebook.webp",
+                },
+                {
+                    id: 7,
+                    name: "Visor VR para smartphone",
+                    cantidadDisponible: 2,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/vr-smartphone.webp",
+                },
+                {
+                    id: 10,
+                    name: "Tablet iPad",
+                    cantidadDisponible: 2,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/ipad.webp",
+                },
+                {
+                    id: 1,
+                    name: "Laptop Gamer",
+                    cantidadDisponible: 4,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/laptop-gamer.webp",
+                },
+                {
+                    id: 6,
+                    name: "PlayStation VR",
+                    cantidadDisponible: 6,
+                    cantidadRecomendada: 0,
+                    image: "https://dreamlabstorage.blob.core.windows.net/materiales/playstationVR.webp",
+                },
+            ],
+        }).as("getMaterials");
+
+        cy.intercept("POST", "reservaciones", {body: [{rowsAffected: 1}]}).as("postReservacion");
 
         cy.visit("/reservacion/resumen");
+        cy.wait("@getMaterials");
+
 
         cy.clickDataCy("summary-submit-button");
         cy.wait("@postReservacion");
@@ -35,6 +130,10 @@ describe("Resumen de reservación", () => {
     it("Resumen de reservacion", () => {
         cy.visit("/reservacion/resumen", {
             onBeforeLoad(win) {
+                win.sessionStorage.setItem(
+                    "materials",
+                    '[{"materialId":11,"quantity":1},{"materialId":12,"quantity":1},{"materialId":13,"quantity":1}]'
+                );
                 win.sessionStorage.setItem(
                     "nameSalaExperiencia",
                     "Dimension Forge"

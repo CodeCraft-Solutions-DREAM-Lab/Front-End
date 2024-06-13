@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 431px) {
     .title-container {
-        column-gap: 1rem;
+        padding-top: 10rem;
     }
 }
 
@@ -29,30 +29,6 @@
     font-weight: 700;
     color: white;
     z-index: 2;
-}
-
-@media screen and (max-width: 431px) {
-    .heading {
-        font-size: 36px;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .heading {
-        font-size: 32px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .heading {
-        font-size: 30px;
-    }
-}
-
-@media screen and (max-width: 376px) {
-    .heading {
-        font-size: 24px;
-    }
 }
 
 .landing-logo {
@@ -75,7 +51,7 @@
 
 .sub-heading {
     overflow-wrap: break-word;
-    width: 800px;
+    width: 100%;
     margin-right: 30rem;
     margin-bottom: 4rem;
     font-size: 4vw;
@@ -85,36 +61,6 @@
     line-height: 1;
     color: white;
     z-index: 2;
-}
-
-@media screen and (max-width: 431px) {
-    .sub-heading {
-        width: 400px;
-        font-size: 32px;
-        margin-right: 1rem;
-        margin-bottom: 2rem;
-        line-height: 3rem;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .sub-heading {
-        font-size: 26px;
-    }
-}
-
-@media screen and (max-width: 391px) {
-    .sub-heading {
-        font-size: 22px;
-        line-height: 2.5rem;
-    }
-}
-
-@media screen and (max-width: 415px) {
-    .sub-heading {
-        font-size: 21px;
-        line-height: 2.4rem;
-    }
 }
 
 .button-container-landing-page {
@@ -132,7 +78,7 @@
     }
 }
 
-.button-more {
+.title-button-more {
     padding-block: 5%;
     padding-inline: 30%;
     background-color: white;
@@ -147,29 +93,30 @@
 }
 
 @media screen and (max-width: 431px) {
-    .button-more {
+    .title-button-more {
         padding-block: 8px;
         padding-inline: 2rem;
         border-radius: 28px;
         text-wrap: nowrap;
+        font-size: 3vw;
     }
 }
 
 @media screen and (max-width: 415px) {
-    .button-more {
+    .title-button-more {
         padding-block: 6px;
         padding-inline: 1.8rem;
     }
 }
 
 @media screen and (max-width: 376px) {
-    .button-more {
+    .title-button-more {
         padding-block: 3px;
         padding-inline: 1.4rem;
     }
 }
 
-.button-more:hover {
+.title-button-more:hover {
     padding-block: 5%;
     padding-inline: 30%;
     background-color: #042E55;
@@ -178,33 +125,35 @@
     font-size: 1vw;
     font-family: "Karla", sans-serif;
     font-weight: bolder;
+    color: white;
     text-transform: uppercase;
 }
 
 @media screen and (max-width: 431px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 8px;
         padding-inline: 2rem;
         border-radius: 28px;
         text-wrap: nowrap;
+        font-size: 3vw;
     }
 }
 
 @media screen and (max-width: 415px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 6px;
         padding-inline: 1.8rem;
     }
 }
 
 @media screen and (max-width: 376px) {
-    .button-more:hover {
+    .title-button-more:hover {
         padding-block: 3px;
         padding-inline: 1.4rem;
     }
 }
 
 .landing-down-arrow {
-    width: 40%;
+    width: 30%;
     cursor: pointer;
 }

@@ -1,4 +1,6 @@
 import "cypress-localstorage-commands";
+import 'cypress-file-upload';
+
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -120,9 +122,23 @@ Cypress.Commands.add("getLength", (name) => {
 });
 
 // Inicia sesión con un usuario específico
-Cypress.Commands.add("loginWith", (user) => {
+Cypress.Commands.add("loginWith", (user, tipo) => {
+    const datosUsuario = {
+        idUsuario: user,
+        nombre: "Test",
+        apellidoP: "Test",
+        apellidoM: "Test",
+        tipo: tipo,
+        prioridad: 362,
+        logroPrincipal: 1,
+        colorPreferido: "#78C2F8",
+    };
+
     cy.intercept("POST", "auth/token", {
-        body: { isAuth: "true" },
+        body: {
+            isAuth: "true",
+            token_data: { datosUsuario: JSON.stringify(datosUsuario) },
+        },
     }).as("login");
 
     cy.setLocalStorage(
@@ -149,4 +165,34 @@ Cypress.Commands.add("attachFileDataCy", (name, file, timeout = 4000) => {
 // Asigna una fecha específica al reloj de Cypress
 Cypress.Commands.add("setDate", (year, month, day) => {
     cy.clock(Date.UTC(year, month, day), ["Date"]);
+});
+
+// Presionar un botón del speed dial del cronograma
+Cypress.Commands.add("clickSpeedDial", (dataCy) => {
+    cy.clickHiddenButton(dataCy.replace(/\s/g, ""));
+});
+
+// Presionar un botón escondido
+Cypress.Commands.add("clickHiddenButton", (dataCy) => {
+    cy.getDataCy(dataCy).click({ force: true });
+});
+
+// Checa si un elemento con el atributo data-cy existe
+Cypress.Commands.add("checkExist", (name) => {
+    return cy.getDataCy(name).should("exist");
+});
+
+// Checa si un elemento con el atributo data-cy es visible
+Cypress.Commands.add("checkVisible", (name) => {
+    return cy.getDataCy(name).should("be.visible");
+});
+
+// Checa si un elemento con el atributo data-cy no existe
+Cypress.Commands.add("checkNotExist", (name) => {
+    return cy.getDataCy(name).should("not.exist");
+});
+
+// Checa si un elemento con el atributo data-cy no es visible
+Cypress.Commands.add("checkNotVisible", (name) => {
+    return cy.getDataCy(name).should("not.be.visible");
 });

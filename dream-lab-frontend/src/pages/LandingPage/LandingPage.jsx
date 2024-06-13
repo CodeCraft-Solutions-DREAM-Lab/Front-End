@@ -1,38 +1,73 @@
-// TODO: remover esto ya que es solo un bypass temporal del login
-import { Button } from "@nextui-org/react";
-import { saveToLocalStorage } from "src/utils/Storage";
-import { useDispatch } from "react-redux";
-import { setAuth } from "src/redux/Slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import Navbar from "src/GlobalComponents/NavBar/NavBar.jsx";
+import "./LandingPage.css";
+import Title from "./components/Title/Title";
+import InfoCard from "./components/InfoCard/InfoCard";
+import LabCarousel from "./components/LabCarousel/LabCarousel";
+import Footer from "./components/Footer/Footer";
 
-function LandingPage() {
-    // Remover posteriormente
-    // El handleClick guarda en el local storage un token valido y sin caducidad y
-    // marca como que se ha iniciado sesión en redux. Posteriormente se redirige a home
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+import Pcb from "src/assets/LandingPage/pcb-landing-page.webp";
+import Blob from "src/assets/LandingPage/blob-landing-page.webp";
+import Vr from "src/assets/LandingPage/vr-landing-page.webp";
+import Moon from "src/assets/LandingPage/moon-landing-page.webp";
+import Astronaut from "src/assets/LandingPage/astronauta-landing-page.webp";
+import Nube from "src/assets/LandingPage/nube-landing-page.webp";
+import VrBlancos from "src/assets/LandingPage/vr-blancos-landing-page.webp";
+import Circuito from "src/assets/LandingPage/circuito-landing-page.webp";
+import Cuarto from "src/assets/LandingPage/cuarto-landing-page.webp";
 
-    const handleClick = () => {
-        saveToLocalStorage(
-            "token",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiQTAxMTc3NzY3IiwiaWF0IjoxNzEyNjMzMjU2fQ.-ky8LBLfLFCRmENvP0QetksCFuN9D5R0OGC9NiN2WD0"
-        );
-        saveToLocalStorage("user", "test");
-        dispatch(setAuth(true));
-        navigate("home");
+//import { ReactComponent as MySVG } from "src/assets/LandingPage/WavesLandingPage.svg";
+import { useRef } from "react";
+
+function LandingPageDev() {
+    const learnMoreRef = useRef(null);
+
+    const scrollToLearnMore = () => {
+        // Calculate the Y position of the target element
+        const yOffset =
+            learnMoreRef.current.getBoundingClientRect().top + window.scrollY;
+
+        // Smoothly scroll to the target element
+        window.scrollTo({ top: yOffset, behavior: "smooth" });
     };
 
     return (
-        <>
-            <h1>Landing Page</h1>
-            <Button
-                onClick={handleClick}
-                className="bg-orange-400 text-white font-bold"
-            >
-                <p className="text-4xl ">Go to Home</p>
-            </Button>
-        </>
+        <div className="landing-page-container">
+            <Navbar view="landingPage" autoHide={true} />
+            <Title scroll={scrollToLearnMore} />
+            <div className="landing-images">
+                <img className="landing-image pcb" src={Pcb} />
+                <img className="landing-image blob" src={Blob} />
+                <img className="landing-image vr" src={Vr} />
+                <img className="landing-image moon" src={Moon} />
+                <img className="landing-image astronaut" src={Astronaut} />
+            </div>
+            <div className="info-cards" ref={learnMoreRef}>
+                <InfoCard
+                    title="¿Qué es el DREAM Lab?"
+                    image={Nube}
+                    description="El DREAM Lab es ese espacio en donde podrás desatar por completo tu potencial. Tecnología de primer nivel en un paraíso moderno es lo que podrás encontrar."
+                />
+                <InfoCard
+                    title="Reservaciones Inteligentes con IA"
+                    image={VrBlancos}
+                    description="Nuestro sistema de reservaciones inteligentes utiliza lo último en inteligencia artificial para priorizar tus metas. "
+                />
+                <InfoCard
+                    title="Nuestras Instalaciones"
+                    image={Circuito}
+                    description="Contamos con instalaciones de primer nivel, encuentra lo que necesitas en nuestros laboratorios."
+                />
+                <InfoCard
+                    title="Reconocimiento de voz"
+                    image={Cuarto}
+                    description="Usa tu voz para obtener recomendaciones en base a lo que buscas gracias a la tecnología de reconocimiento de voz. Rápido, preciso y sin complicaciones."
+                />
+            </div>
+            <h1 className="carousel-header">CONOCE EL DREAM LAB</h1>
+            <LabCarousel />
+            <Footer />
+        </div>
     );
 }
 
-export default LandingPage;
+export default LandingPageDev;

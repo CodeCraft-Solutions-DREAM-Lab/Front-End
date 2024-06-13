@@ -1,0 +1,37 @@
+[
+        {
+            "idEstatus": 1,
+            "nombre": "Preparado",
+            "descripcion": "El material ha sido preparado"
+        },
+        {
+            "idEstatus": 2,
+            "nombre": "En progreso",
+            "descripcion": "El material esta siendo preparado"
+        },
+        {
+            "idEstatus": 3,
+            "nombre": "Confirmada",
+            "descripcion": "La reserva ha sido confirmada"
+        },
+        {
+            "idEstatus": 4,
+            "nombre": "Cancelada",
+            "descripcion": "La reserva ha sido cancelada"
+        },
+        {
+            "idEstatus": 5,
+            "nombre": "En espera",
+            "descripcion": "La solicitud de reserva esta en espera"
+        },
+        {
+            "idEstatus": 6,
+            "nombre": "Denegada",
+            "descripcion": "La solicitud de reserva ha sido negada"
+        },
+        {
+            "idEstatus": 7,
+            "nombre": "Sin preparar",
+            "descripcion": "El material no ha sido preparado"
+        }
+    ]

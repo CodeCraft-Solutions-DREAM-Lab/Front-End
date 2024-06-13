@@ -1,0 +1,222 @@
+[
+        {
+            "idMesa": 1,
+            "idSala": 1,
+            "cupos": 2
+        },
+        {
+            "idMesa": 2,
+            "idSala": 1,
+            "cupos": 3
+        },
+        {
+            "idMesa": 3,
+            "idSala": 1,
+            "cupos": 4
+        },
+        {
+            "idMesa": 4,
+            "idSala": 1,
+            "cupos": 5
+        },
+        {
+            "idMesa": 5,
+            "idSala": 2,
+            "cupos": 2
+        },
+        {
+            "idMesa": 6,
+            "idSala": 2,
+            "cupos": 3
+        },
+        {
+            "idMesa": 7,
+            "idSala": 2,
+            "cupos": 4
+        },
+        {
+            "idMesa": 8,
+            "idSala": 2,
+            "cupos": 8
+        },
+        {
+            "idMesa": 9,
+            "idSala": 3,
+            "cupos": 2
+        },
+        {
+            "idMesa": 10,
+            "idSala": 3,
+            "cupos": 3
+        },
+        {
+            "idMesa": 11,
+            "idSala": 3,
+            "cupos": 4
+        },
+        {
+            "idMesa": 12,
+            "idSala": 3,
+            "cupos": 6
+        },
+        {
+            "idMesa": 13,
+            "idSala": 4,
+            "cupos": 2
+        },
+        {
+            "idMesa": 14,
+            "idSala": 4,
+            "cupos": 3
+        },
+        {
+            "idMesa": 15,
+            "idSala": 4,
+            "cupos": 4
+        },
+        {
+            "idMesa": 16,
+            "idSala": 4,
+            "cupos": 4
+        },
+        {
+            "idMesa": 17,
+            "idSala": 5,
+            "cupos": 2
+        },
+        {
+            "idMesa": 18,
+            "idSala": 5,
+            "cupos": 3
+        },
+        {
+            "idMesa": 19,
+            "idSala": 5,
+            "cupos": 4
+        },
+        {
+            "idMesa": 20,
+            "idSala": 5,
+            "cupos": 10
+        },
+        {
+            "idMesa": 21,
+            "idSala": 6,
+            "cupos": 2
+        },
+        {
+            "idMesa": 22,
+            "idSala": 6,
+            "cupos": 3
+        },
+        {
+            "idMesa": 23,
+            "idSala": 6,
+            "cupos": 4
+        },
+        {
+            "idMesa": 24,
+            "idSala": 6,
+            "cupos": 8
+        },
+        {
+            "idMesa": 25,
+            "idSala": 7,
+            "cupos": 2
+        },
+        {
+            "idMesa": 26,
+            "idSala": 7,
+            "cupos": 3
+        },
+        {
+            "idMesa": 27,
+            "idSala": 7,
+            "cupos": 4
+        },
+        {
+            "idMesa": 28,
+            "idSala": 7,
+            "cupos": 4
+        },
+        {
+            "idMesa": 29,
+            "idSala": 8,
+            "cupos": 2
+        },
+        {
+            "idMesa": 30,
+            "idSala": 8,
+            "cupos": 3
+        },
+        {
+            "idMesa": 31,
+            "idSala": 8,
+            "cupos": 4
+        },
+        {
+            "idMesa": 32,
+            "idSala": 8,
+            "cupos": 9
+        },
+        {
+            "idMesa": 33,
+            "idSala": 9,
+            "cupos": 2
+        },
+        {
+            "idMesa": 34,
+            "idSala": 9,
+            "cupos": 3
+        },
+        {
+            "idMesa": 35,
+            "idSala": 9,
+            "cupos": 4
+        },
+        {
+            "idMesa": 36,
+            "idSala": 9,
+            "cupos": 8
+        },
+        {
+            "idMesa": 37,
+            "idSala": 10,
+            "cupos": 2
+        },
+        {
+            "idMesa": 38,
+            "idSala": 10,
+            "cupos": 3
+        },
+        {
+            "idMesa": 39,
+            "idSala": 10,
+            "cupos": 4
+        },
+        {
+            "idMesa": 40,
+            "idSala": 10,
+            "cupos": 5
+        },
+        {
+            "idMesa": 41,
+            "idSala": 11,
+            "cupos": 2
+        },
+        {
+            "idMesa": 42,
+            "idSala": 11,
+            "cupos": 3
+        },
+        {
+            "idMesa": 43,
+            "idSala": 11,
+            "cupos": 4
+        },
+        {
+            "idMesa": 44,
+            "idSala": 11,
+            "cupos": 10
+        }
+    ]
