@@ -44,7 +44,6 @@
     margin-right: 3vw;
     /* padding-right: 4vw; */
     padding: 0vw 4vw;
-    margin-top: 2vh;
     /* justify-content: center; */
     width: 40%; /* Set the right section to 30% width */
 }
@@ -53,9 +52,17 @@
     padding: 3vh;
 }
 
+.SS-form-container button span {
+    font-size: 1.1rem;
+}
+
 .SS-form-container [aria-label="Selector de fecha"] {
     padding: 3vh;
+}
 
+.SS-form-container [aria-label="Selector de fecha"] [role="presentation"] {
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .SS-form-container {
