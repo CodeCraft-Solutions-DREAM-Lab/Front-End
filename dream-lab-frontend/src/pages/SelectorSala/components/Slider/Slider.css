@@ -15,6 +15,18 @@
     width: 25vw;
 }
 
+.slider-container-in [data-slot="track"] {
+    border-left-color: white;
+}
+
+.slider-container-in [data-slot="filler"] {
+    background-color: white;
+}
+
+.slider-container-in [data-slot="thumb"] {
+    background-color: white;
+}
+
 /* .range-slider {
     width: 100%;
     margin-right: 1.5%;

@@ -65,15 +65,6 @@ function CustomSlider({
                 maxValue={maximo}
                 value={value}
                 onChange={handleChange}
-                classNames={{
-                    filler: "bg-white",
-                    thumb: "bg-white",
-                    track: "border-l-white",
-
-                    
-                    // thumb: "bg-gradient-to-r from-pink-300 to-cyan-300 dark:from-pink-600 dark:to-cyan-800",
-                    // filler: "bg-gradient-to-r from-pink-300 to-cyan-300 dark:from-pink-600 dark:to-cyan-800",
-                  }}
                 startContent={
                     <UserIcon
                         className="w-6 h-6"
