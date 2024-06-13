@@ -3,8 +3,11 @@ import "./Slider.css";
 import unaPersona from "src/assets/SelectorSala/onePerson.webp";
 import grupoPersonas from "src/assets/SelectorSala/group.webp";
 import { getFromSessionStorage, saveToSessionStorage } from "src/utils/Storage";
+import {Slider, Button} from "@nextui-org/react";
+import GroupIcon from "src/assets/Icons/GroupIcon";
+import UserIcon from "src/assets/Icons/UserIcon";
 
-function Slider({
+function CustomSlider({
     minimo,
     maximo,
     fetchFreeHoursAgain,
@@ -13,15 +16,22 @@ function Slider({
     const [value, setValue] = useState(
         parseInt(getFromSessionStorage("personas")) || minimo
     );
+    const [timeoutId, setTimeoutId] = useState(null);
 
-    // useEffect(() => {
+    const handleChange = (val) => {
 
-    // }, [value]);
+        setValue(val);
+        saveToSessionStorage("personas", val);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-        saveToSessionStorage("personas", event.target.value);
-        setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+
+        const newTimeoutId = setTimeout(() => {
+            setFetchFreeHoursAgain(!fetchFreeHoursAgain);
+        }, 1000); 
+
+        setTimeoutId(newTimeoutId);
     };
 
     const setOnePerson = () => {
@@ -35,7 +45,7 @@ function Slider({
     }, []);
 
     return (
-        <div className="slider-out" data-cy="slider-container-personas">
+        <div className="Custom-out" data-cy="slider-container-personas">
             <div className="texto-num-personas">
                 <output
                     htmlFor="slider"
@@ -47,19 +57,31 @@ function Slider({
                 </output>
             </div>
             <div className="slider-container-in">
-                <img className="foto-una-persona" src={unaPersona} />
-                <input
-                    type="range"
-                    min={minimo}
-                    max={maximo}
-                    value={value}
-                    onChange={handleChange}
-                    className="range-slider"
-                />
-                <img className="foto-grupo" src={grupoPersonas} />
+            <Slider
+                aria-label="Volume"
+                size="md"
+                // color="white"
+                minValue={minimo}
+                maxValue={maximo}
+                value={value}
+                onChange={handleChange}
+                startContent={
+                    <UserIcon
+                        className="w-6 h-6"
+                        color="#FFFFFF"
+                    />
+                }
+                endContent={
+                    <GroupIcon
+                        className="w-6 h-6"
+                        color="#FFFFFF"
+                    />
+                }
+                className="max-w-md"
+            />
             </div>
         </div>
     );
 }
 
-export default Slider;
+export default CustomSlider;
