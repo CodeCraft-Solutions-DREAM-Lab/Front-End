@@ -124,10 +124,17 @@ function SelectorSala() {
             ) : (
                 <NavBar view="soloPerfil" autoHide={false} />
             )}
-                <div className="SS-outer-container">
+            <div className="outer-container">
+                {/* <GlassCard className="menu-lateral">
+                    <p>menu</p>
+                </GlassCard> */}
+                <div className="container">
+                    {/* Contenedor principal */}
 
-                    <div className="SS-card-container">
+                    <div className="card-container">
+                        {/* Sección de la izquierda */}
 
+                        {/* Nombre de la sala */}
                         <TextoNombreSala />
                         <Slider
                             minimo={1}
@@ -135,11 +142,14 @@ function SelectorSala() {
                             fetchFreeHoursAgain={fetchFreeHoursAgain}
                             setFetchFreeHoursAgain={setFetchFreeHoursAgain}
                         />
-                        <div className="SS-model">
+                        <div className="model">
                             <GLBModelViewer modelPath="/office-opt-compressed.glb" />
+                            {/*<img src={imagePlaceholder}></img>*/}
+                            {/* Placeholder del modelo 3D */}
                         </div>
                     </div>
-                    <div className="SS-form-container">
+                    <div className="form-container">
+                        {/* Sección de la derecha */}
                         <PrimerRecordatorio
                             data-cy="primer-recordatorio-sala"
                             isOpen={isFirstReminderOpen}
@@ -160,7 +170,7 @@ function SelectorSala() {
                             freeHours={freeHours}
                         />
                         <TextoFecha update={update} />
-                        <div className="SS-button-container">
+                        <div className="button-container">
                             <RoundedButton
                                 onClick={() => {
                                     setIsFirstReminderOpen(true);
@@ -177,6 +187,7 @@ function SelectorSala() {
                         />
                     </div>
                 </div>
+            </div>
         </div>
     );
 }
