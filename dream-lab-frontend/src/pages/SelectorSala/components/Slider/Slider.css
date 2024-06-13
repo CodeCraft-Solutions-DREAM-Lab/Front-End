@@ -88,6 +88,13 @@
         padding-right: 4%;
         padding-left: 4%;
     }
+
+    .slider-container-in {
+        padding-top: 3vh;
+        width: 80vw;
+    }
+
+ 
 }
 
 @media (max-width: 400px) {

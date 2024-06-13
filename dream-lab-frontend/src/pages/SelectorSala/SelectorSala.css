@@ -9,7 +9,7 @@
     flex-direction: row;
     justify-content:center;
     font-family: "Karla", sans-serif;
-    height: 100vh !important;
+    height: 100vh;
 }
 
 .SS-model {
@@ -94,9 +94,11 @@
         padding-right: 0;
     } */
     .SS-outer-container {
+        height: 100%;
         flex-direction: column; /* Stack elements vertically */
         justify-content: center; /* Center content vertically */
         margin: 0 auto;
+        padding-top: 15vh;
     }
 
     .SS-card-container,
