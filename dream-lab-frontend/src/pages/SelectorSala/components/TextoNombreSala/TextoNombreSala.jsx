@@ -9,8 +9,8 @@ const TextoNombreSala = () => {
     const [nombreExperiencia, setNombreExperiencia] = useState("");
 
     const bigTextFormat =
-        "text-white text-4xl font-medium uppercase font-['Karla'] text-center p-2";
-    const smallTextFormat = "text-2xl text-[#D1D1D1]";
+        "text-white text-3xl font-medium uppercase font-['Karla'] text-center p-2";
+    const smallTextFormat = "text-xl text-[#D1D1D1]";
 
     if (type == "sala") {
         id = getFromSessionStorage("idSala");

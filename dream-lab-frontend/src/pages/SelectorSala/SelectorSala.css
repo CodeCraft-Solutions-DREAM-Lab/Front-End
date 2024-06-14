@@ -1,117 +1,91 @@
 
-/* .container {
+.container {
     display: flex;
-
-    background-color: rgb(145, 145, 145);
-} */
-.SS-outer-container {
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
+    justify-content: center; /* Optional here */
+    flex-grow: 1;
+    width: 100%; /* Set the container to take up the full width */
+    height: auto;
+    margin: 0 auto;
+    padding-right: 90px;
     font-family: "Karla", sans-serif;
-    height: 100vh;
+}
+.outer-container {
+    display: flex;
+    padding-top: 18vh;
 }
 
-.SS-model {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
-    width: 75%;
-    height: 60%;
+.model {
+    width: 500px;
+    height: 370px;
 }
 
-.SS-card-container {
-    height: 80%;
-    align-self: end;
-    display: flex;
+.card-container {
+    display: flex; /* Make the card container a flexbox container */
     flex-direction: column;
-    justify-content: start; /* Center content horizontally within the card container */
+    justify-content: center; /* Center content horizontally within the card container */
     align-items: center; /* Center content vertically within the card container */
-    width: 50%; 
-    /* padding-top: 10%; */
-    
+    width: 70%; /* Set the left section to 70% width */
+    padding-bottom: 1vh; /* Existing padding */
 }
 
-.SS-form-container {
-    height: 80%;
-    align-self: end;
-    /* background-color: rgb(201, 201, 201); */
+.form-container {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    margin-right: 3vw;
-    /* padding-right: 4vw; */
-    padding: 0vw 4vw;
-    /* justify-content: center; */
-    width: 40%; /* Set the right section to 30% width */
+    gap: 10%; /* Existing styles */
+    width: 30%; /* Set the right section to 30% width */
 }
 
-.SS-form-container button {
-    padding: 3vh;
-}
-
-.SS-form-container button span {
-    font-size: 1.1rem;
-}
-
-.SS-form-container [aria-label="Selector de fecha"] {
-    padding: 3vh;
-}
-
-.SS-form-container [aria-label="Selector de fecha"] [role="presentation"] {
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-.SS-form-container {
+.form-container {
     display: flex; /* Make the form container a flexbox for vertical arrangement */
     flex-direction: column; /* Stack elements vertically */
     gap: 10px; /* Add some space between elements within the form container */
 }
 
-.SS-button-container {
+.button-container {
     text-align: center; /* Center the button horizontally */
 }
 
-/* .menu-lateral {
+.menu-lateral {
     position: absolute;
     z-index: 3;
     padding-top: 20vh;
-} */
+}
 
 @media (max-width: 768px) {
 
-    .SS-model {
+    .model {
         width: 100%;
         padding: 10%;
     }
-    /* .container {
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 auto;
-        padding-right: 0;
-    } */
-    .SS-outer-container {
-        height: 100%;
+    .container {
         flex-direction: column; /* Stack elements vertically */
         justify-content: center; /* Center content vertically */
         margin: 0 auto;
-        padding-top: 15vh;
+        padding-right: 0;
+    }
+    .outer-container {
+        flex-direction: column; /* Stack elements vertically */
+        justify-content: center; /* Center content vertically */
+        margin: 0 auto;
     }
 
-    .SS-card-container,
-    .SS-form-container {
+    .card-container,
+    .form-container,
+    .menu-lateral {
         width: 100%; /* Set all elements to full width on phone view */
-        margin-right: 0px;
     }
 
-    .SS-card-container {
+    .card-container {
         order: 1; /* Make card container appear first */
     }
 
-    .SS-form-container {
+    .menu-lateral {
+        order: 2; /* Make menu lateral appear second */
+        position: sticky; /* Maintain position relative to container */
+        margin: 0 auto; /* Center horizontally */
+    }
+
+    .form-container {
         order: 3; /* Make form container appear last */
     }
 }

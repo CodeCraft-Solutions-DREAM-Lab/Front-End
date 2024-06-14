@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 431px) {
     .title-container {
-        padding-top: 10rem;
+        column-gap: 1rem;
     }
 }
 
@@ -29,6 +29,30 @@
     font-weight: 700;
     color: white;
     z-index: 2;
+}
+
+@media screen and (max-width: 431px) {
+    .heading {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .heading {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .heading {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .heading {
+        font-size: 24px;
+    }
 }
 
 .landing-logo {
@@ -51,7 +75,7 @@
 
 .sub-heading {
     overflow-wrap: break-word;
-    width: 100%;
+    width: 800px;
     margin-right: 30rem;
     margin-bottom: 4rem;
     font-size: 4vw;
@@ -61,6 +85,36 @@
     line-height: 1;
     color: white;
     z-index: 2;
+}
+
+@media screen and (max-width: 431px) {
+    .sub-heading {
+        width: 400px;
+        font-size: 32px;
+        margin-right: 1rem;
+        margin-bottom: 2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sub-heading {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 391px) {
+    .sub-heading {
+        font-size: 22px;
+        line-height: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sub-heading {
+        font-size: 21px;
+        line-height: 2.4rem;
+    }
 }
 
 .button-container-landing-page {
@@ -98,7 +152,6 @@
         padding-inline: 2rem;
         border-radius: 28px;
         text-wrap: nowrap;
-        font-size: 3vw;
     }
 }
 
@@ -135,7 +188,6 @@
         padding-inline: 2rem;
         border-radius: 28px;
         text-wrap: nowrap;
-        font-size: 3vw;
     }
 }
 
@@ -154,6 +206,6 @@
 }
 
 .landing-down-arrow {
-    width: 30%;
+    width: 40%;
     cursor: pointer;
 }
